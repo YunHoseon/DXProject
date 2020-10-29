@@ -45,7 +45,7 @@ void CSkinnedMesh::update()
 {
 	if (m_isAnimBlend)
 	{
-		m_fPassedBlendTime += g_pTimeManager.GetElapsedTime();
+		m_fPassedBlendTime += g_pTimeManager->GetElapsedTime();
 		if (m_fPassedBlendTime >= m_fBlendTime)
 		{
 			m_isAnimBlend = false;
@@ -60,11 +60,11 @@ void CSkinnedMesh::update()
 		}
 	}
 	
-	m_pAnimController->AdvanceTime(g_pTimeManager.GetElapsedTime(), NULL);
+	m_pAnimController->AdvanceTime(g_pTimeManager->GetElapsedTime(), NULL);
 	update(m_pRoot, NULL);
 	UpdateSkinnedMesh(m_pRoot);
 
-	m_fAnimTime += g_pTimeManager.GetElapsedTime();
+	m_fAnimTime += g_pTimeManager->GetElapsedTime();
 	if (m_fAnimTime + m_fBlendTime >= m_dAnimPeriod)
 	{
 		//m_isInputOn = true;
@@ -293,7 +293,7 @@ void CSkinnedMesh::Destroy()
 void CSkinnedMesh::UpdateAndRender()
 {
 	if (m_pAnimController)
-		m_pAnimController->AdvanceTime(g_pTimeManager.GetElapsedTime(), nullptr);
+		m_pAnimController->AdvanceTime(g_pTimeManager->GetElapsedTime(), nullptr);
 
 	if(m_pRoot)
 	{

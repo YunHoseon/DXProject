@@ -44,7 +44,7 @@ STDMETHODIMP CAllocateHierachy::CreateMeshContainer(THIS_
 		string sFullPath = m_sFolder;
 		sFullPath = sFullPath + string("/") + string(pMaterials[i].pTextureFilename);
 
-		pBoneMesh->vecTexture.push_back(g_pTextureManager.GetTexture(sFullPath));
+		pBoneMesh->vecTexture.push_back(g_pTextureManager->GetTexture(sFullPath));
 	}
 
 	pSkinInfo->AddRef();

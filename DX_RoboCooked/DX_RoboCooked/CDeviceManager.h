@@ -12,10 +12,9 @@ class CDeviceManager : public CSingleton<CDeviceManager>
 private:
 	LPDIRECT3D9			m_pD3D;
 	LPDIRECT3DDEVICE9	m_pD3DDevice;
+public:
 	CDeviceManager();
 	~CDeviceManager();
-
-public:
 	LPDIRECT3DDEVICE9	GetDevice();
 	void Destroy();
 	

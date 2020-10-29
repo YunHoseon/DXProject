@@ -9,7 +9,6 @@ public:
 	CSingleton& operator=(const CSingleton& other) = delete;
 	CSingleton& operator=(CSingleton&& other) = delete;
 
-protected:
 	CSingleton() {}
 	virtual ~CSingleton() {}
 

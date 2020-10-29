@@ -9,10 +9,10 @@ public:
 	//Singletone(CSkinnedMeshManager);
 private:
 	map<string, CSkinnedMesh*> m_mapSkinnedMesh;
-
+public:
 	CSkinnedMeshManager();
 	~CSkinnedMeshManager();
-public:
+
 	CSkinnedMesh*		GetSkinnedMesh(char* szFolder, char* szFileName);
 	void				Destroy();
 	

@@ -13,10 +13,10 @@ public:
 	//Singletone(CFontManager);
 private:
 	map<eFontType, LPD3DXFONT> m_mapFont;
+public:
 	CFontManager();
 	~CFontManager();
 	
-public:
 	LPD3DXFONT GetFont(eFontType e);
 	void Destroy();
 };

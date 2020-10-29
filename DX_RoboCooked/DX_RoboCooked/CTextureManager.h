@@ -8,10 +8,10 @@ private:
 	//Singletone(CTextureManager);
 	
 	std::map<string, LPDIRECT3DTEXTURE9> m_mapTexture;
-
+public:
 	CTextureManager();
 	~CTextureManager();
-public:
+
 	LPDIRECT3DTEXTURE9 GetTexture(char* szFullPath);
 	LPDIRECT3DTEXTURE9 GetTexture(string &sFullPath);
 	void Destroy();
