@@ -19,6 +19,9 @@
     <Filter Include="Tool">
       <UniqueIdentifier>{79040934-30c9-43e3-bd98-bd22f3a7b76f}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Manager\EventManager">
+      <UniqueIdentifier>{8b5ebc83-4581-48f8-8150-bebcc9096f0a}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <Text Include="ReadMe.txt" />
@@ -73,10 +76,10 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="CEventManager.h">
-      <Filter>Manager</Filter>
+      <Filter>Manager\EventManager</Filter>
     </ClInclude>
     <ClInclude Include="CObserver.h">
-      <Filter>Header Files</Filter>
+      <Filter>Manager\EventManager</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -123,10 +126,10 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="CEventManager.cpp">
-      <Filter>Manager</Filter>
+      <Filter>Manager\EventManager</Filter>
     </ClCompile>
     <ClCompile Include="CObserver.cpp">
-      <Filter>Source Files</Filter>
+      <Filter>Manager\EventManager</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
