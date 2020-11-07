@@ -82,8 +82,7 @@ void CCamera::WndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam)
 
 			if (m_vCamRotAngle.x > D3DX_PI / 2.0f + 0.0001f)
 				m_vCamRotAngle.x = D3DX_PI / 2.0f + 0.0001f;
-
-			std::cout << ptCurMouse.x << ptCurMouse.y << std::endl;
+			
 			m_ptPrevMouse = ptCurMouse;
 		}
 		break;
