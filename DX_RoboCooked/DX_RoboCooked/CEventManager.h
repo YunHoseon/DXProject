@@ -22,7 +22,7 @@ struct ST_AttackEvent
 
 class CEventManager : public CSingleton<CEventManager>
 {
-private:
+public:
 	CEventManager();
 	~CEventManager();
 

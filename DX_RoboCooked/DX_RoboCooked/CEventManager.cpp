@@ -2,8 +2,8 @@
 #include "CObserver.h"
 
 
-CEventManager::CEventManager()
-	:m_eEvent(EEvent::E_NONE)
+CEventManager::CEventManager():CSingleton<CEventManager>()
+	, m_eEvent(EEvent::E_NONE)
 {
 }
 
