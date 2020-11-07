@@ -16,7 +16,7 @@
 #include <malloc.h>
 #include <memory.h>
 #include <tchar.h>
-
+#include <iostream>
 
 // TODO: reference additional headers your program requires here
 #include <vector>
@@ -156,6 +156,8 @@ struct ST_SPHERE
 #include "CTextureManager.h"
 #include "CTimeManager.h"
 #include "CFontManager.h"
+#include "CSceneManager.h"
+#include "CEventManager.h"
 
 #ifdef _DEBUG
 	#ifdef UNICODE

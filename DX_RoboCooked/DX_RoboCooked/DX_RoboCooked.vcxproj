@@ -143,8 +143,12 @@
   <ItemGroup>
     <ClInclude Include="CAllocateHierachy.h" />
     <ClInclude Include="CDeviceManager.h" />
+    <ClInclude Include="CEventManager.h" />
     <ClInclude Include="CFontManager.h" />
     <ClInclude Include="CFrameCounter.h" />
+    <ClInclude Include="CObserver.h" />
+    <ClInclude Include="CScene.h" />
+    <ClInclude Include="CSceneManager.h" />
     <ClInclude Include="CSkinnedMesh.h" />
     <ClInclude Include="CSkinnedMeshManager.h" />
     <ClInclude Include="CTextureManager.h" />
@@ -159,8 +163,12 @@
   <ItemGroup>
     <ClCompile Include="CAllocateHierachy.cpp" />
     <ClCompile Include="CDeviceManager.cpp" />
+    <ClCompile Include="CEventManager.cpp" />
     <ClCompile Include="CFontManager.cpp" />
     <ClCompile Include="CFrameCounter.cpp" />
+    <ClCompile Include="CObserver.cpp" />
+    <ClCompile Include="CScene.cpp" />
+    <ClCompile Include="CSceneManager.cpp" />
     <ClCompile Include="CSkinnedMesh.cpp" />
     <ClCompile Include="CSkinnedMeshManager.cpp" />
     <ClCompile Include="CTextureManager.cpp" />

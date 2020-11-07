@@ -66,6 +66,18 @@
     <ClInclude Include="CRandomGenerator.h">
       <Filter>Tool</Filter>
     </ClInclude>
+    <ClInclude Include="CSceneManager.h">
+      <Filter>Manager</Filter>
+    </ClInclude>
+    <ClInclude Include="CScene.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="CEventManager.h">
+      <Filter>Manager</Filter>
+    </ClInclude>
+    <ClInclude Include="CObserver.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="stdafx.cpp">
@@ -102,6 +114,18 @@
       <Filter>Tool</Filter>
     </ClCompile>
     <ClCompile Include="CRandomGenerator.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="CSceneManager.cpp">
+      <Filter>Manager</Filter>
+    </ClCompile>
+    <ClCompile Include="CScene.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="CEventManager.cpp">
+      <Filter>Manager</Filter>
+    </ClCompile>
+    <ClCompile Include="CObserver.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
