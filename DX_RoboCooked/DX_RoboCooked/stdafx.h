@@ -151,7 +151,7 @@ struct ST_SPHERE
 			}
 
 
-
+#include "CMainGame.h"
 #include "CDeviceManager.h"
 #include "CTextureManager.h"
 #include "CTimeManager.h"

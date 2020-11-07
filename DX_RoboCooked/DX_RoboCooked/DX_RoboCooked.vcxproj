@@ -142,11 +142,14 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="CAllocateHierachy.h" />
+    <ClInclude Include="CCamera.h" />
     <ClInclude Include="CDeviceManager.h" />
     <ClInclude Include="CEventManager.h" />
     <ClInclude Include="CFontManager.h" />
     <ClInclude Include="CFrameCounter.h" />
+    <ClInclude Include="CGrid.h" />
     <ClInclude Include="CObserver.h" />
+    <ClInclude Include="CPyramid.h" />
     <ClInclude Include="CScene.h" />
     <ClInclude Include="CSceneManager.h" />
     <ClInclude Include="CSkinnedMesh.h" />
@@ -155,6 +158,7 @@
     <ClInclude Include="CTimeManager.h" />
     <ClInclude Include="DX_RoboCooked.h" />
     <ClInclude Include="CRandomGenerator.h" />
+    <ClInclude Include="CMainGame.h" />
     <ClInclude Include="Resource.h" />
     <ClInclude Include="CSingleton.h" />
     <ClInclude Include="stdafx.h" />
@@ -162,11 +166,14 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="CAllocateHierachy.cpp" />
+    <ClCompile Include="CCamera.cpp" />
     <ClCompile Include="CDeviceManager.cpp" />
     <ClCompile Include="CEventManager.cpp" />
     <ClCompile Include="CFontManager.cpp" />
     <ClCompile Include="CFrameCounter.cpp" />
+    <ClCompile Include="CGrid.cpp" />
     <ClCompile Include="CObserver.cpp" />
+    <ClCompile Include="CPyramid.cpp" />
     <ClCompile Include="CScene.cpp" />
     <ClCompile Include="CSceneManager.cpp" />
     <ClCompile Include="CSkinnedMesh.cpp" />
@@ -176,6 +183,7 @@
     <ClCompile Include="DX_RoboCooked.cpp" />
     <ClCompile Include="CSingleton.cpp" />
     <ClCompile Include="CRandomGenerator.cpp" />
+    <ClCompile Include="CMainGame.cpp" />
     <ClCompile Include="stdafx.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Create</PrecompiledHeader>
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Create</PrecompiledHeader>

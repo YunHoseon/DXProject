@@ -6,11 +6,17 @@
 
 #define MAX_LOADSTRING 100
 
+
+
 // Global Variables:
 HINSTANCE hInst;                                // current instance
 WCHAR szTitle[MAX_LOADSTRING];                  // The title bar text
 WCHAR szWindowClass[MAX_LOADSTRING];            // the main window class name
 HWND g_hWnd;
+CMainGame *g_pMainGame;
+//
+
+
 // Forward declarations of functions included in this code module:
 ATOM                MyRegisterClass(HINSTANCE hInstance);
 BOOL                InitInstance(HINSTANCE, int);
@@ -40,17 +46,35 @@ int APIENTRY wWinMain(_In_ HINSTANCE hInstance,
 
     HACCEL hAccelTable = LoadAccelerators(hInstance, MAKEINTRESOURCE(IDC_DX_ROBOCOOKED));
 
+	g_pMainGame = new CMainGame;
+	g_pMainGame->Setup();
+
+	
     MSG msg;
 
     // Main message loop:
-    while (GetMessage(&msg, nullptr, 0, 0))
-    {
-        if (!TranslateAccelerator(msg.hwnd, hAccelTable, &msg))
-        {
-            TranslateMessage(&msg);
-            DispatchMessage(&msg);
-        }
-    }
+	while (1)
+	{
+		if (PeekMessage(&msg, NULL, 0, 0, PM_REMOVE))
+		{
+			if (msg.message == WM_QUIT)
+			{
+				break;
+			}
+			else
+			{
+				TranslateMessage(&msg);
+				DispatchMessage(&msg);
+			}
+		}
+		else
+		{
+			g_pMainGame->Update();
+			g_pMainGame->Render();
+		}
+	}
+
+	SafeDelete(g_pMainGame);
 
     return (int) msg.wParam;
 }
@@ -123,6 +147,9 @@ BOOL InitInstance(HINSTANCE hInstance, int nCmdShow)
 //
 LRESULT CALLBACK WndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam)
 {
+	if (g_pMainGame)
+		g_pMainGame->WndProc(hWnd, message, wParam, lParam);
+	
     switch (message)
     {
     case WM_COMMAND:
