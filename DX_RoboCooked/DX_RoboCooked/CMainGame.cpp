@@ -36,6 +36,8 @@ void CMainGame::Setup()
 
 void CMainGame::Update()
 {
+	InputManager->Update();
+	
 	if (m_pCamera)
 	{
 		m_pCamera->Update();
@@ -59,6 +61,8 @@ void CMainGame::Render()
 
 void CMainGame::WndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam)
 {
+	InputManager->WndProc(hWnd, message, wParam, lParam);
+	
 	if (m_pCamera)
 		m_pCamera->WndProc(hWnd, message, wParam, lParam);
 }

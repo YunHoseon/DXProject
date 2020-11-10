@@ -22,6 +22,9 @@
     <Filter Include="Manager\EventManager">
       <UniqueIdentifier>{8b5ebc83-4581-48f8-8150-bebcc9096f0a}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Manager\InputManager">
+      <UniqueIdentifier>{5f9889bb-2507-4a95-8953-79c4a73cd727}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <Text Include="ReadMe.txt" />
@@ -93,6 +96,15 @@
     <ClInclude Include="CPyramid.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="InputManager.h">
+      <Filter>Manager\InputManager</Filter>
+    </ClInclude>
+    <ClInclude Include="Keyboard.h">
+      <Filter>Manager\InputManager</Filter>
+    </ClInclude>
+    <ClInclude Include="Mouse.h">
+      <Filter>Manager\InputManager</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="stdafx.cpp">
@@ -154,6 +166,15 @@
     </ClCompile>
     <ClCompile Include="CPyramid.cpp">
       <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="InputManager.cpp">
+      <Filter>Manager\InputManager</Filter>
+    </ClCompile>
+    <ClCompile Include="Keyboard.cpp">
+      <Filter>Manager\InputManager</Filter>
+    </ClCompile>
+    <ClCompile Include="Mouse.cpp">
+      <Filter>Manager\InputManager</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

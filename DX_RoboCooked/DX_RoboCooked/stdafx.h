@@ -30,6 +30,8 @@ using std::set;
 #include <list>
 using std::list;
 #include <assert.h>
+#include <unordered_map>
+using std::unordered_map;
 
 #include <d3dx9.h>
 
@@ -158,6 +160,7 @@ struct ST_SPHERE
 #include "CFontManager.h"
 #include "CSceneManager.h"
 #include "CEventManager.h"
+#include "InputManager.h"
 
 #ifdef _DEBUG
 	#ifdef UNICODE
