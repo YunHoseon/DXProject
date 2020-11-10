@@ -19,15 +19,15 @@ void CKeyboard::Update()
 	{
 		std::cout << "W" << std::endl;
 	}
-	else if (InputManager->IsKeyPressed('A'))
+	if (InputManager->IsKeyPressed('A'))
 	{
 		std::cout << "A" << std::endl;
 	}
-	else if (InputManager->IsKeyPressed('S'))
+	if (InputManager->IsKeyPressed('S'))
 	{
 		std::cout << "S" << std::endl;
 	}
-	else if (InputManager->IsKeyPressed('D'))
+	if (InputManager->IsKeyPressed('D'))
 	{
 		std::cout << "D" << std::endl;
 	}
