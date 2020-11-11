@@ -132,11 +132,9 @@ struct ST_SPHERE
 
 struct ST_CUBE
 {
-	float	fLength;
+	float			fLength;
 	D3DXVECTOR3		vCenter;
-	ST_CUBE() : fLength(0), vCenter(0, 0, 0)
-	{
-	}
+	ST_CUBE() : fLength(0), vCenter(0, 0, 0){}
 };
 
 #define Synthesize(varType, varName, funName)\
