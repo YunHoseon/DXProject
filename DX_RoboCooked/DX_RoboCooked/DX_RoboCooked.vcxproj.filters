@@ -25,6 +25,9 @@
     <Filter Include="Manager\InputManager">
       <UniqueIdentifier>{5f9889bb-2507-4a95-8953-79c4a73cd727}</UniqueIdentifier>
     </Filter>
+    <Filter Include="GameScene">
+      <UniqueIdentifier>{af938e5b-5224-4492-8163-7a3d76ddee02}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <Text Include="ReadMe.txt" />
@@ -106,7 +109,16 @@
       <Filter>Manager\InputManager</Filter>
     </ClInclude>
     <ClInclude Include="GameScene.h">
-      <Filter>Header Files</Filter>
+      <Filter>GameScene</Filter>
+    </ClInclude>
+    <ClInclude Include="CTile.h">
+      <Filter>GameScene</Filter>
+    </ClInclude>
+    <ClInclude Include="CActor.h">
+      <Filter>GameScene</Filter>
+    </ClInclude>
+    <ClInclude Include="CField.h">
+      <Filter>GameScene</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -180,7 +192,16 @@
       <Filter>Manager\InputManager</Filter>
     </ClCompile>
     <ClCompile Include="GameScene.cpp">
-      <Filter>Source Files</Filter>
+      <Filter>GameScene</Filter>
+    </ClCompile>
+    <ClCompile Include="CTile.cpp">
+      <Filter>GameScene</Filter>
+    </ClCompile>
+    <ClCompile Include="CActor.cpp">
+      <Filter>GameScene</Filter>
+    </ClCompile>
+    <ClCompile Include="CField.cpp">
+      <Filter>GameScene</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

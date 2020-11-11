@@ -141,6 +141,7 @@
     <Text Include="ReadMe.txt" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="CActor.h" />
     <ClInclude Include="CAllocateHierachy.h" />
     <ClInclude Include="CCamera.h" />
     <ClInclude Include="CDeviceManager.h" />
@@ -159,6 +160,7 @@
     <ClInclude Include="DX_RoboCooked.h" />
     <ClInclude Include="CRandomGenerator.h" />
     <ClInclude Include="CMainGame.h" />
+    <ClInclude Include="CField.h" />
     <ClInclude Include="GameScene.h" />
     <ClInclude Include="InputManager.h" />
     <ClInclude Include="Keyboard.h" />
@@ -167,8 +169,10 @@
     <ClInclude Include="CSingleton.h" />
     <ClInclude Include="stdafx.h" />
     <ClInclude Include="targetver.h" />
+    <ClInclude Include="CTile.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="CActor.cpp" />
     <ClCompile Include="CAllocateHierachy.cpp" />
     <ClCompile Include="CCamera.cpp" />
     <ClCompile Include="CDeviceManager.cpp" />
@@ -188,6 +192,7 @@
     <ClCompile Include="CSingleton.cpp" />
     <ClCompile Include="CRandomGenerator.cpp" />
     <ClCompile Include="CMainGame.cpp" />
+    <ClCompile Include="CField.cpp" />
     <ClCompile Include="GameScene.cpp" />
     <ClCompile Include="InputManager.cpp" />
     <ClCompile Include="Keyboard.cpp" />
@@ -198,6 +203,7 @@
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Create</PrecompiledHeader>
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Create</PrecompiledHeader>
     </ClCompile>
+    <ClCompile Include="CTile.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="DX_RoboCooked.rc" />

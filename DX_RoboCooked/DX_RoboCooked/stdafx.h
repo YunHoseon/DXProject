@@ -45,8 +45,10 @@ extern HWND g_hWnd;
 
 #define SafeDeleteArray(p) { if(p) delete[] p; p = NULL; }
 
-
 #define ELIPSE 0.000001f
+
+
+#define TILE_SIZE 30
 
 struct ST_PC_VERTEX
 {
