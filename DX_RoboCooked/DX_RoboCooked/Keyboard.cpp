@@ -31,6 +31,23 @@ void CKeyboard::Update()
 	{
 		std::cout << "D" << std::endl;
 	}
+
+	if(InputManager->IsKeyPressed(VK_UP))
+	{
+		std::cout << "up" << std::endl;
+	}
+	if (InputManager->IsKeyPressed(VK_LEFT))
+	{
+		std::cout << "left" << std::endl;
+	}
+	if (InputManager->IsKeyPressed(VK_DOWN))
+	{
+		std::cout << "down" << std::endl;
+	}
+	if (InputManager->IsKeyPressed(VK_RIGHT))
+	{
+		std::cout << "right" << std::endl;
+	}
 }
 
 void CKeyboard::PressKey(WPARAM keyID)
