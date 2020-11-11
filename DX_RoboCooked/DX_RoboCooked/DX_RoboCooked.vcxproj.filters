@@ -28,8 +28,8 @@
     <Filter Include="GameScene">
       <UniqueIdentifier>{af938e5b-5224-4492-8163-7a3d76ddee02}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Debug">
-      <UniqueIdentifier>{3d5d8898-c063-486f-80b9-5f6c5c09d0f8}</UniqueIdentifier>
+    <Filter Include="GameScene\Collider">
+      <UniqueIdentifier>{9b16d774-c905-40a9-86d3-36ac247c8ec1}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -123,11 +123,14 @@
     <ClInclude Include="CField.h">
       <Filter>GameScene</Filter>
     </ClInclude>
-    <ClInclude Include="CDebugCube.h">
-      <Filter>Debug</Filter>
+    <ClInclude Include="CSphereCollision.h">
+      <Filter>GameScene\Collider</Filter>
     </ClInclude>
-    <ClInclude Include="CDebugSphere.h">
-      <Filter>Debug</Filter>
+    <ClInclude Include="CBoxCollision.h">
+      <Filter>GameScene\Collider</Filter>
+    </ClInclude>
+    <ClInclude Include="ICollisionArea.h">
+      <Filter>GameScene\Collider</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -212,11 +215,14 @@
     <ClCompile Include="CField.cpp">
       <Filter>GameScene</Filter>
     </ClCompile>
-    <ClCompile Include="CDebugCube.cpp">
-      <Filter>Debug</Filter>
+    <ClCompile Include="CBoxCollision.cpp">
+      <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="CDebugSphere.cpp">
-      <Filter>Debug</Filter>
+    <ClCompile Include="CSphereCollision.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="ICollisionArea.cpp">
+      <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

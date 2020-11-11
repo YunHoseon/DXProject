@@ -2,7 +2,7 @@
 #include "CMainGame.h"
 #include "CGrid.h"
 #include "CCamera.h"
-#include "GameScene.h"
+#include "CGameScene.h"
 
 /* µð¹ö±ë¿ë */
 #include "CDebugSphere.h"

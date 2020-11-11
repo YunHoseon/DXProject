@@ -1,5 +1,5 @@
 #include "stdafx.h"
-
+#include "CScene.h"
 
 
 
@@ -53,6 +53,7 @@ void CSceneManager::EraseScene(std::string SceneName)
 void CSceneManager::SetCurrentScene(CScene* Scene)
 {
 	m_pCurrentScene = Scene;
+	m_pCurrentScene->Init();
 }
 
 
