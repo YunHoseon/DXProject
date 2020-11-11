@@ -4,7 +4,6 @@
 
 
 CGrid::CGrid()
-	:m_PlaneTexture(NULL)
 {
 }
 
@@ -18,12 +17,7 @@ CGrid::~CGrid()
 }
 
 void CGrid::Setup(int nNumHalfTile, float fInterval)
-{
-	ZeroMemory(&m_stMt1, sizeof(D3DMATERIAL9));
-	m_stMt1.Ambient = D3DXCOLOR(0.3f, 0.3f, 0.3f, 1.0f);
-	m_stMt1.Diffuse = D3DXCOLOR(0.7f, 0.7f, 0.7f, 1.0f);
-	m_stMt1.Specular = D3DXCOLOR(0.7f, 0.7f, 0.7f, 1.0f);
-	
+{	
 	float fMax = nNumHalfTile * fInterval;
 	float fMin = -fMax;
 	ST_PC_VERTEX	vc;
@@ -96,9 +90,9 @@ void CGrid::Render()
 	//Grid
 	g_pD3DDevice->SetRenderState(D3DRS_LIGHTING, false);
 	g_pD3DDevice->SetTexture(NULL, 0);
-	D3DXMATRIXA16 matI2;
-	D3DXMatrixIdentity(&matI2);
-	g_pD3DDevice->SetTransform(D3DTS_WORLD, &matI2);
+	D3DXMATRIXA16 matWorld;
+	D3DXMatrixIdentity(&matWorld);
+	g_pD3DDevice->SetTransform(D3DTS_WORLD, &matWorld);
 	g_pD3DDevice->SetFVF(ST_PC_VERTEX::FVF);
 	g_pD3DDevice->DrawPrimitiveUP(D3DPT_LINELIST, m_vecVertex.size() / 2, &m_vecVertex[0],
 		sizeof(ST_PC_VERTEX));
@@ -107,6 +101,9 @@ void CGrid::Render()
 	g_pD3DDevice->SetRenderState(D3DRS_LIGHTING, false);
 	for each(auto p in m_vecPyramid)
 		p->Render();
+
+
+	
 
 
 }

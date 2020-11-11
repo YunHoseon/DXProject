@@ -13,11 +13,8 @@ private:
 
 
 	vector<CPyramid*>				m_vecPyramid;
-	D3DMATERIAL9					m_stMt1;
-	D3DMATERIAL9					m_stMt2;
 
-	LPDIRECT3DTEXTURE9				m_PlaneTexture;
-	LPDIRECT3DTEXTURE9				m_PlaneTexture2;
+
 
 
 public:

@@ -19,29 +19,29 @@ void CPyramid::Setup(D3DCOLOR c, D3DXMATRIXA16& mat)
 	ST_PC_VERTEX v;
 	v.c = c;
 
-	v.p = D3DXVECTOR3(0, 0, 0);	m_vecVertex.push_back(v);
-	v.p = D3DXVECTOR3(1, -1, -1);	m_vecVertex.push_back(v);
-	v.p = D3DXVECTOR3(-1, -1, -1);	m_vecVertex.push_back(v);
+	v.p = D3DXVECTOR3(0, 0, 0); m_vecVertex.push_back(v);
+	v.p = D3DXVECTOR3(1, -1, -1); m_vecVertex.push_back(v);
+	v.p = D3DXVECTOR3(-1, -1, -1); m_vecVertex.push_back(v);
 
-	v.p = D3DXVECTOR3(0, 0, 0);	m_vecVertex.push_back(v);
-	v.p = D3DXVECTOR3(1, -1, 1);	m_vecVertex.push_back(v);
-	v.p = D3DXVECTOR3(1, -1, -1);	m_vecVertex.push_back(v);
+	v.p = D3DXVECTOR3(0, 0, 0); m_vecVertex.push_back(v);
+	v.p = D3DXVECTOR3(1, -1, 1); m_vecVertex.push_back(v);
+	v.p = D3DXVECTOR3(1, -1, -1); m_vecVertex.push_back(v);
 
-	v.p = D3DXVECTOR3(0, 0, 0);	m_vecVertex.push_back(v);
-	v.p = D3DXVECTOR3(-1, -1, 1);	m_vecVertex.push_back(v);
-	v.p = D3DXVECTOR3(1, -1, 1);	m_vecVertex.push_back(v);
+	v.p = D3DXVECTOR3(0, 0, 0); m_vecVertex.push_back(v);
+	v.p = D3DXVECTOR3(-1, -1, 1); m_vecVertex.push_back(v);
+	v.p = D3DXVECTOR3(1, -1, 1); m_vecVertex.push_back(v);
 
-	v.p = D3DXVECTOR3(0, 0, 0);	m_vecVertex.push_back(v);
-	v.p = D3DXVECTOR3(-1, -1, -1);	m_vecVertex.push_back(v);
-	v.p = D3DXVECTOR3(-1, -1, 1);	m_vecVertex.push_back(v);
+	v.p = D3DXVECTOR3(0, 0, 0); m_vecVertex.push_back(v);
+	v.p = D3DXVECTOR3(-1, -1, -1); m_vecVertex.push_back(v);
+	v.p = D3DXVECTOR3(-1, -1, 1); m_vecVertex.push_back(v);
 
-	v.p = D3DXVECTOR3(-1, -1, -1);	m_vecVertex.push_back(v);
-	v.p = D3DXVECTOR3(1, -1, -1);	m_vecVertex.push_back(v);
-	v.p = D3DXVECTOR3(-1, -1, 1);	m_vecVertex.push_back(v);
+	v.p = D3DXVECTOR3(-1, -1, -1); m_vecVertex.push_back(v);
+	v.p = D3DXVECTOR3(1, -1, -1); m_vecVertex.push_back(v);
+	v.p = D3DXVECTOR3(-1, -1, 1); m_vecVertex.push_back(v);
 
-	v.p = D3DXVECTOR3(-1, -1, -1);	m_vecVertex.push_back(v);
-	v.p = D3DXVECTOR3(1, -1, 1);	m_vecVertex.push_back(v);
-	v.p = D3DXVECTOR3(-1, -1, 1);	m_vecVertex.push_back(v);
+	v.p = D3DXVECTOR3(-1, -1, 1); m_vecVertex.push_back(v);
+	v.p = D3DXVECTOR3(1, -1, -1); m_vecVertex.push_back(v);
+	v.p = D3DXVECTOR3(1, -1, 1); m_vecVertex.push_back(v);
 }
 
 void CPyramid::Render()
