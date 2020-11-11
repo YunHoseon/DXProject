@@ -4,7 +4,7 @@
 
 
 CSceneManager::CSceneManager():CSingleton<CSceneManager>()
-	 ,m_CurrentScene(NULL)
+	 ,m_pCurrentScene(NULL)
 {
 
 }
@@ -21,7 +21,7 @@ void CSceneManager::SceneChange(string sceneName)
 		std::cout << "ÇØ´ç¾À¾øÀ½" << std::endl;
 		return;
 	}
-	m_CurrentScene = m_SceneList[sceneName];
+	m_pCurrentScene = m_SceneList[sceneName];
 }
 
 void CSceneManager::AddScene(std::string SceneName, CScene* Scene)
@@ -34,7 +34,9 @@ void CSceneManager::AddScene(std::string SceneName, CScene* Scene)
 			return;
 		}
 	}
-	m_SceneList[SceneName] = Scene;
+	
+	if(Scene)
+		m_SceneList[SceneName] = Scene;
 }
 
 void CSceneManager::EraseScene(std::string SceneName)
@@ -48,8 +50,14 @@ void CSceneManager::EraseScene(std::string SceneName)
 	m_SceneList[SceneName] = nullptr;
 }
 
+void CSceneManager::SetCurrentScene(CScene* Scene)
+{
+	m_pCurrentScene = Scene;
+}
+
+
 CScene* CSceneManager::GetCurrentScene()
 {
-	return m_CurrentScene;
+	return m_pCurrentScene;
 }
 

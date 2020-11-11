@@ -2,11 +2,13 @@
 #include "CMainGame.h"
 #include "CGrid.h"
 #include "CCamera.h"
+#include "GameScene.h"
 
 
 CMainGame::CMainGame()
 	: m_pGrid(NULL)
 	, m_pCamera(NULL)
+	, m_pScene(NULL)
 {
 }
 
@@ -29,9 +31,12 @@ void CMainGame::Setup()
 
 	m_pCamera = new CCamera;
 	if (m_pCamera)
-	{
 		m_pCamera->Setup(NULL);
-	}
+
+	m_pScene = new CGameScene;
+	g_SceneManager->AddScene("GAMESCENE",m_pScene);
+	g_SceneManager->SetCurrentScene(m_pScene);
+	
 }
 
 void CMainGame::Update()
@@ -39,9 +44,11 @@ void CMainGame::Update()
 	InputManager->Update();
 	
 	if (m_pCamera)
-	{
 		m_pCamera->Update();
-	}
+
+	if (m_pScene)
+		m_pScene->Update();
+	
 }
 
 void CMainGame::Render()
@@ -53,6 +60,9 @@ void CMainGame::Render()
 
 	if (m_pGrid)
 		m_pGrid->Render();
+
+	if (m_pScene)
+		m_pScene->Render();
 
 	
 	g_pD3DDevice->EndScene();

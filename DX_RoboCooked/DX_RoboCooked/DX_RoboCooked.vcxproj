@@ -159,6 +159,7 @@
     <ClInclude Include="DX_RoboCooked.h" />
     <ClInclude Include="CRandomGenerator.h" />
     <ClInclude Include="CMainGame.h" />
+    <ClInclude Include="GameScene.h" />
     <ClInclude Include="InputManager.h" />
     <ClInclude Include="Keyboard.h" />
     <ClInclude Include="Mouse.h" />
@@ -187,6 +188,7 @@
     <ClCompile Include="CSingleton.cpp" />
     <ClCompile Include="CRandomGenerator.cpp" />
     <ClCompile Include="CMainGame.cpp" />
+    <ClCompile Include="GameScene.cpp" />
     <ClCompile Include="InputManager.cpp" />
     <ClCompile Include="Keyboard.cpp" />
     <ClCompile Include="Mouse.cpp" />
