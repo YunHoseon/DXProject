@@ -7,7 +7,7 @@ class CScene;
 
 class CSceneManager : public CSingleton<CSceneManager>
 {
-private:
+public:
 	CSceneManager();
 	~CSceneManager();
 
