@@ -42,3 +42,5 @@ DX_RoboCooked/DX_RoboCooked/Debug/vc140.idb
 DX_RoboCooked/DX_RoboCooked/Debug/DX_RoboCooked.tlog/CL.command.1.tlog
 *.tlog
 *.lastbuildstate
+*.jpg
+*.png
