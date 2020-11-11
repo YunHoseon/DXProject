@@ -8,10 +8,16 @@ class CField :
 {
 public:
 	CField();
-	~CField();
+	virtual ~CField();
 
+public:
+	void Setup(int iWidth = 16,int iHeight = 12);
+	void Render() override;
+	void Update() override;
 private:
-	vector<CTile*> m_vecTile;
+	vector<CTile*>					m_vecTile;
+
+	
 	
 };
 

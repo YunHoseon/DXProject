@@ -47,8 +47,10 @@ extern HWND g_hWnd;
 
 #define ELIPSE 0.000001f
 
+#define BLOCK_SIZE 2.0f
 
-#define TILE_SIZE 30
+#define WIDTH 16
+#define HEIGHT 12
 
 struct ST_PC_VERTEX
 {

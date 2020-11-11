@@ -164,7 +164,7 @@
     <ClInclude Include="CRandomGenerator.h" />
     <ClInclude Include="CMainGame.h" />
     <ClInclude Include="CField.h" />
-    <ClInclude Include="GameScene.h" />
+    <ClInclude Include="CGameScene.h" />
     <ClInclude Include="InputManager.h" />
     <ClInclude Include="Keyboard.h" />
     <ClInclude Include="Mouse.h" />
@@ -199,7 +199,7 @@
     <ClCompile Include="CRandomGenerator.cpp" />
     <ClCompile Include="CMainGame.cpp" />
     <ClCompile Include="CField.cpp" />
-    <ClCompile Include="GameScene.cpp" />
+    <ClCompile Include="CGameScene.cpp" />
     <ClCompile Include="InputManager.cpp" />
     <ClCompile Include="Keyboard.cpp" />
     <ClCompile Include="Mouse.cpp" />

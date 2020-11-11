@@ -10,12 +10,7 @@ public:
 
 private:
 	vector<ST_PC_VERTEX>			m_vecVertex;
-
-
 	vector<CPyramid*>				m_vecPyramid;
-
-
-
 
 public:
 	void Setup(int nNumHalfTile = 15, float fInterval = 1.0f);
