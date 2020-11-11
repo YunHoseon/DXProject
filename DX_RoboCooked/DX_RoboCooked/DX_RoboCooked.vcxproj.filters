@@ -28,6 +28,9 @@
     <Filter Include="GameScene">
       <UniqueIdentifier>{af938e5b-5224-4492-8163-7a3d76ddee02}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Debug">
+      <UniqueIdentifier>{3d5d8898-c063-486f-80b9-5f6c5c09d0f8}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <Text Include="ReadMe.txt" />
@@ -120,6 +123,12 @@
     <ClInclude Include="CField.h">
       <Filter>GameScene</Filter>
     </ClInclude>
+    <ClInclude Include="CDebugCube.h">
+      <Filter>Debug</Filter>
+    </ClInclude>
+    <ClInclude Include="CDebugSphere.h">
+      <Filter>Debug</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="stdafx.cpp">
@@ -202,6 +211,12 @@
     </ClCompile>
     <ClCompile Include="CField.cpp">
       <Filter>GameScene</Filter>
+    </ClCompile>
+    <ClCompile Include="CDebugCube.cpp">
+      <Filter>Debug</Filter>
+    </ClCompile>
+    <ClCompile Include="CDebugSphere.cpp">
+      <Filter>Debug</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

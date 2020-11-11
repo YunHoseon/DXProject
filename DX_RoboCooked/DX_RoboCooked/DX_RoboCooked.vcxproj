@@ -157,6 +157,8 @@
     <ClInclude Include="CSkinnedMeshManager.h" />
     <ClInclude Include="CTextureManager.h" />
     <ClInclude Include="CTimeManager.h" />
+    <ClInclude Include="CDebugCube.h" />
+    <ClInclude Include="CDebugSphere.h" />
     <ClInclude Include="DX_RoboCooked.h" />
     <ClInclude Include="CRandomGenerator.h" />
     <ClInclude Include="CMainGame.h" />
@@ -188,6 +190,8 @@
     <ClCompile Include="CSkinnedMeshManager.cpp" />
     <ClCompile Include="CTextureManager.cpp" />
     <ClCompile Include="CTimeManager.cpp" />
+    <ClCompile Include="CDebugCube.cpp" />
+    <ClCompile Include="CDebugSphere.cpp" />
     <ClCompile Include="DX_RoboCooked.cpp" />
     <ClCompile Include="CSingleton.cpp" />
     <ClCompile Include="CRandomGenerator.cpp" />
