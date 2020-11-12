@@ -1,18 +1,18 @@
 ﻿#include "stdafx.h"
-#include "CRandomGenerator.h"
+#include "CRandomNumberGenerator.h"
 
 
-CRandomGenerator::CRandomGenerator() : rd(), gen(rd())
+CRandomNumberGenerator::CRandomNumberGenerator() : rd(), gen(rd())
 {
 	
 }
 
-CRandomGenerator::~CRandomGenerator()
+CRandomNumberGenerator::~CRandomNumberGenerator()
 {
 }
 
 // Max도 생성범위에 포함됨
-void CRandomGenerator::GenIntArray(vector<int>& vecInt, int nVecSize, int nMin, int nMax)
+void CRandomNumberGenerator::GenIntArray(vector<int>& vecInt, int nVecSize, int nMin, int nMax)
 {
 	std::uniform_int_distribution<int> dis(nMin, nMax);
 	vecInt.resize(nVecSize);
@@ -21,7 +21,7 @@ void CRandomGenerator::GenIntArray(vector<int>& vecInt, int nVecSize, int nMin, 
 }
 
 // Max도 생성범위에 포함됨
-int CRandomGenerator::GenInt(int nMin, int nMax)
+int CRandomNumberGenerator::GenInt(int nMin, int nMax)
 {
 	std::uniform_int_distribution<int> dis(nMin, nMax);
 	return dis(gen);

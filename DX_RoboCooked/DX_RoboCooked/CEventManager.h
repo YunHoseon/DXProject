@@ -2,8 +2,7 @@
 
 #define g_EventManager CEventManager::GetInstance()
 
-class CObserver;
-
+class CEventListener;
 
 enum class EEvent
 {
@@ -26,18 +25,14 @@ public:
 	~CEventManager();
 
 public:
-	void Attach(EEvent eEvent,CObserver* _observer);
-	bool Detach(EEvent eEvent, CObserver* _observer);
-	void DetachAll(CObserver* _observer);
+	void Attach(EEvent eEvent,CEventListener* _observer);
+	bool Detach(EEvent eEvent, CEventListener* _observer);
+	void DetachAll(CEventListener* _observer);
 	void Notify(void* _value);
 	void CallEvent(EEvent eEvent, void* _value);
 	void ErrorSend();
 
 private:
-	std::map<EEvent, std::set<CObserver*>> m_mapEventMap;
+	std::map<EEvent, std::set<CEventListener*>> m_mapEventMap;
 	EEvent m_eEvent;
-
-
 };
-
-

@@ -1,9 +1,9 @@
 #pragma once
-class CObserver
+class CEventListener
 {
 
 public:
-	virtual ~CObserver();
+	virtual ~CEventListener();
 	virtual void OnEvent(EEvent eEvent,void* _value) = 0;
 };
 

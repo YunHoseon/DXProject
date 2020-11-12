@@ -1,11 +1,11 @@
 ﻿#pragma once
 #include <random>
 
-class CRandomGenerator
+class CRandomNumberGenerator
 {
 public:
-	CRandomGenerator();
-	~CRandomGenerator();
+	CRandomNumberGenerator();
+	~CRandomNumberGenerator();
 
 private:
 	std::random_device rd;

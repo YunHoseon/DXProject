@@ -151,7 +151,7 @@
     <ClInclude Include="CFontManager.h" />
     <ClInclude Include="CFrameCounter.h" />
     <ClInclude Include="CGrid.h" />
-    <ClInclude Include="CObserver.h" />
+    <ClInclude Include="CEventListener.h" />
     <ClInclude Include="CPyramid.h" />
     <ClInclude Include="CScene.h" />
     <ClInclude Include="CSceneManager.h" />
@@ -163,7 +163,7 @@
     <ClInclude Include="CDebugCube.h" />
     <ClInclude Include="CDebugSphere.h" />
     <ClInclude Include="DX_RoboCooked.h" />
-    <ClInclude Include="CRandomGenerator.h" />
+    <ClInclude Include="CRandomNumberGenerator.h" />
     <ClInclude Include="CMainGame.h" />
     <ClInclude Include="CField.h" />
     <ClInclude Include="CGameScene.h" />
@@ -187,7 +187,7 @@
     <ClCompile Include="CFontManager.cpp" />
     <ClCompile Include="CFrameCounter.cpp" />
     <ClCompile Include="CGrid.cpp" />
-    <ClCompile Include="CObserver.cpp" />
+    <ClCompile Include="CEventListener.cpp" />
     <ClCompile Include="CPyramid.cpp" />
     <ClCompile Include="CScene.cpp" />
     <ClCompile Include="CSceneManager.cpp" />
@@ -200,7 +200,7 @@
     <ClCompile Include="CDebugSphere.cpp" />
     <ClCompile Include="DX_RoboCooked.cpp" />
     <ClCompile Include="CSingleton.cpp" />
-    <ClCompile Include="CRandomGenerator.cpp" />
+    <ClCompile Include="CRandomNumberGenerator.cpp" />
     <ClCompile Include="CMainGame.cpp" />
     <ClCompile Include="CField.cpp" />
     <ClCompile Include="CGameScene.cpp" />
