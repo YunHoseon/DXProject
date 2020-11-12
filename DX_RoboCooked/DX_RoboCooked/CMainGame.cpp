@@ -64,7 +64,9 @@ void CMainGame::Update()
 
 	if (m_pDebugCube)
 		m_pDebugCube->Update();
-	
+
+	if (m_pDebugSphere)
+		m_pDebugSphere->Update();
 }
 
 void CMainGame::Render()

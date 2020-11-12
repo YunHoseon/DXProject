@@ -122,7 +122,7 @@ struct ST_ROT_SAMPLE
 
 struct ST_SPHERE
 {
-	float	fRaidus;
+	float			fRaidus;
 	D3DXVECTOR3		vCenter;
 	bool			isPicked;
 	ST_SPHERE(): fRaidus(0), isPicked(false), vCenter(0,0,0)

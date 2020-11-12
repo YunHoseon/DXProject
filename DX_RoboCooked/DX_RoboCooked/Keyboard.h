@@ -18,5 +18,5 @@ public:
 	void JudgeDash(WPARAM keyID);
 
 	bool IsKeyPressed(WPARAM keyID);
-	WPARAM GetPressedKey() { return m_mapKey[m_dwPrevKey]; }
+	WPARAM GetPressedKey() { return m_dwPrevKey; }
 };

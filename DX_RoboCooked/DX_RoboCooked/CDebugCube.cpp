@@ -4,6 +4,9 @@
 
 CDebugCube::CDebugCube()
 {
+	m_vPosition = m_cube.vCenter;
+	D3DXMatrixIdentity(&m_matWorld);
+
 	m_stInputKey.moveFowardKey = VK_UP;
 	m_stInputKey.moveLeftKey = VK_LEFT;
 	m_stInputKey.moveBackKey = VK_DOWN;
@@ -30,28 +33,50 @@ void CDebugCube::Setup()
 
 void CDebugCube::Update()
 {
-	switch (InputManager->GetPressedKey())
+	/*D3DXMATRIXA16 matR, matT;
+	D3DXMatrixRotationY(&matR, m_fRotY);
+	D3DXVec3TransformNormal(&m_vDirection, &m_vDirection, &matR);
+*/
+	D3DXMATRIXA16 matS, matR, matT;
+	D3DXVECTOR3 vPosition = m_vPosition;
+	
+	if(InputManager->GetPressedKey() == m_stInputKey.moveFowardKey 
+		&& InputManager->IsKeyPressed(InputManager->GetPressedKey()))
 	{
-	/*case m_stInputKey.moveFowardKey:
-		break;
-		default:
-			break;*/
+		vPosition = m_vPosition - (D3DXVECTOR3(0, 0, -1) * 0.1f);
+		std::cout << "↑" << std::endl;
 	}
+	if (InputManager->GetPressedKey() == m_stInputKey.moveLeftKey
+		&& InputManager->IsKeyPressed(InputManager->GetPressedKey()))
+	{
+		vPosition = m_vPosition + (D3DXVECTOR3(-1, 0, 0) * 0.1f);
+	}
+	if (InputManager->GetPressedKey() == m_stInputKey.moveBackKey
+		&& InputManager->IsKeyPressed(InputManager->GetPressedKey()))
+	{
+		vPosition = m_vPosition + (D3DXVECTOR3(0, 0, -1) * 0.1f);
+	}
+	if (InputManager->GetPressedKey() == m_stInputKey.moveRightKey
+		&& InputManager->IsKeyPressed(InputManager->GetPressedKey()))
+	{
+		vPosition = m_vPosition - (D3DXVECTOR3(-1, 0, 0) * 0.1f);
+	}
+	if (InputManager->GetPressedKey() == m_stInputKey.interactableKey1
+		&& InputManager->IsKeyPressed(InputManager->GetPressedKey()))
+	{
+		std::cout << "상호작용" << std::endl;
+	}
+
+	m_vPosition = vPosition;
+
+	D3DXMatrixTranslation(&matT, m_vPosition.x, m_vPosition.y, m_vPosition.z);
+	m_matWorld = matT;
 }
 
 void CDebugCube::Render()
 {
 	g_pD3DDevice->SetRenderState(D3DRS_LIGHTING, false);
-	D3DXMATRIXA16 matWorld, matS, matR;
-	D3DXMatrixIdentity(&matS);
-	D3DXMatrixIdentity(&matR);
-	matWorld = matS * matR;
-
-	D3DXMatrixIdentity(&matWorld);
-	matWorld._41 = m_cube.vCenter.x;
-	matWorld._42 = m_cube.vCenter.y;
-	matWorld._43 = m_cube.vCenter.z;
-	g_pD3DDevice->SetTransform(D3DTS_WORLD, &matWorld);
+	g_pD3DDevice->SetTransform(D3DTS_WORLD, &m_matWorld);
 	g_pD3DDevice->SetTexture(0, NULL);
 	g_pD3DDevice->SetMaterial(&m_stMtlCube);
 	m_pMeshCube->DrawSubset(0);

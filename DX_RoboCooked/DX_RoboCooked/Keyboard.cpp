@@ -92,8 +92,6 @@ void CKeyboard::PressKey(WPARAM keyID, LPARAM lParam)
 	m_dwPrevKey = new_vk;
 	m_eKeyState = E_BTNDOWN;
 	m_mapKey[new_vk] = true;
-
-	GetPressedKey();
 }
 
 void CKeyboard::ReleaseKey(WPARAM keyID, LPARAM lParam)

@@ -18,8 +18,8 @@ public:
 	~CDebugSphere();
 
 	void Setup();
-	void Update();
-	void Render();
+	virtual void Update() override;
+	virtual void Render() override;
 	//입력키 바꿀 수 있는 함수 추가
 };
 
