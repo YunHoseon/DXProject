@@ -3,7 +3,7 @@
 
 
 CEventManager::CEventManager():CSingleton<CEventManager>()
-	, m_eEvent(EEvent::E_NONE)
+	, m_eEvent(EEvent::E_EventNONE)
 {
 }
 
@@ -13,11 +13,6 @@ CEventManager::~CEventManager()
 
 void CEventManager::Attach(EEvent eEvent, CObserver* observer)
 {
-	std::set<CObserver*>::iterator it = std::find(m_mapEventMap[eEvent].begin(), m_mapEventMap[eEvent].end(), observer);
-	if (it == m_mapEventMap[eEvent].end())	
-		return;
-	
-	
 	m_mapEventMap[eEvent].insert(observer);
 }
 

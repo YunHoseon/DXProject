@@ -7,10 +7,8 @@ class CObserver;
 
 enum class EEvent
 {
-	E_DEFAULT,
-	E_ATTACK,
-	E_SLEEP,
-	E_NONE
+	E_EventTile,
+	E_EventNONE
 };
 
 struct ST_AttackEvent
