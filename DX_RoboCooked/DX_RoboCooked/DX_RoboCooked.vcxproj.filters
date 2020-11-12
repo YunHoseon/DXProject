@@ -84,9 +84,6 @@
     <ClInclude Include="CEventManager.h">
       <Filter>Manager\EventManager</Filter>
     </ClInclude>
-    <ClInclude Include="CObserver.h">
-      <Filter>Manager\EventManager</Filter>
-    </ClInclude>
     <ClInclude Include="CMainGame.h">
       <Filter>Header Files</Filter>
     </ClInclude>
@@ -138,6 +135,9 @@
     <ClInclude Include="CRandomNumberGenerator.h">
       <Filter>Tool</Filter>
     </ClInclude>
+    <ClInclude Include="CEventListener.h">
+      <Filter>Manager\EventManager</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="stdafx.cpp">
@@ -180,9 +180,6 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="CEventManager.cpp">
-      <Filter>Manager\EventManager</Filter>
-    </ClCompile>
-    <ClCompile Include="CObserver.cpp">
       <Filter>Manager\EventManager</Filter>
     </ClCompile>
     <ClCompile Include="CMainGame.cpp">
@@ -235,6 +232,9 @@
     </ClCompile>
     <ClCompile Include="CRandomNumberGenerator.cpp">
       <Filter>Tool</Filter>
+    </ClCompile>
+    <ClCompile Include="CEventListener.cpp">
+      <Filter>Manager\EventManager</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

@@ -1,7 +1,7 @@
 #pragma once
-#include "CObserver.h"
+#include "CEventListener.h"
 
-class CActor : public CObserver
+class CActor : public CEventListener
 {
 public:
 	CActor();

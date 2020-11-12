@@ -151,7 +151,7 @@
     <ClInclude Include="CFontManager.h" />
     <ClInclude Include="CFrameCounter.h" />
     <ClInclude Include="CGrid.h" />
-    <ClInclude Include="CObserver.h" />
+    <ClInclude Include="CEventListener.h" />
     <ClInclude Include="CPyramid.h" />
     <ClInclude Include="CScene.h" />
     <ClInclude Include="CSceneManager.h" />
@@ -187,7 +187,7 @@
     <ClCompile Include="CFontManager.cpp" />
     <ClCompile Include="CFrameCounter.cpp" />
     <ClCompile Include="CGrid.cpp" />
-    <ClCompile Include="CObserver.cpp" />
+    <ClCompile Include="CEventListener.cpp" />
     <ClCompile Include="CPyramid.cpp" />
     <ClCompile Include="CScene.cpp" />
     <ClCompile Include="CSceneManager.cpp" />

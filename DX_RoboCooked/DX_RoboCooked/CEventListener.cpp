@@ -1,7 +1,7 @@
 #include "stdafx.h"
-#include "CObserver.h"
+#include "CEventListener.h"
 
-CObserver::~CObserver()
+CEventListener::~CEventListener()
 {
 	/*std::set<EEvent>::iterator it = m_setSubsEvent.begin();
 	CEventManager& manager = *CEventManager::GetInstance();

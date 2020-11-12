@@ -1,5 +1,5 @@
 #include "stdafx.h"
-#include "CObserver.h"
+#include "CEventListener.h"
 
 
 CEventManager::CEventManager():CSingleton<CEventManager>()
@@ -11,14 +11,14 @@ CEventManager::~CEventManager()
 {
 }
 
-void CEventManager::Attach(EEvent eEvent, CObserver* observer)
+void CEventManager::Attach(EEvent eEvent, CEventListener* observer)
 {
 	m_mapEventMap[eEvent].insert(observer);
 }
 
-bool CEventManager::Detach(EEvent eEvent, CObserver* observer)
+bool CEventManager::Detach(EEvent eEvent, CEventListener* observer)
 {
-	std::set<CObserver*>::iterator it = std::find(m_mapEventMap[eEvent].begin(), m_mapEventMap[eEvent].end(), observer);
+	std::set<CEventListener*>::iterator it = std::find(m_mapEventMap[eEvent].begin(), m_mapEventMap[eEvent].end(), observer);
 	if (it != m_mapEventMap[eEvent].end())
 	{
 		m_mapEventMap[eEvent].erase(it);
@@ -27,9 +27,9 @@ bool CEventManager::Detach(EEvent eEvent, CObserver* observer)
 	return false;
 }
 
-void CEventManager::DetachAll(CObserver* _observer)
+void CEventManager::DetachAll(CEventListener* _observer)
 {
-	std::map<EEvent, std::set<CObserver*>>::iterator it = m_mapEventMap.begin();
+	std::map<EEvent, std::set<CEventListener*>>::iterator it = m_mapEventMap.begin();
 	while (it != m_mapEventMap.end())
 	{
 		for each(auto ob in it->second)
@@ -46,7 +46,7 @@ void CEventManager::DetachAll(CObserver* _observer)
 
 void CEventManager::Notify(void* value)
 {
-	std::set<CObserver *>::iterator iterator = m_mapEventMap[m_eEvent].begin();
+	std::set<CEventListener *>::iterator iterator = m_mapEventMap[m_eEvent].begin();
 
 	while (iterator != m_mapEventMap[m_eEvent].end())
 	{
