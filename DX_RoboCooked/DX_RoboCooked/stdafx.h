@@ -190,11 +190,20 @@ struct ST_PLAYER_INPUTKEY
 #include "CDebugSphere.h"
 #include "CDebugCube.h"
 
+#define __SLASH(x) /##x
+#define __DOUBLE_SLASH __SLASH(/)
+
 #ifdef _DEBUG
 	#ifdef UNICODE
-	#pragma comment(linker, "/entry:wWinMainCRTStartup /subsystem:console")
+		#pragma comment(linker, "/entry:wWinMainCRTStartup /subsystem:console")
 	#else
-	#pragma comment(linker, "/entry:WinMainCRTStartup /subsystem:console")
+		#pragma comment(linker, "/entry:WinMainCRTStartup /subsystem:console")
 	#endif
-#endif
 
+	#define _DebugComment
+	#define _ReleaseComment __DOUBLE_SLASH
+
+#else
+	#define _DebugComment __DOUBLE_SLASH
+	#define _ReleaseComment
+#endif

@@ -4,7 +4,7 @@
 class CBoxCollision : public ICollisionArea
 {
 protected:
-	D3DXVECTOR3			m_vOriginCenterPos;
+	
 	D3DXVECTOR3			m_vOriginAxisDir[3];
 
 	D3DXVECTOR3			m_vCenterPos;

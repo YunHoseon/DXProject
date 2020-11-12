@@ -75,9 +75,6 @@
     <ClInclude Include="CFrameCounter.h">
       <Filter>Tool</Filter>
     </ClInclude>
-    <ClInclude Include="CRandomGenerator.h">
-      <Filter>Tool</Filter>
-    </ClInclude>
     <ClInclude Include="CSceneManager.h">
       <Filter>Manager</Filter>
     </ClInclude>
@@ -138,6 +135,9 @@
     <ClInclude Include="CGameScene.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="CRandomNumberGenerator.h">
+      <Filter>Tool</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="stdafx.cpp">
@@ -171,9 +171,6 @@
       <Filter>Manager</Filter>
     </ClCompile>
     <ClCompile Include="CFrameCounter.cpp">
-      <Filter>Tool</Filter>
-    </ClCompile>
-    <ClCompile Include="CRandomGenerator.cpp">
       <Filter>Tool</Filter>
     </ClCompile>
     <ClCompile Include="CSceneManager.cpp">
@@ -235,6 +232,9 @@
     </ClCompile>
     <ClCompile Include="CBoxCollision.cpp">
       <Filter>GameScene\Collider</Filter>
+    </ClCompile>
+    <ClCompile Include="CRandomNumberGenerator.cpp">
+      <Filter>Tool</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

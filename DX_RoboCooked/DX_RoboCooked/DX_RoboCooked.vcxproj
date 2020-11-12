@@ -163,7 +163,7 @@
     <ClInclude Include="CDebugCube.h" />
     <ClInclude Include="CDebugSphere.h" />
     <ClInclude Include="DX_RoboCooked.h" />
-    <ClInclude Include="CRandomGenerator.h" />
+    <ClInclude Include="CRandomNumberGenerator.h" />
     <ClInclude Include="CMainGame.h" />
     <ClInclude Include="CField.h" />
     <ClInclude Include="CGameScene.h" />
@@ -200,7 +200,7 @@
     <ClCompile Include="CDebugSphere.cpp" />
     <ClCompile Include="DX_RoboCooked.cpp" />
     <ClCompile Include="CSingleton.cpp" />
-    <ClCompile Include="CRandomGenerator.cpp" />
+    <ClCompile Include="CRandomNumberGenerator.cpp" />
     <ClCompile Include="CMainGame.cpp" />
     <ClCompile Include="CField.cpp" />
     <ClCompile Include="CGameScene.cpp" />

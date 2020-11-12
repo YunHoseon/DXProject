@@ -1,7 +1,9 @@
 ﻿#include "stdafx.h"
 #include "CBoxCollision.h"
 
-CBoxCollision::CBoxCollision(D3DXVECTOR3 vOriginPos, D3DXVECTOR3 vSize, D3DXMATRIXA16* pmatWorld):
+#include "CSphereCollision.h"
+
+CBoxCollision::CBoxCollision(D3DXVECTOR3 vOriginPos, D3DXVECTOR3 vSize, D3DXMATRIXA16* pmatWorld): ICollisionArea(),
 		m_pmatWorldTM(pmatWorld)
 {
 	m_eType = EColideType::E_Box;
@@ -23,15 +25,13 @@ CBoxCollision::~CBoxCollision()
 
 void CBoxCollision::Render()
 {
-	return;
-	/*
 	vector<ST_PC_VERTEX> drawPoint;
 	vector<ST_PC_VERTEX> drawVertex;
 	ST_PC_VERTEX vertex;
-	vertex.c = c;
+	vertex.c = stColor[isCollide];
 	//cout << c << endl;
 	int plusMinus[2] = { 1, -1 };
-
+	
 	for (int i = 0; i < 2; ++i)
 	{
 		for (int j = 0; j < 2; ++j)
@@ -61,15 +61,15 @@ void CBoxCollision::Render()
 	drawVertex.push_back(drawPoint[1]); drawVertex.push_back(drawPoint[3]);
 	drawVertex.push_back(drawPoint[3]); drawVertex.push_back(drawPoint[2]);
 	drawVertex.push_back(drawPoint[2]); drawVertex.push_back(drawPoint[0]);
-
+	
 	drawVertex.push_back(drawPoint[4]); drawVertex.push_back(drawPoint[5]);
 	drawVertex.push_back(drawPoint[5]); drawVertex.push_back(drawPoint[7]);
 	drawVertex.push_back(drawPoint[7]); drawVertex.push_back(drawPoint[6]);
 	drawVertex.push_back(drawPoint[6]); drawVertex.push_back(drawPoint[4]);
-
+	
 	drawVertex.push_back(drawPoint[5]); drawVertex.push_back(drawPoint[1]);
 	drawVertex.push_back(drawPoint[4]); drawVertex.push_back(drawPoint[0]);
-
+	
 	drawVertex.push_back(drawPoint[6]); drawVertex.push_back(drawPoint[2]);
 	drawVertex.push_back(drawPoint[7]); drawVertex.push_back(drawPoint[3]);
 	D3DXMATRIXA16 matWorld;
@@ -79,7 +79,6 @@ void CBoxCollision::Render()
 	g_pD3DDevice->SetTexture(0, NULL);
 	g_pD3DDevice->SetFVF(ST_PC_VERTEX::FVF);
 	g_pD3DDevice->DrawPrimitiveUP(D3DPT_LINELIST, drawVertex.size() * 0.5f, &drawVertex[0], sizeof(ST_PC_VERTEX));
-	*/
 }
 
 void CBoxCollision::Update()
@@ -100,7 +99,8 @@ bool CBoxCollision::CollideToBox(ICollisionArea* pTargetCollider)
 	float r0, r1, r;
 	const float cutOff = 0.999999f;
 	bool existsParallelPair = false;
-
+	isCollide = false;
+	
 	CBoxCollision* target = dynamic_cast<CBoxCollision*>(pTargetCollider);
 
 	D3DXVECTOR3 D = target->m_vCenterPos - this->m_vCenterPos;
@@ -142,7 +142,11 @@ bool CBoxCollision::CollideToBox(ICollisionArea* pTargetCollider)
 			return false;
 	}
 
-	if (existsParallelPair) return true;
+	if (existsParallelPair)
+	{
+		isCollide = true;
+		return true;
+	}
 
 	{
 		{
@@ -215,5 +219,16 @@ bool CBoxCollision::CollideToBox(ICollisionArea* pTargetCollider)
 
 bool CBoxCollision::CollideToSphere(ICollisionArea* pTargetCollider)
 {
+	isCollide = false;
+
+	CSphereCollision* target = dynamic_cast<CSphereCollision*>(pTargetCollider);
+	D3DXVECTOR3 vDist = target->GetCenter() - this->m_vOriginCenterPos;
+	
+	if (D3DXVec3LengthSq(&vDist) > (1.0f + target->GetRadius()) * (1.0f + target->GetRadius()))
+		return false;
+
+	D3DXPLANE stPlanes[6];
+	
+	
 	return false;
 }
