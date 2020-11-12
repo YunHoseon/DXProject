@@ -10,7 +10,8 @@ public:
 	virtual ~ICollisionArea() {}
 	//const EColideType& GetType() { return m_eType; }
 	bool Collide(ICollisionArea* pTargetCollider);
-	virtual bool Render() = 0;
+	virtual void Render() = 0;
+	virtual void Update() = 0;
 protected:
 	virtual bool CollideToBox(ICollisionArea* pTargetCollider) = 0;
 	virtual bool CollideToSphere(ICollisionArea* pTargetCollider) = 0;
