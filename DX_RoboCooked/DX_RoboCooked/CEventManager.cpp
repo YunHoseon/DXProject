@@ -37,8 +37,7 @@ void CEventManager::DetachAll(CObserver* _observer)
 			if (ob == _observer)
 			{
 				it->second.erase(ob);
-			}
-				
+			}	
 		}
 		++it;
 	}

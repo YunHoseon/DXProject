@@ -4,7 +4,6 @@
 
 class CObserver;
 
-
 enum class EEvent
 {
 	E_EventTile,
@@ -35,8 +34,4 @@ public:
 private:
 	std::map<EEvent, std::set<CObserver*>> m_mapEventMap;
 	EEvent m_eEvent;
-
-
 };
-
-
