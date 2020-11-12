@@ -4,6 +4,10 @@ class CGrid;
 class CCamera;
 class CScene;
 
+/* µð¹ö±ë¿ë */
+class CDebugSphere;
+class CDebugCube;
+
 class CMainGame
 {
 private:
@@ -11,6 +15,9 @@ private:
 	CCamera*				m_pCamera;
 	CScene*					m_pScene;
 
+	/* µð¹ö±ë¿ë */
+	CDebugSphere*			m_pDebugSphere;
+	CDebugCube*				m_pDebugCube;
 public:
 	CMainGame();
 	~CMainGame();

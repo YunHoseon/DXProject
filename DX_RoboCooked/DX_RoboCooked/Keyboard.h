@@ -13,8 +13,8 @@ public:
 
 	void Update();
 
-	void PressKey(WPARAM keyID);
-	void ReleaseKey(WPARAM keyID);
+	void PressKey(WPARAM keyID, LPARAM lParam);
+	void ReleaseKey(WPARAM keyID, LPARAM lParam);
 	void JudgeDash(WPARAM keyID);
 
 	bool IsKeyPressed(WPARAM keyID);

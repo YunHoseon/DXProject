@@ -130,6 +130,13 @@ struct ST_SPHERE
 	}
 };
 
+struct ST_CUBE
+{
+	float			fLength;
+	D3DXVECTOR3		vCenter;
+	ST_CUBE() : fLength(0), vCenter(0, 0, 0){}
+};
+
 #define Synthesize(varType, varName, funName)\
 	protected: varType varName; \
 	public : inline varType Get##funName(void) const {return varName;}\
@@ -165,6 +172,8 @@ struct ST_SPHERE
 #include "CSceneManager.h"
 #include "CEventManager.h"
 #include "InputManager.h"
+#include "CDebugSphere.h"
+#include "CDebugCube.h"
 
 #ifdef _DEBUG
 	#ifdef UNICODE

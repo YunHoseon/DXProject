@@ -26,11 +26,11 @@ void CInputManager::WndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lPara
 	switch (message)
 	{
 	case WM_KEYDOWN:
-		m_pKeyboard->PressKey(wParam);
+		m_pKeyboard->PressKey(wParam, lParam);
 		break;
 
 	case WM_KEYUP:
-		m_pKeyboard->ReleaseKey(wParam);
+		m_pKeyboard->ReleaseKey(wParam, lParam);
 		break;
 
 	case WM_LBUTTONDOWN:

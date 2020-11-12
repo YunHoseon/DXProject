@@ -14,7 +14,7 @@ CKeyboard::~CKeyboard()
 }
 
 void CKeyboard::Update()
-{
+ {
 	if (InputManager->IsKeyPressed('W'))
 	{
 		std::cout << "W" << std::endl;
@@ -30,6 +30,10 @@ void CKeyboard::Update()
 	if (InputManager->IsKeyPressed('D'))
 	{
 		std::cout << "D" << std::endl;
+	}
+	if(InputManager->IsKeyPressed(162))
+	{
+		std::cout << "lCtrl" << std::endl;
 	}
 
 	if(InputManager->IsKeyPressed(VK_UP))
@@ -48,20 +52,68 @@ void CKeyboard::Update()
 	{
 		std::cout << "right" << std::endl;
 	}
+	/*if (InputManager->IsKeyPressed(229))
+	{
+		std::cout << "rCtrl" << std::endl;
+	}*/
+
+	/*if(GetAsyncKeyState(VK_RCONTROL) & 0x8000)
+	{
+		std::cout << "right control" << std::endl;
+	}*/
 }
 
-void CKeyboard::PressKey(WPARAM keyID)
+void CKeyboard::PressKey(WPARAM keyID, LPARAM lParam)
 {
-	JudgeDash(keyID);
-	m_dwPrevKey = keyID;
+	WPARAM new_vk = keyID;
+	UINT scancode = (lParam & 0x00ff0000) >> 16;
+	int extended = (lParam & 0x01000000) != 0;
+
+	switch (keyID)
+	{
+	case VK_SHIFT:
+		new_vk = MapVirtualKey(scancode, MAPVK_VSC_TO_VK_EX);
+		break;
+	case VK_CONTROL:
+		new_vk = extended ? VK_RCONTROL : VK_LCONTROL;
+		break;
+	case VK_MENU:
+		new_vk = extended ? VK_RMENU : VK_LMENU;
+		break;
+	default:
+		new_vk = keyID;
+		break;
+	}
+
+	m_dwPrevKey = new_vk;
 	m_eKeyState = E_BTNDOWN;
-	m_mapKey[keyID] = true;
+	m_mapKey[new_vk] = true;
 }
 
-void CKeyboard::ReleaseKey(WPARAM keyID)
+void CKeyboard::ReleaseKey(WPARAM keyID, LPARAM lParam)
 {
+	WPARAM new_vk = keyID;
+	UINT scancode = (lParam & 0x00ff0000) >> 16;
+	int extended = (lParam & 0x01000000) != 0;
+
+	switch (keyID)
+	{
+	case VK_SHIFT:
+		new_vk = MapVirtualKey(scancode, MAPVK_VSC_TO_VK_EX);
+		break;
+	case VK_CONTROL:
+		new_vk = extended ? VK_RCONTROL : VK_LCONTROL;
+		break;
+	case VK_MENU:
+		new_vk = extended ? VK_RMENU : VK_LMENU;
+		break;
+	default:
+		new_vk = keyID;
+		break;
+	}
+	
 	m_eKeyState = E_BTNUP;
-	m_mapKey[keyID] = false;
+	m_mapKey[new_vk] = false;
 }
 
 void CKeyboard::JudgeDash(WPARAM keyID)

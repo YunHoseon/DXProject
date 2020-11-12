@@ -143,7 +143,9 @@
   <ItemGroup>
     <ClInclude Include="CActor.h" />
     <ClInclude Include="CAllocateHierachy.h" />
+    <ClInclude Include="CBoxCollision.h" />
     <ClInclude Include="CCamera.h" />
+    <ClInclude Include="ICollisionArea.h" />
     <ClInclude Include="CDeviceManager.h" />
     <ClInclude Include="CEventManager.h" />
     <ClInclude Include="CFontManager.h" />
@@ -155,8 +157,11 @@
     <ClInclude Include="CSceneManager.h" />
     <ClInclude Include="CSkinnedMesh.h" />
     <ClInclude Include="CSkinnedMeshManager.h" />
+    <ClInclude Include="CSphereCollision.h" />
     <ClInclude Include="CTextureManager.h" />
     <ClInclude Include="CTimeManager.h" />
+    <ClInclude Include="CDebugCube.h" />
+    <ClInclude Include="CDebugSphere.h" />
     <ClInclude Include="DX_RoboCooked.h" />
     <ClInclude Include="CRandomGenerator.h" />
     <ClInclude Include="CMainGame.h" />
@@ -174,7 +179,9 @@
   <ItemGroup>
     <ClCompile Include="CActor.cpp" />
     <ClCompile Include="CAllocateHierachy.cpp" />
+    <ClCompile Include="CBoxCollision.cpp" />
     <ClCompile Include="CCamera.cpp" />
+    <ClCompile Include="ICollisionArea.cpp" />
     <ClCompile Include="CDeviceManager.cpp" />
     <ClCompile Include="CEventManager.cpp" />
     <ClCompile Include="CFontManager.cpp" />
@@ -186,8 +193,11 @@
     <ClCompile Include="CSceneManager.cpp" />
     <ClCompile Include="CSkinnedMesh.cpp" />
     <ClCompile Include="CSkinnedMeshManager.cpp" />
+    <ClCompile Include="CSphereCollision.cpp" />
     <ClCompile Include="CTextureManager.cpp" />
     <ClCompile Include="CTimeManager.cpp" />
+    <ClCompile Include="CDebugCube.cpp" />
+    <ClCompile Include="CDebugSphere.cpp" />
     <ClCompile Include="DX_RoboCooked.cpp" />
     <ClCompile Include="CSingleton.cpp" />
     <ClCompile Include="CRandomGenerator.cpp" />
