@@ -1,5 +1,6 @@
 #pragma once
 
+
 class CGrid;
 class CCamera;
 class CScene;
@@ -14,6 +15,8 @@ private:
 	CGrid*					m_pGrid;
 	CCamera*				m_pCamera;
 	CScene*					m_pScene;
+
+	
 
 	/* µð¹ö±ë¿ë */
 	CDebugSphere*			m_pDebugSphere;

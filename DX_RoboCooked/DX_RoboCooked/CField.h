@@ -18,6 +18,5 @@ private:
 	vector<CTile*>					m_vecTile;
 	D3DMATERIAL9					m_stMtlTile;
 	
-	
 };
 

@@ -1,4 +1,5 @@
 #pragma once
+#include "CActor.h"
 #include "CScene.h"
 
 class CField;
@@ -7,7 +8,8 @@ class CGameScene :
 	public CScene
 {
 private:
-	CField* m_pField;
+	CField*					m_pField;
+	vector<CActor*>			m_vecStaticActor;
 public:
 	CGameScene();
 	~CGameScene();

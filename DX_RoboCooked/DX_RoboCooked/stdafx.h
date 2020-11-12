@@ -47,7 +47,7 @@ extern HWND g_hWnd;
 
 #define ELIPSE 0.000001f
 
-#define BLOCK_SIZE 2.0f
+#define BLOCK_SIZE 1.0f
 
 #define WIDTH 16
 #define HEIGHT 12
@@ -184,6 +184,9 @@ struct ST_PLAYER_INPUTKEY
 #include "CSceneManager.h"
 #include "CEventManager.h"
 #include "InputManager.h"
+
+
+
 #include "CDebugSphere.h"
 #include "CDebugCube.h"
 
