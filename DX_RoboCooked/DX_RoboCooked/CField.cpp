@@ -31,20 +31,6 @@ void CField::Setup(int iWidth, int iHeight)
 	{
 		for (int j = 0; j < iWidth; ++j)
 		{
-			/*v.p = D3DXVECTOR3{ (fMinX + j) * fBlockSize, 0, (fMinZ + i) * fBlockSize }; v.t = D3DXVECTOR2(0, 0);
-			vecPlane.push_back(v);
-			v.p = D3DXVECTOR3{ (fMinX + j) * fBlockSize, 0, (fMinZ + i) * fBlockSize + fBlockSize }; v.t = D3DXVECTOR2(1, 0);
-			vecPlane.push_back(v);
-			v.p = D3DXVECTOR3{ (fMinX + j) * fBlockSize + fBlockSize, 0, (fMinZ + i) * fBlockSize + fBlockSize }; v.t = D3DXVECTOR2(0, 1);
-			vecPlane.push_back(v);
-
-			v.p = D3DXVECTOR3{ (fMinX + j) * fBlockSize, 0, (fMinZ + i) * fBlockSize };  v.t = D3DXVECTOR2(0, 1);
-			vecPlane.push_back(v);
-			v.p = D3DXVECTOR3{ (fMinX + j) * fBlockSize + fBlockSize, 0, (fMinZ + i) * fBlockSize + fBlockSize }; v.t = D3DXVECTOR2(1, 0);
-			vecPlane.push_back(v);
-			v.p = D3DXVECTOR3{ (fMinX + j) * fBlockSize + fBlockSize, 0, (fMinZ + i) * fBlockSize }; v.t = D3DXVECTOR2(1, 1);
-			vecPlane.push_back(v);*/
-
 			v.p = D3DXVECTOR3{ fMinX + j * BLOCK_SIZE, 0, fMaxZ - i * BLOCK_SIZE }; v.t = D3DXVECTOR2(0, 0);
 			vecPlane.push_back(v);
 			v.p = D3DXVECTOR3{ fMinX + j * BLOCK_SIZE + BLOCK_SIZE, 0, fMaxZ - i * BLOCK_SIZE }; v.t = D3DXVECTOR2(1, 0);
