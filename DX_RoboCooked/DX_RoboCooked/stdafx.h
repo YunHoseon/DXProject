@@ -52,6 +52,7 @@ extern HWND g_hWnd;
 #define WIDTH 16
 #define HEIGHT 12
 
+
 struct ST_PC_VERTEX
 {
 	D3DXVECTOR3	p;
@@ -122,7 +123,7 @@ struct ST_ROT_SAMPLE
 
 struct ST_SPHERE
 {
-	float	fRaidus;
+	float			fRaidus;
 	D3DXVECTOR3		vCenter;
 	bool			isPicked;
 	ST_SPHERE(): fRaidus(0), isPicked(false), vCenter(0,0,0)

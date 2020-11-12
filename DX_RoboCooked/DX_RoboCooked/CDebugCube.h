@@ -1,6 +1,8 @@
 #pragma once
 #include "CActor.h"
 
+
+
 class CDebugCube : public CActor
 {
 private:
@@ -18,7 +20,8 @@ public:
 	~CDebugCube();
 
 	void Setup();
-	virtual void Update() override;
-	virtual void  Render() override;
+	void Update() override;
+	void Render() override;
+	void OnEvent(EEvent eEvent, void* _value) {};
 };
 

@@ -49,7 +49,8 @@ void CMainGame::Setup()
 	m_pScene = new CGameScene;
 	g_SceneManager->AddScene("GAMESCENE",m_pScene);
 	g_SceneManager->SetCurrentScene(m_pScene);
-	
+
+	//g_EventManager->CallEvent(EEvent::E_EventTile, NULL);
 }
 
 void CMainGame::Update()
@@ -64,7 +65,9 @@ void CMainGame::Update()
 
 	if (m_pDebugCube)
 		m_pDebugCube->Update();
-	
+
+	if (m_pDebugSphere)
+		m_pDebugSphere->Update();
 }
 
 void CMainGame::Render()

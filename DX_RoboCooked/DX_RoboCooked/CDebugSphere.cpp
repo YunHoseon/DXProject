@@ -4,6 +4,9 @@
 
 CDebugSphere::CDebugSphere()
 {
+	m_vPosition = m_sphere.vCenter;
+	D3DXMatrixIdentity(&m_matWorld);
+	
 	m_stInputKey.moveFowardKey = 'W';
 	m_stInputKey.moveLeftKey = 'A';
 	m_stInputKey.moveBackKey = 'S';
@@ -12,7 +15,6 @@ CDebugSphere::CDebugSphere()
 	m_stInputKey.interactableKey2 = 'G';
 	m_stInputKey.interactableKey3 = 'H';
 }
-
 
 CDebugSphere::~CDebugSphere()
 {
@@ -30,46 +32,41 @@ void CDebugSphere::Setup()
 
 void CDebugSphere::Update()
 {
-	if (GetKeyState('A') & 0X8000)
-	{
-		m_fRotY -= 0.1f;
-	}
-	if (GetKeyState('D') & 0X8000)
-	{
-		m_fRotY += 0.1f;
-	}
-
-	D3DXMATRIXA16 matR, matT;
-	D3DXMatrixRotationY(&matR, m_fRotY);
-
-	m_vDirection = D3DXVECTOR3(0, 0, -1);
-	D3DXVec3TransformNormal(&m_vDirection, &m_vDirection, &matR);
-
+	D3DXMATRIXA16 matS, matR, matT;
 	D3DXVECTOR3 vPosition = m_vPosition;
 
-	if (GetKeyState('W') & 0X8000)
+	if (InputManager->IsKeyPressed(m_stInputKey.moveFowardKey))
 	{
-		vPosition = m_vPosition + (m_vDirection * 0.1f);
+		vPosition += (D3DXVECTOR3(0, 0, 1) * 0.1f);
+		std::cout << "↑" << std::endl;
 	}
-	if (GetKeyState('S') & 0X8000)
+	if (InputManager->IsKeyPressed(m_stInputKey.moveLeftKey))
 	{
-		vPosition = m_vPosition - (m_vDirection * 0.1f);
+		vPosition += (D3DXVECTOR3(-1, 0, 0) * 0.1f);
 	}
+	if (InputManager->IsKeyPressed(m_stInputKey.moveBackKey))
+	{
+		vPosition += (D3DXVECTOR3(0, 0, -1) * 0.1f);
+	}
+	if (InputManager->IsKeyPressed(m_stInputKey.moveRightKey))
+	{
+		vPosition += (D3DXVECTOR3(1, 0, 0) * 0.1f);
+	}
+	if (InputManager->IsKeyPressed(m_stInputKey.interactableKey1))
+	{
+		std::cout << "상호작용" << std::endl;
+	}
+
+	m_vPosition = vPosition;
+
+	D3DXMatrixTranslation(&matT, m_vPosition.x, m_vPosition.y, m_vPosition.z);
+	m_matWorld = matT;
 }
 
 void CDebugSphere::Render()
 {
 	g_pD3DDevice->SetRenderState(D3DRS_LIGHTING, false);
-	D3DXMATRIXA16 matWorld, matS, matR;
-	D3DXMatrixIdentity(&matS);
-	D3DXMatrixIdentity(&matR);
-	matWorld = matS * matR;
-
-	D3DXMatrixIdentity(&matWorld);
-	matWorld._41 = m_sphere.vCenter.x;
-	matWorld._42 = m_sphere.vCenter.y;
-	matWorld._43 = m_sphere.vCenter.z;
-	g_pD3DDevice->SetTransform(D3DTS_WORLD, &matWorld);
+	g_pD3DDevice->SetTransform(D3DTS_WORLD, &m_matWorld);
 	g_pD3DDevice->SetTexture(0, NULL);
 	g_pD3DDevice->SetMaterial(&m_stMtlSphere);
 	m_pMeshSphere->DrawSubset(0);

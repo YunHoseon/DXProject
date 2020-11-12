@@ -53,8 +53,3 @@ bool CInputManager::IsKeyPressed(WPARAM keyID)
 {
 	return m_pKeyboard->IsKeyPressed(keyID);
 }
-
-WPARAM CInputManager::GetPressedKey()
-{
-	return m_pKeyboard->GetPressedKey();
-}
