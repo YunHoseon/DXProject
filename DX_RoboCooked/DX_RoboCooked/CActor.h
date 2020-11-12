@@ -1,5 +1,7 @@
 #pragma once
-class CActor
+#include "CObserver.h"
+
+class CActor : public CObserver
 {
 public:
 	CActor();

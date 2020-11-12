@@ -1,6 +1,7 @@
 #pragma once
 #include "CActor.h"
 
+
 class CDebugSphere : public CActor
 {
 private:
@@ -18,8 +19,11 @@ public:
 	~CDebugSphere();
 
 	void Setup();
-	virtual void Update() override;
-	virtual void Render() override;
+	void Update() override;
+	void Render() override;
+	
 	//입력키 바꿀 수 있는 함수 추가
+
+	void OnEvent(EEvent eEvent, void* _value) {};
 };
 
