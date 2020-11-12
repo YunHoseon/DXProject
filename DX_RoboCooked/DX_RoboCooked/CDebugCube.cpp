@@ -2,6 +2,7 @@
 #include "CDebugCube.h"
 
 
+
 CDebugCube::CDebugCube()
 {
 	m_stInputKey.moveFowardKey = VK_UP;
@@ -32,10 +33,9 @@ void CDebugCube::Update()
 {
 	switch (InputManager->GetPressedKey())
 	{
-	/*case m_stInputKey.moveFowardKey:
-		break;
+
 		default:
-			break;*/
+			break;
 	}
 }
 

@@ -52,6 +52,7 @@ extern HWND g_hWnd;
 #define WIDTH 16
 #define HEIGHT 12
 
+
 struct ST_PC_VERTEX
 {
 	D3DXVECTOR3	p;

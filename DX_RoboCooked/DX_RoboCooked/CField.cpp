@@ -2,7 +2,7 @@
 #include "CField.h"
 
 
-
+const float Y = -0.5f;
 CField::CField()
 {
 }
@@ -150,7 +150,7 @@ void CField::Setup(int iWidth, int iHeight)
 		{
 			CTile* pTile = new CTile;
 			ST_CUBE cube;
-			cube.vCenter = D3DXVECTOR3((float)j, 0, (float)i);
+			cube.vCenter = D3DXVECTOR3((float)j, Y, (float)i);
 			pTile->SetCube(cube);
 
 			pTile->SetMeshCubeTile(pMesh);

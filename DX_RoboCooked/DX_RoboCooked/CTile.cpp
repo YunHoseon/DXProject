@@ -20,6 +20,11 @@ void CTile::AddEvent(EEvent eEvent)
 }
 
 
+void CTile::OnEvent(EEvent eEvent, void* _value)
+{
+	
+}
+
 void CTile::Render()
 {
 	D3DXMATRIXA16 matWorld;

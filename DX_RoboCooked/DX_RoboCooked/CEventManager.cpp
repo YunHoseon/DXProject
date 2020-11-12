@@ -13,19 +13,17 @@ CEventManager::~CEventManager()
 
 void CEventManager::Attach(EEvent eEvent, CObserver* observer)
 {
-	for(int i = 0 ; i < m_mapEventMap[eEvent].size(); i++)
-	{
-		if(m_mapEventMap[eEvent][i] == observer)
-			return;
-	}
+	std::set<CObserver*>::iterator it = std::find(m_mapEventMap[eEvent].begin(), m_mapEventMap[eEvent].end(), observer);
+	if (it == m_mapEventMap[eEvent].end())	
+		return;
 	
-	m_mapEventMap[eEvent].push_back(observer);
+	
+	m_mapEventMap[eEvent].insert(observer);
 }
 
 bool CEventManager::Detach(EEvent eEvent, CObserver* observer)
 {
-	std::vector<CObserver*>::iterator it = std::find(m_mapEventMap[eEvent].begin(), m_mapEventMap[eEvent].end(), observer);
-
+	std::set<CObserver*>::iterator it = std::find(m_mapEventMap[eEvent].begin(), m_mapEventMap[eEvent].end(), observer);
 	if (it != m_mapEventMap[eEvent].end())
 	{
 		m_mapEventMap[eEvent].erase(it);
@@ -34,10 +32,27 @@ bool CEventManager::Detach(EEvent eEvent, CObserver* observer)
 	return false;
 }
 
+void CEventManager::DetachAll(CObserver* _observer)
+{
+	std::map<EEvent, std::set<CObserver*>>::iterator it = m_mapEventMap.begin();
+	while (it != m_mapEventMap.end())
+	{
+		for each(auto ob in it->second)
+		{
+			if (ob == _observer)
+			{
+				it->second.erase(ob);
+			}
+				
+		}
+		++it;
+	}
+}
+
 
 void CEventManager::Notify(void* value)
 {
-	std::vector<CObserver *>::iterator iterator = m_mapEventMap[m_eEvent].begin();
+	std::set<CObserver *>::iterator iterator = m_mapEventMap[m_eEvent].begin();
 
 	while (iterator != m_mapEventMap[m_eEvent].end())
 	{

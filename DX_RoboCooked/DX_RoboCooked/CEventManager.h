@@ -29,12 +29,13 @@ public:
 public:
 	void Attach(EEvent eEvent,CObserver* _observer);
 	bool Detach(EEvent eEvent, CObserver* _observer);
+	void DetachAll(CObserver* _observer);
 	void Notify(void* _value);
 	void CallEvent(EEvent eEvent, void* _value);
 	void ErrorSend();
 
 private:
-	std::map<EEvent, std::vector<CObserver*>> m_mapEventMap;
+	std::map<EEvent, std::set<CObserver*>> m_mapEventMap;
 	EEvent m_eEvent;
 
 

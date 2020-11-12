@@ -1,6 +1,7 @@
 #pragma once
 #include "CActor.h"
 
+
 class CDebugSphere : public CActor
 {
 private:

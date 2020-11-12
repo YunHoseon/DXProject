@@ -13,7 +13,6 @@ CDebugSphere::CDebugSphere()
 	m_stInputKey.interactableKey3 = 'H';
 }
 
-
 CDebugSphere::~CDebugSphere()
 {
 }
