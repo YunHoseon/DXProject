@@ -227,8 +227,43 @@ bool CBoxCollision::CollideToSphere(ICollisionArea* pTargetCollider)
 	if (D3DXVec3LengthSq(&vDist) > (1.0f + target->GetRadius()) * (1.0f + target->GetRadius()))
 		return false;
 
-	D3DXPLANE stPlanes[6];
-	
+	vector<D3DXPLANE> stPlanes;
+	vector<D3DXVECTOR3> vecVertex;
+	D3DXVECTOR3 v;
+	D3DXPLANE plane;
+	int plusMinus[2] = { 1, -1 };
+
+	for (int i = 0; i < 2; ++i)
+	{
+		for (int j = 0; j < 2; ++j)
+		{
+			for (int k = 0; k < 2; ++k)
+			{
+				v = m_vCenterPos
+					+ (m_vAxisDir[0] * m_fAxisHalfLen[0] * plusMinus[i])
+					+ (m_vAxisDir[1] * m_fAxisHalfLen[1] * plusMinus[j])
+					+ (m_vAxisDir[2] * m_fAxisHalfLen[2] * plusMinus[k]);
+				vecVertex.push_back(v);
+			}
+		}
+	}
+	//               4-------------0
+	//              /|             /|
+	//             / |            / |
+	//            /  |           /  |
+	//           5-------------1    |
+	//           |   |         |    |
+	//           |   6-------------2
+	//           |  /          |  /
+	//           | /           | /
+	//           7-------------3
+	//
+	D3DXPlaneFromPoints(&plane, &vecVertex[7], &vecVertex[5], &vecVertex[1]); stPlanes.push_back(plane);
+	D3DXPlaneFromPoints(&plane, &vecVertex[2], &vecVertex[0], &vecVertex[4]); stPlanes.push_back(plane);
+	D3DXPlaneFromPoints(&plane, &vecVertex[6], &vecVertex[4], &vecVertex[5]); stPlanes.push_back(plane);
+	D3DXPlaneFromPoints(&plane, &vecVertex[3], &vecVertex[1], &vecVertex[0]); stPlanes.push_back(plane);
+	D3DXPlaneFromPoints(&plane, &vecVertex[5], &vecVertex[4], &vecVertex[0]); stPlanes.push_back(plane);
+	D3DXPlaneFromPoints(&plane, &vecVertex[6], &vecVertex[7], &vecVertex[3]); stPlanes.push_back(plane);
 	
 	return false;
 }
