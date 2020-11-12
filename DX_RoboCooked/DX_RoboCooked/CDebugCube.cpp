@@ -40,29 +40,23 @@ void CDebugCube::Update()
 	D3DXMATRIXA16 matS, matR, matT;
 	D3DXVECTOR3 vPosition = m_vPosition;
 	
-	if(InputManager->GetPressedKey() == m_stInputKey.moveFowardKey 
-		&& InputManager->IsKeyPressed(InputManager->GetPressedKey()))
+	if (InputManager->IsKeyPressed(m_stInputKey.moveFowardKey))
 	{
-		vPosition = m_vPosition - (D3DXVECTOR3(0, 0, -1) * 0.1f);
-		std::cout << "↑" << std::endl;
+		vPosition += (D3DXVECTOR3(0, 0, 1) * 0.1f);
 	}
-	if (InputManager->GetPressedKey() == m_stInputKey.moveLeftKey
-		&& InputManager->IsKeyPressed(InputManager->GetPressedKey()))
+	if (InputManager->IsKeyPressed(m_stInputKey.moveLeftKey))
 	{
-		vPosition = m_vPosition + (D3DXVECTOR3(-1, 0, 0) * 0.1f);
+		vPosition += (D3DXVECTOR3(-1, 0, 0) * 0.1f);
 	}
-	if (InputManager->GetPressedKey() == m_stInputKey.moveBackKey
-		&& InputManager->IsKeyPressed(InputManager->GetPressedKey()))
+	if (InputManager->IsKeyPressed(m_stInputKey.moveBackKey))
 	{
-		vPosition = m_vPosition + (D3DXVECTOR3(0, 0, -1) * 0.1f);
+		vPosition += (D3DXVECTOR3(0, 0, -1) * 0.1f);
 	}
-	if (InputManager->GetPressedKey() == m_stInputKey.moveRightKey
-		&& InputManager->IsKeyPressed(InputManager->GetPressedKey()))
+	if (InputManager->IsKeyPressed(m_stInputKey.moveRightKey))
 	{
-		vPosition = m_vPosition - (D3DXVECTOR3(-1, 0, 0) * 0.1f);
+		vPosition += (D3DXVECTOR3(1, 0, 0) * 0.1f);
 	}
-	if (InputManager->GetPressedKey() == m_stInputKey.interactableKey1
-		&& InputManager->IsKeyPressed(InputManager->GetPressedKey()))
+	if (InputManager->IsKeyPressed(m_stInputKey.interactableKey1))
 	{
 		std::cout << "상호작용" << std::endl;
 	}
