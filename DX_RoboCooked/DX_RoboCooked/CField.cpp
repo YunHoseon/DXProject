@@ -142,22 +142,32 @@ void CField::Setup(int iWidth, int iHeight)
 	pMesh->OptimizeInplace(D3DXMESHOPT_ATTRSORT | D3DXMESHOPT_COMPACT | D3DXMESHOPT_VERTEXCACHE,
 		&vecAdj[0], 0, 0, 0);
 
-	
-	for (float i = fMinZ + (BLOCK_SIZE / 2.0f); i < fMaxZ; i+=(BLOCK_SIZE/2.0f))
+	int row = 0, col = 0;
+	for (float i = fMinZ + BLOCK_SIZE; i <= fMaxZ; i+=BLOCK_SIZE)
 	{
-		for (float j = fMinX + (BLOCK_SIZE / 2.0f); j < fMaxX; j += (BLOCK_SIZE / 2.0f))
+		col = 0;
+		for (float j = fMinX + BLOCK_SIZE ; j <= fMaxX; j += BLOCK_SIZE)
 		{
 			CTile* pTile = new CTile;
 			ST_CUBE cube;
-			cube.fLength = BLOCK_SIZE;
 			cube.vCenter = D3DXVECTOR3((float)j, 0, (float)i);
 			pTile->SetCube(cube);
 
 			pTile->SetMeshCubeTile(pMesh);
-			pTile->SetPlaneTexture(g_pTextureManager->GetTexture("data/Albedo00.jpg"));
+			if (col == 1)
+			{
+				pTile->SetPlaneTexture(g_pTextureManager->GetTexture("data/stones.png"));
+			}
+			else
+			{
+				pTile->SetPlaneTexture(g_pTextureManager->GetTexture("data/Albedo00.jpg"));
+
+			}
 			
 			m_vecTile.push_back(pTile);
+			col++;
 		}
+		row++;
 	}
 
 

@@ -49,8 +49,8 @@ extern HWND g_hWnd;
 
 #define BLOCK_SIZE 1.0f
 
-#define WIDTH 12
-#define HEIGHT 16
+#define WIDTH 16
+#define HEIGHT 12
 
 struct ST_PC_VERTEX
 {
