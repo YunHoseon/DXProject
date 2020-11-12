@@ -49,8 +49,8 @@ extern HWND g_hWnd;
 
 #define BLOCK_SIZE 1.0f
 
-#define WIDTH 16
-#define HEIGHT 12
+#define WIDTH 12
+#define HEIGHT 16
 
 struct ST_PC_VERTEX
 {
@@ -172,6 +172,9 @@ struct ST_CUBE
 #include "CSceneManager.h"
 #include "CEventManager.h"
 #include "InputManager.h"
+
+
+
 #include "CDebugSphere.h"
 #include "CDebugCube.h"
 

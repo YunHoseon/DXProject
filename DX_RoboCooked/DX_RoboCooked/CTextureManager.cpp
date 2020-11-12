@@ -11,7 +11,8 @@ CTextureManager::~CTextureManager()
 
 LPDIRECT3DTEXTURE9 CTextureManager::GetTexture(char* szFullPath)
 {
-	if(m_mapTexture.find(szFullPath) == m_mapTexture.end())
+	map<string, LPDIRECT3DTEXTURE9>::iterator it = m_mapTexture.find(szFullPath);
+	if( it == m_mapTexture.end())
 	{
 		D3DXCreateTextureFromFileA(g_pD3DDevice, szFullPath, &m_mapTexture[szFullPath]);
 	}

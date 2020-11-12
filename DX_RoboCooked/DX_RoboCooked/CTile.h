@@ -17,6 +17,6 @@ private:
 
 public:
 	void Render() override;
-	void Update() {};
+	void Update() override;
 };
 
