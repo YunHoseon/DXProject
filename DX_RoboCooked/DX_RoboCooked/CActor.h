@@ -12,8 +12,7 @@ protected:
 	//콜라이더 미추가
 
 public:
-	virtual void Render() = 0;
 	virtual void Update() = 0;
-	
+	virtual void Render() = 0;
 };
 

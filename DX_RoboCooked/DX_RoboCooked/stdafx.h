@@ -137,6 +137,18 @@ struct ST_CUBE
 	ST_CUBE() : fLength(0), vCenter(0, 0, 0){}
 };
 
+struct ST_PLAYER_INPUTKEY
+{
+	WPARAM moveFowardKey;
+	WPARAM moveLeftKey;
+	WPARAM moveBackKey;
+	WPARAM moveRightKey;
+
+	WPARAM interactableKey1;
+	WPARAM interactableKey2;
+	WPARAM interactableKey3;
+};
+
 #define Synthesize(varType, varName, funName)\
 	protected: varType varName; \
 	public : inline varType Get##funName(void) const {return varName;}\

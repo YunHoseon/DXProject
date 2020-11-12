@@ -3,8 +3,8 @@
 
 
 CKeyboard::CKeyboard()
-	:m_elapsedTime(0),
-	 m_dwPrevKey(0)
+	:m_elapsedTime(0)
+	,m_dwPrevKey(0)
 {
 	m_eKeyState = E_NONE;
 }
@@ -15,7 +15,7 @@ CKeyboard::~CKeyboard()
 
 void CKeyboard::Update()
  {
-	if (InputManager->IsKeyPressed('W'))
+	/*if (InputManager->IsKeyPressed('W'))
 	{
 		std::cout << "W" << std::endl;
 	}
@@ -31,7 +31,7 @@ void CKeyboard::Update()
 	{
 		std::cout << "D" << std::endl;
 	}
-	if(InputManager->IsKeyPressed(162))
+	if(InputManager->IsKeyPressed(VK_CONTROL))
 	{
 		std::cout << "lCtrl" << std::endl;
 	}
@@ -52,7 +52,7 @@ void CKeyboard::Update()
 	{
 		std::cout << "right" << std::endl;
 	}
-	/*if (InputManager->IsKeyPressed(229))
+	if (InputManager->IsKeyPressed(VK_RCONTROL))
 	{
 		std::cout << "rCtrl" << std::endl;
 	}*/
@@ -61,6 +61,7 @@ void CKeyboard::Update()
 	{
 		std::cout << "right control" << std::endl;
 	}*/
+
 }
 
 void CKeyboard::PressKey(WPARAM keyID, LPARAM lParam)
@@ -74,9 +75,12 @@ void CKeyboard::PressKey(WPARAM keyID, LPARAM lParam)
 	case VK_SHIFT:
 		new_vk = MapVirtualKey(scancode, MAPVK_VSC_TO_VK_EX);
 		break;
-	case VK_CONTROL:
+		
+	case VK_PROCESSKEY:
+	case VK_HANJA:
 		new_vk = extended ? VK_RCONTROL : VK_LCONTROL;
 		break;
+		
 	case VK_MENU:
 		new_vk = extended ? VK_RMENU : VK_LMENU;
 		break;
@@ -88,6 +92,8 @@ void CKeyboard::PressKey(WPARAM keyID, LPARAM lParam)
 	m_dwPrevKey = new_vk;
 	m_eKeyState = E_BTNDOWN;
 	m_mapKey[new_vk] = true;
+
+	GetPressedKey();
 }
 
 void CKeyboard::ReleaseKey(WPARAM keyID, LPARAM lParam)
@@ -101,9 +107,12 @@ void CKeyboard::ReleaseKey(WPARAM keyID, LPARAM lParam)
 	case VK_SHIFT:
 		new_vk = MapVirtualKey(scancode, MAPVK_VSC_TO_VK_EX);
 		break;
-	case VK_CONTROL:
+		
+	case VK_PROCESSKEY:
+	case VK_HANJA:
 		new_vk = extended ? VK_RCONTROL : VK_LCONTROL;
 		break;
+		
 	case VK_MENU:
 		new_vk = extended ? VK_RMENU : VK_LMENU;
 		break;

@@ -4,6 +4,13 @@
 
 CDebugCube::CDebugCube()
 {
+	m_stInputKey.moveFowardKey = VK_UP;
+	m_stInputKey.moveLeftKey = VK_LEFT;
+	m_stInputKey.moveBackKey = VK_DOWN;
+	m_stInputKey.moveRightKey = VK_RIGHT;
+	m_stInputKey.interactableKey1 = VK_OEM_COMMA;
+	m_stInputKey.interactableKey2 = VK_OEM_PERIOD;
+	m_stInputKey.interactableKey3 = VK_OEM_2;
 }
 
 
@@ -23,6 +30,13 @@ void CDebugCube::Setup()
 
 void CDebugCube::Update()
 {
+	switch (InputManager->GetPressedKey())
+	{
+	/*case m_stInputKey.moveFowardKey:
+		break;
+		default:
+			break;*/
+	}
 }
 
 void CDebugCube::Render()
