@@ -24,6 +24,7 @@ public:
 	
 	//입력키 바꿀 수 있는 함수 추가
 
-	void OnEvent(EEvent eEvent, void* _value) {};
+	void OnEvent(EEvent eEvent, void* _value);
+	void Move(void* _value);
 };
 

@@ -14,6 +14,8 @@ CDebugCube::CDebugCube()
 	m_stInputKey.interactableKey1 = VK_OEM_COMMA;
 	m_stInputKey.interactableKey2 = VK_OEM_PERIOD;
 	m_stInputKey.interactableKey3 = VK_OEM_2;
+
+	g_EventManager->Attach(EEvent::E_EventMovePlayer2, this);
 }
 
 
@@ -74,4 +76,19 @@ void CDebugCube::Render()
 	g_pD3DDevice->SetTexture(0, NULL);
 	g_pD3DDevice->SetMaterial(&m_stMtlCube);
 	m_pMeshCube->DrawSubset(0);
+}
+
+void CDebugCube::OnEvent(EEvent eEvent, void* _value)
+{
+	switch (eEvent)
+	{
+	case EEvent::E_EventMovePlayer1:
+		Move(_value);
+		break;
+	}
+}
+
+void CDebugCube::Move(void* _value)
+{
+	
 }

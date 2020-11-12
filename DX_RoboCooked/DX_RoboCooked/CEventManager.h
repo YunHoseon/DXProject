@@ -8,14 +8,15 @@ class CObserver;
 enum class EEvent
 {
 	E_EventTile,
+	E_EventMovePlayer1,
+	E_EventMovePlayer2,
 	E_EventNONE
 };
 
-struct ST_AttackEvent
+struct ST_MoveEvent
 {
-	std::string name;
-	int age;
-	ST_AttackEvent():age(0){}
+	WPARAM wKey;
+	ST_MoveEvent():wKey(0){}
 };
 
 class CEventManager : public CSingleton<CEventManager>

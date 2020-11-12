@@ -15,20 +15,36 @@ CKeyboard::~CKeyboard()
 
 void CKeyboard::Update()
  {
-	/*if (InputManager->IsKeyPressed('W'))
+	
+	//ST_BitrhDayEvent data{ name, age };
+	//NotifyEvent(EEvent::E_BIRTHDAY, (void*)&data);
+	
+	if (InputManager->IsKeyPressed('W'))
 	{
+		ST_MoveEvent data;
+		data.wKey = 'W';
+		g_EventManager->CallEvent(EEvent::E_EventMovePlayer1, (void*)&data);
 		std::cout << "W" << std::endl;
 	}
 	if (InputManager->IsKeyPressed('A'))
 	{
+		ST_MoveEvent data;
+		data.wKey = 'A';
+		g_EventManager->CallEvent(EEvent::E_EventMovePlayer1, (void*)&data);
 		std::cout << "A" << std::endl;
 	}
 	if (InputManager->IsKeyPressed('S'))
 	{
+		ST_MoveEvent data;
+		data.wKey = 'S';
+		g_EventManager->CallEvent(EEvent::E_EventMovePlayer1, (void*)&data);
 		std::cout << "S" << std::endl;
 	}
 	if (InputManager->IsKeyPressed('D'))
 	{
+		ST_MoveEvent data;
+		data.wKey = 'D';
+		g_EventManager->CallEvent(EEvent::E_EventMovePlayer1, (void*)&data);
 		std::cout << "D" << std::endl;
 	}
 	if(InputManager->IsKeyPressed(VK_CONTROL))
@@ -38,24 +54,30 @@ void CKeyboard::Update()
 
 	if(InputManager->IsKeyPressed(VK_UP))
 	{
+		g_EventManager->CallEvent(EEvent::E_EventMovePlayer2, NULL);
 		std::cout << "up" << std::endl;
 	}
 	if (InputManager->IsKeyPressed(VK_LEFT))
 	{
+		g_EventManager->CallEvent(EEvent::E_EventMovePlayer2, NULL);
 		std::cout << "left" << std::endl;
 	}
 	if (InputManager->IsKeyPressed(VK_DOWN))
 	{
+		g_EventManager->CallEvent(EEvent::E_EventMovePlayer2, NULL);
+
 		std::cout << "down" << std::endl;
 	}
 	if (InputManager->IsKeyPressed(VK_RIGHT))
 	{
+		g_EventManager->CallEvent(EEvent::E_EventMovePlayer2, NULL);
+
 		std::cout << "right" << std::endl;
 	}
 	if (InputManager->IsKeyPressed(VK_RCONTROL))
 	{
 		std::cout << "rCtrl" << std::endl;
-	}*/
+	}
 
 	/*if(GetAsyncKeyState(VK_RCONTROL) & 0x8000)
 	{

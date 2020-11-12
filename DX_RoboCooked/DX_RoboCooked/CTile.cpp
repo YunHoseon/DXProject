@@ -27,7 +27,7 @@ void CTile::OnEvent(EEvent eEvent, void* _value)
 	case EEvent::E_EventNONE:
 		break;
 	case EEvent::E_EventTile:
-		//D3DXMatrixScaling(&m_matS, 1.0f, 2.0f, 1.0f);
+		D3DXMatrixScaling(&m_matS, 1.0f, 2.0f, 1.0f);
 		//D3DXMatrixTranslation(&m_matT, 1.0f, 2.0f, 1.0f);
 	/*	D3DXQUATERNION q;
 		D3DXVECTOR3 a(0, 1, 0);
