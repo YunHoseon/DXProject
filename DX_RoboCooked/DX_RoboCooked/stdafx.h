@@ -49,8 +49,8 @@ extern HWND g_hWnd;
 
 #define BLOCK_SIZE 1.0f
 
-#define WIDTH 12
-#define HEIGHT 16
+#define WIDTH 16
+#define HEIGHT 12
 
 struct ST_PC_VERTEX
 {
@@ -135,6 +135,18 @@ struct ST_CUBE
 	float			fLength;
 	D3DXVECTOR3		vCenter;
 	ST_CUBE() : fLength(0), vCenter(0, 0, 0){}
+};
+
+struct ST_PLAYER_INPUTKEY
+{
+	WPARAM moveFowardKey;
+	WPARAM moveLeftKey;
+	WPARAM moveBackKey;
+	WPARAM moveRightKey;
+
+	WPARAM interactableKey1;
+	WPARAM interactableKey2;
+	WPARAM interactableKey3;
 };
 
 #define Synthesize(varType, varName, funName)\

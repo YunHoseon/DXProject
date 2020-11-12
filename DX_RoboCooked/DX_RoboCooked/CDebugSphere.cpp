@@ -4,6 +4,13 @@
 
 CDebugSphere::CDebugSphere()
 {
+	m_stInputKey.moveFowardKey = 'W';
+	m_stInputKey.moveLeftKey = 'A';
+	m_stInputKey.moveBackKey = 'S';
+	m_stInputKey.moveRightKey = 'D';
+	m_stInputKey.interactableKey1 = 'F';
+	m_stInputKey.interactableKey2 = 'G';
+	m_stInputKey.interactableKey3 = 'H';
 }
 
 
