@@ -11,8 +11,11 @@ enum class EEvent
 	E_KeyRelease,
 	E_Player1KeyChange,
 	E_Player2KeyChange,
-	E_TileMove
-
+	E_TileMove,
+	E_PartsHold,
+	E_PartsSpin,
+	E_PartsPut,
+	E_PartsThrow
 };
 
 struct ST_KeyInputEvent

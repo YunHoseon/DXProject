@@ -1,8 +1,7 @@
 #include "stdafx.h"
 #include "CField.h"
 
-
-const float Y = -0.5f;
+const float Y = -1.0f;
 CField::CField()
 {
 }
@@ -12,8 +11,6 @@ CField::~CField()
 {
 	for each(auto c in m_vecTile)
 		SafeDelete(c);
-
-
 }
 
 void CField::Setup(int iWidth, int iHeight)
@@ -23,8 +20,6 @@ void CField::Setup(int iWidth, int iHeight)
 
 	float fMaxZ = (iHeight / 2.0f) * BLOCK_SIZE;
 	float fMinZ = -fMaxZ;
-
-	
 
 	vector<ST_PNT_VERTEX> vecVertex;
 	ST_PNT_VERTEX v;
@@ -136,7 +131,6 @@ void CField::Setup(int iWidth, int iHeight)
 		pI[i] = i;
 	pMesh->UnlockIndexBuffer();
 
-	
 	vector<DWORD> vecAdj(vecVertex.size());
 	pMesh->GenerateAdjacency(0.0f, &vecAdj[0]);
 	pMesh->OptimizeInplace(D3DXMESHOPT_ATTRSORT | D3DXMESHOPT_COMPACT | D3DXMESHOPT_VERTEXCACHE,
@@ -146,7 +140,7 @@ void CField::Setup(int iWidth, int iHeight)
 	for (float i = fMinZ + (BLOCK_SIZE/2); i <= fMaxZ; i+=BLOCK_SIZE)
 	{
 
-		for (float j = fMinX + (BLOCK_SIZE /2) ; j <= fMaxX; j += BLOCK_SIZE)
+		for (float j = fMinX + (BLOCK_SIZE / 2); j <= fMaxX; j += BLOCK_SIZE)
 		{
 			CTile* pTile = new CTile;
 			ST_CUBE cube;
@@ -154,24 +148,19 @@ void CField::Setup(int iWidth, int iHeight)
 			pTile->SetCube(cube);
 
 			pTile->SetMeshCubeTile(pMesh);
-			pTile->AddEvent(EEvent::E_TileMove);		
+			pTile->AddEvent(EEvent::E_TileMove);
 			pTile->SetPlaneTexture(g_pTextureManager->GetTexture("data/stones.png"));
-		
+
 			//pTile->SetPlaneTexture(g_pTextureManager->GetTexture("data/Albedo00.jpg"));
 
 			m_vecTile.push_back(pTile);
-	
 		}
-
 	}
-
 
 	for (int i = 0; i < m_vecTile.size(); i++)
 	{
 		m_vecTile[i]->SetPlaneTexture(g_pTextureManager->GetTexture("data/Albedo00.jpg"));
 	}
-
-	
 
 	ZeroMemory(&m_stMtlTile, sizeof(D3DMATERIAL9));
 	m_stMtlTile.Ambient = D3DXCOLOR(0.7f, 0.7f, 0.7f, 1.0f);
@@ -188,7 +177,6 @@ void CField::Render()
 	{
 		c->Render();
 	}
-		
 }
 
 void CField::Update()
