@@ -2,19 +2,14 @@
 #include "CDebugCube.h"
 
 
-CDebugCube::CDebugCube()
+CDebugCube::CDebugCube() :
+	m_fSpeed(0.1f)
 {
 	m_vPosition = m_cube.vCenter;
 	D3DXMatrixIdentity(&m_matWorld);
-
-	m_stInputKey.moveFowardKey = VK_UP;
-	m_stInputKey.moveLeftKey = VK_LEFT;
-	m_stInputKey.moveBackKey = VK_DOWN;
-	m_stInputKey.moveRightKey = VK_RIGHT;
-	m_stInputKey.interactableKey1 = VK_OEM_COMMA;
-	m_stInputKey.interactableKey2 = VK_OEM_PERIOD;
-	m_stInputKey.interactableKey3 = VK_OEM_2;
-
+	
+	//m_stInputKey.moveFowardKey = 'W';
+	
 	g_EventManager->Attach(EEvent::E_KeyPress, this);
 	g_EventManager->Attach(EEvent::E_KeyRelease, this);
 }
@@ -36,11 +31,6 @@ void CDebugCube::Setup()
 
 void CDebugCube::Update()
 {
-	/*D3DXMATRIXA16 matR, matT;
-	D3DXMatrixRotationY(&matR, m_fRotY);
-	D3DXVec3TransformNormal(&m_vDirection, &m_vDirection, &matR);
-*/
-	
 }
 
 void CDebugCube::Render()
@@ -67,26 +57,25 @@ void CDebugCube::OnEvent(EEvent eEvent, void* _value)
 	}
 }
 
-
 void CDebugCube::PressKey(void* _value)
 {
 	ST_KeyInputEvent *data = static_cast<ST_KeyInputEvent*>(_value);
 	
-	if (data->wKey == m_stInputKey.moveFowardKey)
+	if (data->wKey == m_stInputKey.moveFowardKey)	//이벤트 추가해야함
 	{
-		Move(D3DXVECTOR3(0, 0, 1) * 0.1f);
+		Move(D3DXVECTOR3(0, 0, 1) * m_fSpeed);
 	}
 	if (data->wKey == m_stInputKey.moveLeftKey)
 	{
-		Move((D3DXVECTOR3(-1, 0, 0) * 0.1f));
+		Move((D3DXVECTOR3(-1, 0, 0) * m_fSpeed));
 	}
 	if (data->wKey == m_stInputKey.moveBackKey)
 	{
-		Move(D3DXVECTOR3(0, 0, -1) * 0.1f);
+		Move(D3DXVECTOR3(0, 0, -1) * m_fSpeed);
 	}
 	if (data->wKey == m_stInputKey.moveRightKey)
 	{
-		Move(D3DXVECTOR3(1, 0, 0) * 0.1f);
+		Move(D3DXVECTOR3(1, 0, 0) * m_fSpeed);
 	}
 	if (data->wKey == m_stInputKey.interactableKey1)
 	{
@@ -109,11 +98,7 @@ void CDebugCube::ReleaseKey(void* _value)
 void CDebugCube::Move(D3DXVECTOR3 _vecMove)
 {
 	D3DXVECTOR3 vPosition = m_vPosition;
-
 	vPosition += _vecMove;
-	
 	m_vPosition = vPosition;
-
 	D3DXMatrixTranslation(&m_matT, m_vPosition.x, m_vPosition.y, m_vPosition.z);
-
 }

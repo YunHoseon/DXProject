@@ -5,6 +5,7 @@
 class CDebugSphere : public CActor
 {
 private:
+	float				m_fSpeed;
 	float				m_fRotY;
 	D3DXVECTOR3			m_vDirection;
 	D3DXVECTOR3			m_vPosition;
@@ -21,8 +22,6 @@ public:
 	void Setup();
 	void Update() override;
 	void Render() override;
-	
-	//입력키 바꿀 수 있는 함수 추가
 
 	void OnEvent(EEvent eEvent, void* _value);
 	void PressKey(void* _value);

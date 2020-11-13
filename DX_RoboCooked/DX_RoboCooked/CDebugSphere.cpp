@@ -2,18 +2,11 @@
 #include "CDebugSphere.h"
 
 
-CDebugSphere::CDebugSphere()
+CDebugSphere::CDebugSphere() :
+	m_fSpeed(0.1f)
 {
 	m_vPosition = m_sphere.vCenter;
 	D3DXMatrixIdentity(&m_matWorld);
-	
-	/*m_stInputKey.moveFowardKey = 'W';
-	m_stInputKey.moveLeftKey = 'A';
-	m_stInputKey.moveBackKey = 'S';
-	m_stInputKey.moveRightKey = 'D';
-	m_stInputKey.interactableKey1 = 'F';
-	m_stInputKey.interactableKey2 = 'G';
-	m_stInputKey.interactableKey3 = 'H';*/
 
 	g_EventManager->Attach(EEvent::E_KeyPress, this);
 	g_EventManager->Attach(EEvent::E_KeyRelease, this);
@@ -35,19 +28,6 @@ void CDebugSphere::Setup()
 
 void CDebugSphere::Update()
 {
-	D3DXMATRIXA16 matS, matR, matT;
-	D3DXVECTOR3 vPosition = m_vPosition;
-
-	
-	if (InputManager->IsKeyPressed(m_stInputKey.interactableKey1))
-	{
-		std::cout << "상호작용" << std::endl;
-	}
-
-	m_vPosition = vPosition;
-
-	D3DXMatrixTranslation(&matT, m_vPosition.x, m_vPosition.y, m_vPosition.z);
-	m_matWorld = matT;
 }
 
 void CDebugSphere::Render()
@@ -72,9 +52,6 @@ void CDebugSphere::OnEvent(EEvent eEvent, void* _value)
 		ReleaseKey(_value);
 		break;
 	}
-
-
-	
 }
 
 void CDebugSphere::PressKey(void* _value)
@@ -83,19 +60,19 @@ void CDebugSphere::PressKey(void* _value)
 
 	if (data->wKey == m_stInputKey.moveFowardKey)
 	{
-		Move(D3DXVECTOR3(0, 0, 1) * 0.1f);
+		Move(D3DXVECTOR3(0, 0, 1) * m_fSpeed);
 	}
 	if (data->wKey == m_stInputKey.moveLeftKey)
 	{
-		Move((D3DXVECTOR3(-1, 0, 0) * 0.1f));
+		Move((D3DXVECTOR3(-1, 0, 0) * m_fSpeed));
 	}
 	if (data->wKey == m_stInputKey.moveBackKey)
 	{
-		Move(D3DXVECTOR3(0, 0, -1) * 0.1f);
+		Move(D3DXVECTOR3(0, 0, -1) * m_fSpeed);
 	}
 	if (data->wKey == m_stInputKey.moveRightKey)
 	{
-		Move(D3DXVECTOR3(1, 0, 0) * 0.1f);
+		Move(D3DXVECTOR3(1, 0, 0) * m_fSpeed);
 	}
 	if (data->wKey == m_stInputKey.interactableKey1)
 	{

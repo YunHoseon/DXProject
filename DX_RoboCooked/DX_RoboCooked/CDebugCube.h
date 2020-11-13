@@ -6,6 +6,7 @@
 class CDebugCube : public CActor
 {
 private:
+	float				m_fSpeed;
 	float				m_fRotY;
 	D3DXVECTOR3			m_vDirection;
 	D3DXVECTOR3			m_vPosition;
@@ -22,6 +23,7 @@ public:
 	void Setup();
 	void Update() override;
 	void Render() override;
+	
 	void OnEvent(EEvent eEvent, void* _value);
 	void PressKey(void* _value);
 	void ReleaseKey(void* _value);

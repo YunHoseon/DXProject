@@ -48,8 +48,3 @@ void CInputManager::WndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lPara
 		break;
 	}
 }
-
-bool CInputManager::IsKeyPressed(WPARAM keyID)
-{
-	return m_pKeyboard->IsKeyPressed(keyID);
-}
