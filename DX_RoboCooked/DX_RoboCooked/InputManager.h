@@ -16,6 +16,5 @@ public:
 	void Update();
 	void WndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam);
 	bool IsKeyPressed(WPARAM keyID);
-	WPARAM GetPressedKey();
 };
 
