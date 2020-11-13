@@ -149,19 +149,17 @@ struct ST_PLAYER_INPUTKEY
 	WPARAM interactableKey2;
 	WPARAM interactableKey3;
 
-	ST_PLAYER_INPUTKEY operator=(ST_PLAYER_INPUTKEY key1)
+	ST_PLAYER_INPUTKEY& operator=(const ST_PLAYER_INPUTKEY& key)
 	{
-		ST_PLAYER_INPUTKEY key;
+		moveFowardKey = key.moveFowardKey;
+		moveLeftKey = key.moveLeftKey;
+		moveBackKey = key.moveBackKey;
+		moveRightKey = key.moveRightKey;
+		interactableKey1 = key.interactableKey1;
+		interactableKey2 = key.interactableKey2;
+		interactableKey3 = key.interactableKey3;
 
-		key.moveFowardKey = key1.moveFowardKey;
-		key.moveLeftKey = key1.moveLeftKey;
-		key.moveBackKey = key1.moveBackKey;
-		key.moveRightKey = key1.moveRightKey;
-		key.interactableKey1 = key1.interactableKey1;
-		key.interactableKey2 = key1.interactableKey2;
-		key.interactableKey3 = key1.interactableKey3;
-		
-		return key;
+		return *this;
 	}
 };
 
