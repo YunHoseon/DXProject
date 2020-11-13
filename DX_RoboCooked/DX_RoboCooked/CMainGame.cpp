@@ -5,8 +5,8 @@
 #include "CGameScene.h"
 
 /* µğ¹ö±ë¿ë */
-#include "CDebugSphere.h"
-#include "CDebugCube.h"
+#include "CDebugPlayer1.h"
+#include "CDebugPlayer2.h"
 
 CMainGame::CMainGame()
 	: m_pGrid(NULL)
@@ -38,11 +38,11 @@ void CMainGame::Setup()
 	if (m_pCamera)
 		m_pCamera->Setup(NULL);
 
-	m_pDebugSphere = new CDebugSphere;
+	m_pDebugSphere = new CDebugPlayer1;
 	if (m_pDebugSphere)
 		m_pDebugSphere->Setup();
 
-	m_pDebugCube = new CDebugCube;
+	m_pDebugCube = new CDebugPlayer2;
 	if (m_pDebugCube)
 		m_pDebugCube->Setup();
 

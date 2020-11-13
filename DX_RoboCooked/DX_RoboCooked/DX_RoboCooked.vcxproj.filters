@@ -31,9 +31,6 @@
     <Filter Include="GameScene\Collider">
       <UniqueIdentifier>{9b16d774-c905-40a9-86d3-36ac247c8ec1}</UniqueIdentifier>
     </Filter>
-    <Filter Include="DebugClass">
-      <UniqueIdentifier>{53c12b74-0474-4b95-9895-540665cb961c}</UniqueIdentifier>
-    </Filter>
   </ItemGroup>
   <ItemGroup>
     <Text Include="ReadMe.txt" />
@@ -135,11 +132,11 @@
     <ClInclude Include="CEventListener.h">
       <Filter>Manager\EventManager</Filter>
     </ClInclude>
-    <ClInclude Include="CDebugCube.h">
-      <Filter>DebugClass</Filter>
+    <ClInclude Include="CDebugPlayer2.h">
+      <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="CDebugSphere.h">
-      <Filter>DebugClass</Filter>
+    <ClInclude Include="CDebugPlayer1.h">
+      <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -233,11 +230,11 @@
     <ClCompile Include="CEventListener.cpp">
       <Filter>Manager\EventManager</Filter>
     </ClCompile>
-    <ClCompile Include="CDebugSphere.cpp">
-      <Filter>DebugClass</Filter>
+    <ClCompile Include="CDebugPlayer2.cpp">
+      <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="CDebugCube.cpp">
-      <Filter>DebugClass</Filter>
+    <ClCompile Include="CDebugPlayer1.cpp">
+      <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

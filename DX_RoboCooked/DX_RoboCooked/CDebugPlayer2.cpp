@@ -1,22 +1,14 @@
 #include "stdafx.h"
-#include "CDebugCube.h"
+#include "CDebugPlayer2.h"
 
 #include "CBoxCollision.h"
 
 
-CDebugCube::CDebugCube() :
+CDebugPlayer2::CDebugPlayer2() :
 	m_fSpeed(0.1f)
 {
 	m_vPosition = m_cube.vCenter;
 	D3DXMatrixIdentity(&m_matWorld);
-	
-	m_stInputKey.moveFowardKey = VK_UP;
-	m_stInputKey.moveLeftKey = VK_LEFT;
-	m_stInputKey.moveBackKey = VK_BACK;
-	m_stInputKey.moveRightKey = VK_RIGHT;
-	m_stInputKey.interactableKey1 = VK_OEM_COMMA;
-	m_stInputKey.interactableKey2 = VK_OEM_PERIOD;
-	m_stInputKey.interactableKey3 = VK_OEM_2;
 	
 	g_EventManager->Attach(EEvent::E_KeyPress, this);
 	g_EventManager->Attach(EEvent::E_KeyRelease, this);
@@ -25,13 +17,12 @@ CDebugCube::CDebugCube() :
 	m_pCollision = new CBoxCollision(m_vPosition, D3DXVECTOR3(1, 1, 1), &m_matWorld);
 }
 
-
-CDebugCube::~CDebugCube()
+CDebugPlayer2::~CDebugPlayer2()
 {
 	SafeDelete(m_pCollision);
 }
 
-void CDebugCube::Setup()
+void CDebugPlayer2::Setup()
 {
 	D3DXCreateBox(g_pD3DDevice, 0.8f, 0.8f, 0.8f, &m_pMeshCube, NULL);
 
@@ -41,13 +32,13 @@ void CDebugCube::Setup()
 	m_stMtlCube.Specular = D3DXCOLOR(0.7f, 0.7f, 0.7f, 1.0f);
 }
 
-void CDebugCube::Update()
+void CDebugPlayer2::Update()
 {
 	if (m_pCollision)
 		m_pCollision->Update();
 }
 
-void CDebugCube::Render()
+void CDebugPlayer2::Render()
 {
 	m_matWorld = m_matS * m_matR * m_matT;
 	
@@ -61,7 +52,7 @@ void CDebugCube::Render()
 		_DEBUG_COMMENT m_pCollision->Render();
 }
 
-void CDebugCube::OnEvent(EEvent eEvent, void* _value)
+void CDebugPlayer2::OnEvent(EEvent eEvent, void* _value)
 {
 	switch (eEvent)
 	{
@@ -70,17 +61,18 @@ void CDebugCube::OnEvent(EEvent eEvent, void* _value)
 		break;
 	case EEvent::E_KeyRelease:
 		ReleaseKey(_value);
+		break;
 	case EEvent::E_Player2KeyChange:
 		SetKeyChange(_value);
 		break;
 	}
 }
 
-void CDebugCube::PressKey(void* _value)
+void CDebugPlayer2::PressKey(void* _value)
 {
 	ST_KeyInputEvent *data = static_cast<ST_KeyInputEvent*>(_value);
 	
-	if (data->wKey == m_stInputKey.moveFowardKey)	//이벤트 추가해야함
+	if (data->wKey == m_stInputKey.moveFowardKey)
 	{
 		Move(D3DXVECTOR3(0, 0, 1) * m_fSpeed);
 	}
@@ -110,11 +102,11 @@ void CDebugCube::PressKey(void* _value)
 	}
 }
 
-void CDebugCube::ReleaseKey(void* _value)
+void CDebugPlayer2::ReleaseKey(void* _value)
 {
 }
 
-void CDebugCube::Move(D3DXVECTOR3 _vecMove)
+void CDebugPlayer2::Move(D3DXVECTOR3 _vecMove)
 {
 	D3DXVECTOR3 vPosition = m_vPosition;
 	vPosition += _vecMove;
@@ -122,7 +114,8 @@ void CDebugCube::Move(D3DXVECTOR3 _vecMove)
 	D3DXMatrixTranslation(&m_matT, m_vPosition.x, m_vPosition.y, m_vPosition.z);
 }
 
-void CDebugCube::SetKeyChange(void* _value)
+void CDebugPlayer2::SetKeyChange(void* _value)
 {
-	memcpy(&m_stInputKey, &_value, sizeof(ST_PLAYER_INPUTKEY));
+	ST_PLAYER_INPUTKEY *data = static_cast<ST_PLAYER_INPUTKEY*>(_value);
+	m_stInputKey = *data;
 }

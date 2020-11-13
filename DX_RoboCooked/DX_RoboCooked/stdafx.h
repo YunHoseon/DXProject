@@ -148,6 +148,19 @@ struct ST_PLAYER_INPUTKEY
 	WPARAM interactableKey1;
 	WPARAM interactableKey2;
 	WPARAM interactableKey3;
+
+	ST_PLAYER_INPUTKEY& operator=(const ST_PLAYER_INPUTKEY& key)
+	{
+		moveFowardKey = key.moveFowardKey;
+		moveLeftKey = key.moveLeftKey;
+		moveBackKey = key.moveBackKey;
+		moveRightKey = key.moveRightKey;
+		interactableKey1 = key.interactableKey1;
+		interactableKey2 = key.interactableKey2;
+		interactableKey3 = key.interactableKey3;
+
+		return *this;
+	}
 };
 
 #define Synthesize(varType, varName, funName)\
@@ -185,11 +198,6 @@ struct ST_PLAYER_INPUTKEY
 #include "CSceneManager.h"
 #include "CEventManager.h"
 #include "InputManager.h"
-
-
-
-#include "CDebugSphere.h"
-#include "CDebugCube.h"
 
 #define __SLASH(x) /##x
 #define __DOUBLE_SLASH __SLASH(/)

@@ -1,31 +1,23 @@
 #include "stdafx.h"
-#include "CDebugSphere.h"
+#include "CDebugPlayer1.h"
 
 
-CDebugSphere::CDebugSphere() :
+CDebugPlayer1::CDebugPlayer1() :
 	m_fSpeed(0.1f)
 {
 	m_vPosition = m_sphere.vCenter;
 	D3DXMatrixIdentity(&m_matWorld);
-
-	m_stInputKey.moveFowardKey = 'W';
-	m_stInputKey.moveLeftKey = 'A';
-	m_stInputKey.moveBackKey = 'S';
-	m_stInputKey.moveRightKey = 'D';
-	m_stInputKey.interactableKey1 = 'F';
-	m_stInputKey.interactableKey2 = 'G';
-	m_stInputKey.interactableKey3 = 'H';
-
+	
 	g_EventManager->Attach(EEvent::E_KeyPress, this);
 	g_EventManager->Attach(EEvent::E_KeyRelease, this);
 	g_EventManager->Attach(EEvent::E_Player1KeyChange, this);
 }
 
-CDebugSphere::~CDebugSphere()
+CDebugPlayer1::~CDebugPlayer1()
 {
 }
 
-void CDebugSphere::Setup()
+void CDebugPlayer1::Setup()
 {
 	D3DXCreateSphere(g_pD3DDevice, 0.5f, 10, 10, &m_pMeshSphere, NULL);
 
@@ -35,11 +27,11 @@ void CDebugSphere::Setup()
 	m_stMtlSphere.Specular = D3DXCOLOR(0.7f, 0.7f, 0.7f, 1.0f);
 }
 
-void CDebugSphere::Update()
+void CDebugPlayer1::Update()
 {
 }
 
-void CDebugSphere::Render()
+void CDebugPlayer1::Render()
 {
 	m_matWorld = m_matS * m_matR * m_matT;
 	
@@ -50,7 +42,7 @@ void CDebugSphere::Render()
 	m_pMeshSphere->DrawSubset(0);
 }
 
-void CDebugSphere::OnEvent(EEvent eEvent, void* _value)
+void CDebugPlayer1::OnEvent(EEvent eEvent, void* _value)
 {
 	switch (eEvent)
 	{
@@ -66,7 +58,7 @@ void CDebugSphere::OnEvent(EEvent eEvent, void* _value)
 	}
 }
 
-void CDebugSphere::PressKey(void* _value)
+void CDebugPlayer1::PressKey(void* _value)
 {
 	ST_KeyInputEvent *data = static_cast<ST_KeyInputEvent*>(_value);
 
@@ -100,12 +92,12 @@ void CDebugSphere::PressKey(void* _value)
 	}
 }
 
-void CDebugSphere::ReleaseKey(void* _value)
+void CDebugPlayer1::ReleaseKey(void* _value)
 {
 	std::cout << "Release" << std::endl;
 }
 
-void CDebugSphere::Move(D3DXVECTOR3 _vecMove)
+void CDebugPlayer1::Move(D3DXVECTOR3 _vecMove)
 {
 	D3DXVECTOR3 vPosition = m_vPosition;
 
@@ -116,8 +108,9 @@ void CDebugSphere::Move(D3DXVECTOR3 _vecMove)
 	D3DXMatrixTranslation(&m_matT, m_vPosition.x, m_vPosition.y, m_vPosition.z);
 }
 
-void CDebugSphere::SetKeyChange(void* _value)
+void CDebugPlayer1::SetKeyChange(void* _value)
 {
-	memcpy(&m_stInputKey, &_value, sizeof(ST_PLAYER_INPUTKEY));
+	ST_PLAYER_INPUTKEY *data = static_cast<ST_PLAYER_INPUTKEY*>(_value);
+	m_stInputKey = *data;
 }
 
