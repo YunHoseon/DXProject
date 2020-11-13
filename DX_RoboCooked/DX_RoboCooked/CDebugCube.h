@@ -23,6 +23,8 @@ public:
 	void Update() override;
 	void Render() override;
 	void OnEvent(EEvent eEvent, void* _value);
-	void Move(void* _value);
+	void PressKey(void* _value);
+	void ReleaseKey(void* _value);
+	void Move(D3DXVECTOR3 _vecMove);
 };
 

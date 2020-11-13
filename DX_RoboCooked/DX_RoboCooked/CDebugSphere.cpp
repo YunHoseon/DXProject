@@ -15,7 +15,8 @@ CDebugSphere::CDebugSphere()
 	m_stInputKey.interactableKey2 = 'G';
 	m_stInputKey.interactableKey3 = 'H';
 
-	g_EventManager->Attach(EEvent::E_EventMovePlayer1, this);
+	g_EventManager->Attach(EEvent::E_KeyPress, this);
+	g_EventManager->Attach(EEvent::E_KeyRelease, this);
 }
 
 CDebugSphere::~CDebugSphere()
@@ -36,24 +37,6 @@ void CDebugSphere::Update()
 {
 	D3DXMATRIXA16 matS, matR, matT;
 	D3DXVECTOR3 vPosition = m_vPosition;
-
-	//if (InputManager->IsKeyPressed(m_stInputKey.moveFowardKey))
-	//{
-	//	vPosition += (D3DXVECTOR3(0, 0, 1) * 0.1f);
-	//}
-	//if (InputManager->IsKeyPressed(m_stInputKey.moveLeftKey))
-	//{
-	//	vPosition += (D3DXVECTOR3(-1, 0, 0) * 0.1f);
-	//}
-	//if (InputManager->IsKeyPressed(m_stInputKey.moveBackKey))
-	//{
-	//	vPosition += (D3DXVECTOR3(0, 0, -1) * 0.1f);
-	//}
-	//if (InputManager->IsKeyPressed(m_stInputKey.moveRightKey))
-	//{
-	//	vPosition += (D3DXVECTOR3(1, 0, 0) * 0.1f);
-	//}
-
 
 	
 	if (InputManager->IsKeyPressed(m_stInputKey.interactableKey1))
@@ -82,43 +65,66 @@ void CDebugSphere::OnEvent(EEvent eEvent, void* _value)
 {
 	switch (eEvent)
 	{
-	case EEvent::E_EventMovePlayer1:
-		Move(_value);
+	case EEvent::E_KeyPress:
+		PressKey(_value);
+		break;
+	case EEvent::E_KeyRelease:
+		ReleaseKey(_value);
 		break;
 	}
+
+
+	
 }
 
-void CDebugSphere::Move(void* _value)
+void CDebugSphere::PressKey(void* _value)
 {
-	ST_MoveEvent *data = static_cast<ST_MoveEvent*>(_value);
+	ST_KeyInputEvent *data = static_cast<ST_KeyInputEvent*>(_value);
+
+	if (data->wKey == m_stInputKey.moveFowardKey)
+	{
+		Move(D3DXVECTOR3(0, 0, 1) * 0.1f);
+	}
+	if (data->wKey == m_stInputKey.moveLeftKey)
+	{
+		Move((D3DXVECTOR3(-1, 0, 0) * 0.1f));
+	}
+	if (data->wKey == m_stInputKey.moveBackKey)
+	{
+		Move(D3DXVECTOR3(0, 0, -1) * 0.1f);
+	}
+	if (data->wKey == m_stInputKey.moveRightKey)
+	{
+		Move(D3DXVECTOR3(1, 0, 0) * 0.1f);
+	}
+	if (data->wKey == m_stInputKey.interactableKey1)
+	{
+
+	}
+	if (data->wKey == m_stInputKey.interactableKey2)
+	{
+
+	}
+	if (data->wKey == m_stInputKey.interactableKey3)
+	{
+
+	}
+
+}
+
+void CDebugSphere::ReleaseKey(void* _value)
+{
+	std::cout << "Release" << std::endl;
+}
+
+void CDebugSphere::Move(D3DXVECTOR3 _vecMove)
+{
 	D3DXVECTOR3 vPosition = m_vPosition;
-	
-	/*ST_BitrhDayEvent data{ name, age };
-	NotifyEvent(EEvent::E_BIRTHDAY, (void*)&data);*/
 
-	//ST_BitrhDayEvent *data = static_cast<ST_BitrhDayEvent*>(_value);
+	vPosition += _vecMove;
 
-	if (data->wKey == 'W')
-	{
-		vPosition += (D3DXVECTOR3(0, 0, 1) * 0.1f);
-	}
-	if (data->wKey == 'A')
-	{
-		vPosition += (D3DXVECTOR3(-1, 0, 0) * 0.1f);
-	}
-	if (data->wKey == 'S')
-	{
-		vPosition += (D3DXVECTOR3(0, 0, -1) * 0.1f);
-	}
-	if (data->wKey == 'D')
-	{
-		vPosition += (D3DXVECTOR3(1, 0, 0) * 0.1f);
-	}
-
-	
-	
 	m_vPosition = vPosition;
 
 	D3DXMatrixTranslation(&m_matT, m_vPosition.x, m_vPosition.y, m_vPosition.z);
-	
 }
+
