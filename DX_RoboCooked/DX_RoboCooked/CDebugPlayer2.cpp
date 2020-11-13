@@ -80,15 +80,15 @@ void CDebugPlayer2::PressKey(void* _value)
 	}
 	if (data->wKey == m_stInputKey.interactableKey1)
 	{
-		
+		g_SoundManager->PlaySFX("BBam");
 	}
 	if (data->wKey == m_stInputKey.interactableKey2)
 	{
-		
+		g_SoundManager->PlaySFX("BBam");
 	}
 	if (data->wKey == m_stInputKey.interactableKey3)
 	{
-		
+		g_SoundManager->PlaySFX("BBam");
 	}
 }
 
