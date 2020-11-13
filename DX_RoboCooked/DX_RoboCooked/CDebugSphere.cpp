@@ -118,6 +118,7 @@ void CDebugSphere::Move(D3DXVECTOR3 _vecMove)
 
 void CDebugSphere::SetKeyChange(void* _value)
 {
-	memcpy(&m_stInputKey, &_value, sizeof(ST_PLAYER_INPUTKEY));
+	ST_PLAYER_INPUTKEY *data = static_cast<ST_PLAYER_INPUTKEY*>(_value);
+	m_stInputKey = *data;
 }
 

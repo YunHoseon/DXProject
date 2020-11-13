@@ -18,7 +18,6 @@ public:
 	~CBoxCollision() override;
 	void Render() override;
 	void Update() override;
-protected:
 	bool CollideToBox(ICollisionArea* pTargetCollider) override;
 	bool CollideToSphere(ICollisionArea* pTargetCollider) override;
 };

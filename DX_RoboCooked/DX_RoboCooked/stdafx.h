@@ -148,6 +148,21 @@ struct ST_PLAYER_INPUTKEY
 	WPARAM interactableKey1;
 	WPARAM interactableKey2;
 	WPARAM interactableKey3;
+
+	ST_PLAYER_INPUTKEY operator=(ST_PLAYER_INPUTKEY key1)
+	{
+		ST_PLAYER_INPUTKEY key;
+
+		key.moveFowardKey = key1.moveFowardKey;
+		key.moveLeftKey = key1.moveLeftKey;
+		key.moveBackKey = key1.moveBackKey;
+		key.moveRightKey = key1.moveRightKey;
+		key.interactableKey1 = key1.interactableKey1;
+		key.interactableKey2 = key1.interactableKey2;
+		key.interactableKey3 = key1.interactableKey3;
+		
+		return key;
+	}
 };
 
 #define Synthesize(varType, varName, funName)\
@@ -201,8 +216,8 @@ struct ST_PLAYER_INPUTKEY
 		#pragma comment(linker, "/entry:WinMainCRTStartup /subsystem:console")
 	#endif
 
-	#define _DebugComment
-	#define _ReleaseComment __DOUBLE_SLASH
+	#define _DEBUG_COMMENT
+	#define _RELEASE_COMMENT __DOUBLE_SLASH
 
 #else
 	#define _DebugComment __DOUBLE_SLASH

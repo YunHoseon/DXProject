@@ -43,110 +43,6 @@ void CKeyboard::Update()
 		std::cout << *it << std::endl;
 		g_EventManager->CallEvent(EEvent::E_KeyPress, (void*)&data);
 	}
-
-	/*{
-		if (InputManager->IsKeyPressed('W'))
-		{
-			data.wKey = 'W';
-			g_EventManager->CallEvent(EEvent::E_KeyPress, (void*)&data);
-			std::cout << "W" << std::endl;
-		}
-		if (InputManager->IsKeyPressed('A'))
-		{
-			data.wKey = 'A';
-			g_EventManager->CallEvent(EEvent::E_KeyPress, (void*)&data);
-			std::cout << "A" << std::endl;
-		}
-		if (InputManager->IsKeyPressed('S'))
-		{
-			data.wKey = 'S';
-			g_EventManager->CallEvent(EEvent::E_KeyPress, (void*)&data);
-			std::cout << "S" << std::endl;
-		}
-		if (InputManager->IsKeyPressed('D'))
-		{
-			data.wKey = 'D';
-			g_EventManager->CallEvent(EEvent::E_KeyPress, (void*)&data);
-			std::cout << "D" << std::endl;
-		}
-		if (InputManager->IsKeyPressed('F'))
-		{
-			data.wKey = 'F';
-			g_EventManager->CallEvent(EEvent::E_KeyPress, (void*)&data);
-			std::cout << "F" << std::endl;
-		}
-		if (InputManager->IsKeyPressed('G'))
-		{
-			data.wKey = 'G';
-			g_EventManager->CallEvent(EEvent::E_KeyPress, (void*)&data);
-			std::cout << "g" << std::endl;
-		}
-		if (InputManager->IsKeyPressed('H'))
-		{
-			data.wKey = 'H';
-			g_EventManager->CallEvent(EEvent::E_KeyPress, (void*)&data);
-			std::cout << "H" << std::endl;
-		}
-	}
-
-	{
-		if (InputManager->IsKeyPressed(VK_UP))
-		{
-			data.wKey = VK_UP;
-			g_EventManager->CallEvent(EEvent::E_KeyPress, (void*)&data);
-			std::cout << "up" << std::endl;
-		}
-		if (InputManager->IsKeyPressed(VK_LEFT))
-		{
-			data.wKey = VK_LEFT;
-			g_EventManager->CallEvent(EEvent::E_KeyPress, (void*)&data);
-			std::cout << "left" << std::endl;
-		}
-		if (InputManager->IsKeyPressed(VK_DOWN))
-		{
-			data.wKey = VK_DOWN;
-			g_EventManager->CallEvent(EEvent::E_KeyPress, (void*)&data);
-			std::cout << "down" << std::endl;
-		}
-		if (InputManager->IsKeyPressed(VK_RIGHT))
-		{
-			data.wKey = VK_RIGHT;
-			g_EventManager->CallEvent(EEvent::E_KeyPress, (void*)&data);
-			std::cout << "right" << std::endl;
-		}
-		if (InputManager->IsKeyPressed('<'))
-		{
-			data.wKey = '<';
-			g_EventManager->CallEvent(EEvent::E_KeyPress, (void*)&data);\
-			std::cout << "<" << std::endl;
-		}
-		if (InputManager->IsKeyPressed('>'))
-		{
-			data.wKey = '>';
-			g_EventManager->CallEvent(EEvent::E_KeyPress, (void*)&data);
-			std::cout << ">" << std::endl;
-		}
-		if (InputManager->IsKeyPressed('?'))
-		{
-			data.wKey = '?';
-			g_EventManager->CallEvent(EEvent::E_KeyPress, (void*)&data);
-			std::cout << "?" << std::endl;
-		}
-	}
-	
-	if (InputManager->IsKeyPressed(VK_CONTROL))
-	{
-		data.wKey = VK_RCONTROL;
-		g_EventManager->CallEvent(EEvent::E_KeyPress, (void*)&data);
-		std::cout << "lCtrl" << std::endl;
-	}
-	
-	if (InputManager->IsKeyPressed(VK_RCONTROL))
-	{
-		data.wKey = VK_RCONTROL;
-		g_EventManager->CallEvent(EEvent::E_KeyPress, (void*)&data);
-		std::cout << "rCtrl" << std::endl;
-	}*/
 }
 
 void CKeyboard::PressKey(WPARAM keyID, LPARAM lParam)
@@ -224,7 +120,8 @@ void CKeyboard::OnEvent(EEvent eEvent, void* _value)
 
 void CKeyboard::SetKeyChange(int n, void* _value)
 {
-	memcpy(&m_stInputKey[n-1], &_value, sizeof(ST_PLAYER_INPUTKEY));
+	ST_PLAYER_INPUTKEY *data = static_cast<ST_PLAYER_INPUTKEY*>(_value);
+	m_stInputKey[n - 1] = *data;
 }
 
 //void CKeyboard::JudgeDash(WPARAM keyID)

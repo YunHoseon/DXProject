@@ -60,6 +60,7 @@ void CDebugCube::OnEvent(EEvent eEvent, void* _value)
 		break;
 	case EEvent::E_KeyRelease:
 		ReleaseKey(_value);
+		break;
 	case EEvent::E_Player2KeyChange:
 		SetKeyChange(_value);
 		break;
@@ -114,5 +115,6 @@ void CDebugCube::Move(D3DXVECTOR3 _vecMove)
 
 void CDebugCube::SetKeyChange(void* _value)
 {
-	memcpy(&m_stInputKey, &_value, sizeof(ST_PLAYER_INPUTKEY));
+	ST_PLAYER_INPUTKEY *data = static_cast<ST_PLAYER_INPUTKEY*>(_value);
+	m_stInputKey = *data;
 }
