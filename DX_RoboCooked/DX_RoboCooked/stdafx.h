@@ -199,11 +199,6 @@ struct ST_PLAYER_INPUTKEY
 #include "CEventManager.h"
 #include "InputManager.h"
 
-
-
-#include "CDebugSphere.h"
-#include "CDebugCube.h"
-
 #define __SLASH(x) /##x
 #define __DOUBLE_SLASH __SLASH(/)
 

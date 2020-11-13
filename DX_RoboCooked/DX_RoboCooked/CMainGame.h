@@ -6,8 +6,8 @@ class CCamera;
 class CScene;
 
 /* µð¹ö±ë¿ë */
-class CDebugSphere;
-class CDebugCube;
+class CDebugPlayer1;
+class CDebugPlayer2;
 
 class CMainGame
 {
@@ -19,8 +19,8 @@ private:
 	
 
 	/* µð¹ö±ë¿ë */
-	CDebugSphere*			m_pDebugSphere;
-	CDebugCube*				m_pDebugCube;
+	CDebugPlayer1*			m_pDebugSphere;
+	CDebugPlayer2*				m_pDebugCube;
 public:
 	CMainGame();
 	~CMainGame();

@@ -2,8 +2,7 @@
 #include "CActor.h"
 
 
-
-class CDebugCube : public CActor
+class CDebugPlayer1 : public CActor
 {
 private:
 	float				m_fSpeed;
@@ -11,19 +10,19 @@ private:
 	D3DXVECTOR3			m_vDirection;
 	D3DXVECTOR3			m_vPosition;
 	D3DXMATRIXA16		m_matWorld;
-
-	ST_CUBE				m_cube;
-	LPD3DXMESH			m_pMeshCube;
-	D3DMATERIAL9		m_stMtlCube;
+	
+	ST_SPHERE			m_sphere;
+	LPD3DXMESH			m_pMeshSphere;
+	D3DMATERIAL9		m_stMtlSphere;
 	ST_PLAYER_INPUTKEY	m_stInputKey;
 public:
-	CDebugCube();
-	~CDebugCube();
+	CDebugPlayer1();
+	~CDebugPlayer1();
 
 	void Setup();
 	void Update() override;
 	void Render() override;
-	
+
 	void OnEvent(EEvent eEvent, void* _value);
 	void PressKey(void* _value);
 	void ReleaseKey(void* _value);
