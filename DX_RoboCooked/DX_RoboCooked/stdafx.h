@@ -216,8 +216,8 @@ struct ST_PLAYER_INPUTKEY
 		#pragma comment(linker, "/entry:WinMainCRTStartup /subsystem:console")
 	#endif
 
-	#define _DebugComment
-	#define _ReleaseComment __DOUBLE_SLASH
+	#define _DEBUG_COMMENT
+	#define _RELEASE_COMMENT __DOUBLE_SLASH
 
 #else
 	#define _DebugComment __DOUBLE_SLASH
