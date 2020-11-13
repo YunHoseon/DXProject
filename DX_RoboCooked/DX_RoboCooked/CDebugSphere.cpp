@@ -8,8 +8,17 @@ CDebugSphere::CDebugSphere() :
 	m_vPosition = m_sphere.vCenter;
 	D3DXMatrixIdentity(&m_matWorld);
 
+	m_stInputKey.moveFowardKey = 'W';
+	m_stInputKey.moveLeftKey = 'A';
+	m_stInputKey.moveBackKey = 'S';
+	m_stInputKey.moveRightKey = 'D';
+	m_stInputKey.interactableKey1 = 'F';
+	m_stInputKey.interactableKey2 = 'G';
+	m_stInputKey.interactableKey3 = 'H';
+
 	g_EventManager->Attach(EEvent::E_KeyPress, this);
 	g_EventManager->Attach(EEvent::E_KeyRelease, this);
+	g_EventManager->Attach(EEvent::E_Player1KeyChange, this);
 }
 
 CDebugSphere::~CDebugSphere()
@@ -51,6 +60,9 @@ void CDebugSphere::OnEvent(EEvent eEvent, void* _value)
 	case EEvent::E_KeyRelease:
 		ReleaseKey(_value);
 		break;
+	case EEvent::E_Player1KeyChange:
+		SetKeyChange(_value);
+		break;
 	}
 }
 
@@ -86,7 +98,6 @@ void CDebugSphere::PressKey(void* _value)
 	{
 
 	}
-
 }
 
 void CDebugSphere::ReleaseKey(void* _value)
@@ -103,5 +114,10 @@ void CDebugSphere::Move(D3DXVECTOR3 _vecMove)
 	m_vPosition = vPosition;
 
 	D3DXMatrixTranslation(&m_matT, m_vPosition.x, m_vPosition.y, m_vPosition.z);
+}
+
+void CDebugSphere::SetKeyChange(void* _value)
+{
+	memcpy(&m_stInputKey, &_value, sizeof(ST_PLAYER_INPUTKEY));
 }
 
