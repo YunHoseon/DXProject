@@ -3,6 +3,7 @@
 #include "CGrid.h"
 #include "CCamera.h"
 #include "CGameScene.h"
+#include "CParts.h"
 
 /* µð¹ö±ë¿ë */
 #include "CDebugPlayer1.h"
@@ -14,6 +15,7 @@ CMainGame::CMainGame()
 	, m_pScene(NULL)
 	, m_pDebugSphere(NULL)
 	, m_pDebugCube(NULL)
+	, m_pDebugParts(NULL)
 {
 }
 
@@ -33,7 +35,6 @@ void CMainGame::Setup()
 	if (m_pGrid)
 		m_pGrid->Setup();
 
-
 	m_pCamera = new CCamera;
 	if (m_pCamera)
 		m_pCamera->Setup(NULL);
@@ -45,6 +46,10 @@ void CMainGame::Setup()
 	m_pDebugCube = new CDebugPlayer2;
 	if (m_pDebugCube)
 		m_pDebugCube->Setup();
+
+	m_pDebugParts = new CParts;
+	if (m_pDebugParts)
+		m_pDebugParts->Setup();
 
 	m_pScene = new CGameScene;
 	g_SceneManager->AddScene("GAMESCENE",m_pScene);
@@ -91,6 +96,9 @@ void CMainGame::Render()
 
 	if (m_pDebugCube)
 		m_pDebugCube->Render();
+
+	if (m_pDebugParts)
+		m_pDebugParts->Render();
 	
 	g_pD3DDevice->EndScene();
 	g_pD3DDevice->Present(NULL, NULL, NULL, NULL);

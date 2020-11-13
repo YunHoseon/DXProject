@@ -1,5 +1,6 @@
 #include "stdafx.h"
 #include "CDebugPlayer1.h"
+#include "CBoxCollision.h"
 
 
 CDebugPlayer1::CDebugPlayer1() :
@@ -19,6 +20,7 @@ CDebugPlayer1::~CDebugPlayer1()
 
 void CDebugPlayer1::Setup()
 {
+	m_pCollision = new CBoxCollision(D3DXVECTOR3(0,0,0), D3DXVECTOR3(0.8f, 0.8f, 0.8f), &m_matWorld);
 	D3DXCreateSphere(g_pD3DDevice, 0.5f, 10, 10, &m_pMeshSphere, NULL);
 
 	ZeroMemory(&m_stMtlSphere, sizeof(D3DMATERIAL9));

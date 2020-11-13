@@ -173,8 +173,10 @@
     <ClInclude Include="CField.h" />
     <ClInclude Include="CGameScene.h" />
     <ClInclude Include="InputManager.h" />
+    <ClInclude Include="InteractiveActor.h" />
     <ClInclude Include="Keyboard.h" />
     <ClInclude Include="Mouse.h" />
+    <ClInclude Include="CParts.h" />
     <ClInclude Include="Resource.h" />
     <ClInclude Include="CSingleton.h" />
     <ClInclude Include="stdafx.h" />
@@ -211,8 +213,10 @@
     <ClCompile Include="CField.cpp" />
     <ClCompile Include="CGameScene.cpp" />
     <ClCompile Include="InputManager.cpp" />
+    <ClCompile Include="InteractiveActor.cpp" />
     <ClCompile Include="Keyboard.cpp" />
     <ClCompile Include="Mouse.cpp" />
+    <ClCompile Include="CParts.cpp" />
     <ClCompile Include="stdafx.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Create</PrecompiledHeader>
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Create</PrecompiledHeader>
