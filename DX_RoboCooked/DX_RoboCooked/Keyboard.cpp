@@ -23,6 +23,9 @@ CKeyboard::CKeyboard()
 	m_stInputKey[1].interactableKey1 = VK_OEM_COMMA;
 	m_stInputKey[1].interactableKey2 = VK_OEM_PERIOD;
 	m_stInputKey[1].interactableKey3 = VK_OEM_2;
+
+	g_EventManager->CallEvent(EEvent::E_Player1KeyChange, (void*)&m_stInputKey[0]);
+	g_EventManager->CallEvent(EEvent::E_Player2KeyChange, (void*)&m_stInputKey[1]);
 }
 
 CKeyboard::~CKeyboard()
@@ -144,12 +147,6 @@ void CKeyboard::Update()
 		g_EventManager->CallEvent(EEvent::E_KeyPress, (void*)&data);
 		std::cout << "rCtrl" << std::endl;
 	}*/
-
-	/*if(GetAsyncKeyState(VK_RCONTROL) & 0x8000)
-	{
-		std::cout << "right control" << std::endl;
-	}*/
-
 }
 
 void CKeyboard::PressKey(WPARAM keyID, LPARAM lParam)
@@ -212,19 +209,22 @@ void CKeyboard::ReleaseKey(WPARAM keyID, LPARAM lParam)
 	g_EventManager->CallEvent(EEvent::E_KeyRelease, NULL);
 }
 
-void CKeyboard::OnEvent(EEvent eEvent, int n, void* _value)
+void CKeyboard::OnEvent(EEvent eEvent, void* _value)
 {
 	switch (eEvent)
 	{
-	case EEvent::E_KeyChange:
-		SetKeyChange(n, _value);
+	case EEvent::E_Player1KeyChange:
+		SetKeyChange(1, _value);
+		break;
+	case EEvent::E_Player2KeyChange:
+		SetKeyChange(2, _value);
 		break;
 	}
 }
 
 void CKeyboard::SetKeyChange(int n, void* _value)
 {
-	
+	memcpy(&m_stInputKey[n-1], &_value, sizeof(ST_PLAYER_INPUTKEY));
 }
 
 //void CKeyboard::JudgeDash(WPARAM keyID)

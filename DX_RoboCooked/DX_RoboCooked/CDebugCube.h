@@ -28,5 +28,6 @@ public:
 	void PressKey(void* _value);
 	void ReleaseKey(void* _value);
 	void Move(D3DXVECTOR3 _vecMove);
+	void SetKeyChange(void* _value);
 };
 

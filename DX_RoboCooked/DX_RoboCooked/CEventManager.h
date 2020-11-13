@@ -9,7 +9,8 @@ enum class EEvent
 	E_Tick,
 	E_KeyPress,
 	E_KeyRelease,
-	E_KeyChange,
+	E_Player1KeyChange,
+	E_Player2KeyChange,
 	E_TileMove
 };
 
