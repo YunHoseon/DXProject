@@ -8,14 +8,6 @@ CDebugCube::CDebugCube() :
 	m_vPosition = m_cube.vCenter;
 	D3DXMatrixIdentity(&m_matWorld);
 	
-	m_stInputKey.moveFowardKey = VK_UP;
-	m_stInputKey.moveLeftKey = VK_LEFT;
-	m_stInputKey.moveBackKey = VK_BACK;
-	m_stInputKey.moveRightKey = VK_RIGHT;
-	m_stInputKey.interactableKey1 = VK_OEM_COMMA;
-	m_stInputKey.interactableKey2 = VK_OEM_PERIOD;
-	m_stInputKey.interactableKey3 = VK_OEM_2;
-	
 	g_EventManager->Attach(EEvent::E_KeyPress, this);
 	g_EventManager->Attach(EEvent::E_KeyRelease, this);
 	g_EventManager->Attach(EEvent::E_Player2KeyChange, this);

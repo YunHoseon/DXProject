@@ -16,10 +16,10 @@ CKeyboard::CKeyboard()
 	m_stInputKey[0].interactableKey2 = 'G';
 	m_stInputKey[0].interactableKey3 = 'H';
 
-	m_stInputKey[1].moveFowardKey = VK_UP;
-	m_stInputKey[1].moveLeftKey = VK_LEFT;
-	m_stInputKey[1].moveBackKey = VK_BACK;
-	m_stInputKey[1].moveRightKey = VK_RIGHT;
+	m_stInputKey[1].moveFowardKey	 = VK_UP;
+	m_stInputKey[1].moveLeftKey		 = VK_LEFT;
+	m_stInputKey[1].moveBackKey		 = VK_DOWN;
+	m_stInputKey[1].moveRightKey	 = VK_RIGHT;
 	m_stInputKey[1].interactableKey1 = VK_OEM_COMMA;
 	m_stInputKey[1].interactableKey2 = VK_OEM_PERIOD;
 	m_stInputKey[1].interactableKey3 = VK_OEM_2;

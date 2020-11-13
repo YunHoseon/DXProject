@@ -8,14 +8,6 @@ CDebugSphere::CDebugSphere() :
 	m_vPosition = m_sphere.vCenter;
 	D3DXMatrixIdentity(&m_matWorld);
 
-	m_stInputKey.moveFowardKey = 'W';
-	m_stInputKey.moveLeftKey = 'A';
-	m_stInputKey.moveBackKey = 'S';
-	m_stInputKey.moveRightKey = 'D';
-	m_stInputKey.interactableKey1 = 'F';
-	m_stInputKey.interactableKey2 = 'G';
-	m_stInputKey.interactableKey3 = 'H';
-
 	g_EventManager->Attach(EEvent::E_KeyPress, this);
 	g_EventManager->Attach(EEvent::E_KeyRelease, this);
 	g_EventManager->Attach(EEvent::E_Player1KeyChange, this);

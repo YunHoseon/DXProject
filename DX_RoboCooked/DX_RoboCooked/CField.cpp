@@ -143,10 +143,10 @@ void CField::Setup(int iWidth, int iHeight)
 		&vecAdj[0], 0, 0, 0);
 
 
-	for (float i = fMinZ + BLOCK_SIZE; i <= fMaxZ; i+=BLOCK_SIZE)
+	for (float i = fMinZ + (BLOCK_SIZE/2); i <= fMaxZ; i+=BLOCK_SIZE)
 	{
 
-		for (float j = fMinX + BLOCK_SIZE ; j <= fMaxX; j += BLOCK_SIZE)
+		for (float j = fMinX + (BLOCK_SIZE /2) ; j <= fMaxX; j += BLOCK_SIZE)
 		{
 			CTile* pTile = new CTile;
 			ST_CUBE cube;
