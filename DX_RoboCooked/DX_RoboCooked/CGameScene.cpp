@@ -1,12 +1,16 @@
 #include "stdafx.h"
 #include "CGameScene.h"
-
 #include "CField.h"
 
 
 CGameScene::CGameScene()
 	:m_pField(NULL)
 {
+	//Sound Add
+	g_SoundManager->AddBGM("data/sound/bgm.mp3");
+	g_SoundManager->AddSFX("data/sound/effBBam.mp3", "BBam");
+	g_SoundManager->AddSFX("data/sound/effMelem.mp3", "Melem");
+
 }
 
 CGameScene::~CGameScene()

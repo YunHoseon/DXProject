@@ -3,13 +3,12 @@
 
 #include "CSphereCollision.h"
 
-CBoxCollision::CBoxCollision(D3DXVECTOR3 vOriginPos, D3DXVECTOR3 vSize, D3DXMATRIXA16* pmatWorld): ICollisionArea(),
-		m_pmatWorldTM(pmatWorld)
+CBoxCollision::CBoxCollision(D3DXVECTOR3 vOriginPos, D3DXVECTOR3 vSize, D3DXMATRIXA16* pmatWorld): ICollisionArea()
 {
 	m_eType = EColideType::E_Box;
 
 	m_vOriginCenterPos = vOriginPos;
-
+	m_pmatWorldTM = pmatWorld;
 	m_vOriginAxisDir[0] = D3DXVECTOR3(1, 0, 0);
 	m_vOriginAxisDir[1] = D3DXVECTOR3(0, 1, 0);
 	m_vOriginAxisDir[2] = D3DXVECTOR3(0, 0, 1);
@@ -91,7 +90,7 @@ void CBoxCollision::Update()
 	D3DXVec3TransformCoord(&m_vCenterPos, &m_vOriginCenterPos, m_pmatWorldTM);
 }
 
-bool CBoxCollision::CollideToBox(ICollisionArea* pTargetCollider)
+bool CBoxCollision::CollideToBox(CBoxCollision* pTargetCollider)
 {
 	float cos[3][3];
 	float absCos[3][3];
@@ -101,9 +100,8 @@ bool CBoxCollision::CollideToBox(ICollisionArea* pTargetCollider)
 	bool existsParallelPair = false;
 	isCollide = false;
 	
-	CBoxCollision* target = dynamic_cast<CBoxCollision*>(pTargetCollider);
 
-	D3DXVECTOR3 D = target->m_vCenterPos - this->m_vCenterPos;
+	D3DXVECTOR3 D = pTargetCollider->m_vCenterPos - this->m_vCenterPos;
 	if (D3DXVec3LengthSq(&D) > 4.5f)
 		return false;
 	
@@ -111,7 +109,7 @@ bool CBoxCollision::CollideToBox(ICollisionArea* pTargetCollider)
 	{
 		for (int b = 0; b < 3; ++b)
 		{
-			cos[a][b] = D3DXVec3Dot(&this->m_vAxisDir[a], &target->m_vAxisDir[b]);
+			cos[a][b] = D3DXVec3Dot(&this->m_vAxisDir[a], &pTargetCollider->m_vAxisDir[b]);
 
 			absCos[a][b] = abs(cos[a][b]);
 
@@ -122,9 +120,9 @@ bool CBoxCollision::CollideToBox(ICollisionArea* pTargetCollider)
 		r = abs(dist[a]);
 
 		r0 = this->m_fAxisHalfLen[a];
-		r1 = target->m_fAxisHalfLen[0] * absCos[a][0] +
-			target->m_fAxisHalfLen[1] * absCos[a][1] +
-			target->m_fAxisHalfLen[2] * absCos[a][2];
+		r1 = pTargetCollider->m_fAxisHalfLen[0] * absCos[a][0] +
+			pTargetCollider->m_fAxisHalfLen[1] * absCos[a][1] +
+			pTargetCollider->m_fAxisHalfLen[2] * absCos[a][2];
 
 		if (r > r0 + r1)
 			return false;
@@ -132,11 +130,11 @@ bool CBoxCollision::CollideToBox(ICollisionArea* pTargetCollider)
 
 	for (int b = 0; b < 3; ++b)
 	{
-		r = abs(D3DXVec3Dot(&target->m_vAxisDir[b], &D));
+		r = abs(D3DXVec3Dot(&pTargetCollider->m_vAxisDir[b], &D));
 		r0 = this->m_fAxisHalfLen[0] * absCos[0][b] +
 			this->m_fAxisHalfLen[1] * absCos[1][b] +
 			this->m_fAxisHalfLen[2] * absCos[2][b];
-		r1 = target->m_fAxisHalfLen[b];
+		r1 = pTargetCollider->m_fAxisHalfLen[b];
 
 		if (r > r0 + r1)
 			return false;
@@ -217,14 +215,14 @@ bool CBoxCollision::CollideToBox(ICollisionArea* pTargetCollider)
 	return false;
 }
 
-bool CBoxCollision::CollideToSphere(ICollisionArea* pTargetCollider)
+bool CBoxCollision::CollideToSphere(CSphereCollision* pTargetCollider)
 {
 	isCollide = false;
 
-	CSphereCollision* target = dynamic_cast<CSphereCollision*>(pTargetCollider);
-	D3DXVECTOR3 vDist = target->GetCenter() - this->m_vOriginCenterPos;
+
+	D3DXVECTOR3 vDist = pTargetCollider->GetCenter() - m_vCenterPos;
 	
-	if (D3DXVec3LengthSq(&vDist) > (1.0f + target->GetRadius()) * (1.0f + target->GetRadius()))
+	if (D3DXVec3LengthSq(&vDist) > (1.0f + pTargetCollider->GetRadius()) * (1.0f + pTargetCollider->GetRadius()))
 		return false;
 
 	vector<D3DXPLANE> stPlanes(6);
@@ -266,7 +264,7 @@ bool CBoxCollision::CollideToSphere(ICollisionArea* pTargetCollider)
 
 	for (D3DXPLANE & plane : stPlanes)
 	{
-		if (D3DXPlaneDotCoord(&plane, &target->GetCenter()) > target->GetRadius());
+		if (D3DXPlaneDotCoord(&plane, &pTargetCollider->GetCenter()) > pTargetCollider->GetRadius());
 			return false;
 	}
 	return true;

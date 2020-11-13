@@ -138,11 +138,8 @@
     <ClInclude Include="CDebugPlayer1.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="InteractiveActor.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="CParts.h">
-      <Filter>Header Files</Filter>
+    <ClInclude Include="CSoundManager.h">
+      <Filter>Manager</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -242,11 +239,8 @@
     <ClCompile Include="CDebugPlayer1.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="InteractiveActor.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="CParts.cpp">
-      <Filter>Source Files</Filter>
+    <ClCompile Include="CSoundManager.cpp">
+      <Filter>Manager</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
