@@ -15,7 +15,6 @@ CKeyboard::~CKeyboard()
 
 void CKeyboard::Update()
  {
-	
 	//ST_BitrhDayEvent data{ name, age };
 	//NotifyEvent(EEvent::E_BIRTHDAY, (void*)&data);
 	ST_MoveEvent data;
