@@ -141,6 +141,12 @@
     <ClInclude Include="CSoundManager.h">
       <Filter>Manager</Filter>
     </ClInclude>
+    <ClInclude Include="InteractiveActor.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="CParts.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="stdafx.cpp">
@@ -241,6 +247,12 @@
     </ClCompile>
     <ClCompile Include="CSoundManager.cpp">
       <Filter>Manager</Filter>
+    </ClCompile>
+    <ClCompile Include="InteractiveActor.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="CParts.cpp">
+      <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
