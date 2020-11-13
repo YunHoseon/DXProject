@@ -142,10 +142,10 @@ void CField::Setup(int iWidth, int iHeight)
 	pMesh->OptimizeInplace(D3DXMESHOPT_ATTRSORT | D3DXMESHOPT_COMPACT | D3DXMESHOPT_VERTEXCACHE,
 		&vecAdj[0], 0, 0, 0);
 
-	int row = 0, col = 0;
+
 	for (float i = fMinZ + BLOCK_SIZE; i <= fMaxZ; i+=BLOCK_SIZE)
 	{
-		col = 0;
+
 		for (float j = fMinX + BLOCK_SIZE ; j <= fMaxX; j += BLOCK_SIZE)
 		{
 			CTile* pTile = new CTile;
@@ -154,24 +154,24 @@ void CField::Setup(int iWidth, int iHeight)
 			pTile->SetCube(cube);
 
 			pTile->SetMeshCubeTile(pMesh);
-			pTile->AddEvent(EEvent::E_TileMove);
-			/* 테스트용 if문  텍스쳐 바뀌는지 체크*/
-			if (col == 1)
-			{
-				pTile->SetPlaneTexture(g_pTextureManager->GetTexture("data/stones.png"));
-			}
-			else
-			{
-				pTile->SetPlaneTexture(g_pTextureManager->GetTexture("data/Albedo00.jpg"));
+			pTile->AddEvent(EEvent::E_TileMove);		
+			pTile->SetPlaneTexture(g_pTextureManager->GetTexture("data/stones.png"));
+		
+			//pTile->SetPlaneTexture(g_pTextureManager->GetTexture("data/Albedo00.jpg"));
 
-			}
-			
 			m_vecTile.push_back(pTile);
-			col++;
+	
 		}
-		row++;
+
 	}
 
+
+	for (int i = 0; i < m_vecTile.size(); i++)
+	{
+		m_vecTile[i]->SetPlaneTexture(g_pTextureManager->GetTexture("data/Albedo00.jpg"));
+	}
+
+	
 
 	ZeroMemory(&m_stMtlTile, sizeof(D3DMATERIAL9));
 	m_stMtlTile.Ambient = D3DXCOLOR(0.7f, 0.7f, 0.7f, 1.0f);
