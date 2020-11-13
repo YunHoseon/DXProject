@@ -3,7 +3,6 @@
 
 
 CEventManager::CEventManager():CSingleton<CEventManager>()
-	, m_eEvent(EEvent::E_EventNONE)
 {
 }
 

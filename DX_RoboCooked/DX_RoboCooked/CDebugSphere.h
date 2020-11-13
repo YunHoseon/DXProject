@@ -25,6 +25,8 @@ public:
 	//입력키 바꿀 수 있는 함수 추가
 
 	void OnEvent(EEvent eEvent, void* _value);
-	void Move(void* _value);
+	void PressKey(void* _value);
+	void ReleaseKey(void* _value);
+	void Move(D3DXVECTOR3 _vecMove);
 };
 
