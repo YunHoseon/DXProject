@@ -24,7 +24,6 @@
 *.lai
 *.la
 *.a
-*.lib
 
 # Executables
 *.exe
@@ -44,3 +43,4 @@ DX_RoboCooked/DX_RoboCooked/Debug/DX_RoboCooked.tlog/CL.command.1.tlog
 *.lastbuildstate
 *.jpg
 *.png
+*.mp3
