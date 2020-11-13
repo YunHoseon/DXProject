@@ -30,8 +30,8 @@ using std::set;
 #include <list>
 using std::list;
 #include <assert.h>
-#include <unordered_map>
-using std::unordered_map;
+#include <unordered_set>
+using std::unordered_set;
 
 #include <d3dx9.h>
 

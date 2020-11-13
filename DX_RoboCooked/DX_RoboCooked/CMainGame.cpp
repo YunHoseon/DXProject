@@ -77,6 +77,9 @@ void CMainGame::Render()
 
 	g_pD3DDevice->BeginScene();
 
+	if (m_pCamera)
+		m_pCamera->Render();
+	
 	if (m_pGrid)
 		m_pGrid->Render();
 

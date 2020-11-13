@@ -154,7 +154,7 @@ void CField::Setup(int iWidth, int iHeight)
 			pTile->SetCube(cube);
 
 			pTile->SetMeshCubeTile(pMesh);
-			pTile->AddEvent(EEvent::E_EventTile);
+			pTile->AddEvent(EEvent::E_TileMove);
 			/* 테스트용 if문  텍스쳐 바뀌는지 체크*/
 			if (col == 1)
 			{

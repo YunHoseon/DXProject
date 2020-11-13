@@ -51,6 +51,39 @@ void CCamera::Update()
 	g_pD3DDevice->SetTransform(D3DTS_VIEW, &matView);
 }
 
+void CCamera::Render()
+{
+	string sCameraDistance = string("카메라 거리 :") + std::to_string(m_fCameraDistance);
+	RECT rc;
+	SetRect(&rc, 0, 0, 0, 0);
+
+	// >> :font manager 추가후
+	LPD3DXFONT pFont = g_pFontManager->GetFont(CFontManager::eFontType::E_DEFAULT);
+	//<<:
+
+	pFont->DrawTextA(NULL,
+		sCameraDistance.c_str(),
+		sCameraDistance.length(),
+		&rc,
+		DT_LEFT | DT_TOP | DT_NOCLIP,
+		D3DCOLOR_XRGB(255, 255, 0));
+
+
+
+	string sAngle = string("카메라 각도 :") + std::to_string(m_vCamRotAngle.x);
+	SetRect(&rc, 0, 50, 0, 0);
+
+	pFont = g_pFontManager->GetFont(CFontManager::eFontType::E_DEFAULT);
+
+
+	pFont->DrawTextA(NULL,
+		sAngle.c_str(),
+		sAngle.length(),
+		&rc,
+		DT_LEFT | DT_TOP | DT_NOCLIP,
+		D3DCOLOR_XRGB(255, 255, 0));
+}
+
 void CCamera::WndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam)
 {	
 	switch (message)
@@ -72,23 +105,23 @@ void CCamera::WndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam)
 			ptCurMouse.x = LOWORD(lParam);
 			ptCurMouse.y = HIWORD(lParam);
 
-			float fDeltaX = (float)ptCurMouse.x - m_ptPrevMouse.x;
+			//float fDeltaX = (float)ptCurMouse.x - m_ptPrevMouse.x;
 			float fDeltaY = (float)ptCurMouse.y - m_ptPrevMouse.y;
-			m_vCamRotAngle.y += (fDeltaX / 100.0f);
+			//m_vCamRotAngle.y += (fDeltaX / 100.0f);
 			m_vCamRotAngle.x += (fDeltaY / 100.0f);
 
-			if (m_vCamRotAngle.x < -D3DX_PI / 2.0f + 0.0001f)
-				m_vCamRotAngle.x = -D3DX_PI / 2.0f + 0.0001f;
+			if (m_vCamRotAngle.x < -D3DX_PI / 5.0f + 0.0001f)
+				m_vCamRotAngle.x = -D3DX_PI / 5.0f + 0.0001f;
 
-			if (m_vCamRotAngle.x > D3DX_PI / 2.0f + 0.0001f)
-				m_vCamRotAngle.x = D3DX_PI / 2.0f + 0.0001f;
+			if (m_vCamRotAngle.x > D3DX_PI / 5.0f + 0.0001f)
+				m_vCamRotAngle.x = D3DX_PI / 5.0f + 0.0001f;
 			
 			m_ptPrevMouse = ptCurMouse;
 		}
 		break;
 		
 	case WM_MOUSEWHEEL:
-		m_fCameraDistance -= (GET_WHEEL_DELTA_WPARAM(wParam)) / 30.0f;
+		m_fCameraDistance -= (GET_WHEEL_DELTA_WPARAM(wParam)) / 1000.0f;
 		if (m_fCameraDistance < 0.0001f)
 			m_fCameraDistance = 0.0001f;
 		break;
