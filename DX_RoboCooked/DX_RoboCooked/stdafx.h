@@ -158,7 +158,7 @@ struct ST_PLAYER_INPUTKEY
 		interactableKey1 = key.interactableKey1;
 		interactableKey2 = key.interactableKey2;
 		interactableKey3 = key.interactableKey3;
-		
+
 		return *this;
 	}
 };
@@ -198,11 +198,6 @@ struct ST_PLAYER_INPUTKEY
 #include "CSceneManager.h"
 #include "CEventManager.h"
 #include "InputManager.h"
-
-
-
-#include "CDebugSphere.h"
-#include "CDebugCube.h"
 
 #define __SLASH(x) /##x
 #define __DOUBLE_SLASH __SLASH(/)
