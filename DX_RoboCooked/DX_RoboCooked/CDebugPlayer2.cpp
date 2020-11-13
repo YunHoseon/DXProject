@@ -1,6 +1,8 @@
 #include "stdafx.h"
 #include "CDebugPlayer2.h"
 
+#include "CBoxCollision.h"
+
 
 CDebugPlayer2::CDebugPlayer2() :
 	m_fSpeed(0.1f)
@@ -11,10 +13,13 @@ CDebugPlayer2::CDebugPlayer2() :
 	g_EventManager->Attach(EEvent::E_KeyPress, this);
 	g_EventManager->Attach(EEvent::E_KeyRelease, this);
 	g_EventManager->Attach(EEvent::E_Player2KeyChange, this);
+
+	m_pCollision = new CBoxCollision(m_vPosition, D3DXVECTOR3(1, 1, 1), &m_matWorld);
 }
 
 CDebugPlayer2::~CDebugPlayer2()
 {
+	SafeDelete(m_pCollision);
 }
 
 void CDebugPlayer2::Setup()
@@ -29,6 +34,8 @@ void CDebugPlayer2::Setup()
 
 void CDebugPlayer2::Update()
 {
+	if (m_pCollision)
+		m_pCollision->Update();
 }
 
 void CDebugPlayer2::Render()
@@ -40,6 +47,9 @@ void CDebugPlayer2::Render()
 	g_pD3DDevice->SetTexture(0, NULL);
 	g_pD3DDevice->SetMaterial(&m_stMtlCube);
 	m_pMeshCube->DrawSubset(0);
+
+	_DEBUG_COMMENT if (m_pCollision)
+		_DEBUG_COMMENT m_pCollision->Render();
 }
 
 void CDebugPlayer2::OnEvent(EEvent eEvent, void* _value)
