@@ -14,7 +14,6 @@
 # Compiled Dynamic libraries
 *.so
 *.dylib
-*.dll
 
 # Fortran module files
 *.mod
@@ -44,3 +43,5 @@ DX_RoboCooked/DX_RoboCooked/Debug/DX_RoboCooked.tlog/CL.command.1.tlog
 *.jpg
 *.png
 *.mp3
+DX_RoboCooked/DX_RoboCooked/data
+
