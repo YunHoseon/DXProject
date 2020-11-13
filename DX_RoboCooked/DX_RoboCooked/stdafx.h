@@ -148,6 +148,21 @@ struct ST_PLAYER_INPUTKEY
 	WPARAM interactableKey1;
 	WPARAM interactableKey2;
 	WPARAM interactableKey3;
+
+	ST_PLAYER_INPUTKEY operator=(ST_PLAYER_INPUTKEY key1)
+	{
+		ST_PLAYER_INPUTKEY key;
+
+		key.moveFowardKey = key1.moveFowardKey;
+		key.moveLeftKey = key1.moveLeftKey;
+		key.moveBackKey = key1.moveBackKey;
+		key.moveRightKey = key1.moveRightKey;
+		key.interactableKey1 = key1.interactableKey1;
+		key.interactableKey2 = key1.interactableKey2;
+		key.interactableKey3 = key1.interactableKey3;
+		
+		return key;
+	}
 };
 
 #define Synthesize(varType, varName, funName)\
