@@ -34,19 +34,19 @@ void CDebugPlayer2::Setup()
 
 void CDebugPlayer2::Update()
 {
+	m_matWorld = m_matS * m_matR * m_matT;
 	if (m_pCollision)
 		m_pCollision->Update();
 }
 
 void CDebugPlayer2::Render()
 {
-	m_matWorld = m_matS * m_matR * m_matT;
-	
-	g_pD3DDevice->SetRenderState(D3DRS_LIGHTING, false);
+	g_pD3DDevice->SetRenderState(D3DRS_LIGHTING, true);
 	g_pD3DDevice->SetTransform(D3DTS_WORLD, &m_matWorld);
 	g_pD3DDevice->SetTexture(0, NULL);
 	g_pD3DDevice->SetMaterial(&m_stMtlCube);
 	m_pMeshCube->DrawSubset(0);
+	g_pD3DDevice->SetRenderState(D3DRS_LIGHTING, false);
 
 	_DEBUG_COMMENT if (m_pCollision)
 		_DEBUG_COMMENT m_pCollision->Render();
