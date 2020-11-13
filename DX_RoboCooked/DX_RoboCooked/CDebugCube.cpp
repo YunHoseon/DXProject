@@ -1,6 +1,6 @@
 #include "stdafx.h"
 #include "CDebugCube.h"
-
+#include "CBoxCollision.h"
 
 CDebugCube::CDebugCube()
 {
@@ -16,11 +16,14 @@ CDebugCube::CDebugCube()
 	m_stInputKey.interactableKey3 = VK_OEM_2;
 
 	g_EventManager->Attach(EEvent::E_EventMovePlayer2, this);
+
+	m_pCollision = new CBoxCollision(m_vPosition, D3DXVECTOR3(1, 1, 1), &m_matWorld);
 }
 
 
 CDebugCube::~CDebugCube()
 {
+	SafeDelete(m_pCollision);
 }
 
 void CDebugCube::Setup()
@@ -67,6 +70,9 @@ void CDebugCube::Update()
 
 	D3DXMatrixTranslation(&matT, m_vPosition.x, m_vPosition.y, m_vPosition.z);
 	m_matWorld = matT;
+
+	if(m_pCollision)
+		m_pCollision->Update();
 }
 
 void CDebugCube::Render()
@@ -76,6 +82,9 @@ void CDebugCube::Render()
 	g_pD3DDevice->SetTexture(0, NULL);
 	g_pD3DDevice->SetMaterial(&m_stMtlCube);
 	m_pMeshCube->DrawSubset(0);
+
+	_DEBUG_COMMENT if(m_pCollision)
+		_DEBUG_COMMENT m_pCollision->Render();
 }
 
 void CDebugCube::OnEvent(EEvent eEvent, void* _value)
