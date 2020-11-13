@@ -29,6 +29,6 @@ public:
 	void Render();
 	void WndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam);
 	
-
+	void SetLight();
 };
 

@@ -1,6 +1,7 @@
 #include "stdafx.h"
 #include "CDebugPlayer1.h"
 #include "CBoxCollision.h"
+#include "CSphereCollision.h"
 
 
 CDebugPlayer1::CDebugPlayer1() :
@@ -20,7 +21,8 @@ CDebugPlayer1::~CDebugPlayer1()
 
 void CDebugPlayer1::Setup()
 {
-	m_pCollision = new CBoxCollision(D3DXVECTOR3(0,0,0), D3DXVECTOR3(0.8f, 0.8f, 0.8f), &m_matWorld);
+	m_pCollision = new CSphereCollision(m_vPosition, 0.5f, &m_matWorld);
+	//m_pCollision = new CBoxCollision(D3DXVECTOR3(0,0,0), D3DXVECTOR3(0.8f, 0.8f, 0.8f), &m_matWorld);
 	D3DXCreateSphere(g_pD3DDevice, 0.5f, 10, 10, &m_pMeshSphere, NULL);
 
 	ZeroMemory(&m_stMtlSphere, sizeof(D3DMATERIAL9));
@@ -31,17 +33,20 @@ void CDebugPlayer1::Setup()
 
 void CDebugPlayer1::Update()
 {
+	m_matWorld = m_matS * m_matR * m_matT;
 }
 
 void CDebugPlayer1::Render()
 {
-	m_matWorld = m_matS * m_matR * m_matT;
-	
-	g_pD3DDevice->SetRenderState(D3DRS_LIGHTING, false);
+	g_pD3DDevice->SetRenderState(D3DRS_LIGHTING, true);
 	g_pD3DDevice->SetTransform(D3DTS_WORLD, &m_matWorld);
 	g_pD3DDevice->SetTexture(0, NULL);
 	g_pD3DDevice->SetMaterial(&m_stMtlSphere);
 	m_pMeshSphere->DrawSubset(0);
+	g_pD3DDevice->SetRenderState(D3DRS_LIGHTING, false);
+
+	_DEBUG_COMMENT if (m_pCollision)
+		_DEBUG_COMMENT m_pCollision->Render();
 }
 
 void CDebugPlayer1::OnEvent(EEvent eEvent, void* _value)
