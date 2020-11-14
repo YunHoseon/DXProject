@@ -77,7 +77,6 @@ void CMainGame::Update()
 	{
 		m_pDebugSphere->Update();
 	}
-		
 }
 
 void CMainGame::Render()
