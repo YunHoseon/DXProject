@@ -12,13 +12,14 @@ using namespace FMOD;
 class SoundManager : public CSingleton<SoundManager>
 {
 private:
-	System * fmodSystem;
+	System * m_fmodSystem;
 
-	Channel* bgmChannel;
-	Channel* sfxChannel;
+	Channel* m_bgmChannel;
 
-	Sound* bgm;
-	map<string, Sound*> soundHash;
+	Sound* m_bgm;
+	map<string, Sound*> m_soundHash;
+	map<string, Channel*> m_sfxChannel;
+
 
 private:
 	void init();
@@ -32,6 +33,7 @@ public:
 	void PlaySFX(string soundName);
 	void PlayBGM();
 	void Stop();
+	void SetBGMSound(float fVoulum);
 
 	void Destroy();
 
