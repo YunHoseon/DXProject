@@ -20,6 +20,10 @@ CGameScene::~CGameScene()
 
 void CGameScene::Init()
 {
+	//g_SoundManager->PlayBGM();
+	//g_SoundManager->SetBGMSound(0.5f);
+
+	
 	m_pField = new CField;
 	if (m_pField)
 	{

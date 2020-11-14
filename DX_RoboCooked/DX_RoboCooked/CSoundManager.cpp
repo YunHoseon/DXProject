@@ -15,38 +15,53 @@ SoundManager::~SoundManager()
 
 void SoundManager::Destroy()
 {
-	delete fmodSystem;
+
+	for each(auto it in m_soundHash)
+	{
+		it.second->release();
+	}
+	
+	delete m_fmodSystem;
 }
 
 void SoundManager::init()
 {
-	System_Create(&fmodSystem);
-	fmodSystem->init(4, FMOD_INIT_NORMAL, NULL);
+	System_Create(&m_fmodSystem);
+	m_fmodSystem->init(30, FMOD_INIT_NORMAL, NULL);
 }
 
 void SoundManager::AddBGM(string path)
 {
-	fmodSystem->createStream(path.c_str(), FMOD_LOOP_NORMAL, NULL, &bgm); //배경은 createStream
+	m_fmodSystem->createStream(path.c_str(), FMOD_LOOP_NORMAL, NULL, &m_bgm); //배경은 createStream
 }
 
 void SoundManager::AddSFX(string path, string soundName)
 {
-	fmodSystem->createSound(path.c_str(), FMOD_DEFAULT, NULL, &soundHash[soundName]);
+	m_fmodSystem->createSound(path.c_str(), FMOD_DEFAULT, NULL, &m_soundHash[soundName]);
+	Channel* sfx = nullptr;
+	m_sfxChannel[soundName] = sfx;
 }
 
 void SoundManager::PlayBGM()
 {
-	fmodSystem->playSound(FMOD_CHANNEL_REUSE, bgm, false, &bgmChannel);
+	m_fmodSystem->playSound(FMOD_CHANNEL_REUSE, m_bgm, false, &m_bgmChannel);
 }
 
 void SoundManager::PlaySFX(string soundName)
 {
-	if (soundHash[soundName] != NULL)
-		fmodSystem->playSound(FMOD_CHANNEL_REUSE,soundHash[soundName], false, &sfxChannel);
+	if (m_soundHash[soundName] != NULL)
+	{
+		m_fmodSystem->playSound(FMOD_CHANNEL_REUSE,m_soundHash[soundName], false, &m_sfxChannel[soundName]);
+
+	}
 }
 
 void SoundManager::Stop()
 {
-	sfxChannel->stop();
-	bgmChannel->stop();
+	m_bgmChannel->stop();
+}
+
+void SoundManager::SetBGMSound(float fVoulum)
+{
+	m_bgmChannel->setVolume(fVoulum);
 }
