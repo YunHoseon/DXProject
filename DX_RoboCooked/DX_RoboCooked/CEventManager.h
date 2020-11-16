@@ -19,11 +19,6 @@ enum class EEvent
 	E_PartsMake
 };
 
-struct ST_KeyInputEvent
-{
-	WPARAM wKey;
-};
-
 
 class CEventManager : public CSingleton<CEventManager>
 {
