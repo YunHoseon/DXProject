@@ -71,16 +71,16 @@
   <PropertyGroup Label="UserMacros" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <LinkIncremental>true</LinkIncremental>
-    <IncludePath>D:\DXProject\DX_RoboCooked\DX_RoboCooked;$(IncludePath)</IncludePath>
-    <LibraryPath>D:\DXProject\DX_RoboCooked\DX_RoboCooked;$(LibraryPath)</LibraryPath>
+    <IncludePath>D:\DXProject\DX_RoboCooked\DX_RoboCooked;$(IncludePath);$(DXSDK_DIR)\Include</IncludePath>
+    <LibraryPath>D:\DXProject\DX_RoboCooked\DX_RoboCooked;$(LibraryPath);$(DXSDK_DIR)\Lib\x86</LibraryPath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <LinkIncremental>true</LinkIncremental>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <LinkIncremental>false</LinkIncremental>
-    <IncludePath>D:\Dxprojcet\DX_RoboCooked\DX_RoboCooked;$(IncludePath)</IncludePath>
-    <LibraryPath>D:\Dxprojcet\DX_RoboCooked\DX_RoboCooked;D:\Dxprojcet\DX_RoboCooked\DX_RoboCooked;$(LibraryPath)</LibraryPath>
+    <IncludePath>D:\Dxprojcet\DX_RoboCooked\DX_RoboCooked;$(IncludePath);$(DXSDK_DIR)\Include</IncludePath>
+    <LibraryPath>D:\Dxprojcet\DX_RoboCooked\DX_RoboCooked;D:\Dxprojcet\DX_RoboCooked\DX_RoboCooked;$(LibraryPath);$(DXSDK_DIR)\Lib\x86</LibraryPath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <LinkIncremental>false</LinkIncremental>
