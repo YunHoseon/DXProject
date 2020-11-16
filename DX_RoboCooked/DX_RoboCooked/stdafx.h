@@ -30,8 +30,8 @@ using std::set;
 #include <list>
 using std::list;
 #include <assert.h>
-#include <unordered_map>
-using std::unordered_map;
+#include <unordered_set>
+using std::unordered_set;
 
 #include <d3dx9.h>
 
@@ -47,10 +47,11 @@ extern HWND g_hWnd;
 
 #define ELIPSE 0.000001f
 
-#define BLOCK_SIZE 2.0f
+#define BLOCK_SIZE 1.0f
 
 #define WIDTH 16
 #define HEIGHT 12
+
 
 struct ST_PC_VERTEX
 {
@@ -122,7 +123,7 @@ struct ST_ROT_SAMPLE
 
 struct ST_SPHERE
 {
-	float	fRaidus;
+	float			fRaidus;
 	D3DXVECTOR3		vCenter;
 	bool			isPicked;
 	ST_SPHERE(): fRaidus(0), isPicked(false), vCenter(0,0,0)
@@ -132,10 +133,33 @@ struct ST_SPHERE
 
 struct ST_CUBE
 {
-	float	fLength;
+	float			fLength;
 	D3DXVECTOR3		vCenter;
-	ST_CUBE() : fLength(0), vCenter(0, 0, 0)
+	ST_CUBE() : fLength(0), vCenter(0, 0, 0){}
+};
+
+struct ST_PLAYER_INPUTKEY
+{
+	WPARAM moveFowardKey;
+	WPARAM moveLeftKey;
+	WPARAM moveBackKey;
+	WPARAM moveRightKey;
+
+	WPARAM interactableKey1;
+	WPARAM interactableKey2;
+	WPARAM interactableKey3;
+
+	ST_PLAYER_INPUTKEY& operator=(const ST_PLAYER_INPUTKEY& key)
 	{
+		moveFowardKey = key.moveFowardKey;
+		moveLeftKey = key.moveLeftKey;
+		moveBackKey = key.moveBackKey;
+		moveRightKey = key.moveRightKey;
+		interactableKey1 = key.interactableKey1;
+		interactableKey2 = key.interactableKey2;
+		interactableKey3 = key.interactableKey3;
+
+		return *this;
 	}
 };
 
@@ -174,14 +198,22 @@ struct ST_CUBE
 #include "CSceneManager.h"
 #include "CEventManager.h"
 #include "InputManager.h"
-#include "CDebugSphere.h"
-#include "CDebugCube.h"
+#include "CSoundManager.h"
+
+#define __SLASH(x) /##x
+#define __DOUBLE_SLASH __SLASH(/)
 
 #ifdef _DEBUG
 	#ifdef UNICODE
-	#pragma comment(linker, "/entry:wWinMainCRTStartup /subsystem:console")
+		#pragma comment(linker, "/entry:wWinMainCRTStartup /subsystem:console")
 	#else
-	#pragma comment(linker, "/entry:WinMainCRTStartup /subsystem:console")
+		#pragma comment(linker, "/entry:WinMainCRTStartup /subsystem:console")
 	#endif
-#endif
 
+	#define _DEBUG_COMMENT
+	#define _RELEASE_COMMENT __DOUBLE_SLASH
+
+#else
+	#define _DebugComment __DOUBLE_SLASH
+	#define _ReleaseComment
+#endif

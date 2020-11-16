@@ -71,12 +71,16 @@
   <PropertyGroup Label="UserMacros" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <LinkIncremental>true</LinkIncremental>
+    <IncludePath>D:\DXProject\DX_RoboCooked\DX_RoboCooked;$(IncludePath)</IncludePath>
+    <LibraryPath>D:\DXProject\DX_RoboCooked\DX_RoboCooked;$(LibraryPath)</LibraryPath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <LinkIncremental>true</LinkIncremental>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <LinkIncremental>false</LinkIncremental>
+    <IncludePath>D:\Dxprojcet\DX_RoboCooked\DX_RoboCooked;$(IncludePath)</IncludePath>
+    <LibraryPath>D:\Dxprojcet\DX_RoboCooked\DX_RoboCooked;D:\Dxprojcet\DX_RoboCooked\DX_RoboCooked;$(LibraryPath)</LibraryPath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <LinkIncremental>false</LinkIncremental>
@@ -145,13 +149,14 @@
     <ClInclude Include="CAllocateHierachy.h" />
     <ClInclude Include="CBoxCollision.h" />
     <ClInclude Include="CCamera.h" />
+    <ClInclude Include="CSoundManager.h" />
     <ClInclude Include="ICollisionArea.h" />
     <ClInclude Include="CDeviceManager.h" />
     <ClInclude Include="CEventManager.h" />
     <ClInclude Include="CFontManager.h" />
     <ClInclude Include="CFrameCounter.h" />
     <ClInclude Include="CGrid.h" />
-    <ClInclude Include="CObserver.h" />
+    <ClInclude Include="CEventListener.h" />
     <ClInclude Include="CPyramid.h" />
     <ClInclude Include="CScene.h" />
     <ClInclude Include="CSceneManager.h" />
@@ -160,16 +165,18 @@
     <ClInclude Include="CSphereCollision.h" />
     <ClInclude Include="CTextureManager.h" />
     <ClInclude Include="CTimeManager.h" />
-    <ClInclude Include="CDebugCube.h" />
-    <ClInclude Include="CDebugSphere.h" />
+    <ClInclude Include="CDebugPlayer2.h" />
+    <ClInclude Include="CDebugPlayer1.h" />
     <ClInclude Include="DX_RoboCooked.h" />
-    <ClInclude Include="CRandomGenerator.h" />
+    <ClInclude Include="CRandomNumberGenerator.h" />
     <ClInclude Include="CMainGame.h" />
     <ClInclude Include="CField.h" />
     <ClInclude Include="CGameScene.h" />
     <ClInclude Include="InputManager.h" />
+    <ClInclude Include="InteractiveActor.h" />
     <ClInclude Include="Keyboard.h" />
     <ClInclude Include="Mouse.h" />
+    <ClInclude Include="CParts.h" />
     <ClInclude Include="Resource.h" />
     <ClInclude Include="CSingleton.h" />
     <ClInclude Include="stdafx.h" />
@@ -181,13 +188,14 @@
     <ClCompile Include="CAllocateHierachy.cpp" />
     <ClCompile Include="CBoxCollision.cpp" />
     <ClCompile Include="CCamera.cpp" />
+    <ClCompile Include="CSoundManager.cpp" />
     <ClCompile Include="ICollisionArea.cpp" />
     <ClCompile Include="CDeviceManager.cpp" />
     <ClCompile Include="CEventManager.cpp" />
     <ClCompile Include="CFontManager.cpp" />
     <ClCompile Include="CFrameCounter.cpp" />
     <ClCompile Include="CGrid.cpp" />
-    <ClCompile Include="CObserver.cpp" />
+    <ClCompile Include="CEventListener.cpp" />
     <ClCompile Include="CPyramid.cpp" />
     <ClCompile Include="CScene.cpp" />
     <ClCompile Include="CSceneManager.cpp" />
@@ -196,17 +204,19 @@
     <ClCompile Include="CSphereCollision.cpp" />
     <ClCompile Include="CTextureManager.cpp" />
     <ClCompile Include="CTimeManager.cpp" />
-    <ClCompile Include="CDebugCube.cpp" />
-    <ClCompile Include="CDebugSphere.cpp" />
+    <ClCompile Include="CDebugPlayer2.cpp" />
+    <ClCompile Include="CDebugPlayer1.cpp" />
     <ClCompile Include="DX_RoboCooked.cpp" />
     <ClCompile Include="CSingleton.cpp" />
-    <ClCompile Include="CRandomGenerator.cpp" />
+    <ClCompile Include="CRandomNumberGenerator.cpp" />
     <ClCompile Include="CMainGame.cpp" />
     <ClCompile Include="CField.cpp" />
     <ClCompile Include="CGameScene.cpp" />
     <ClCompile Include="InputManager.cpp" />
+    <ClCompile Include="InteractiveActor.cpp" />
     <ClCompile Include="Keyboard.cpp" />
     <ClCompile Include="Mouse.cpp" />
+    <ClCompile Include="CParts.cpp" />
     <ClCompile Include="stdafx.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Create</PrecompiledHeader>
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Create</PrecompiledHeader>

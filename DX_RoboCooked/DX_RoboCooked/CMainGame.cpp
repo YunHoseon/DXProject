@@ -3,10 +3,11 @@
 #include "CGrid.h"
 #include "CCamera.h"
 #include "CGameScene.h"
+#include "CParts.h"
 
 /* µð¹ö±ë¿ë */
-#include "CDebugSphere.h"
-#include "CDebugCube.h"
+#include "CDebugPlayer1.h"
+#include "CDebugPlayer2.h"
 
 CMainGame::CMainGame()
 	: m_pGrid(NULL)
@@ -14,6 +15,7 @@ CMainGame::CMainGame()
 	, m_pScene(NULL)
 	, m_pDebugSphere(NULL)
 	, m_pDebugCube(NULL)
+	, m_pDebugParts(NULL)
 {
 }
 
@@ -29,27 +31,33 @@ CMainGame::~CMainGame()
 
 void CMainGame::Setup()
 {
+	SetLight();
+	
 	m_pGrid = new CGrid;
 	if (m_pGrid)
 		m_pGrid->Setup();
-
 
 	m_pCamera = new CCamera;
 	if (m_pCamera)
 		m_pCamera->Setup(NULL);
 
-	m_pDebugSphere = new CDebugSphere;
+	m_pDebugSphere = new CDebugPlayer1;
 	if (m_pDebugSphere)
 		m_pDebugSphere->Setup();
 
-	m_pDebugCube = new CDebugCube;
+	m_pDebugCube = new CDebugPlayer2;
 	if (m_pDebugCube)
 		m_pDebugCube->Setup();
+
+	m_pDebugParts = new CParts;
+	if (m_pDebugParts)
+		m_pDebugParts->Setup();
 
 	m_pScene = new CGameScene;
 	g_SceneManager->AddScene("GAMESCENE",m_pScene);
 	g_SceneManager->SetCurrentScene(m_pScene);
-	
+
+	//g_EventManager->CallEvent(EEvent::E_EventTile, NULL);
 }
 
 void CMainGame::Update()
@@ -61,7 +69,14 @@ void CMainGame::Update()
 
 	if (m_pScene)
 		m_pScene->Update();
-	
+
+	if (m_pDebugCube)
+		m_pDebugCube->Update();
+
+	if (m_pDebugSphere)
+	{
+		m_pDebugSphere->Update();
+	}
 }
 
 void CMainGame::Render()
@@ -71,6 +86,9 @@ void CMainGame::Render()
 
 	g_pD3DDevice->BeginScene();
 
+	if (m_pCamera)
+		m_pCamera->Render();
+	
 	if (m_pGrid)
 		m_pGrid->Render();
 
@@ -82,6 +100,9 @@ void CMainGame::Render()
 
 	if (m_pDebugCube)
 		m_pDebugCube->Render();
+
+	if (m_pDebugParts)
+		m_pDebugParts->Render();
 	
 	g_pD3DDevice->EndScene();
 	g_pD3DDevice->Present(NULL, NULL, NULL, NULL);
@@ -93,4 +114,20 @@ void CMainGame::WndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam)
 	
 	if (m_pCamera)
 		m_pCamera->WndProc(hWnd, message, wParam, lParam);
+}
+
+void CMainGame::SetLight()
+{
+	D3DLIGHT9	stLight;
+	ZeroMemory(&stLight, sizeof(D3DLIGHT9));
+	stLight.Type = D3DLIGHT_DIRECTIONAL;
+	stLight.Ambient = D3DXCOLOR(0.8f, 0.8f, 0.8f, 1.0f);
+	stLight.Diffuse = D3DXCOLOR(0.8f, 0.8f, 0.8f, 1.0f);
+	stLight.Specular = D3DXCOLOR(0.8f, 0.8f, 0.8f, 1.0f);
+
+	D3DXVECTOR3 vDir = D3DXVECTOR3(1.0f, -1.0f, 1.0f);
+	D3DXVec3Normalize(&vDir, &vDir);
+	stLight.Direction = vDir;
+	g_pD3DDevice->SetLight(0, &stLight);
+	g_pD3DDevice->LightEnable(0, true);
 }

@@ -1,12 +1,12 @@
 #pragma once
-
 class CGrid;
 class CCamera;
 class CScene;
 
 /* µð¹ö±ë¿ë */
-class CDebugSphere;
-class CDebugCube;
+class CDebugPlayer1;
+class CDebugPlayer2;
+class CParts;
 
 class CMainGame
 {
@@ -16,8 +16,9 @@ private:
 	CScene*					m_pScene;
 
 	/* µð¹ö±ë¿ë */
-	CDebugSphere*			m_pDebugSphere;
-	CDebugCube*				m_pDebugCube;
+	CDebugPlayer1*			m_pDebugSphere;
+	CDebugPlayer2*			m_pDebugCube;
+	CParts*					m_pDebugParts;
 public:
 	CMainGame();
 	~CMainGame();
@@ -28,6 +29,6 @@ public:
 	void Render();
 	void WndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam);
 	
-
+	void SetLight();
 };
 

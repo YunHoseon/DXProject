@@ -3,10 +3,29 @@
 
 
 CKeyboard::CKeyboard()
-	:m_elapsedTime(0),
-	 m_dwPrevKey(0)
+	:m_elapsedTime(0)
+	,m_dwPrevKey(0)
 {
 	m_eKeyState = E_NONE;
+
+	m_stInputKey[0].moveFowardKey = 'W';
+	m_stInputKey[0].moveLeftKey = 'A';
+	m_stInputKey[0].moveBackKey = 'S';
+	m_stInputKey[0].moveRightKey = 'D';
+	m_stInputKey[0].interactableKey1 = 'F';
+	m_stInputKey[0].interactableKey2 = 'G';
+	m_stInputKey[0].interactableKey3 = 'H';
+
+	m_stInputKey[1].moveFowardKey = VK_UP;
+	m_stInputKey[1].moveLeftKey = VK_LEFT;
+	m_stInputKey[1].moveBackKey = VK_DOWN;
+	m_stInputKey[1].moveRightKey = VK_RIGHT;
+	m_stInputKey[1].interactableKey1 = VK_OEM_COMMA;
+	m_stInputKey[1].interactableKey2 = VK_OEM_PERIOD;
+	m_stInputKey[1].interactableKey3 = VK_OEM_2;
+
+	g_EventManager->CallEvent(EEvent::E_Player1KeyChange, (void*)&m_stInputKey[0]);
+	g_EventManager->CallEvent(EEvent::E_Player2KeyChange, (void*)&m_stInputKey[1]);
 }
 
 CKeyboard::~CKeyboard()
@@ -15,52 +34,15 @@ CKeyboard::~CKeyboard()
 
 void CKeyboard::Update()
  {
-	if (InputManager->IsKeyPressed('W'))
-	{
-		std::cout << "W" << std::endl;
-	}
-	if (InputManager->IsKeyPressed('A'))
-	{
-		std::cout << "A" << std::endl;
-	}
-	if (InputManager->IsKeyPressed('S'))
-	{
-		std::cout << "S" << std::endl;
-	}
-	if (InputManager->IsKeyPressed('D'))
-	{
-		std::cout << "D" << std::endl;
-	}
-	if(InputManager->IsKeyPressed(162))
-	{
-		std::cout << "lCtrl" << std::endl;
-	}
+	ST_KeyInputEvent data;
 
-	if(InputManager->IsKeyPressed(VK_UP))
+	unordered_set<WPARAM>::iterator it;
+	for(it = m_setKey.begin(); it != m_setKey.end(); it++)
 	{
-		std::cout << "up" << std::endl;
+		data.wKey = *it;
+		std::cout << *it << std::endl;
+		g_EventManager->CallEvent(EEvent::E_KeyPress, (void*)&data);
 	}
-	if (InputManager->IsKeyPressed(VK_LEFT))
-	{
-		std::cout << "left" << std::endl;
-	}
-	if (InputManager->IsKeyPressed(VK_DOWN))
-	{
-		std::cout << "down" << std::endl;
-	}
-	if (InputManager->IsKeyPressed(VK_RIGHT))
-	{
-		std::cout << "right" << std::endl;
-	}
-	/*if (InputManager->IsKeyPressed(229))
-	{
-		std::cout << "rCtrl" << std::endl;
-	}*/
-
-	/*if(GetAsyncKeyState(VK_RCONTROL) & 0x8000)
-	{
-		std::cout << "right control" << std::endl;
-	}*/
 }
 
 void CKeyboard::PressKey(WPARAM keyID, LPARAM lParam)
@@ -74,9 +56,12 @@ void CKeyboard::PressKey(WPARAM keyID, LPARAM lParam)
 	case VK_SHIFT:
 		new_vk = MapVirtualKey(scancode, MAPVK_VSC_TO_VK_EX);
 		break;
-	case VK_CONTROL:
+		
+	case VK_PROCESSKEY:
+	case VK_HANJA:
 		new_vk = extended ? VK_RCONTROL : VK_LCONTROL;
 		break;
+		
 	case VK_MENU:
 		new_vk = extended ? VK_RMENU : VK_LMENU;
 		break;
@@ -85,9 +70,9 @@ void CKeyboard::PressKey(WPARAM keyID, LPARAM lParam)
 		break;
 	}
 
+	m_setKey.insert(new_vk);
 	m_dwPrevKey = new_vk;
 	m_eKeyState = E_BTNDOWN;
-	m_mapKey[new_vk] = true;
 }
 
 void CKeyboard::ReleaseKey(WPARAM keyID, LPARAM lParam)
@@ -101,9 +86,12 @@ void CKeyboard::ReleaseKey(WPARAM keyID, LPARAM lParam)
 	case VK_SHIFT:
 		new_vk = MapVirtualKey(scancode, MAPVK_VSC_TO_VK_EX);
 		break;
-	case VK_CONTROL:
+		
+	case VK_PROCESSKEY:
+	case VK_HANJA:
 		new_vk = extended ? VK_RCONTROL : VK_LCONTROL;
 		break;
+		
 	case VK_MENU:
 		new_vk = extended ? VK_RMENU : VK_LMENU;
 		break;
@@ -111,35 +99,39 @@ void CKeyboard::ReleaseKey(WPARAM keyID, LPARAM lParam)
 		new_vk = keyID;
 		break;
 	}
-	
+
+	m_setKey.erase(new_vk);
 	m_eKeyState = E_BTNUP;
-	m_mapKey[new_vk] = false;
+	g_EventManager->CallEvent(EEvent::E_KeyRelease, NULL);
 }
 
-void CKeyboard::JudgeDash(WPARAM keyID)
+void CKeyboard::OnEvent(EEvent eEvent, void* _value)
 {
-	DWORD currentTime = GetTickCount();
-
-	if (currentTime - m_elapsedTime < 500 && keyID == m_dwPrevKey && m_eKeyState == E_BTNUP)
+	switch (eEvent)
 	{
-		std::cout << "대쉬" << std::endl;
-		m_eKeyState = E_DBLDOWN;
+	case EEvent::E_Player1KeyChange:
+		SetKeyChange(1, _value);
+		break;
+	case EEvent::E_Player2KeyChange:
+		SetKeyChange(2, _value);
+		break;
 	}
-	m_elapsedTime = GetTickCount();
 }
 
-bool CKeyboard::IsKeyPressed(WPARAM keyID)
+void CKeyboard::SetKeyChange(int n, void* _value)
 {
-	/*if (m_mapKey[keyID])
-	{
-		m_mapKey[keyID] = false;
-		return true;
-	}
-	else
-		return false;*/
-
-	if (m_mapKey[keyID])
-		return m_mapKey[keyID];
-	else
-		return false;
+	ST_PLAYER_INPUTKEY *data = static_cast<ST_PLAYER_INPUTKEY*>(_value);
+	m_stInputKey[n - 1] = *data;
 }
+
+//void CKeyboard::JudgeDash(WPARAM keyID)
+//{
+//	DWORD currentTime = GetTickCount();
+//
+//	if (currentTime - m_elapsedTime < 500 && keyID == m_dwPrevKey && m_eKeyState == E_BTNUP)
+//	{
+//		std::cout << "대쉬" << std::endl;
+//		m_eKeyState = E_DBLDOWN;
+//	}
+//	m_elapsedTime = GetTickCount();
+//}

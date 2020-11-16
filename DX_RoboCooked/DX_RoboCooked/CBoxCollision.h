@@ -3,13 +3,18 @@
 
 class CBoxCollision : public ICollisionArea
 {
-public:
-	CBoxCollision(D3DXVECTOR3 vHalfSize);
-	~CBoxCollision() override;
-	bool Render() override;
 protected:
-	bool CollideToBox(ICollisionArea* pTargetCollider) override;
-	bool CollideToSphere(ICollisionArea* pTargetCollider) override;
-public:
 	
+	D3DXVECTOR3			m_vOriginAxisDir[3];
+	D3DXVECTOR3			m_vAxisDir[3];
+
+	float				m_fAxisHalfLen[3];
+
+public:
+	CBoxCollision(D3DXVECTOR3 vOriginPos, D3DXVECTOR3 vSize, D3DXMATRIXA16* pmatWorld = nullptr);
+	~CBoxCollision() override;
+	void Render() override;
+	void Update() override;
+	bool CollideToBox(CBoxCollision* pTargetCollider) override;
+	bool CollideToSphere(CSphereCollision* pTargetCollider) override;
 };

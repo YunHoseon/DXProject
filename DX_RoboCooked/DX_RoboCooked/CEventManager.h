@@ -2,23 +2,27 @@
 
 #define g_EventManager CEventManager::GetInstance()
 
-class CObserver;
-
+class CEventListener;
 
 enum class EEvent
 {
-	E_DEFAULT,
-	E_ATTACK,
-	E_SLEEP,
-	E_NONE
+	E_Tick,
+	E_KeyPress,
+	E_KeyRelease,
+	E_Player1KeyChange,
+	E_Player2KeyChange,
+	E_TileMove,
+	E_PartsHold,
+	E_PartsSpin,
+	E_PartsPut,
+	E_PartsThrow
 };
 
-struct ST_AttackEvent
+struct ST_KeyInputEvent
 {
-	std::string name;
-	int age;
-	ST_AttackEvent():age(0){}
+	WPARAM wKey;
 };
+
 
 class CEventManager : public CSingleton<CEventManager>
 {
@@ -27,17 +31,14 @@ public:
 	~CEventManager();
 
 public:
-	void Attach(EEvent eEvent,CObserver* _observer);
-	bool Detach(EEvent eEvent, CObserver* _observer);
+	void Attach(EEvent eEvent,CEventListener* _observer);
+	bool Detach(EEvent eEvent, CEventListener* _observer);
+	void DetachAll(CEventListener* _observer);
 	void Notify(void* _value);
 	void CallEvent(EEvent eEvent, void* _value);
 	void ErrorSend();
 
 private:
-	std::map<EEvent, std::vector<CObserver*>> m_mapEventMap;
+	std::map<EEvent, std::set<CEventListener*>> m_mapEventMap;
 	EEvent m_eEvent;
-
-
 };
-
-
