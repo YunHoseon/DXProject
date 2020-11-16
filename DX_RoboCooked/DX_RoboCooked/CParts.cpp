@@ -46,6 +46,9 @@ void CParts::Render()
 	m_pMeshSphere->DrawSubset(0);
 	g_pD3DDevice->SetRenderState(D3DRS_LIGHTING, false);
 
+
+
+
 	_DEBUG_COMMENT if (m_pCollision)
 		_DEBUG_COMMENT m_pCollision->Render();
 }
@@ -63,4 +66,9 @@ void CParts::OnEvent(EEvent eEvent, void* _value)
 	case EEvent::E_PartsThrow:
 		break;
 	}
+}
+
+void CParts::Interact()
+{
+
 }

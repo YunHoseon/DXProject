@@ -19,7 +19,6 @@ void CTile::AddEvent(EEvent eEvent)
 	g_EventManager->Attach(eEvent, this);
 }
 
-
 void CTile::OnEvent(EEvent eEvent, void* _value)
 {
 	switch (eEvent)
@@ -51,15 +50,12 @@ void CTile::Render()
 	
 	g_pD3DDevice->SetTransform(D3DTS_WORLD, &matWorld);
 
-	
 	m_pCubeTile->DrawSubset(0);
 
-	
-	
 	g_pD3DDevice->SetTexture(0, 0);
 }
 
 void CTile::Update()
 {
-}
 
+}
