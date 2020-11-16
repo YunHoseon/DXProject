@@ -30,14 +30,12 @@ void CGameScene::Init()
 	//g_SoundManager->PlayBGM();
 	//g_SoundManager->SetBGMSound(0.5f);
 
-	
 	m_pField = new CField;
 	if (m_pField)
 	{
 		m_pField->Setup(WIDTH, HEIGHT);
 		m_vecStaticActor.push_back(m_pField);
 	}
-
 }
 
 void CGameScene::Render()
@@ -51,7 +49,6 @@ void CGameScene::Render()
 	{
 		it->Render();
 	}
-
 }
 
 void CGameScene::Update()

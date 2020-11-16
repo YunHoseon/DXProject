@@ -13,6 +13,22 @@ CParts::CParts()
 	g_EventManager->Attach(EEvent::E_PartsSpin, this);
 	g_EventManager->Attach(EEvent::E_PartsPut, this);
 	g_EventManager->Attach(EEvent::E_PartsThrow, this);
+	std::cout << "ID°¡ ¾ø´Â ÆÄÃ÷ÀÔ´Ï´Ù." << std::endl;
+}
+
+CParts::CParts(int nPartsID)
+	:m_vPosition(3.0f, 0.0f, 2.0f)
+{
+	m_nPartsID = nPartsID;
+	D3DXMatrixIdentity(&m_matWorld);
+	m_sphere.vCenter = m_vPosition;
+	m_sphere.fRaidus = 0.3f;
+
+	g_EventManager->Attach(EEvent::E_PartsHold, this);
+	g_EventManager->Attach(EEvent::E_PartsSpin, this);
+	g_EventManager->Attach(EEvent::E_PartsPut, this);
+	g_EventManager->Attach(EEvent::E_PartsThrow, this);
+	std::cout << "ÆÄÃ÷ ID : " << m_nPartsID << std::endl;
 }
 
 CParts::~CParts()
@@ -45,9 +61,6 @@ void CParts::Render()
 	g_pD3DDevice->SetMaterial(&m_stMtlParts);
 	m_pMeshSphere->DrawSubset(0);
 	g_pD3DDevice->SetRenderState(D3DRS_LIGHTING, false);
-
-
-
 
 	_DEBUG_COMMENT if (m_pCollision)
 		_DEBUG_COMMENT m_pCollision->Render();

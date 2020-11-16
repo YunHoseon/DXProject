@@ -11,9 +11,12 @@ private:
 	ST_SPHERE			m_sphere;
 	LPD3DXMESH			m_pMeshSphere;
 	D3DMATERIAL9		m_stMtlParts;
+
+	int					m_nPartsID;
 	
 public:
 	CParts();
+	CParts(int nPartsID);
 	virtual ~CParts();
 
 	void Setup();
