@@ -10,6 +10,7 @@ private:
 	D3DXVECTOR3			m_vDirection;
 	D3DXVECTOR3			m_vPosition;
 	D3DXMATRIXA16		m_matWorld;
+	ICollisionArea*		m_pInteractCollision;
 	
 	ST_SPHERE			m_sphere;
 	LPD3DXMESH			m_pMeshSphere;
@@ -27,6 +28,7 @@ public:
 	void PressKey(void* _value);
 	void ReleaseKey(void* _value);
 	void Move(D3DXVECTOR3 _vecMove);
+	void Rotate();
 	void SetKeyChange(void* _value);
 };
 

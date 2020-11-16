@@ -4,8 +4,9 @@
 #include "CSphereCollision.h"
 
 
-CDebugPlayer1::CDebugPlayer1() :
-	m_fSpeed(0.1f)
+CDebugPlayer1::CDebugPlayer1() 
+	:m_fSpeed(0.1f)
+	, m_fRotY(0.0f)
 {
 	m_vPosition = m_sphere.vCenter;
 	D3DXMatrixIdentity(&m_matWorld);
@@ -22,7 +23,7 @@ CDebugPlayer1::~CDebugPlayer1()
 void CDebugPlayer1::Setup()
 {
 	m_pCollision = new CSphereCollision(m_vPosition, 0.5f, &m_matWorld);
-	//m_pCollision = new CBoxCollision(D3DXVECTOR3(0,0,0), D3DXVECTOR3(0.8f, 0.8f, 0.8f), &m_matWorld);
+	m_pInteractCollision = new CBoxCollision(m_vPosition + D3DXVECTOR3(0, 0, 0.5f), D3DXVECTOR3(0.3f, 0.3f, 0.3f), &m_matWorld);
 	D3DXCreateSphere(g_pD3DDevice, 0.5f, 10, 10, &m_pMeshSphere, NULL);
 
 	ZeroMemory(&m_stMtlSphere, sizeof(D3DMATERIAL9));
@@ -45,6 +46,8 @@ void CDebugPlayer1::Render()
 	m_pMeshSphere->DrawSubset(0);
 	g_pD3DDevice->SetRenderState(D3DRS_LIGHTING, false);
 
+	_DEBUG_COMMENT if (m_pInteractCollision)
+		_DEBUG_COMMENT m_pInteractCollision->Render();
 	_DEBUG_COMMENT if (m_pCollision)
 		_DEBUG_COMMENT m_pCollision->Render();
 }
@@ -71,18 +74,26 @@ void CDebugPlayer1::PressKey(void* _value)
 
 	if (data->wKey == m_stInputKey.moveFowardKey)
 	{
+		m_fRotY = 0.0f;
+		Rotate();
 		Move(D3DXVECTOR3(0, 0, 1) * m_fSpeed);
 	}
 	if (data->wKey == m_stInputKey.moveLeftKey)
 	{
+		m_fRotY = D3DX_PI * 1.5f;
+		Rotate();
 		Move((D3DXVECTOR3(-1, 0, 0) * m_fSpeed));
 	}
 	if (data->wKey == m_stInputKey.moveBackKey)
 	{
+		m_fRotY = D3DX_PI;
+		Rotate();
 		Move(D3DXVECTOR3(0, 0, -1) * m_fSpeed);
 	}
 	if (data->wKey == m_stInputKey.moveRightKey)
 	{
+		m_fRotY = D3DX_PI * 0.5f;
+		Rotate();
 		Move(D3DXVECTOR3(1, 0, 0) * m_fSpeed);
 	}
 	if (data->wKey == m_stInputKey.interactableKey1)
@@ -113,6 +124,14 @@ void CDebugPlayer1::Move(D3DXVECTOR3 _vecMove)
 	m_vPosition = vPosition;
 
 	D3DXMatrixTranslation(&m_matT, m_vPosition.x, m_vPosition.y, m_vPosition.z);
+}
+
+void CDebugPlayer1::Rotate()
+{
+	D3DXQUATERNION qRot;
+	D3DXQuaternionRotationAxis(&qRot, &D3DXVECTOR3(0, 1, 0), m_fRotY);
+	D3DXMatrixRotationQuaternion(&m_matR, &qRot);
+	D3DXQuaternionSlerp(&)
 }
 
 void CDebugPlayer1::SetKeyChange(void* _value)
