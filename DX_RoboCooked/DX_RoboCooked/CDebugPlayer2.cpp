@@ -5,7 +5,7 @@
 
 
 CDebugPlayer2::CDebugPlayer2() :
-	m_fSpeed(0.1f)
+	m_fSpeed(0.02f)
 {
 	m_vPosition = m_cube.vCenter;
 	D3DXMatrixIdentity(&m_matWorld);

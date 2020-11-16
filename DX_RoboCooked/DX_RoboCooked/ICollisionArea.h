@@ -27,4 +27,5 @@ public:
 	virtual void Update() = 0;
 	virtual bool CollideToBox(CBoxCollision* pTargetCollider) = 0;
 	virtual bool CollideToSphere(CSphereCollision* pTargetCollider) = 0;
+	void SetIsCollide(bool b) { isCollide = b; }
 };

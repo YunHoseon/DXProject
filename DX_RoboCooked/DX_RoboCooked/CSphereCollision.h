@@ -7,6 +7,7 @@ class CSphereCollision : public ICollisionArea
 {
 protected:
 	float			fRadius;
+	LPD3DXMESH		m_pMesh;
 public:
 	explicit CSphereCollision(D3DXVECTOR3 vOriginPos, float fRadius = 1.0f, D3DXMATRIXA16* pmatWorld = nullptr);
 	~CSphereCollision() override;

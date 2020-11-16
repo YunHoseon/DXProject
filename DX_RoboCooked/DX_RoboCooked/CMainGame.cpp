@@ -76,6 +76,7 @@ void CMainGame::Update()
 	if (m_pDebugSphere)
 	{
 		m_pDebugSphere->Update();
+		m_pDebugSphere->Collide(m_pDebugCube);
 	}
 }
 

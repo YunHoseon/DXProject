@@ -8,6 +8,7 @@ CBoxCollision::CBoxCollision(D3DXVECTOR3 vOriginPos, D3DXVECTOR3 vSize, D3DXMATR
 	m_eType = EColideType::E_Box;
 
 	m_vOriginCenterPos = vOriginPos;
+	m_vCenterPos = vOriginPos;
 	m_pmatWorldTM = pmatWorld;
 	m_vOriginAxisDir[0] = D3DXVECTOR3(1, 0, 0);
 	m_vOriginAxisDir[1] = D3DXVECTOR3(0, 1, 0);
@@ -99,6 +100,7 @@ bool CBoxCollision::CollideToBox(CBoxCollision* pTargetCollider)
 	const float cutOff = 0.999999f;
 	bool existsParallelPair = false;
 	isCollide = false;
+	pTargetCollider->SetIsCollide(false);
 	
 
 	D3DXVECTOR3 D = pTargetCollider->m_vCenterPos - this->m_vCenterPos;
@@ -143,6 +145,7 @@ bool CBoxCollision::CollideToBox(CBoxCollision* pTargetCollider)
 	if (existsParallelPair)
 	{
 		isCollide = true;
+		pTargetCollider->SetIsCollide(true);
 		return true;
 	}
 
@@ -218,7 +221,7 @@ bool CBoxCollision::CollideToBox(CBoxCollision* pTargetCollider)
 bool CBoxCollision::CollideToSphere(CSphereCollision* pTargetCollider)
 {
 	isCollide = false;
-
+	pTargetCollider->SetIsCollide(false);
 
 	D3DXVECTOR3 vDist = pTargetCollider->GetCenter() - m_vCenterPos;
 	
@@ -264,8 +267,12 @@ bool CBoxCollision::CollideToSphere(CSphereCollision* pTargetCollider)
 
 	for (D3DXPLANE & plane : stPlanes)
 	{
-		if (D3DXPlaneDotCoord(&plane, &pTargetCollider->GetCenter()) > pTargetCollider->GetRadius());
+		if (D3DXPlaneDotCoord(&plane, &pTargetCollider->GetCenter()) > pTargetCollider->GetRadius())
+		{
 			return false;
+		}
 	}
+	isCollide = true;
+	pTargetCollider->SetIsCollide(true);
 	return true;
 }
