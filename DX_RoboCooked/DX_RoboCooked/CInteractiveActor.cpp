@@ -1,5 +1,5 @@
 #include "stdafx.h"
-#include "InteractiveActor.h"
+#include "CInteractiveActor.h"
 
 
 CInteractiveActor::CInteractiveActor()

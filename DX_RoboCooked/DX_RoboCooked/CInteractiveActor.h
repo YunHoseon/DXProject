@@ -6,5 +6,7 @@ class CInteractiveActor :
 public:
 	CInteractiveActor();
 	~CInteractiveActor();
+
+	virtual void Interact() = 0;
 };
 

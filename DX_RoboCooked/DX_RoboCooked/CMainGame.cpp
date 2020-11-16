@@ -101,9 +101,9 @@ void CMainGame::Render()
 	if (m_pDebugCube)
 		m_pDebugCube->Render();
 
-	if (m_pDebugParts)
+	/*if (m_pDebugParts)
 		m_pDebugParts->Render();
-	
+	*/
 	g_pD3DDevice->EndScene();
 	g_pD3DDevice->Present(NULL, NULL, NULL, NULL);
 }
