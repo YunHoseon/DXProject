@@ -137,6 +137,15 @@ struct ST_CUBE
 	D3DXVECTOR3		vCenter;
 	ST_CUBE() : fLength(0), vCenter(0, 0, 0){}
 };
+struct ST_PartsMakeEvent
+{
+	int iID;
+};
+
+struct ST_KeyInputEvent
+{
+	WPARAM wKey;
+};
 
 struct ST_PLAYER_INPUTKEY
 {
@@ -162,6 +171,7 @@ struct ST_PLAYER_INPUTKEY
 		return *this;
 	}
 };
+
 
 #define Synthesize(varType, varName, funName)\
 	protected: varType varName; \

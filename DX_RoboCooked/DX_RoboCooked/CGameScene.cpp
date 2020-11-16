@@ -3,7 +3,7 @@
 #include "CField.h"
 #include "CInteractiveActor.h"
 #include "CParts.h" //생성할때 사용하기위해
-
+#include "CPartStorage.h"
 
 CGameScene::CGameScene()
 	:m_pField(NULL)
@@ -36,6 +36,12 @@ void CGameScene::Init()
 		m_pField->Setup(WIDTH, HEIGHT);
 		m_vecStaticActor.push_back(m_pField);
 	}
+	
+	CPartStorage* partStorage = new CPartStorage;
+	partStorage->Setup(45, D3DXVECTOR3(5, 0, 2));
+	partStorage->Interact();
+
+	m_vecObject.push_back(partStorage);
 }
 
 void CGameScene::Render()
@@ -46,6 +52,11 @@ void CGameScene::Render()
 	}
 
 	for (auto it : m_vecParts)
+	{
+		it->Render();
+	}
+
+	for (auto it : m_vecObject)
 	{
 		it->Render();
 	}
@@ -62,13 +73,21 @@ void CGameScene::Update()
 	{
 		it->Update();
 	}
+
+	for (auto it : m_vecObject)
+	{
+		it->Update();
+	}
 }
 
 void CGameScene::OnEvent(EEvent eEvent, void * _value)
 {
+	
 	if (eEvent == EEvent::E_PartsMake)
 	{
-		CParts* parts = new CParts;
+		ST_PartsMakeEvent *data = static_cast<ST_PartsMakeEvent*>(_value);
+
+		CParts* parts = new CParts(data->iID);
 		parts->Setup();
 		m_vecParts.push_back(parts);
 	}

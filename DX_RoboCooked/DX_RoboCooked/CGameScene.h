@@ -11,6 +11,7 @@ class CGameScene :
 private:
 	CField*						m_pField;
 	vector<CActor*>				m_vecStaticActor;
+	vector<CInteractiveActor*>	m_vecObject;
 	vector<CInteractiveActor*>	m_vecParts;
 public:
 	CGameScene();
