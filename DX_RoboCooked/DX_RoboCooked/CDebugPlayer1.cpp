@@ -1,12 +1,14 @@
 #include "stdafx.h"
 #include "CDebugPlayer1.h"
 #include "CBoxCollision.h"
+#include "CGameScene.h"
 #include "CSphereCollision.h"
 
 
 CDebugPlayer1::CDebugPlayer1(CGameScene* gameCenter)
 	:m_fSpeed(0.02f)
 	, m_fRotY(0.0f)
+	//, m_pInteractCollision(nullptr)
 {
 	m_GameCenter = gameCenter;
 
