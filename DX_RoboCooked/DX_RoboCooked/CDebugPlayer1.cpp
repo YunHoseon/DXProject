@@ -7,11 +7,9 @@
 
 CDebugPlayer1::CDebugPlayer1(CGameScene* gameCenter)
 	:m_fSpeed(0.02f)
-	, m_fRotY(0.0f)
+	,m_fRotY(0.0f)
 {
 	m_GameCenter = gameCenter;
-
-	
 	m_vPosition = m_sphere.vCenter;
 	D3DXMatrixIdentity(&m_matWorld);
 	
@@ -108,6 +106,7 @@ void CDebugPlayer1::PressKey(void* _value)
 	if (data->wKey == m_stInputKey.interactableKey1)
 	{
 		m_GameCenter->GetInteractObject(this);
+		//m_ePlayerState = ePlayerState::E_Grab;
 		g_SoundManager->PlaySFX("Melem");
 	}
 	if (data->wKey == m_stInputKey.interactableKey2)

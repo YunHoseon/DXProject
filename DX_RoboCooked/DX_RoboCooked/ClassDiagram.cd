@@ -1,0 +1,369 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ClassDiagram MajorVersion="1" MinorVersion="1">
+  <Class Name="CAllocateHierachy" Collapsed="true" BaseTypeListCollapsed="true">
+    <Position X="21.75" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAACBAAAAAAAAAAAAAAAQAAAAABAEAAgAAAAAAEAA=</HashCode>
+      <FileName>CAllocateHierachy.h</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="CSkinnedMesh" Collapsed="true">
+    <Position X="23.5" Y="2.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAQAgCGAAAAAgAgAQAAABIQACABAEEAFCAIgAAQUCAA=</HashCode>
+      <FileName>CSkinnedMesh.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="CCamera" Collapsed="true">
+    <Position X="23.5" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAQABAGACioAAAAAAAAAAgAgAAAAAAAAABAAQACAABA=</HashCode>
+      <FileName>CCamera.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="CGrid" Collapsed="true">
+    <Position X="27" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAGAAAAAAgACAAAAAAAAAAAAAAABAAAAAAEAA=</HashCode>
+      <FileName>CGrid.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="CPyramid" Collapsed="true">
+    <Position X="27" Y="1.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AQAAAAAAGAAAAAAAAIAIAAAAAAAAAAAAABAAAAAAAAA=</HashCode>
+      <FileName>CPyramid.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="CScene" Collapsed="true">
+    <Position X="1.75" Y="6.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAQAAAAQAAAAAAAAAAAAAAAAAAAAAAAAABACAAAAAAg=</HashCode>
+      <FileName>CScene.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="CDebugPlayer2" Collapsed="true">
+    <Position X="7.75" Y="8.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>BAQEAAASCIAAAAAAAEAgEAEAEQAAAEACIBAAACAQEAA=</HashCode>
+      <FileName>CDebugPlayer2.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="CDebugPlayer1" Collapsed="true">
+    <Position X="4.75" Y="6.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>BAQAAAASCKAAIAAAAEAAFAEgEAAAAEAAIFAAQAAAEAA=</HashCode>
+      <FileName>CDebugPlayer1.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="CMainGame" Collapsed="true">
+    <Position X="23.5" Y="1.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAQAICAACAAAAADAAAAIAAAAAAAAAAAAIBAAQAAAAAA=</HashCode>
+      <FileName>CMainGame.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="CGameScene" Collapsed="true">
+    <Position X="4.75" Y="7.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAwAAAAAkAAAAQAAQEAAAAAAAAAAAAAAAFQCAAhAABA=</HashCode>
+      <FileName>CGameScene.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="CParts" Collapsed="true">
+    <Position X="14.5" Y="7.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAQAAAACCCAAIAAAgEAAAAAgIAAAAAAAABAAgAAgAQA=</HashCode>
+      <FileName>CParts.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="SoundManager" Collapsed="true">
+    <Position X="1.25" Y="1.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAEABAAAAAEgAIAQQAEAAAAAQABAAAIAIAAAAAAAAkg=</HashCode>
+      <FileName>CSoundManager.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="CDeviceManager" Collapsed="true">
+    <Position X="3.5" Y="1.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAQAgAQAAAAAAAAAAAAAAAAAABAAAgAAAACAAAAAAA=</HashCode>
+      <FileName>CDeviceManager.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="CFontManager" Collapsed="true">
+    <Position X="8" Y="1.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAABAAAAAAAAAAAQAAAAAAAAAhAAAEAAAAAAAAAAAA=</HashCode>
+      <FileName>CFontManager.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="CSceneManager" Collapsed="true">
+    <Position X="10.25" Y="1.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAYAAAAAAAgggIAAAAAAAAAQQAAAAAQAAAAAAAAA=</HashCode>
+      <FileName>CSceneManager.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="CSkinnedMeshManager" Collapsed="true">
+    <Position X="14.75" Y="1.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAABAAAAAAAAAAABAAAAJAAAAAAAAAAE=</HashCode>
+      <FileName>CSkinnedMeshManager.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="CTextureManager" Collapsed="true">
+    <Position X="17" Y="1.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAIACAAAAAAAAgAAAAAAAAABAAACAAAAAAAAAAAA=</HashCode>
+      <FileName>CTextureManager.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="CTimeManager" Collapsed="true">
+    <Position X="19.25" Y="1.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAECAAAAAAAAAAAAADAAAAAAAEAAA=</HashCode>
+      <FileName>CTimeManager.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="CSingleton&lt;T&gt;" Collapsed="true">
+    <Position X="10.25" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAQAAAAAABBAAAAAAAAAgAAAAAAA=</HashCode>
+      <FileName>CSingleton.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="CEventManager" Collapsed="true">
+    <Position X="5.75" Y="1.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAACAAAAAAAAIAQgAAACgAAIgAAAAAAAAAAAAQAAA=</HashCode>
+      <FileName>CEventManager.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="CEventListener" Collapsed="true">
+    <Position X="7.75" Y="3.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAEAAAAAAAAQAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>CEventListener.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="CInputManager" Collapsed="true">
+    <Position X="12.5" Y="1.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAQAAAAAAAAAAAAAAAAAAAAAAAAAQgAACAAARAAAAAA=</HashCode>
+      <FileName>InputManager.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="CKeyboard" Collapsed="true">
+    <Position X="21.75" Y="1.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>BAUAAgAQAAAAABAAAEAgAAEAAAAAAEAAAAAAACAAAAA=</HashCode>
+      <FileName>Keyboard.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="CMouse" Collapsed="true">
+    <Position X="25.25" Y="1.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAEBAhAQAAAAAAAAAQAAIABAAAAAAEAAAAAAAAAAAAQ=</HashCode>
+      <FileName>Mouse.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="CFrameCounter" Collapsed="true">
+    <Position X="25.25" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAQAAAAAAAACAAAAACQAAAAAAAABAAAAABAAAAAAAAA=</HashCode>
+      <FileName>CFrameCounter.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="CRandomNumberGenerator" Collapsed="true">
+    <Position X="21.75" Y="2.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAQAAAAAAAAAQAAQAAAAAAAAAAAAAAAAACAABA=</HashCode>
+      <FileName>CRandomNumberGenerator.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="CActor" Collapsed="true">
+    <Position X="7.75" Y="4.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>EAQEAAAAAAAAAAAAAKAAAAQAAAAAAAAAABCAAAAAABA=</HashCode>
+      <FileName>CActor.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="CCharacter" Collapsed="true">
+    <Position X="4.75" Y="5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AQAAAAAEAggAAAAAAAAAAAAAAAAAAAAgAAAAAAAAAAA=</HashCode>
+      <FileName>CCharacter.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="CPartStorage" Collapsed="true">
+    <Position X="14.5" Y="9.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAQAAAAAGAAAAAAAAEAAAAAAIEAAAAAgABAAAAIABAA=</HashCode>
+      <FileName>CPartStorage.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="CField" Collapsed="true">
+    <Position X="12.25" Y="6.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAQAAAAACAAAQAAAQGAAAAAAAAAAAAAAABAAACAAAAA=</HashCode>
+      <FileName>CField.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="CInteractiveActor" Collapsed="true">
+    <Position X="14.5" Y="6.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAQAAAAAAAIAAAAAAAAAAAAAAIAAA=</HashCode>
+      <FileName>CInteractiveActor.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="IPartGenerator" Collapsed="true">
+    <Position X="17.5" Y="8.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAIAAAIAAAA=</HashCode>
+      <FileName>IPartGenerator.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="CTile" Collapsed="true">
+    <Position X="7.75" Y="6.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAQAACAAAAEAAABAAEAEAAAAAAAAAAAAABAAAAAAABA=</HashCode>
+      <FileName>CTile.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="CBoxCollision" Collapsed="true">
+    <Position X="0.5" Y="10.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAQAAAAAAEAAAAAAAIAAAGAQACAAAAAAABEAAAAAAAA=</HashCode>
+      <FileName>CBoxCollision.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="ICollisionArea" Collapsed="true">
+    <Position X="1.75" Y="9.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AQQAAQEAAEAAAAAQAAAAAiQAIAAIAAAAABAAAQAhAAA=</HashCode>
+      <FileName>ICollisionArea.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="CSphereCollision" Collapsed="true">
+    <Position X="2.75" Y="10.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAQAAAAAAEEAAAAAAAAAACAAAAAAAEAgAFAAAAgAAAA=</HashCode>
+      <FileName>CSphereCollision.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Struct Name="ST_BONE" Collapsed="true">
+    <Position X="21.75" Y="3.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAIAA=</HashCode>
+      <FileName>CAllocateHierachy.h</FileName>
+    </TypeIdentifier>
+  </Struct>
+  <Struct Name="ST_BONE_MESH" Collapsed="true">
+    <Position X="23.5" Y="3.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAADAAAAAAAAAAAAAAAQAACAAAAAAIAAAAAAAAAAAA=</HashCode>
+      <FileName>CAllocateHierachy.h</FileName>
+    </TypeIdentifier>
+  </Struct>
+  <Struct Name="ST_PC_VERTEX" Collapsed="true">
+    <Position X="23.5" Y="4.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAQAAAAAAAAAAAAAAAAAAAAAAAAACAAEAAAAAAAAA=</HashCode>
+      <FileName>stdafx.h</FileName>
+    </TypeIdentifier>
+  </Struct>
+  <Struct Name="ST_PN_VERTEX" Collapsed="true">
+    <Position X="27" Y="4.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAEkAAAAAAAAA=</HashCode>
+      <FileName>stdafx.h</FileName>
+    </TypeIdentifier>
+  </Struct>
+  <Struct Name="ST_PNT_VERTEX" Collapsed="true">
+    <Position X="23.5" Y="5.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAABAAAAAAAAAAAAAAAAAAAAAAAAAAEEQAAAAAAAA=</HashCode>
+      <FileName>stdafx.h</FileName>
+    </TypeIdentifier>
+  </Struct>
+  <Struct Name="ST_PNC_VERTEX" Collapsed="true">
+    <Position X="21.75" Y="5.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAABAAAAAAAAAAAAAAAAAAAAAAAACAEEAAAAAAAAA=</HashCode>
+      <FileName>stdafx.h</FileName>
+    </TypeIdentifier>
+  </Struct>
+  <Struct Name="ST_PT_VERTEX" Collapsed="true">
+    <Position X="27" Y="5.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAEQAAAAAACA=</HashCode>
+      <FileName>stdafx.h</FileName>
+    </TypeIdentifier>
+  </Struct>
+  <Struct Name="ST_POS_SAMPLE" Collapsed="true">
+    <Position X="25.25" Y="5.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAQAAAAAAAAAAAAAAAAAAAAAAAAAEBAAAAAAAAA=</HashCode>
+      <FileName>stdafx.h</FileName>
+    </TypeIdentifier>
+  </Struct>
+  <Struct Name="ST_ROT_SAMPLE" Collapsed="true">
+    <Position X="21.75" Y="6.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAEAAAAAAAAAAAAAAAECAAAAAAAAA=</HashCode>
+      <FileName>stdafx.h</FileName>
+    </TypeIdentifier>
+  </Struct>
+  <Struct Name="ST_SPHERE" Collapsed="true">
+    <Position X="23.5" Y="6.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAIAAAAAAAAAAAEAAAAAgAAAACAAAAAAAAAAAAA=</HashCode>
+      <FileName>stdafx.h</FileName>
+    </TypeIdentifier>
+  </Struct>
+  <Struct Name="ST_CUBE" Collapsed="true">
+    <Position X="25.25" Y="3.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAgAAQAAAAAAAAAAAIAAA=</HashCode>
+      <FileName>stdafx.h</FileName>
+    </TypeIdentifier>
+  </Struct>
+  <Struct Name="ST_PartsMakeEvent" Collapsed="true">
+    <Position X="21.75" Y="4.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAgAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>stdafx.h</FileName>
+    </TypeIdentifier>
+  </Struct>
+  <Struct Name="ST_KeyInputEvent" Collapsed="true">
+    <Position X="27" Y="3.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAIAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>stdafx.h</FileName>
+    </TypeIdentifier>
+  </Struct>
+  <Struct Name="ST_PLAYER_INPUTKEY" Collapsed="true">
+    <Position X="25.25" Y="4.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>IAAAAAAgAAAAAEAcAAAAAAAAAAAAAAAAAAAgAAAAAAg=</HashCode>
+      <FileName>stdafx.h</FileName>
+    </TypeIdentifier>
+  </Struct>
+  <Enum Name="EEvent" Collapsed="true">
+    <Position X="21.75" Y="8" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAIAAAAAAAAAAAABAAAAAAAAABAAABAgAAAAAAAAAA=</HashCode>
+      <FileName>CEventManager.h</FileName>
+    </TypeIdentifier>
+  </Enum>
+  <Enum Name="ePlayerState" Collapsed="true">
+    <Position X="23.5" Y="8" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAIAAAAAAAAgAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>CCharacter.h</FileName>
+    </TypeIdentifier>
+  </Enum>
+  <Font Name="Malgun Gothic" Size="9" />
+</ClassDiagram>

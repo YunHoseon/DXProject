@@ -10,10 +10,10 @@ enum class ePlayerState
 
 class CCharacter
 {
-
 protected:
 	CGameScene*			m_GameCenter;
 	ICollisionArea*		m_pInteractCollision;
+	ePlayerState		m_ePlayerState;
 public:
 	CCharacter();
 	~CCharacter();
