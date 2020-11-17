@@ -162,6 +162,5 @@ CParts* CPartStorage::Make()
 void CPartStorage::Interact(CCharacter* pCharacter)
 {
 	CParts* parts = Make();
-	parts->SetPosition(pCharacter->GetPosition() + D3DXVECTOR3(0,1,0));
-
+	parts->SetPosition(pCharacter->GetGrabPartsPosition());
 }

@@ -36,6 +36,9 @@ void CDebugPlayer1::Setup()
 void CDebugPlayer1::Update()
 {
 	m_matWorld = m_matS * m_matR * m_matT;
+	m_vGrabPartsPosition.x = m_vPosition.x;
+	m_vGrabPartsPosition.z = m_vPosition.z;
+
 	if (m_pInteractCollision)
 		m_pInteractCollision->Update();
 	
@@ -51,6 +54,7 @@ void CDebugPlayer1::Render()
 	g_pD3DDevice->SetMaterial(&m_stMtlSphere);
 	m_pMeshSphere->DrawSubset(0);
 	g_pD3DDevice->SetRenderState(D3DRS_LIGHTING, false);
+
 
 	_DEBUG_COMMENT if (m_pInteractCollision)
 		_DEBUG_COMMENT m_pInteractCollision->Render();
