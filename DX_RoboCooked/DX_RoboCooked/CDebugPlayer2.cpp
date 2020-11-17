@@ -74,31 +74,39 @@ void CDebugPlayer2::PressKey(void* _value)
 	
 	if (data->wKey == m_stInputKey.moveFowardKey)
 	{
+		m_fRotY = 0.0f;
+		Rotate();
 		Move(D3DXVECTOR3(0, 0, 1) * m_fSpeed);
 	}
 	if (data->wKey == m_stInputKey.moveLeftKey)
 	{
+		m_fRotY = D3DX_PI * 1.5f;
+		Rotate();
 		Move((D3DXVECTOR3(-1, 0, 0) * m_fSpeed));
 	}
 	if (data->wKey == m_stInputKey.moveBackKey)
 	{
+		m_fRotY = D3DX_PI;
+		Rotate();
 		Move(D3DXVECTOR3(0, 0, -1) * m_fSpeed);
 	}
 	if (data->wKey == m_stInputKey.moveRightKey)
 	{
+		m_fRotY = D3DX_PI * 0.5f;
+		Rotate();
 		Move(D3DXVECTOR3(1, 0, 0) * m_fSpeed);
 	}
 	if (data->wKey == m_stInputKey.interactableKey1)
 	{
-		g_SoundManager->PlaySFX("BBam");
+		g_SoundManager->PlaySFX("Melem");
 	}
 	if (data->wKey == m_stInputKey.interactableKey2)
 	{
-		g_SoundManager->PlaySFX("BBam");
+		g_SoundManager->PlaySFX("Melem");
 	}
 	if (data->wKey == m_stInputKey.interactableKey3)
 	{
-		g_SoundManager->PlaySFX("BBam");
+		g_SoundManager->PlaySFX("Melem");
 	}
 }
 
@@ -112,6 +120,13 @@ void CDebugPlayer2::Move(D3DXVECTOR3 _vecMove)
 	vPosition += _vecMove;
 	m_vPosition = vPosition;
 	D3DXMatrixTranslation(&m_matT, m_vPosition.x, m_vPosition.y, m_vPosition.z);
+}
+
+void CDebugPlayer2::Rotate()
+{
+	D3DXQUATERNION qRot;
+	D3DXQuaternionRotationAxis(&qRot, &D3DXVECTOR3(0, 1, 0), m_fRotY);
+	D3DXMatrixRotationQuaternion(&m_matR, &qRot);
 }
 
 void CDebugPlayer2::SetKeyChange(void* _value)

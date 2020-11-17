@@ -5,8 +5,15 @@
 #include "CParts.h" //생성할때 사용하기위해
 #include "CPartStorage.h"
 
+/* 디버깅용 */
+#include "CDebugPlayer1.h"
+#include "CDebugPlayer2.h"
+
 CGameScene::CGameScene()
 	:m_pField(NULL)
+	, m_pDebugSphere(NULL)
+	, m_pDebugCube(NULL)
+	, m_pDebugParts(NULL)
 {
 	//Sound Add
 	g_SoundManager->AddBGM("data/sound/bgm.mp3");
@@ -42,6 +49,19 @@ void CGameScene::Init()
 	partStorage->Interact();
 
 	m_vecObject.push_back(partStorage);
+
+	m_pDebugSphere = new CDebugPlayer1;
+	if (m_pDebugSphere)
+		m_pDebugSphere->Setup();
+
+	m_pDebugCube = new CDebugPlayer2;
+	if (m_pDebugCube)
+		m_pDebugCube->Setup();
+
+	m_pDebugParts = new CParts;
+	if (m_pDebugParts)
+		m_pDebugParts->Setup();
+
 }
 
 void CGameScene::Render()
@@ -60,6 +80,13 @@ void CGameScene::Render()
 	{
 		it->Render();
 	}
+
+	if (m_pDebugSphere)
+		m_pDebugSphere->Render();
+
+	if (m_pDebugCube)
+		m_pDebugCube->Render();
+
 }
 
 void CGameScene::Update()
@@ -78,11 +105,19 @@ void CGameScene::Update()
 	{
 		it->Update();
 	}
+
+	if (m_pDebugCube)
+		m_pDebugCube->Update();
+
+	if (m_pDebugSphere)
+	{
+		m_pDebugSphere->Update();
+		m_pDebugSphere->Collide(m_pDebugCube);
+	}
 }
 
 void CGameScene::OnEvent(EEvent eEvent, void * _value)
 {
-	
 	if (eEvent == EEvent::E_PartsMake)
 	{
 		ST_PartsMakeEvent *data = static_cast<ST_PartsMakeEvent*>(_value);

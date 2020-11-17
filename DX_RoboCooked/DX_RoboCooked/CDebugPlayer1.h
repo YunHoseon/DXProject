@@ -16,6 +16,7 @@ private:
 	LPD3DXMESH			m_pMeshSphere;
 	D3DMATERIAL9		m_stMtlSphere;
 	ST_PLAYER_INPUTKEY	m_stInputKey;
+	
 public:
 	CDebugPlayer1();
 	~CDebugPlayer1();

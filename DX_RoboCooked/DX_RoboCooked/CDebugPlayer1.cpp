@@ -135,7 +135,6 @@ void CDebugPlayer1::Rotate()
 	D3DXQUATERNION qRot;
 	D3DXQuaternionRotationAxis(&qRot, &D3DXVECTOR3(0, 1, 0), m_fRotY);
 	D3DXMatrixRotationQuaternion(&m_matR, &qRot);
-	//D3DXQuaternionSlerp(&);
 }
 
 void CDebugPlayer1::SetKeyChange(void* _value)

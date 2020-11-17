@@ -5,6 +5,11 @@
 class CField;
 class CInteractiveActor;
 
+/* µð¹ö±ë¿ë */
+class CDebugPlayer1;
+class CDebugPlayer2;
+class CParts;
+
 class CGameScene :
 	public CScene,CEventListener
 {
@@ -13,6 +18,11 @@ private:
 	vector<CActor*>				m_vecStaticActor;
 	vector<CInteractiveActor*>	m_vecObject;
 	vector<CInteractiveActor*>	m_vecParts;
+
+	/* µð¹ö±ë¿ë */
+	CDebugPlayer1*			m_pDebugSphere;
+	CDebugPlayer2*			m_pDebugCube;
+	CParts*					m_pDebugParts;
 public:
 	CGameScene();
 	~CGameScene();

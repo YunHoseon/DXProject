@@ -5,17 +5,10 @@
 #include "CGameScene.h"
 #include "CParts.h"
 
-/* µğ¹ö±ë¿ë */
-#include "CDebugPlayer1.h"
-#include "CDebugPlayer2.h"
-
 CMainGame::CMainGame()
 	: m_pGrid(NULL)
 	, m_pCamera(NULL)
 	, m_pScene(NULL)
-	, m_pDebugSphere(NULL)
-	, m_pDebugCube(NULL)
-	, m_pDebugParts(NULL)
 {
 }
 
@@ -41,18 +34,6 @@ void CMainGame::Setup()
 	if (m_pCamera)
 		m_pCamera->Setup(NULL);
 
-	m_pDebugSphere = new CDebugPlayer1;
-	if (m_pDebugSphere)
-		m_pDebugSphere->Setup();
-
-	m_pDebugCube = new CDebugPlayer2;
-	if (m_pDebugCube)
-		m_pDebugCube->Setup();
-
-	m_pDebugParts = new CParts;
-	if (m_pDebugParts)
-		m_pDebugParts->Setup();
-
 	m_pScene = new CGameScene;
 	g_SceneManager->AddScene("GAMESCENE",m_pScene);
 	g_SceneManager->SetCurrentScene(m_pScene);
@@ -69,15 +50,6 @@ void CMainGame::Update()
 
 	if (m_pScene)
 		m_pScene->Update();
-
-	if (m_pDebugCube)
-		m_pDebugCube->Update();
-
-	if (m_pDebugSphere)
-	{
-		m_pDebugSphere->Update();
-		m_pDebugSphere->Collide(m_pDebugCube);
-	}
 }
 
 void CMainGame::Render()
@@ -95,13 +67,7 @@ void CMainGame::Render()
 
 	if (m_pScene)
 		m_pScene->Render();
-
-	if (m_pDebugSphere)
-		m_pDebugSphere->Render();
-
-	if (m_pDebugCube)
-		m_pDebugCube->Render();
-
+	
 	/*if (m_pDebugParts)
 		m_pDebugParts->Render();
 	*/
