@@ -63,9 +63,10 @@ void CGameScene::Init()
 		m_pDebugCube->Setup();
 
 	m_vecCharacters.push_back(m_pDebugCube);
-	//m_pDebugParts = new CParts(999);
-	//if (m_pDebugParts)
-	//	m_pDebugParts->Setup();
+	m_pDebugParts = new CParts(999);
+	if (m_pDebugParts)
+		m_pDebugParts->Setup();
+	m_vecParts.push_back(m_pDebugParts);
 }
 
 void CGameScene::Render()
@@ -111,7 +112,6 @@ void CGameScene::Update()
 
 	if (m_pDebugCube)
 		m_pDebugCube->Update();
-
 
 	if (m_pDebugSphere)
 	{
