@@ -24,7 +24,7 @@ public:
 	virtual void Render() = 0;
 	virtual bool Collide(CActor* target);
 
-	ICollisionArea* GetCollsion() { return m_pCollision; }
+	ICollisionArea* GetCollision() { return m_pCollision; }
 	
 };
 

@@ -3,7 +3,7 @@
 #include "CBoxCollision.h"
 #include "CParts.h"
 #include "CCharacter.h"
-#include "CActor.h"
+#include "CGameScene.h"
 
 CPartStorage::CPartStorage(CGameScene* gameCenter)
 {

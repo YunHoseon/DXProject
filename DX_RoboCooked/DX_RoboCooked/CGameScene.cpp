@@ -132,7 +132,7 @@ void CGameScene::GetInteractObject(CCharacter* pCharacter)
 {
 	for (auto it : m_vecObject)
 	{
-		if (pCharacter->GetInteractCollsion()->Collide(it->GetCollsion()))
+		if (pCharacter->GetInteractCollsion()->Collide(it->GetCollision()))
 		{
 			it->Interact(pCharacter);
 			break;

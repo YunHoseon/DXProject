@@ -1,5 +1,6 @@
 #pragma once
-#include "CGameScene.h"
+
+class ICollisionArea;
 class CGameScene;
 
 
@@ -15,11 +16,13 @@ protected:
 	//CGameScene*			m_GameCenter;
 	EPlayerState		m_ePlayerState;
 	ICollisionArea*		m_pInteractCollision;
+	float				m_fBaseSpeed;
 	float				m_fSpeed;
 	float				m_fRotY;
 	D3DXVECTOR3			m_vDirection;
 	D3DXVECTOR3			m_vPosition;
 	D3DXVECTOR3			m_vGrabPartsPosition;
+	// 상태이상에 대한 변수 //
 	
 public:
 	CCharacter();

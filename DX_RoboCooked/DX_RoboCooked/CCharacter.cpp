@@ -1,18 +1,23 @@
 #include "stdafx.h"
 #include "CCharacter.h"
 
+#include "CGameScene.h"
+#include "ICollisionArea.h"
+
 
 CCharacter::CCharacter()
 	: m_pInteractCollision(nullptr)
 	, m_ePlayerState(EPlayerState::E_None)
-	, m_fSpeed(0.2f)
+	, m_fBaseSpeed(0.02f)
+	, m_fSpeed(0)
 	, m_fRotY(0)
+	, m_vDirection(0,0,1)
+	, m_vPosition(0, 0, 0)
+	, m_vGrabPartsPosition(0, 1, 0)
 {
-	m_vPosition = D3DXVECTOR3(0,0,0);
-	m_vGrabPartsPosition = D3DXVECTOR3(0, 1, 0);
-
 }
 
 CCharacter::~CCharacter()
 {
+	SafeDelete(m_pInteractCollision);
 }
