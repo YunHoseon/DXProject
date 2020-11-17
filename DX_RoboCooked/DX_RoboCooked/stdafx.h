@@ -139,7 +139,7 @@ struct ST_CUBE
 };
 struct ST_PartsMakeEvent
 {
-	int iID;
+	int nID;
 };
 
 struct ST_KeyInputEvent

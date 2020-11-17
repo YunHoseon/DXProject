@@ -1,8 +1,9 @@
 #pragma once
 #include "CActor.h"
+#include "CCharacter.h"
 
 
-class CDebugPlayer2 : public CActor
+class CDebugPlayer2 : public CActor,CCharacter
 {
 private:
 	float				m_fSpeed;
@@ -17,11 +18,11 @@ private:
 	ST_PLAYER_INPUTKEY	m_stInputKey;
 	
 public:
-	CDebugPlayer2();
+	CDebugPlayer2(CGameScene* gameCenter);
 	~CDebugPlayer2();
 
 	void Setup();
-	void Update() override;
+	void Update();
 	void Render() override;
 	
 	void OnEvent(EEvent eEvent, void* _value);

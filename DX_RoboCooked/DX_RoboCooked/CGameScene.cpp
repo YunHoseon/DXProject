@@ -4,6 +4,7 @@
 #include "CInteractiveActor.h"
 #include "CParts.h" //생성할때 사용하기위해
 #include "CPartStorage.h"
+#include "ICollisionArea.h"
 
 /* 디버깅용 */
 #include "CDebugPlayer1.h"
@@ -20,7 +21,6 @@ CGameScene::CGameScene()
 	g_SoundManager->AddSFX("data/sound/effBBam.mp3", "BBam");
 	g_SoundManager->AddSFX("data/sound/effMelem.mp3", "Melem");
 	g_EventManager->Attach(EEvent::E_PartsMake, this);
-
 }
 
 CGameScene::~CGameScene()
@@ -30,6 +30,9 @@ CGameScene::~CGameScene()
 	{
 		SafeDelete(it);
 	}
+	SafeDelete(m_pDebugSphere);
+	SafeDelete(m_pDebugCube);
+	SafeDelete(m_pDebugParts);
 }
 
 void CGameScene::Init()
@@ -45,23 +48,22 @@ void CGameScene::Init()
 	}
 	
 	CPartStorage* partStorage = new CPartStorage;
-	partStorage->Setup(45, D3DXVECTOR3(5, 0, 2));
+	partStorage->Setup(0, D3DXVECTOR3(5, 0, 2));
 	partStorage->Interact();
 
 	m_vecObject.push_back(partStorage);
 
-	m_pDebugSphere = new CDebugPlayer1;
+	m_pDebugSphere = new CDebugPlayer1(this);
 	if (m_pDebugSphere)
 		m_pDebugSphere->Setup();
 
-	m_pDebugCube = new CDebugPlayer2;
+	m_pDebugCube = new CDebugPlayer2(this);
 	if (m_pDebugCube)
 		m_pDebugCube->Setup();
 
-	m_pDebugParts = new CParts;
+	m_pDebugParts = new CParts(999);
 	if (m_pDebugParts)
 		m_pDebugParts->Setup();
-
 }
 
 void CGameScene::Render()
@@ -81,12 +83,11 @@ void CGameScene::Render()
 		it->Render();
 	}
 
-	if (m_pDebugCube)
-		m_pDebugCube->Render();
-
 	if (m_pDebugSphere)
 		m_pDebugSphere->Render();
 
+	if (m_pDebugCube)
+		m_pDebugCube->Render();
 }
 
 void CGameScene::Update()
@@ -109,16 +110,11 @@ void CGameScene::Update()
 	if (m_pDebugCube)
 		m_pDebugCube->Update();
 
+
 	if (m_pDebugSphere)
 	{
 		m_pDebugSphere->Update();
 		m_pDebugSphere->Collide(m_pDebugCube);
-	}
-
-	for (auto && value : m_vecObject)
-	{
-		m_pDebugCube->Collide(value);
-		m_pDebugSphere->Collide(value);
 	}
 }
 
@@ -128,8 +124,20 @@ void CGameScene::OnEvent(EEvent eEvent, void * _value)
 	{
 		ST_PartsMakeEvent *data = static_cast<ST_PartsMakeEvent*>(_value);
 
-		CParts* parts = new CParts(data->iID);
+		CParts* parts = new CParts(data->nID);
 		parts->Setup();
 		m_vecParts.push_back(parts);
 	}
+}
+
+CActor* CGameScene::GetInteractObject(CCharacter* pCharacter)
+{
+	for(auto it : m_vecObject)
+	{
+		if(pCharacter->GetInteractCollsion()->Collide(it->GetCollsion()))
+		{
+			return it;
+		}
+	}
+
 }

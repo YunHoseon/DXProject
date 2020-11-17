@@ -4,10 +4,13 @@
 #include "CSphereCollision.h"
 
 
-CDebugPlayer1::CDebugPlayer1() 
+CDebugPlayer1::CDebugPlayer1(CGameScene* gameCenter)
 	:m_fSpeed(0.02f)
 	, m_fRotY(0.0f)
 {
+	m_GameCenter = gameCenter;
+
+	
 	m_vPosition = m_sphere.vCenter;
 	D3DXMatrixIdentity(&m_matWorld);
 	
@@ -37,6 +40,7 @@ void CDebugPlayer1::Update()
 	m_matWorld = m_matS * m_matR * m_matT;
 	if (m_pInteractCollision)
 		m_pInteractCollision->Update();
+	
 	if (m_pCollision)
 		m_pCollision->Update();
 }
@@ -102,6 +106,7 @@ void CDebugPlayer1::PressKey(void* _value)
 	}
 	if (data->wKey == m_stInputKey.interactableKey1)
 	{
+		m_GameCenter->GetInteractObject(this);
 		g_SoundManager->PlaySFX("Melem");
 	}
 	if (data->wKey == m_stInputKey.interactableKey2)
@@ -135,6 +140,16 @@ void CDebugPlayer1::Rotate()
 	D3DXQUATERNION qRot;
 	D3DXQuaternionRotationAxis(&qRot, &D3DXVECTOR3(0, 1, 0), m_fRotY);
 	D3DXMatrixRotationQuaternion(&m_matR, &qRot);
+}
+
+void CDebugPlayer1::Pick()
+{
+	
+}
+
+void CDebugPlayer1::Place()
+{
+	
 }
 
 void CDebugPlayer1::SetKeyChange(void* _value)
