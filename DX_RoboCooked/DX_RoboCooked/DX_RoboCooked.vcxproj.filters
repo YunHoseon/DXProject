@@ -132,17 +132,8 @@
     <ClInclude Include="CEventListener.h">
       <Filter>Manager\EventManager</Filter>
     </ClInclude>
-    <ClInclude Include="CDebugPlayer2.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="CDebugPlayer1.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="CSoundManager.h">
       <Filter>Manager</Filter>
-    </ClInclude>
-    <ClInclude Include="CParts.h">
-      <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="CInteractiveActor.h">
       <Filter>GameScene</Filter>
@@ -154,6 +145,15 @@
       <Filter>GameScene</Filter>
     </ClInclude>
     <ClInclude Include="CCharacter.h">
+      <Filter>GameScene</Filter>
+    </ClInclude>
+    <ClInclude Include="CParts.h">
+      <Filter>GameScene</Filter>
+    </ClInclude>
+    <ClInclude Include="CDebugPlayer2.h">
+      <Filter>GameScene</Filter>
+    </ClInclude>
+    <ClInclude Include="CDebugPlayer1.h">
       <Filter>GameScene</Filter>
     </ClInclude>
   </ItemGroup>
@@ -245,17 +245,8 @@
     <ClCompile Include="CEventListener.cpp">
       <Filter>Manager\EventManager</Filter>
     </ClCompile>
-    <ClCompile Include="CDebugPlayer2.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="CDebugPlayer1.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="CSoundManager.cpp">
       <Filter>Manager</Filter>
-    </ClCompile>
-    <ClCompile Include="CParts.cpp">
-      <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="CInteractiveActor.cpp">
       <Filter>GameScene</Filter>
@@ -269,8 +260,17 @@
     <ClCompile Include="CGameScene.cpp">
       <Filter>GameScene</Filter>
     </ClCompile>
+    <ClCompile Include="CParts.cpp">
+      <Filter>GameScene</Filter>
+    </ClCompile>
+    <ClCompile Include="CDebugPlayer2.cpp">
+      <Filter>GameScene</Filter>
+    </ClCompile>
+    <ClCompile Include="CDebugPlayer1.cpp">
+      <Filter>GameScene</Filter>
+    </ClCompile>
     <ClCompile Include="CCharacter.cpp">
-      <Filter>Source Files</Filter>
+      <Filter>GameScene</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

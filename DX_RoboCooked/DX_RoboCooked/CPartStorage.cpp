@@ -1,6 +1,8 @@
 #include "stdafx.h"
 #include "CPartStorage.h"
 #include "CBoxCollision.h"
+#include "CParts.h"
+#include "CCharacter.h"
 
 CPartStorage::CPartStorage()
 {
@@ -35,9 +37,10 @@ void CPartStorage::Render()
 		_DEBUG_COMMENT m_pCollision->Render();
 }
 
-void CPartStorage::Setup(float fAngle, D3DXVECTOR3 vecPosition)
+void CPartStorage::Setup(float fAngle, D3DXVECTOR3 vecPosition, INT nPartsID)
 {
-
+	m_nPartsID = nPartsID;
+	
 	vector<ST_PNT_VERTEX> vecVertex;
 	ST_PNT_VERTEX v;
 	v.n = D3DXVECTOR3(0, 1, 0);
@@ -149,14 +152,16 @@ void CPartStorage::OnEvent(EEvent eEvent, void * _value)
 {
 }
 
-void CPartStorage::Make()
+CParts* CPartStorage::Make()
 {
-	ST_PartsMakeEvent data;
-	data.nID = 0;
-	g_EventManager->CallEvent(EEvent::E_PartsMake,(void*)&data);
+	CParts* parts = new CParts(m_nPartsID);
+	parts->Setup();
+	return parts;
 }
 
 void CPartStorage::Interact(CCharacter* pCharacter)
 {
-	Make();
+	CParts* parts = Make();
+	parts->SetPosition(pCharacter->GetPosition() + D3DXVECTOR3(0,1,0));
+
 }

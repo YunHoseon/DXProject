@@ -6,12 +6,9 @@
 
 
 CDebugPlayer1::CDebugPlayer1(CGameScene* gameCenter)
-	:m_fSpeed(0.02f)
-	, m_fRotY(0.0f)
+
 {
 	m_GameCenter = gameCenter;
-
-	
 	m_vPosition = m_sphere.vCenter;
 	D3DXMatrixIdentity(&m_matWorld);
 	

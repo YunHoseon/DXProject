@@ -12,7 +12,7 @@ class CDebugPlayer1;
 class CDebugPlayer2;
 
 class CGameScene :
-	public CScene,CEventListener
+	public CScene
 {
 private:
 	CField*						m_pField;
@@ -33,7 +33,6 @@ public:
 	virtual void Init();
 	virtual void Render();
 	virtual void Update();
-	void OnEvent(EEvent eEvent, void* _value) override;
 	void CGameScene::GetInteractObject(CCharacter* pCharacter);
 };
 

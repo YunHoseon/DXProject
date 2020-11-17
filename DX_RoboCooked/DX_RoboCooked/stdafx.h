@@ -137,10 +137,6 @@ struct ST_CUBE
 	D3DXVECTOR3		vCenter;
 	ST_CUBE() : fLength(0), vCenter(0, 0, 0){}
 };
-struct ST_PartsMakeEvent
-{
-	int nID;
-};
 
 struct ST_KeyInputEvent
 {

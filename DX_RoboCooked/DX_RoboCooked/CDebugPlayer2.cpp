@@ -4,12 +4,9 @@
 #include "CBoxCollision.h"
 
 
-CDebugPlayer2::CDebugPlayer2(CGameScene* gameCenter) :
-	m_fSpeed(0.02f)
+CDebugPlayer2::CDebugPlayer2(CGameScene* gameCenter) 
 {
 	m_GameCenter = gameCenter;
-
-	
 	m_vPosition = m_cube.vCenter;
 	D3DXMatrixIdentity(&m_matWorld);
 	

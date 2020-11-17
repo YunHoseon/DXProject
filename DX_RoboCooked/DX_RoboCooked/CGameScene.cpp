@@ -22,7 +22,6 @@ CGameScene::CGameScene()
 	g_SoundManager->AddBGM("data/sound/bgm.mp3");
 	g_SoundManager->AddSFX("data/sound/effBBam.mp3", "BBam");
 	g_SoundManager->AddSFX("data/sound/effMelem.mp3", "Melem");
-	g_EventManager->Attach(EEvent::E_PartsMake, this);
 }
 
 CGameScene::~CGameScene()
@@ -50,7 +49,7 @@ void CGameScene::Init()
 	}
 	
 	CPartStorage* partStorage = new CPartStorage;
-	partStorage->Setup(0, D3DXVECTOR3(5, 0, 2));
+	partStorage->Setup(0, D3DXVECTOR3(5, 0, 2) , 1);
 
 	m_vecObject.push_back(partStorage);
 
@@ -63,9 +62,12 @@ void CGameScene::Init()
 		m_pDebugCube->Setup();
 
 	m_vecCharacters.push_back(m_pDebugCube);
+	m_vecCharacters.push_back(m_pDebugSphere);
+
 	//m_pDebugParts = new CParts(999);
 	//if (m_pDebugParts)
 	//	m_pDebugParts->Setup();
+	//m_vecParts.push_back(m_pDebugParts);
 }
 
 void CGameScene::Render()
@@ -85,11 +87,16 @@ void CGameScene::Render()
 		it->Render();
 	}
 
-	if (m_pDebugSphere)
-		m_pDebugSphere->Render();
+	for (auto it : m_vecCharacters)
+	{
+		it->Render();
+	}
+	
+	//if (m_pDebugSphere)
+	//	m_pDebugSphere->Render();
 
-	if (m_pDebugCube)
-		m_pDebugCube->Render();
+	//if (m_pDebugCube)
+	//	m_pDebugCube->Render();
 }
 
 void CGameScene::Update()
@@ -120,17 +127,6 @@ void CGameScene::Update()
 	}
 }
 
-void CGameScene::OnEvent(EEvent eEvent, void * _value)
-{
-	if (eEvent == EEvent::E_PartsMake)
-	{
-		ST_PartsMakeEvent *data = static_cast<ST_PartsMakeEvent*>(_value);
-
-		CParts* parts = new CParts(data->nID);
-		parts->Setup();
-		m_vecParts.push_back(parts);
-	}
-}
 
 void CGameScene::GetInteractObject(CCharacter* pCharacter)
 {

@@ -15,8 +15,7 @@ enum class EEvent
 	E_PartsHold,
 	E_PartsSpin,
 	E_PartsPut,
-	E_PartsThrow,
-	E_PartsMake
+	E_PartsThrow
 };
 
 
