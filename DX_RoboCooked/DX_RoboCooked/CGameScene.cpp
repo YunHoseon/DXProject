@@ -21,7 +21,6 @@ CGameScene::CGameScene()
 	g_SoundManager->AddSFX("data/sound/effBBam.mp3", "BBam");
 	g_SoundManager->AddSFX("data/sound/effMelem.mp3", "Melem");
 	g_EventManager->Attach(EEvent::E_PartsMake, this);
-
 }
 
 CGameScene::~CGameScene()
@@ -31,6 +30,9 @@ CGameScene::~CGameScene()
 	{
 		SafeDelete(it);
 	}
+	SafeDelete(m_pDebugSphere);
+	SafeDelete(m_pDebugCube);
+	SafeDelete(m_pDebugParts);
 }
 
 void CGameScene::Init()
@@ -59,10 +61,9 @@ void CGameScene::Init()
 	if (m_pDebugCube)
 		m_pDebugCube->Setup();
 
-	m_pDebugParts = new CParts;
+	m_pDebugParts = new CParts(999);
 	if (m_pDebugParts)
 		m_pDebugParts->Setup();
-
 }
 
 void CGameScene::Render()
@@ -87,7 +88,6 @@ void CGameScene::Render()
 
 	if (m_pDebugCube)
 		m_pDebugCube->Render();
-
 }
 
 void CGameScene::Update()

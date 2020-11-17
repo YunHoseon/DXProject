@@ -13,6 +13,8 @@ private:
 	D3DMATERIAL9		m_stMtlParts;
 
 	int					m_nPartsID;
+	float				m_fRotAngle;
+	float				m_fWeight;
 	
 public:
 	CParts();
