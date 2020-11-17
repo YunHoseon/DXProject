@@ -8,11 +8,6 @@ CParts::CParts()
 	D3DXMatrixIdentity(&m_matWorld);
 	m_sphere.vCenter = m_vPosition;
 	m_sphere.fRaidus = 0.3f;
-
-	g_EventManager->Attach(EEvent::E_PartsHold, this);
-	g_EventManager->Attach(EEvent::E_PartsSpin, this);
-	g_EventManager->Attach(EEvent::E_PartsPut, this);
-	g_EventManager->Attach(EEvent::E_PartsThrow, this);
 	std::cout << "ID°¡ ¾ø´Â ÆÄÃ÷ÀÔ´Ï´Ù." << std::endl;
 }
 
@@ -23,11 +18,6 @@ CParts::CParts(int nPartsID)
 	D3DXMatrixIdentity(&m_matWorld);
 	m_sphere.vCenter = m_vPosition;
 	m_sphere.fRaidus = 0.3f;
-
-	g_EventManager->Attach(EEvent::E_PartsHold, this);
-	g_EventManager->Attach(EEvent::E_PartsSpin, this);
-	g_EventManager->Attach(EEvent::E_PartsPut, this);
-	g_EventManager->Attach(EEvent::E_PartsThrow, this);
 	std::cout << "ÆÄÃ÷ ID : " << m_nPartsID << std::endl;
 }
 
@@ -68,17 +58,7 @@ void CParts::Render()
 
 void CParts::OnEvent(EEvent eEvent, void* _value)
 {
-	switch (eEvent)
-	{
-	case EEvent::E_PartsHold:
-		break;
-	case EEvent::E_PartsSpin:
-		break;
-	case EEvent::E_PartsPut:
-		break;
-	case EEvent::E_PartsThrow:
-		break;
-	}
+
 }
 
 void CParts::Interact(CCharacter* pCharacter)

@@ -2,6 +2,12 @@
 #include "CGameScene.h"
 class CGameScene;
 
+enum class ePlayerState
+{
+	E_None, //기본상태
+	E_Grab  //잡기상태
+};
+
 class CCharacter
 {
 
@@ -12,7 +18,6 @@ public:
 	CCharacter();
 	~CCharacter();
 
-	
 	ICollisionArea* GetInteractCollsion() { return m_pInteractCollision; }
 };
 

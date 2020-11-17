@@ -7,8 +7,7 @@ class CParts :
 {
 private:
 	D3DXVECTOR3			m_vPosition;
-	D3DXMATRIXA16		m_matWorld;
-	
+
 	ST_SPHERE			m_sphere;
 	LPD3DXMESH			m_pMeshSphere;
 	D3DMATERIAL9		m_stMtlParts;

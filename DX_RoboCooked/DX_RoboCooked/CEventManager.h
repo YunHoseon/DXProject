@@ -12,10 +12,6 @@ enum class EEvent
 	E_Player1KeyChange,
 	E_Player2KeyChange,
 	E_TileMove,
-	E_PartsHold,
-	E_PartsSpin,
-	E_PartsPut,
-	E_PartsThrow,
 	E_PartsMake
 };
 
