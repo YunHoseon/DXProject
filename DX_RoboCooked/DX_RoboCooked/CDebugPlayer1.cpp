@@ -22,8 +22,8 @@ CDebugPlayer1::~CDebugPlayer1()
 
 void CDebugPlayer1::Setup()
 {
-	m_pCollision = new CSphereCollision(m_vPosition, 0.5f, &m_matWorld);
-	m_pInteractCollision = new CBoxCollision(m_vPosition + D3DXVECTOR3(0, 0, 0.5f), D3DXVECTOR3(0.3f, 0.3f, 0.3f), &m_matWorld);
+	m_pCollision = new CSphereCollision({}, 0.5f, &m_matWorld);
+	m_pInteractCollision = new CBoxCollision(D3DXVECTOR3(0, 0, 0.5f), D3DXVECTOR3(0.3f, 0.3f, 0.3f), &m_matWorld);
 	D3DXCreateSphere(g_pD3DDevice, 0.5f, 10, 10, &m_pMeshSphere, NULL);
 
 	ZeroMemory(&m_stMtlSphere, sizeof(D3DMATERIAL9));

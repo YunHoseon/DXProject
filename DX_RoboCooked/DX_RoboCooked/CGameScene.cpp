@@ -81,11 +81,11 @@ void CGameScene::Render()
 		it->Render();
 	}
 
-	if (m_pDebugSphere)
-		m_pDebugSphere->Render();
-
 	if (m_pDebugCube)
 		m_pDebugCube->Render();
+
+	if (m_pDebugSphere)
+		m_pDebugSphere->Render();
 
 }
 
@@ -113,6 +113,12 @@ void CGameScene::Update()
 	{
 		m_pDebugSphere->Update();
 		m_pDebugSphere->Collide(m_pDebugCube);
+	}
+
+	for (auto && value : m_vecObject)
+	{
+		m_pDebugCube->Collide(value);
+		m_pDebugSphere->Collide(value);
 	}
 }
 

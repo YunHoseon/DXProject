@@ -2,7 +2,7 @@
 #include "CPartStorage.h"
 #include "CBoxCollision.h"
 
-CPartStorage::CPartStorage()
+CPartStorage::CPartStorage(): m_storageTexture(nullptr)
 {
 }
 
@@ -13,13 +13,15 @@ CPartStorage::~CPartStorage()
 
 void CPartStorage::Update()
 {
+	if (m_pCollision)
+		m_pCollision->Update();
 }
 
 void CPartStorage::Render()
 {
-	D3DXMATRIXA16 matWorld;
-	matWorld = m_matS * m_matR * m_matT;
-	g_pD3DDevice->SetTransform(D3DTS_WORLD, &matWorld);
+	//D3DXMATRIXA16 matWorld;
+	//matWorld = m_matS * m_matR * m_matT;
+	g_pD3DDevice->SetTransform(D3DTS_WORLD, &m_matWorld);
 	g_pD3DDevice->SetTexture(0, m_storageTexture);
 
 	g_pD3DDevice->SetFVF(ST_PNT_VERTEX::FVF);
@@ -136,11 +138,12 @@ void CPartStorage::Setup(float fAngle, D3DXVECTOR3 vecPosition)
 
 	m_storageTexture = g_pTextureManager->GetTexture(("data/Texture/box.jpg"));
 
+	D3DXMatrixIdentity(&m_matS);
 	D3DXMatrixRotationY(&m_matR, D3DXToRadian(fAngle));
 	D3DXMatrixTranslation(&m_matT, vecPosition.x,0, vecPosition.z);
+	m_matWorld = m_matS * m_matR * m_matT;
 
-
-	m_pCollision = new CBoxCollision(vecPosition, D3DXVECTOR3(1, 1, 1), &m_matR);
+	m_pCollision = new CBoxCollision(D3DXVECTOR3(0,0,0), D3DXVECTOR3(1, 1, 1), &m_matWorld);
 }
 
 void CPartStorage::OnEvent(EEvent eEvent, void * _value)
@@ -152,7 +155,7 @@ void CPartStorage::Make()
 	ST_PartsMakeEvent data;
 	data.iID = 0;
 	g_EventManager->CallEvent(EEvent::E_PartsMake, (void*)&data);
-
+	
 }
 
 void CPartStorage::Interact()

@@ -18,7 +18,7 @@ void CSceneManager::SceneChange(string sceneName)
 {
 	if (m_SceneList.find(sceneName) == m_SceneList.end())
 	{
-		std::cout << "해당씬없음" << std::endl;
+		_DEBUG_COMMENT std::cout << "해당씬없음" << std::endl;
 		return;
 	}
 	m_pCurrentScene = m_SceneList[sceneName];
@@ -30,7 +30,7 @@ void CSceneManager::AddScene(std::string SceneName, CScene* Scene)
 	{
 		if(m_SceneList[SceneName] != nullptr)
 		{
-			std::cout << "이미 해당씬이 있습니다." << std::endl;
+			_DEBUG_COMMENT std::cout << "이미 해당씬이 있습니다." << std::endl;
 			return;
 		}
 	}
@@ -43,7 +43,7 @@ void CSceneManager::EraseScene(std::string SceneName)
 {
 	if (m_SceneList.find(SceneName) == m_SceneList.end())
 	{
-		std::cout << "해당씬없음" << std::endl;
+		_DEBUG_COMMENT std::cout << "해당씬없음" << std::endl;
 		return;
 	}
 	
