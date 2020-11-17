@@ -13,13 +13,15 @@ CPartStorage::~CPartStorage()
 
 void CPartStorage::Update()
 {
+	if (m_pCollision)
+		m_pCollision->Update();
 }
 
 void CPartStorage::Render()
 {
-	D3DXMATRIXA16 matWorld;
-	matWorld = m_matS * m_matR * m_matT;
-	g_pD3DDevice->SetTransform(D3DTS_WORLD, &matWorld);
+	
+	m_matWorld = m_matS * m_matR * m_matT;
+	g_pD3DDevice->SetTransform(D3DTS_WORLD, &m_matWorld);
 	g_pD3DDevice->SetTexture(0, m_storageTexture);
 
 	g_pD3DDevice->SetFVF(ST_PNT_VERTEX::FVF);
@@ -139,8 +141,8 @@ void CPartStorage::Setup(float fAngle, D3DXVECTOR3 vecPosition)
 	D3DXMatrixRotationY(&m_matR, D3DXToRadian(fAngle));
 	D3DXMatrixTranslation(&m_matT, vecPosition.x,0, vecPosition.z);
 
+	m_pCollision = new CBoxCollision(vecPosition, D3DXVECTOR3(1.0f, 1.0f, 1.0f), &m_matWorld);
 
-	m_pCollision = new CBoxCollision(vecPosition, D3DXVECTOR3(1, 1, 1), &m_matR);
 }
 
 void CPartStorage::OnEvent(EEvent eEvent, void * _value)

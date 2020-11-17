@@ -13,6 +13,8 @@ protected:
 	D3DXMATRIXA16 m_matS;
 	D3DXMATRIXA16 m_matR;
 	D3DXMATRIXA16 m_matT;
+	D3DXMATRIXA16 m_matWorld;
+
 	//콜라이더 미추가
 	ICollisionArea* m_pCollision;
 public:
