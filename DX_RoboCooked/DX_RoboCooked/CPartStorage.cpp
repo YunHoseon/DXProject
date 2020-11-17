@@ -156,7 +156,7 @@ void CPartStorage::Make()
 	g_EventManager->CallEvent(EEvent::E_PartsMake,(void*)&data);
 }
 
-void CPartStorage::Interact()
+void CPartStorage::Interact(CCharacter* pCharacter)
 {
 	Make();
 }

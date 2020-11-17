@@ -1,5 +1,7 @@
 #pragma once
 #include "CActor.h"
+class CCharacter;
+
 class CInteractiveActor :
 	public CActor
 {
@@ -7,6 +9,6 @@ public:
 	CInteractiveActor();
 	~CInteractiveActor();
 
-	virtual void Interact() = 0;
+	virtual void Interact(CCharacter* pCharacter) = 0;
 };
 

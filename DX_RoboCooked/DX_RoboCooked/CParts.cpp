@@ -81,7 +81,7 @@ void CParts::OnEvent(EEvent eEvent, void* _value)
 	}
 }
 
-void CParts::Interact()
+void CParts::Interact(CCharacter* pCharacter)
 {
 
 }

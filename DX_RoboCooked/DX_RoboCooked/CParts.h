@@ -1,6 +1,7 @@
 #pragma once
 #include "CInteractiveActor.h"
 
+class CCharacter;
 class CParts :
 	public CInteractiveActor
 {
@@ -25,6 +26,6 @@ public:
 	void Update() override;
 	void Render() override;
 	void OnEvent(EEvent eEvent, void* _value);
-	void Interact() override;
+	void Interact(CCharacter* pCharacter) override;
 };
 

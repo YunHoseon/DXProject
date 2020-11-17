@@ -51,7 +51,6 @@ void CGameScene::Init()
 	
 	CPartStorage* partStorage = new CPartStorage;
 	partStorage->Setup(0, D3DXVECTOR3(5, 0, 2));
-	partStorage->Interact();
 
 	m_vecObject.push_back(partStorage);
 
@@ -133,15 +132,14 @@ void CGameScene::OnEvent(EEvent eEvent, void * _value)
 	}
 }
 
-CActor* CGameScene::GetInteractObject(CCharacter* pCharacter)
+void CGameScene::GetInteractObject(CCharacter* pCharacter)
 {
-	for(auto it : m_vecObject)
+	for (auto it : m_vecObject)
 	{
-		if(pCharacter->GetInteractCollsion()->Collide(it->GetCollsion()))
+		if (pCharacter->GetInteractCollsion()->Collide(it->GetCollsion()))
 		{
-			return it;
+			it->Interact(pCharacter);
+			break;
 		}
 	}
-
-	return NULL;
 }

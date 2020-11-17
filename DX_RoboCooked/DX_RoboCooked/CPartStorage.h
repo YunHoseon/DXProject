@@ -18,7 +18,7 @@ public:
 	void Render() override;
 	void Setup(float fAngle ,D3DXVECTOR3 vecPosition);
 	void OnEvent(EEvent eEvent, void* _value);
-	void Interact() override;
+	void Interact(CCharacter* pCharacter) override;
 
 private:
 	void Make() override;

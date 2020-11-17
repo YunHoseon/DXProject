@@ -34,6 +34,6 @@ public:
 	virtual void Render();
 	virtual void Update();
 	void OnEvent(EEvent eEvent, void* _value) override;
-	CActor* CGameScene::GetInteractObject(CCharacter* pCharacter);
+	void CGameScene::GetInteractObject(CCharacter* pCharacter);
 };
 
