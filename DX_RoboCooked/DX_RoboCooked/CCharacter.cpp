@@ -3,8 +3,7 @@
 
 
 CCharacter::CCharacter()
-	: m_GameCenter(NULL)
-	, m_pInteractCollision(nullptr)
+	: m_pInteractCollision(nullptr)
 	, m_ePlayerState(EPlayerState::E_None)
 	, m_fSpeed(0.2f)
 	, m_fRotY(0)

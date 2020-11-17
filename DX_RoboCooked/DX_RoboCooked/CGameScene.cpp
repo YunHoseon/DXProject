@@ -48,7 +48,7 @@ void CGameScene::Init()
 		m_vecStaticActor.push_back(m_pField);
 	}
 	
-	CPartStorage* partStorage = new CPartStorage;
+	CPartStorage* partStorage = new CPartStorage(this);
 	partStorage->Setup(0, D3DXVECTOR3(5, 0, 2) , 1);
 
 	m_vecObject.push_back(partStorage);
@@ -138,4 +138,10 @@ void CGameScene::GetInteractObject(CCharacter* pCharacter)
 			break;
 		}
 	}
+}
+
+void CGameScene::AddParts(CParts * parts)
+{
+	if(parts != NULL)
+		m_vecParts.push_back(parts);
 }

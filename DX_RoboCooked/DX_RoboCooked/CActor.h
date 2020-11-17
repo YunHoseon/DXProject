@@ -1,7 +1,7 @@
 #pragma once
 #include "CEventListener.h"
 
-
+class CGameScene;
 class ICollisionArea;
 
 class CActor : public CEventListener
@@ -11,6 +11,7 @@ public:
 	virtual  ~CActor();
 
 protected:
+	CGameScene*	  m_GameCenter;
 	D3DXMATRIXA16 m_matS;
 	D3DXMATRIXA16 m_matR;
 	D3DXMATRIXA16 m_matT;
@@ -24,5 +25,6 @@ public:
 	virtual bool Collide(CActor* target);
 
 	ICollisionArea* GetCollsion() { return m_pCollision; }
+	
 };
 

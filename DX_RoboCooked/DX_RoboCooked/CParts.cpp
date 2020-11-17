@@ -27,6 +27,10 @@ CParts::~CParts()
 
 void CParts::Setup()
 {
+	D3DXMatrixIdentity(&m_matS);
+	D3DXMatrixIdentity(&m_matR);
+	D3DXMatrixIdentity(&m_matT);
+
 	m_pCollision = new CSphereCollision(m_vPosition, 0.3f, &m_matWorld);
 	D3DXCreateSphere(g_pD3DDevice, m_sphere.fRaidus, 10, 10, &m_pMeshSphere, NULL);
 
@@ -38,7 +42,8 @@ void CParts::Setup()
 
 void CParts::Update()
 {
-	D3DXMatrixTranslation(&m_matT, m_vPosition.x, m_vPosition.y, m_vPosition.z);
+	
+	D3DXMatrixTranslation(&m_matT, m_vPosition.x , m_vPosition.y, m_vPosition.z);
 	m_matWorld = m_matS * m_matR * m_matT;
 }
 

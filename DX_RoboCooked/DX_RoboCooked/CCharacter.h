@@ -12,7 +12,7 @@ enum class EPlayerState
 class CCharacter
 {
 protected:
-	CGameScene*			m_GameCenter;
+	//CGameScene*			m_GameCenter;
 	EPlayerState		m_ePlayerState;
 	ICollisionArea*		m_pInteractCollision;
 	float				m_fSpeed;

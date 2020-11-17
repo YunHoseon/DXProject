@@ -3,9 +3,11 @@
 #include "CBoxCollision.h"
 #include "CParts.h"
 #include "CCharacter.h"
+#include "CActor.h"
 
-CPartStorage::CPartStorage()
+CPartStorage::CPartStorage(CGameScene* gameCenter)
 {
+	m_GameCenter = gameCenter;
 }
 
 
@@ -163,4 +165,5 @@ void CPartStorage::Interact(CCharacter* pCharacter)
 {
 	CParts* parts = Make();
 	parts->SetPosition(pCharacter->GetGrabPartsPosition());
+	m_GameCenter->AddParts(parts);
 }
