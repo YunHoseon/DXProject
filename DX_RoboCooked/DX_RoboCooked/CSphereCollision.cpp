@@ -46,19 +46,19 @@ void CSphereCollision::Render()
 void CSphereCollision::Update()
 {
 	D3DXVec3TransformCoord(&m_vCenterPos, &m_vOriginCenterPos, m_pmatWorldTM);
+	isCollide = false;
 }
 
 bool CSphereCollision::CollideToBox(CBoxCollision* pTargetCollider)
 {
-	isCollide = pTargetCollider->CollideToSphere(this);
-	return isCollide;
+	return pTargetCollider->CollideToSphere(this);
 }
 
 bool CSphereCollision::CollideToSphere(CSphereCollision* pTargetCollider)
 {
 	D3DXVECTOR3 vDist = pTargetCollider->GetCenter() - m_vCenterPos;
-	isCollide = false;
-	pTargetCollider->SetIsCollide(false);
+	//isCollide = false;
+	//pTargetCollider->SetIsCollide(false);
 	
 	if (D3DXVec3LengthSq(&vDist) > (fRadius + pTargetCollider->fRadius) * (fRadius + pTargetCollider->fRadius))
 		return false;

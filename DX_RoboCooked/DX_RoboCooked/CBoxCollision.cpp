@@ -76,6 +76,7 @@ void CBoxCollision::Render()
 	D3DXMatrixIdentity(&matWorld);
 	g_pD3DDevice->SetRenderState(D3DRS_LIGHTING, false);
 	g_pD3DDevice->SetTransform(D3DTS_WORLD, &matWorld);
+	//g_pD3DDevice->SetTransform(D3DTS_WORLD, m_pmatWorldTM);
 	g_pD3DDevice->SetTexture(0, NULL);
 	g_pD3DDevice->SetFVF(ST_PC_VERTEX::FVF);
 	g_pD3DDevice->DrawPrimitiveUP(D3DPT_LINELIST, drawVertex.size() * 0.5f, &drawVertex[0], sizeof(ST_PC_VERTEX));
@@ -89,6 +90,7 @@ void CBoxCollision::Update()
 	}
 
 	D3DXVec3TransformCoord(&m_vCenterPos, &m_vOriginCenterPos, m_pmatWorldTM);
+	isCollide = false;
 }
 
 bool CBoxCollision::CollideToBox(CBoxCollision* pTargetCollider)
@@ -99,8 +101,8 @@ bool CBoxCollision::CollideToBox(CBoxCollision* pTargetCollider)
 	float r0, r1, r;
 	const float cutOff = 0.999999f;
 	bool existsParallelPair = false;
-	isCollide = false;
-	pTargetCollider->SetIsCollide(false);
+	//isCollide = false;
+	//pTargetCollider->SetIsCollide(false);
 	
 
 	D3DXVECTOR3 D = pTargetCollider->m_vCenterPos - this->m_vCenterPos;
@@ -220,8 +222,8 @@ bool CBoxCollision::CollideToBox(CBoxCollision* pTargetCollider)
 
 bool CBoxCollision::CollideToSphere(CSphereCollision* pTargetCollider)
 {
-	isCollide = false;
-	pTargetCollider->SetIsCollide(false);
+	//isCollide = false;
+	//pTargetCollider->SetIsCollide(false);
 
 	D3DXVECTOR3 vDist = pTargetCollider->GetCenter() - m_vCenterPos;
 	
