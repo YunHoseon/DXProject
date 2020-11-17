@@ -1,8 +1,10 @@
 #pragma once
 #include "CActor.h"
+#include "CCharacter.h"
+#include "CGameScene.h"
 
 
-class CDebugPlayer1 : public CActor
+class CDebugPlayer1 : public CActor,CCharacter
 {
 private:
 	float				m_fSpeed;
@@ -10,7 +12,7 @@ private:
 	D3DXVECTOR3			m_vDirection;
 	D3DXVECTOR3			m_vPosition;
 	D3DXMATRIXA16		m_matWorld;
-	ICollisionArea*		m_pInteractCollision;
+
 	
 	ST_SPHERE			m_sphere;
 	LPD3DXMESH			m_pMeshSphere;
@@ -18,11 +20,11 @@ private:
 	ST_PLAYER_INPUTKEY	m_stInputKey;
 	
 public:
-	CDebugPlayer1();
+	CDebugPlayer1(CGameScene* gameCenter);
 	~CDebugPlayer1();
 
 	void Setup();
-	void Update() override;
+	void Update();
 	void Render() override;
 
 	void OnEvent(EEvent eEvent, void* _value);
@@ -31,5 +33,7 @@ public:
 	void Move(D3DXVECTOR3 _vecMove);
 	void Rotate();
 	void SetKeyChange(void* _value);
+
+
 };
 

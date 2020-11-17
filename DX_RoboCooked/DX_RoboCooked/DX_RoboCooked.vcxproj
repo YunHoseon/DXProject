@@ -71,16 +71,16 @@
   <PropertyGroup Label="UserMacros" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <LinkIncremental>true</LinkIncremental>
-    <IncludePath>C:\DxProject\DX_RoboCooked\DX_RoboCooked;$(DXSDK_DIR)\Include;D:\DXProject\DX_RoboCooked\DX_RoboCooked;$(IncludePath)</IncludePath>
-    <LibraryPath>$(DXSDK_DIR)\Lib\x86;C:\DxProject\DX_RoboCooked\DX_RoboCooked;D:\DXProject\DX_RoboCooked\DX_RoboCooked;$(LibraryPath)</LibraryPath>
+    <IncludePath>D:\Dxprojcet\DX_RoboCooked\DX_RoboCooked;$(DXSDK_DIR)\Include;D:\DXProject\DX_RoboCooked\DX_RoboCooked;$(IncludePath)</IncludePath>
+    <LibraryPath>$(DXSDK_DIR)\Lib\x86;D:\Dxprojcet\DX_RoboCooked\DX_RoboCooked;D:\DXProject\DX_RoboCooked\DX_RoboCooked;$(LibraryPath)</LibraryPath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <LinkIncremental>true</LinkIncremental>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <LinkIncremental>false</LinkIncremental>
-    <IncludePath>C:\DxProject\DX_RoboCooked\DX_RoboCooked;$(DXSDK_DIR)\Include;D:\Dxprojcet\DX_RoboCooked\DX_RoboCooked;$(IncludePath)</IncludePath>
-    <LibraryPath>$(DXSDK_DIR)\Lib\x86;C:\DxProject\DX_RoboCooked\DX_RoboCooked;D:\Dxprojcet\DX_RoboCooked\DX_RoboCooked;D:\Dxprojcet\DX_RoboCooked\DX_RoboCooked;$(LibraryPath)</LibraryPath>
+    <IncludePath>D:\Dxprojcet\DX_RoboCooked\DX_RoboCooked;$(DXSDK_DIR)\Include;D:\Dxprojcet\DX_RoboCooked\DX_RoboCooked;$(IncludePath)</IncludePath>
+    <LibraryPath>$(DXSDK_DIR)\Lib\x86;D:\Dxprojcet\DX_RoboCooked\DX_RoboCooked;D:\Dxprojcet\DX_RoboCooked\DX_RoboCooked;D:\Dxprojcet\DX_RoboCooked\DX_RoboCooked;$(LibraryPath)</LibraryPath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <LinkIncremental>false</LinkIncremental>
@@ -149,6 +149,7 @@
     <ClInclude Include="CAllocateHierachy.h" />
     <ClInclude Include="CBoxCollision.h" />
     <ClInclude Include="CCamera.h" />
+    <ClInclude Include="CCharacter.h" />
     <ClInclude Include="CPartStorage.h" />
     <ClInclude Include="CSoundManager.h" />
     <ClInclude Include="ICollisionArea.h" />
@@ -190,6 +191,7 @@
     <ClCompile Include="CAllocateHierachy.cpp" />
     <ClCompile Include="CBoxCollision.cpp" />
     <ClCompile Include="CCamera.cpp" />
+    <ClCompile Include="CCharacter.cpp" />
     <ClCompile Include="CPartStorage.cpp" />
     <ClCompile Include="CSoundManager.cpp" />
     <ClCompile Include="ICollisionArea.cpp" />

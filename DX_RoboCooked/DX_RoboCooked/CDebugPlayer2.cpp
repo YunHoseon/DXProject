@@ -4,9 +4,12 @@
 #include "CBoxCollision.h"
 
 
-CDebugPlayer2::CDebugPlayer2() :
+CDebugPlayer2::CDebugPlayer2(CGameScene* gameCenter) :
 	m_fSpeed(0.02f)
 {
+	m_GameCenter = gameCenter;
+
+	
 	m_vPosition = m_cube.vCenter;
 	D3DXMatrixIdentity(&m_matWorld);
 	
@@ -134,3 +137,4 @@ void CDebugPlayer2::SetKeyChange(void* _value)
 	ST_PLAYER_INPUTKEY *data = static_cast<ST_PLAYER_INPUTKEY*>(_value);
 	m_stInputKey = *data;
 }
+
