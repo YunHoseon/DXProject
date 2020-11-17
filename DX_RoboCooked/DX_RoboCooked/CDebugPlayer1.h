@@ -12,8 +12,6 @@ private:
 	float				m_fRotY;
 	D3DXVECTOR3			m_vDirection;
 	D3DXVECTOR3			m_vPosition;
-	//D3DXMATRIXA16		m_matWorld;
-	//ICollisionArea*		m_pInteractCollision;
 	
 	ST_SPHERE			m_sphere;
 	LPD3DXMESH			m_pMeshSphere;
