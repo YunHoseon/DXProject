@@ -30,7 +30,6 @@ public:
 	void Attach(EEvent eEvent,CEventListener* _observer);
 	bool Detach(EEvent eEvent, CEventListener* _observer);
 	void DetachAll(CEventListener* _observer);
-	void Notify(void* _value);
 	void CallEvent(EEvent eEvent, void* _value);
 	void ErrorSend();
 

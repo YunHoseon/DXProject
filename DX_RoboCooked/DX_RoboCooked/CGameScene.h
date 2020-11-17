@@ -22,9 +22,9 @@ private:
 	vector<CCharacter*>			m_vecCharacters;
 
 	/* µð¹ö±ë¿ë */
-	CDebugPlayer1*			m_pDebugSphere;
-	CDebugPlayer2*			m_pDebugCube;
-	CParts*					m_pDebugParts;
+	CDebugPlayer1*				m_pDebugSphere;
+	CDebugPlayer2*				m_pDebugCube;
+	CParts*						m_pDebugParts;
 public:
 	CGameScene();
 	~CGameScene();

@@ -5,7 +5,7 @@
 
 class CGameScene;
 
-class CDebugPlayer1 : public CActor,CCharacter
+class CDebugPlayer1 : public CActor, public CCharacter
 {
 private:
 	float				m_fSpeed;

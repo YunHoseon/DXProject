@@ -5,6 +5,8 @@
 #include "CParts.h" //생성할때 사용하기위해
 #include "CPartStorage.h"
 #include "ICollisionArea.h"
+#include "CActor.h"
+#include "CCharacter.h"
 
 /* 디버깅용 */
 #include "CDebugPlayer1.h"
@@ -61,9 +63,10 @@ void CGameScene::Init()
 	if (m_pDebugCube)
 		m_pDebugCube->Setup();
 
-	m_pDebugParts = new CParts(999);
-	if (m_pDebugParts)
-		m_pDebugParts->Setup();
+	m_vecCharacters.push_back(m_pDebugCube);
+	//m_pDebugParts = new CParts(999);
+	//if (m_pDebugParts)
+	//	m_pDebugParts->Setup();
 }
 
 void CGameScene::Render()
@@ -140,4 +143,5 @@ CActor* CGameScene::GetInteractObject(CCharacter* pCharacter)
 		}
 	}
 
+	return NULL;
 }

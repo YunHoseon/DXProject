@@ -3,7 +3,7 @@
 #include "CCharacter.h"
 
 
-class CDebugPlayer2 : public CActor,CCharacter
+class CDebugPlayer2 : public CActor,public CCharacter
 {
 private:
 	float				m_fSpeed;

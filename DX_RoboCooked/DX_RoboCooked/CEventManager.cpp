@@ -43,21 +43,16 @@ void CEventManager::DetachAll(CEventListener* _observer)
 }
 
 
-void CEventManager::Notify(void* value)
-{
-	std::set<CEventListener *>::iterator iterator = m_mapEventMap[m_eEvent].begin();
-
-	while (iterator != m_mapEventMap[m_eEvent].end())
-	{
-		(*iterator)->OnEvent(m_eEvent, value);
-		++iterator;
-	}
-}
-
 void CEventManager::CallEvent(EEvent eEvent, void* value)
 {	
-	m_eEvent = eEvent;
-	Notify(value);
+
+	std::set<CEventListener *>::iterator iterator = m_mapEventMap[eEvent].begin();
+
+	while (iterator != m_mapEventMap[eEvent].end())
+	{
+		(*iterator)->OnEvent(eEvent, value);
+		++iterator;
+	}
 }
 
 void CEventManager::ErrorSend()
