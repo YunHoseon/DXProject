@@ -164,6 +164,6 @@ CParts* CPartStorage::Make()
 void CPartStorage::Interact(CCharacter* pCharacter)
 {
 	CParts* parts = Make();
-	parts->SetPosition(pCharacter->GetGrabPartsPosition());
+	parts->SetPosition(&pCharacter->GetGrabPartsPosition());
 	m_GameCenter->AddParts(parts);
 }

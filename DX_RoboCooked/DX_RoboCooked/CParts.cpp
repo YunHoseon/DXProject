@@ -27,6 +27,7 @@ CParts::~CParts()
 
 void CParts::Setup()
 {
+	m_vTestPosition = NULL;
 	D3DXMatrixIdentity(&m_matS);
 	D3DXMatrixIdentity(&m_matR);
 	D3DXMatrixIdentity(&m_matT);
@@ -42,9 +43,15 @@ void CParts::Setup()
 
 void CParts::Update()
 {
-	
+	if (m_vTestPosition)
+	{
+		m_vPosition = *m_vTestPosition;
+	}
+
 	D3DXMatrixTranslation(&m_matT, m_vPosition.x , m_vPosition.y, m_vPosition.z);
+
 	m_matWorld = m_matS * m_matR * m_matT;
+
 }
 
 void CParts::Render()

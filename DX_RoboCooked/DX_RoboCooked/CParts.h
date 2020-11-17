@@ -27,6 +27,6 @@ public:
 	void Render() override;
 	void OnEvent(EEvent eEvent, void* _value);
 	void Interact(CCharacter* pCharacter) override;
-	void SetPosition(D3DXVECTOR3& vPosition) { m_vPosition = vPosition; }
+	void SetPosition(D3DXVECTOR3* vPosition) { m_vTestPosition = vPosition; }
 };
 
