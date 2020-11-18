@@ -1,6 +1,7 @@
 #include "stdafx.h"
 #include "CParts.h"
 #include "CSphereCollision.h"
+#include "CCharacter.h"
 
 CParts::CParts()
 	:m_vPosition(3.0f, 0.0f, 2.0f)
@@ -27,12 +28,12 @@ CParts::~CParts()
 
 void CParts::Setup()
 {
-	m_vTestPosition = NULL;
+	m_vGrabPosition = NULL;
 	D3DXMatrixIdentity(&m_matS);
 	D3DXMatrixIdentity(&m_matR);
 	D3DXMatrixIdentity(&m_matT);
 
-	m_pCollision = new CSphereCollision(m_vPosition, 0.3f, &m_matWorld);
+	m_pCollision = new CSphereCollision({}, 0.3f, &m_matWorld);
 	D3DXCreateSphere(g_pD3DDevice, m_sphere.fRaidus, 10, 10, &m_pMeshSphere, NULL);
 
 	ZeroMemory(&m_stMtlParts, sizeof(D3DMATERIAL9));
@@ -43,14 +44,17 @@ void CParts::Setup()
 
 void CParts::Update()
 {
-	if (m_vTestPosition)
+	if (m_vGrabPosition)
 	{
-		m_vPosition = *m_vTestPosition;
+		m_vPosition = *m_vGrabPosition;
 	}
 
 	D3DXMatrixTranslation(&m_matT, m_vPosition.x , m_vPosition.y, m_vPosition.z);
 
 	m_matWorld = m_matS * m_matR * m_matT;
+
+	if (m_pCollision)
+		m_pCollision->Update();
 
 }
 
@@ -74,12 +78,15 @@ void CParts::OnEvent(EEvent eEvent, void* _value)
 
 void CParts::Interact(CCharacter* pCharacter)
 {
-
+	SetPosition(&pCharacter->GetGrabPartsPosition());
+	pCharacter->SetParts(this);
+	pCharacter->SetPlayerState(EPlayerState::E_Grab);
+	
 }
 
 void CParts::DownParts(D3DXVECTOR3 vDir)
 {
-	m_vTestPosition = NULL;
+	m_vGrabPosition = NULL;
 	D3DXVec3Normalize(&vDir, &vDir);
 	
 	m_vPosition.x += (vDir.x/1.3f);

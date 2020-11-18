@@ -109,27 +109,17 @@ void CDebugPlayer1::PressKey(void* _value)
 	}
 	if (data->wKey == m_stInputKey.interactableKey1)
 	{
-		if (m_ePlayerState == EPlayerState::E_None && m_isGrabCooltime == false)
+		if(m_ePlayerState == EPlayerState::E_None)
 		{
-			DWORD startTime = GetTickCount();
 			m_GameCenter->GetInteractObject(this);
-			m_isGrabCooltime = true;
-			g_SoundManager->PlaySFX("Melem");
 			
-			if (startTime - m_elapsedTime >= 300)
-			{
-				m_isGrabCooltime = false;
-			}
-			
-			m_elapsedTime = GetTickCount();
 		}
-		else if (m_ePlayerState == EPlayerState::E_Grab)
+		else if(m_ePlayerState == EPlayerState::E_Grab)
 		{
-			m_GameCenter->DownParts(m_pParts, m_vDirection);
+			m_GameCenter->DownParts(m_pParts,m_vDirection);
 			m_ePlayerState = EPlayerState::E_None;
-			g_SoundManager->PlaySFX("Melem");
 		}
-		
+		//g_SoundManager->PlaySFX("Melem");
 	}
 	if (data->wKey == m_stInputKey.interactableKey2)
 	{
@@ -140,7 +130,7 @@ void CDebugPlayer1::PressKey(void* _value)
 		g_SoundManager->PlaySFX("Melem");
 	}
 
-	//_DEBUG_COMMENT cout << m_fRotY << endl;
+	_DEBUG_COMMENT cout << m_fRotY << endl;
 }
 
 void CDebugPlayer1::ReleaseKey(void* _value)
