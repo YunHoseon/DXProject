@@ -152,6 +152,7 @@
     <ClInclude Include="CBoxCollision.h" />
     <ClInclude Include="CCamera.h" />
     <ClInclude Include="CCharacter.h" />
+    <ClInclude Include="CPartCombinator.h" />
     <ClInclude Include="CPartStorage.h" />
     <ClInclude Include="CSoundManager.h" />
     <ClInclude Include="ICollisionArea.h" />
@@ -195,6 +196,7 @@
     <ClCompile Include="CBoxCollision.cpp" />
     <ClCompile Include="CCamera.cpp" />
     <ClCompile Include="CCharacter.cpp" />
+    <ClCompile Include="CPartCombinator.cpp" />
     <ClCompile Include="CPartStorage.cpp" />
     <ClCompile Include="CSoundManager.cpp" />
     <ClCompile Include="ICollisionArea.cpp" />
