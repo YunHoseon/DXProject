@@ -13,6 +13,7 @@ CPartStorage::CPartStorage(IInteractCenter* pInteractCenter)
 
 CPartStorage::~CPartStorage()
 {
+	SafeRelease(m_storageTexture);
 }
 
 void CPartStorage::Update()
@@ -45,7 +46,7 @@ void CPartStorage::Render()
 
 void CPartStorage::Setup(float fAngle, D3DXVECTOR3 vecPosition, INT nPartsID)
 {
-	m_nPartsID = nPartsID;
+	m_nID = nPartsID;
 	
 	vector<ST_PNT_VERTEX> vecVertex;
 	ST_PNT_VERTEX v;
@@ -159,7 +160,7 @@ void CPartStorage::OnEvent(EEvent eEvent, void * _value)
 
 CParts* CPartStorage::Make()
 {
-	CParts* parts = new CParts(m_nPartsID);
+	CParts* parts = new CParts(m_nID);
 	parts->Setup();
 	return parts;
 }

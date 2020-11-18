@@ -7,6 +7,7 @@
 #include "ICollisionArea.h"
 #include "CActor.h"
 #include "CCharacter.h"
+#include "CPartCombinator.h"
 
 /* µð¹ö±ë¿ë */
 #include "CDebugPlayer1.h"
@@ -52,6 +53,11 @@ void CGameScene::Init()
 	partStorage->Setup(0, D3DXVECTOR3(5, 0, 2) , 1);
 
 	m_vecObject.push_back(partStorage);
+
+	CPartCombinator* partCombinator = new CPartCombinator(this, ECombinatorType::E_1stAuto);
+	partCombinator->Setup(45.0f, D3DXVECTOR3(-1, 0, -1));
+
+	m_vecObject.push_back(partCombinator);
 
 	m_pDebugSphere = new CDebugPlayer1(this);
 	if (m_pDebugSphere)

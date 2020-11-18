@@ -149,9 +149,10 @@ void CField::Setup(int iWidth, int iHeight)
 
 			pTile->SetMeshCubeTile(pMesh);
 			pTile->AddEvent(EEvent::E_TileMove);
+		
 			pTile->SetPlaneTexture(g_pTextureManager->GetTexture("data/stones.png"));
 
-			//pTile->SetPlaneTexture(g_pTextureManager->GetTexture("data/Albedo00.jpg"));
+			
 
 			m_vecTile.push_back(pTile);
 		}
