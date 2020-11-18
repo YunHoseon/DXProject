@@ -168,6 +168,9 @@
     <ClInclude Include="CPartVending.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="CCombinatorButton.h">
+      <Filter>GameScene</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="stdafx.cpp">
@@ -295,6 +298,9 @@
     </ClCompile>
     <ClCompile Include="CPartVending.cpp">
       <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="CCombinatorButton.cpp">
+      <Filter>GameScene</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
