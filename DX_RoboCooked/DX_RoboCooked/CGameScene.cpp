@@ -4,6 +4,7 @@
 #include "CInteractiveActor.h"
 #include "CParts.h" //생성할때 사용하기위해
 #include "CPartStorage.h"
+#include "COutlet.h"
 #include "ICollisionArea.h"
 #include "CActor.h"
 #include "CCharacter.h"
@@ -28,7 +29,7 @@ CGameScene::CGameScene()
 CGameScene::~CGameScene()
 {
 	SafeDelete(m_pField);
-	for (auto it : m_vecParts)
+	for (CInteractiveActor* it : m_vecParts)
 	{
 		SafeDelete(it);
 	}
@@ -78,22 +79,22 @@ void CGameScene::Init()
 
 void CGameScene::Render()
 {
-	for (auto it : m_vecStaticActor)
+	for (CActor* it : m_vecStaticActor)
 	{
 		it->Render();
 	}
 
-	for (auto it : m_vecParts)
+	for (CInteractiveActor* it : m_vecParts)
 	{
 		it->Render();
 	}
 
-	for (auto it : m_vecObject)
+	for (CInteractiveActor* it : m_vecObject)
 	{
 		it->Render();
 	}
 
-	for (auto it : m_vecCharacters)
+	for (CCharacter* it : m_vecCharacters)
 	{
 		it->Render();
 	}
@@ -107,17 +108,17 @@ void CGameScene::Render()
 
 void CGameScene::Update()
 {
-	for (auto it : m_vecStaticActor)
+	for (CActor* it : m_vecStaticActor)
 	{
 		it->Update();
 	}
 
-	for (auto it : m_vecParts)
+	for (CInteractiveActor* it : m_vecParts)
 	{
 		it->Update();
 	}
 
-	for (auto it : m_vecObject)
+	for (CInteractiveActor* it : m_vecObject)
 	{
 		it->Update();
 	}
@@ -132,13 +133,13 @@ void CGameScene::Update()
 		m_pDebugSphere->Collide(m_pDebugCube);
 	}
 
-	for (auto && value : m_vecObject)
+	for (CInteractiveActor* value : m_vecObject)
 	{
 		m_pDebugSphere->Collide(value);
 		m_pDebugCube->Collide(value);
 	}
 
-	for (auto && value : m_vecParts)
+	for (CInteractiveActor* value : m_vecParts)
 	{
 		m_pDebugSphere->Collide(value);
 		m_pDebugCube->Collide(value);
@@ -148,7 +149,7 @@ void CGameScene::Update()
 
 void CGameScene::GetInteractObject(CCharacter* pCharacter)
 {
-	for (auto it : m_vecParts)
+	for (CInteractiveActor * it : m_vecParts)
 	{
 		if (pCharacter->GetInteractCollsion()->Collide(it->GetCollision()))
 		{
@@ -157,7 +158,7 @@ void CGameScene::GetInteractObject(CCharacter* pCharacter)
 		}
 	}
 
-	for (auto it : m_vecObject)
+	for (CInteractiveActor * it : m_vecObject)
 	{
 		if (pCharacter->GetInteractCollsion()->Collide(it->GetCollision()))
 		{
@@ -169,13 +170,13 @@ void CGameScene::GetInteractObject(CCharacter* pCharacter)
 
 void CGameScene::AddParts(CParts * parts)
 {
-	if(parts != NULL)
+	if(parts != nullptr)
 		m_vecParts.push_back(parts);
 }
 
 void CGameScene::DownParts(CParts* parts, D3DXVECTOR3 vDir)
 {
-	if (parts != NULL)
+	if (parts != nullptr)
 	{
 		parts->DownParts(vDir);
 	}
