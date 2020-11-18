@@ -36,6 +36,7 @@ void CDebugPlayer1::Setup()
 void CDebugPlayer1::Update()
 {
 	m_matWorld = m_matS * m_matR * m_matT;
+	
 	if (m_pInteractCollision)
 		m_pInteractCollision->Update();
 	
@@ -45,6 +46,8 @@ void CDebugPlayer1::Update()
 
 void CDebugPlayer1::Render()
 {
+	
+	
 	g_pD3DDevice->SetRenderState(D3DRS_LIGHTING, true);
 	g_pD3DDevice->SetTransform(D3DTS_WORLD, &m_matWorld);
 	g_pD3DDevice->SetTexture(0, NULL);

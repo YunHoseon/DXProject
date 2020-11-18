@@ -26,7 +26,7 @@ public:
 	virtual void Render() = 0;
 	virtual void Update() = 0;
 	
-	D3DXVECTOR3& GetPosition() { return m_vPosition; }
+	//D3DXVECTOR3& GetPosition() { return m_vPosition; }
 	ICollisionArea* GetInteractCollsion() { return m_pInteractCollision; }
 };
 
