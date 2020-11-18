@@ -1,6 +1,8 @@
 #pragma once
 #include "CActor.h"
+
 class CCharacter;
+
 
 class CInteractiveActor :
 	public CActor
