@@ -19,3 +19,4 @@ bool CActor::Collide(CActor* target)
 {
 	return m_pCollision->Collide(target->m_pCollision);
 }
+

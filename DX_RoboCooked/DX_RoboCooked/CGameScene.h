@@ -34,5 +34,6 @@ public:
 	virtual void Render();
 	virtual void Update();
 	void CGameScene::GetInteractObject(CCharacter* pCharacter);
+	void AddParts(CParts* parts);
 };
 
