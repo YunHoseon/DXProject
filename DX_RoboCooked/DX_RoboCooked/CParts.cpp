@@ -5,6 +5,7 @@
 
 CParts::CParts()
 	:m_vPosition(3.0f, 0.0f, 2.0f)
+	, m_fRotAngle(0.0f)
 {
 	D3DXMatrixIdentity(&m_matWorld);
 	m_sphere.vCenter = m_vPosition;
@@ -14,6 +15,7 @@ CParts::CParts()
 
 CParts::CParts(int nPartsID)
 	:m_vPosition(3.0f, 0.0f, 2.0f)
+	, m_fRotAngle(0.0f)
 {
 	m_nPartsID = nPartsID;
 	D3DXMatrixIdentity(&m_matWorld);
@@ -48,6 +50,7 @@ void CParts::Update()
 	{
 		m_vPosition = *m_vGrabPosition;
 	}
+	D3DXMatrixRotationX(&m_matR, D3DXToRadian(m_fRotAngle));
 
 	D3DXMatrixTranslation(&m_matT, m_vPosition.x , m_vPosition.y, m_vPosition.z);
 
@@ -93,4 +96,11 @@ void CParts::DownParts(D3DXVECTOR3 vDir)
 	m_vPosition.y = vDir.y;
 	m_vPosition.z += (vDir.z/1.3f);
 
+}
+
+void CParts::PartsRotate()
+{
+	m_fRotAngle += 90.0f;
+	if (m_fRotAngle == 360.0f)
+		m_fRotAngle = 0;
 }
