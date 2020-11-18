@@ -34,6 +34,7 @@ void CDebugPlayer2::Setup()
 
 void CDebugPlayer2::Update()
 {
+	Move();
 	m_matWorld = m_matS * m_matR * m_matT;
 	if (m_pCollision)
 		m_pCollision->Update();
@@ -71,30 +72,30 @@ void CDebugPlayer2::OnEvent(EEvent eEvent, void* _value)
 void CDebugPlayer2::PressKey(void* _value)
 {
 	ST_KeyInputEvent *data = static_cast<ST_KeyInputEvent*>(_value);
-	
+
 	if (data->wKey == m_stInputKey.moveFowardKey)
 	{
-		m_fRotY = 0.0f;
-		Rotate();
-		Move(D3DXVECTOR3(0, 0, 1) * m_fSpeed);
+		Rotate(0);
+		m_fSpeed = m_fBaseSpeed;
 	}
 	if (data->wKey == m_stInputKey.moveLeftKey)
 	{
-		m_fRotY = D3DX_PI * 1.5f;
-		Rotate();
-		Move((D3DXVECTOR3(-1, 0, 0) * m_fSpeed));
+		if (m_fRotY - 0.1f < 0.f)
+			m_fRotY += D3DX_PI * 2.f;
+		Rotate(D3DX_PI * 1.5f);
+		m_fSpeed = m_fBaseSpeed;
 	}
 	if (data->wKey == m_stInputKey.moveBackKey)
 	{
-		m_fRotY = D3DX_PI;
-		Rotate();
-		Move(D3DXVECTOR3(0, 0, -1) * m_fSpeed);
+		Rotate(D3DX_PI);
+		m_fSpeed = m_fBaseSpeed;
 	}
 	if (data->wKey == m_stInputKey.moveRightKey)
 	{
-		m_fRotY = D3DX_PI * 0.5f;
-		Rotate();
-		Move(D3DXVECTOR3(1, 0, 0) * m_fSpeed);
+		if (m_fRotY + 0.1f > D3DX_PI * 2.f)
+			m_fRotY -= D3DX_PI * 2.f;
+		Rotate(D3DX_PI * 0.5f);
+		m_fSpeed = m_fBaseSpeed;
 	}
 	if (data->wKey == m_stInputKey.interactableKey1)
 	{
@@ -108,25 +109,39 @@ void CDebugPlayer2::PressKey(void* _value)
 	{
 		g_SoundManager->PlaySFX("Melem");
 	}
+
+	_DEBUG_COMMENT cout << m_fRotY << endl;
 }
 
 void CDebugPlayer2::ReleaseKey(void* _value)
 {
+	_DEBUG_COMMENT std::cout << "Release" << std::endl;
+	m_fSpeed = 0.0f;
 }
 
-void CDebugPlayer2::Move(D3DXVECTOR3 _vecMove)
+void CDebugPlayer2::Move()
 {
-	D3DXVECTOR3 vPosition = m_vPosition;
-	vPosition += _vecMove;
-	m_vPosition = vPosition;
+	if (m_fSpeed == 0.0f)
+		return;
+
+	D3DXVec3TransformNormal(&m_vDirection, &D3DXVECTOR3(0, 0, 1), &m_matR);
+
+	m_vPosition += m_vDirection * m_fSpeed;
+
 	D3DXMatrixTranslation(&m_matT, m_vPosition.x, m_vPosition.y, m_vPosition.z);
 }
 
-void CDebugPlayer2::Rotate()
+void CDebugPlayer2::Rotate(float fTargetRot)
 {
-	D3DXQUATERNION qRot;
-	D3DXQuaternionRotationAxis(&qRot, &D3DXVECTOR3(0, 1, 0), m_fRotY);
-	D3DXMatrixRotationQuaternion(&m_matR, &qRot);
+	D3DXQUATERNION stLerpRot, stCurrentRot, stTargetRot;
+	D3DXQuaternionRotationAxis(&stCurrentRot, &D3DXVECTOR3(0, 1, 0), m_fRotY);
+	D3DXQuaternionRotationAxis(&stTargetRot, &D3DXVECTOR3(0, 1, 0), fTargetRot);
+
+	D3DXQuaternionSlerp(&stLerpRot, &stCurrentRot, &stTargetRot, 0.3f);
+	D3DXMatrixRotationQuaternion(&m_matR, &stLerpRot);
+
+	D3DXVECTOR3 dummy;
+	D3DXQuaternionToAxisAngle(&stLerpRot, &dummy, &m_fRotY);
 }
 
 void CDebugPlayer2::SetKeyChange(void* _value)

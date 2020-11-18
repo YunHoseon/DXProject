@@ -90,6 +90,8 @@ void CDebugPlayer1::PressKey(void* _value)
 	}
 	if (data->wKey == m_stInputKey.moveLeftKey)
 	{
+		if (m_fRotY - 0.1f < 0.f)
+			m_fRotY += D3DX_PI * 2.f;
 		Rotate(D3DX_PI * 1.5f);
 		m_fSpeed = m_fBaseSpeed;
 	}
@@ -100,6 +102,8 @@ void CDebugPlayer1::PressKey(void* _value)
 	}
 	if (data->wKey == m_stInputKey.moveRightKey)
 	{
+		if (m_fRotY + 0.1f > D3DX_PI * 2.f)
+			m_fRotY -= D3DX_PI * 2.f;
 		Rotate(D3DX_PI * 0.5f);
 		m_fSpeed = m_fBaseSpeed;
 	}
@@ -116,6 +120,8 @@ void CDebugPlayer1::PressKey(void* _value)
 	{
 		g_SoundManager->PlaySFX("Melem");
 	}
+
+	_DEBUG_COMMENT cout << m_fRotY << endl;
 }
 
 void CDebugPlayer1::ReleaseKey(void* _value)
@@ -129,10 +135,9 @@ void CDebugPlayer1::Move()
 	if (m_fSpeed == 0.0f)
 		return;
 	
-	D3DXVECTOR3 vDir;
-	D3DXVec3TransformNormal(&vDir, &m_vDirection, &m_matR);
+	D3DXVec3TransformNormal(&m_vDirection, &D3DXVECTOR3(0,0,1), &m_matR);
 
-	m_vPosition += vDir * m_fSpeed;
+	m_vPosition += m_vDirection * m_fSpeed;
 
 	D3DXMatrixTranslation(&m_matT, m_vPosition.x, m_vPosition.y, m_vPosition.z);
 }

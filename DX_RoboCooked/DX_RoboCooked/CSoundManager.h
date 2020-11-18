@@ -1,12 +1,12 @@
 #pragma once
-#include <fmod.hpp>
+#include "inc/fmod.hpp"
 #pragma comment(lib,"fmodex_vc.lib")
 #include <string>
 #include <map>
 
 #define g_SoundManager	SoundManager::GetInstance()
 
-using namespace std;
+//using namespace std;
 using namespace FMOD;
 
 class SoundManager : public CSingleton<SoundManager>

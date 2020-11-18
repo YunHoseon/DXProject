@@ -71,8 +71,8 @@
   <PropertyGroup Label="UserMacros" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <LinkIncremental>true</LinkIncremental>
-    <IncludePath>C:\DxProject\DX_RoboCooked\DX_RoboCooked;$(DXSDK_DIR)\Include;D:\DXProject\DX_RoboCooked\DX_RoboCooked;$(IncludePath)</IncludePath>
-    <LibraryPath>$(DXSDK_DIR)\Lib\x86;C:\DxProject\DX_RoboCooked\DX_RoboCooked;D:\DXProject\DX_RoboCooked\DX_RoboCooked;$(LibraryPath)</LibraryPath>
+    <IncludePath>C:\DxProject\DX_RoboCooked\DX_RoboCooked;$(DXSDK_DIR)\Include;D:\DXProject\DX_RoboCooked\DX_RoboCooked;$(IncludePath);</IncludePath>
+    <LibraryPath>$(DXSDK_DIR)\Lib\x86;C:\DxProject\DX_RoboCooked\DX_RoboCooked;D:\DXProject\DX_RoboCooked\DX_RoboCooked;$(LibraryPath);</LibraryPath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <LinkIncremental>true</LinkIncremental>
@@ -95,6 +95,8 @@
     <Link>
       <SubSystem>Windows</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
+      <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalLibraryDirectories>%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">

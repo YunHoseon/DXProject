@@ -125,6 +125,12 @@ void CGameScene::Update()
 		m_pDebugSphere->Update();
 		m_pDebugSphere->Collide(m_pDebugCube);
 	}
+
+	for (auto && value : m_vecObject)
+	{
+		m_pDebugSphere->Collide(value);
+		m_pDebugCube->Collide(value);
+	}
 }
 
 
