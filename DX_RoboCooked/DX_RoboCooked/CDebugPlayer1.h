@@ -3,6 +3,7 @@
 #include "CCharacter.h"
 
 
+
 class CGameScene;
 
 class CDebugPlayer1 : public CActor, public CCharacter
@@ -12,7 +13,9 @@ private:
 	LPD3DXMESH			m_pMeshSphere;
 	D3DMATERIAL9		m_stMtlSphere;
 	ST_PLAYER_INPUTKEY	m_stInputKey;
-	
+
+
+
 public:
 	CDebugPlayer1(CGameScene* gameCenter);
 	~CDebugPlayer1();
@@ -30,5 +33,6 @@ public:
 	void Rotate(float fTargetRot);
 	void Pick();
 	void Place();
+	
 };
 
