@@ -22,8 +22,8 @@ public:
 	void OnEvent(EEvent eEvent, void* _value);
 	void PressKey(void* _value);
 	void ReleaseKey(void* _value);
-	void Move(D3DXVECTOR3 _vecMove);
-	void Rotate();
+	void Move();
+	void Rotate(float fTargetRot);
 	void SetKeyChange(void* _value);
 };
 

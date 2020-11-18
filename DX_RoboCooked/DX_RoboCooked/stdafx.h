@@ -218,8 +218,9 @@ struct ST_PLAYER_INPUTKEY
 
 	#define _DEBUG_COMMENT
 	#define _RELEASE_COMMENT __DOUBLE_SLASH
-
+	using std::cout;
+	using std::endl;
 #else
-	#define _DebugComment __DOUBLE_SLASH
-	#define _ReleaseComment
+	#define _DEBUG_COMMENT __DOUBLE_SLASH
+	#define _RELEASE_COMMENT
 #endif
