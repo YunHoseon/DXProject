@@ -29,5 +29,6 @@ public:
 	void Interact(CCharacter* pCharacter) override;
 	void SetPosition(D3DXVECTOR3* vPosition) { m_vGrabPosition = vPosition; }
 	void DownParts(D3DXVECTOR3 vDir);
+	void PartsRotate();
 };
 
