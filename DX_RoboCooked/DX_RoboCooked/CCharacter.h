@@ -1,4 +1,5 @@
 #pragma once
+#include "CParts.h"
 
 class ICollisionArea;
 class CGameScene;
@@ -22,8 +23,10 @@ protected:
 	D3DXVECTOR3			m_vDirection;
 	D3DXVECTOR3			m_vPosition;
 	D3DXVECTOR3			m_vGrabPartsPosition;
+	CParts*				m_pParts;
 	// 상태이상에 대한 변수 //
 	
+
 public:
 	CCharacter();
 	virtual ~CCharacter() = 0;
@@ -32,5 +35,8 @@ public:
 	
 	D3DXVECTOR3& GetGrabPartsPosition() { return m_vGrabPartsPosition; }
 	ICollisionArea* GetInteractCollsion() { return m_pInteractCollision; }
+	EPlayerState GetPlayerState() { return m_ePlayerState; }
+	void SetPlayerState(EPlayerState state) { m_ePlayerState = state; }
+	void SetParts(CParts* pParts) { m_pParts = pParts; }
 };
 

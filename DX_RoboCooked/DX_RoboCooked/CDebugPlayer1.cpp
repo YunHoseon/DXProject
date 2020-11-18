@@ -105,7 +105,16 @@ void CDebugPlayer1::PressKey(void* _value)
 	}
 	if (data->wKey == m_stInputKey.interactableKey1)
 	{
-		m_GameCenter->GetInteractObject(this);
+		if(m_ePlayerState == EPlayerState::E_None)
+		{
+			m_GameCenter->GetInteractObject(this);
+			m_ePlayerState = EPlayerState::E_Grab;
+		}
+		else if(m_ePlayerState == EPlayerState::E_Grab)
+		{
+			m_GameCenter->DownParts(m_pParts,m_vDirection);
+			m_ePlayerState = EPlayerState::E_None;
+		}
 		g_SoundManager->PlaySFX("Melem");
 	}
 	if (data->wKey == m_stInputKey.interactableKey2)
@@ -129,10 +138,9 @@ void CDebugPlayer1::Move()
 	if (m_fSpeed == 0.0f)
 		return;
 	
-	D3DXVECTOR3 vDir;
-	D3DXVec3TransformNormal(&vDir, &m_vDirection, &m_matR);
+	D3DXVec3TransformNormal(&m_vDirection, &D3DXVECTOR3(0,0,1), &m_matR);
 
-	m_vPosition += vDir * m_fSpeed;
+	m_vPosition += m_vDirection * m_fSpeed;
 
 	D3DXMatrixTranslation(&m_matT, m_vPosition.x, m_vPosition.y, m_vPosition.z);
 }

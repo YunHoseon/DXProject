@@ -14,6 +14,7 @@ CCharacter::CCharacter()
 	, m_vDirection(0,0,1)
 	, m_vPosition(0, 0, 0)
 	, m_vGrabPartsPosition(0, 1, 0)
+	, m_pParts(NULL)
 {
 }
 

@@ -145,3 +145,11 @@ void CGameScene::AddParts(CParts * parts)
 	if(parts != NULL)
 		m_vecParts.push_back(parts);
 }
+
+void CGameScene::DownParts(CParts* parts, D3DXVECTOR3 vDir)
+{
+	if (parts != NULL)
+	{
+		parts->DownParts(vDir);
+	}
+}

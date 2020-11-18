@@ -35,5 +35,6 @@ public:
 	virtual void Update();
 	void CGameScene::GetInteractObject(CCharacter* pCharacter);
 	void AddParts(CParts* parts);
+	void DownParts(CParts* parts,D3DXVECTOR3 vDir);
 };
 

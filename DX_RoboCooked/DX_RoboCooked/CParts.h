@@ -28,5 +28,6 @@ public:
 	void OnEvent(EEvent eEvent, void* _value);
 	void Interact(CCharacter* pCharacter) override;
 	void SetPosition(D3DXVECTOR3* vPosition) { m_vTestPosition = vPosition; }
+	void DownParts(D3DXVECTOR3 vDir);
 };
 
