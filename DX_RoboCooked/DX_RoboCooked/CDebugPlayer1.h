@@ -3,7 +3,6 @@
 #include "CCharacter.h"
 
 
-class CGameScene;
 
 class CDebugPlayer1 : public CActor, public CCharacter
 {
@@ -14,14 +13,14 @@ private:
 	ST_PLAYER_INPUTKEY	m_stInputKey;
 	
 public:
-	CDebugPlayer1(CGameScene* gameCenter);
+	CDebugPlayer1(IInteractCenter* pInteractCenter = nullptr);
 	~CDebugPlayer1();
 
 	void Setup();
 	void Update() override;
 	void Render() override;
 
-	void OnEvent(EEvent eEvent, void* _value);
+	void OnEvent(EEvent eEvent, void* _value) override;
 	void PressKey(void* _value);
 	void ReleaseKey(void* _value);
 	void SetKeyChange(void* _value);

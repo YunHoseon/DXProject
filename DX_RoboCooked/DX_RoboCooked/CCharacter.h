@@ -14,7 +14,7 @@ enum class EPlayerState
 class CCharacter
 {
 protected:
-	//CGameScene*			m_GameCenter;
+	//CGameScene*			m_pInteractCenter;
 	EPlayerState		m_ePlayerState;
 	ICollisionArea*		m_pInteractCollision;
 	float				m_fBaseSpeed;

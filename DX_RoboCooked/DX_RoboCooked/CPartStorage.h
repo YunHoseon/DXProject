@@ -12,7 +12,7 @@ private:
 	INT						m_nPartsID;
 	
 public:
-	CPartStorage(CGameScene* gameCenter);
+	CPartStorage(IInteractCenter* pInteractCenter);
 	~CPartStorage();
 
 

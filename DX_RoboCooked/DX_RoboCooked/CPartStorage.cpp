@@ -5,9 +5,9 @@
 #include "CCharacter.h"
 #include "CGameScene.h"
 
-CPartStorage::CPartStorage(CGameScene* gameCenter)
+CPartStorage::CPartStorage(IInteractCenter* pInteractCenter)
 {
-	m_GameCenter = gameCenter;
+	m_pInteractCenter = pInteractCenter;
 }
 
 
@@ -167,7 +167,7 @@ void CPartStorage::Interact(CCharacter* pCharacter)
 	{
 		CParts* parts = Make();
 		parts->SetPosition(&pCharacter->GetGrabPartsPosition());
-		m_GameCenter->AddParts(parts);
+		m_pInteractCenter->AddParts(parts);
 		pCharacter->SetParts(parts);
 		pCharacter->SetPlayerState(EPlayerState::E_Grab);
 	}

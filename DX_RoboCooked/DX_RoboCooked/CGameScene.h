@@ -1,7 +1,7 @@
 #pragma once
 #include "CActor.h"
 #include "CScene.h"
-
+#include "IInteractCenter.h"
 class CField;
 class CInteractiveActor;
 class CParts;
@@ -12,7 +12,7 @@ class CDebugPlayer1;
 class CDebugPlayer2;
 
 class CGameScene :
-	public CScene
+	public CScene, public IInteractCenter
 {
 private:
 	CField*						m_pField;
@@ -33,7 +33,7 @@ public:
 	virtual void Init();
 	virtual void Render();
 	virtual void Update();
-	void CGameScene::GetInteractObject(CCharacter* pCharacter);
+	void GetInteractObject(CCharacter* pCharacter);
 	void AddParts(CParts* parts);
 	void DownParts(CParts* parts,D3DXVECTOR3 vDir);
 };
