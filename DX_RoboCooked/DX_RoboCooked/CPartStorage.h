@@ -15,7 +15,6 @@ public:
 	CPartStorage(CGameScene* gameCenter);
 	~CPartStorage();
 
-
 public:
 	void Update() override;
 	void Render() override;
@@ -25,6 +24,5 @@ public:
 
 private:
 	CParts* Make() override;
-	
 };
 
