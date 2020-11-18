@@ -169,6 +169,7 @@ void CPartStorage::Interact(CCharacter* pCharacter)
 		parts->SetPosition(&pCharacter->GetGrabPartsPosition());
 		m_GameCenter->AddParts(parts);
 		pCharacter->SetParts(parts);
+		pCharacter->SetPlayerState(EPlayerState::E_Grab);
 	}
 	
 }
