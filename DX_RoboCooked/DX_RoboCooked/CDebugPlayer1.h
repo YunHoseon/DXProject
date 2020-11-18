@@ -28,7 +28,5 @@ public:
 	
 	void Move();
 	void Rotate(float fTargetRot);
-	void Pick();
-	void Place();
 };
 

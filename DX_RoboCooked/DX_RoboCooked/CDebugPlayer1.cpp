@@ -150,16 +150,6 @@ void CDebugPlayer1::Rotate(float fTargetRot)
 	D3DXQuaternionToAxisAngle(&stLerpRot, &dummy, &m_fRotY);
 }
 
-void CDebugPlayer1::Pick()
-{
-	
-}
-
-void CDebugPlayer1::Place()
-{
-	
-}
-
 void CDebugPlayer1::SetKeyChange(void* _value)
 {
 	ST_PLAYER_INPUTKEY *data = static_cast<ST_PLAYER_INPUTKEY*>(_value);

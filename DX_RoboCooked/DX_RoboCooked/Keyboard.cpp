@@ -56,12 +56,12 @@ void CKeyboard::PressKey(WPARAM keyID, LPARAM lParam)
 	case VK_SHIFT:
 		new_vk = MapVirtualKey(scancode, MAPVK_VSC_TO_VK_EX);
 		break;
-		
+
 	case VK_PROCESSKEY:
 	case VK_HANJA:
 		new_vk = extended ? VK_RCONTROL : VK_LCONTROL;
 		break;
-		
+
 	case VK_MENU:
 		new_vk = extended ? VK_RMENU : VK_LMENU;
 		break;
@@ -73,6 +73,18 @@ void CKeyboard::PressKey(WPARAM keyID, LPARAM lParam)
 	m_setKey.insert(new_vk);
 	m_dwPrevKey = new_vk;
 	m_eKeyState = E_BTNDOWN;
+
+	/*while (m_eKeyState == E_BTNDOWN)
+	{
+		DWORD currentTime = GetTickCount();
+
+		if (currentTime - m_elapsedTime < 500 && keyID == m_dwPrevKey && m_eKeyState == E_BTNUP)
+		{
+			std::cout << "È¦µå" << std::endl;
+			m_eKeyState = E_HOLD;
+		}
+		m_elapsedTime = GetTickCount();
+	}*/
 }
 
 void CKeyboard::ReleaseKey(WPARAM keyID, LPARAM lParam)
