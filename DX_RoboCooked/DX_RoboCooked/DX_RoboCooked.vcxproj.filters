@@ -156,8 +156,8 @@
     <ClInclude Include="CDebugPlayer1.h">
       <Filter>GameScene</Filter>
     </ClInclude>
-    <ClInclude Include="IInteractCenter.h">
-      <Filter>GameScene</Filter>
+    <ClInclude Include="CPartCombinator.h">
+      <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="COutlet.h">
       <Filter>GameScene</Filter>
@@ -281,7 +281,7 @@
     <ClCompile Include="CCharacter.cpp">
       <Filter>GameScene</Filter>
     </ClCompile>
-    <ClCompile Include="IInteractCenter.cpp">
+    <ClCompile Include="CPartCombinator.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="COutlet.cpp">
