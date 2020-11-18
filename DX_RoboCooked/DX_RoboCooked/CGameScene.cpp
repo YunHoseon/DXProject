@@ -61,7 +61,7 @@ void CGameScene::Init()
 
 	m_vecObject.push_back(partCombinator);
 
-	CCombinatorButton* combinatorButton = new CCombinatorButton(partCombinator);//수동조합기 먼저 해봅시다 .
+	CCombinatorButton* combinatorButton = new CCombinatorButton(partCombinator);
 	combinatorButton->Setup(0,D3DXVECTOR3(3,0,-3));
 	m_vecObject.push_back(combinatorButton);
 

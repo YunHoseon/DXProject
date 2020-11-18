@@ -156,14 +156,17 @@
     <ClInclude Include="CDebugPlayer1.h">
       <Filter>GameScene</Filter>
     </ClInclude>
+    <ClInclude Include="CPartCombinator.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
     <ClInclude Include="IInteractCenter.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="CPartCombinator.h">
-      <Filter>GameScene</Filter>
+    <ClInclude Include="COutlet.h">
+      <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="CCombinatorButton.h">
-      <Filter>GameScene</Filter>
+    <ClInclude Include="CPartVending.h">
+      <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -281,14 +284,17 @@
     <ClCompile Include="CCharacter.cpp">
       <Filter>GameScene</Filter>
     </ClCompile>
+    <ClCompile Include="CPartCombinator.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
     <ClCompile Include="IInteractCenter.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="CPartCombinator.cpp">
-      <Filter>GameScene</Filter>
+    <ClCompile Include="COutlet.cpp">
+      <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="CCombinatorButton.cpp">
-      <Filter>GameScene</Filter>
+    <ClCompile Include="CPartVending.cpp">
+      <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
