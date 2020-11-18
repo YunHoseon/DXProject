@@ -14,7 +14,6 @@ enum class EPlayerState
 class CCharacter
 {
 protected:
-	//CGameScene*			m_GameCenter;
 	EPlayerState		m_ePlayerState;
 	ICollisionArea*		m_pInteractCollision;
 	float				m_fBaseSpeed;
@@ -24,6 +23,9 @@ protected:
 	D3DXVECTOR3			m_vPosition;
 	D3DXVECTOR3			m_vGrabPartsPosition;
 	CParts*				m_pParts;
+
+	DWORD				m_elapsedTime;
+	bool				m_isGrabCooltime;
 	// 상태이상에 대한 변수 //
 	
 
