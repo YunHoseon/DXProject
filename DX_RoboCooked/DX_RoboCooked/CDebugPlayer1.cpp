@@ -119,7 +119,7 @@ void CDebugPlayer1::PressKey(void* _value)
 			m_GameCenter->DownParts(m_pParts,m_vDirection);
 			m_ePlayerState = EPlayerState::E_None;
 		}
-		g_SoundManager->PlaySFX("Melem");
+		//g_SoundManager->PlaySFX("Melem");
 	}
 	if (data->wKey == m_stInputKey.interactableKey2)
 	{

@@ -64,10 +64,10 @@ void CGameScene::Init()
 	m_vecCharacters.push_back(m_pDebugCube);
 	m_vecCharacters.push_back(m_pDebugSphere);
 
-	//m_pDebugParts = new CParts(999);
-	//if (m_pDebugParts)
-	//	m_pDebugParts->Setup();
-	//m_vecParts.push_back(m_pDebugParts);
+	m_pDebugParts = new CParts(999);
+	if (m_pDebugParts)
+		m_pDebugParts->Setup();
+	m_vecParts.push_back(m_pDebugParts);
 }
 
 void CGameScene::Render()
@@ -131,17 +131,32 @@ void CGameScene::Update()
 		m_pDebugSphere->Collide(value);
 		m_pDebugCube->Collide(value);
 	}
+
+	for (auto && value : m_vecParts)
+	{
+		m_pDebugSphere->Collide(value);
+		m_pDebugCube->Collide(value);
+	}
 }
 
 
 void CGameScene::GetInteractObject(CCharacter* pCharacter)
 {
+	for (auto it : m_vecParts)
+	{
+		if (pCharacter->GetInteractCollsion()->Collide(it->GetCollision()))
+		{
+			it->Interact(pCharacter);
+			return;
+		}
+	}
+
 	for (auto it : m_vecObject)
 	{
 		if (pCharacter->GetInteractCollsion()->Collide(it->GetCollision()))
 		{
 			it->Interact(pCharacter);
-			break;
+			return;
 		}
 	}
 }

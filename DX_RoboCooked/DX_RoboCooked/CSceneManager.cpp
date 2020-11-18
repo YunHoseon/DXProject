@@ -12,6 +12,11 @@ CSceneManager::CSceneManager():CSingleton<CSceneManager>()
 
 CSceneManager::~CSceneManager()
 {
+	for(auto it : m_SceneList)
+	{
+		SafeDelete(it.second);
+	}
+	
 }
 
 void CSceneManager::SceneChange(string sceneName)

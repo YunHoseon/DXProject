@@ -7,7 +7,7 @@ class CParts :
 {
 private:
 	D3DXVECTOR3			m_vPosition;
-	D3DXVECTOR3*		m_vTestPosition;
+	D3DXVECTOR3*		m_vGrabPosition;
 
 	ST_SPHERE			m_sphere;
 	LPD3DXMESH			m_pMeshSphere;
@@ -27,7 +27,7 @@ public:
 	void Render() override;
 	void OnEvent(EEvent eEvent, void* _value);
 	void Interact(CCharacter* pCharacter) override;
-	void SetPosition(D3DXVECTOR3* vPosition) { m_vTestPosition = vPosition; }
+	void SetPosition(D3DXVECTOR3* vPosition) { m_vGrabPosition = vPosition; }
 	void DownParts(D3DXVECTOR3 vDir);
 };
 
