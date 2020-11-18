@@ -122,11 +122,15 @@ void CDebugPlayer1::PressKey(void* _value)
 			m_pInteractCenter->DownParts(m_pParts,m_vDirection);
 			m_ePlayerState = EPlayerState::E_None;
 		}
-		g_SoundManager->PlaySFX("Melem");
+		//g_SoundManager->PlaySFX("Melem");
 	}
 	if (data->wKey == m_stInputKey.interactableKey2)
 	{
-		g_SoundManager->PlaySFX("Melem");
+		if (m_ePlayerState == EPlayerState::E_Grab)
+		{
+			m_pParts->PartsRotate();
+		}
+		//g_SoundManager->PlaySFX("Melem");
 	}
 	if (data->wKey == m_stInputKey.interactableKey3)
 	{

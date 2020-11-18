@@ -7,8 +7,8 @@ class CGameScene;
 
 enum class EPlayerState
 {
-	E_None, //╠Б╨╩╩Себ
-	E_Grab  //юБ╠Б╩Себ
+	E_None, //О©╫Б╨╩О©╫О©╫О©╫О©╫
+	E_Grab  //О©╫О©╫О©╫О©╫О©╫О©╫
 };
 
 class CCharacter
@@ -24,7 +24,10 @@ protected:
 	D3DXVECTOR3			m_vPosition;
 	D3DXVECTOR3			m_vGrabPartsPosition;
 	CParts*				m_pParts;
-	// ╩Себюл╩С©║ ╢Кгя ╨╞╪Ж //
+
+	DWORD				m_elapsedTime;
+	bool				m_isGrabCooltime;
+	// О©╫О©╫О©╫О©╫О©╫л╩О©╫ О©╫О©╫О©╫О©╫ О©╫О©╫О©╫О©╫ //
 	
 
 public:
