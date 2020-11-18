@@ -9,6 +9,7 @@
 #include "CActor.h"
 #include "CCharacter.h"
 #include "CPartCombinator.h"
+#include "CCombinatorButton.h"
 
 /* 디버깅용 */
 #include "CDebugPlayer1.h"
@@ -59,6 +60,12 @@ void CGameScene::Init()
 	partCombinator->Setup(45.0f, D3DXVECTOR3(-1, 0, -1));
 
 	m_vecObject.push_back(partCombinator);
+
+	CCombinatorButton* combinatorButton = new CCombinatorButton(partCombinator);//수동조합기 먼저 해봅시다 .
+	combinatorButton->Setup(0,D3DXVECTOR3(3,0,-3));
+	m_vecObject.push_back(combinatorButton);
+
+
 
 	m_pDebugSphere = new CDebugPlayer1(this);
 	if (m_pDebugSphere)

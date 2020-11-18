@@ -1,22 +1,57 @@
 #include "stdafx.h"
-#include "CPartCombinator.h"
+#include "CCombinatorButton.h"
 #include "CBoxCollision.h"
-#include "CCharacter.h"
-#include "CActor.h"
 
 
-CPartCombinator::CPartCombinator(IInteractCenter* pInteractCenter,ECombinatorType eType):m_eType(eType)
+CCombinatorButton::CCombinatorButton(CPartCombinator* pPartCombinator)
+			:m_pPartCombinator(pPartCombinator)
 {
-	m_pInteractCenter = pInteractCenter;
 }
 
 
-CPartCombinator::~CPartCombinator()
+CCombinatorButton::~CCombinatorButton()
 {
-	SafeRelease(m_CombinatorTexture);
+	SafeRelease(m_CombinatorBtnTexture);
 }
 
-void CPartCombinator::Setup(float fAngle, D3DXVECTOR3 vecPosition)
+void CCombinatorButton::OnEvent(EEvent eEvent, void * _value)
+{
+}
+
+void CCombinatorButton::Interact(CCharacter * pCharacter)
+{
+	m_pPartCombinator->CombineParts();
+}
+
+void CCombinatorButton::Update()
+{
+	_DEBUG_COMMENT if (m_pCollision)
+		_DEBUG_COMMENT m_pCollision->Update();
+}
+
+void CCombinatorButton::Render()
+{
+	m_matWorld = m_matS * m_matR * m_matT;
+	g_pD3DDevice->SetTransform(D3DTS_WORLD, &m_matWorld);
+	g_pD3DDevice->SetTexture(0, m_CombinatorBtnTexture);
+
+	D3DMATERIAL9 mtlStorage;
+	ZeroMemory(&mtlStorage, sizeof(D3DMATERIAL9));
+	mtlStorage.Ambient = D3DXCOLOR(0.7f, 0.7f, 0.7f, 1.0f);
+	mtlStorage.Diffuse = D3DXCOLOR(0.7f, 0.7f, 0.7f, 1.0f);
+	mtlStorage.Specular = D3DXCOLOR(0.7f, 0.7f, 0.7f, 1.0f);
+
+	g_pD3DDevice->SetMaterial(&mtlStorage);
+	g_pD3DDevice->SetFVF(ST_PNT_VERTEX::FVF);
+	g_pD3DDevice->DrawPrimitiveUP(D3DPT_TRIANGLELIST, m_vecVertex.size() / 3, &m_vecVertex[0],
+		sizeof(ST_PNT_VERTEX));
+	g_pD3DDevice->SetTexture(0, 0);
+
+	_DEBUG_COMMENT if (m_pCollision)
+		_DEBUG_COMMENT m_pCollision->Render();
+}
+
+void CCombinatorButton::Setup(float fAngle, D3DXVECTOR3 vPosition)
 {
 	vector<ST_PNT_VERTEX> vecVertex;
 	ST_PNT_VERTEX v;
@@ -116,64 +151,10 @@ void CPartCombinator::Setup(float fAngle, D3DXVECTOR3 vecPosition)
 
 	m_vecVertex = vecVertex;
 
-	m_CombinatorTexture = g_pTextureManager->GetTexture(("data/Texture/city_014.png"));
+	m_CombinatorBtnTexture = g_pTextureManager->GetTexture(("data/Texture/stones.png"));
 
-	D3DXMatrixRotationY(&m_matR, D3DXToRadian(fAngle));
-	D3DXMatrixTranslation(&m_matT, vecPosition.x, 0, vecPosition.z);
+	D3DXMatrixRotationY(&m_matR, D3DXToRadian(0.0f));
+	D3DXMatrixTranslation(&m_matT, vPosition.x, 0, vPosition.z);
 
 	m_pCollision = new CBoxCollision(D3DXVECTOR3(0, 0, 0), D3DXVECTOR3(1.0f, 1.0f, 1.0f), &m_matWorld);
-}
-
-void CPartCombinator::Update()
-{
-	_DEBUG_COMMENT if (m_pCollision)
-		_DEBUG_COMMENT m_pCollision->Update();
-}
-
-void CPartCombinator::Render()
-{
-	m_matWorld = m_matS * m_matR * m_matT;
-	g_pD3DDevice->SetTransform(D3DTS_WORLD, &m_matWorld);
-	g_pD3DDevice->SetTexture(0, m_CombinatorTexture);
-
-	D3DMATERIAL9 mtlStorage;
-	ZeroMemory(&mtlStorage, sizeof(D3DMATERIAL9));
-	mtlStorage.Ambient = D3DXCOLOR(0.7f, 0.7f, 0.7f, 1.0f);
-	mtlStorage.Diffuse = D3DXCOLOR(0.7f, 0.7f, 0.7f, 1.0f);
-	mtlStorage.Specular = D3DXCOLOR(0.7f, 0.7f, 0.7f, 1.0f);
-
-	g_pD3DDevice->SetMaterial(&mtlStorage);
-	g_pD3DDevice->SetFVF(ST_PNT_VERTEX::FVF);
-	g_pD3DDevice->DrawPrimitiveUP(D3DPT_TRIANGLELIST, m_vecVertex.size() / 3, &m_vecVertex[0],
-		sizeof(ST_PNT_VERTEX));
-	g_pD3DDevice->SetTexture(0, 0);
-
-	_DEBUG_COMMENT if (m_pCollision)
-		_DEBUG_COMMENT m_pCollision->Render();
-}
-
-
-void CPartCombinator::Interact(CCharacter* pCharacter)
-{
-	if (m_eType == ECombinatorType::E_1stAuto || m_eType == ECombinatorType::E_2stAuto)
-		return; //자동은 상호작용안함
-
-	if (pCharacter->GetPlayerState() == EPlayerState::E_Grab)
-	{
-
-	}
-}
-
-void CPartCombinator::OnEvent(EEvent eEvent, void* _value)
-{
-}
-
-void CPartCombinator::CombineParts()
-{
-
-}
-
-CParts* CPartCombinator::Make()
-{
-	return nullptr;
 }

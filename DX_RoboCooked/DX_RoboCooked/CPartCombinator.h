@@ -30,6 +30,7 @@ public:
 	void Setup(float fAngle, D3DXVECTOR3 vecPosition);
 	void Interact(CCharacter* pCharacter) override;
 	void OnEvent(EEvent eEvent, void* _value);
+	void CombineParts();
 private:
 	CParts* Make() override;
 
