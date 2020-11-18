@@ -4,6 +4,7 @@
 #include "CInteractiveActor.h"
 #include "CParts.h" //생성할때 사용하기위해
 #include "CPartStorage.h"
+#include "COutlet.h"
 #include "ICollisionArea.h"
 #include "CActor.h"
 #include "CCharacter.h"

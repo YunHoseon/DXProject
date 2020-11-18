@@ -4,11 +4,10 @@
 class ICollisionArea;
 class CGameScene;
 
-
 enum class EPlayerState
 {
-	E_None, //�⺻����
-	E_Grab  //������
+	E_None, 
+	E_Grab
 };
 
 class CCharacter
@@ -27,8 +26,6 @@ protected:
 
 	DWORD				m_elapsedTime;
 	bool				m_isGrabCooltime;
-	// �����̻� ���� ���� //
-	
 
 public:
 	CCharacter();

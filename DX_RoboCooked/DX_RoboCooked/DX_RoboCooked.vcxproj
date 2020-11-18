@@ -152,6 +152,7 @@
     <ClInclude Include="CBoxCollision.h" />
     <ClInclude Include="CCamera.h" />
     <ClInclude Include="CCharacter.h" />
+    <ClInclude Include="CPartVending.h" />
     <ClInclude Include="CPartStorage.h" />
     <ClInclude Include="CSoundManager.h" />
     <ClInclude Include="ICollisionArea.h" />
@@ -183,6 +184,7 @@
     <ClInclude Include="Keyboard.h" />
     <ClInclude Include="Mouse.h" />
     <ClInclude Include="CParts.h" />
+    <ClInclude Include="COutlet.h" />
     <ClInclude Include="Resource.h" />
     <ClInclude Include="CSingleton.h" />
     <ClInclude Include="stdafx.h" />
@@ -195,6 +197,7 @@
     <ClCompile Include="CBoxCollision.cpp" />
     <ClCompile Include="CCamera.cpp" />
     <ClCompile Include="CCharacter.cpp" />
+    <ClCompile Include="CPartVending.cpp" />
     <ClCompile Include="CPartStorage.cpp" />
     <ClCompile Include="CSoundManager.cpp" />
     <ClCompile Include="ICollisionArea.cpp" />
@@ -227,6 +230,7 @@
     <ClCompile Include="Keyboard.cpp" />
     <ClCompile Include="Mouse.cpp" />
     <ClCompile Include="CParts.cpp" />
+    <ClCompile Include="COutlet.cpp" />
     <ClCompile Include="stdafx.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Create</PrecompiledHeader>
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Create</PrecompiledHeader>

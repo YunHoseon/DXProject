@@ -159,6 +159,12 @@
     <ClInclude Include="IInteractCenter.h">
       <Filter>GameScene</Filter>
     </ClInclude>
+    <ClInclude Include="COutlet.h">
+      <Filter>GameScene</Filter>
+    </ClInclude>
+    <ClInclude Include="CPartVending.h">
+      <Filter>GameScene</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="stdafx.cpp">
@@ -277,6 +283,12 @@
     </ClCompile>
     <ClCompile Include="IInteractCenter.cpp">
       <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="COutlet.cpp">
+      <Filter>GameScene</Filter>
+    </ClCompile>
+    <ClCompile Include="CPartVending.cpp">
+      <Filter>GameScene</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
