@@ -224,7 +224,7 @@ bool CBoxCollision::CollideToSphere(CSphereCollision* pTargetCollider)
 {
 	//isCollide = false;
 	//pTargetCollider->SetIsCollide(false);
-
+	
 	D3DXVECTOR3 vDist = pTargetCollider->GetCenter() - m_vCenterPos;
 	
 	if (D3DXVec3LengthSq(&vDist) > (1.0f + pTargetCollider->GetRadius()) * (1.0f + pTargetCollider->GetRadius()))

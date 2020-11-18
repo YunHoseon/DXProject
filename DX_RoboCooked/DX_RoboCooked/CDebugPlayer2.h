@@ -12,7 +12,7 @@ private:
 	ST_PLAYER_INPUTKEY	m_stInputKey;
 	
 public:
-	CDebugPlayer2(CGameScene* gameCenter);
+	CDebugPlayer2(IInteractCenter* pInteractCenter = nullptr);
 	~CDebugPlayer2();
 
 	void Setup();

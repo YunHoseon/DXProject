@@ -177,6 +177,7 @@
     <ClInclude Include="CMainGame.h" />
     <ClInclude Include="CField.h" />
     <ClInclude Include="CGameScene.h" />
+    <ClInclude Include="IInteractCenter.h" />
     <ClInclude Include="InputManager.h" />
     <ClInclude Include="CInteractiveActor.h" />
     <ClInclude Include="IPartGenerator.h" />
@@ -221,6 +222,7 @@
     <ClCompile Include="CMainGame.cpp" />
     <ClCompile Include="CField.cpp" />
     <ClCompile Include="CGameScene.cpp" />
+    <ClCompile Include="IInteractCenter.cpp" />
     <ClCompile Include="InputManager.cpp" />
     <ClCompile Include="CInteractiveActor.cpp" />
     <ClCompile Include="IPartGenerator.cpp" />

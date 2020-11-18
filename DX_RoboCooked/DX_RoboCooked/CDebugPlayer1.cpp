@@ -5,10 +5,10 @@
 #include "CSphereCollision.h"
 
 
-CDebugPlayer1::CDebugPlayer1(CGameScene* gameCenter)
-
+CDebugPlayer1::CDebugPlayer1(IInteractCenter* pInteractCenter)
+	: m_pMeshSphere(nullptr)
 {
-	m_GameCenter = gameCenter;
+	m_pInteractCenter = pInteractCenter;
 	m_vPosition = m_sphere.vCenter;
 	D3DXMatrixIdentity(&m_matWorld);
 	
@@ -19,6 +19,7 @@ CDebugPlayer1::CDebugPlayer1(CGameScene* gameCenter)
 
 CDebugPlayer1::~CDebugPlayer1()
 {
+	SafeRelease(m_pMeshSphere);
 }
 
 void CDebugPlayer1::Setup()
@@ -76,6 +77,8 @@ void CDebugPlayer1::OnEvent(EEvent eEvent, void* _value)
 	case EEvent::E_Player1KeyChange:
 		SetKeyChange(_value);
 		break;
+	default:
+		break;
 	}
 }
 
@@ -90,7 +93,7 @@ void CDebugPlayer1::PressKey(void* _value)
 	}
 	if (data->wKey == m_stInputKey.moveLeftKey)
 	{
-		if (m_fRotY - 0.1f < 0.f)
+		if (m_fRotY - 0.5f < 0.f)
 			m_fRotY += D3DX_PI * 2.f;
 		Rotate(D3DX_PI * 1.5f);
 		m_fSpeed = m_fBaseSpeed;
@@ -102,7 +105,7 @@ void CDebugPlayer1::PressKey(void* _value)
 	}
 	if (data->wKey == m_stInputKey.moveRightKey)
 	{
-		if (m_fRotY + 0.1f > D3DX_PI * 2.f)
+		if (m_fRotY + 0.5f > D3DX_PI * 2.f)
 			m_fRotY -= D3DX_PI * 2.f;
 		Rotate(D3DX_PI * 0.5f);
 		m_fSpeed = m_fBaseSpeed;
@@ -111,12 +114,12 @@ void CDebugPlayer1::PressKey(void* _value)
 	{
 		if(m_ePlayerState == EPlayerState::E_None)
 		{
-			m_GameCenter->GetInteractObject(this);
+			m_pInteractCenter->GetInteractObject(this);
 			
 		}
 		else if(m_ePlayerState == EPlayerState::E_Grab)
 		{
-			m_GameCenter->DownParts(m_pParts,m_vDirection);
+			m_pInteractCenter->DownParts(m_pParts,m_vDirection);
 			m_ePlayerState = EPlayerState::E_None;
 		}
 		//g_SoundManager->PlaySFX("Melem");

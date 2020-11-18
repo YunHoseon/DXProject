@@ -12,9 +12,8 @@ private:
 	INT						m_nPartsID;
 	
 public:
-	CPartStorage(CGameScene* gameCenter);
+	CPartStorage(IInteractCenter* pInteractCenter);
 	~CPartStorage();
-
 
 public:
 	void Update() override;
@@ -25,6 +24,5 @@ public:
 
 private:
 	CParts* Make() override;
-	
 };
 

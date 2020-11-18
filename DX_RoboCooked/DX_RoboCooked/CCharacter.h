@@ -7,13 +7,14 @@ class CGameScene;
 
 enum class EPlayerState
 {
-	E_None, //╠Б╨╩╩Себ
-	E_Grab  //юБ╠Б╩Себ
+	E_None, //О©╫Б╨╩О©╫О©╫О©╫О©╫
+	E_Grab  //О©╫О©╫О©╫О©╫О©╫О©╫
 };
 
 class CCharacter
 {
 protected:
+	//CGameScene*			m_pInteractCenter;
 	EPlayerState		m_ePlayerState;
 	ICollisionArea*		m_pInteractCollision;
 	float				m_fBaseSpeed;
@@ -26,7 +27,7 @@ protected:
 
 	DWORD				m_elapsedTime;
 	bool				m_isGrabCooltime;
-	// ╩Себюл╩С©║ ╢Кгя ╨╞╪Ж //
+	// О©╫О©╫О©╫О©╫О©╫л╩О©╫ О©╫О©╫О©╫О©╫ О©╫О©╫О©╫О©╫ //
 	
 
 public:

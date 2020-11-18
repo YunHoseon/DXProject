@@ -3,7 +3,7 @@
 #include "ICollisionArea.h"
 
 
-CActor::CActor(): m_pCollision(nullptr)
+CActor::CActor(): m_pInteractCenter(nullptr), m_pCollision(nullptr)
 {
 	D3DXMatrixIdentity(&m_matS);
 	D3DXMatrixIdentity(&m_matR);

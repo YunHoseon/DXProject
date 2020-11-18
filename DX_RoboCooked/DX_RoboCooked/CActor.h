@@ -1,7 +1,7 @@
 #pragma once
 #include "CEventListener.h"
 
-class CGameScene;
+class IInteractCenter;
 class ICollisionArea;
 
 class CActor : public CEventListener
@@ -11,13 +11,12 @@ public:
 	virtual  ~CActor();
 
 protected:
-	CGameScene*	  m_GameCenter;
-	D3DXMATRIXA16 m_matS;
-	D3DXMATRIXA16 m_matR;
-	D3DXMATRIXA16 m_matT;
-	D3DXMATRIXA16 m_matWorld;
+	IInteractCenter*	m_pInteractCenter;
+	D3DXMATRIXA16		m_matS;
+	D3DXMATRIXA16		m_matR;
+	D3DXMATRIXA16		m_matT;
+	D3DXMATRIXA16		m_matWorld;
 
-	//콜라이더 미추가
 	ICollisionArea* m_pCollision;
 public:
 	virtual void Update() = 0;
