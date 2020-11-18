@@ -159,11 +159,14 @@
     <ClInclude Include="CPartCombinator.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="IInteractCenter.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
     <ClInclude Include="COutlet.h">
-      <Filter>GameScene</Filter>
+      <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="CPartVending.h">
-      <Filter>GameScene</Filter>
+      <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -284,11 +287,14 @@
     <ClCompile Include="CPartCombinator.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="IInteractCenter.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
     <ClCompile Include="COutlet.cpp">
-      <Filter>GameScene</Filter>
+      <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="CPartVending.cpp">
-      <Filter>GameScene</Filter>
+      <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

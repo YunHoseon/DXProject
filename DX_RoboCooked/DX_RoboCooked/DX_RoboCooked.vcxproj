@@ -152,8 +152,10 @@
     <ClInclude Include="CBoxCollision.h" />
     <ClInclude Include="CCamera.h" />
     <ClInclude Include="CCharacter.h" />
+    <ClInclude Include="COutlet.h" />
     <ClInclude Include="CPartCombinator.h" />
     <ClInclude Include="CPartStorage.h" />
+    <ClInclude Include="CPartVending.h" />
     <ClInclude Include="CSoundManager.h" />
     <ClInclude Include="ICollisionArea.h" />
     <ClInclude Include="CDeviceManager.h" />
@@ -196,8 +198,10 @@
     <ClCompile Include="CBoxCollision.cpp" />
     <ClCompile Include="CCamera.cpp" />
     <ClCompile Include="CCharacter.cpp" />
+    <ClCompile Include="COutlet.cpp" />
     <ClCompile Include="CPartCombinator.cpp" />
     <ClCompile Include="CPartStorage.cpp" />
+    <ClCompile Include="CPartVending.cpp" />
     <ClCompile Include="CSoundManager.cpp" />
     <ClCompile Include="ICollisionArea.cpp" />
     <ClCompile Include="CDeviceManager.cpp" />
