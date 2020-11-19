@@ -159,7 +159,7 @@ void CField::Setup(int iWidth, int iHeight)
 	}
 
 	for (int i = 0; i < m_vecTile.size(); i++)
-	{
+	{-++
 		m_vecTile[i]->SetPlaneTexture(g_pTextureManager->GetTexture("data/Texture/Albedo00.jpg"));
 	}
 
