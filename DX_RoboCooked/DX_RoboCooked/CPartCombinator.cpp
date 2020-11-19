@@ -13,7 +13,6 @@ CPartCombinator::CPartCombinator(IInteractCenter* pInteractCenter,ECombinatorTyp
 		, m_pPartsInteractCollision(NULL)
 		, m_vOnCombinatorPosition(0,0,0)
 		, m_pParts(NULL)
-		, m_multimapParts()
 {
 	m_vPosition = D3DXVECTOR3(0, 0, 0);
 	m_pInteractCenter = pInteractCenter;
@@ -188,10 +187,9 @@ void CPartCombinator::Interact(CCharacter* pCharacter)
 	if (pCharacter->GetPlayerState() == EPlayerState::E_None)
 	{
 		pCharacter->SetPlayerState(EPlayerState::E_Grab);
-		
 		m_pParts->SetGrabPosition(&pCharacter->GetGrabPartsPosition());
 		m_pParts->GetCollision()->SetActive(true);
-		m_pParts->SetMoveParts(false);
+	
 		m_multimapParts.erase(m_multimapParts.begin());
 	}
 	
@@ -211,10 +209,13 @@ void CPartCombinator::OnEvent(EEvent eEvent, void* _value)
 {
 }
 
-void CPartCombinator::CombineParts()
+void CPartCombinator::CombineParts(CCharacter* pCharacter)
 {
-	m_pParts = m_multimapParts.begin()->second;
-	m_multimapParts.begin()->second->SetPosition(m_vOnCombinatorPosition);
+	std::multimap<string, CParts*>::iterator iter = m_multimapParts.begin();
+
+	m_pParts = nullptr;
+	m_pParts = iter->second;
+	iter->second->SetPosition(m_vOnCombinatorPosition);
 }
 
 CParts* CPartCombinator::Make()

@@ -87,7 +87,7 @@ void CDebugPlayer1::PressKey(void* _value)
 {
 	ST_KeyInputEvent *data = static_cast<ST_KeyInputEvent*>(_value);
 	DWORD CurrentTime = GetTickCount();
-	
+	float fTestTime = 700.0f;
 	if (data->wKey == m_stInputKey.moveFowardKey)
 	{
 		Rotate(0);
@@ -114,7 +114,7 @@ void CDebugPlayer1::PressKey(void* _value)
 	}
 	if (data->wKey == m_stInputKey.interactableKey1)
 	{
-		if (CurrentTime - m_ElapsTimeF >  500)
+		if (CurrentTime - m_ElapsTimeF >  fTestTime)
 		{
 			if (m_ePlayerState == EPlayerState::E_None)
 			{
@@ -122,8 +122,7 @@ void CDebugPlayer1::PressKey(void* _value)
 			}
 			else if (m_ePlayerState == EPlayerState::E_Grab)
 			{
-				m_pInteractCenter->DownParts(m_pParts, m_vDirection);
-				m_ePlayerState = EPlayerState::E_None;
+				m_pInteractCenter->DownParts(this,m_pParts, m_vDirection);
 			}
 			g_SoundManager->PlaySFX("Melem");
 			m_ElapsTimeF = CurrentTime;
@@ -133,7 +132,7 @@ void CDebugPlayer1::PressKey(void* _value)
 	}
 	if (data->wKey == m_stInputKey.interactableKey2)
 	{
-		if (CurrentTime - m_ElapsTimeG >  500)
+		if (CurrentTime - m_ElapsTimeG >  fTestTime)
 		{
 			if (m_ePlayerState == EPlayerState::E_Grab)
 			{
@@ -151,7 +150,7 @@ void CDebugPlayer1::PressKey(void* _value)
 	}
 	if (data->wKey == m_stInputKey.interactableKey3)
 	{
-		if (CurrentTime - m_ElapsTimeH >  500)
+		if (CurrentTime - m_ElapsTimeH >  fTestTime)
 		{
 			g_SoundManager->PlaySFX("Melem");
 			m_ElapsTimeF = CurrentTime;

@@ -35,7 +35,7 @@ public:
 	virtual void Update();
 	void GetInteractObject(CCharacter* pCharacter) override;
 	void AddParts(CParts* parts) override;
-	void DownParts(CParts* parts,D3DXVECTOR3 vDir) override;
+	void DownParts(CCharacter* pCharacter,CParts* parts,D3DXVECTOR3 vDir) override;
 	void CheckAroundCombinator(CPartCombinator* combinator) override;
 };
 
