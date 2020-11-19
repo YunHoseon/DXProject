@@ -151,7 +151,6 @@ void CPartCombinator::Update()
 
 void CPartCombinator::Render()
 {
-
 	m_matWorld = m_matS * m_matR * m_matT;
 	g_pD3DDevice->SetTransform(D3DTS_WORLD, &m_matWorld);
 	g_pD3DDevice->SetTexture(0, m_CombinatorTexture);
@@ -179,7 +178,7 @@ void CPartCombinator::Render()
 
 void CPartCombinator::Interact(CCharacter* pCharacter)
 {
-	if (m_pParts == NULL)
+	if (m_pParts == nullptr)
 		return;
 
 	if (m_eType == ECombinatorType::E_1stAuto || m_eType == ECombinatorType::E_2stAuto)
@@ -192,6 +191,7 @@ void CPartCombinator::Interact(CCharacter* pCharacter)
 		m_pParts->SetGrabPosition(&pCharacter->GetGrabPartsPosition());
 		m_pParts->GetCollision()->SetActive(true);
 	
+		m_pParts = nullptr;
 		m_multimapParts.erase(m_multimapParts.begin());
 	}
 	
@@ -214,6 +214,8 @@ void CPartCombinator::OnEvent(EEvent eEvent, void* _value)
 void CPartCombinator::CombineParts(CCharacter* pCharacter)
 {
 	std::multimap<string, CParts*>::iterator iter = m_multimapParts.begin();
+	if (iter == m_multimapParts.end())
+		return;
 
 	m_pParts = nullptr;
 	m_pParts = iter->second;

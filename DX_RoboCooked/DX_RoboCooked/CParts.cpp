@@ -53,12 +53,10 @@ void CParts::Update()
 
 void CParts::Render()
 {
-	g_pD3DDevice->SetRenderState(D3DRS_LIGHTING, true);
 	g_pD3DDevice->SetTransform(D3DTS_WORLD, &m_matWorld);
 	g_pD3DDevice->SetTexture(0, NULL);
 	g_pD3DDevice->SetMaterial(&m_stMtlParts);
 	m_pMeshSphere->DrawSubset(0);
-	g_pD3DDevice->SetRenderState(D3DRS_LIGHTING, false);
 
 	_DEBUG_COMMENT if (m_pCollision)
 		_DEBUG_COMMENT m_pCollision->Render();
