@@ -11,8 +11,8 @@
 CPartCombinator::CPartCombinator(IInteractCenter* pInteractCenter,ECombinatorType eType)
 		: m_eType(eType)
 		, m_pPartsInteractCollision(NULL)
-		, m_vPosition(0,0,0)
 {
+	m_vPosition = D3DXVECTOR3(0, 0, 0);
 	m_pInteractCenter = pInteractCenter;
 }
 
@@ -189,6 +189,7 @@ void CPartCombinator::PartsInteract(CParts* pParts)
 	if (pParts->GetGrabPosition() != NULL)
 		return;
 	 m_multimapParts.insert(std::make_pair(std::to_string(pParts->GetPartsID()),pParts));
+	 pParts->GetCollision()->SetActive(false);
 }
 
 void CPartCombinator::OnEvent(EEvent eEvent, void* _value)

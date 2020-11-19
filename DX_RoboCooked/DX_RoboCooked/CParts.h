@@ -6,7 +6,6 @@ class CParts :
 	public CInteractiveActor
 {
 private:
-	D3DXVECTOR3			m_vPosition;
 	D3DXVECTOR3*		m_vGrabPosition;
 
 	ST_SPHERE			m_sphere;

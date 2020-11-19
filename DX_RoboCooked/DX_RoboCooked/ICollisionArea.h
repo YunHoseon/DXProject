@@ -9,7 +9,7 @@ public:
 	enum class EColideType { E_Box, E_Sphere };
 protected:
 	EColideType			m_eType;
-	bool				isCollide;
+	bool				isCollide; // render할 때 색 변환을 위한 변수
 	bool				isActive;
 	D3DCOLOR			stColor[2];
 
