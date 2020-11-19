@@ -4,9 +4,10 @@
 #include "CCharacter.h"
 
 CParts::CParts()
-	:m_vPosition(3.0f, 0.0f, 2.0f)
-	, m_fRotAngle(0.0f)
+	: m_fRotAngle(0.0f)
 {
+	m_vPosition = D3DXVECTOR3(3.0f, 0.0f, 2.0f);
+
 	D3DXMatrixIdentity(&m_matWorld);
 	m_sphere.vCenter = m_vPosition;
 	m_sphere.fRaidus = 0.3f;
@@ -14,9 +15,9 @@ CParts::CParts()
 }
 
 CParts::CParts(int nPartsID)
-	:m_vPosition(3.0f, 0.0f, 2.0f)
-	, m_fRotAngle(0.0f)
+	: m_fRotAngle(0.0f)
 {
+	m_vPosition = D3DXVECTOR3(3.0f, 0.0f, 2.0f);
 	m_nPartsID = nPartsID;
 	D3DXMatrixIdentity(&m_matWorld);
 	m_sphere.vCenter = m_vPosition;
@@ -97,7 +98,7 @@ void CParts::DownParts(D3DXVECTOR3 vDir)
 	D3DXVec3Normalize(&vDir, &vDir);
 	
 	m_vPosition.x += (vDir.x/1.3f);
-	m_vPosition.y = vDir.y;
+	m_vPosition.y  = vDir.y;
 	m_vPosition.z += (vDir.z/1.3f);
 
 }

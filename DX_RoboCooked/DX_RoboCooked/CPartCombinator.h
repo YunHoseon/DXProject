@@ -20,7 +20,6 @@ private:
 	vector<ST_PNT_VERTEX>			m_vecVertex;
 	LPDIRECT3DTEXTURE9				m_CombinatorTexture;
 	ICollisionArea*					m_pPartsInteractCollision;
-	D3DXVECTOR3						m_vPosition;
 	std::multimap<string, CParts*>	m_multimapParts;
 	
 public:

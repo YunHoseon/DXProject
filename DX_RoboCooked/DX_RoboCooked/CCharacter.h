@@ -19,9 +19,6 @@ protected:
 	ICollisionArea*		m_pInteractCollision;
 	float				m_fBaseSpeed;
 	float				m_fSpeed;
-	float				m_fRotY;
-	D3DXVECTOR3			m_vDirection;
-	D3DXVECTOR3			m_vPosition;
 	D3DXVECTOR3			m_vGrabPartsPosition;
 	CParts*				m_pParts;
 

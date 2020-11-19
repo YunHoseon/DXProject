@@ -11,8 +11,8 @@
 CPartCombinator::CPartCombinator(IInteractCenter* pInteractCenter,ECombinatorType eType)
 		: m_eType(eType)
 		, m_pPartsInteractCollision(NULL)
-		, m_vPosition(0,0,0)
 {
+	m_vPosition = D3DXVECTOR3(0, 0, 0);
 	m_pInteractCenter = pInteractCenter;
 }
 
