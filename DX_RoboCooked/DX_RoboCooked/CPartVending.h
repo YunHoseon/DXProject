@@ -25,9 +25,8 @@ public:
 	void Update() override;
 	void Render() override;
 
-	void OnEvent(EEvent eEvent, void* _value);
 	CParts * Make() override;
+	void OnEvent(EEvent eEvent, void* _value);
 	void Interact(CCharacter* pCharacter) override;
-	void InteractToOutlet();
 };
 
