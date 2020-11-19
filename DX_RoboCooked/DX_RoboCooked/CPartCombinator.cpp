@@ -5,7 +5,8 @@
 #include "CActor.h"
 
 
-CPartCombinator::CPartCombinator(IInteractCenter* pInteractCenter,ECombinatorType eType):m_eType(eType)
+CPartCombinator::CPartCombinator(IInteractCenter* pInteractCenter, ECombinatorType eType)
+	: m_eType(eType)
 {
 	m_pInteractCenter = pInteractCenter;
 }

@@ -4,12 +4,13 @@
 #include "CInteractiveActor.h"
 #include "CParts.h" //생성할때 사용하기위해
 #include "CPartStorage.h"
-#include "COutlet.h"
 #include "ICollisionArea.h"
 #include "CActor.h"
 #include "CCharacter.h"
 #include "CPartCombinator.h"
 #include "CCombinatorButton.h"
+#include "COutlet.h"
+#include "CPartVending.h"
 
 /* 디버깅용 */
 #include "CDebugPlayer1.h"
@@ -34,8 +35,11 @@ CGameScene::~CGameScene()
 	{
 		SafeDelete(it);
 	}
-	SafeDelete(m_pDebugSphere);
-	SafeDelete(m_pDebugCube);
+	
+	for (CCharacter* it : m_vecCharacters)
+	{
+		SafeDelete(it);
+	}
 	SafeDelete(m_pDebugParts);
 }
 
@@ -53,19 +57,20 @@ void CGameScene::Init()
 	
 	CPartStorage* partStorage = new CPartStorage(this);
 	partStorage->Setup(0, D3DXVECTOR3(5, 0, 2) , 1);
-
 	m_vecObject.push_back(partStorage);
 
 	CPartCombinator* partCombinator = new CPartCombinator(this, ECombinatorType::E_1stAuto);
 	partCombinator->Setup(45.0f, D3DXVECTOR3(-2, 0, 2));
-
 	m_vecObject.push_back(partCombinator);
 
 	CCombinatorButton* combinatorButton = new CCombinatorButton(partCombinator);
 	combinatorButton->Setup(0,D3DXVECTOR3(3,0,-3));
 	m_vecObject.push_back(combinatorButton);
 
-
+	COutlet* outlet = new COutlet(this);
+	CPartVending* partVending = new CPartVending(outlet);
+	partVending->Setup(0, D3DXVECTOR3(5, 0, -3));
+	m_vecObject.push_back(partVending);
 
 	m_pDebugSphere = new CDebugPlayer1(this);
 	if (m_pDebugSphere)
@@ -105,12 +110,6 @@ void CGameScene::Render()
 	{
 		it->Render();
 	}
-	
-	//if (m_pDebugSphere)
-	//	m_pDebugSphere->Render();
-
-	//if (m_pDebugCube)
-	//	m_pDebugCube->Render();
 }
 
 void CGameScene::Update()

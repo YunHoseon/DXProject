@@ -2,6 +2,8 @@
 #include "COutlet.h"
 #include "ICollisionArea.h"
 #include "CBoxCollision.h"
+#include "CParts.h"
+#include "CGameScene.h"
 
 COutlet::COutlet(IInteractCenter* pInteractCenter)
 	:m_nPartsID(0)
@@ -53,4 +55,13 @@ void COutlet::Render()
 
 void COutlet::OnEvent(EEvent eEvent, void* _value)
 {
+}
+
+CParts* COutlet::Make()
+{
+	CParts* parts = new CParts(m_nID);
+	parts->Setup();
+	//parts->SetPosition(&m_);
+	m_pInteractCenter->AddParts(parts);
+	return 0;
 }
