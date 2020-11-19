@@ -8,6 +8,7 @@
 COutlet::COutlet(IInteractCenter* pInteractCenter)
 	:m_nPartsID(0)
 	, m_pGeneratorSwitch(NULL)
+	, m_vDirection(0, 0, 1)
 {
 	m_pInteractCenter = pInteractCenter;
 	D3DXMatrixIdentity(&m_matWorld);
@@ -18,9 +19,10 @@ COutlet::~COutlet()
 {
 }
 
-void COutlet::Setup(float fAngle, D3DXVECTOR3 vecPosition, int nPartsID)
+void COutlet::Setup(float fAngle, D3DXVECTOR3 vPosition, int nPartsID)
 {
 	m_nPartsID = nPartsID;
+	m_vPosition = vPosition;
 	D3DXCreateBox(g_pD3DDevice, 0.8f, 0.8f, 0.8f, &m_pMeshCube, NULL);
 
 	ZeroMemory(&m_stMtlCube, sizeof(D3DMATERIAL9));
@@ -29,7 +31,7 @@ void COutlet::Setup(float fAngle, D3DXVECTOR3 vecPosition, int nPartsID)
 	m_stMtlCube.Specular = D3DXCOLOR(0.7f, 0.7f, 0.7f, 1.0f);
 
 	D3DXMatrixRotationY(&m_matR, D3DXToRadian(fAngle));
-	D3DXMatrixTranslation(&m_matT, vecPosition.x, 0, vecPosition.z);
+	D3DXMatrixTranslation(&m_matT, vPosition.x, 0, vPosition.z);
 
 	m_pCollision = new CBoxCollision(D3DXVECTOR3(0, 0, 0), D3DXVECTOR3(1.0f, 1.0f, 1.0f), &m_matWorld);
 }
@@ -61,7 +63,7 @@ CParts* COutlet::Make()
 {
 	CParts* parts = new CParts(m_nID);
 	parts->Setup();
-	//parts->SetPosition(&m_);
+	parts->SetPosition(m_vPosition + m_vDirection);
 	m_pInteractCenter->AddParts(parts);
 	return 0;
 }
