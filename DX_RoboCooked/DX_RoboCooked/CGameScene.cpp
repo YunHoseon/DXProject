@@ -65,7 +65,7 @@ void CGameScene::Init()
 	m_vecObject.push_back(partCombinator);
 
 	CCombinatorButton* combinatorButton = new CCombinatorButton(partCombinator);
-	combinatorButton->Setup(0,D3DXVECTOR3(3,0,-3));
+	combinatorButton->Setup(0,D3DXVECTOR3(1,0,-1));
 	m_vecObject.push_back(combinatorButton);
 
 	COutlet* outlet = new COutlet(this);
@@ -91,6 +91,11 @@ void CGameScene::Init()
 	if (m_pDebugParts)
 		m_pDebugParts->Setup();
 	m_vecParts.push_back(m_pDebugParts);
+	
+	CParts* m_pDebugParts2 = new CParts(999);
+	if (m_pDebugParts2)
+		m_pDebugParts2->Setup();
+	m_vecParts.push_back(m_pDebugParts2);
 }
 
 void CGameScene::Render()
@@ -214,10 +219,11 @@ void CGameScene::AddParts(CParts * parts)
 		m_vecParts.push_back(parts);
 }
 
-void CGameScene::DownParts(CParts* parts, D3DXVECTOR3 vDir)
+void CGameScene::DownParts(CCharacter* pCharacter,CParts* parts, D3DXVECTOR3 vDir)
 {
 	if (parts != nullptr)
 	{
+		pCharacter->SetPlayerState(EPlayerState::E_None);
 		parts->DownParts(vDir);
 	}
 }
