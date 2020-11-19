@@ -115,42 +115,53 @@ void CGameScene::Render()
 
 void CGameScene::Update()
 {
-	for (CActor* it : m_vecStaticActor)
-	{
-		it->Update();
+	// collide -> update
+	
+	{// collide
+		if (m_pDebugSphere)
+			m_pDebugSphere->Collide(m_pDebugCube);
+
+		for (CInteractiveActor* obj : m_vecObject)
+		{
+			m_pDebugSphere->Collide(obj);
+			m_pDebugCube->Collide(obj);
+		}
+
+		for (CInteractiveActor* part : m_vecParts)
+		{
+			m_pDebugSphere->Collide(part);
+			m_pDebugCube->Collide(part);
+		}
+		// part-part, part-obj ÇÊ¿ä
+	}
+	{// update
+		for (CActor* it : m_vecStaticActor)
+		{
+			it->Update();
+		}
+
+		for (CInteractiveActor* it : m_vecParts)
+		{
+			it->Update();
+		}
+
+		for (CInteractiveActor* it : m_vecObject)
+		{
+			it->Update();
+		}
+
+		if (m_pDebugCube)
+			m_pDebugCube->Update();
+
+		if (m_pDebugSphere)
+		{
+			m_pDebugSphere->Update();
+
+		}
 	}
 
-	for (CInteractiveActor* it : m_vecParts)
-	{
-		it->Update();
-	}
-
-	for (CInteractiveActor* it : m_vecObject)
-	{
-		it->Update();
-	}
-
-	if (m_pDebugCube)
-		m_pDebugCube->Update();
 
 
-	if (m_pDebugSphere)
-	{
-		m_pDebugSphere->Update();
-		m_pDebugSphere->Collide(m_pDebugCube);
-	}
-
-	for (CInteractiveActor* value : m_vecObject)
-	{
-		m_pDebugSphere->Collide(value);
-		m_pDebugCube->Collide(value);
-	}
-
-	for (CInteractiveActor* value : m_vecParts)
-	{
-		m_pDebugSphere->Collide(value);
-		m_pDebugCube->Collide(value);
-	}
 }
 
 

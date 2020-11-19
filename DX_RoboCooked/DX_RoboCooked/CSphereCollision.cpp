@@ -39,6 +39,7 @@ void CSphereCollision::Render()
 		g_pD3DDevice->SetMaterial(&stMtl);
 		m_pMesh->DrawSubset(0);
 		g_pD3DDevice->SetRenderState(D3DRS_FILLMODE, D3DFILL_SOLID);
+		isCollide = false;
 	}
 	
 }
@@ -46,7 +47,7 @@ void CSphereCollision::Render()
 void CSphereCollision::Update()
 {
 	D3DXVec3TransformCoord(&m_vCenterPos, &m_vOriginCenterPos, m_pmatWorldTM);
-	isCollide = false;
+	
 }
 
 bool CSphereCollision::CollideToBox(CBoxCollision* pTargetCollider)
