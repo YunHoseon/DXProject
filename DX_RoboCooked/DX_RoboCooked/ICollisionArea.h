@@ -10,6 +10,7 @@ public:
 protected:
 	EColideType			m_eType;
 	bool				isCollide;
+	bool				isActive;
 	D3DCOLOR			stColor[2];
 
 	D3DXVECTOR3			m_vOriginCenterPos;
@@ -28,4 +29,6 @@ public:
 	virtual bool CollideToBox(CBoxCollision* pTargetCollider) = 0;
 	virtual bool CollideToSphere(CSphereCollision* pTargetCollider) = 0;
 	void SetIsCollide(bool b) { isCollide = b; }
+	bool GetActive() { return isActive; }
+	void SetActive(bool b) { isActive = b; }
 };

@@ -2,7 +2,7 @@
 class CParts;
 class IPartGenerator
 {
-protected:
+protected:	
 	int			m_nID;
 	
 	virtual CParts* Make() = 0;

@@ -1,12 +1,17 @@
 #include "stdafx.h"
 #include "CPartCombinator.h"
 #include "CSphereCollision.h"
+#include "CBoxCollision.h"
 #include "CCharacter.h"
 #include "CActor.h"
+#include "IInteractCenter.h"
+#include "CParts.h"
 
 
-CPartCombinator::CPartCombinator(IInteractCenter* pInteractCenter, ECombinatorType eType)
-	: m_eType(eType)
+CPartCombinator::CPartCombinator(IInteractCenter* pInteractCenter,ECombinatorType eType)
+		: m_eType(eType)
+		, m_pPartsInteractCollision(NULL)
+		, m_vPosition(0,0,0)
 {
 	m_pInteractCenter = pInteractCenter;
 }
@@ -17,7 +22,7 @@ CPartCombinator::~CPartCombinator()
 	SafeRelease(m_CombinatorTexture);
 }
 
-void CPartCombinator::Setup(float fAngle, D3DXVECTOR3 vecPosition)
+void CPartCombinator::Setup(float fAngle, D3DXVECTOR3 vPosition)
 {
 	vector<ST_PNT_VERTEX> vecVertex;
 	ST_PNT_VERTEX v;
@@ -120,19 +125,28 @@ void CPartCombinator::Setup(float fAngle, D3DXVECTOR3 vecPosition)
 	m_CombinatorTexture = g_pTextureManager->GetTexture(("data/Texture/city_014.png"));
 
 	D3DXMatrixRotationY(&m_matR, D3DXToRadian(fAngle));
-	D3DXMatrixTranslation(&m_matT, vecPosition.x, 0, vecPosition.z);
+	D3DXMatrixTranslation(&m_matT, vPosition.x, 0, vPosition.z);
+	m_vPosition = vPosition;
+	m_pCollision = new CBoxCollision(D3DXVECTOR3(0, 0, 0),D3DXVECTOR3(1.0f, 1.0f,1.0f), &m_matWorld);
+	m_pPartsInteractCollision = new CSphereCollision(D3DXVECTOR3(0, 0, 0), 2.0f, &m_matWorld);
 
-	m_pCollision = new CSphereCollision(D3DXVECTOR3(0, 0, 0),1.0f, &m_matWorld);
 }
 
 void CPartCombinator::Update()
 {
+	
 	_DEBUG_COMMENT if (m_pCollision)
 		_DEBUG_COMMENT m_pCollision->Update();
+
+	_DEBUG_COMMENT if (m_pPartsInteractCollision)
+		_DEBUG_COMMENT m_pPartsInteractCollision->Update();
+	
+	m_pInteractCenter->CheckAroundCombinator(this);
 }
 
 void CPartCombinator::Render()
 {
+
 	m_matWorld = m_matS * m_matR * m_matT;
 	g_pD3DDevice->SetTransform(D3DTS_WORLD, &m_matWorld);
 	g_pD3DDevice->SetTexture(0, m_CombinatorTexture);
@@ -151,6 +165,10 @@ void CPartCombinator::Render()
 
 	_DEBUG_COMMENT if (m_pCollision)
 		_DEBUG_COMMENT m_pCollision->Render();
+
+	_DEBUG_COMMENT if (m_pPartsInteractCollision)
+		_DEBUG_COMMENT m_pPartsInteractCollision->Render();
+
 }
 
 
@@ -163,6 +181,14 @@ void CPartCombinator::Interact(CCharacter* pCharacter)
 	{
 
 	}
+	
+}
+
+void CPartCombinator::PartsInteract(CParts* pParts)
+{
+	if (pParts->GetGrabPosition() != NULL)
+		return;
+	 m_multimapParts.insert(std::make_pair(std::to_string(pParts->GetPartsID()),pParts));
 }
 
 void CPartCombinator::OnEvent(EEvent eEvent, void* _value)
