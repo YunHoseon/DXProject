@@ -6,6 +6,7 @@
 #include "CActor.h"
 #include "IInteractCenter.h"
 #include "CParts.h"
+#include "CCharacter.h"
 
 
 CPartCombinator::CPartCombinator(IInteractCenter* pInteractCenter,ECombinatorType eType)
@@ -187,6 +188,7 @@ void CPartCombinator::Interact(CCharacter* pCharacter)
 	if (pCharacter->GetPlayerState() == EPlayerState::E_None)
 	{
 		pCharacter->SetPlayerState(EPlayerState::E_Grab);
+		pCharacter->SetParts(m_pParts);
 		m_pParts->SetGrabPosition(&pCharacter->GetGrabPartsPosition());
 		m_pParts->GetCollision()->SetActive(true);
 	
