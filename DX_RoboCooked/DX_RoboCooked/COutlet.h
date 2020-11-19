@@ -1,16 +1,24 @@
 #pragma once
-#include "CActor.h"
+#include "CInteractiveActor.h"
 #include "IPartGenerator.h"
 
 class CPartVending;
+
+enum class EOutletState
+{
+	E_None,
+	E_Loaded
+};
+
 class COutlet :
-	public CActor, IPartGenerator
+	public CInteractiveActor, IPartGenerator
 {
 private:
-	int					m_nPartsID;
-	CPartVending*		m_pGeneratorSwitch;
-	LPD3DXMESH			m_pMeshCube;
-	D3DMATERIAL9		m_stMtlCube;
+	EOutletState			m_eOutletState;
+	int						m_nPartsID;
+	vector<ST_PNT_VERTEX>	m_vecVertex;
+	LPDIRECT3DTEXTURE9		m_PartVendingTexture;
+	
 public:
 	COutlet(IInteractCenter* pInteractCenter);
 	~COutlet();
@@ -20,6 +28,9 @@ public:
 	void Render() override;
 	
 	void OnEvent(EEvent eEvent, void* _value);
+	void Interact(CCharacter* pCharacter);
 	CParts* Make() override;
+	EOutletState GetState() { return m_eOutletState; }
+	void SetState(EOutletState state) { m_eOutletState = state; }
 };
 

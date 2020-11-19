@@ -11,7 +11,7 @@ enum class EPlayerState
 	E_Grab 
 };
 
-class CCharacter
+class CCharacter :public CActor
 {
 protected:
 
@@ -24,8 +24,6 @@ protected:
 
 	DWORD				m_elapsedTime;
 	bool				m_isGrabCooltime;
-
-	
 
 public:
 	CCharacter();

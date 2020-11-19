@@ -7,6 +7,7 @@
 
 CDebugPlayer1::CDebugPlayer1(IInteractCenter* pInteractCenter)
 	: m_pMeshSphere(nullptr)
+	, m_ElapsTimeF(0), m_ElapsTimeG(0), m_ElapsTimeH(0)
 {
 	m_pInteractCenter = pInteractCenter;
 	m_vPosition = m_sphere.vCenter;
@@ -85,7 +86,8 @@ void CDebugPlayer1::OnEvent(EEvent eEvent, void* _value)
 void CDebugPlayer1::PressKey(void* _value)
 {
 	ST_KeyInputEvent *data = static_cast<ST_KeyInputEvent*>(_value);
-
+	DWORD CurrentTime = GetTickCount();
+	
 	if (data->wKey == m_stInputKey.moveFowardKey)
 	{
 		Rotate(0);
@@ -112,29 +114,50 @@ void CDebugPlayer1::PressKey(void* _value)
 	}
 	if (data->wKey == m_stInputKey.interactableKey1)
 	{
-		if(m_ePlayerState == EPlayerState::E_None)
+		if (CurrentTime - m_ElapsTimeF >  500)
 		{
-			m_pInteractCenter->GetInteractObject(this);
-			
+			if (m_ePlayerState == EPlayerState::E_None)
+			{
+				m_pInteractCenter->GetInteractObject(this);
+			}
+			else if (m_ePlayerState == EPlayerState::E_Grab)
+			{
+				m_pInteractCenter->DownParts(m_pParts, m_vDirection);
+				m_ePlayerState = EPlayerState::E_None;
+			}
+			g_SoundManager->PlaySFX("Melem");
+			m_ElapsTimeF = CurrentTime;
 		}
-		else if(m_ePlayerState == EPlayerState::E_Grab)
-		{
-			m_pInteractCenter->DownParts(m_pParts,m_vDirection);
-			m_ePlayerState = EPlayerState::E_None;
-		}
-		//g_SoundManager->PlaySFX("Melem");
+		
+	
 	}
 	if (data->wKey == m_stInputKey.interactableKey2)
 	{
-		if (m_ePlayerState == EPlayerState::E_Grab)
+		if (CurrentTime - m_ElapsTimeG >  500)
 		{
-			m_pParts->PartsRotate();
+			if (m_ePlayerState == EPlayerState::E_Grab)
+			{
+				m_pParts->PartsRotate();
+			}
+
+
+			g_SoundManager->PlaySFX("Melem");
+			
+			m_ElapsTimeG = CurrentTime;
 		}
-		//g_SoundManager->PlaySFX("Melem");
+		
+	
+		
 	}
 	if (data->wKey == m_stInputKey.interactableKey3)
 	{
-		g_SoundManager->PlaySFX("Melem");
+		if (CurrentTime - m_ElapsTimeH >  500)
+		{
+			g_SoundManager->PlaySFX("Melem");
+			m_ElapsTimeF = CurrentTime;
+		}
+
+		
 	}
 
 	_DEBUG_COMMENT cout << m_fRotY << endl;

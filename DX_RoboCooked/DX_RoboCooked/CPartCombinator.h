@@ -19,8 +19,10 @@ private:
 	ECombinatorType					m_eType;
 	vector<ST_PNT_VERTEX>			m_vecVertex;
 	LPDIRECT3DTEXTURE9				m_CombinatorTexture;
-	ICollisionArea*					m_pPartsInteractCollision;
 	std::multimap<string, CParts*>	m_multimapParts;
+	ICollisionArea*					m_pPartsInteractCollision;
+	D3DXVECTOR3						m_vOnCombinatorPosition;
+	CParts*							m_pParts;
 	
 public:
 	CPartCombinator(IInteractCenter* pInteractCenter,ECombinatorType eType);
