@@ -22,11 +22,15 @@ protected:
 
 	ICollisionArea*		m_pCollision;
 public:
+
 	virtual void Update() = 0;
 	virtual void Render() = 0;
 	virtual bool Collide(CActor* target);
 
 	ICollisionArea* GetCollision() { return m_pCollision; }
 	
+	D3DXVECTOR3& GetDirection()	{ return m_vDirection; }
+	void SetDirection(const D3DXVECTOR3& vDirection) { m_vDirection = vDirection; }
+	__declspec(property(get = GetDirection, put = SetDirection)) D3DXVECTOR3 Direction;
 };
 
