@@ -170,7 +170,7 @@ void CPartStorage::Interact(CCharacter* pCharacter)
 	if (pCharacter->GetPlayerState() == EPlayerState::E_None)
 	{
 		CParts* parts = Make();
-		parts->SetPosition(&pCharacter->GetGrabPartsPosition());
+		parts->SetGrabPosition(&pCharacter->GetGrabPartsPosition());
 		m_pInteractCenter->AddParts(parts);
 		pCharacter->SetParts(parts);
 		pCharacter->SetPlayerState(EPlayerState::E_Grab);

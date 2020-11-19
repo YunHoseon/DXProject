@@ -46,6 +46,8 @@ void CParts::Setup()
 
 void CParts::Update()
 {
+
+	
 	if (m_vGrabPosition)
 	{
 		m_vPosition = *m_vGrabPosition;
@@ -63,6 +65,8 @@ void CParts::Update()
 
 void CParts::Render()
 {
+
+	
 	g_pD3DDevice->SetRenderState(D3DRS_LIGHTING, true);
 	g_pD3DDevice->SetTransform(D3DTS_WORLD, &m_matWorld);
 	g_pD3DDevice->SetTexture(0, NULL);
@@ -81,7 +85,7 @@ void CParts::OnEvent(EEvent eEvent, void* _value)
 
 void CParts::Interact(CCharacter* pCharacter)
 {
-	SetPosition(&pCharacter->GetGrabPartsPosition());
+	SetGrabPosition(&pCharacter->GetGrabPartsPosition());
 	pCharacter->SetParts(this);
 	pCharacter->SetPlayerState(EPlayerState::E_Grab);
 	
@@ -104,3 +108,4 @@ void CParts::PartsRotate()
 	if (m_fRotAngle == 360.0f)
 		m_fRotAngle = 0;
 }
+

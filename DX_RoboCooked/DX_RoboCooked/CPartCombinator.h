@@ -16,9 +16,12 @@ class CPartCombinator :
 	public CInteractiveActor ,public IPartGenerator 
 {
 private:
-	ECombinatorType			m_eType;
-	vector<ST_PNT_VERTEX>	m_vecVertex;
-	LPDIRECT3DTEXTURE9		m_CombinatorTexture;
+	ECombinatorType					m_eType;
+	vector<ST_PNT_VERTEX>			m_vecVertex;
+	LPDIRECT3DTEXTURE9				m_CombinatorTexture;
+	ICollisionArea*					m_pPartsInteractCollision;
+	D3DXVECTOR3						m_vPosition;
+	std::multimap<string, CParts*>	m_multimapParts;
 	
 public:
 	CPartCombinator(IInteractCenter* pInteractCenter,ECombinatorType eType);
@@ -27,10 +30,14 @@ public:
 public:
 	void Update() override;
 	void Render() override;
-	void Setup(float fAngle, D3DXVECTOR3 vecPosition);
+	void Setup(float fAngle, D3DXVECTOR3 vPosition);
 	void Interact(CCharacter* pCharacter) override;
-	void OnEvent(EEvent eEvent, void* _value);
+	void PartsInteract(CParts* pParts);
+	void OnEvent(EEvent eEvent, void* _value) override;
 	void CombineParts();
+	ICollisionArea* GetInteractCollsion() { return m_pPartsInteractCollision; }
+	D3DXVECTOR3 GetPosition() { return m_vPosition; }
+	
 private:
 	CParts* Make() override;
 

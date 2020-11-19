@@ -186,5 +186,18 @@ void CGameScene::DownParts(CParts* parts, D3DXVECTOR3 vDir)
 	if (parts != nullptr)
 	{
 		parts->DownParts(vDir);
+		
+	}
+}
+
+void CGameScene::CheckAroundCombinator(CPartCombinator* combinator)
+{
+	for (CInteractiveActor * it : m_vecParts)
+	{
+		if (combinator->GetInteractCollsion()->Collide(it->GetCollision()))
+		{
+			combinator->PartsInteract(static_cast<CParts*>(it)); //형변환해서 값을 넣어준다.
+			return;
+		}
 	}
 }
