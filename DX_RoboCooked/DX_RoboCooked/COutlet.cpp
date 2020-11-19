@@ -171,6 +171,9 @@ void COutlet::Interact(CCharacter* pCharacter)
 		parts->SetPosition(m_vPosition + D3DXVECTOR3(0, 1.0f, 0));
 		m_pInteractCenter->AddParts(parts);
 		pCharacter->SetParts(parts);*/
+		parts->SetPosition(m_pOutlet->GetPosition() + D3DXVECTOR3(0, 1.0f, 0));
+		m_pInteractCenter->AddParts(parts);
+		pCharacter->SetParts(parts);
 		pCharacter->SetPlayerState(EPlayerState::E_Grab);
 		m_eOutletState = EOutletState::E_None;
 		cout << "부품 가져감" << endl;

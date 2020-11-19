@@ -179,7 +179,6 @@ void CPartVending::Interact(CCharacter* pCharacter)
 		parts->SetPosition(m_pOutlet->GetPosition() + D3DXVECTOR3(0, 1.0f, 0));
 		m_pInteractCenter->AddParts(parts);
 		pCharacter->SetParts(parts);
-		pCharacter->SetPlayerState(EPlayerState::E_Grab);
 		m_pOutlet->SetState(EOutletState::E_Loaded);
 		m_ePartVendingState = EPartVendingState::E_Unusable;
 		cout << "何前 积己" << endl;
