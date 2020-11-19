@@ -11,6 +11,7 @@
 #include "CCombinatorButton.h"
 #include "COutlet.h"
 #include "CPartVending.h"
+#include "CTestPhysics.h"
 
 /* 디버깅용 */
 #include "CDebugPlayer1.h"
@@ -117,22 +118,41 @@ void CGameScene::Render()
 
 void CGameScene::Update()
 {
-	// collide -> update
+	{
+		// Gravity Update
+		if (m_pDebugCube)
+			CTestPhysics::ApplyGravity(m_pDebugCube);
+
+		if (m_pDebugSphere)
+			CTestPhysics::ApplyGravity(m_pDebugSphere);
+
+		for (CInteractiveActor* part : m_vecParts)
+		{
+			CTestPhysics::ApplyGravity(part);
+		}
+	}
 	
+	// collide -> update
 	{// collide
 		if (m_pDebugSphere)
 			m_pDebugSphere->Collide(m_pDebugCube);
 
 		for (CInteractiveActor* obj : m_vecObject)
 		{
-			m_pDebugSphere->Collide(obj);
-			m_pDebugCube->Collide(obj);
+			if (m_pDebugSphere->Collide(obj))
+				CTestPhysics::ApplyBound(m_pDebugSphere, obj);
+			
+			if(m_pDebugCube->Collide(obj))
+				CTestPhysics::ApplyBound(m_pDebugCube, obj);
 		}
 
 		for (CInteractiveActor* part : m_vecParts)
 		{
-			m_pDebugSphere->Collide(part);
-			m_pDebugCube->Collide(part);
+			if (m_pDebugSphere->Collide(part))
+				CTestPhysics::ApplyBound(m_pDebugSphere, part);
+
+			if (m_pDebugCube->Collide(part))
+				CTestPhysics::ApplyBound(m_pDebugCube, part);
 		}
 		// part-part, part-obj 필요
 	}
