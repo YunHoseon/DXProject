@@ -154,6 +154,11 @@ void CPartVending::OnEvent(EEvent eEvent, void* _value)
 
 void CPartVending::Interact(CCharacter* pCharacter)
 {
-	if(m_ePartVendingState == EPartVendingState::E_Usable)
+	if(m_ePartVendingState == EPartVendingState::E_Usable 
+		&& m_pOutlet->GetState() == EOutletState::E_None)
+	{
 		m_pOutlet->Interact(pCharacter);
+		m_pOutlet->SetState(EOutletState::E_Loaded);
+		m_ePartVendingState = EPartVendingState::E_Unusable;
+	}
 }

@@ -30,5 +30,7 @@ public:
 	void OnEvent(EEvent eEvent, void* _value);
 	void Interact(CCharacter* pCharacter);
 	CParts* Make() override;
+	EOutletState GetState() { return m_eOutletState; }
+	void SetState(EOutletState state) { m_eOutletState = state; }
 };
 

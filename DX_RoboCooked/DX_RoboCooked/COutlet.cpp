@@ -174,5 +174,6 @@ void COutlet::Interact(CCharacter* pCharacter)
 		m_pInteractCenter->AddParts(parts);
 		pCharacter->SetParts(parts);
 		pCharacter->SetPlayerState(EPlayerState::E_Grab);
+		m_eOutletState == EOutletState::E_None;
 	}
 }
