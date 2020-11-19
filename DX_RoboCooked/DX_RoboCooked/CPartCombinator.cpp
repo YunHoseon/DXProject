@@ -189,6 +189,7 @@ void CPartCombinator::PartsInteract(CParts* pParts)
 	if (pParts->GetGrabPosition() != NULL)
 		return;
 	 m_multimapParts.insert(std::make_pair(std::to_string(pParts->GetPartsID()),pParts));
+	 pParts->GetCollision()->SetActive(false);
 }
 
 void CPartCombinator::OnEvent(EEvent eEvent, void* _value)
