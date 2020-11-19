@@ -7,8 +7,9 @@ class COutlet :
 	public CActor, IPartGenerator
 {
 private:
-	int m_nPartsID;
-	CPartVending* m_pGeneratorSwitch;
+	int					m_nPartsID;
+	CPartVending*		m_pGeneratorSwitch;
+	D3DXVECTOR3			m_vPosition;
 
 	LPD3DXMESH			m_pMeshCube;
 	D3DMATERIAL9		m_stMtlCube;
@@ -21,5 +22,6 @@ public:
 	void Render() override;
 	
 	void OnEvent(EEvent eEvent, void* _value);
+	CParts* Make() override;
 };
 

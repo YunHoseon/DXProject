@@ -19,6 +19,6 @@ public:
 	void Interact(CCharacter* pCharacter) override;
 	void Update() override;
 	void Render() override;
-	void Setup(float fAngle,D3DXVECTOR3 vPosition);
+	void Setup(float fAngle, D3DXVECTOR3 vPosition);
 };
 

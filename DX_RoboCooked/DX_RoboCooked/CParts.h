@@ -16,7 +16,7 @@ private:
 	int					m_nPartsID;
 	float				m_fRotAngle;
 	float				m_fWeight;
-	
+
 public:
 	CParts();
 	CParts(int nPartsID);
@@ -27,8 +27,11 @@ public:
 	void Render() override;
 	void OnEvent(EEvent eEvent, void* _value);
 	void Interact(CCharacter* pCharacter) override;
-	void SetPosition(D3DXVECTOR3* vPosition) { m_vGrabPosition = vPosition; }
+	void SetGrabPosition(D3DXVECTOR3* vPosition) { m_vGrabPosition = vPosition; }
+	D3DXVECTOR3* GetGrabPosition() { return m_vGrabPosition; }
 	void DownParts(D3DXVECTOR3 vDir);
 	void PartsRotate();
+	int GetPartsID() { return m_nPartsID; };
+
 };
 
