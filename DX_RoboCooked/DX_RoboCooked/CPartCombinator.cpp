@@ -1,6 +1,6 @@
 #include "stdafx.h"
 #include "CPartCombinator.h"
-#include "CBoxCollision.h"
+#include "CSphereCollision.h"
 #include "CCharacter.h"
 #include "CActor.h"
 
@@ -121,7 +121,7 @@ void CPartCombinator::Setup(float fAngle, D3DXVECTOR3 vecPosition)
 	D3DXMatrixRotationY(&m_matR, D3DXToRadian(fAngle));
 	D3DXMatrixTranslation(&m_matT, vecPosition.x, 0, vecPosition.z);
 
-	m_pCollision = new CBoxCollision(D3DXVECTOR3(0, 0, 0), D3DXVECTOR3(1.0f, 1.0f, 1.0f), &m_matWorld);
+	m_pCollision = new CSphereCollision(D3DXVECTOR3(0, 0, 0),1.0f, &m_matWorld);
 }
 
 void CPartCombinator::Update()

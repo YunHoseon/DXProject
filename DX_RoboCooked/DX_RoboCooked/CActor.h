@@ -17,7 +17,7 @@ protected:
 	D3DXMATRIXA16		m_matT;
 	D3DXMATRIXA16		m_matWorld;
 
-	ICollisionArea* m_pCollision;
+	ICollisionArea*		m_pCollision;
 public:
 	virtual void Update() = 0;
 	virtual void Render() = 0;

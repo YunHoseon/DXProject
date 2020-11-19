@@ -57,7 +57,7 @@ void CGameScene::Init()
 	m_vecObject.push_back(partStorage);
 
 	CPartCombinator* partCombinator = new CPartCombinator(this, ECombinatorType::E_1stAuto);
-	partCombinator->Setup(45.0f, D3DXVECTOR3(-1, 0, -1));
+	partCombinator->Setup(45.0f, D3DXVECTOR3(-2, 0, 2));
 
 	m_vecObject.push_back(partCombinator);
 

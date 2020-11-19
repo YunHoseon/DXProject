@@ -2,9 +2,10 @@
 #include "CCamera.h"
 
 
+
 CCamera::CCamera() :m_vEye(0, 0, -5), m_vLookAt(0, 0, 0), m_vUp(0, 1, 0),
-					m_pvTarget(NULL), m_fCameraDistance(5.0f),
-					m_isMouseButtonDown(false), m_vCamRotAngle(0, 0, 0) 
+					m_pvTarget(NULL), m_fCameraDistance(11.83f), // 11.0f CameraDistance
+					m_isMouseButtonDown(false), m_vCamRotAngle(0.18f, 0, 0) //0.18f
 {
 }
 
