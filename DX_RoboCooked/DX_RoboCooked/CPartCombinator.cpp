@@ -11,6 +11,9 @@
 CPartCombinator::CPartCombinator(IInteractCenter* pInteractCenter,ECombinatorType eType)
 		: m_eType(eType)
 		, m_pPartsInteractCollision(NULL)
+		, m_vOnCombinatorPosition(0,0,0)
+		, m_pParts(NULL)
+		, m_multimapParts()
 {
 	m_vPosition = D3DXVECTOR3(0, 0, 0);
 	m_pInteractCenter = pInteractCenter;
@@ -127,6 +130,8 @@ void CPartCombinator::Setup(float fAngle, D3DXVECTOR3 vPosition)
 	D3DXMatrixRotationY(&m_matR, D3DXToRadian(fAngle));
 	D3DXMatrixTranslation(&m_matT, vPosition.x, 0, vPosition.z);
 	m_vPosition = vPosition;
+	m_vOnCombinatorPosition = D3DXVECTOR3(vPosition.x, vPosition.y+1.0f, vPosition.z);
+	
 	m_pCollision = new CBoxCollision(D3DXVECTOR3(0, 0, 0),D3DXVECTOR3(1.0f, 1.0f,1.0f), &m_matWorld);
 	m_pPartsInteractCollision = new CSphereCollision(D3DXVECTOR3(0, 0, 0), 2.0f, &m_matWorld);
 
@@ -174,12 +179,20 @@ void CPartCombinator::Render()
 
 void CPartCombinator::Interact(CCharacter* pCharacter)
 {
+	if (m_pParts == NULL)
+		return;
+
 	if (m_eType == ECombinatorType::E_1stAuto || m_eType == ECombinatorType::E_2stAuto)
 		return; //자동은 상호작용안함
 
-	if (pCharacter->GetPlayerState() == EPlayerState::E_Grab)
+	if (pCharacter->GetPlayerState() == EPlayerState::E_None)
 	{
-
+		pCharacter->SetPlayerState(EPlayerState::E_Grab);
+		
+		m_pParts->SetGrabPosition(&pCharacter->GetGrabPartsPosition());
+		m_pParts->GetCollision()->SetActive(true);
+		m_pParts->SetMoveParts(false);
+		m_multimapParts.erase(m_multimapParts.begin());
 	}
 	
 }
@@ -200,7 +213,8 @@ void CPartCombinator::OnEvent(EEvent eEvent, void* _value)
 
 void CPartCombinator::CombineParts()
 {
-
+	m_pParts = m_multimapParts.begin()->second;
+	m_multimapParts.begin()->second->SetPosition(m_vOnCombinatorPosition);
 }
 
 CParts* CPartCombinator::Make()
