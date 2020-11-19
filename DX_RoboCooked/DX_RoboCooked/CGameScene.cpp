@@ -11,6 +11,7 @@
 #include "CCombinatorButton.h"
 #include "COutlet.h"
 #include "CPartVending.h"
+#include "CTestPhysics.h"
 
 /* 디버깅용 */
 #include "CDebugPlayer1.h"
@@ -71,7 +72,7 @@ void CGameScene::Init()
 	outlet->Setup(0, D3DXVECTOR3(1, 0, 3), 2);
 	m_vecObject.push_back(outlet);
 	
-	CPartVending* partVending = new CPartVending(outlet);
+	CPartVending* partVending = new CPartVending(outlet, this);
 	partVending->Setup(0, D3DXVECTOR3(1, 0, -3));
 	m_vecObject.push_back(partVending);
 
@@ -122,42 +123,72 @@ void CGameScene::Render()
 
 void CGameScene::Update()
 {
-	for (CActor* it : m_vecStaticActor)
 	{
-		it->Update();
+		// Gravity Update
+		if (m_pDebugCube)
+			CTestPhysics::ApplyGravity(m_pDebugCube);
+
+		if (m_pDebugSphere)
+			CTestPhysics::ApplyGravity(m_pDebugSphere);
+
+		for (CInteractiveActor* part : m_vecParts)
+		{
+			CTestPhysics::ApplyGravity(part);
+		}
+	}
+	
+	// collide -> update
+	{// collide
+		if (m_pDebugSphere)
+			m_pDebugSphere->Collide(m_pDebugCube);
+
+		for (CInteractiveActor* obj : m_vecObject)
+		{
+			if (m_pDebugSphere->Collide(obj))
+				CTestPhysics::ApplyBound(m_pDebugSphere, obj);
+			
+			if(m_pDebugCube->Collide(obj))
+				CTestPhysics::ApplyBound(m_pDebugCube, obj);
+		}
+
+		for (CInteractiveActor* part : m_vecParts)
+		{
+			if (m_pDebugSphere->Collide(part))
+				CTestPhysics::ApplyBound(m_pDebugSphere, part);
+
+			if (m_pDebugCube->Collide(part))
+				CTestPhysics::ApplyBound(m_pDebugCube, part);
+		}
+		// part-part, part-obj 필요
+	}
+	{// update
+		for (CActor* it : m_vecStaticActor)
+		{
+			it->Update();
+		}
+
+		for (CInteractiveActor* it : m_vecParts)
+		{
+			it->Update();
+		}
+
+		for (CInteractiveActor* it : m_vecObject)
+		{
+			it->Update();
+		}
+
+		if (m_pDebugCube)
+			m_pDebugCube->Update();
+
+		if (m_pDebugSphere)
+		{
+			m_pDebugSphere->Update();
+
+		}
 	}
 
-	for (CInteractiveActor* it : m_vecParts)
-	{
-		it->Update();
-	}
-
-	for (CInteractiveActor* it : m_vecObject)
-	{
-		it->Update();
-	}
-
-	if (m_pDebugCube)
-		m_pDebugCube->Update();
 
 
-	if (m_pDebugSphere)
-	{
-		m_pDebugSphere->Update();
-		m_pDebugSphere->Collide(m_pDebugCube);
-	}
-
-	for (CInteractiveActor* value : m_vecObject)
-	{
-		m_pDebugSphere->Collide(value);
-		m_pDebugCube->Collide(value);
-	}
-
-	for (CInteractiveActor* value : m_vecParts)
-	{
-		m_pDebugSphere->Collide(value);
-		m_pDebugCube->Collide(value);
-	}
 }
 
 

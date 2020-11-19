@@ -171,6 +171,9 @@
     <ClInclude Include="COutlet.h">
       <Filter>GameScene</Filter>
     </ClInclude>
+    <ClInclude Include="CTestPhysics.h">
+      <Filter>GameScene\Collider</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="stdafx.cpp">
@@ -301,6 +304,9 @@
     </ClCompile>
     <ClCompile Include="COutlet.cpp">
       <Filter>GameScene</Filter>
+    </ClCompile>
+    <ClCompile Include="CTestPhysics.cpp">
+      <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

@@ -2,15 +2,12 @@
 #include "COutlet.h"
 #include "ICollisionArea.h"
 #include "CBoxCollision.h"
-#include "CParts.h"
 #include "CCharacter.h"
-#include "CGameScene.h"
 
 COutlet::COutlet(IInteractCenter* pInteractCenter)
 	:m_nPartsID(0)
 	, m_eOutletState(EOutletState::E_None)
 {
-	m_vDirection = D3DXVECTOR3(0, 0, 1);
 	m_pInteractCenter = pInteractCenter;
 }
 
@@ -158,21 +155,27 @@ void COutlet::OnEvent(EEvent eEvent, void* _value)
 {
 }
 
-CParts* COutlet::Make()
-{
-	CParts* parts = new CParts(m_nID);
-	parts->Setup();
-	return parts;
-}
+//CParts* COutlet::Make()
+//{
+//	CParts* parts = new CParts(m_nID);
+//	parts->Setup();
+//	return parts;
+//}
 
 void COutlet::Interact(CCharacter* pCharacter)
 {
-	if (pCharacter->GetPlayerState() == EPlayerState::E_None && m_eOutletState == EOutletState::E_Loaded)
+	if (pCharacter->GetPlayerState() == EPlayerState::E_None 
+		&& m_eOutletState == EOutletState::E_Loaded)
 	{
-		CParts* parts = Make();
+		/*CParts* parts = Make();
 		parts->SetPosition(m_vPosition + D3DXVECTOR3(0, 1.0f, 0));
+		m_pInteractCenter->AddParts(parts);
+		pCharacter->SetParts(parts);*/
+		parts->SetPosition(m_pOutlet->GetPosition() + D3DXVECTOR3(0, 1.0f, 0));
 		m_pInteractCenter->AddParts(parts);
 		pCharacter->SetParts(parts);
 		pCharacter->SetPlayerState(EPlayerState::E_Grab);
+		m_eOutletState = EOutletState::E_None;
+		cout << "부품 가져감" << endl;
 	}
 }
