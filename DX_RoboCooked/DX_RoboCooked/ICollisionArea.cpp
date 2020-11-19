@@ -3,7 +3,8 @@
 #include "CBoxCollision.h"
 #include "CSphereCollision.h"
 
-ICollisionArea::ICollisionArea(): m_eType(EColideType::E_Box), isCollide(false), stColor{}, m_pmatWorldTM(nullptr)
+ICollisionArea::ICollisionArea(): m_eType(EColideType::E_Box), isCollide(false), isActive(true), stColor{},
+                                  m_pmatWorldTM(nullptr)
 {
 	stColor[0] = D3DCOLOR_XRGB(255, 255, 255);
 	stColor[1] = D3DCOLOR_XRGB(255, 0, 0);
@@ -11,6 +12,9 @@ ICollisionArea::ICollisionArea(): m_eType(EColideType::E_Box), isCollide(false),
 
 bool ICollisionArea::Collide(ICollisionArea* pTargetCollider)
 {
+	if (!isActive || !pTargetCollider->isActive)
+		return false;
+	
 	if (pTargetCollider->m_eType == EColideType::E_Box)
 		return CollideToBox(dynamic_cast<CBoxCollision*>(pTargetCollider));
 
