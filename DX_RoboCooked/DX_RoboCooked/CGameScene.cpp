@@ -68,9 +68,11 @@ void CGameScene::Init()
 	m_vecObject.push_back(combinatorButton);
 
 	COutlet* outlet = new COutlet(this);
-	//outlet->Setup(0, )
+	outlet->Setup(0, D3DXVECTOR3(1, 0, 3), 2);
+	m_vecObject.push_back(outlet);
+	
 	CPartVending* partVending = new CPartVending(outlet);
-	partVending->Setup(0, D3DXVECTOR3(5, 0, -3));
+	partVending->Setup(0, D3DXVECTOR3(1, 0, -3));
 	m_vecObject.push_back(partVending);
 
 	m_pDebugSphere = new CDebugPlayer1(this);

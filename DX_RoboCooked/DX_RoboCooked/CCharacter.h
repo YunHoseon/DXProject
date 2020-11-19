@@ -25,8 +25,6 @@ protected:
 	DWORD				m_elapsedTime;
 	bool				m_isGrabCooltime;
 
-	
-
 public:
 	CCharacter();
 	virtual ~CCharacter() = 0;

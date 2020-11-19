@@ -31,7 +31,6 @@ public:
 	D3DXVECTOR3* GetGrabPosition() { return m_vGrabPosition; }
 	void DownParts(D3DXVECTOR3 vDir);
 	void PartsRotate();
-	int GetPartsID() { return m_nPartsID; };
-
+	int GetPartsID() { return m_nPartsID; }
 };
 

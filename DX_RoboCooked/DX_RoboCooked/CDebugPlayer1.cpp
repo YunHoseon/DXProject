@@ -115,7 +115,6 @@ void CDebugPlayer1::PressKey(void* _value)
 		if(m_ePlayerState == EPlayerState::E_None)
 		{
 			m_pInteractCenter->GetInteractObject(this);
-			
 		}
 		else if(m_ePlayerState == EPlayerState::E_Grab)
 		{
