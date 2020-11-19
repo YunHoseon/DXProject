@@ -8,8 +8,8 @@
 COutlet::COutlet(IInteractCenter* pInteractCenter)
 	:m_nPartsID(0)
 	, m_pGeneratorSwitch(NULL)
-	, m_vDirection(0, 0, 1)
 {
+	m_vDirection = D3DXVECTOR3(0, 0, 1);
 	m_pInteractCenter = pInteractCenter;
 	D3DXMatrixIdentity(&m_matWorld);
 }
