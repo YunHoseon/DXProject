@@ -2,7 +2,7 @@
 #include "CInteractiveActor.h"
 
 class CPartVending;
-
+class CParts;
 enum class EOutletState
 {
 	E_None,
@@ -17,6 +17,7 @@ private:
 	int						m_nPartsID;
 	vector<ST_PNT_VERTEX>	m_vecVertex;
 	LPDIRECT3DTEXTURE9		m_PartVendingTexture;
+	CParts*					m_pMyParts;
 	
 public:
 	COutlet(IInteractCenter* pInteractCenter);
@@ -28,7 +29,8 @@ public:
 	
 	void OnEvent(EEvent eEvent, void* _value);
 	void Interact(CCharacter* pCharacter);
-	//CParts* Make() override;
+	void AcceptPartsFromVending(CParts* parts);
+
 	D3DXVECTOR3 GetPosition() { return m_vPosition; }
 	EOutletState GetState() { return m_eOutletState; }
 	void SetState(EOutletState state) { m_eOutletState = state; }

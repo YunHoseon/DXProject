@@ -3,6 +3,8 @@
 #include "ICollisionArea.h"
 #include "CBoxCollision.h"
 #include "CCharacter.h"
+#include "IInteractCenter.h"
+#include "CParts.h"
 
 COutlet::COutlet(IInteractCenter* pInteractCenter)
 	:m_nPartsID(0)
@@ -171,11 +173,21 @@ void COutlet::Interact(CCharacter* pCharacter)
 		parts->SetPosition(m_vPosition + D3DXVECTOR3(0, 1.0f, 0));
 		m_pInteractCenter->AddParts(parts);
 		pCharacter->SetParts(parts);*/
-		/*parts->SetPosition(m_pOutlet->GetPosition() + D3DXVECTOR3(0, 1.0f, 0));
-		m_pInteractCenter->AddParts(parts);
-		pCharacter->SetParts(parts);*/
+
+		pCharacter->SetParts(m_pMyParts);									//캐릭터에게 어떤파츠를 들고있는지 알려줌
+		m_pMyParts->SetGrabPosition(&pCharacter->GetGrabPartsPosition());	//캐릭터를 따라가게함
+		
 		pCharacter->SetPlayerState(EPlayerState::E_Grab);
 		m_eOutletState = EOutletState::E_None;
+		m_pMyParts = NULL;
 		cout << "부품 가져감" << endl;
+		
 	}
+}
+
+void COutlet::AcceptPartsFromVending(CParts * parts)
+{
+	m_eOutletState = EOutletState::E_Loaded;
+	m_pMyParts = parts;
+	parts->SetPosition(this->GetPosition() + D3DXVECTOR3(0, 1.0f, 0));
 }
