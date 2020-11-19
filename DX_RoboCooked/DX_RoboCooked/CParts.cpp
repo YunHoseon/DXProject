@@ -3,19 +3,9 @@
 #include "CSphereCollision.h"
 #include "CCharacter.h"
 
-CParts::CParts()
-	: m_fRotAngle(0.0f)
-{
-	m_vPosition = D3DXVECTOR3(3.0f, 0.0f, 2.0f);
-
-	D3DXMatrixIdentity(&m_matWorld);
-	m_sphere.vCenter = m_vPosition;
-	m_sphere.fRaidus = 0.3f;
-	std::cout << "ID가 없는 파츠입니다." << std::endl;
-}
-
 CParts::CParts(int nPartsID)
-	: m_fRotAngle(0.0f)
+	: m_vGrabPosition(nullptr), m_pMeshSphere(nullptr), m_stMtlParts(), m_isMoveParts(false), m_fRotAngle(0.0f),
+	  m_fWeight(0), m_vCombinatorPosition(0,0,0)
 {
 	m_vPosition = D3DXVECTOR3(3.0f, 0.0f, 2.0f);
 	m_nPartsID = nPartsID;
@@ -47,7 +37,8 @@ void CParts::Setup()
 
 void CParts::Update()
 {
-
+	if (m_isMoveParts)
+		MoveParts();
 	
 	if (m_vGrabPosition)
 	{
@@ -109,4 +100,19 @@ void CParts::PartsRotate()
 	if (m_fRotAngle == 360.0f)
 		m_fRotAngle = 0;
 }
+
+void CParts::MoveParts()
+{
+	D3DXVECTOR3 vDirection = m_vCombinatorPosition - m_vPosition;
+	float fLength = D3DXVec3Length(&vDirection);
+	
+	if(fLength < 0.1f && fLength > -0.1f)
+	{
+		m_isMoveParts = false;
+		return;
+	}
+	D3DXVec3Normalize(&vDirection, &vDirection);
+	m_vPosition += vDirection*0.01f;
+}
+
 

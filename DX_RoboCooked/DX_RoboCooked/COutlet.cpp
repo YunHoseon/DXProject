@@ -10,6 +10,7 @@ COutlet::COutlet(IInteractCenter* pInteractCenter)
 	:m_nPartsID(0)
 	, m_eOutletState(EOutletState::E_None)
 {
+	m_vDirection = D3DXVECTOR3(0, 0, 1);
 	m_pInteractCenter = pInteractCenter;
 }
 

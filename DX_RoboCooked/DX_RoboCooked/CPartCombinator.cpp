@@ -190,6 +190,8 @@ void CPartCombinator::PartsInteract(CParts* pParts)
 		return;
 	 m_multimapParts.insert(std::make_pair(std::to_string(pParts->GetPartsID()),pParts));
 	 pParts->GetCollision()->SetActive(false);
+	 pParts->SetCombinatorPosition(m_vPosition);
+	 pParts->SetMoveParts(true);
 }
 
 void CPartCombinator::OnEvent(EEvent eEvent, void* _value)
