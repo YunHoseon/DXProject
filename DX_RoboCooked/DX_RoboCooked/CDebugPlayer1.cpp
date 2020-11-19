@@ -114,7 +114,7 @@ void CDebugPlayer1::PressKey(void* _value)
 	}
 	if (data->wKey == m_stInputKey.interactableKey1)
 	{
-		if (CurrentTime - m_ElapsTimeF >  500)
+		if (CurrentTime - m_ElapsTimeF > 500)
 		{
 			if (m_ePlayerState == EPlayerState::E_None)
 			{
@@ -128,39 +128,28 @@ void CDebugPlayer1::PressKey(void* _value)
 			g_SoundManager->PlaySFX("Melem");
 			m_ElapsTimeF = CurrentTime;
 		}
-		
-	
 	}
 	if (data->wKey == m_stInputKey.interactableKey2)
 	{
-		if (CurrentTime - m_ElapsTimeG >  500)
+		if (CurrentTime - m_ElapsTimeG > 500)
 		{
 			if (m_ePlayerState == EPlayerState::E_Grab)
 			{
 				m_pParts->PartsRotate();
 			}
-
-
 			g_SoundManager->PlaySFX("Melem");
-			
 			m_ElapsTimeG = CurrentTime;
 		}
-		
-	
-		
 	}
 	if (data->wKey == m_stInputKey.interactableKey3)
 	{
 		if (CurrentTime - m_ElapsTimeH >  500)
 		{
 			g_SoundManager->PlaySFX("Melem");
-			m_ElapsTimeF = CurrentTime;
+			m_ElapsTimeH = CurrentTime;
 		}
-
-		
 	}
-
-	_DEBUG_COMMENT cout << m_fRotY << endl;
+	//_DEBUG_COMMENT cout << m_fRotY << endl;
 }
 
 void CDebugPlayer1::ReleaseKey(void* _value)

@@ -72,7 +72,7 @@ void CGameScene::Init()
 	outlet->Setup(0, D3DXVECTOR3(1, 0, 3), 2);
 	m_vecObject.push_back(outlet);
 	
-	CPartVending* partVending = new CPartVending(outlet);
+	CPartVending* partVending = new CPartVending(outlet, this);
 	partVending->Setup(0, D3DXVECTOR3(1, 0, -3));
 	m_vecObject.push_back(partVending);
 

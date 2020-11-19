@@ -41,24 +41,18 @@ void CParts::Update()
 		MoveParts();
 	
 	if (m_vGrabPosition)
-	{
 		m_vPosition = *m_vGrabPosition;
-	}
+	
 	D3DXMatrixRotationX(&m_matR, D3DXToRadian(m_fRotAngle));
-
 	D3DXMatrixTranslation(&m_matT, m_vPosition.x , m_vPosition.y, m_vPosition.z);
-
 	m_matWorld = m_matS * m_matR * m_matT;
 
 	if (m_pCollision)
 		m_pCollision->Update();
-
 }
 
 void CParts::Render()
 {
-
-	
 	g_pD3DDevice->SetRenderState(D3DRS_LIGHTING, true);
 	g_pD3DDevice->SetTransform(D3DTS_WORLD, &m_matWorld);
 	g_pD3DDevice->SetTexture(0, NULL);
@@ -80,7 +74,6 @@ void CParts::Interact(CCharacter* pCharacter)
 	SetGrabPosition(&pCharacter->GetGrabPartsPosition());
 	pCharacter->SetParts(this);
 	pCharacter->SetPlayerState(EPlayerState::E_Grab);
-	
 }
 
 void CParts::DownParts(D3DXVECTOR3 vDir)
@@ -91,7 +84,6 @@ void CParts::DownParts(D3DXVECTOR3 vDir)
 	m_vPosition.x += (vDir.x/1.3f);
 	m_vPosition.y  = vDir.y;
 	m_vPosition.z += (vDir.z/1.3f);
-
 }
 
 void CParts::PartsRotate()

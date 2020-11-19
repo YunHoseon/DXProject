@@ -1,6 +1,5 @@
 #pragma once
 #include "CInteractiveActor.h"
-#include "IPartGenerator.h"
 
 class CPartVending;
 
@@ -11,7 +10,7 @@ enum class EOutletState
 };
 
 class COutlet :
-	public CInteractiveActor, IPartGenerator
+	public CInteractiveActor
 {
 private:
 	EOutletState			m_eOutletState;
@@ -29,7 +28,8 @@ public:
 	
 	void OnEvent(EEvent eEvent, void* _value);
 	void Interact(CCharacter* pCharacter);
-	CParts* Make() override;
+	//CParts* Make() override;
+	D3DXVECTOR3 GetPosition() { return m_vPosition; }
 	EOutletState GetState() { return m_eOutletState; }
 	void SetState(EOutletState state) { m_eOutletState = state; }
 };

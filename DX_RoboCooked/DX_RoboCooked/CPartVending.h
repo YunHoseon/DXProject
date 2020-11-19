@@ -1,5 +1,6 @@
 #pragma once
 #include "CInteractiveActor.h"
+#include "IPartGenerator.h"
 #include "COutlet.h"
 
 enum class EPartVendingState
@@ -8,7 +9,8 @@ enum class EPartVendingState
 	E_Unusable
 };
 
-class CPartVending : public CInteractiveActor
+class CPartVending :
+	public CInteractiveActor, public IPartGenerator
 {
 private:
 	EPartVendingState		m_ePartVendingState;
@@ -16,7 +18,7 @@ private:
 	LPDIRECT3DTEXTURE9		m_PartVendingTexture;
 	COutlet*				m_pOutlet;
 public:
-	CPartVending(COutlet* outlet);
+	CPartVending(COutlet* outlet, IInteractCenter* pInteractCenter);
 	~CPartVending();
 
 	void Setup(float fAngle, D3DXVECTOR3 vPosition);
@@ -24,6 +26,8 @@ public:
 	void Render() override;
 
 	void OnEvent(EEvent eEvent, void* _value);
+	CParts * Make() override;
 	void Interact(CCharacter* pCharacter) override;
+	void InteractToOutlet();
 };
 

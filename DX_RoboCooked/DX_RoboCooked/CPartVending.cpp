@@ -1,11 +1,15 @@
 #include "stdafx.h"
 #include "CPartVending.h"
 #include "CBoxCollision.h"
+#include "CCharacter.h"
+#include "CParts.h"
+#include "CGameScene.h"
 
-CPartVending::CPartVending(COutlet* outlet)
+CPartVending::CPartVending(COutlet* outlet, IInteractCenter* pInteractCenter)
 	:m_pOutlet(outlet)
 	, m_ePartVendingState(EPartVendingState::E_Usable)
 {
+	m_pInteractCenter = pInteractCenter;
 }
 
 
@@ -112,6 +116,7 @@ void CPartVending::Setup(float fAngle, D3DXVECTOR3 vPosition)
 		vecVertex.push_back(v);
 	}
 
+	m_vPosition = vPosition;
 	m_vecVertex = vecVertex;
 	m_PartVendingTexture = g_pTextureManager->GetTexture(("data/Texture/scifi_07.png"));
 	D3DXMatrixRotationY(&m_matR, D3DXToRadian(0.0f));
@@ -152,13 +157,31 @@ void CPartVending::OnEvent(EEvent eEvent, void* _value)
 {
 }
 
+CParts* CPartVending::Make()
+{
+	CParts* parts = new CParts(m_nID);
+	parts->Setup();
+	return parts;
+}
+
 void CPartVending::Interact(CCharacter* pCharacter)
 {
 	if(m_ePartVendingState == EPartVendingState::E_Usable 
-		&& m_pOutlet->GetState() == EOutletState::E_None)
+		&& m_pOutlet->GetState() == EOutletState::E_None 
+		&& pCharacter->GetPlayerState() == EPlayerState::E_None)
 	{
+		/*m_pOutlet->SetState(EOutletState::E_Loaded);
+		m_ePartVendingState = EPartVendingState::E_Unusable;
 		m_pOutlet->Interact(pCharacter);
+		cout << "何前 积己" << endl;*/
+
+		CParts* parts = Make();
+		parts->SetPosition(m_pOutlet->GetPosition() + D3DXVECTOR3(0, 1.0f, 0));
+		m_pInteractCenter->AddParts(parts);
+		pCharacter->SetParts(parts);
+		pCharacter->SetPlayerState(EPlayerState::E_Grab);
 		m_pOutlet->SetState(EOutletState::E_Loaded);
 		m_ePartVendingState = EPartVendingState::E_Unusable;
+		cout << "何前 积己" << endl;
 	}
 }
