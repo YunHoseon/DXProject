@@ -80,6 +80,7 @@ void CBoxCollision::Render()
 	g_pD3DDevice->SetTexture(0, NULL);
 	g_pD3DDevice->SetFVF(ST_PC_VERTEX::FVF);
 	g_pD3DDevice->DrawPrimitiveUP(D3DPT_LINELIST, drawVertex.size() * 0.5f, &drawVertex[0], sizeof(ST_PC_VERTEX));
+	isCollide = false;
 }
 
 void CBoxCollision::Update()
@@ -90,7 +91,7 @@ void CBoxCollision::Update()
 	}
 
 	D3DXVec3TransformCoord(&m_vCenterPos, &m_vOriginCenterPos, m_pmatWorldTM);
-	isCollide = false;
+	
 }
 
 bool CBoxCollision::CollideToBox(CBoxCollision* pTargetCollider)
