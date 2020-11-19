@@ -9,6 +9,7 @@ class COutlet :
 private:
 	int					m_nPartsID;
 	CPartVending*		m_pGeneratorSwitch;
+	D3DXVECTOR3			m_vDirection;
 	D3DXVECTOR3			m_vPosition;
 
 	LPD3DXMESH			m_pMeshCube;
