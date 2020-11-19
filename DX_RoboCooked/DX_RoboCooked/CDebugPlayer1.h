@@ -4,7 +4,7 @@
 
 
 
-class CDebugPlayer1 : public CActor, public CCharacter
+class CDebugPlayer1 : public CCharacter
 {
 private:
 	ST_SPHERE			m_sphere;

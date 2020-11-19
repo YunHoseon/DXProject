@@ -3,7 +3,7 @@
 #include "CCharacter.h"
 
 
-class CDebugPlayer2 : public CActor,public CCharacter
+class CDebugPlayer2 :public CCharacter
 {
 private:
 	ST_CUBE				m_cube;

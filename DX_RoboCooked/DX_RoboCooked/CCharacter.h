@@ -11,7 +11,7 @@ enum class EPlayerState
 	E_Grab 
 };
 
-class CCharacter
+class CCharacter :public CActor
 {
 protected:
 
