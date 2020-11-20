@@ -130,7 +130,7 @@ void CPartVending::Update()
 	_DEBUG_COMMENT if (m_pCollision)
 		_DEBUG_COMMENT m_pCollision->Update();
 
-	if (m_ePartVendingState == EPartVendingState::E_Unusable && )
+	if (m_ePartVendingState == EPartVendingState::E_Unusable)
 	{
 
 	}
