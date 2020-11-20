@@ -14,7 +14,6 @@ class COutlet :
 {
 private:
 	EOutletState			m_eOutletState;
-	int						m_nPartsID;
 	vector<ST_PNT_VERTEX>	m_vecVertex;
 	LPDIRECT3DTEXTURE9		m_PartVendingTexture;
 	CParts*					m_pMyParts;
@@ -23,7 +22,7 @@ public:
 	COutlet(IInteractCenter* pInteractCenter);
 	~COutlet();
 
-	void Setup(float fAngle, D3DXVECTOR3 vecPosition, int nPartsID);
+	void Setup(float fAngle, D3DXVECTOR3 vecPosition);
 	void Update() override;
 	void Render() override;
 	

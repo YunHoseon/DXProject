@@ -69,10 +69,10 @@ void CGameScene::Init()
 	m_vecObject.push_back(combinatorButton);
 
 	COutlet* outlet = new COutlet(this);
-	outlet->Setup(0, D3DXVECTOR3(1, 0, 3), 2);
+	outlet->Setup(0, D3DXVECTOR3(1, 0, 3));
 	m_vecObject.push_back(outlet);
 	
-	CPartVending* partVending = new CPartVending(outlet, this);
+	CPartVending* partVending = new CPartVending(outlet, this, 2);
 	partVending->Setup(0, D3DXVECTOR3(1, 0, -3));
 	m_vecObject.push_back(partVending);
 
@@ -123,19 +123,19 @@ void CGameScene::Render()
 
 void CGameScene::Update()
 {
-	{
-		// Gravity Update
-		if (m_pDebugCube)
-			CTestPhysics::ApplyGravity(m_pDebugCube);
+	//{
+	//	// Gravity Update
+	//	if (m_pDebugCube)
+	//		CTestPhysics::ApplyGravity(m_pDebugCube);
 
-		if (m_pDebugSphere)
-			CTestPhysics::ApplyGravity(m_pDebugSphere);
+	//	if (m_pDebugSphere)
+	//		CTestPhysics::ApplyGravity(m_pDebugSphere);
 
-		for (CInteractiveActor* part : m_vecParts)
-		{
-			CTestPhysics::ApplyGravity(part);
-		}
-	}
+	//	for (CInteractiveActor* part : m_vecParts)
+	//	{
+	//		CTestPhysics::ApplyGravity(part);
+	//	}
+	//}
 	
 	// collide -> update
 	{// collide
