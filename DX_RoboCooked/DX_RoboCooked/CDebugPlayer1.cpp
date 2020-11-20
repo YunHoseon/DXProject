@@ -12,7 +12,7 @@ CDebugPlayer1::CDebugPlayer1(IInteractCenter* pInteractCenter)
 	m_pInteractCenter = pInteractCenter;
 	m_vPosition = m_sphere.vCenter;
 	D3DXMatrixIdentity(&m_matWorld);
-	
+
 	g_EventManager->Attach(EEvent::E_KeyPress, this);
 	g_EventManager->Attach(EEvent::E_KeyRelease, this);
 	g_EventManager->Attach(EEvent::E_Player1KeyChange, this);
@@ -38,13 +38,12 @@ void CDebugPlayer1::Setup()
 void CDebugPlayer1::Update()
 {
 	Move();
-	m_matWorld = m_matS * m_matR * m_matT;
 	m_vGrabPartsPosition.x = m_vPosition.x;
 	m_vGrabPartsPosition.z = m_vPosition.z;
 
 	if (m_pInteractCollision)
 		m_pInteractCollision->Update();
-	
+
 	if (m_pCollision)
 		m_pCollision->Update();
 }
@@ -88,30 +87,25 @@ void CDebugPlayer1::PressKey(void* _value)
 	ST_KeyInputEvent *data = static_cast<ST_KeyInputEvent*>(_value);
 	DWORD CurrentTime = GetTickCount();
 	float fTestTime = 700.0f;
-	
 	if (data->wKey == m_stInputKey.moveFowardKey)
 	{
 		Rotate(0);
-		PressMoveKey();
 	}
 	if (data->wKey == m_stInputKey.moveLeftKey)
 	{
 		if (m_fRotY - 0.5f < 0.f)
 			m_fRotY += D3DX_PI * 2.f;
 		Rotate(D3DX_PI * 1.5f);
-		PressMoveKey();
 	}
 	if (data->wKey == m_stInputKey.moveBackKey)
 	{
 		Rotate(D3DX_PI);
-		PressMoveKey();
 	}
 	if (data->wKey == m_stInputKey.moveRightKey)
 	{
 		if (m_fRotY + 0.5f > D3DX_PI * 2.f)
 			m_fRotY -= D3DX_PI * 2.f;
 		Rotate(D3DX_PI * 0.5f);
-		PressMoveKey();
 	}
 	if (data->wKey == m_stInputKey.interactableKey1)
 	{
@@ -123,7 +117,7 @@ void CDebugPlayer1::PressKey(void* _value)
 			}
 			else if (m_ePlayerState == EPlayerState::E_Grab)
 			{
-				m_pInteractCenter->DownParts(this,m_pParts, m_vDirection);
+				m_pInteractCenter->DownParts(this, m_pParts, m_vDirection);
 			}
 			g_SoundManager->PlaySFX("Melem");
 			m_ElapsTimeF = CurrentTime;
@@ -138,7 +132,7 @@ void CDebugPlayer1::PressKey(void* _value)
 				m_pParts->PartsRotate();
 			}
 			g_SoundManager->PlaySFX("Melem");
-			
+
 			m_ElapsTimeG = CurrentTime;
 		}
 	}
@@ -154,33 +148,20 @@ void CDebugPlayer1::PressKey(void* _value)
 	_DEBUG_COMMENT cout << m_fRotY << endl;
 }
 
-void CDebugPlayer1::PressMoveKey()
-{
-	m_fSpeed = m_fBaseSpeed;
-	if (m_pInteractCollision)
-		m_pInteractCollision->Update();
-
-	if (m_pCollision)
-		m_pCollision->Update();
-	
-}
-
 void CDebugPlayer1::ReleaseKey(void* _value)
 {
 	_DEBUG_COMMENT std::cout << "Release" << std::endl;
-	m_fSpeed = 0.0f;
 }
 
 void CDebugPlayer1::Move()
 {
-	if (m_fSpeed == 0.0f)
-		return;
-	
-	D3DXVec3TransformNormal(&m_vDirection, &D3DXVECTOR3(0,0,1), &m_matR);
-
-	m_vPosition += m_vDirection * m_fSpeed;
+	m_vPosition += m_vDirection;
 
 	D3DXMatrixTranslation(&m_matT, m_vPosition.x, m_vPosition.y, m_vPosition.z);
+	m_matWorld = m_matS * m_matR * m_matT;
+	if (m_pCollision)
+		m_pCollision->Update();
+	m_vDirection *= 0;
 }
 
 void CDebugPlayer1::Rotate(float fTargetRot)
@@ -191,7 +172,14 @@ void CDebugPlayer1::Rotate(float fTargetRot)
 
 	D3DXQuaternionSlerp(&stLerpRot, &stCurrentRot, &stTargetRot, 0.3f);
 	D3DXMatrixRotationQuaternion(&m_matR, &stLerpRot);
-	
+
+	D3DXVec3TransformNormal(&m_vDirection, &D3DXVECTOR3(0, 0, 1), &m_matR);
+	m_vDirection *= m_fSpeed;
+
+	m_matWorld = m_matS * m_matR * m_matT;
+	if (m_pCollision)
+		m_pCollision->Update();
+
 	D3DXVECTOR3 dummy;
 	D3DXQuaternionToAxisAngle(&stLerpRot, &dummy, &m_fRotY);
 }
@@ -201,4 +189,3 @@ void CDebugPlayer1::SetKeyChange(void* _value)
 	ST_PLAYER_INPUTKEY *data = static_cast<ST_PLAYER_INPUTKEY*>(_value);
 	m_stInputKey = *data;
 }
-
