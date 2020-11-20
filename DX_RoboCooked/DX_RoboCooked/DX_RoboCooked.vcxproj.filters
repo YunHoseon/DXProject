@@ -31,12 +31,6 @@
     <Filter Include="GameScene\Collider">
       <UniqueIdentifier>{9b16d774-c905-40a9-86d3-36ac247c8ec1}</UniqueIdentifier>
     </Filter>
-    <Filter Include="GameScene\Interact">
-      <UniqueIdentifier>{0b7f17e2-7d62-43b9-992b-4b8561a5e378}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="GameScene\Character">
-      <UniqueIdentifier>{85c08dba-76ed-4886-91a5-7a0e7d3a9d37}</UniqueIdentifier>
-    </Filter>
   </ItemGroup>
   <ItemGroup>
     <Text Include="ReadMe.txt" />
@@ -141,7 +135,25 @@
     <ClInclude Include="CSoundManager.h">
       <Filter>Manager</Filter>
     </ClInclude>
+    <ClInclude Include="CInteractiveActor.h">
+      <Filter>GameScene</Filter>
+    </ClInclude>
+    <ClInclude Include="CPartStorage.h">
+      <Filter>GameScene</Filter>
+    </ClInclude>
     <ClInclude Include="IPartGenerator.h">
+      <Filter>GameScene</Filter>
+    </ClInclude>
+    <ClInclude Include="CCharacter.h">
+      <Filter>GameScene</Filter>
+    </ClInclude>
+    <ClInclude Include="CParts.h">
+      <Filter>GameScene</Filter>
+    </ClInclude>
+    <ClInclude Include="CDebugPlayer2.h">
+      <Filter>GameScene</Filter>
+    </ClInclude>
+    <ClInclude Include="CDebugPlayer1.h">
       <Filter>GameScene</Filter>
     </ClInclude>
     <ClInclude Include="CPartCombinator.h">
@@ -150,35 +162,20 @@
     <ClInclude Include="IInteractCenter.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="CCombinatorButton.h">
+      <Filter>GameScene</Filter>
+    </ClInclude>
+    <ClInclude Include="CPartVending.h">
+      <Filter>GameScene</Filter>
+    </ClInclude>
+    <ClInclude Include="COutlet.h">
+      <Filter>GameScene</Filter>
+    </ClInclude>
     <ClInclude Include="CTestPhysics.h">
       <Filter>GameScene\Collider</Filter>
     </ClInclude>
-    <ClInclude Include="CCombinatorButton.h">
-      <Filter>GameScene\Interact</Filter>
-    </ClInclude>
-    <ClInclude Include="CInteractiveActor.h">
-      <Filter>GameScene\Interact</Filter>
-    </ClInclude>
-    <ClInclude Include="COutlet.h">
-      <Filter>GameScene\Interact</Filter>
-    </ClInclude>
-    <ClInclude Include="CPartStorage.h">
-      <Filter>GameScene\Interact</Filter>
-    </ClInclude>
-    <ClInclude Include="CParts.h">
-      <Filter>GameScene\Interact</Filter>
-    </ClInclude>
-    <ClInclude Include="CPartVending.h">
-      <Filter>GameScene\Interact</Filter>
-    </ClInclude>
-    <ClInclude Include="CDebugPlayer2.h">
-      <Filter>GameScene\Character</Filter>
-    </ClInclude>
-    <ClInclude Include="CDebugPlayer1.h">
-      <Filter>GameScene\Character</Filter>
-    </ClInclude>
-    <ClInclude Include="CCharacter.h">
-      <Filter>GameScene\Character</Filter>
+    <ClInclude Include="CPartsParser.h">
+      <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -272,10 +269,28 @@
     <ClCompile Include="CSoundManager.cpp">
       <Filter>Manager</Filter>
     </ClCompile>
+    <ClCompile Include="CInteractiveActor.cpp">
+      <Filter>GameScene</Filter>
+    </ClCompile>
+    <ClCompile Include="CPartStorage.cpp">
+      <Filter>GameScene</Filter>
+    </ClCompile>
     <ClCompile Include="IPartGenerator.cpp">
       <Filter>GameScene</Filter>
     </ClCompile>
     <ClCompile Include="CGameScene.cpp">
+      <Filter>GameScene</Filter>
+    </ClCompile>
+    <ClCompile Include="CParts.cpp">
+      <Filter>GameScene</Filter>
+    </ClCompile>
+    <ClCompile Include="CDebugPlayer2.cpp">
+      <Filter>GameScene</Filter>
+    </ClCompile>
+    <ClCompile Include="CDebugPlayer1.cpp">
+      <Filter>GameScene</Filter>
+    </ClCompile>
+    <ClCompile Include="CCharacter.cpp">
       <Filter>GameScene</Filter>
     </ClCompile>
     <ClCompile Include="CPartCombinator.cpp">
@@ -284,35 +299,20 @@
     <ClCompile Include="IInteractCenter.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="CTestPhysics.cpp">
-      <Filter>GameScene\Collider</Filter>
-    </ClCompile>
     <ClCompile Include="CCombinatorButton.cpp">
-      <Filter>GameScene\Interact</Filter>
-    </ClCompile>
-    <ClCompile Include="CInteractiveActor.cpp">
-      <Filter>GameScene\Interact</Filter>
-    </ClCompile>
-    <ClCompile Include="COutlet.cpp">
-      <Filter>GameScene\Interact</Filter>
-    </ClCompile>
-    <ClCompile Include="CPartStorage.cpp">
-      <Filter>GameScene\Interact</Filter>
-    </ClCompile>
-    <ClCompile Include="CParts.cpp">
-      <Filter>GameScene\Interact</Filter>
+      <Filter>GameScene</Filter>
     </ClCompile>
     <ClCompile Include="CPartVending.cpp">
-      <Filter>GameScene\Interact</Filter>
+      <Filter>GameScene</Filter>
     </ClCompile>
-    <ClCompile Include="CDebugPlayer1.cpp">
-      <Filter>GameScene\Character</Filter>
+    <ClCompile Include="COutlet.cpp">
+      <Filter>GameScene</Filter>
     </ClCompile>
-    <ClCompile Include="CDebugPlayer2.cpp">
-      <Filter>GameScene\Character</Filter>
+    <ClCompile Include="CTestPhysics.cpp">
+      <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="CCharacter.cpp">
-      <Filter>GameScene\Character</Filter>
+    <ClCompile Include="CPartsParser.cpp">
+      <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
