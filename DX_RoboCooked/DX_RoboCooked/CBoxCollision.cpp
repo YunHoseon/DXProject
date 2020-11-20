@@ -94,7 +94,7 @@ void CBoxCollision::Update()
 	
 }
 
-bool CBoxCollision::CollideToBox(CBoxCollision* pTargetCollider)
+bool CBoxCollision::CollideToBox(CBoxCollision* pTargetCollider, D3DXVECTOR3* pNormal)
 {
 	float cos[3][3];
 	float absCos[3][3];
@@ -102,9 +102,6 @@ bool CBoxCollision::CollideToBox(CBoxCollision* pTargetCollider)
 	float r0, r1, r;
 	const float cutOff = 0.999999f;
 	bool existsParallelPair = false;
-	//isCollide = false;
-	//pTargetCollider->SetIsCollide(false);
-	
 
 	D3DXVECTOR3 D = pTargetCollider->m_vCenterPos - this->m_vCenterPos;
 	if (D3DXVec3LengthSq(&D) > 3.0f)
@@ -215,70 +212,11 @@ bool CBoxCollision::CollideToBox(CBoxCollision* pTargetCollider)
 		}
 
 	}
-
-	if (r > r0 + r1) return false;
-
-	return false;
+	return true;
 }
 
-bool CBoxCollision::CollideToSphere(CSphereCollision* pTargetCollider)
+bool CBoxCollision::CollideToSphere(CSphereCollision* pTargetCollider, D3DXVECTOR3* pNormal)
 {
-	
-	//D3DXVECTOR3 vDist = pTargetCollider->GetCenter() - m_vCenterPos;
-
-	//// 0.866025f = 루트3 / 2 = 1,1,1크기의 큐브의 원점->대각선 길이
-	//if (D3DXVec3LengthSq(&vDist) > (0.866025f + pTargetCollider->GetRadius()) * (0.866025f + pTargetCollider->GetRadius()))
-	//	return false;
-
-	//vector<D3DXPLANE> stPlanes(6);
-	//vector<D3DXVECTOR3> vecVertex;
-	//D3DXVECTOR3 v;
-	//int plusMinus[2] = { 1, -1 };
-
-	//for (int i = 0; i < 2; ++i)
-	//{
-	//	for (int j = 0; j < 2; ++j)
-	//	{
-	//		for (int k = 0; k < 2; ++k)
-	//		{
-	//			v = m_vCenterPos
-	//				+ (m_vAxisDir[0] * m_fAxisHalfLen[0] * plusMinus[i])
-	//				+ (m_vAxisDir[1] * m_fAxisHalfLen[1] * plusMinus[j])
-	//				+ (m_vAxisDir[2] * m_fAxisHalfLen[2] * plusMinus[k]);
-	//			vecVertex.push_back(v);
-	//		}
-	//	}
-	//}
-	////               4-------------0
-	////              /|             /|
-	////             / |            / |
-	////            /  |           /  |
-	////           5-------------1    |
-	////           |   |         |    |
-	////           |   6-------------2
-	////           |  /          |  /
-	////           | /           | /
-	////           7-------------3
-	////
-	//D3DXPlaneFromPoints(&stPlanes[0], &vecVertex[7], &vecVertex[5], &vecVertex[1]); 
-	//D3DXPlaneFromPoints(&stPlanes[1], &vecVertex[2], &vecVertex[0], &vecVertex[4]); 
-	//D3DXPlaneFromPoints(&stPlanes[2], &vecVertex[6], &vecVertex[4], &vecVertex[5]); 
-	//D3DXPlaneFromPoints(&stPlanes[3], &vecVertex[3], &vecVertex[1], &vecVertex[0]); 
-	//D3DXPlaneFromPoints(&stPlanes[4], &vecVertex[5], &vecVertex[4], &vecVertex[0]); 
-	//D3DXPlaneFromPoints(&stPlanes[5], &vecVertex[6], &vecVertex[7], &vecVertex[3]); 
-
-	//for (D3DXPLANE & plane : stPlanes)
-	//{
-	//	if (D3DXPlaneDotCoord(&plane, &pTargetCollider->GetCenter()) > pTargetCollider->GetRadius())
-	//	{
-	//		return false;
-	//	}
-	//}
-	//isCollide = true;
-	//pTargetCollider->SetIsCollide(true);
-	//return true;
-
-
 	// OBB
 	D3DXVECTOR3 vDist = m_vCenterPos - pTargetCollider->GetCenter();
 	float fDist = D3DXVec3Length(&vDist);
@@ -287,10 +225,16 @@ bool CBoxCollision::CollideToSphere(CSphereCollision* pTargetCollider)
 	if (fDist > 0.866025f + pTargetCollider->GetRadius())
 		return false;
 
+	if (fDist == 0)
+	{
+		isCollide = true;
+		pTargetCollider->SetIsCollide(true);
+		return true;
+	}
 	
 	D3DXVec3Normalize(&vDist, &vDist);
 
-	D3DXVECTOR3 v;
+	D3DXVECTOR3 v, vNormal(0,0,0);
 	int plusMinus[2] = { 1, -1 };
 
 	for (int i = 0; i < 2; ++i)
@@ -306,13 +250,20 @@ bool CBoxCollision::CollideToSphere(CSphereCollision* pTargetCollider)
 				float fTraceDist = D3DXVec3Dot(&vDist, &v);
 				if (fDist + fTraceDist <= pTargetCollider->GetRadius())
 				{
-					isCollide = true;
-					pTargetCollider->SetIsCollide(true);
-					return true;
+					vNormal += v;
 				}
 			}
 		}
 	}
+	if (vNormal != D3DXVECTOR3(0, 0, 0))
+	{
+		isCollide = true;
+		pTargetCollider->SetIsCollide(true);
+		if (pNormal)
+			*pNormal = *D3DXVec3Normalize(&vNormal, &vNormal);
+		return true;
+	}
+	
 	return false;
 
 	

@@ -38,7 +38,6 @@ void CDebugPlayer1::Setup()
 void CDebugPlayer1::Update()
 {
 	Move();
-	m_matWorld = m_matS * m_matR * m_matT;
 	m_vGrabPartsPosition.x = m_vPosition.x;
 	m_vGrabPartsPosition.z = m_vPosition.z;
 
@@ -91,26 +90,22 @@ void CDebugPlayer1::PressKey(void* _value)
 	if (data->wKey == m_stInputKey.moveFowardKey)
 	{
 		Rotate(0);
-		m_fSpeed = m_fBaseSpeed;
 	}
 	if (data->wKey == m_stInputKey.moveLeftKey)
 	{
 		if (m_fRotY - 0.5f < 0.f)
 			m_fRotY += D3DX_PI * 2.f;
 		Rotate(D3DX_PI * 1.5f);
-		m_fSpeed = m_fBaseSpeed;
 	}
 	if (data->wKey == m_stInputKey.moveBackKey)
 	{
 		Rotate(D3DX_PI);
-		m_fSpeed = m_fBaseSpeed;
 	}
 	if (data->wKey == m_stInputKey.moveRightKey)
 	{
 		if (m_fRotY + 0.5f > D3DX_PI * 2.f)
 			m_fRotY -= D3DX_PI * 2.f;
 		Rotate(D3DX_PI * 0.5f);
-		m_fSpeed = m_fBaseSpeed;
 	}
 	if (data->wKey == m_stInputKey.interactableKey1)
 	{
@@ -156,19 +151,17 @@ void CDebugPlayer1::PressKey(void* _value)
 void CDebugPlayer1::ReleaseKey(void* _value)
 {
 	_DEBUG_COMMENT std::cout << "Release" << std::endl;
-	m_fSpeed = 0.0f;
 }
 
 void CDebugPlayer1::Move()
 {
-	if (m_fSpeed == 0.0f)
-		return;
-	
-	D3DXVec3TransformNormal(&m_vDirection, &D3DXVECTOR3(0,0,1), &m_matR);
-
-	m_vPosition += m_vDirection * m_fSpeed;
+	m_vPosition += m_vDirection;
 
 	D3DXMatrixTranslation(&m_matT, m_vPosition.x, m_vPosition.y, m_vPosition.z);
+	m_matWorld = m_matS * m_matR * m_matT;
+	if (m_pCollision)
+		m_pCollision->Update();
+	m_vDirection *= 0;
 }
 
 void CDebugPlayer1::Rotate(float fTargetRot)
@@ -179,6 +172,13 @@ void CDebugPlayer1::Rotate(float fTargetRot)
 
 	D3DXQuaternionSlerp(&stLerpRot, &stCurrentRot, &stTargetRot, 0.3f);
 	D3DXMatrixRotationQuaternion(&m_matR, &stLerpRot);
+
+	D3DXVec3TransformNormal(&m_vDirection, &D3DXVECTOR3(0, 0, 1), &m_matR);
+	m_vDirection *= m_fSpeed;
+
+	m_matWorld = m_matS * m_matR * m_matT;
+	if (m_pCollision)
+		m_pCollision->Update();
 	
 	D3DXVECTOR3 dummy;
 	D3DXQuaternionToAxisAngle(&stLerpRot, &dummy, &m_fRotY);

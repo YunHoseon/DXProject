@@ -123,9 +123,6 @@
     <ClInclude Include="ICollisionArea.h">
       <Filter>GameScene\Collider</Filter>
     </ClInclude>
-    <ClInclude Include="CGameScene.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="CRandomNumberGenerator.h">
       <Filter>Tool</Filter>
     </ClInclude>
@@ -156,9 +153,6 @@
     <ClInclude Include="CDebugPlayer1.h">
       <Filter>GameScene</Filter>
     </ClInclude>
-    <ClInclude Include="CPartCombinator.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="IInteractCenter.h">
       <Filter>Header Files</Filter>
     </ClInclude>
@@ -174,8 +168,11 @@
     <ClInclude Include="CTestPhysics.h">
       <Filter>GameScene\Collider</Filter>
     </ClInclude>
-    <ClInclude Include="CPartsParser.h">
-      <Filter>Header Files</Filter>
+    <ClInclude Include="CPartCombinator.h">
+      <Filter>GameScene</Filter>
+    </ClInclude>
+    <ClInclude Include="CGameScene.h">
+      <Filter>GameScene</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -293,9 +290,6 @@
     <ClCompile Include="CCharacter.cpp">
       <Filter>GameScene</Filter>
     </ClCompile>
-    <ClCompile Include="CPartCombinator.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="IInteractCenter.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
@@ -311,8 +305,8 @@
     <ClCompile Include="CTestPhysics.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="CPartsParser.cpp">
-      <Filter>Source Files</Filter>
+    <ClCompile Include="CPartCombinator.cpp">
+      <Filter>GameScene</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

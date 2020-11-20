@@ -139,25 +139,19 @@ void CGameScene::Update()
 	
 	// collide -> update
 	{// collide
-		if (m_pDebugSphere)
-			m_pDebugSphere->Collide(m_pDebugCube);
+		if (m_pDebugSphere && m_pDebugCube)
+			CTestPhysics::ApplyBound(m_pDebugSphere, m_pDebugCube);
 
 		for (CInteractiveActor* obj : m_vecObject)
 		{
-			if (m_pDebugSphere->Collide(obj))
-				CTestPhysics::ApplyBound(m_pDebugSphere, obj);
-			
-			if(m_pDebugCube->Collide(obj))
-				CTestPhysics::ApplyBound(m_pDebugCube, obj);
+			CTestPhysics::ApplyBound(m_pDebugSphere, obj);
+			CTestPhysics::ApplyBound(m_pDebugCube, obj);
 		}
 
 		for (CInteractiveActor* part : m_vecParts)
 		{
-			if (m_pDebugSphere->Collide(part))
-				CTestPhysics::ApplyBound(m_pDebugSphere, part);
-
-			if (m_pDebugCube->Collide(part))
-				CTestPhysics::ApplyBound(m_pDebugCube, part);
+			CTestPhysics::ApplyBound(m_pDebugSphere, part);
+			CTestPhysics::ApplyBound(m_pDebugCube, part);
 		}
 		// part-part, part-obj ÇÊ¿ä
 	}

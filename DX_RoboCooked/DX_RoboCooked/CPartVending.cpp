@@ -128,8 +128,8 @@ void CPartVending::Setup(float fAngle, D3DXVECTOR3 vPosition)
 
 void CPartVending::Update()
 {
-	_DEBUG_COMMENT if (m_pCollision)
-		_DEBUG_COMMENT m_pCollision->Update();
+	 if (m_pCollision)
+		 m_pCollision->Update();
 
 	if (m_pOutlet->GetState() == EOutletState::E_None)
 		m_ePartVendingState = EPartVendingState::E_Usable;

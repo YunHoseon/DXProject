@@ -50,20 +50,19 @@ void CSphereCollision::Update()
 	
 }
 
-bool CSphereCollision::CollideToBox(CBoxCollision* pTargetCollider)
+bool CSphereCollision::CollideToBox(CBoxCollision* pTargetCollider, D3DXVECTOR3* pNormal)
 {
-	return pTargetCollider->CollideToSphere(this);
+	return pTargetCollider->CollideToSphere(this, pNormal);
 }
 
-bool CSphereCollision::CollideToSphere(CSphereCollision* pTargetCollider)
+bool CSphereCollision::CollideToSphere(CSphereCollision* pTargetCollider, D3DXVECTOR3* pNormal)
 {
-	D3DXVECTOR3 vDist = pTargetCollider->GetCenter() - m_vCenterPos;
-	//isCollide = false;
-	//pTargetCollider->SetIsCollide(false);
+	D3DXVECTOR3 vDist = m_vCenterPos - pTargetCollider->GetCenter();
 	
 	if (D3DXVec3LengthSq(&vDist) > (fRadius + pTargetCollider->fRadius) * (fRadius + pTargetCollider->fRadius))
 		return false;
-
+	if (pNormal)
+		*pNormal = *D3DXVec3Normalize(&vDist, &vDist);
 	isCollide = true;
 	pTargetCollider->SetIsCollide(true);
 	return true;
