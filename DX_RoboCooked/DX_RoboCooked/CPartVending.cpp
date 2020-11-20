@@ -5,11 +5,12 @@
 #include "CParts.h"
 #include "CGameScene.h"
 
-CPartVending::CPartVending(COutlet* outlet, IInteractCenter* pInteractCenter)
+CPartVending::CPartVending(COutlet* outlet, IInteractCenter* pInteractCenter, int nPartsID)
 	:m_pOutlet(outlet)
 	, m_ePartVendingState(EPartVendingState::E_Usable)
 {
 	m_pInteractCenter = pInteractCenter;
+	m_nID = nPartsID;
 }
 
 
@@ -127,8 +128,8 @@ void CPartVending::Setup(float fAngle, D3DXVECTOR3 vPosition)
 
 void CPartVending::Update()
 {
-	_DEBUG_COMMENT if (m_pCollision)
-		_DEBUG_COMMENT m_pCollision->Update();
+	 if (m_pCollision)
+		 m_pCollision->Update();
 
 	if (m_pOutlet->GetState() == EOutletState::E_None)
 		m_ePartVendingState = EPartVendingState::E_Usable;
@@ -179,6 +180,5 @@ void CPartVending::Interact(CCharacter* pCharacter)
 		
 		m_ePartVendingState = EPartVendingState::E_Unusable;
 		m_pInteractCenter->SendPartsToOutlet(parts, m_pOutlet);
-		cout << "何前 积己" << endl;
 	}
 }

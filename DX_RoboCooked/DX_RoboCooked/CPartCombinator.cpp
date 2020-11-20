@@ -6,7 +6,7 @@
 #include "CActor.h"
 #include "IInteractCenter.h"
 #include "CParts.h"
-#include "CCharacter.h"
+
 
 
 CPartCombinator::CPartCombinator(IInteractCenter* pInteractCenter,ECombinatorType eType)
@@ -14,6 +14,7 @@ CPartCombinator::CPartCombinator(IInteractCenter* pInteractCenter,ECombinatorTyp
 	  , m_CombinatorTexture(nullptr), m_pPartsInteractCollision(NULL)
 	  , m_vOnCombinatorPosition(0, 0, 0)
 	  , m_pParts(NULL), m_isCombine(false)
+	  , m_isFull(false)
 {
 	m_vPosition = D3DXVECTOR3(0, 0, 0);
 	m_pInteractCenter = pInteractCenter;
@@ -140,12 +141,17 @@ void CPartCombinator::Setup(float fAngle, D3DXVECTOR3 vPosition)
 void CPartCombinator::Update()
 {
 	
-	_DEBUG_COMMENT if (m_pCollision)
-		_DEBUG_COMMENT m_pCollision->Update();
+	 if (m_pCollision)
+		 m_pCollision->Update();
 
-	_DEBUG_COMMENT if (m_pPartsInteractCollision)
-		_DEBUG_COMMENT m_pPartsInteractCollision->Update();
+	 if (m_pPartsInteractCollision)
+		 m_pPartsInteractCollision->Update();
 
+	if(m_isFull && (m_eType == ECombinatorType::E_1stAuto || m_eType == ECombinatorType::E_2stAuto))
+	{
+		CombineParts();
+	}
+	
 	if (m_isCombine && m_pParts == nullptr)
 		DischargeParts();
 	
@@ -193,9 +199,7 @@ void CPartCombinator::Interact(CCharacter* pCharacter)
 		pCharacter->SetParts(m_pParts);
 		m_pParts->SetGrabPosition(&pCharacter->GetGrabPartsPosition());
 		m_pParts->GetCollision()->SetActive(true);
-	
 		m_pParts = nullptr;
-		m_multimapParts.erase(m_multimapParts.begin());
 	}
 	
 }
@@ -204,6 +208,21 @@ void CPartCombinator::PartsInteract(CParts* pParts)
 {
 	if (pParts->GetGrabPosition() != NULL)
 		return;
+
+	switch (m_eType) {
+	case ECombinatorType::E_1stAuto:
+	case ECombinatorType::E_1stManual:
+		if (m_multimapParts.size() >= 2)
+			return;
+		break;
+	case ECombinatorType::E_2stAuto: 
+	case ECombinatorType::E_2stManual: 
+		if (m_multimapParts.size() >= 3)
+			return;
+		break;
+	default: ;
+	}
+
 	 m_multimapParts.insert(std::make_pair(std::to_string(pParts->GetPartsID()),pParts));
 	 pParts->GetCollision()->SetActive(false);
 	 pParts->SetCombinatorPosition(m_vPosition);
@@ -217,18 +236,57 @@ void CPartCombinator::OnEvent(EEvent eEvent, void* _value)
 void CPartCombinator::CombineParts()
 {
 	m_isCombine = true;
+
+	switch (m_eType)
+	{
+	case ECombinatorType::E_1stAuto:
+	case ECombinatorType::E_2stAuto:
+		AutoCombine();
+		break;
+	case ECombinatorType::E_1stManual:
+	case ECombinatorType::E_2stManual: 
+		ManualCombine();
+		break;
+	default: 
+		break;
+	}
+	
+	
 }
 
-void CPartCombinator::DischargeParts()
+void CPartCombinator::AutoCombine()
 {
+	/*
+	 *조합식에 맞춰서 m_vecDischargeParts에 값을 넣어준다 . 1개만
+	 *조합에 사용한것은 delete 해준다 .delete는 센터에서 해줘야한다 why? vector에있는것도 erase 해줘야하니까 
+	 */
+}
+
+void CPartCombinator::ManualCombine()
+{
+
+	/*
+	 * 조합식 맞춰서 멀티맵에 넣는다. 조합에 사용한것은 delete 해준다 .
+	 * delete는 센터에서 해줘야한다 why? vector에있는것도 erase 해줘야하니까 
+	 */
 	std::multimap<string, CParts*>::iterator iter = m_multimapParts.begin();
-	if (iter == m_multimapParts.end())
+	for (auto it : m_multimapParts)
+	{
+		m_vecDischargeParts.push_back(it.second);
+	}
+	m_multimapParts.clear();
+}
+
+void CPartCombinator::DischargeParts() //조합 마치고 위에있는 파츠 들고오게해주는 함수
+{
+	if (m_vecDischargeParts.size() == 0)
 	{
 		m_isCombine = false;
 		return;
 	}
-	m_pParts = iter->second;
-	iter->second->SetPosition(m_vOnCombinatorPosition);
+	m_pParts = *m_vecDischargeParts.begin();
+	m_pParts->SetPosition(m_vOnCombinatorPosition);
+	m_vecDischargeParts.erase(m_vecDischargeParts.begin());
 }
 
 CParts* CPartCombinator::Make()

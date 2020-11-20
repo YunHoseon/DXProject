@@ -60,7 +60,7 @@ void CGameScene::Init()
 	partStorage->Setup(0, D3DXVECTOR3(5, 0, 2) , 1);
 	m_vecObject.push_back(partStorage);
 
-	CPartCombinator* partCombinator = new CPartCombinator(this, ECombinatorType::E_1stManual);
+	CPartCombinator* partCombinator = new CPartCombinator(this, ECombinatorType::E_2stManual);
 	partCombinator->Setup(45.0f, D3DXVECTOR3(-2, 0, 2));
 	m_vecObject.push_back(partCombinator);
 
@@ -69,10 +69,10 @@ void CGameScene::Init()
 	m_vecObject.push_back(combinatorButton);
 
 	COutlet* outlet = new COutlet(this);
-	outlet->Setup(0, D3DXVECTOR3(1, 0, 3), 2);
+	outlet->Setup(0, D3DXVECTOR3(1, 0, 3));
 	m_vecObject.push_back(outlet);
 	
-	CPartVending* partVending = new CPartVending(outlet, this);
+	CPartVending* partVending = new CPartVending(outlet, this, 2);
 	partVending->Setup(0, D3DXVECTOR3(1, 0, -3));
 	m_vecObject.push_back(partVending);
 

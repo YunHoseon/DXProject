@@ -40,7 +40,7 @@ void CKeyboard::Update()
 	for(it = m_setKey.begin(); it != m_setKey.end(); it++)
 	{
 		data.wKey = *it;
-		std::cout << *it << std::endl;
+		//std::cout << *it << std::endl;
 		g_EventManager->CallEvent(EEvent::E_KeyPress, (void*)&data);
 	}
 }

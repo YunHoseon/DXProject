@@ -7,8 +7,7 @@
 #include "CParts.h"
 
 COutlet::COutlet(IInteractCenter* pInteractCenter)
-	:m_nPartsID(0)
-	, m_eOutletState(EOutletState::E_None)
+	: m_eOutletState(EOutletState::E_None)
 {
 	m_pInteractCenter = pInteractCenter;
 }
@@ -18,7 +17,7 @@ COutlet::~COutlet()
 {
 }
 
-void COutlet::Setup(float fAngle, D3DXVECTOR3 vPosition, int nPartsID)
+void COutlet::Setup(float fAngle, D3DXVECTOR3 vPosition)
 {
 	vector<ST_PNT_VERTEX> vecVertex;
 	ST_PNT_VERTEX v;
@@ -127,8 +126,8 @@ void COutlet::Setup(float fAngle, D3DXVECTOR3 vPosition, int nPartsID)
 
 void COutlet::Update()
 {
-	_DEBUG_COMMENT if (m_pCollision)
-		_DEBUG_COMMENT m_pCollision->Update();
+	 if (m_pCollision)
+		 m_pCollision->Update();
 }
 
 void COutlet::Render()
@@ -168,7 +167,6 @@ void COutlet::Interact(CCharacter* pCharacter)
 		pCharacter->SetPlayerState(EPlayerState::E_Grab);
 		m_eOutletState = EOutletState::E_None;
 		m_pMyParts = NULL;
-		cout << "부품 가져감" << endl;
 	}
 }
 
