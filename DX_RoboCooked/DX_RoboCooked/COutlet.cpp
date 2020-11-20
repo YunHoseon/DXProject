@@ -157,23 +157,11 @@ void COutlet::OnEvent(EEvent eEvent, void* _value)
 {
 }
 
-//CParts* COutlet::Make()
-//{
-//	CParts* parts = new CParts(m_nID);
-//	parts->Setup();
-//	return parts;
-//}
-
 void COutlet::Interact(CCharacter* pCharacter)
 {
 	if (pCharacter->GetPlayerState() == EPlayerState::E_None 
 		&& m_eOutletState == EOutletState::E_Loaded)
 	{
-		/*CParts* parts = Make();
-		parts->SetPosition(m_vPosition + D3DXVECTOR3(0, 1.0f, 0));
-		m_pInteractCenter->AddParts(parts);
-		pCharacter->SetParts(parts);*/
-
 		pCharacter->SetParts(m_pMyParts);									//캐릭터에게 어떤파츠를 들고있는지 알려줌
 		m_pMyParts->SetGrabPosition(&pCharacter->GetGrabPartsPosition());	//캐릭터를 따라가게함
 		
@@ -181,7 +169,6 @@ void COutlet::Interact(CCharacter* pCharacter)
 		m_eOutletState = EOutletState::E_None;
 		m_pMyParts = NULL;
 		cout << "부품 가져감" << endl;
-		
 	}
 }
 

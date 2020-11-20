@@ -127,8 +127,6 @@ void CDebugPlayer1::PressKey(void* _value)
 			g_SoundManager->PlaySFX("Melem");
 			m_ElapsTimeF = CurrentTime;
 		}
-		
-	
 	}
 	if (data->wKey == m_stInputKey.interactableKey2)
 	{
@@ -138,15 +136,10 @@ void CDebugPlayer1::PressKey(void* _value)
 			{
 				m_pParts->PartsRotate();
 			}
-
-
 			g_SoundManager->PlaySFX("Melem");
 			
 			m_ElapsTimeG = CurrentTime;
 		}
-		
-	
-		
 	}
 	if (data->wKey == m_stInputKey.interactableKey3)
 	{
@@ -155,8 +148,6 @@ void CDebugPlayer1::PressKey(void* _value)
 			g_SoundManager->PlaySFX("Melem");
 			m_ElapsTimeF = CurrentTime;
 		}
-
-		
 	}
 
 	_DEBUG_COMMENT cout << m_fRotY << endl;
