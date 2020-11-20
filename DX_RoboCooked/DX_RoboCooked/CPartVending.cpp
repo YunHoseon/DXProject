@@ -130,10 +130,8 @@ void CPartVending::Update()
 	_DEBUG_COMMENT if (m_pCollision)
 		_DEBUG_COMMENT m_pCollision->Update();
 
-	if (m_ePartVendingState == EPartVendingState::E_Unusable)
-	{
-
-	}
+	if (m_pOutlet->GetState() == EOutletState::E_None)
+		m_ePartVendingState = EPartVendingState::E_Usable;
 }
 
 void CPartVending::Render()
@@ -175,11 +173,6 @@ void CPartVending::Interact(CCharacter* pCharacter)
 		&& m_pOutlet->GetState() == EOutletState::E_None 
 		&& pCharacter->GetPlayerState() == EPlayerState::E_None)
 	{
-		/*m_pOutlet->SetState(EOutletState::E_Loaded);
-		m_ePartVendingState = EPartVendingState::E_Unusable;
-		m_pOutlet->Interact(pCharacter);
-		cout << "何前 积己" << endl;*/
-
 		CParts* parts = Make();
 		parts->SetPosition(m_pOutlet->GetPosition() + D3DXVECTOR3(0, 1.0f, 0));
 		m_pInteractCenter->AddParts(parts);

@@ -181,14 +181,8 @@ void CGameScene::Update()
 			m_pDebugCube->Update();
 
 		if (m_pDebugSphere)
-		{
 			m_pDebugSphere->Update();
-
-		}
 	}
-
-
-
 }
 
 
