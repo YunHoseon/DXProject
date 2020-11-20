@@ -17,8 +17,7 @@ protected:
 
 	EPlayerState		m_ePlayerState;
 	ICollisionArea*		m_pInteractCollision;
-	float				m_fBaseSpeed;
-	float				m_fSpeed;
+
 	D3DXVECTOR3			m_vGrabPartsPosition;
 	CParts*				m_pParts;
 
