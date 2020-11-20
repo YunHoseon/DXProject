@@ -14,6 +14,7 @@ CPartCombinator::CPartCombinator(IInteractCenter* pInteractCenter,ECombinatorTyp
 	  , m_CombinatorTexture(nullptr), m_pPartsInteractCollision(NULL)
 	  , m_vOnCombinatorPosition(0, 0, 0)
 	  , m_pParts(NULL), m_isCombine(false)
+	  , m_isFull(false)
 {
 	m_vPosition = D3DXVECTOR3(0, 0, 0);
 	m_pInteractCenter = pInteractCenter;
@@ -140,12 +141,17 @@ void CPartCombinator::Setup(float fAngle, D3DXVECTOR3 vPosition)
 void CPartCombinator::Update()
 {
 	
-	_DEBUG_COMMENT if (m_pCollision)
-		_DEBUG_COMMENT m_pCollision->Update();
+	 if (m_pCollision)
+		 m_pCollision->Update();
 
-	_DEBUG_COMMENT if (m_pPartsInteractCollision)
-		_DEBUG_COMMENT m_pPartsInteractCollision->Update();
+	 if (m_pPartsInteractCollision)
+		 m_pPartsInteractCollision->Update();
 
+	if(m_isFull && (m_eType == ECombinatorType::E_1stAuto || m_eType == ECombinatorType::E_2stAuto))
+	{
+		CombineParts();
+	}
+	
 	if (m_isCombine && m_pParts == nullptr)
 		DischargeParts();
 	
@@ -230,16 +236,48 @@ void CPartCombinator::OnEvent(EEvent eEvent, void* _value)
 void CPartCombinator::CombineParts()
 {
 	m_isCombine = true;
+
+	switch (m_eType)
+	{
+	case ECombinatorType::E_1stAuto:
+	case ECombinatorType::E_2stAuto:
+		AutoCombine();
+		break;
+	case ECombinatorType::E_1stManual:
+	case ECombinatorType::E_2stManual: 
+		ManualCombine();
+		break;
+	default: 
+		break;
+	}
 	
+	
+}
+
+void CPartCombinator::AutoCombine()
+{
+	/*
+	 *조합식에 맞춰서 m_vecDischargeParts에 값을 넣어준다 . 1개만
+	 *조합에 사용한것은 delete 해준다 .delete는 센터에서 해줘야한다 why? vector에있는것도 erase 해줘야하니까 
+	 */
+}
+
+void CPartCombinator::ManualCombine()
+{
+
+	/*
+	 * 조합식 맞춰서 멀티맵에 넣는다. 조합에 사용한것은 delete 해준다 .
+	 * delete는 센터에서 해줘야한다 why? vector에있는것도 erase 해줘야하니까 
+	 */
 	std::multimap<string, CParts*>::iterator iter = m_multimapParts.begin();
-	for(auto it : m_multimapParts)
+	for (auto it : m_multimapParts)
 	{
 		m_vecDischargeParts.push_back(it.second);
 	}
 	m_multimapParts.clear();
 }
 
-void CPartCombinator::DischargeParts()
+void CPartCombinator::DischargeParts() //조합 마치고 위에있는 파츠 들고오게해주는 함수
 {
 	if (m_vecDischargeParts.size() == 0)
 	{

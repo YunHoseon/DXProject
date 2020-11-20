@@ -25,8 +25,8 @@ void CCombinatorButton::Interact(CCharacter * pCharacter)
 
 void CCombinatorButton::Update()
 {
-	_DEBUG_COMMENT if (m_pCollision)
-		_DEBUG_COMMENT m_pCollision->Update();
+	 if (m_pCollision)
+		 m_pCollision->Update();
 }
 
 void CCombinatorButton::Render()

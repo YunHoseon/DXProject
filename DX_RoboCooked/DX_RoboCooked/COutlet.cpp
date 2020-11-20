@@ -126,8 +126,8 @@ void COutlet::Setup(float fAngle, D3DXVECTOR3 vPosition)
 
 void COutlet::Update()
 {
-	_DEBUG_COMMENT if (m_pCollision)
-		_DEBUG_COMMENT m_pCollision->Update();
+	 if (m_pCollision)
+		 m_pCollision->Update();
 }
 
 void COutlet::Render()
