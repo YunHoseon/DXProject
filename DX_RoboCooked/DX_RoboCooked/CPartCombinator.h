@@ -23,6 +23,7 @@ private:
 	ICollisionArea*					m_pPartsInteractCollision;
 	D3DXVECTOR3						m_vOnCombinatorPosition;
 	CParts*							m_pParts;
+	bool							m_isCombine;
 	
 public:
 	CPartCombinator(IInteractCenter* pInteractCenter,ECombinatorType eType);
@@ -35,7 +36,8 @@ public:
 	void Interact(CCharacter* pCharacter) override;
 	void PartsInteract(CParts* pParts);
 	void OnEvent(EEvent eEvent, void* _value) override;
-	void CombineParts(CCharacter* pCharacter);
+	void CombineParts();
+	void DischargeParts();
 	ICollisionArea* GetInteractCollsion() { return m_pPartsInteractCollision; }
 	D3DXVECTOR3 GetPosition() { return m_vPosition; }
 	

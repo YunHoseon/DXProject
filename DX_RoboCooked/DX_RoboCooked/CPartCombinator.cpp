@@ -10,10 +10,10 @@
 
 
 CPartCombinator::CPartCombinator(IInteractCenter* pInteractCenter,ECombinatorType eType)
-		: m_eType(eType)
-		, m_pPartsInteractCollision(NULL)
-		, m_vOnCombinatorPosition(0,0,0)
-		, m_pParts(NULL)
+	  : m_eType(eType)
+	  , m_CombinatorTexture(nullptr), m_pPartsInteractCollision(NULL)
+	  , m_vOnCombinatorPosition(0, 0, 0)
+	  , m_pParts(NULL), m_isCombine(false)
 {
 	m_vPosition = D3DXVECTOR3(0, 0, 0);
 	m_pInteractCenter = pInteractCenter;
@@ -145,6 +145,9 @@ void CPartCombinator::Update()
 
 	_DEBUG_COMMENT if (m_pPartsInteractCollision)
 		_DEBUG_COMMENT m_pPartsInteractCollision->Update();
+
+	if (m_isCombine && m_pParts == nullptr)
+		DischargeParts();
 	
 	m_pInteractCenter->CheckAroundCombinator(this);
 }
@@ -211,13 +214,19 @@ void CPartCombinator::OnEvent(EEvent eEvent, void* _value)
 {
 }
 
-void CPartCombinator::CombineParts(CCharacter* pCharacter)
+void CPartCombinator::CombineParts()
+{
+	m_isCombine = true;
+}
+
+void CPartCombinator::DischargeParts()
 {
 	std::multimap<string, CParts*>::iterator iter = m_multimapParts.begin();
 	if (iter == m_multimapParts.end())
+	{
+		m_isCombine = false;
 		return;
-
-	m_pParts = nullptr;
+	}
 	m_pParts = iter->second;
 	iter->second->SetPosition(m_vOnCombinatorPosition);
 }
