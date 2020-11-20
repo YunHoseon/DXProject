@@ -5,11 +5,12 @@
 #include "CParts.h"
 #include "CGameScene.h"
 
-CPartVending::CPartVending(COutlet* outlet, IInteractCenter* pInteractCenter)
+CPartVending::CPartVending(COutlet* outlet, IInteractCenter* pInteractCenter, int nPartsID)
 	:m_pOutlet(outlet)
 	, m_ePartVendingState(EPartVendingState::E_Usable)
 {
 	m_pInteractCenter = pInteractCenter;
+	m_nID = nPartsID;
 }
 
 
@@ -179,6 +180,5 @@ void CPartVending::Interact(CCharacter* pCharacter)
 		
 		m_ePartVendingState = EPartVendingState::E_Unusable;
 		m_pInteractCenter->SendPartsToOutlet(parts, m_pOutlet);
-		cout << "何前 积己" << endl;
 	}
 }

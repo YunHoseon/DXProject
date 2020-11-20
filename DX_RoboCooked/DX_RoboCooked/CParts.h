@@ -12,6 +12,7 @@ private:
 	ST_SPHERE			m_sphere;
 	LPD3DXMESH			m_pMeshSphere;
 	D3DMATERIAL9		m_stMtlParts;
+	
 	bool				m_isMoveParts;
 	int					m_nPartsID;
 	float				m_fRotAngle;
