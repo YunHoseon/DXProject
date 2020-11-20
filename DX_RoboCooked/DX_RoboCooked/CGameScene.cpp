@@ -123,19 +123,19 @@ void CGameScene::Render()
 
 void CGameScene::Update()
 {
-	{
-		// Gravity Update
-		if (m_pDebugCube)
-			CTestPhysics::ApplyGravity(m_pDebugCube);
+	//{
+	//	// Gravity Update
+	//	if (m_pDebugCube)
+	//		CTestPhysics::ApplyGravity(m_pDebugCube);
 
-		if (m_pDebugSphere)
-			CTestPhysics::ApplyGravity(m_pDebugSphere);
+	//	if (m_pDebugSphere)
+	//		CTestPhysics::ApplyGravity(m_pDebugSphere);
 
-		for (CInteractiveActor* part : m_vecParts)
-		{
-			CTestPhysics::ApplyGravity(part);
-		}
-	}
+	//	for (CInteractiveActor* part : m_vecParts)
+	//	{
+	//		CTestPhysics::ApplyGravity(part);
+	//	}
+	//}
 	
 	// collide -> update
 	{// collide

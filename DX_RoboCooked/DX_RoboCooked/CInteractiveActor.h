@@ -9,7 +9,7 @@ class CInteractiveActor :
 {
 public:
 	CInteractiveActor();
-	~CInteractiveActor();
+	virtual ~CInteractiveActor();
 
 	virtual void Interact(CCharacter* pCharacter) = 0;
 };

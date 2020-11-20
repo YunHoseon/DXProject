@@ -306,7 +306,7 @@
       <Filter>GameScene</Filter>
     </ClCompile>
     <ClCompile Include="CTestPhysics.cpp">
-      <Filter>Source Files</Filter>
+      <Filter>GameScene\Collider</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
