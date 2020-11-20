@@ -15,6 +15,6 @@ public:
 	~CBoxCollision() override;
 	void Render() override;
 	void Update() override;
-	bool CollideToBox(CBoxCollision* pTargetCollider) override;
-	bool CollideToSphere(CSphereCollision* pTargetCollider) override;
+	bool CollideToBox(CBoxCollision* pTargetCollider, D3DXVECTOR3* pNormal = nullptr) override;
+	bool CollideToSphere(CSphereCollision* pTargetCollider, D3DXVECTOR3* pNormal = nullptr) override;
 };

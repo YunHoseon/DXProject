@@ -155,6 +155,7 @@
     <ClInclude Include="CCombinatorButton.h" />
     <ClInclude Include="COutlet.h" />
     <ClInclude Include="CPartCombinator.h" />
+    <ClInclude Include="CPartsParser.h" />
     <ClInclude Include="CPartStorage.h" />
     <ClInclude Include="CPartVending.h" />
     <ClInclude Include="CSoundManager.h" />
@@ -203,6 +204,7 @@
     <ClCompile Include="CCombinatorButton.cpp" />
     <ClCompile Include="COutlet.cpp" />
     <ClCompile Include="CPartCombinator.cpp" />
+    <ClCompile Include="CPartsParser.cpp" />
     <ClCompile Include="CPartStorage.cpp" />
     <ClCompile Include="CPartVending.cpp" />
     <ClCompile Include="CSoundManager.cpp" />

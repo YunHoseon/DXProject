@@ -22,12 +22,12 @@ public:
 	ICollisionArea();
 	virtual ~ICollisionArea() {}
 	D3DXVECTOR3	GetCenter() { return m_vCenterPos; }
-	//const EColideType& GetType() { return m_eType; }
-	bool Collide(ICollisionArea* pTargetCollider);
+
+	bool Collide(ICollisionArea* pTargetCollider, D3DXVECTOR3* pNormal = nullptr);
 	virtual void Render() = 0;
 	virtual void Update() = 0;
-	virtual bool CollideToBox(CBoxCollision* pTargetCollider) = 0;
-	virtual bool CollideToSphere(CSphereCollision* pTargetCollider) = 0;
+	virtual bool CollideToBox(CBoxCollision* pTargetCollider, D3DXVECTOR3* pNormal) = 0;
+	virtual bool CollideToSphere(CSphereCollision* pTargetCollider, D3DXVECTOR3* pNormal) = 0;
 	void SetIsCollide(bool b) { isCollide = b; }
 	bool GetActive() { return isActive; }
 	void SetActive(bool b) { isActive = b; }

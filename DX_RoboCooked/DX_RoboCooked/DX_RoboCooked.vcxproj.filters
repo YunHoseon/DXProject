@@ -123,9 +123,6 @@
     <ClInclude Include="ICollisionArea.h">
       <Filter>GameScene\Collider</Filter>
     </ClInclude>
-    <ClInclude Include="CGameScene.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="CRandomNumberGenerator.h">
       <Filter>Tool</Filter>
     </ClInclude>
@@ -172,6 +169,9 @@
       <Filter>GameScene\Collider</Filter>
     </ClInclude>
     <ClInclude Include="CPartCombinator.h">
+      <Filter>GameScene</Filter>
+    </ClInclude>
+    <ClInclude Include="CGameScene.h">
       <Filter>GameScene</Filter>
     </ClInclude>
   </ItemGroup>

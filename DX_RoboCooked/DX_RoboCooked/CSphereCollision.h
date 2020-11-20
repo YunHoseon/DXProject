@@ -14,6 +14,6 @@ public:
 	void Render() override;
 	void Update() override;
 	float GetRadius() { return fRadius; }
-	bool CollideToBox(CBoxCollision* pTargetCollider) override;
-	bool CollideToSphere(CSphereCollision* pTargetCollider) override;
+	bool CollideToBox(CBoxCollision* pTargetCollider, D3DXVECTOR3* pNormal) override;
+	bool CollideToSphere(CSphereCollision* pTargetCollider, D3DXVECTOR3* pNormal) override;
 };
