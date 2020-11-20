@@ -6,7 +6,7 @@
 #include "CActor.h"
 #include "IInteractCenter.h"
 #include "CParts.h"
-#include "CCharacter.h"
+
 
 
 CPartCombinator::CPartCombinator(IInteractCenter* pInteractCenter,ECombinatorType eType)
@@ -193,9 +193,7 @@ void CPartCombinator::Interact(CCharacter* pCharacter)
 		pCharacter->SetParts(m_pParts);
 		m_pParts->SetGrabPosition(&pCharacter->GetGrabPartsPosition());
 		m_pParts->GetCollision()->SetActive(true);
-	
 		m_pParts = nullptr;
-		m_multimapParts.erase(m_multimapParts.begin());
 	}
 	
 }
@@ -204,6 +202,21 @@ void CPartCombinator::PartsInteract(CParts* pParts)
 {
 	if (pParts->GetGrabPosition() != NULL)
 		return;
+
+	switch (m_eType) {
+	case ECombinatorType::E_1stAuto:
+	case ECombinatorType::E_1stManual:
+		if (m_multimapParts.size() >= 2)
+			return;
+		break;
+	case ECombinatorType::E_2stAuto: 
+	case ECombinatorType::E_2stManual: 
+		if (m_multimapParts.size() >= 3)
+			return;
+		break;
+	default: ;
+	}
+
 	 m_multimapParts.insert(std::make_pair(std::to_string(pParts->GetPartsID()),pParts));
 	 pParts->GetCollision()->SetActive(false);
 	 pParts->SetCombinatorPosition(m_vPosition);
@@ -217,18 +230,25 @@ void CPartCombinator::OnEvent(EEvent eEvent, void* _value)
 void CPartCombinator::CombineParts()
 {
 	m_isCombine = true;
+	
+	std::multimap<string, CParts*>::iterator iter = m_multimapParts.begin();
+	for(auto it : m_multimapParts)
+	{
+		m_vecDischargeParts.push_back(it.second);
+	}
+	m_multimapParts.clear();
 }
 
 void CPartCombinator::DischargeParts()
 {
-	std::multimap<string, CParts*>::iterator iter = m_multimapParts.begin();
-	if (iter == m_multimapParts.end())
+	if (m_vecDischargeParts.size() == 0)
 	{
 		m_isCombine = false;
 		return;
 	}
-	m_pParts = iter->second;
-	iter->second->SetPosition(m_vOnCombinatorPosition);
+	m_pParts = *m_vecDischargeParts.begin();
+	m_pParts->SetPosition(m_vOnCombinatorPosition);
+	m_vecDischargeParts.erase(m_vecDischargeParts.begin());
 }
 
 CParts* CPartCombinator::Make()
