@@ -25,6 +25,7 @@ public:
 
 	void OnEvent(EEvent eEvent, void* _value) override;
 	void PressKey(void* _value);
+	void PressMoveKey();
 	void ReleaseKey(void* _value);
 	void SetKeyChange(void* _value);
 	

@@ -224,13 +224,23 @@ void CGameScene::DownParts(CCharacter* pCharacter,CParts* parts, D3DXVECTOR3 vDi
 
 void CGameScene::CheckAroundCombinator(CPartCombinator* combinator)
 {
+	map<CParts*,float> veclength;
 	for (CInteractiveActor * it : m_vecParts)
 	{
+		CParts* data = static_cast<CParts*>(it);
 		if (combinator->GetInteractCollsion()->Collide(it->GetCollision()))
 		{
-			combinator->PartsInteract(static_cast<CParts*>(it)); //형변환해서 값을 넣어준다.
-			return;
+			D3DXVECTOR3 vDirection = combinator->GetPosition() - data->GetPosition();
+			veclength[data] = D3DXVec3Length(&vDirection);	
+			//combinator->PartsInteract(static_cast<CParts*>(it)); //형변환해서 값을 넣어준다.
+			//return;
 		}
+	}
+
+
+	for(auto it : veclength)
+	{
+		combinator->PartsInteract(it.first);
 	}
 }
 

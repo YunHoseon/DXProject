@@ -88,29 +88,30 @@ void CDebugPlayer1::PressKey(void* _value)
 	ST_KeyInputEvent *data = static_cast<ST_KeyInputEvent*>(_value);
 	DWORD CurrentTime = GetTickCount();
 	float fTestTime = 700.0f;
+	
 	if (data->wKey == m_stInputKey.moveFowardKey)
 	{
 		Rotate(0);
-		m_fSpeed = m_fBaseSpeed;
+		PressMoveKey();
 	}
 	if (data->wKey == m_stInputKey.moveLeftKey)
 	{
 		if (m_fRotY - 0.5f < 0.f)
 			m_fRotY += D3DX_PI * 2.f;
 		Rotate(D3DX_PI * 1.5f);
-		m_fSpeed = m_fBaseSpeed;
+		PressMoveKey();
 	}
 	if (data->wKey == m_stInputKey.moveBackKey)
 	{
 		Rotate(D3DX_PI);
-		m_fSpeed = m_fBaseSpeed;
+		PressMoveKey();
 	}
 	if (data->wKey == m_stInputKey.moveRightKey)
 	{
 		if (m_fRotY + 0.5f > D3DX_PI * 2.f)
 			m_fRotY -= D3DX_PI * 2.f;
 		Rotate(D3DX_PI * 0.5f);
-		m_fSpeed = m_fBaseSpeed;
+		PressMoveKey();
 	}
 	if (data->wKey == m_stInputKey.interactableKey1)
 	{
@@ -151,6 +152,17 @@ void CDebugPlayer1::PressKey(void* _value)
 	}
 
 	_DEBUG_COMMENT cout << m_fRotY << endl;
+}
+
+void CDebugPlayer1::PressMoveKey()
+{
+	m_fSpeed = m_fBaseSpeed;
+	if (m_pInteractCollision)
+		m_pInteractCollision->Update();
+
+	if (m_pCollision)
+		m_pCollision->Update();
+	
 }
 
 void CDebugPlayer1::ReleaseKey(void* _value)

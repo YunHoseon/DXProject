@@ -37,6 +37,7 @@ public:
 	void SetCombinatorPosition(D3DXVECTOR3 vPosition){ m_vCombinatorPosition = vPosition; }
 	bool GetMoveParts() { return m_isMoveParts; }
 	void SetMoveParts(bool b) { m_isMoveParts = b; }
+	D3DXVECTOR3 GetPosition() { return m_vPosition; }
 
 };
 

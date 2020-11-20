@@ -10,11 +10,11 @@
 
 
 CPartCombinator::CPartCombinator(IInteractCenter* pInteractCenter,ECombinatorType eType)
-	  : m_eType(eType)
-	  , m_CombinatorTexture(nullptr), m_pPartsInteractCollision(NULL)
+	: m_eType(eType)
+	  , m_eCombinatorState(ECombinatorState::E_LoadPossible), m_CombinatorTexture(nullptr), m_pPartsInteractCollision(NULL)
 	  , m_vOnCombinatorPosition(0, 0, 0)
 	  , m_pParts(NULL), m_isCombine(false)
-	  , m_isFull(false)
+	  , m_isFull(false), m_p3DTEXT(nullptr)
 {
 	m_vPosition = D3DXVECTOR3(0, 0, 0);
 	m_pInteractCenter = pInteractCenter;
@@ -23,7 +23,10 @@ CPartCombinator::CPartCombinator(IInteractCenter* pInteractCenter,ECombinatorTyp
 
 CPartCombinator::~CPartCombinator()
 {
+	SafeDelete(m_pPartsInteractCollision);
+	SafeDelete(m_pCollision);
 	SafeRelease(m_CombinatorTexture);
+	SafeRelease(m_p3DTEXT);
 }
 
 void CPartCombinator::Setup(float fAngle, D3DXVECTOR3 vPosition)
@@ -136,7 +139,10 @@ void CPartCombinator::Setup(float fAngle, D3DXVECTOR3 vPosition)
 	m_pCollision = new CBoxCollision(D3DXVECTOR3(0, 0, 0),D3DXVECTOR3(1.0f, 1.0f,1.0f), &m_matWorld);
 	m_pPartsInteractCollision = new CSphereCollision(D3DXVECTOR3(0, 0, 0), 2.0f, &m_matWorld);
 
+
 }
+
+
 
 void CPartCombinator::Update()
 {
@@ -147,6 +153,9 @@ void CPartCombinator::Update()
 	 if (m_pPartsInteractCollision)
 		 m_pPartsInteractCollision->Update();
 
+	 if (m_vecDischargeParts.size() == 0)
+		 m_eCombinatorState = ECombinatorState::E_LoadPossible;
+
 	if(m_isFull && (m_eType == ECombinatorType::E_1stAuto || m_eType == ECombinatorType::E_2stAuto))
 	{
 		CombineParts();
@@ -154,27 +163,14 @@ void CPartCombinator::Update()
 	
 	if (m_isCombine && m_pParts == nullptr)
 		DischargeParts();
-	
-	m_pInteractCenter->CheckAroundCombinator(this);
+
+	if(m_eCombinatorState == ECombinatorState::E_LoadPossible)
+		m_pInteractCenter->CheckAroundCombinator(this);
 }
 
 void CPartCombinator::Render()
 {
-	m_matWorld = m_matS * m_matR * m_matT;
-	g_pD3DDevice->SetTransform(D3DTS_WORLD, &m_matWorld);
-	g_pD3DDevice->SetTexture(0, m_CombinatorTexture);
-
-	D3DMATERIAL9 mtlStorage;
-	ZeroMemory(&mtlStorage, sizeof(D3DMATERIAL9));
-	mtlStorage.Ambient = D3DXCOLOR(0.7f, 0.7f, 0.7f, 1.0f);
-	mtlStorage.Diffuse = D3DXCOLOR(0.7f, 0.7f, 0.7f, 1.0f);
-	mtlStorage.Specular = D3DXCOLOR(0.7f, 0.7f, 0.7f, 1.0f);
-
-	g_pD3DDevice->SetMaterial(&mtlStorage);
-	g_pD3DDevice->SetFVF(ST_PNT_VERTEX::FVF);
-	g_pD3DDevice->DrawPrimitiveUP(D3DPT_TRIANGLELIST, m_vecVertex.size() / 3, &m_vecVertex[0],
-		sizeof(ST_PNT_VERTEX));
-	g_pD3DDevice->SetTexture(0, 0);
+	CombinatorRender();
 
 	_DEBUG_COMMENT if (m_pCollision)
 		_DEBUG_COMMENT m_pCollision->Render();
@@ -213,12 +209,18 @@ void CPartCombinator::PartsInteract(CParts* pParts)
 	case ECombinatorType::E_1stAuto:
 	case ECombinatorType::E_1stManual:
 		if (m_multimapParts.size() >= 2)
+		{
+			m_eCombinatorState = ECombinatorState::E_LoadImpossible;
 			return;
+		}
 		break;
 	case ECombinatorType::E_2stAuto: 
 	case ECombinatorType::E_2stManual: 
 		if (m_multimapParts.size() >= 3)
+		{
+			m_eCombinatorState = ECombinatorState::E_LoadImpossible;
 			return;
+		}
 		break;
 	default: ;
 	}
@@ -226,7 +228,9 @@ void CPartCombinator::PartsInteract(CParts* pParts)
 	 m_multimapParts.insert(std::make_pair(std::to_string(pParts->GetPartsID()),pParts));
 	 pParts->GetCollision()->SetActive(false);
 	 pParts->SetCombinatorPosition(m_vPosition);
-	 pParts->SetMoveParts(true);
+	
+	if(m_eCombinatorState == ECombinatorState::E_LoadPossible)
+		pParts->SetMoveParts(true);
 }
 
 void CPartCombinator::OnEvent(EEvent eEvent, void* _value)
@@ -287,6 +291,25 @@ void CPartCombinator::DischargeParts() //조합 마치고 위에있는 파츠 들고오게해주�
 	m_pParts = *m_vecDischargeParts.begin();
 	m_pParts->SetPosition(m_vOnCombinatorPosition);
 	m_vecDischargeParts.erase(m_vecDischargeParts.begin());
+}
+
+void CPartCombinator::CombinatorRender()
+{
+	m_matWorld = m_matS * m_matR * m_matT;
+	g_pD3DDevice->SetTransform(D3DTS_WORLD, &m_matWorld);
+	g_pD3DDevice->SetTexture(0, m_CombinatorTexture);
+
+	D3DMATERIAL9 mtlStorage;
+	ZeroMemory(&mtlStorage, sizeof(D3DMATERIAL9));
+	mtlStorage.Ambient = D3DXCOLOR(0.7f, 0.7f, 0.7f, 1.0f);
+	mtlStorage.Diffuse = D3DXCOLOR(0.7f, 0.7f, 0.7f, 1.0f);
+	mtlStorage.Specular = D3DXCOLOR(0.7f, 0.7f, 0.7f, 1.0f);
+
+	g_pD3DDevice->SetMaterial(&mtlStorage);
+	g_pD3DDevice->SetFVF(ST_PNT_VERTEX::FVF);
+	g_pD3DDevice->DrawPrimitiveUP(D3DPT_TRIANGLELIST, m_vecVertex.size() / 3, &m_vecVertex[0],
+		sizeof(ST_PNT_VERTEX));
+	g_pD3DDevice->SetTexture(0, 0);
 }
 
 CParts* CPartCombinator::Make()
