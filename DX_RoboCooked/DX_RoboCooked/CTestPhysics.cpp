@@ -17,5 +17,11 @@ void CTestPhysics::ApplyBound(CActor* pA, CActor* pB)
 {
 	D3DXVECTOR3 vNormal(0, 0, 0);
 	if (pA->Collide(pB, &vNormal))
-		pA->AddForce(vNormal * 0.02f);
+	{
+		// 마찰력 = -1 * 마찰계수 * 수직항력 * Normalization(-velocity)
+		// 수직항력 = vNormal * dot(vNormal, -velocity)
+		//D3DXVECTOR3 vNormalForce = vNormal * -D3DXVec3Dot(&vNormal, &pA->GetVelocity());
+		D3DXVECTOR3 vNormalForce = vNormal * -D3DXVec3Dot(&vNormal, &pA->GetAcceleration()); // 임시. 나중에 가속도를 속도로 바꿔야함.
+		pA->AddForce(vNormalForce);
+	}
 }

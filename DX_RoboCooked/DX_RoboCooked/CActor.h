@@ -41,7 +41,8 @@ public:
 	void SetDirection(const D3DXVECTOR3& vDirection) { m_vDirection = vDirection; }
 	__declspec(property(get = GetDirection, put = SetDirection)) D3DXVECTOR3 Direction;
 
-	float GetSpeed() { return m_fSpeed; }
+	const D3DXVECTOR3& GetVelocity() { return m_vVelocity; }
+	const D3DXVECTOR3& GetAcceleration() { return m_vAcceleration; }
 
 	/// test now-Àç¿í
 	virtual void AddForce(const D3DXVECTOR3& vForce);

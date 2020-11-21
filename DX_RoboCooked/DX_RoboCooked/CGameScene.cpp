@@ -10,6 +10,7 @@
 #include "CPartCombinator.h"
 #include "CCombinatorButton.h"
 #include "CPartManualCombinator.h"
+#include "CPartAutoCombinator.h"
 #include "COutlet.h"
 #include "CPartVending.h"
 #include "CTestPhysics.h"
@@ -62,14 +63,20 @@ void CGameScene::Init()
 	partStorage->Setup(0, D3DXVECTOR3(5, 0, 2) , "1");
 	m_vecObject.push_back(partStorage);
 
-	CPartCombinator* partCombinator = new CPartManualCombinator(this, eCombinatorLevel::ONE , 45.0f , D3DXVECTOR3(-2, 0, 2));
-	//partCombinator->Setup(45.0f, D3DXVECTOR3(-2, 0, 2));
-	m_vecObject.push_back(partCombinator);
+	CPartCombinator* partManualCombinator = new CPartManualCombinator(this, eCombinatorPartsLevel::ONE , 45.0f , D3DXVECTOR3(-2, 0, 2));
 
-	CCombinatorButton* combinatorButton = new CCombinatorButton(partCombinator);
+	m_vecObject.push_back(partManualCombinator);
+
+	CCombinatorButton* combinatorButton = new CCombinatorButton(partManualCombinator);
 	combinatorButton->Setup(0,D3DXVECTOR3(1,0,-1));
 	m_vecObject.push_back(combinatorButton);
 
+
+	CPartCombinator* partAutoCombinator = new CPartAutoCombinator(this, eCombinatorPartsLevel::ONE, 0, D3DXVECTOR3(-4, 0, -3));
+	m_vecObject.push_back(partAutoCombinator);
+
+
+	
 	COutlet* outlet = new COutlet(this);
 	outlet->Setup(0, D3DXVECTOR3(1, 0, 3));
 	m_vecObject.push_back(outlet);
@@ -224,12 +231,11 @@ void CGameScene::CheckAroundCombinator(CPartCombinator* combinator)
 	for (CInteractiveActor * it : m_vecParts)
 	{
 		CParts* data = static_cast<CParts*>(it);
-		if (combinator->GetInteractCollsion()->Collide(it->GetCollision()))
+		if (combinator->GetCombinPartsLevel() == data->GetCombinPartsLevel() &&
+			combinator->GetInteractCollsion()->Collide(it->GetCollision()))
 		{
 			D3DXVECTOR3 vDirection = combinator->GetPosition() - data->GetPosition();
 			veclength[data] = D3DXVec3Length(&vDirection);	
-			//combinator->PartsInteract(static_cast<CParts*>(it)); //형변환해서 값을 넣어준다.
-			//return;
 		}
 	}
 

@@ -4,7 +4,7 @@ class CPartManualCombinator :
 	public CPartCombinator
 {
 public:
-	CPartManualCombinator(IInteractCenter* pInteractCenter, eCombinatorLevel eType, float fAngle, D3DXVECTOR3 vPosition);
+	CPartManualCombinator(IInteractCenter* pInteractCenter, eCombinatorPartsLevel eType, float fAngle, D3DXVECTOR3 vPosition);
 	~CPartManualCombinator();
 
 	void Update() override;
@@ -14,10 +14,11 @@ public:
 	void PartsInteract(CParts* pParts) override;
 	void OnEvent(EEvent eEvent, void* _value) override;
 	void CombineParts();
+	void PartsMakeTime() override;
 
 	void ManualCombine();
-	void DischargeParts();
-	void CombinatorRender();
+	void DischargeParts() override;
+	void CombinatorRender() override;
 
 
 private:
