@@ -2,7 +2,8 @@
 #include "CPartAutoCombinator.h"
 #include "CBoxCollision.h"
 #include "CSphereCollision.h"
-
+#include "CParts.h"
+#include "IInteractCenter.h"
 
 CPartAutoCombinator::CPartAutoCombinator(IInteractCenter* pInteractCenter, eCombinatorPartsLevel eType, float fAngle, D3DXVECTOR3 vPosition)
 {
@@ -25,6 +26,14 @@ CPartAutoCombinator::~CPartAutoCombinator()
 
 void CPartAutoCombinator::Update()
 {
+	if (m_isTimeCheck)
+		PartsMakeTime();
+	
+	if(m_isCombine && m_pParts == nullptr)
+		DischargeParts();
+
+	if (m_eCombinatorState == ECombinatorState::E_LoadPossible)
+		m_pInteractCenter->CheckAroundCombinator(this);
 }
 
 void CPartAutoCombinator::Render()
@@ -44,6 +53,28 @@ void CPartAutoCombinator::Interact(CCharacter* pCharacter)
 
 void CPartAutoCombinator::PartsInteract(CParts* pParts)
 {
+	if (pParts->GetGrabPosition() != NULL || m_eCombinatorState == ECombinatorState::E_LoadImpossible)
+		return;
+
+	m_multimapParts.insert(std::make_pair(pParts->GetPartsID(), pParts));
+
+	pParts->GetCollision()->SetActive(false);
+	pParts->SetCombinatorPosition(m_vPosition);
+
+	if (m_eCombinatorState == ECombinatorState::E_LoadPossible)
+		pParts->SetMoveParts(true);
+
+	switch (m_eLevel)
+	{
+	case eCombinatorPartsLevel::ONE:
+		if (m_multimapParts.size() >= 2)
+			m_eCombinatorState = ECombinatorState::E_LoadImpossible;
+		break;
+	case eCombinatorPartsLevel::TWO:
+		if (m_multimapParts.size() >= 3)
+			m_eCombinatorState = ECombinatorState::E_LoadImpossible;
+		break;
+	}
 }
 
 void CPartAutoCombinator::OnEvent(EEvent eEvent, void* _value)
@@ -56,19 +87,42 @@ void CPartAutoCombinator::CombineParts()
 
 void CPartAutoCombinator::PartsMakeTime()
 {
+	m_fElapsedTime += g_pTimeManager->GetElapsedTime();
+
+	if (m_fElapsedTime >= m_fCombineTime)
+	{
+		m_isTimeCheck = false;
+		m_fElapsedTime = 0;
+		Make();
+		AutoCombine();
+	}
 }
 
-void CPartAutoCombinator::ManualCombine()
+void CPartAutoCombinator::AutoCombine()
 {
+	m_isCombine = true; //들고가기 가능하게 하는 bool
+	for (auto it : m_multimapParts)
+	{
+		m_vecDischargeParts.push_back(it.second);
+	}
+	m_multimapParts.clear();
 }
 
 void CPartAutoCombinator::DischargeParts()
 {
+	if (m_vecDischargeParts.empty())
+	{
+		m_eCombinatorState = ECombinatorState::E_LoadPossible;
+		m_isCombine = false;
+		return;
+	}
+	m_pParts = *m_vecDischargeParts.begin();
+	m_pParts->SetPosition(m_vOnCombinatorPosition);
+	m_vecDischargeParts.erase(m_vecDischargeParts.begin());
 }
 
 void CPartAutoCombinator::CombinatorRender()
 {
-	
 	g_pD3DDevice->SetTransform(D3DTS_WORLD, &m_matWorld);
 	g_pD3DDevice->SetTexture(0, m_CombinatorTexture);
 
@@ -205,4 +259,6 @@ void CPartAutoCombinator::Setup(float fAngle, D3DXVECTOR3 vPosition)
 	m_matWorld = m_matS * m_matR * m_matT;
 	if (m_pCollision)
 		m_pCollision->Update();
+	if (m_pPartsInteractCollision)
+		m_pPartsInteractCollision->Update();
 }

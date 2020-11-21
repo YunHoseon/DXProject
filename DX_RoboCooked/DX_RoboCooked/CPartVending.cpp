@@ -124,12 +124,16 @@ void CPartVending::Setup(float fAngle, D3DXVECTOR3 vPosition)
 	D3DXMatrixTranslation(&m_matT, vPosition.x, 0, vPosition.z);
 
 	m_pCollision = new CBoxCollision(D3DXVECTOR3(0, 0, 0), D3DXVECTOR3(1.0f, 1.0f, 1.0f), &m_matWorld);
+	
+	m_matWorld = m_matS * m_matR * m_matT;
+	
+	if (m_pCollision)
+		m_pCollision->Update();
 }
 
 void CPartVending::Update()
 {
-	 if (m_pCollision)
-		 m_pCollision->Update();
+	
 
 	if (m_pOutlet->GetState() == EOutletState::E_None)
 		m_ePartVendingState = EPartVendingState::E_Usable;
@@ -137,7 +141,7 @@ void CPartVending::Update()
 
 void CPartVending::Render()
 {
-	m_matWorld = m_matS * m_matR * m_matT;
+
 	g_pD3DDevice->SetTransform(D3DTS_WORLD, &m_matWorld);
 	g_pD3DDevice->SetTexture(0, m_PartVendingTexture);
 
