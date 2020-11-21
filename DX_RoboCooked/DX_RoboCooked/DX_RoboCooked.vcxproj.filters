@@ -179,6 +179,7 @@
     </ClInclude>
     <ClInclude Include="CTestPhysics.h">
       <Filter>GameScene\Physics</Filter>
+    </ClInclude>
     <ClInclude Include="CPartAutoCombinator.h">
       <Filter>Header Files</Filter>
     </ClInclude>
@@ -321,6 +322,7 @@
     </ClCompile>
     <ClCompile Include="CTestPhysics.cpp">
       <Filter>GameScene\Physics</Filter>
+    </ClCompile>
     <ClCompile Include="CPartAutoCombinator.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
