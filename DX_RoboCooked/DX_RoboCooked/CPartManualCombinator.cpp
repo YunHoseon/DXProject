@@ -8,7 +8,7 @@
 #include "IInteractCenter.h"
 
 
-CPartManualCombinator::CPartManualCombinator(IInteractCenter* pInteractCenter, eCombinatorLevel eType, float fAngle, D3DXVECTOR3 vPosition)
+CPartManualCombinator::CPartManualCombinator(IInteractCenter* pInteractCenter, eCombinatorPartsLevel eType, float fAngle, D3DXVECTOR3 vPosition)
 {
 	m_eLevel = eType;
 	m_vPosition = D3DXVECTOR3(0, 0, 0);
@@ -16,8 +16,11 @@ CPartManualCombinator::CPartManualCombinator(IInteractCenter* pInteractCenter, e
 	m_pParts = nullptr;
 	m_isCombine = false;
 	m_eCombinatorState = ECombinatorState::E_LoadPossible;
+	m_isTimeCheck = false;
+	m_fElapsedTime = 0;
+	m_fCombineTime = 5.0f;
 	Setup(fAngle, vPosition);
-	
+
 
 }
 
@@ -150,6 +153,9 @@ void CPartManualCombinator::Update()
 	if (m_pPartsInteractCollision)
 		m_pPartsInteractCollision->Update();
 
+	if (m_isTimeCheck)
+		PartsMakeTime();
+	
 	if (m_isCombine && m_pParts == nullptr)
 		DischargeParts();
 
@@ -170,16 +176,28 @@ void CPartManualCombinator::Render()
 
 CParts* CPartManualCombinator::Make()
 {
-	return nullptr;
+	/*
+	 * 조합식 매니저로 조합식들고와서 조합 
+	 */
+	string strResult;
+	for(auto it : m_multimapParts)
+	{
+		strResult += it.first;
+	}
+	//매니저로 조합식들 들고와서
+	//그 조합식과 동일한게있다면
+	//m_vecDischargeParts
+	CParts* parts = NULL;
+	//if(동일한게있다면)
+	//parts = manager->CreateParts(strResult);
+	
+	return parts;
 }
 
 void CPartManualCombinator::Interact(CCharacter* pCharacter)
 {
 	if (m_pParts == nullptr)
 		return;
-
-	//if (m_eType == ECombinatorType::E_1stAuto || m_eType == ECombinatorType::E_2stAuto)
-	//	return; //자동은 상호작용안함
 
 	if (pCharacter->GetPlayerState() == EPlayerState::E_None)
 	{
@@ -193,38 +211,24 @@ void CPartManualCombinator::Interact(CCharacter* pCharacter)
 
 void CPartManualCombinator::PartsInteract(CParts* pParts)
 {
-	if (pParts->GetGrabPosition() != NULL)
+	if (pParts->GetGrabPosition() != NULL || m_eCombinatorState == ECombinatorState::E_LoadImpossible)
 		return;
 
-	switch (m_eLevel)
-	{
-	case eCombinatorLevel::ONE:
-		if (m_multimapParts.size() > 2)
-			return;
-		break;
-	case eCombinatorLevel::TWO:
-		if (m_multimapParts.size() > 3) return;
-		break;
-	}
-	
 	m_multimapParts.insert(std::make_pair(pParts->GetPartsID(), pParts));
-
 
 	pParts->GetCollision()->SetActive(false);
 	pParts->SetCombinatorPosition(m_vPosition);
 
 	if (m_eCombinatorState == ECombinatorState::E_LoadPossible)
 		pParts->SetMoveParts(true);
-
-
 	
 	switch (m_eLevel)
 	{
-	case eCombinatorLevel::ONE:
+	case eCombinatorPartsLevel::ONE:
 		if (m_multimapParts.size() >= 2)
 			m_eCombinatorState = ECombinatorState::E_LoadImpossible;
 			break;
-	case eCombinatorLevel::TWO:
+	case eCombinatorPartsLevel::TWO:
 		if (m_multimapParts.size() >= 3)
 			m_eCombinatorState = ECombinatorState::E_LoadImpossible;
 			break;
@@ -240,9 +244,27 @@ void CPartManualCombinator::CombineParts()
 	/*
 	 * 적재불가능 상태이면 MAKE 함수 호출후 쿨타임 주고 아래로 내려가게
 	 */
+	if(m_eCombinatorState == ECombinatorState::E_LoadImpossible)
+	{
+		m_isTimeCheck = true;
+		return;
+	}
+	
 	ManualCombine();
 }
 
+void CPartManualCombinator::PartsMakeTime()
+{
+	m_fElapsedTime += g_pTimeManager->GetElapsedTime();
+
+	if(m_fElapsedTime >= m_fCombineTime)
+	{
+		m_isTimeCheck = false;
+		m_fElapsedTime = 0;
+		Make();
+		ManualCombine();
+	}
+}
 
 void CPartManualCombinator::ManualCombine()
 {

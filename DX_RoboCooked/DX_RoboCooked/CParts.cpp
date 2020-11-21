@@ -5,7 +5,7 @@
 
 CParts::CParts(string sPartsID)
 	: m_vGrabPosition(nullptr), m_pMeshSphere(nullptr), m_stMtlParts(), m_isMoveParts(false), m_fRotAngle(0.0f),
-	  m_fWeight(0), m_vCombinatorPosition(0,0,0)
+	  m_fWeight(0), m_eLevel(eCombinatorPartsLevel::ONE), m_vCombinatorPosition(0, 0, 0)
 {
 	m_vPosition = D3DXVECTOR3(3.0f, 0.0f, 2.0f);
 	m_sPartsID = sPartsID;

@@ -5,10 +5,11 @@
 class IPartGenerator;
 
 
-enum class eCombinatorLevel
+enum class eCombinatorPartsLevel
 {
 	ONE,
-	TWO
+	TWO,
+	THREE
 };
 
 enum class ECombinatorState
@@ -21,7 +22,7 @@ class CPartCombinator :
 	public CInteractiveActor ,public IPartGenerator 
 {
 protected:
-	eCombinatorLevel				m_eLevel;
+	eCombinatorPartsLevel			m_eLevel;
 	ECombinatorState				m_eCombinatorState;
 	vector<ST_PNT_VERTEX>			m_vecVertex;
 	LPDIRECT3DTEXTURE9				m_CombinatorTexture;
@@ -31,13 +32,15 @@ protected:
 	D3DXVECTOR3						m_vOnCombinatorPosition;
 	CParts*							m_pParts;
 	bool							m_isCombine;
-	
+	bool							m_isTimeCheck;
+	float							m_fElapsedTime;
+	float							m_fCombineTime;
 
 
 	
 public:
 	CPartCombinator();
-	CPartCombinator(IInteractCenter* pInteractCenter, eCombinatorLevel eType, float fAngle, D3DXVECTOR3 vPosition);
+	CPartCombinator(IInteractCenter* pInteractCenter, eCombinatorPartsLevel eType, float fAngle, D3DXVECTOR3 vPosition);
 	virtual ~CPartCombinator();
 
 public:
@@ -48,13 +51,13 @@ public:
 	virtual void PartsInteract(CParts* pParts){};
 	virtual void OnEvent(EEvent eEvent, void* _value) override = 0;
 	virtual void CombineParts() {};
-	void AutoCombine() {};
-	void ManualCombine() {};
+	virtual void PartsMakeTime() = 0;
 	virtual void DischargeParts(){};
 	virtual void CombinatorRender() = 0;
-	virtual ICollisionArea* GetInteractCollsion() const { return m_pPartsInteractCollision; };
-	virtual D3DXVECTOR3 GetPosition() const { return m_vPosition; };
-
+	
+	ICollisionArea* GetInteractCollsion() const { return m_pPartsInteractCollision; };
+	D3DXVECTOR3 GetPosition() const { return m_vPosition; };
+	eCombinatorPartsLevel GetCombinPartsLevel() const { return m_eLevel; }
 private:
 	CParts* Make() override = 0;
 	virtual void Setup(float fAngle, D3DXVECTOR3 vPosition){};

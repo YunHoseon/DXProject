@@ -62,7 +62,7 @@ void CGameScene::Init()
 	partStorage->Setup(0, D3DXVECTOR3(5, 0, 2) , "1");
 	m_vecObject.push_back(partStorage);
 
-	CPartCombinator* partCombinator = new CPartManualCombinator(this, eCombinatorLevel::ONE , 45.0f , D3DXVECTOR3(-2, 0, 2));
+	CPartCombinator* partCombinator = new CPartManualCombinator(this, eCombinatorPartsLevel::ONE , 45.0f , D3DXVECTOR3(-2, 0, 2));
 	//partCombinator->Setup(45.0f, D3DXVECTOR3(-2, 0, 2));
 	m_vecObject.push_back(partCombinator);
 
@@ -224,7 +224,8 @@ void CGameScene::CheckAroundCombinator(CPartCombinator* combinator)
 	for (CInteractiveActor * it : m_vecParts)
 	{
 		CParts* data = static_cast<CParts*>(it);
-		if (combinator->GetInteractCollsion()->Collide(it->GetCollision()))
+		if (combinator->GetCombinPartsLevel() == data->GetCombinPartsLevel() &&
+			combinator->GetInteractCollsion()->Collide(it->GetCollision()))
 		{
 			D3DXVECTOR3 vDirection = combinator->GetPosition() - data->GetPosition();
 			veclength[data] = D3DXVec3Length(&vDirection);	
