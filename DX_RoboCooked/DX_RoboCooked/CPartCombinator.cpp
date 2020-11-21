@@ -1,11 +1,7 @@
 #include "stdafx.h"
 #include "CPartCombinator.h"
-#include "CSphereCollision.h"
-#include "CBoxCollision.h"
-#include "CCharacter.h"
 #include "CActor.h"
 #include "IInteractCenter.h"
-#include "CParts.h"
 
 
 CPartCombinator::CPartCombinator()
@@ -17,7 +13,6 @@ CPartCombinator::CPartCombinator(IInteractCenter* pInteractCenter, eCombinatorLe
 	  m_pPartsInteractCollision(NULL)
 	  , m_vOnCombinatorPosition(0, 0, 0)
 	  , m_pParts(NULL), m_isCombine(false)
-	  , m_isFull(false)
 {
 	m_pInteractCenter = pInteractCenter;
 	Setup(fAngle, vPosition);

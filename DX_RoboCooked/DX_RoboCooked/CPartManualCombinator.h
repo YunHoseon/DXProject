@@ -14,7 +14,7 @@ public:
 	void PartsInteract(CParts* pParts) override;
 	void OnEvent(EEvent eEvent, void* _value) override;
 	void CombineParts();
-	void CombineManualParts();
+
 	void ManualCombine();
 	void DischargeParts();
 	void CombinatorRender();

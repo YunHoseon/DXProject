@@ -13,9 +13,11 @@ CPartManualCombinator::CPartManualCombinator(IInteractCenter* pInteractCenter, e
 	m_eLevel = eType;
 	m_vPosition = D3DXVECTOR3(0, 0, 0);
 	m_pInteractCenter = pInteractCenter;
-	Setup(fAngle, vPosition);
 	m_pParts = nullptr;
 	m_isCombine = false;
+	m_eCombinatorState = ECombinatorState::E_LoadPossible;
+	Setup(fAngle, vPosition);
+	
 
 }
 
@@ -148,14 +150,6 @@ void CPartManualCombinator::Update()
 	if (m_pPartsInteractCollision)
 		m_pPartsInteractCollision->Update();
 
-	if (m_vecDischargeParts.empty())
-		m_eCombinatorState = ECombinatorState::E_LoadPossible;
-
-	//if (m_isFull && (m_eLevel == eCombinatorLevel::ONE || m_eLevel == eCombinatorLevel::TWO))
-	//{
-	//	CombineParts();
-	//}
-
 	if (m_isCombine && m_pParts == nullptr)
 		DischargeParts();
 
@@ -205,27 +199,36 @@ void CPartManualCombinator::PartsInteract(CParts* pParts)
 	switch (m_eLevel)
 	{
 	case eCombinatorLevel::ONE:
-		if (m_multimapParts.size() >= 2)
-		{
-			m_eCombinatorState = ECombinatorState::E_LoadImpossible;
+		if (m_multimapParts.size() > 2)
 			return;
-		}
 		break;
 	case eCombinatorLevel::TWO:
-		if (m_multimapParts.size() >= 3)
-		{
-			m_eCombinatorState = ECombinatorState::E_LoadImpossible;
-			return;
-		}
+		if (m_multimapParts.size() > 3) return;
 		break;
 	}
 	
 	m_multimapParts.insert(std::make_pair(pParts->GetPartsID(), pParts));
+
+
 	pParts->GetCollision()->SetActive(false);
 	pParts->SetCombinatorPosition(m_vPosition);
 
 	if (m_eCombinatorState == ECombinatorState::E_LoadPossible)
 		pParts->SetMoveParts(true);
+
+
+	
+	switch (m_eLevel)
+	{
+	case eCombinatorLevel::ONE:
+		if (m_multimapParts.size() >= 2)
+			m_eCombinatorState = ECombinatorState::E_LoadImpossible;
+			break;
+	case eCombinatorLevel::TWO:
+		if (m_multimapParts.size() >= 3)
+			m_eCombinatorState = ECombinatorState::E_LoadImpossible;
+			break;
+	}
 }
 
 void CPartManualCombinator::OnEvent(EEvent eEvent, void* _value)
@@ -235,20 +238,15 @@ void CPartManualCombinator::OnEvent(EEvent eEvent, void* _value)
 void CPartManualCombinator::CombineParts()
 {
 	/*
-	 * 적재불가능 상태이면 쿨타임 주고 아래로 내려가게
+	 * 적재불가능 상태이면 MAKE 함수 호출후 쿨타임 주고 아래로 내려가게
 	 */
-
-	m_isCombine = true; //들고가기 가능하게 하는 bool
-
 	ManualCombine();
 }
 
-void CPartManualCombinator::CombineManualParts()
-{
-}
 
 void CPartManualCombinator::ManualCombine()
 {
+	m_isCombine = true; //들고가기 가능하게 하는 bool
 	for (auto it : m_multimapParts)
 	{
 		m_vecDischargeParts.push_back(it.second);
@@ -260,6 +258,7 @@ void CPartManualCombinator::DischargeParts()
 {
 	if (m_vecDischargeParts.empty())
 	{
+		m_eCombinatorState = ECombinatorState::E_LoadPossible;
 		m_isCombine = false;
 		return;
 	}

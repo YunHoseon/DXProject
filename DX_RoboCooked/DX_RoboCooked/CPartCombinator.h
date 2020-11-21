@@ -30,7 +30,6 @@ protected:
 	ICollisionArea*					m_pPartsInteractCollision;
 	D3DXVECTOR3						m_vOnCombinatorPosition;
 	CParts*							m_pParts;
-	bool							m_isFull;
 	bool							m_isCombine;
 	
 
@@ -49,8 +48,6 @@ public:
 	virtual void PartsInteract(CParts* pParts){};
 	virtual void OnEvent(EEvent eEvent, void* _value) override = 0;
 	virtual void CombineParts() {};
-	virtual void CombineManualParts(){};
-	virtual void CombineAutoParts(){};
 	void AutoCombine() {};
 	void ManualCombine() {};
 	virtual void DischargeParts(){};
