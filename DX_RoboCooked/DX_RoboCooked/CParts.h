@@ -1,24 +1,27 @@
 #pragma once
 #include "CInteractiveActor.h"
+#include "CPartCombinator.h"
 
 class CCharacter;
 class CParts :
 	public CInteractiveActor
 {
 private:
-	D3DXVECTOR3			m_vCombinatorPosition;
-	D3DXVECTOR3*		m_vGrabPosition;
+	D3DXVECTOR3						m_vCombinatorPosition;
+	D3DXVECTOR3*					m_vGrabPosition;
 
-	ST_SPHERE			m_sphere;
-	LPD3DXMESH			m_pMeshSphere;
-	D3DMATERIAL9		m_stMtlParts;
-	
-	bool				m_isMoveParts;
-	string				m_sPartsID;
-	float				m_fRotAngle;
-	float				m_fWeight;
-	D3DXVECTOR3			m_vSize;
-	string				m_sFormula;
+	ST_SPHERE						m_sphere;
+	LPD3DXMESH						m_pMeshSphere;
+	D3DMATERIAL9					m_stMtlParts;
+
+	bool							m_isMoveParts;
+	string							m_sPartsID;
+	float							m_fRotAngle;
+	float							m_fWeight;
+	D3DXVECTOR3						m_vSize;
+	eCombinatorPartsLevel			m_eLevel;
+	string							m_sFormula;
+
 
 public:
 	CParts(string sPartsID);
@@ -48,7 +51,7 @@ public:
 	void SetSize(D3DXVECTOR3 size) { m_vSize = size; }
 
 	string GetFormula() { return m_sFormula; }
-	void SetFormula(string sFormula) { m_sFormula = sFormula; }
+	void SetFormula(string sFormula) { m_sFormula= sFormula; }
 	
 	void SetPosition(D3DXVECTOR3 vPosition) { m_vPosition = vPosition; }
 	
@@ -59,5 +62,7 @@ public:
 	void SetMoveParts(bool b) { m_isMoveParts = b; }
 	D3DXVECTOR3 GetPosition() { return m_vPosition; }
 
+
+	eCombinatorPartsLevel GetCombinPartsLevel() const { return m_eLevel; }
 };
 

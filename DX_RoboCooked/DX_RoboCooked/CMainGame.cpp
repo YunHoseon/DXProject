@@ -41,6 +41,8 @@ void CMainGame::Setup()
 
 void CMainGame::Update()
 {
+	g_pTimeManager->update();
+	
 	InputManager->Update();
 	
 	if (m_pCamera)
