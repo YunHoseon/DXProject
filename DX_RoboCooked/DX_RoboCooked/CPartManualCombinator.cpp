@@ -2,6 +2,8 @@
 #include "CPartManualCombinator.h"
 #include "ICollisionArea.h"
 #include "CBoxCollision.h"
+#include "CCharacter.h"
+#include "CParts.h"
 #include "CSphereCollision.h"
 #include "IInteractCenter.h"
 
@@ -12,6 +14,9 @@ CPartManualCombinator::CPartManualCombinator(IInteractCenter* pInteractCenter, e
 	m_vPosition = D3DXVECTOR3(0, 0, 0);
 	m_pInteractCenter = pInteractCenter;
 	Setup(fAngle, vPosition);
+	m_pParts = nullptr;
+	m_isCombine = false;
+
 }
 
 
@@ -146,10 +151,10 @@ void CPartManualCombinator::Update()
 	if (m_vecDischargeParts.empty())
 		m_eCombinatorState = ECombinatorState::E_LoadPossible;
 
-	if (m_isFull && (m_eLevel == eCombinatorLevel::ONE || m_eLevel == eCombinatorLevel::TWO))
-	{
-		CombineParts();
-	}
+	//if (m_isFull && (m_eLevel == eCombinatorLevel::ONE || m_eLevel == eCombinatorLevel::TWO))
+	//{
+	//	CombineParts();
+	//}
 
 	if (m_isCombine && m_pParts == nullptr)
 		DischargeParts();
@@ -176,10 +181,51 @@ CParts* CPartManualCombinator::Make()
 
 void CPartManualCombinator::Interact(CCharacter* pCharacter)
 {
+	if (m_pParts == nullptr)
+		return;
+
+	//if (m_eType == ECombinatorType::E_1stAuto || m_eType == ECombinatorType::E_2stAuto)
+	//	return; //자동은 상호작용안함
+
+	if (pCharacter->GetPlayerState() == EPlayerState::E_None)
+	{
+		pCharacter->SetPlayerState(EPlayerState::E_Grab);
+		pCharacter->SetParts(m_pParts);
+		m_pParts->SetGrabPosition(&pCharacter->GetGrabPartsPosition());
+		m_pParts->GetCollision()->SetActive(true);
+		m_pParts = nullptr;
+	}
 }
 
 void CPartManualCombinator::PartsInteract(CParts* pParts)
 {
+	if (pParts->GetGrabPosition() != NULL)
+		return;
+
+	switch (m_eLevel)
+	{
+	case eCombinatorLevel::ONE:
+		if (m_multimapParts.size() >= 2)
+		{
+			m_eCombinatorState = ECombinatorState::E_LoadImpossible;
+			return;
+		}
+		break;
+	case eCombinatorLevel::TWO:
+		if (m_multimapParts.size() >= 3)
+		{
+			m_eCombinatorState = ECombinatorState::E_LoadImpossible;
+			return;
+		}
+		break;
+	}
+	
+	m_multimapParts.insert(std::make_pair(pParts->GetPartsID(), pParts));
+	pParts->GetCollision()->SetActive(false);
+	pParts->SetCombinatorPosition(m_vPosition);
+
+	if (m_eCombinatorState == ECombinatorState::E_LoadPossible)
+		pParts->SetMoveParts(true);
 }
 
 void CPartManualCombinator::OnEvent(EEvent eEvent, void* _value)
@@ -194,21 +240,6 @@ void CPartManualCombinator::CombineParts()
 
 	m_isCombine = true; //들고가기 가능하게 하는 bool
 
-	/*switch (m_eLevel)
-	{
-	case ECombinatorType::E_1stAuto:
-	case ECombinatorType::E_2stAuto:
-		AutoCombine();
-		break;
-	case ECombinatorType::E_1stManual:
-	case ECombinatorType::E_2stManual: 
-		ManualCombine();
-		break;
-	default: 
-		break;
-	}
-	*/
-
 	ManualCombine();
 }
 
@@ -216,17 +247,25 @@ void CPartManualCombinator::CombineManualParts()
 {
 }
 
-void CPartManualCombinator::CombineAutoParts()
-{
-}
-
 void CPartManualCombinator::ManualCombine()
 {
-	
+	for (auto it : m_multimapParts)
+	{
+		m_vecDischargeParts.push_back(it.second);
+	}
+	m_multimapParts.clear();
 }
 
 void CPartManualCombinator::DischargeParts()
 {
+	if (m_vecDischargeParts.empty())
+	{
+		m_isCombine = false;
+		return;
+	}
+	m_pParts = *m_vecDischargeParts.begin();
+	m_pParts->SetPosition(m_vOnCombinatorPosition);
+	m_vecDischargeParts.erase(m_vecDischargeParts.begin());
 }
 
 void CPartManualCombinator::CombinatorRender()

@@ -11,16 +11,14 @@ public:
 	void Render() override;
 
 	void Interact(CCharacter* pCharacter) override;
-	void PartsInteract(CParts* pParts);
+	void PartsInteract(CParts* pParts) override;
 	void OnEvent(EEvent eEvent, void* _value) override;
 	void CombineParts();
 	void CombineManualParts();
-	void CombineAutoParts();
 	void ManualCombine();
 	void DischargeParts();
 	void CombinatorRender();
-	ICollisionArea* GetInteractCollsion() const { return m_pPartsInteractCollision; }
-	D3DXVECTOR3 GetPosition() const { return m_vPosition; }
+
 
 private:
 	CParts* Make() override;

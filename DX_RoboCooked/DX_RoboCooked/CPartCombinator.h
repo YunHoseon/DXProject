@@ -42,25 +42,25 @@ public:
 	virtual ~CPartCombinator();
 
 public:
-	void Update() override;
-	void Render() override;
+	void Update() override = 0;
+	void Render() override = 0;
 	
-	virtual void Interact(CCharacter* pCharacter) override;
-	virtual void PartsInteract(CParts* pParts);
-	virtual void OnEvent(EEvent eEvent, void* _value) override;
-	virtual void CombineParts();
-	virtual void CombineManualParts();
-	virtual void CombineAutoParts();
+	virtual void Interact(CCharacter* pCharacter) override = 0;
+	virtual void PartsInteract(CParts* pParts){};
+	virtual void OnEvent(EEvent eEvent, void* _value) override = 0;
+	virtual void CombineParts() {};
+	virtual void CombineManualParts(){};
+	virtual void CombineAutoParts(){};
 	void AutoCombine() {};
 	void ManualCombine() {};
-	virtual void DischargeParts();
+	virtual void DischargeParts(){};
 	virtual void CombinatorRender() = 0;
-	virtual ICollisionArea* GetInteractCollsion() const;
-	virtual D3DXVECTOR3 GetPosition() const;
+	virtual ICollisionArea* GetInteractCollsion() const { return m_pPartsInteractCollision; };
+	virtual D3DXVECTOR3 GetPosition() const { return m_vPosition; };
 
 private:
-	CParts* Make() override;
-	virtual void Setup(float fAngle, D3DXVECTOR3 vPosition);
+	CParts* Make() override = 0;
+	virtual void Setup(float fAngle, D3DXVECTOR3 vPosition){};
 
 	
 };
