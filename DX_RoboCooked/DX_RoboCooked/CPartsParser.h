@@ -7,10 +7,10 @@ struct MY_TOKEN
 {
 	MY_TOKEN_TYPE type;
 	union {             // 두 종류 중 한 종류만 저장할 것이므로 공용체
-		char *string;
+		char* string;
 		double number;
 	};
-	bool isArray;       
+	bool isArray;  
 };
 
 struct JSON
@@ -19,12 +19,10 @@ struct JSON
 };
 
 class CParts;
-
 class CPartsParser
 {
 private:
-	bool isExistFile;
-	map<string, CParts*> m_mapPartsData;
+	map<string, CParts> m_mapPartsData;
 public:
 	CPartsParser();
 	~CPartsParser();
@@ -33,5 +31,6 @@ public:
 	void ParseJSON(char* doc, int size, JSON* json);
 	void SavePartsData(JSON json);
 	void FreeJSON(JSON* json);
+	void EliminateChar(char* str, char c);
 };
 

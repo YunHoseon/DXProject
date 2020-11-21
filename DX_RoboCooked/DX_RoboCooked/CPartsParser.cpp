@@ -49,12 +49,16 @@ void CPartsParser::ParseJSON(char* doc, int size, JSON* json)
 	int tokenIndex = 0;    // 토큰 인덱스
 	int pos = 0;           // 문자 검색 위치를 저장하는 변수
 
+	EliminateChar(doc, '\r');
+	EliminateChar(doc, '\n');
+	EliminateChar(doc, ' ');
+
 	if (doc[pos] != '[')   // 문서의 시작이 [ 인지 검사
 		return;
 
-	pos++;    // 다음 문자로
+	pos++;					// 다음 문자로
 
-	if (doc[pos] != '{')   // 다음 문자가 { 인지 검사
+	if (doc[pos] != '{')	// 다음 문자가 { 인지 검사
 		return;
 
 	while (pos < size)       // 문서 크기만큼 반복
@@ -134,18 +138,37 @@ void CPartsParser::ParseJSON(char* doc, int size, JSON* json)
 
 void CPartsParser::SavePartsData(JSON json)
 {
-	CParts* parts;
-	parts->SetPartsID(json.tokens[1].string);
-	parts->SetSize(D3DXVECTOR3(json.tokens[3].number, json.tokens[5].number, json.tokens[7].number));
-	parts->SetWeight(json.tokens[9].number);
-	//m_mapPartsData.insert();
+	for(int i = 0; i < 20; i++)
+	{
+		CParts parts("");
+		
+		parts.SetPartsID(json.tokens[1 + (i * 11 + i)].string);
+		parts.SetSize(D3DXVECTOR3(json.tokens[3 + (i * 11 + i)].number
+			,json.tokens[5 + (i * 11 + i)].number
+			,json.tokens[7 + (i * 11 + i)].number));
+		parts.SetWeight(json.tokens[9 + (i * 11 + i)].number);
+		parts.SetFormula(json.tokens[11 + (i * 11 + i)].string);
+		m_mapPartsData.insert(std::make_pair(json.tokens[1 + (i * 11 + i)].string, parts));
+	}
 }
 
 void CPartsParser::FreeJSON(JSON* json)
 {
 	for (int i = 0; i < TOKEN_COUNT; i++)
 	{
-		if (json->tokens[i].type == (MY_TOKEN_TYPE)TOKEN_STRING)    // 토큰 종류가 문자열이면
-			free(json->tokens[i].string);							// 동적 메모리 해제
+		if (json->tokens[i].type == (MY_TOKEN_TYPE)TOKEN_STRING)
+			free(json->tokens[i].string);
+	}
+}
+
+void CPartsParser::EliminateChar(char* str, char c)
+{
+	for (; *str != '\0'; str++)	//종료 문자를 만날 때까지 반복
+	{
+		if (*str == c)			//ch와 같은 문자일 때
+		{
+			strcpy(str, str + 1);
+			str--;
+		}
 	}
 }

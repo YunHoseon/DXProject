@@ -31,9 +31,6 @@
     <Filter Include="GameScene\Collider">
       <UniqueIdentifier>{9b16d774-c905-40a9-86d3-36ac247c8ec1}</UniqueIdentifier>
     </Filter>
-    <Filter Include="GameScene\Physics">
-      <UniqueIdentifier>{de962a97-9bfd-4690-8917-aba481ea7e8d}</UniqueIdentifier>
-    </Filter>
   </ItemGroup>
   <ItemGroup>
     <Text Include="ReadMe.txt" />
@@ -168,6 +165,9 @@
     <ClInclude Include="COutlet.h">
       <Filter>GameScene</Filter>
     </ClInclude>
+    <ClInclude Include="CTestPhysics.h">
+      <Filter>GameScene\Collider</Filter>
+    </ClInclude>
     <ClInclude Include="CPartCombinator.h">
       <Filter>GameScene</Filter>
     </ClInclude>
@@ -177,12 +177,13 @@
     <ClInclude Include="CPartsParser.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="CTestPhysics.h">
-      <Filter>GameScene\Physics</Filter>
     <ClInclude Include="CPartAutoCombinator.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="CPartManualCombinator.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="CPartsManager.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
@@ -313,18 +314,22 @@
     <ClCompile Include="COutlet.cpp">
       <Filter>GameScene</Filter>
     </ClCompile>
+    <ClCompile Include="CTestPhysics.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
     <ClCompile Include="CPartCombinator.cpp">
       <Filter>GameScene</Filter>
     </ClCompile>
     <ClCompile Include="CPartsParser.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="CTestPhysics.cpp">
-      <Filter>GameScene\Physics</Filter>
     <ClCompile Include="CPartAutoCombinator.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="CPartManualCombinator.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="CPartsManager.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>

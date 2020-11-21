@@ -37,6 +37,7 @@ void CMainGame::Setup()
 	m_pScene = new CGameScene;
 	g_SceneManager->AddScene("GAMESCENE",m_pScene);
 	g_SceneManager->SetCurrentScene(m_pScene);
+	//g_pPartsManager->GetPartsData("data/js/PartsData.json");
 }
 
 void CMainGame::Update()

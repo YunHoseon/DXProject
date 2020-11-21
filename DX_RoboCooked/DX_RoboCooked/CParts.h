@@ -48,7 +48,7 @@ public:
 	void SetSize(D3DXVECTOR3 size) { m_vSize = size; }
 
 	string GetFormula() { return m_sFormula; }
-	void SetFormula(string sFormula) { strcpy_s(&m_sFormula, sFormula); }
+	void SetFormula(string sFormula) { m_sFormula = sFormula; }
 	
 	void SetPosition(D3DXVECTOR3 vPosition) { m_vPosition = vPosition; }
 	
