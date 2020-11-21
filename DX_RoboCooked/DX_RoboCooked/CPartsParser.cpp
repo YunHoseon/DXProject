@@ -135,7 +135,9 @@ void CPartsParser::ParseJSON(char* doc, int size, JSON* json)
 void CPartsParser::SavePartsData(JSON json)
 {
 	CParts* parts;
-	//parts->SetPartsID(json.tokens[1].string);
+	parts->SetPartsID(json.tokens[1].string);
+	parts->SetSize(D3DXVECTOR3(json.tokens[3].number, json.tokens[5].number, json.tokens[7].number));
+	parts->SetWeight(json.tokens[9].number);
 	//m_mapPartsData.insert();
 }
 
