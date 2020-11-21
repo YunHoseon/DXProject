@@ -68,7 +68,7 @@ void CPartAutoCombinator::DischargeParts()
 
 void CPartAutoCombinator::CombinatorRender()
 {
-	m_matWorld = m_matS * m_matR * m_matT;
+	
 	g_pD3DDevice->SetTransform(D3DTS_WORLD, &m_matWorld);
 	g_pD3DDevice->SetTexture(0, m_CombinatorTexture);
 
@@ -83,6 +83,7 @@ void CPartAutoCombinator::CombinatorRender()
 	g_pD3DDevice->DrawPrimitiveUP(D3DPT_TRIANGLELIST, m_vecVertex.size() / 3, &m_vecVertex[0],
 		sizeof(ST_PNT_VERTEX));
 	g_pD3DDevice->SetTexture(0, 0);
+
 }
 
 CParts* CPartAutoCombinator::Make()
@@ -200,4 +201,8 @@ void CPartAutoCombinator::Setup(float fAngle, D3DXVECTOR3 vPosition)
 	m_pCollision = new CBoxCollision(D3DXVECTOR3(0, 0, 0), D3DXVECTOR3(1.0f, 1.0f, 1.0f), &m_matWorld);
 	m_pPartsInteractCollision = new CSphereCollision(D3DXVECTOR3(0, 0, 0), 2.0f, &m_matWorld);
 
+
+	m_matWorld = m_matS * m_matR * m_matT;
+	if (m_pCollision)
+		m_pCollision->Update();
 }
