@@ -17,13 +17,18 @@ protected:
 	D3DXMATRIXA16		m_matT;
 	D3DXMATRIXA16		m_matWorld;
 	float				m_fRotY;
-	D3DXVECTOR3			m_vDirection;
-	D3DXVECTOR3			m_vPosition;
 
-	float				m_fBaseSpeed;
-	float				m_fSpeed;
 	
 	ICollisionArea*		m_pCollision;
+	// for physics
+	D3DXVECTOR3			m_vPosition;
+	D3DXVECTOR3			m_vVelocity;
+	D3DXVECTOR3			m_vAcceleration;
+	D3DXVECTOR3			m_vDirection;
+	float				m_fBaseSpeed;
+	float				m_fSpeed;
+	float				m_fMass;
+	
 public:
 
 	virtual void Update() = 0;
@@ -37,5 +42,9 @@ public:
 	__declspec(property(get = GetDirection, put = SetDirection)) D3DXVECTOR3 Direction;
 
 	float GetSpeed() { return m_fSpeed; }
+
+	/// test now-Àç¿í
+	virtual void AddForce(const D3DXVECTOR3& vForce);
+	virtual void SetForce(const D3DXVECTOR3& vForce = D3DXVECTOR3(0, 0, 0));
 };
 

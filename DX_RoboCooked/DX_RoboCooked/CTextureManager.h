@@ -5,13 +5,12 @@
 class CTextureManager : public CSingleton<CTextureManager>
 {
 private:
-	//Singletone(CTextureManager);
 	
 	std::map<string, LPDIRECT3DTEXTURE9> m_mapTexture;
-public:
+	friend CSingleton<CTextureManager>;
 	CTextureManager();
 	~CTextureManager();
-
+public:
 	LPDIRECT3DTEXTURE9 GetTexture(char* szFullPath);
 	LPDIRECT3DTEXTURE9 GetTexture(string &sFullPath);
 	void Destroy();

@@ -24,10 +24,10 @@ private:
 
 private:
 	void init();
-
-public:
+	friend CSingleton<SoundManager>;
 	SoundManager();
 	~SoundManager();
+public:
 
 	void AddSFX(string path, string musicName);
 	void AddBGM(string path);

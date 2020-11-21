@@ -155,17 +155,20 @@ void CDebugPlayer1::ReleaseKey(void* _value)
 
 void CDebugPlayer1::Move()
 {
-	m_vPosition += m_vDirection;
+	m_vVelocity += m_vAcceleration;
+	m_vPosition += m_vVelocity;
 
 	D3DXMatrixTranslation(&m_matT, m_vPosition.x, m_vPosition.y, m_vPosition.z);
 	m_matWorld = m_matS * m_matR * m_matT;
 	if (m_pCollision)
 		m_pCollision->Update();
-	m_vDirection *= 0;
+	SetForce();
+	m_vVelocity *= 0;
 }
 
 void CDebugPlayer1::Rotate(float fTargetRot)
 {
+
 	D3DXQUATERNION stLerpRot, stCurrentRot, stTargetRot;
 	D3DXQuaternionRotationAxis(&stCurrentRot, &D3DXVECTOR3(0, 1, 0), m_fRotY);
 	D3DXQuaternionRotationAxis(&stTargetRot, &D3DXVECTOR3(0, 1, 0), fTargetRot);
@@ -174,9 +177,9 @@ void CDebugPlayer1::Rotate(float fTargetRot)
 	D3DXMatrixRotationQuaternion(&m_matR, &stLerpRot);
 
 	D3DXVec3TransformNormal(&m_vDirection, &D3DXVECTOR3(0, 0, 1), &m_matR);
-	m_vDirection *= m_fSpeed;
-
 	m_matWorld = m_matS * m_matR * m_matT;
+	SetForce(m_vDirection * m_fBaseSpeed);
+	//m_vDirection *= m_fSpeed;
 	if (m_pCollision)
 		m_pCollision->Update();
 
