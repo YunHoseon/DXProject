@@ -7,7 +7,8 @@ class CScene;
 
 class CSceneManager : public CSingleton<CSceneManager>
 {
-public:
+private:
+	friend CSingleton<CSceneManager>;
 	CSceneManager();
 	~CSceneManager();
 

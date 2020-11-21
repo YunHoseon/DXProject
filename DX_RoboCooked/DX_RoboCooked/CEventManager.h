@@ -21,7 +21,8 @@ enum class EEvent
 
 class CEventManager : public CSingleton<CEventManager>
 {
-public:
+private:
+	friend CSingleton<CEventManager>;
 	CEventManager();
 	~CEventManager();
 
