@@ -17,8 +17,8 @@ public:
 	void PartsMakeTime() override;
 
 	void ManualCombine();
-	void DischargeParts();
-	void CombinatorRender();
+	void DischargeParts() override;
+	void CombinatorRender() override;
 
 
 private:

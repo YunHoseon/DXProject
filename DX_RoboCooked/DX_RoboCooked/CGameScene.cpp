@@ -236,8 +236,6 @@ void CGameScene::CheckAroundCombinator(CPartCombinator* combinator)
 		{
 			D3DXVECTOR3 vDirection = combinator->GetPosition() - data->GetPosition();
 			veclength[data] = D3DXVec3Length(&vDirection);	
-			//combinator->PartsInteract(static_cast<CParts*>(it)); //형변환해서 값을 넣어준다.
-			//return;
 		}
 	}
 
