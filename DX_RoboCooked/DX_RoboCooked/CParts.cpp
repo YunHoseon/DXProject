@@ -79,9 +79,9 @@ void CParts::DownParts(D3DXVECTOR3 vDir)
 	m_vGrabPosition = NULL;
 	D3DXVec3Normalize(&vDir, &vDir);
 	
-	m_vPosition.x += (vDir.x/1.3f);
+	m_vPosition.x += (vDir.x/1.5f);
 	m_vPosition.y  = vDir.y;
-	m_vPosition.z += (vDir.z/1.3f);
+	m_vPosition.z += (vDir.z/1.5f);
 }
 
 void CParts::PartsRotate()

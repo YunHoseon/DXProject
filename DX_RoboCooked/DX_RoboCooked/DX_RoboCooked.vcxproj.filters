@@ -174,6 +174,15 @@
     <ClInclude Include="CGameScene.h">
       <Filter>GameScene</Filter>
     </ClInclude>
+    <ClInclude Include="CPartsParser.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="CPartAutoCombinator.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="CPartManualCombinator.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="stdafx.cpp">
@@ -307,6 +316,15 @@
     </ClCompile>
     <ClCompile Include="CPartCombinator.cpp">
       <Filter>GameScene</Filter>
+    </ClCompile>
+    <ClCompile Include="CPartsParser.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="CPartAutoCombinator.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="CPartManualCombinator.cpp">
+      <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

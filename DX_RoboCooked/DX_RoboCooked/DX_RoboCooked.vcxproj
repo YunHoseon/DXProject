@@ -154,7 +154,9 @@
     <ClInclude Include="CCharacter.h" />
     <ClInclude Include="CCombinatorButton.h" />
     <ClInclude Include="COutlet.h" />
+    <ClInclude Include="CPartAutoCombinator.h" />
     <ClInclude Include="CPartCombinator.h" />
+    <ClInclude Include="CPartManualCombinator.h" />
     <ClInclude Include="CPartsParser.h" />
     <ClInclude Include="CPartStorage.h" />
     <ClInclude Include="CPartVending.h" />
@@ -203,7 +205,9 @@
     <ClCompile Include="CCharacter.cpp" />
     <ClCompile Include="CCombinatorButton.cpp" />
     <ClCompile Include="COutlet.cpp" />
+    <ClCompile Include="CPartAutoCombinator.cpp" />
     <ClCompile Include="CPartCombinator.cpp" />
+    <ClCompile Include="CPartManualCombinator.cpp" />
     <ClCompile Include="CPartsParser.cpp" />
     <ClCompile Include="CPartStorage.cpp" />
     <ClCompile Include="CPartVending.cpp" />
