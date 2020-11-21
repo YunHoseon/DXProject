@@ -132,7 +132,7 @@ void CPartManualCombinator::Setup(float fAngle, D3DXVECTOR3 vPosition)
 
 	m_vecVertex = vecVertex;
 
-	m_CombinatorTexture = g_pTextureManager->GetTexture(("data/Texture/city_014.png"));
+	m_CombinatorTexture = g_pTextureManager->GetTexture(("data/Texture/city_manual.png"));
 
 	D3DXMatrixRotationY(&m_matR, D3DXToRadian(fAngle));
 	D3DXMatrixTranslation(&m_matT, vPosition.x, 0, vPosition.z);

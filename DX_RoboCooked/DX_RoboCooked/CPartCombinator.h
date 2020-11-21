@@ -8,8 +8,7 @@ class IPartGenerator;
 enum class eCombinatorPartsLevel
 {
 	ONE,
-	TWO,
-	THREE
+	TWO
 };
 
 enum class ECombinatorState
@@ -39,8 +38,8 @@ protected:
 
 	
 public:
-	CPartCombinator();
-	CPartCombinator(IInteractCenter* pInteractCenter, eCombinatorPartsLevel eType, float fAngle, D3DXVECTOR3 vPosition);
+	CPartCombinator(){};
+	CPartCombinator(IInteractCenter* pInteractCenter, eCombinatorPartsLevel eType, float fAngle, D3DXVECTOR3 vPosition) ;
 	virtual ~CPartCombinator();
 
 public:
