@@ -18,7 +18,7 @@ public:
 public:
 	void Update() override;
 	void Render() override;
-	void Setup(float fAngle ,D3DXVECTOR3 vecPosition,INT nPartsID);
+	void Setup(float fAngle ,D3DXVECTOR3 vecPosition,string sPartsID);
 	void Interact(CCharacter* pCharacter) override;
 	void OnEvent(EEvent eEvent, void* _value);
 private:

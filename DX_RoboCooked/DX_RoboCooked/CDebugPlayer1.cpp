@@ -57,7 +57,6 @@ void CDebugPlayer1::Render()
 	m_pMeshSphere->DrawSubset(0);
 	g_pD3DDevice->SetRenderState(D3DRS_LIGHTING, false);
 
-
 	_DEBUG_COMMENT if (m_pInteractCollision)
 		_DEBUG_COMMENT m_pInteractCollision->Render();
 	_DEBUG_COMMENT if (m_pCollision)

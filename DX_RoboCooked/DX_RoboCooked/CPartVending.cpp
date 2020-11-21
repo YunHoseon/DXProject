@@ -5,12 +5,12 @@
 #include "CParts.h"
 #include "CGameScene.h"
 
-CPartVending::CPartVending(COutlet* outlet, IInteractCenter* pInteractCenter, int nPartsID)
+CPartVending::CPartVending(COutlet* outlet, IInteractCenter* pInteractCenter, string sPartsID)
 	:m_pOutlet(outlet)
 	, m_ePartVendingState(EPartVendingState::E_Usable)
 {
 	m_pInteractCenter = pInteractCenter;
-	m_nID = nPartsID;
+	m_sID = sPartsID;
 }
 
 
@@ -163,7 +163,7 @@ void CPartVending::OnEvent(EEvent eEvent, void* _value)
 
 CParts* CPartVending::Make()
 {
-	CParts* parts = new CParts(m_nID);
+	CParts* parts = new CParts(m_sID);
 	parts->Setup();
 	return parts;
 }

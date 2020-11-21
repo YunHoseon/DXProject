@@ -55,8 +55,5 @@ public:
 	
 private:
 	CParts* Make() override;
-	
-
-	
 };
 

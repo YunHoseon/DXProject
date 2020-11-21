@@ -57,7 +57,7 @@ void CGameScene::Init()
 	}
 	
 	CPartStorage* partStorage = new CPartStorage(this);
-	partStorage->Setup(0, D3DXVECTOR3(5, 0, 2) , 1);
+	partStorage->Setup(0, D3DXVECTOR3(5, 0, 2) , "1");
 	m_vecObject.push_back(partStorage);
 
 	CPartCombinator* partCombinator = new CPartCombinator(this, ECombinatorType::E_2stManual);
@@ -72,7 +72,7 @@ void CGameScene::Init()
 	outlet->Setup(0, D3DXVECTOR3(1, 0, 3));
 	m_vecObject.push_back(outlet);
 	
-	CPartVending* partVending = new CPartVending(outlet, this, 2);
+	CPartVending* partVending = new CPartVending(outlet, this, "2");
 	partVending->Setup(0, D3DXVECTOR3(1, 0, -3));
 	m_vecObject.push_back(partVending);
 
@@ -87,12 +87,12 @@ void CGameScene::Init()
 	m_vecCharacters.push_back(m_pDebugCube);
 	m_vecCharacters.push_back(m_pDebugSphere);
 
-	m_pDebugParts = new CParts(999);
+	m_pDebugParts = new CParts("999");
 	if (m_pDebugParts)
 		m_pDebugParts->Setup();
 	m_vecParts.push_back(m_pDebugParts);
 	
-	CParts* m_pDebugParts2 = new CParts(999);
+	CParts* m_pDebugParts2 = new CParts("999");
 	if (m_pDebugParts2)
 		m_pDebugParts2->Setup();
 	m_vecParts.push_back(m_pDebugParts2);

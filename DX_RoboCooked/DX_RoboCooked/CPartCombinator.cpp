@@ -142,8 +142,6 @@ void CPartCombinator::Setup(float fAngle, D3DXVECTOR3 vPosition)
 
 }
 
-
-
 void CPartCombinator::Update()
 {
 	
@@ -180,7 +178,6 @@ void CPartCombinator::Render()
 
 }
 
-
 void CPartCombinator::Interact(CCharacter* pCharacter)
 {
 	if (m_pParts == nullptr)
@@ -197,7 +194,6 @@ void CPartCombinator::Interact(CCharacter* pCharacter)
 		m_pParts->GetCollision()->SetActive(true);
 		m_pParts = nullptr;
 	}
-	
 }
 
 void CPartCombinator::PartsInteract(CParts* pParts)
@@ -225,7 +221,7 @@ void CPartCombinator::PartsInteract(CParts* pParts)
 	default: ;
 	}
 
-	 m_multimapParts.insert(std::make_pair(std::to_string(pParts->GetPartsID()),pParts));
+	 m_multimapParts.insert(std::make_pair(pParts->GetPartsID(),pParts));
 	 pParts->GetCollision()->SetActive(false);
 	 pParts->SetCombinatorPosition(m_vPosition);
 	
@@ -254,8 +250,6 @@ void CPartCombinator::CombineParts()
 	default: 
 		break;
 	}
-	
-	
 }
 
 void CPartCombinator::AutoCombine()
