@@ -18,6 +18,7 @@ private:
 	float				m_fRotAngle;
 	float				m_fWeight;
 	D3DXVECTOR3			m_vSize;
+	string				m_sFormula;
 
 public:
 	CParts(string sPartsID);
@@ -45,6 +46,9 @@ public:
 
 	D3DXVECTOR3 GetSize() { return m_vSize; }
 	void SetSize(D3DXVECTOR3 size) { m_vSize = size; }
+
+	string GetFormula() { return m_sFormula; }
+	void SetFormula(string sFormula) { strcpy_s(&m_sFormula, sFormula); }
 	
 	void SetPosition(D3DXVECTOR3 vPosition) { m_vPosition = vPosition; }
 	
