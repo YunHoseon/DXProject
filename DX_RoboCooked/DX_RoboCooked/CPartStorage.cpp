@@ -44,9 +44,9 @@ void CPartStorage::Render()
 		_DEBUG_COMMENT m_pCollision->Render();
 }
 
-void CPartStorage::Setup(float fAngle, D3DXVECTOR3 vecPosition, INT nPartsID)
+void CPartStorage::Setup(float fAngle, D3DXVECTOR3 vecPosition, string sPartsID)
 {
-	m_nID = nPartsID;
+	m_sID = sPartsID;
 	
 	vector<ST_PNT_VERTEX> vecVertex;
 	ST_PNT_VERTEX v;
@@ -160,7 +160,7 @@ void CPartStorage::OnEvent(EEvent eEvent, void * _value)
 
 CParts* CPartStorage::Make()
 {
-	CParts* parts = new CParts(m_nID);
+	CParts* parts = new CParts(m_sID);
 	parts->Setup();
 	return parts;
 }

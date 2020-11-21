@@ -68,12 +68,12 @@ void CPartsParser::ParseJSON(char* doc, int size, JSON* json)
 
 			// 문자열의 끝 위치를 구함. 다음 "의 위치
 			char *end = strchr(begin, '"');
-			if (end == NULL)    // "가 없으면 잘못된 문법이므로 
-				break;          // 반복을 종료
+			if (end == NULL)    // "가 없으면 잘못된 문법이므로 반복을 종료
+				break;
 
 			int stringLength = end - begin;    // 문자열의 실제 길이는 끝 위치 - 시작 위치
 
-											   // 토큰 배열에 문자열 저장, 토큰 종류는 문자열
+			// 토큰 배열에 문자열 저장, 토큰 종류는 문자열
 			json->tokens[tokenIndex].type = (MY_TOKEN_TYPE)TOKEN_STRING;
 			// 문자열 길이 + NULL 공간만큼 메모리 할당
 			json->tokens[tokenIndex].string = (char*)malloc(stringLength + 1);
@@ -86,7 +86,7 @@ void CPartsParser::ParseJSON(char* doc, int size, JSON* json)
 
 			tokenIndex++; // 토큰 인덱스 증가
 
-			pos = pos + stringLength + 1;    // 현재 위치 + 문자열 길이 + "(+ 1)
+			pos = pos + stringLength + 1;    // 현재 위치 + 문자열 길이 + " (+1)
 		}
 		break;
 
@@ -109,11 +109,8 @@ void CPartsParser::ParseJSON(char* doc, int size, JSON* json)
 			}
 
 			int stringLength = end - begin;    // 문자열의 실제 길이는 끝 위치 - 시작 위치
-
-											   // 문자열 길이 + NULL 공간만큼 메모리 할당
 			buffer = (char*)malloc(stringLength + 1);
-			// 할당한 메모리를 0으로 초기화
-			memset(buffer, 0, stringLength + 1);
+			memset(buffer, 0, stringLength + 1);	// 할당한 메모리를 0으로 초기화
 
 			// 문서에서 문자열을 버퍼에 저장
 			// 문자열 시작 위치에서 문자열 길이만큼만 복사
@@ -124,11 +121,10 @@ void CPartsParser::ParseJSON(char* doc, int size, JSON* json)
 			// 문자열을 숫자로 변환하여 토큰에 저장
 			json->tokens[tokenIndex].number = atof(buffer);
 
-			free(buffer);    // 버퍼 해제
+			free(buffer);
+			tokenIndex++;
 
-			tokenIndex++;    // 토큰 인덱스 증가
-
-			pos = pos + stringLength + 1;    // 현재 위치 + 문자열 길이 + , 또는 }(+ 1)
+			pos = pos + stringLength + 1;    // 현재 위치 + 문자열 길이 + , 또는 } (+1)
 		}
 		break;
 		}
@@ -139,12 +135,13 @@ void CPartsParser::ParseJSON(char* doc, int size, JSON* json)
 void CPartsParser::SavePartsData(JSON json)
 {
 	CParts* parts;
+	//parts->SetPartsID(json.tokens[1].string);
 	//m_mapPartsData.insert();
 }
 
 void CPartsParser::FreeJSON(JSON* json)
 {
-	for (int i = 0; i < TOKEN_COUNT; i++)            // 토큰 개수만큼 반복
+	for (int i = 0; i < TOKEN_COUNT; i++)
 	{
 		if (json->tokens[i].type == (MY_TOKEN_TYPE)TOKEN_STRING)    // 토큰 종류가 문자열이면
 			free(json->tokens[i].string);							// 동적 메모리 해제

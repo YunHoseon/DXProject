@@ -27,7 +27,9 @@ CActor::~CActor()
 
 bool CActor::Collide(CActor* target, D3DXVECTOR3* pNormal)
 {
-	return m_pCollision->Collide(target->m_pCollision, pNormal);
+	if(m_pCollision && target->m_pCollision)
+		return m_pCollision->Collide(target->m_pCollision, pNormal);
+	return false;
 }
 
 void CActor::AddForce(const D3DXVECTOR3& vForce)

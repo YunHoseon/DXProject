@@ -4,12 +4,11 @@
 
 class IPartGenerator;
 
-enum class ECombinatorType
+
+enum class eCombinatorLevel
 {
-	E_1stAuto,
-	E_1stManual,
-	E_2stAuto,
-	E_2stManual
+	ONE,
+	TWO
 };
 
 enum class ECombinatorState
@@ -21,8 +20,8 @@ enum class ECombinatorState
 class CPartCombinator :
 	public CInteractiveActor ,public IPartGenerator 
 {
-private:
-	ECombinatorType					m_eType;
+protected:
+	eCombinatorLevel				m_eLevel;
 	ECombinatorState				m_eCombinatorState;
 	vector<ST_PNT_VERTEX>			m_vecVertex;
 	LPDIRECT3DTEXTURE9				m_CombinatorTexture;
@@ -31,31 +30,37 @@ private:
 	ICollisionArea*					m_pPartsInteractCollision;
 	D3DXVECTOR3						m_vOnCombinatorPosition;
 	CParts*							m_pParts;
-	bool							m_isCombine;
 	bool							m_isFull;
-	ID3DXMesh*						m_p3DTEXT;
+	bool							m_isCombine;
+	
+
+
+	
 public:
-	CPartCombinator(IInteractCenter* pInteractCenter,ECombinatorType eType);
-	~CPartCombinator();
+	CPartCombinator();
+	CPartCombinator(IInteractCenter* pInteractCenter, eCombinatorLevel eType, float fAngle, D3DXVECTOR3 vPosition);
+	virtual ~CPartCombinator();
 
 public:
-	void Update() override;
-	void Render() override;
-	void Setup(float fAngle, D3DXVECTOR3 vPosition);
-	void Interact(CCharacter* pCharacter) override;
-	void PartsInteract(CParts* pParts);
-	void OnEvent(EEvent eEvent, void* _value) override;
-	void CombineParts();
-	void AutoCombine();
-	void ManualCombine();
-	void DischargeParts();
-	void CombinatorRender();
-	ICollisionArea* GetInteractCollsion() { return m_pPartsInteractCollision; }
-	D3DXVECTOR3 GetPosition() { return m_vPosition; }
+	void Update() override = 0;
+	void Render() override = 0;
 	
+	virtual void Interact(CCharacter* pCharacter) override = 0;
+	virtual void PartsInteract(CParts* pParts){};
+	virtual void OnEvent(EEvent eEvent, void* _value) override = 0;
+	virtual void CombineParts() {};
+	virtual void CombineManualParts(){};
+	virtual void CombineAutoParts(){};
+	void AutoCombine() {};
+	void ManualCombine() {};
+	virtual void DischargeParts(){};
+	virtual void CombinatorRender() = 0;
+	virtual ICollisionArea* GetInteractCollsion() const { return m_pPartsInteractCollision; };
+	virtual D3DXVECTOR3 GetPosition() const { return m_vPosition; };
+
 private:
-	CParts* Make() override;
-	
+	CParts* Make() override = 0;
+	virtual void Setup(float fAngle, D3DXVECTOR3 vPosition){};
 
 	
 };
