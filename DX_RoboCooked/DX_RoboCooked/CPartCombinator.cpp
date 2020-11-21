@@ -225,7 +225,7 @@ void CPartCombinator::PartsInteract(CParts* pParts)
 	default: ;
 	}*/
 
-	 m_multimapParts.insert(std::make_pair(std::to_string(pParts->GetPartsID()),pParts));
+	 m_multimapParts.insert(std::make_pair(pParts->GetPartsID(),pParts));
 	 pParts->GetCollision()->SetActive(false);
 	 pParts->SetCombinatorPosition(m_vPosition);
 	
