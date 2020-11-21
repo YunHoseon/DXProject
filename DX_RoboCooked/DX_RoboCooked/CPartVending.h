@@ -18,7 +18,7 @@ private:
 	LPDIRECT3DTEXTURE9		m_PartVendingTexture;
 	COutlet*				m_pOutlet;
 public:
-	CPartVending(COutlet* outlet, IInteractCenter* pInteractCenter, int nPartsID);
+	CPartVending(COutlet* outlet, IInteractCenter* pInteractCenter, string nPartsID);
 	~CPartVending();
 
 	void Setup(float fAngle, D3DXVECTOR3 vPosition);

@@ -14,13 +14,13 @@ private:
 	D3DMATERIAL9		m_stMtlParts;
 	
 	bool				m_isMoveParts;
-	int					m_nPartsID;
+	string				m_sPartsID;
 	float				m_fRotAngle;
 	float				m_fWeight;
 	D3DXVECTOR3			m_vSize;
 
 public:
-	CParts(int nPartsID);
+	CParts(string sPartsID);
 	virtual ~CParts();
 
 	void Setup();
@@ -37,8 +37,8 @@ public:
 
 	/* getter setter */
 	
-	int GetPartsID() { return m_nPartsID; }
-	void SetPartsID(int	ID) { m_nPartsID = ID; }
+	string GetPartsID() { return m_sPartsID; }
+	void SetPartsID(string	ID) { m_sPartsID = ID; }
 
 	float GetWeight() { return m_fWeight; }
 	void SetWeight(float weight) { m_fWeight = weight; }

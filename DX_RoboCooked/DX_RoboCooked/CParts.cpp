@@ -3,16 +3,16 @@
 #include "CSphereCollision.h"
 #include "CCharacter.h"
 
-CParts::CParts(int nPartsID)
+CParts::CParts(string sPartsID)
 	: m_vGrabPosition(nullptr), m_pMeshSphere(nullptr), m_stMtlParts(), m_isMoveParts(false), m_fRotAngle(0.0f),
 	  m_fWeight(0), m_vCombinatorPosition(0,0,0)
 {
 	m_vPosition = D3DXVECTOR3(3.0f, 0.0f, 2.0f);
-	m_nPartsID = nPartsID;
+	m_sPartsID = sPartsID;
 	D3DXMatrixIdentity(&m_matWorld);
 	m_sphere.vCenter = m_vPosition;
 	m_sphere.fRaidus = 0.3f;
-	std::cout << "ÆÄÃ÷ ID : " << m_nPartsID << std::endl;
+	std::cout << "ÆÄÃ÷ ID : " << m_sPartsID << std::endl;
 }
 
 CParts::~CParts()

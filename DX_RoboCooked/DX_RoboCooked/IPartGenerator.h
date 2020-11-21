@@ -3,7 +3,7 @@ class CParts;
 class IPartGenerator
 {
 protected:	
-	int			m_nID;
+	string		m_sID;
 	virtual ~IPartGenerator() = default;
 	virtual CParts* Make() = 0;
 };
