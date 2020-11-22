@@ -113,8 +113,8 @@ void CWall::Setup()
 	m_vecVertex = vecVertex;
 
 	m_wallTexture = g_pTextureManager->GetTexture(("data/Texture/box.jpg"));
-	D3DXMatrixScaling(&m_matS, 16.0f, 12.0f, 1.0f);
-	D3DXMatrixTranslation(&m_matT, 0, 0, 6);
+	//D3DXMatrixScaling(&m_matS, 16.0f, 12.0f, 1.0f);
+	//D3DXMatrixTranslation(&m_matT, 0, 0, 6);
 
 	/*m_pCollision = new CBoxCollision(D3DXVECTOR3(0, 0, 0), D3DXVECTOR3(1.0f, 1.0f, 1.0f), &m_matWorld);
 	if (m_pCollision)
