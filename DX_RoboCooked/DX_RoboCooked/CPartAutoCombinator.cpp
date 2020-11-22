@@ -4,6 +4,7 @@
 #include "CSphereCollision.h"
 #include "CParts.h"
 #include "IInteractCenter.h"
+#include "CCharacter.h"
 
 CPartAutoCombinator::CPartAutoCombinator(IInteractCenter* pInteractCenter, eCombinatorPartsLevel eType, float fAngle, D3DXVECTOR3 vPosition)
 {
@@ -13,7 +14,6 @@ CPartAutoCombinator::CPartAutoCombinator(IInteractCenter* pInteractCenter, eComb
 	m_pParts = nullptr;
 	m_isCombine = false;
 	m_eCombinatorState = ECombinatorState::E_LoadPossible;
-	m_isTimeCheck = false;
 	m_fElapsedTime = 0;
 	m_fCombineTime = 5.0f;
 	Setup(fAngle, vPosition);
@@ -26,7 +26,7 @@ CPartAutoCombinator::~CPartAutoCombinator()
 
 void CPartAutoCombinator::Update()
 {
-	if (m_isTimeCheck)
+	if (m_eCombinatorState == ECombinatorState::E_LoadImpossible)
 		PartsMakeTime();
 	
 	if(m_isCombine && m_pParts == nullptr)
@@ -49,6 +49,17 @@ void CPartAutoCombinator::Render()
 
 void CPartAutoCombinator::Interact(CCharacter* pCharacter)
 {
+	if (m_pParts == nullptr)
+		return;
+
+	if (pCharacter->GetPlayerState() == EPlayerState::E_None)
+	{
+		pCharacter->SetPlayerState(EPlayerState::E_Grab);
+		pCharacter->SetParts(m_pParts);
+		m_pParts->SetGrabPosition(&pCharacter->GetGrabPartsPosition());
+		m_pParts->GetCollision()->SetActive(true);
+		m_pParts = nullptr;
+	}
 }
 
 void CPartAutoCombinator::PartsInteract(CParts* pParts)
@@ -91,7 +102,6 @@ void CPartAutoCombinator::PartsMakeTime()
 
 	if (m_fElapsedTime >= m_fCombineTime)
 	{
-		m_isTimeCheck = false;
 		m_fElapsedTime = 0;
 		Make();
 		AutoCombine();

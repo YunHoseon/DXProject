@@ -31,7 +31,6 @@ protected:
 	D3DXVECTOR3						m_vOnCombinatorPosition;
 	CParts*							m_pParts;
 	bool							m_isCombine;
-	bool							m_isTimeCheck;
 	float							m_fElapsedTime;
 	float							m_fCombineTime;
 
