@@ -189,6 +189,12 @@
     <ClInclude Include="CPartManualCombinator.h">
       <Filter>GameScene\Combinator</Filter>
     </ClInclude>
+    <ClInclude Include="CPartsManager.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="CWall.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="stdafx.cpp">
@@ -331,6 +337,12 @@
     </ClCompile>
     <ClCompile Include="CPartAutoCombinator.cpp">
       <Filter>GameScene\Combinator</Filter>
+    </ClCompile>
+    <ClCompile Include="CPartsManager.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="CWall.cpp">
+      <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

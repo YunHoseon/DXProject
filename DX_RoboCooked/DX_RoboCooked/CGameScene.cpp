@@ -14,7 +14,7 @@
 #include "COutlet.h"
 #include "CPartVending.h"
 #include "CTestPhysics.h"
-
+#include "CWall.h"
 
 /* µð¹ö±ë¿ë */
 #include "CDebugPlayer1.h"
@@ -58,25 +58,25 @@ void CGameScene::Init()
 		m_pField->Setup(WIDTH, HEIGHT);
 		m_vecStaticActor.push_back(m_pField);
 	}
-	
+
+	CWall* wall = new CWall;
+	wall->Setup();
+	m_vecStaticActor.push_back(wall);
+
 	CPartStorage* partStorage = new CPartStorage(this);
 	partStorage->Setup(0, D3DXVECTOR3(5, 0, 2) , "1");
 	m_vecObject.push_back(partStorage);
 
 	CPartCombinator* partManualCombinator = new CPartManualCombinator(this, eCombinatorPartsLevel::ONE , 45.0f , D3DXVECTOR3(-2, 0, 2));
-
 	m_vecObject.push_back(partManualCombinator);
 
 	CCombinatorButton* combinatorButton = new CCombinatorButton(partManualCombinator);
 	combinatorButton->Setup(0,D3DXVECTOR3(1,0,-1));
 	m_vecObject.push_back(combinatorButton);
 
-
 	CPartCombinator* partAutoCombinator = new CPartAutoCombinator(this, eCombinatorPartsLevel::ONE, 0, D3DXVECTOR3(-4, 0, -3));
 	m_vecObject.push_back(partAutoCombinator);
 
-
-	
 	COutlet* outlet = new COutlet(this);
 	outlet->Setup(0, D3DXVECTOR3(1, 0, 3));
 	m_vecObject.push_back(outlet);

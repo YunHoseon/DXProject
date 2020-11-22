@@ -162,6 +162,7 @@
     <ClInclude Include="CPartVending.h" />
     <ClInclude Include="CSoundManager.h" />
     <ClInclude Include="CTestPhysics.h" />
+    <ClInclude Include="CWall.h" />
     <ClInclude Include="ICollisionArea.h" />
     <ClInclude Include="CDeviceManager.h" />
     <ClInclude Include="CEventManager.h" />
@@ -214,6 +215,7 @@
     <ClCompile Include="CPartVending.cpp" />
     <ClCompile Include="CSoundManager.cpp" />
     <ClCompile Include="CTestPhysics.cpp" />
+    <ClCompile Include="CWall.cpp" />
     <ClCompile Include="ICollisionArea.cpp" />
     <ClCompile Include="CDeviceManager.cpp" />
     <ClCompile Include="CEventManager.cpp" />
