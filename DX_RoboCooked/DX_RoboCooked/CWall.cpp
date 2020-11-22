@@ -122,7 +122,7 @@ void CWall::Setup()
 
 	D3DXMATRIXA16 matS, matT, mat;
 	D3DXMatrixScaling(&matS, 16.0f, 12.0f, 1.0f);
-	D3DXMatrixTranslation(&matT, 0.0f, -0.5f, 0.0f);	//중심점 이동
+	D3DXMatrixTranslation(&matT, 0.0f, 6.0f, 0.0f);	//중심점 이동
 	mat = matS * matT;
 
 	for (size_t i = 0; i < m_vecVertex.size(); ++i)
@@ -133,14 +133,14 @@ void CWall::Setup()
 
 void CWall::Update()
 {
-	D3DXMatrixRotationX(&m_matR, D3DXToRadian(70));
-	D3DXMatrixTranslation(&m_matT, 0, 6, 6);
+	D3DXMatrixRotationX(&m_matR, D3DXToRadian(60));
+	D3DXMatrixTranslation(&m_matT, 0, -1.5f, 6);
 	m_matWorld = m_matR * m_matT;
 }
 
 void CWall::Render()
 {
-	/*g_pD3DDevice->SetTransform(D3DTS_WORLD, &m_matWorld);
+	g_pD3DDevice->SetTransform(D3DTS_WORLD, &m_matWorld);
 	g_pD3DDevice->SetTexture(0, m_wallTexture);
 
 	ZeroMemory(&m_stMtlWall, sizeof(D3DMATERIAL9));
@@ -152,5 +152,5 @@ void CWall::Render()
 	g_pD3DDevice->SetFVF(ST_PNT_VERTEX::FVF);
 	g_pD3DDevice->DrawPrimitiveUP(D3DPT_TRIANGLELIST, m_vecVertex.size() / 3, &m_vecVertex[0],
 		sizeof(ST_PNT_VERTEX));
-	g_pD3DDevice->SetTexture(0, 0);*/
+	g_pD3DDevice->SetTexture(0, 0);
 }
