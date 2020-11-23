@@ -32,14 +32,14 @@ void CSphereCollision::Render()
 		g_pD3DDevice->SetTransform(D3DTS_WORLD, m_pmatWorldTM);
 		g_pD3DDevice->SetTexture(0, NULL);
 		D3DMATERIAL9 stMtl{};
-		float a = isCollide ? 0 : 1;
+		float a = m_isCollide ? 0 : 1;
 		stMtl.Ambient = D3DXCOLOR(1, a, a, 1.0f);
 		stMtl.Diffuse = D3DXCOLOR(1, a, a, 1.0f);
 		stMtl.Specular = D3DXCOLOR(1, a, a, 1.0f);
 		g_pD3DDevice->SetMaterial(&stMtl);
 		m_pMesh->DrawSubset(0);
 		g_pD3DDevice->SetRenderState(D3DRS_FILLMODE, D3DFILL_SOLID);
-		isCollide = false;
+		m_isCollide = false;
 	}
 	
 }
@@ -63,7 +63,7 @@ bool CSphereCollision::CollideToSphere(CSphereCollision* pTargetCollider, D3DXVE
 		return false;
 	if (pNormal)
 		*pNormal = *D3DXVec3Normalize(&vDist, &vDist);
-	isCollide = true;
+	m_isCollide = true;
 	pTargetCollider->SetIsCollide(true);
 	return true;
 }

@@ -3,16 +3,16 @@
 #include "CBoxCollision.h"
 #include "CSphereCollision.h"
 
-ICollisionArea::ICollisionArea(): m_eType(EColideType::E_Box), isCollide(false), isActive(true), stColor{},
+ICollisionArea::ICollisionArea(): m_eType(EColideType::E_Box), m_isCollide(false), m_isActive(true), m_stColor{},
                                   m_pmatWorldTM(nullptr)
 {
-	stColor[0] = D3DCOLOR_XRGB(255, 255, 255);
-	stColor[1] = D3DCOLOR_XRGB(255, 0, 0);
+	m_stColor[0] = D3DCOLOR_XRGB(255, 255, 255);
+	m_stColor[1] = D3DCOLOR_XRGB(255, 0, 0);
 }
 
 bool ICollisionArea::Collide(ICollisionArea* pTargetCollider, D3DXVECTOR3* pNormal)
 {
-	if (!isActive || !pTargetCollider->isActive)
+	if (!m_isActive || !pTargetCollider->m_isActive)
 		return false;
 	
 	if (pTargetCollider->m_eType == EColideType::E_Box)

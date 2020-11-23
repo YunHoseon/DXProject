@@ -28,7 +28,7 @@ void CBoxCollision::Render()
 	vector<ST_PC_VERTEX> drawPoint;
 	vector<ST_PC_VERTEX> drawVertex;
 	ST_PC_VERTEX vertex;
-	vertex.c = stColor[isCollide];
+	vertex.c = m_stColor[m_isCollide];
 	//cout << c << endl;
 	int plusMinus[2] = { 1, -1 };
 	
@@ -80,7 +80,7 @@ void CBoxCollision::Render()
 	g_pD3DDevice->SetTexture(0, NULL);
 	g_pD3DDevice->SetFVF(ST_PC_VERTEX::FVF);
 	g_pD3DDevice->DrawPrimitiveUP(D3DPT_LINELIST, drawVertex.size() * 0.5f, &drawVertex[0], sizeof(ST_PC_VERTEX));
-	isCollide = false;
+	m_isCollide = false;
 }
 
 void CBoxCollision::Update()
@@ -144,7 +144,7 @@ bool CBoxCollision::CollideToBox(CBoxCollision* pTargetCollider, D3DXVECTOR3* pN
 
 	if (existsParallelPair)
 	{
-		isCollide = true;
+		m_isCollide = true;
 		pTargetCollider->SetIsCollide(true);
 		return true;
 	}
@@ -227,14 +227,16 @@ bool CBoxCollision::CollideToSphere(CSphereCollision* pTargetCollider, D3DXVECTO
 
 	if (fDist == 0)
 	{
-		isCollide = true;
+		m_isCollide = true;
 		pTargetCollider->SetIsCollide(true);
 		return true;
 	}
 	
 	D3DXVec3Normalize(&vDist, &vDist);
 
+	vector<std::pair<float, D3DXVECTOR3>> vecNormalVertex;
 	D3DXVECTOR3 v, vNormal(0,0,0);
+	bool isCollide = false;
 	int plusMinus[2] = { 1, -1 };
 
 	for (int i = 0; i < 2; ++i)
@@ -248,16 +250,31 @@ bool CBoxCollision::CollideToSphere(CSphereCollision* pTargetCollider, D3DXVECTO
 					+ (m_vAxisDir[2] * m_fAxisHalfLen[2] * plusMinus[k]);
 
 				float fTraceDist = D3DXVec3Dot(&vDist, &v);
-				if (fDist + fTraceDist <= pTargetCollider->GetRadius())
+				if (fTraceDist < 0)
 				{
-					vNormal += v;
+					vecNormalVertex.emplace_back(fTraceDist,v);
+					if (fDist + fTraceDist <= pTargetCollider->GetRadius())
+					{
+						isCollide = true;
+					}
 				}
+				
 			}
 		}
 	}
+
+	if(isCollide)
+	{
+		for (std::pair<float, D3DXVECTOR3>& v : vecNormalVertex)
+		{
+			if (fDist + v.first < pTargetCollider->GetRadius() || v.first < -0.0001f)
+				vNormal += v.second;
+		}
+	}
+	
 	if (vNormal != D3DXVECTOR3(0, 0, 0))
 	{
-		isCollide = true;
+		m_isCollide = true;
 		pTargetCollider->SetIsCollide(true);
 		if (pNormal)
 			*pNormal = *D3DXVec3Normalize(&vNormal, &vNormal);

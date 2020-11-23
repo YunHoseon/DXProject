@@ -9,9 +9,9 @@ public:
 	enum class EColideType { E_Box, E_Sphere };
 protected:
 	EColideType			m_eType;
-	bool				isCollide; // render할 때 색 변환을 위한 변수
-	bool				isActive;
-	D3DCOLOR			stColor[2];
+	bool				m_isCollide; // render할 때 색 변환을 위한 변수
+	bool				m_isActive;
+	D3DCOLOR			m_stColor[2];
 
 	D3DXVECTOR3			m_vOriginCenterPos;
 	D3DXVECTOR3			m_vCenterPos;
@@ -28,7 +28,7 @@ public:
 	virtual void Update() = 0;
 	virtual bool CollideToBox(CBoxCollision* pTargetCollider, D3DXVECTOR3* pNormal) = 0;
 	virtual bool CollideToSphere(CSphereCollision* pTargetCollider, D3DXVECTOR3* pNormal) = 0;
-	void SetIsCollide(bool b) { isCollide = b; }
-	bool GetActive() { return isActive; }
-	void SetActive(bool b) { isActive = b; }
+	void SetIsCollide(bool b) { m_isCollide = b; }
+	bool GetActive() { return m_isActive; }
+	void SetActive(bool b) { m_isActive = b; }
 };
