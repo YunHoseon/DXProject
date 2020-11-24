@@ -69,13 +69,10 @@ void CCamera::Render()
 		DT_LEFT | DT_TOP | DT_NOCLIP,
 		D3DCOLOR_XRGB(255, 255, 0));
 
-
-
 	string sAngle = string("카메라 각도 :") + std::to_string(m_vCamRotAngle.x);
 	SetRect(&rc, 0, 50, 0, 0);
 
 	pFont = g_pFontManager->GetFont(CFontManager::eFontType::E_DEFAULT);
-
 
 	pFont->DrawTextA(NULL,
 		sAngle.c_str(),

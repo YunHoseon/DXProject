@@ -3,6 +3,7 @@
 #include "CBoxCollision.h"
 
 CWall::CWall()
+	:n_RotAngleX(0)
 {
 }
 
@@ -129,17 +130,44 @@ void CWall::Setup()
 	{
 		D3DXVec3TransformCoord(&m_vecVertex[i].p, &m_vecVertex[i].p, &mat);
 	}
+
+	Create_Font();
 }
 
 void CWall::Update()
 {
-	D3DXMatrixRotationX(&m_matR, D3DXToRadian(60));
+	if (GetKeyState('O') & 0X8000)
+	{
+		n_RotAngleX -= 2;
+		if (n_RotAngleX <= 0)
+			n_RotAngleX = 0;
+	}
+	if (GetKeyState('P') & 0X8000)
+	{
+		n_RotAngleX += 2;
+		if (n_RotAngleX >= 90)
+			n_RotAngleX = 90;
+	}
+
+	D3DXMatrixRotationX(&m_matR, D3DXToRadian(n_RotAngleX));
 	D3DXMatrixTranslation(&m_matT, 0, -1.5f, 6);
 	m_matWorld = m_matR * m_matT;
 }
 
 void CWall::Render()
 {
+	string sWallRotationX = string("벽 회전(O/P키) :") + std::to_string(n_RotAngleX);
+	RECT rc;
+	SetRect(&rc, 0, 100, 0, 0);
+	LPD3DXFONT pFont = g_pFontManager->GetFont(CFontManager::eFontType::E_DEFAULT);
+
+	pFont->DrawTextA(NULL,
+		sWallRotationX.c_str(),
+		sWallRotationX.length(),
+		&rc,
+		DT_LEFT | DT_TOP | DT_NOCLIP,
+		D3DCOLOR_XRGB(255, 255, 255));
+
 	g_pD3DDevice->SetTransform(D3DTS_WORLD, &m_matWorld);
 	g_pD3DDevice->SetTexture(0, m_wallTexture);
 
@@ -153,4 +181,40 @@ void CWall::Render()
 	g_pD3DDevice->DrawPrimitiveUP(D3DPT_TRIANGLELIST, m_vecVertex.size() / 3, &m_vecVertex[0],
 		sizeof(ST_PNT_VERTEX));
 	g_pD3DDevice->SetTexture(0, 0);
+
+	D3DXMATRIXA16 matWorld, matS, matR, matT;
+	D3DXMatrixIdentity(&matS);
+	D3DXMatrixIdentity(&matR);
+	D3DXMatrixIdentity(&matT);
+	D3DXMatrixScaling(&matS, 1.0f, 1.0f, 10.0f);
+	D3DXMatrixTranslation(&matT, -2.0f, 3.0f, -0.5f);
+	matWorld = matS * matR * matT * m_matWorld;
+	g_pD3DDevice->SetTransform(D3DTS_WORLD, &matWorld);
+	m_p3DText->DrawSubset(0);
+}
+
+void CWall::Create_Font()
+{
+	HDC hdc = CreateCompatibleDC(0);
+	LOGFONT lf;
+	ZeroMemory(&lf, sizeof(LOGFONT));
+	lf.lfHeight = 25;
+	lf.lfWidth = 12;
+	lf.lfWeight = 500;
+	lf.lfItalic = false;
+	lf.lfUnderline = false;
+	lf.lfStrikeOut = false;
+	lf.lfCharSet = DEFAULT_CHARSET;
+	wcscpy_s(lf.lfFaceName, L"굴림체");
+
+	HFONT hFont;
+	HFONT hFontOld;
+
+	hFont = CreateFontIndirect(&lf);
+	hFontOld = (HFONT)SelectObject(hdc, hFont);
+	D3DXCreateText(g_pD3DDevice, hdc, L"TV TEXT", 0.001f, 0.01f, &m_p3DText, 0, 0);
+
+	SelectObject(hdc, hFontOld);
+	DeleteObject(hFont);
+	DeleteDC(hdc);
 }
