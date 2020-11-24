@@ -15,10 +15,25 @@ CPartManualCombinator::CPartManualCombinator(IInteractCenter* pInteractCenter, e
 	m_pInteractCenter = pInteractCenter;
 	m_pParts = nullptr;
 	m_isCombine = false;
-	m_eCombinatorState = ECombinatorState::E_LoadPossible;
+	m_eCombinatorLoadState = ECombinatorLoadState::E_LoadPossible;
+	m_eCombinatorActionState = eCombinatorActionState::Usable;
 	m_isTimeCheck = false;
 	m_fElapsedTime = 0;
 	m_fCombineTime = 5.0f;
+	m_nPartsCount = 0;
+
+
+	switch (m_eLevel)
+	{
+	case eCombinatorPartsLevel::ONE:
+		m_nMaxPartsCount = 2;
+		break;
+	case eCombinatorPartsLevel::TWO:
+		m_nMaxPartsCount = 3;
+		break;
+	}
+
+
 	Setup(fAngle, vPosition);
 
 
@@ -154,13 +169,13 @@ void CPartManualCombinator::Setup(float fAngle, D3DXVECTOR3 vPosition)
 
 void CPartManualCombinator::Update()
 {
-	if (m_isTimeCheck)
+	if (m_isTimeCheck && m_eCombinatorActionState == eCombinatorActionState::Usable)
 		PartsMakeTime();
 	
 	if (m_isCombine && m_pParts == nullptr)
 		DischargeParts();
 
-	if (m_eCombinatorState == ECombinatorState::E_LoadPossible)
+	if (m_eCombinatorLoadState == ECombinatorLoadState::E_LoadPossible)
 		m_pInteractCenter->CheckAroundCombinator(this);
 }
 
@@ -212,28 +227,24 @@ void CPartManualCombinator::Interact(CCharacter* pCharacter)
 
 void CPartManualCombinator::PartsInteract(CParts* pParts)
 {
-	if (pParts->GetGrabPosition() != NULL || m_eCombinatorState == ECombinatorState::E_LoadImpossible)
-		return;
-
-	m_multimapParts.insert(std::make_pair(pParts->GetPartsID(), pParts));
+	m_nPartsCount++;
+	//m_multimapParts.insert(std::make_pair(pParts->GetPartsID(), pParts));
 
 	pParts->GetCollision()->SetActive(false);
 	pParts->SetCombinatorPosition(m_vPosition);
-
-	if (m_eCombinatorState == ECombinatorState::E_LoadPossible)
-		pParts->SetMoveParts(true);
+	pParts->SetMoveParts(true);
 	
-	switch (m_eLevel)
+	/*switch (m_eLevel)
 	{
 	case eCombinatorPartsLevel::ONE:
 		if (m_multimapParts.size() >= 2)
-			m_eCombinatorState = ECombinatorState::E_LoadImpossible;
-			break;
+			m_eCombinatorState = ECombinatorLoadState::E_LoadImpossible;
+		break;
 	case eCombinatorPartsLevel::TWO:
 		if (m_multimapParts.size() >= 3)
-			m_eCombinatorState = ECombinatorState::E_LoadImpossible;
-			break;
-	}
+			m_eCombinatorState = ECombinatorLoadState::E_LoadImpossible;
+		break;
+	}*/
 }
 
 void CPartManualCombinator::OnEvent(EEvent eEvent, void* _value)
@@ -245,7 +256,7 @@ void CPartManualCombinator::CombineParts()
 	/*
 	 * 적재불가능 상태이면 MAKE 함수 호출후 쿨타임 주고 아래로 내려가게
 	 */
-	if(m_eCombinatorState == ECombinatorState::E_LoadImpossible)
+	if(m_eCombinatorLoadState == ECombinatorLoadState::E_LoadImpossible)
 	{
 		m_isTimeCheck = true;
 		return;
@@ -281,7 +292,9 @@ void CPartManualCombinator::DischargeParts()
 {
 	if (m_vecDischargeParts.empty())
 	{
-		m_eCombinatorState = ECombinatorState::E_LoadPossible;
+		m_nPartsCount = 0;
+		//m_eCombinatorActionState = eCombinatorActionState::Usable;
+		m_eCombinatorLoadState = ECombinatorLoadState::E_LoadPossible;
 		m_isCombine = false;
 		return;
 	}
@@ -292,7 +305,6 @@ void CPartManualCombinator::DischargeParts()
 
 void CPartManualCombinator::CombinatorRender()
 {
-
 	g_pD3DDevice->SetTransform(D3DTS_WORLD, &m_matWorld);
 	g_pD3DDevice->SetTexture(0, m_CombinatorTexture);
 
@@ -307,4 +319,15 @@ void CPartManualCombinator::CombinatorRender()
 	g_pD3DDevice->DrawPrimitiveUP(D3DPT_TRIANGLELIST, m_vecVertex.size() / 3, &m_vecVertex[0],
 		sizeof(ST_PNT_VERTEX));
 	g_pD3DDevice->SetTexture(0, 0);
+}
+
+void CPartManualCombinator::PartsInsert(CParts* p)
+{
+	m_multimapParts.insert(std::make_pair(p->GetPartsID(), p));
+	
+	/*if (m_multimapParts.size() == m_nMaxPartsCount)
+	{
+		m_eCombinatorActionState = eCombinatorActionState::Usable;
+	}*/
+
 }

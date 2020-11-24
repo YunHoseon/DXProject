@@ -21,6 +21,7 @@ private:
 	D3DXVECTOR3						m_vSize;
 	eCombinatorPartsLevel			m_eLevel;
 	string							m_sFormula;
+	CPartCombinator*				m_pPartsCombinator;
 
 
 public:
@@ -62,7 +63,8 @@ public:
 	void SetMoveParts(bool b) { m_isMoveParts = b; }
 	D3DXVECTOR3 GetPosition() { return m_vPosition; }
 
-
 	eCombinatorPartsLevel GetCombinPartsLevel() const { return m_eLevel; }
+
+	void SetCPartCombinator(CPartCombinator* p) { m_pPartsCombinator = p; }
 };
 

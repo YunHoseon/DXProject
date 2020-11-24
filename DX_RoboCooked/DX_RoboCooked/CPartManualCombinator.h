@@ -22,7 +22,7 @@ public:
 	void ManualCombine();
 	void DischargeParts() override;
 	void CombinatorRender() override;
-
+	void PartsInsert(CParts* p) override;
 
 private:
 	CParts* Make() override;

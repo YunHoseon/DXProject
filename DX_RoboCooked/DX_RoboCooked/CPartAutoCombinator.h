@@ -19,6 +19,7 @@ public:
 	void AutoCombine();
 	void DischargeParts() override;
 	void CombinatorRender() override;
+	void PartsInsert(CParts* p) override;
 
 
 private:
