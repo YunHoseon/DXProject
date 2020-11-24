@@ -45,7 +45,6 @@ void CEventManager::DetachAll(CEventListener* _observer)
 
 void CEventManager::CallEvent(EEvent eEvent, void* value)
 {	
-
 	std::set<CEventListener *>::iterator iterator = m_mapEventMap[eEvent].begin();
 
 	while (iterator != m_mapEventMap[eEvent].end())

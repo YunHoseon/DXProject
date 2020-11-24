@@ -9,7 +9,7 @@ private:
 	vector<ST_PNT_VERTEX>	m_vecVertex;
 	LPDIRECT3DTEXTURE9		m_wallTexture;
 	ID3DXMesh*				m_p3DText;
-
+	D3DMATERIAL9			m_stMtlWall;
 public:
 	CWall();
 	~CWall();
@@ -17,9 +17,9 @@ public:
 	void Setup();
 	void Update() override;
 	void Render() override;
-	void OnEvent(EEvent eEvent, void* _value) {};
+	void OnEvent(EEvent eEvent, void* _value);
 
 	void Create_Font();
-	D3DMATERIAL9					m_stMtlWall;
+	void ReleaseKey();
 };
 

@@ -5,6 +5,7 @@
 CWall::CWall()
 	:n_RotAngleX(0)
 {
+	g_EventManager->Attach(EEvent::E_KeyRelease, this);
 }
 
 
@@ -112,31 +113,21 @@ void CWall::Setup()
 	}
 
 	m_vecVertex = vecVertex;
-
 	m_wallTexture = g_pTextureManager->GetTexture(("data/Texture/box.jpg"));
-	//D3DXMatrixScaling(&m_matS, 16.0f, 12.0f, 1.0f);
-	//D3DXMatrixTranslation(&m_matT, 0, 0, 6);
-
-	/*m_pCollision = new CBoxCollision(D3DXVECTOR3(0, 0, 0), D3DXVECTOR3(1.0f, 1.0f, 1.0f), &m_matWorld);
-	if (m_pCollision)
-		m_pCollision->Update();*/
-
 	D3DXMATRIXA16 matS, matT, mat;
 	D3DXMatrixScaling(&matS, 16.0f, 12.0f, 1.0f);
-	D3DXMatrixTranslation(&matT, 0.0f, 6.0f, 0.0f);	//중심점 이동
+	D3DXMatrixTranslation(&matT, 0.0f, 6.0f, 0.0f);
 	mat = matS * matT;
 
 	for (size_t i = 0; i < m_vecVertex.size(); ++i)
-	{
 		D3DXVec3TransformCoord(&m_vecVertex[i].p, &m_vecVertex[i].p, &mat);
-	}
 
 	Create_Font();
 }
 
 void CWall::Update()
 {
-	if (GetKeyState('O') & 0X8000)
+	/*if (GetKeyState('O') & 0X8000)
 	{
 		n_RotAngleX -= 2;
 		if (n_RotAngleX <= 0)
@@ -147,7 +138,7 @@ void CWall::Update()
 		n_RotAngleX += 2;
 		if (n_RotAngleX >= 90)
 			n_RotAngleX = 90;
-	}
+	}*/
 
 	D3DXMatrixRotationX(&m_matR, D3DXToRadian(n_RotAngleX));
 	D3DXMatrixTranslation(&m_matT, 0, -1.5f, 6);
@@ -193,6 +184,18 @@ void CWall::Render()
 	m_p3DText->DrawSubset(0);
 }
 
+void CWall::OnEvent(EEvent eEvent, void * _value)
+{
+	switch (eEvent)
+	{
+	case EEvent::E_KeyRelease:
+		ReleaseKey();
+		break;
+	default:
+		break;
+	}
+}
+
 void CWall::Create_Font()
 {
 	HDC hdc = CreateCompatibleDC(0);
@@ -217,4 +220,20 @@ void CWall::Create_Font()
 	SelectObject(hdc, hFontOld);
 	DeleteObject(hFont);
 	DeleteDC(hdc);
+}
+
+void CWall::ReleaseKey()
+{
+	if (GetAsyncKeyState('O') & 0x0001)
+	{
+		n_RotAngleX -= 2;
+		if (n_RotAngleX <= 0)
+			n_RotAngleX = 0;
+	}
+	else if (GetAsyncKeyState('P') & 0x0001)
+	{
+		n_RotAngleX += 2;
+		if (n_RotAngleX >= 90)
+			n_RotAngleX = 90;
+	}
 }
