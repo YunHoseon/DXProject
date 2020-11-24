@@ -1,8 +1,10 @@
 #include "stdafx.h"
 #include "CField.h"
 
+#include "CBoxCollision.h"
+
 const float Y = -1.0f;
-CField::CField()
+CField::CField(): m_stMtlTile({})
 {
 }
 
@@ -166,6 +168,8 @@ void CField::Setup(int iWidth, int iHeight)
 	m_stMtlTile.Ambient = D3DXCOLOR(0.7f, 0.7f, 0.7f, 1.0f);
 	m_stMtlTile.Diffuse = D3DXCOLOR(0.7f, 0.7f, 0.7f, 1.0f);
 	m_stMtlTile.Specular = D3DXCOLOR(0.7f, 0.7f, 0.7f, 1.0f);
+	m_pCollision = new CBoxCollision(D3DXVECTOR3(0, Y, 0), D3DXVECTOR3(BLOCK_SIZE * (fMaxX - fMinX), BLOCK_SIZE, BLOCK_SIZE * (fMaxZ - fMinZ)), &m_matWorld);
+	m_pCollision->Update();
 }
 
 
@@ -177,6 +181,9 @@ void CField::Render()
 	{
 		c->Render();
 	}
+
+	_DEBUG_COMMENT if (m_pCollision)
+		_DEBUG_COMMENT m_pCollision->Render();
 }
 
 void CField::Update()

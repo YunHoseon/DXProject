@@ -18,6 +18,7 @@ CActor::CActor()
 	D3DXMatrixIdentity(&m_matS);
 	D3DXMatrixIdentity(&m_matR);
 	D3DXMatrixIdentity(&m_matT);
+	m_matWorld = m_matS * m_matR * m_matT;
 }
 
 

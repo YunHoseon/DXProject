@@ -162,7 +162,7 @@ void CDebugPlayer1::Move()
 	if (m_pCollision)
 		m_pCollision->Update();
 	SetForce();
-	m_vVelocity *= 0;
+	//m_vVelocity *= 0;
 }
 
 void CDebugPlayer1::Rotate(float fTargetRot)
@@ -178,6 +178,7 @@ void CDebugPlayer1::Rotate(float fTargetRot)
 	D3DXVec3TransformNormal(&m_vDirection, &D3DXVECTOR3(0, 0, 1), &m_matR);
 	m_matWorld = m_matS * m_matR * m_matT;
 	SetForce(m_vDirection * m_fBaseSpeed);
+	
 	//m_vDirection *= m_fSpeed;
 	if (m_pCollision)
 		m_pCollision->Update();
