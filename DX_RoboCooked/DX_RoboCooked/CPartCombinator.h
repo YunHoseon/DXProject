@@ -45,15 +45,15 @@ protected:
 	INT								m_nMaxPartsCount;
 
 
-	
+
 public:
 	CPartCombinator(){};
 	CPartCombinator(IInteractCenter* pInteractCenter, eCombinatorPartsLevel eType, float fAngle, D3DXVECTOR3 vPosition) ;
 	virtual ~CPartCombinator();
 
 public:
-	void Update() override = 0;
-	void Render() override = 0;
+	virtual void Update() override = 0;
+	virtual void Render() override = 0;
 	
 	virtual void Interact(CCharacter* pCharacter) override = 0;
 	virtual void PartsInteract(CParts* pParts) = 0 ;

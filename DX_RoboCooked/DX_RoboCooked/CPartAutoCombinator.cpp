@@ -39,6 +39,7 @@ CPartAutoCombinator::~CPartAutoCombinator()
 
 void CPartAutoCombinator::Update()
 {
+
 	if (m_eCombinatorLoadState == eCombinatorLoadState::LoadImpossible &&
 		m_eCombinatorActionState == eCombinatorActionState::Usable)
 		PartsMakeTime();
@@ -278,6 +279,7 @@ void CPartAutoCombinator::Setup(float fAngle, D3DXVECTOR3 vPosition)
 	m_vOnCombinatorPosition = D3DXVECTOR3(vPosition.x, vPosition.y + 1.0f, vPosition.z);
 
 	m_pCollision = new CBoxCollision(D3DXVECTOR3(0, 0, 0), D3DXVECTOR3(1.0f, 1.0f, 1.0f), &m_matWorld);
+
 	m_pPartsInteractCollision = new CSphereCollision(D3DXVECTOR3(0, 0, 0), 2.0f, &m_matWorld);
 
 

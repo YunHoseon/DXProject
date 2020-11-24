@@ -22,7 +22,6 @@ CPartManualCombinator::CPartManualCombinator(IInteractCenter* pInteractCenter, e
 	m_fCombineTime = 5.0f;
 	m_nPartsCount = 0;
 
-
 	switch (m_eLevel)
 	{
 	case eCombinatorPartsLevel::ONE:
@@ -169,6 +168,7 @@ void CPartManualCombinator::Setup(float fAngle, D3DXVECTOR3 vPosition)
 
 void CPartManualCombinator::Update()
 {
+
 	if (m_isTimeCheck && m_eCombinatorActionState == eCombinatorActionState::Usable)
 		PartsMakeTime();
 	
