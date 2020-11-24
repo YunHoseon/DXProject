@@ -62,7 +62,7 @@ void CParts::Render()
 		_DEBUG_COMMENT m_pCollision->Render();
 }
 
-void CParts::OnEvent(EEvent eEvent, void* _value)
+void CParts::OnEvent(eEvent eEvent, void* _value)
 {
 
 }
@@ -71,7 +71,7 @@ void CParts::Interact(CCharacter* pCharacter)
 {
 	SetGrabPosition(&pCharacter->GetGrabPartsPosition());
 	pCharacter->SetParts(this);
-	pCharacter->SetPlayerState(EPlayerState::E_Grab);
+	pCharacter->SetPlayerState(ePlayerState::Grab);
 }
 
 void CParts::DownParts(D3DXVECTOR3 vDir)

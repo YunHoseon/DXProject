@@ -5,7 +5,7 @@
 CWall::CWall()
 	:n_RotAngleX(0)
 {
-	g_EventManager->Attach(EEvent::E_KeyRelease, this);
+	g_EventManager->Attach(eEvent::KeyRelease, this);
 }
 
 
@@ -150,7 +150,7 @@ void CWall::Render()
 	string sWallRotationX = string("벽 회전(O/P키) :") + std::to_string(n_RotAngleX);
 	RECT rc;
 	SetRect(&rc, 0, 100, 0, 0);
-	LPD3DXFONT pFont = g_pFontManager->GetFont(CFontManager::eFontType::E_DEFAULT);
+	LPD3DXFONT pFont = g_pFontManager->GetFont(CFontManager::eFontType::DEFAULT);
 
 	pFont->DrawTextA(NULL,
 		sWallRotationX.c_str(),
@@ -184,11 +184,11 @@ void CWall::Render()
 	m_p3DText->DrawSubset(0);
 }
 
-void CWall::OnEvent(EEvent eEvent, void * _value)
+void CWall::OnEvent(eEvent eEvent, void * _value)
 {
 	switch (eEvent)
 	{
-	case EEvent::E_KeyRelease:
+	case eEvent::KeyRelease:
 		ReleaseKey();
 		break;
 	default:

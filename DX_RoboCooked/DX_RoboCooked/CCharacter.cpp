@@ -7,7 +7,7 @@
 
 CCharacter::CCharacter()
 	: m_pInteractCollision(nullptr)
-	, m_ePlayerState(EPlayerState::E_None)
+	, m_ePlayerState(ePlayerState::None)
 	, m_vGrabPartsPosition(0, 1, 0)
 	, m_pParts(NULL)
 	, m_isGrabCooltime(false)

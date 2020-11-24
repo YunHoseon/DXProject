@@ -11,10 +11,10 @@ enum class eCombinatorPartsLevel
 	TWO
 };
 
-enum class ECombinatorLoadState
+enum class eCombinatorLoadState
 {
-	E_LoadPossible,
-	E_LoadImpossible
+	LoadPossible,
+	LoadImpossible
 };
 
 enum class eCombinatorActionState
@@ -29,7 +29,7 @@ class CPartCombinator :
 {
 protected:
 	eCombinatorPartsLevel			m_eLevel;
-	ECombinatorLoadState			m_eCombinatorLoadState;
+	eCombinatorLoadState			m_eCombinatorLoadState;
 	eCombinatorActionState			m_eCombinatorActionState;
 	vector<ST_PNT_VERTEX>			m_vecVertex;
 	LPDIRECT3DTEXTURE9				m_CombinatorTexture;
@@ -57,7 +57,7 @@ public:
 	
 	virtual void Interact(CCharacter* pCharacter) override = 0;
 	virtual void PartsInteract(CParts* pParts) = 0 ;
-	virtual void OnEvent(EEvent eEvent, void* _value) override = 0;
+	virtual void OnEvent(eEvent eEvent, void* _value) override = 0;
 	virtual void CombineParts() = 0;
 	virtual void PartsMakeTime() = 0;
 	virtual void DischargeParts() = 0;
@@ -67,8 +67,8 @@ public:
 	ICollisionArea* GetInteractCollsion() const { return m_pPartsInteractCollision; };
 	D3DXVECTOR3 GetPosition() const { return m_vPosition; };
 	eCombinatorPartsLevel GetCombinPartsLevel() const { return m_eLevel; }
-	ECombinatorLoadState GetCombinatorLoadState() { return m_eCombinatorLoadState; }
-	void SetCombinatorLoadState(ECombinatorLoadState st) { m_eCombinatorLoadState = st; }
+	eCombinatorLoadState GetCombinatorLoadState() { return m_eCombinatorLoadState; }
+	void SetCombinatorLoadState(eCombinatorLoadState st) { m_eCombinatorLoadState = st; }
 	INT GetCombinatorPartsCount() { return m_nPartsCount; }
 
 

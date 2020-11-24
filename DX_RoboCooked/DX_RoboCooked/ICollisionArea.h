@@ -6,9 +6,9 @@ class CBoxCollision;
 class ICollisionArea
 {
 public:
-	enum class EColideType { E_Box, E_Sphere };
+	enum class eColideType { Box, Sphere };
 protected:
-	EColideType			m_eType;
+	eColideType			m_eType;
 	bool				m_isCollide; // render할 때 색 변환을 위한 변수
 	bool				m_isActive;
 	D3DCOLOR			m_stColor[2];

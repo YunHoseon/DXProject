@@ -18,6 +18,6 @@ public:
 	void PressKey(WPARAM keyID, LPARAM lParam);
 	void ReleaseKey(WPARAM keyID, LPARAM lParam);
 	//void JudgeDash(WPARAM keyID);
-	void OnEvent(EEvent eEvent, void* _value);
+	void OnEvent(eEvent eEvent, void* _value);
 	void SetKeyChange(int n, void* _value);		//어떤 플레이어의 키를 바꿀것인지, 어떤 값으로 바꿀것인지
 };

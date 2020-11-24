@@ -7,7 +7,7 @@
 CSphereCollision::CSphereCollision(D3DXVECTOR3 vOriginPos, float fRadius, D3DXMATRIXA16* pmatWorld): fRadius(fRadius),
 	m_pMesh(nullptr)
 {
-	m_eType = EColideType::E_Sphere;
+	m_eType = eColideType::Sphere;
 	m_vOriginCenterPos = vOriginPos;
 	m_vCenterPos = vOriginPos;
 	m_pmatWorldTM = pmatWorld;

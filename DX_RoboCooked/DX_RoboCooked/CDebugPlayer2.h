@@ -19,7 +19,7 @@ public:
 	void Update();
 	void Render() override;
 	
-	void OnEvent(EEvent eEvent, void* _value);
+	void OnEvent(eEvent eEvent, void* _value);
 	void PressKey(void* _value);
 	void ReleaseKey(void* _value);
 	void Move();

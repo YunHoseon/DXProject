@@ -19,7 +19,7 @@ LPD3DXFONT CFontManager::GetFont(eFontType e)
 
 	D3DXFONT_DESC fd{};
 
-	if(e == E_DEFAULT)
+	if(e == DEFAULT)
 	{
 		fd.Height = 30;
 		fd.Width = 15;
@@ -31,7 +31,7 @@ LPD3DXFONT CFontManager::GetFont(eFontType e)
 		wcscpy_s(fd.FaceName, L"굴림체");
 		
 	}
-	else if(e == E_QUEST)
+	else if(e == QUEST)
 	{
 		fd.Height = 50;
 		fd.Width = 25;

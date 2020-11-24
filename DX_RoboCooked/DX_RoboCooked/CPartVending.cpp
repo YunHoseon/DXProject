@@ -7,7 +7,7 @@
 
 CPartVending::CPartVending(COutlet* outlet, IInteractCenter* pInteractCenter, string sPartsID)
 	:m_pOutlet(outlet)
-	, m_ePartVendingState(EPartVendingState::E_Usable)
+	, m_ePartVendingState(ePartVendingState::Usable)
 {
 	m_pInteractCenter = pInteractCenter;
 	m_sID = sPartsID;
@@ -135,8 +135,8 @@ void CPartVending::Update()
 {
 	
 
-	if (m_pOutlet->GetState() == EOutletState::E_None)
-		m_ePartVendingState = EPartVendingState::E_Usable;
+	if (m_pOutlet->GetState() == eOutletState::None)
+		m_ePartVendingState = ePartVendingState::Usable;
 }
 
 void CPartVending::Render()
@@ -161,7 +161,7 @@ void CPartVending::Render()
 		_DEBUG_COMMENT m_pCollision->Render();
 }
 
-void CPartVending::OnEvent(EEvent eEvent, void* _value)
+void CPartVending::OnEvent(eEvent eEvent, void* _value)
 {
 }
 
@@ -174,15 +174,15 @@ CParts* CPartVending::Make()
 
 void CPartVending::Interact(CCharacter* pCharacter)
 {
-	if(m_ePartVendingState == EPartVendingState::E_Usable 
-		&& m_pOutlet->GetState() == EOutletState::E_None 
-		&& pCharacter->GetPlayerState() == EPlayerState::E_None)
+	if(m_ePartVendingState == ePartVendingState::Usable 
+		&& m_pOutlet->GetState() == eOutletState::None 
+		&& pCharacter->GetPlayerState() == ePlayerState::None)
 	{
 		CParts* parts = Make();
 		parts->SetPosition(m_pOutlet->GetPosition() + D3DXVECTOR3(0, 1.0f, 0));
 		m_pInteractCenter->AddParts(parts);
 		
-		m_ePartVendingState = EPartVendingState::E_Unusable;
+		m_ePartVendingState = ePartVendingState::Unusable;
 		m_pInteractCenter->SendPartsToOutlet(parts, m_pOutlet);
 	}
 }

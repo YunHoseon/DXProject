@@ -17,7 +17,7 @@ private:
 public:
 	void Render() override;
 	void Update() override;
-	void AddEvent(EEvent eEvent);
-	void OnEvent(EEvent eEvent, void* _value) override;
+	void AddEvent(eEvent eEvent);
+	void OnEvent(eEvent eEvent, void* _value) override;
 };
 

@@ -14,7 +14,7 @@ CCombinatorButton::~CCombinatorButton()
 	SafeRelease(m_CombinatorBtnTexture);
 }
 
-void CCombinatorButton::OnEvent(EEvent eEvent, void * _value)
+void CCombinatorButton::OnEvent(eEvent eEvent, void * _value)
 {
 }
 

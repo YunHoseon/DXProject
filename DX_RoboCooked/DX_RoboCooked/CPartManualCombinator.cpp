@@ -15,7 +15,7 @@ CPartManualCombinator::CPartManualCombinator(IInteractCenter* pInteractCenter, e
 	m_pInteractCenter = pInteractCenter;
 	m_pParts = nullptr;
 	m_isCombine = false;
-	m_eCombinatorLoadState = ECombinatorLoadState::E_LoadPossible;
+	m_eCombinatorLoadState = eCombinatorLoadState::LoadPossible;
 	m_eCombinatorActionState = eCombinatorActionState::Usable;
 	m_isTimeCheck = false;
 	m_fElapsedTime = 0;
@@ -175,7 +175,7 @@ void CPartManualCombinator::Update()
 	if (m_isCombine && m_pParts == nullptr)
 		DischargeParts();
 
-	if (m_eCombinatorLoadState == ECombinatorLoadState::E_LoadPossible)
+	if (m_eCombinatorLoadState == eCombinatorLoadState::LoadPossible)
 		m_pInteractCenter->CheckAroundCombinator(this);
 }
 
@@ -212,42 +212,39 @@ CParts* CPartManualCombinator::Make()
 
 void CPartManualCombinator::Interact(CCharacter* pCharacter)
 {
-	if (m_pParts == nullptr)
+	if (m_pParts == nullptr ||  pCharacter->GetPlayerState() != ePlayerState::None)
 		return;
 
-	if (pCharacter->GetPlayerState() == EPlayerState::E_None)
-	{
-		pCharacter->SetPlayerState(EPlayerState::E_Grab);
-		pCharacter->SetParts(m_pParts);
-		m_pParts->SetGrabPosition(&pCharacter->GetGrabPartsPosition());
-		m_pParts->GetCollision()->SetActive(true);
-		m_pParts = nullptr;
-	}
+	pCharacter->SetPlayerState(ePlayerState::Grab);
+	pCharacter->SetParts(m_pParts);
+	m_pParts->SetGrabPosition(&pCharacter->GetGrabPartsPosition());
+	m_pParts->GetCollision()->SetActive(true);
+	m_pParts = nullptr;
+
 }
 
 void CPartManualCombinator::PartsInteract(CParts* pParts)
 {
 	m_nPartsCount++;
-	//m_multimapParts.insert(std::make_pair(pParts->GetPartsID(), pParts));
 
 	pParts->GetCollision()->SetActive(false);
 	pParts->SetCombinatorPosition(m_vPosition);
 	pParts->SetMoveParts(true);
 	
-	/*switch (m_eLevel)
+	switch (m_eLevel)
 	{
 	case eCombinatorPartsLevel::ONE:
-		if (m_multimapParts.size() >= 2)
-			m_eCombinatorState = ECombinatorLoadState::E_LoadImpossible;
+		if (m_multimapParts.size() >= m_nMaxPartsCount)
+			m_eCombinatorLoadState = eCombinatorLoadState::LoadImpossible;
 		break;
 	case eCombinatorPartsLevel::TWO:
-		if (m_multimapParts.size() >= 3)
-			m_eCombinatorState = ECombinatorLoadState::E_LoadImpossible;
+		if (m_multimapParts.size() >= m_nMaxPartsCount)
+			m_eCombinatorLoadState = eCombinatorLoadState::LoadImpossible;
 		break;
-	}*/
+	}
 }
 
-void CPartManualCombinator::OnEvent(EEvent eEvent, void* _value)
+void CPartManualCombinator::OnEvent(eEvent eEvent, void* _value)
 {
 }
 
@@ -256,7 +253,7 @@ void CPartManualCombinator::CombineParts()
 	/*
 	 * 적재불가능 상태이면 MAKE 함수 호출후 쿨타임 주고 아래로 내려가게
 	 */
-	if(m_eCombinatorLoadState == ECombinatorLoadState::E_LoadImpossible)
+	if(m_eCombinatorLoadState == eCombinatorLoadState::LoadImpossible)
 	{
 		m_isTimeCheck = true;
 		return;
@@ -293,8 +290,7 @@ void CPartManualCombinator::DischargeParts()
 	if (m_vecDischargeParts.empty())
 	{
 		m_nPartsCount = 0;
-		//m_eCombinatorActionState = eCombinatorActionState::Usable;
-		m_eCombinatorLoadState = ECombinatorLoadState::E_LoadPossible;
+		m_eCombinatorLoadState = eCombinatorLoadState::LoadPossible;
 		m_isCombine = false;
 		return;
 	}
@@ -325,9 +321,11 @@ void CPartManualCombinator::PartsInsert(CParts* p)
 {
 	m_multimapParts.insert(std::make_pair(p->GetPartsID(), p));
 	
-	/*if (m_multimapParts.size() == m_nMaxPartsCount)
+	/*
+	if (m_multimapParts.size() == m_nMaxPartsCount)
 	{
 		m_eCombinatorActionState = eCombinatorActionState::Usable;
-	}*/
+	}
+	*/
 
 }

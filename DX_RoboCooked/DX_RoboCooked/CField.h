@@ -14,7 +14,7 @@ public:
 	void Setup(int iWidth = 16,int iHeight = 12);
 	void Render() override;
 	void Update() override;
-	void OnEvent(EEvent eEvent, void* _value) {};
+	void OnEvent(eEvent eEvent, void* _value) {};
 private:
 	vector<CTile*>					m_vecTile;
 	D3DMATERIAL9					m_stMtlTile;

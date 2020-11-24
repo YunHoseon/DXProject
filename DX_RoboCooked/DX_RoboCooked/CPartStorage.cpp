@@ -156,7 +156,7 @@ void CPartStorage::Setup(float fAngle, D3DXVECTOR3 vecPosition, string sPartsID)
 		m_pCollision->Update();
 }
 
-void CPartStorage::OnEvent(EEvent eEvent, void * _value)
+void CPartStorage::OnEvent(eEvent eEvent, void * _value)
 {
 }
 
@@ -169,12 +169,12 @@ CParts* CPartStorage::Make()
 
 void CPartStorage::Interact(CCharacter* pCharacter)
 {
-	if (pCharacter->GetPlayerState() == EPlayerState::E_None)
+	if (pCharacter->GetPlayerState() == ePlayerState::None)
 	{
 		CParts* parts = Make();
 		parts->SetGrabPosition(&pCharacter->GetGrabPartsPosition());
 		m_pInteractCenter->AddParts(parts);
 		pCharacter->SetParts(parts);
-		pCharacter->SetPlayerState(EPlayerState::E_Grab);
+		pCharacter->SetPlayerState(ePlayerState::Grab);
 	}
 }

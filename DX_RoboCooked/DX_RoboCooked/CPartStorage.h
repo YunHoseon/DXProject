@@ -20,7 +20,7 @@ public:
 	void Render() override;
 	void Setup(float fAngle ,D3DXVECTOR3 vecPosition,string sPartsID);
 	void Interact(CCharacter* pCharacter) override;
-	void OnEvent(EEvent eEvent, void* _value);
+	void OnEvent(eEvent eEvent, void* _value);
 private:
 	CParts* Make() override;
 };

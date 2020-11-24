@@ -220,20 +220,19 @@ void CGameScene::DownParts(CCharacter* pCharacter,CParts* parts, D3DXVECTOR3 vDi
 {
 	if (parts != nullptr)
 	{
-		pCharacter->SetPlayerState(EPlayerState::E_None);
+		pCharacter->SetPlayerState(ePlayerState::None);
 		parts->DownParts(vDir);
 	}
 }
 
 void CGameScene::CheckAroundCombinator(CPartCombinator* combinator)
 {
-	if (combinator->GetCombinatorLoadState() == ECombinatorLoadState::E_LoadImpossible)
+	if (combinator->GetCombinatorLoadState() == eCombinatorLoadState::LoadImpossible)
 		return;
 
 	map<CParts*,float> veclength;
 	for (CInteractiveActor * it : m_vecParts)
 	{
-	
 		CParts* data = static_cast<CParts*>(it);
 		if (data->GetGrabPosition() != NULL)
 			continue;
@@ -251,23 +250,7 @@ void CGameScene::CheckAroundCombinator(CPartCombinator* combinator)
 	{
 		combinator->PartsInteract(it.first);
 		it.first->SetCPartCombinator(combinator);
-		switch (combinator->GetCombinPartsLevel())
-		{
-		case eCombinatorPartsLevel::ONE:
-			if (combinator->GetCombinatorPartsCount() >= 2)
-			{
-				combinator->SetCombinatorLoadState(ECombinatorLoadState::E_LoadImpossible);
-				return;
-			}
-			break;
-		case eCombinatorPartsLevel::TWO:
-			if (combinator->GetCombinatorPartsCount() >= 3)
-			{
-				combinator->SetCombinatorLoadState(ECombinatorLoadState::E_LoadImpossible);
-				return;
-			}
-			break;
-		}
+		
 	}
 
 

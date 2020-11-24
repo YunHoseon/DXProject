@@ -32,7 +32,7 @@ public:
 	void Update() override;
 	void Render() override;
 	
-	void OnEvent(EEvent eEvent, void* _value);
+	void OnEvent(eEvent eEvent, void* _value);
 	void Interact(CCharacter* pCharacter) override;
 	
 	void DownParts(D3DXVECTOR3 vDir);

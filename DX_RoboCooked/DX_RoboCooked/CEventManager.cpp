@@ -10,12 +10,12 @@ CEventManager::~CEventManager()
 {
 }
 
-void CEventManager::Attach(EEvent eEvent, CEventListener* observer)
+void CEventManager::Attach(eEvent eEvent, CEventListener* observer)
 {
 	m_mapEventMap[eEvent].insert(observer);
 }
 
-bool CEventManager::Detach(EEvent eEvent, CEventListener* observer)
+bool CEventManager::Detach(eEvent eEvent, CEventListener* observer)
 {
 	std::set<CEventListener*>::iterator it = std::find(m_mapEventMap[eEvent].begin(), m_mapEventMap[eEvent].end(), observer);
 	if (it != m_mapEventMap[eEvent].end())
@@ -28,7 +28,7 @@ bool CEventManager::Detach(EEvent eEvent, CEventListener* observer)
 
 void CEventManager::DetachAll(CEventListener* _observer)
 {
-	std::map<EEvent, std::set<CEventListener*>>::iterator it = m_mapEventMap.begin();
+	std::map<eEvent, std::set<CEventListener*>>::iterator it = m_mapEventMap.begin();
 	while (it != m_mapEventMap.end())
 	{
 		for each(auto ob in it->second)
@@ -43,7 +43,7 @@ void CEventManager::DetachAll(CEventListener* _observer)
 }
 
 
-void CEventManager::CallEvent(EEvent eEvent, void* value)
+void CEventManager::CallEvent(eEvent eEvent, void* value)
 {	
 	std::set<CEventListener *>::iterator iterator = m_mapEventMap[eEvent].begin();
 

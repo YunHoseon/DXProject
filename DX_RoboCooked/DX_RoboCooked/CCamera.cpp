@@ -59,7 +59,7 @@ void CCamera::Render()
 	SetRect(&rc, 0, 0, 0, 0);
 
 	// >> :font manager 추가후
-	LPD3DXFONT pFont = g_pFontManager->GetFont(CFontManager::eFontType::E_DEFAULT);
+	LPD3DXFONT pFont = g_pFontManager->GetFont(CFontManager::eFontType::DEFAULT);
 	//<<:
 
 	pFont->DrawTextA(NULL,
@@ -72,7 +72,7 @@ void CCamera::Render()
 	string sAngle = string("카메라 각도 :") + std::to_string(m_vCamRotAngle.x);
 	SetRect(&rc, 0, 50, 0, 0);
 
-	pFont = g_pFontManager->GetFont(CFontManager::eFontType::E_DEFAULT);
+	pFont = g_pFontManager->GetFont(CFontManager::eFontType::DEFAULT);
 
 	pFont->DrawTextA(NULL,
 		sAngle.c_str(),

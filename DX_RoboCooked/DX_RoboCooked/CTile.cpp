@@ -14,16 +14,16 @@ CTile::~CTile()
 	SafeRelease(m_pCubeTile);
 }
 
-void CTile::AddEvent(EEvent eEvent)
+void CTile::AddEvent(eEvent eEvent)
 {
 	g_EventManager->Attach(eEvent, this);
 }
 
-void CTile::OnEvent(EEvent eEvent, void* _value)
+void CTile::OnEvent(eEvent eEvent, void* _value)
 {
 	switch (eEvent)
 	{
-	case EEvent::E_TileMove:
+	case eEvent::TileMove:
 		D3DXMatrixScaling(&m_matS, 1.0f, 2.0f, 1.0f);
 		//D3DXMatrixTranslation(&m_matT, 1.0f, 2.0f, 1.0f);
 	/*	D3DXQUATERNION q;

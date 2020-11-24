@@ -5,7 +5,7 @@
 
 CBoxCollision::CBoxCollision(D3DXVECTOR3 vOriginPos, D3DXVECTOR3 vSize, D3DXMATRIXA16* pmatWorld): ICollisionArea()
 {
-	m_eType = EColideType::E_Box;
+	m_eType = eColideType::Box;
 
 	m_vOriginCenterPos = vOriginPos;
 	m_vCenterPos = vOriginPos;

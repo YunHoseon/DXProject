@@ -7,10 +7,9 @@ class CFontManager : public CSingleton<CFontManager>
 public:
 	enum eFontType
 	{
-		E_DEFAULT,
-		E_QUEST
+		DEFAULT,
+		QUEST
 	};
-	//Singletone(CFontManager);
 private:
 	map<eFontType, LPD3DXFONT> m_mapFont;
 	friend CSingleton<CFontManager>;

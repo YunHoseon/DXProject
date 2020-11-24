@@ -7,7 +7,7 @@
 #include "CParts.h"
 
 COutlet::COutlet(IInteractCenter* pInteractCenter)
-	: m_eOutletState(EOutletState::E_None)
+	: m_eOutletState(eOutletState::None)
 {
 	m_pInteractCenter = pInteractCenter;
 }
@@ -155,27 +155,27 @@ void COutlet::Render()
 		_DEBUG_COMMENT m_pCollision->Render();
 }
 
-void COutlet::OnEvent(EEvent eEvent, void* _value)
+void COutlet::OnEvent(eEvent eEvent, void* _value)
 {
 }
 
 void COutlet::Interact(CCharacter* pCharacter)
 {
-	if (pCharacter->GetPlayerState() == EPlayerState::E_None 
-		&& m_eOutletState == EOutletState::E_Loaded)
+	if (pCharacter->GetPlayerState() == ePlayerState::None 
+		&& m_eOutletState == eOutletState::Loaded)
 	{
 		pCharacter->SetParts(m_pMyParts);									//캐릭터에게 어떤파츠를 들고있는지 알려줌
 		m_pMyParts->SetGrabPosition(&pCharacter->GetGrabPartsPosition());	//캐릭터를 따라가게함
 		
-		pCharacter->SetPlayerState(EPlayerState::E_Grab);
-		m_eOutletState = EOutletState::E_None;
+		pCharacter->SetPlayerState(ePlayerState::Grab);
+		m_eOutletState = eOutletState::None;
 		m_pMyParts = NULL;
 	}
 }
 
 void COutlet::AcceptPartsFromVending(CParts * parts)
 {
-	m_eOutletState = EOutletState::E_Loaded;
+	m_eOutletState = eOutletState::Loaded;
 	m_pMyParts = parts;
 	parts->SetPosition(this->GetPosition() + D3DXVECTOR3(0, 1.0f, 0));
 }

@@ -12,7 +12,7 @@ public:
 
 	void Interact(CCharacter* pCharacter) override;
 	void PartsInteract(CParts* pParts) override;
-	void OnEvent(EEvent eEvent, void* _value) override;
+	void OnEvent(eEvent eEvent, void* _value) override;
 	void CombineParts();
 	void PartsMakeTime() override;
 

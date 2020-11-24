@@ -13,9 +13,9 @@ CDebugPlayer1::CDebugPlayer1(IInteractCenter* pInteractCenter)
 	m_vPosition = m_sphere.vCenter;
 	D3DXMatrixIdentity(&m_matWorld);
 
-	g_EventManager->Attach(EEvent::E_KeyPress, this);
-	g_EventManager->Attach(EEvent::E_KeyRelease, this);
-	g_EventManager->Attach(EEvent::E_Player1KeyChange, this);
+	g_EventManager->Attach(eEvent::KeyPress, this);
+	g_EventManager->Attach(eEvent::KeyRelease, this);
+	g_EventManager->Attach(eEvent::Player1KeyChange, this);
 }
 
 CDebugPlayer1::~CDebugPlayer1()
@@ -63,17 +63,17 @@ void CDebugPlayer1::Render()
 		_DEBUG_COMMENT m_pCollision->Render();
 }
 
-void CDebugPlayer1::OnEvent(EEvent eEvent, void* _value)
+void CDebugPlayer1::OnEvent(eEvent eEvent, void* _value)
 {
 	switch (eEvent)
 	{
-	case EEvent::E_KeyPress:
+	case eEvent::KeyPress:
 		PressKey(_value);
 		break;
-	case EEvent::E_KeyRelease:
+	case eEvent::KeyRelease:
 		ReleaseKey(_value);
 		break;
-	case EEvent::E_Player1KeyChange:
+	case eEvent::Player1KeyChange:
 		SetKeyChange(_value);
 		break;
 	default:
@@ -110,11 +110,11 @@ void CDebugPlayer1::PressKey(void* _value)
 	{
 		if (CurrentTime - m_ElapsTimeF >  fTestTime)
 		{
-			if (m_ePlayerState == EPlayerState::E_None)
+			if (m_ePlayerState == ePlayerState::None)
 			{
 				m_pInteractCenter->GetInteractObject(this);
 			}
-			else if (m_ePlayerState == EPlayerState::E_Grab)
+			else if (m_ePlayerState == ePlayerState::Grab)
 			{
 				m_pInteractCenter->DownParts(this, m_pParts, m_vDirection);
 			}
@@ -126,7 +126,7 @@ void CDebugPlayer1::PressKey(void* _value)
 	{
 		if (CurrentTime - m_ElapsTimeG >  fTestTime)
 		{
-			if (m_ePlayerState == EPlayerState::E_Grab)
+			if (m_ePlayerState == ePlayerState::Grab)
 			{
 				m_pParts->PartsRotate();
 			}

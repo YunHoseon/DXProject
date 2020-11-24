@@ -5,17 +5,17 @@ class ICollisionArea;
 class CGameScene;
 
 
-enum class EPlayerState
+enum class ePlayerState
 {
-	E_None, 
-	E_Grab 
+	None, 
+	Grab 
 };
 
 class CCharacter :public CActor
 {
 protected:
 
-	EPlayerState		m_ePlayerState;
+	ePlayerState		m_ePlayerState;
 	ICollisionArea*		m_pInteractCollision;
 
 	D3DXVECTOR3			m_vGrabPartsPosition;
@@ -32,8 +32,8 @@ public:
 	
 	D3DXVECTOR3& GetGrabPartsPosition() { return m_vGrabPartsPosition; }
 	ICollisionArea* GetInteractCollsion() { return m_pInteractCollision; }
-	EPlayerState GetPlayerState() { return m_ePlayerState; }
-	void SetPlayerState(EPlayerState state) { m_ePlayerState = state; }
+	ePlayerState GetPlayerState() { return m_ePlayerState; }
+	void SetPlayerState(ePlayerState state) { m_ePlayerState = state; }
 	void SetParts(CParts* pParts) { m_pParts = pParts; }
 	CParts* GetParts() { return m_pParts; }
 };

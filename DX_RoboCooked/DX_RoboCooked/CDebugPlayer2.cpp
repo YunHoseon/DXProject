@@ -10,9 +10,9 @@ CDebugPlayer2::CDebugPlayer2(IInteractCenter* pInteractCenter)
 	m_vPosition = m_cube.vCenter;
 	D3DXMatrixIdentity(&m_matWorld);
 	
-	g_EventManager->Attach(EEvent::E_KeyPress, this);
-	g_EventManager->Attach(EEvent::E_KeyRelease, this);
-	g_EventManager->Attach(EEvent::E_Player2KeyChange, this);
+	g_EventManager->Attach(eEvent::KeyPress, this);
+	g_EventManager->Attach(eEvent::KeyRelease, this);
+	g_EventManager->Attach(eEvent::Player2KeyChange, this);
 
 	m_pCollision = new CBoxCollision(m_vPosition, D3DXVECTOR3(1, 1, 1), &m_matWorld);
 }
@@ -53,17 +53,17 @@ void CDebugPlayer2::Render()
 		_DEBUG_COMMENT m_pCollision->Render();
 }
 
-void CDebugPlayer2::OnEvent(EEvent eEvent, void* _value)
+void CDebugPlayer2::OnEvent(eEvent eEvent, void* _value)
 {
 	switch (eEvent)
 	{
-	case EEvent::E_KeyPress:
+	case eEvent::KeyPress:
 		PressKey(_value);
 		break;
-	case EEvent::E_KeyRelease:
+	case eEvent::KeyRelease:
 		ReleaseKey(_value);
 		break;
-	case EEvent::E_Player2KeyChange:
+	case eEvent::Player2KeyChange:
 		SetKeyChange(_value);
 		break;
 	}

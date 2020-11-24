@@ -24,8 +24,8 @@ CKeyboard::CKeyboard()
 	m_stInputKey[1].interactableKey2 = VK_OEM_PERIOD;
 	m_stInputKey[1].interactableKey3 = VK_OEM_2;
 
-	g_EventManager->CallEvent(EEvent::E_Player1KeyChange, (void*)&m_stInputKey[0]);
-	g_EventManager->CallEvent(EEvent::E_Player2KeyChange, (void*)&m_stInputKey[1]);
+	g_EventManager->CallEvent(eEvent::Player1KeyChange, (void*)&m_stInputKey[0]);
+	g_EventManager->CallEvent(eEvent::Player2KeyChange, (void*)&m_stInputKey[1]);
 }
 
 CKeyboard::~CKeyboard()
@@ -41,7 +41,7 @@ void CKeyboard::Update()
 	{
 		data.wKey = *it;
 		//std::cout << *it << std::endl;
-		g_EventManager->CallEvent(EEvent::E_KeyPress, (void*)&data);
+		g_EventManager->CallEvent(eEvent::KeyPress, (void*)&data);
 	}
 }
 
@@ -114,17 +114,17 @@ void CKeyboard::ReleaseKey(WPARAM keyID, LPARAM lParam)
 
 	m_setKey.erase(new_vk);
 	m_eKeyState = E_BTNUP;
-	g_EventManager->CallEvent(EEvent::E_KeyRelease, NULL);
+	g_EventManager->CallEvent(eEvent::KeyRelease, NULL);
 }
 
-void CKeyboard::OnEvent(EEvent eEvent, void* _value)
+void CKeyboard::OnEvent(eEvent eEvent, void* _value)
 {
 	switch (eEvent)
 	{
-	case EEvent::E_Player1KeyChange:
+	case eEvent::Player1KeyChange:
 		SetKeyChange(1, _value);
 		break;
-	case EEvent::E_Player2KeyChange:
+	case eEvent::Player2KeyChange:
 		SetKeyChange(2, _value);
 		break;
 	}
