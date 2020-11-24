@@ -11,18 +11,26 @@ enum class eCombinatorPartsLevel
 	TWO
 };
 
-enum class ECombinatorState
+enum class ECombinatorLoadState
 {
 	E_LoadPossible,
 	E_LoadImpossible
 };
+
+enum class eCombinatorActionState
+{
+	Usable,
+	Unusable
+};
+
 
 class CPartCombinator :
 	public CInteractiveActor ,public IPartGenerator 
 {
 protected:
 	eCombinatorPartsLevel			m_eLevel;
-	ECombinatorState				m_eCombinatorState;
+	ECombinatorLoadState			m_eCombinatorLoadState;
+	eCombinatorActionState			m_eCombinatorActionState;
 	vector<ST_PNT_VERTEX>			m_vecVertex;
 	LPDIRECT3DTEXTURE9				m_CombinatorTexture;
 	std::multimap<string, CParts*>	m_multimapParts;
@@ -33,6 +41,8 @@ protected:
 	bool							m_isCombine;
 	float							m_fElapsedTime;
 	float							m_fCombineTime;
+	INT								m_nPartsCount;
+	INT								m_nMaxPartsCount;
 
 
 	
@@ -46,16 +56,22 @@ public:
 	void Render() override = 0;
 	
 	virtual void Interact(CCharacter* pCharacter) override = 0;
-	virtual void PartsInteract(CParts* pParts){};
+	virtual void PartsInteract(CParts* pParts) = 0 ;
 	virtual void OnEvent(EEvent eEvent, void* _value) override = 0;
-	virtual void CombineParts() {};
+	virtual void CombineParts() = 0;
 	virtual void PartsMakeTime() = 0;
-	virtual void DischargeParts(){};
+	virtual void DischargeParts() = 0;
 	virtual void CombinatorRender() = 0;
+	virtual void PartsInsert(CParts* p) = 0 ;
 	
 	ICollisionArea* GetInteractCollsion() const { return m_pPartsInteractCollision; };
 	D3DXVECTOR3 GetPosition() const { return m_vPosition; };
 	eCombinatorPartsLevel GetCombinPartsLevel() const { return m_eLevel; }
+	ECombinatorLoadState GetCombinatorLoadState() { return m_eCombinatorLoadState; }
+	void SetCombinatorLoadState(ECombinatorLoadState st) { m_eCombinatorLoadState = st; }
+	INT GetCombinatorPartsCount() { return m_nPartsCount; }
+
+
 private:
 	CParts* Make() override = 0;
 	virtual void Setup(float fAngle, D3DXVECTOR3 vPosition){};

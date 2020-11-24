@@ -230,10 +230,17 @@ void CGameScene::DownParts(CCharacter* pCharacter,CParts* parts, D3DXVECTOR3 vDi
 
 void CGameScene::CheckAroundCombinator(CPartCombinator* combinator)
 {
+	if (combinator->GetCombinatorLoadState() == ECombinatorLoadState::E_LoadImpossible)
+		return;
+
 	map<CParts*,float> veclength;
 	for (CInteractiveActor * it : m_vecParts)
 	{
+	
 		CParts* data = static_cast<CParts*>(it);
+		if (data->GetGrabPosition() != NULL)
+			continue;
+
 		if (combinator->GetCombinPartsLevel() == data->GetCombinPartsLevel() &&
 			combinator->GetInteractCollsion()->Collide(it->GetCollision()))
 		{
@@ -246,7 +253,28 @@ void CGameScene::CheckAroundCombinator(CPartCombinator* combinator)
 	for(auto it : veclength)
 	{
 		combinator->PartsInteract(it.first);
+		it.first->SetCPartCombinator(combinator);
+		switch (combinator->GetCombinPartsLevel())
+		{
+		case eCombinatorPartsLevel::ONE:
+			if (combinator->GetCombinatorPartsCount() >= 2)
+			{
+				combinator->SetCombinatorLoadState(ECombinatorLoadState::E_LoadImpossible);
+				return;
+			}
+			break;
+		case eCombinatorPartsLevel::TWO:
+			if (combinator->GetCombinatorPartsCount() >= 3)
+			{
+				combinator->SetCombinatorLoadState(ECombinatorLoadState::E_LoadImpossible);
+				return;
+			}
+			break;
+		}
 	}
+
+
+
 }
 
 void CGameScene::SendPartsToOutlet(CParts * parts, COutlet * outlet)
