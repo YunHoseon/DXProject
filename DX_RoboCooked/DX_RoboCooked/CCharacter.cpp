@@ -13,7 +13,7 @@ CCharacter::CCharacter()
 	, m_elapsedTime(0)
 	, m_isGrabCooltime(false)
 {
-	m_fBaseSpeed = 0.001f;
+	m_fBaseSpeed = 0.02f;
 	m_fSpeed = m_fBaseSpeed;
 }
 

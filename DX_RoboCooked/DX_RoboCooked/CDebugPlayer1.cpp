@@ -11,6 +11,8 @@ CDebugPlayer1::CDebugPlayer1(IInteractCenter* pInteractCenter)
 {
 	m_pInteractCenter = pInteractCenter;
 	m_vPosition = m_sphere.vCenter;
+	//m_vPosition.y += 2;
+	//m_vPosition.z += 3;
 	D3DXMatrixIdentity(&m_matWorld);
 
 	g_EventManager->Attach(EEvent::E_KeyPress, this);
@@ -162,7 +164,7 @@ void CDebugPlayer1::Move()
 	if (m_pCollision)
 		m_pCollision->Update();
 	SetForce();
-	//m_vVelocity *= 0;
+	m_vVelocity *= 0;
 }
 
 void CDebugPlayer1::Rotate(float fTargetRot)
