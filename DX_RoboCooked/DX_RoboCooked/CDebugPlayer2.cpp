@@ -8,13 +8,14 @@ CDebugPlayer2::CDebugPlayer2(IInteractCenter* pInteractCenter)
 {
 	m_pInteractCenter = pInteractCenter;
 	m_vPosition = m_cube.vCenter;
+	m_vPosition = D3DXVECTOR3(-2, 0, 0);
 	D3DXMatrixIdentity(&m_matWorld);
 	
 	g_EventManager->Attach(eEvent::KeyPress, this);
 	g_EventManager->Attach(eEvent::KeyRelease, this);
 	g_EventManager->Attach(eEvent::Player2KeyChange, this);
 
-	m_pCollision = new CBoxCollision(m_vPosition, D3DXVECTOR3(1, 1, 1), &m_matWorld);
+	m_pCollision = new CBoxCollision(D3DXVECTOR3(0,0,0), D3DXVECTOR3(1, 1, 1), &m_matWorld);
 }
 
 CDebugPlayer2::~CDebugPlayer2()

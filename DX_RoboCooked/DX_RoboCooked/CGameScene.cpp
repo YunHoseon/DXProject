@@ -132,25 +132,28 @@ void CGameScene::Render()
 
 void CGameScene::Update()
 {
-	//{
-	//	// Gravity Update
-	//	if (m_pDebugCube)
-	//		CTestPhysics::ApplyGravity(m_pDebugCube);
+	{
+		// Gravity Update
+		//if (m_pDebugCube)
+		//	CTestPhysics::ApplyGravity(m_pDebugCube);
 
-	//	if (m_pDebugSphere)
-	//		CTestPhysics::ApplyGravity(m_pDebugSphere);
+		if (m_pDebugSphere)
+			CTestPhysics::ApplyGravity(m_pDebugSphere);
 
-	//	for (CInteractiveActor* part : m_vecParts)
-	//	{
-	//		CTestPhysics::ApplyGravity(part);
-	//	}
-	//}
+		//for (CInteractiveActor* part : m_vecParts)
+		//{
+		//	CTestPhysics::ApplyGravity(part);
+		//}
+	}
 	
 	// collide -> update
 	{// collide
 		if (m_pDebugSphere && m_pDebugCube)
 			CTestPhysics::ApplyBound(m_pDebugSphere, m_pDebugCube);
 
+		//if (m_pDebugSphere && m_pField)
+		//	CTestPhysics::ApplyBound(m_pDebugSphere, m_pField);
+		
 		for (CInteractiveActor* obj : m_vecObject)
 		{
 			CTestPhysics::ApplyBound(m_pDebugSphere, obj);

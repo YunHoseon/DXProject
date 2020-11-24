@@ -10,6 +10,7 @@ CCharacter::CCharacter()
 	, m_ePlayerState(ePlayerState::None)
 	, m_vGrabPartsPosition(0, 1, 0)
 	, m_pParts(NULL)
+	, m_elapsedTime(0)
 	, m_isGrabCooltime(false)
 {
 	m_fBaseSpeed = 0.02f;
