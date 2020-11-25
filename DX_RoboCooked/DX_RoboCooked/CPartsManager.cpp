@@ -19,7 +19,7 @@ void CPartsManager::GetPartsData(char* szFullPath)
 	char* doc = pPartsParser->ReadFile(szFullPath, &size);
 	if (doc == NULL)
 	{
-		cout << "데이터 없음" << endl;
+		_DEBUG_COMMENT cout << "데이터 없음" << endl;
 		return;
 	}
 
