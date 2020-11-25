@@ -170,7 +170,7 @@ void CPartManualCombinator::Update()
 {
 
 	if (m_isTimeCheck && m_eCombinatorActionState == eCombinatorActionState::Usable)
-		PartsMakeTime();
+		CombineParts();
 	
 	if (m_isCombine && m_pParts == nullptr)
 		DischargeParts();
@@ -248,7 +248,7 @@ void CPartManualCombinator::OnEvent(eEvent eEvent, void* _value)
 {
 }
 
-void CPartManualCombinator::PartsMakeTime()
+void CPartManualCombinator::CombineParts()
 {
 	m_fElapsedTime += g_pTimeManager->GetElapsedTime();
 
@@ -257,7 +257,7 @@ void CPartManualCombinator::PartsMakeTime()
 		m_isTimeCheck = false;
 		m_fElapsedTime = 0;
 		Make();
-		CombineParts();
+		ReadytoCarryParts();
 	}
 }
 
@@ -295,26 +295,15 @@ void CPartManualCombinator::CombinatorRender()
 	g_pD3DDevice->SetTexture(0, 0);
 }
 
-void CPartManualCombinator::PartsInsert(CParts* p)
+void CPartManualCombinator::InsertParts(CParts* p)
 {
 	m_multimapParts.insert(std::make_pair(p->GetPartsID(), p));
-	
-	/*
-	if (m_multimapParts.size() == m_nMaxPartsCount)
-	{
-		m_eCombinatorActionState = eCombinatorActionState::Usable;
-	}
-	*/
 
 }
 
-void CPartManualCombinator::CombineParts()
+void CPartManualCombinator::ReadytoCarryParts()
 {
-	if (m_eCombinatorLoadState == eCombinatorLoadState::LoadImpossible)
-	{
-		m_isTimeCheck = true;
-		return;
-	}
+	CheckCombineisFull();
 
 	m_isCombine = true; //들고가기 가능하게 하는 bool
 	for (auto it : m_multimapParts)
@@ -322,4 +311,13 @@ void CPartManualCombinator::CombineParts()
 		m_vecDischargeParts.push_back(it.second);
 	}
 	m_multimapParts.clear();
+}
+
+void CPartManualCombinator::CheckCombineisFull()
+{
+	if (m_eCombinatorLoadState == eCombinatorLoadState::LoadImpossible)
+	{
+		m_isTimeCheck = true;
+		return;
+	}
 }

@@ -20,8 +20,7 @@ void CCombinatorButton::OnEvent(eEvent eEvent, void * _value)
 
 void CCombinatorButton::Interact(CCharacter * pCharacter)
 {
-	//m_pPartCombinator->CombineParts();
-	m_pPartCombinator->CombineParts();
+	m_pPartCombinator->ReadytoCarryParts();
 }
 
 void CCombinatorButton::Update()

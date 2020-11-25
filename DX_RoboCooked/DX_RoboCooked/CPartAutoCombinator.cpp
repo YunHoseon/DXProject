@@ -42,7 +42,7 @@ void CPartAutoCombinator::Update()
 
 	if (m_eCombinatorLoadState == eCombinatorLoadState::LoadImpossible &&
 		m_eCombinatorActionState == eCombinatorActionState::Usable)
-		PartsMakeTime();
+		CombineParts();
 	
 	if(m_isCombine && m_pParts == nullptr)
 		DischargeParts();
@@ -100,7 +100,7 @@ void CPartAutoCombinator::OnEvent(eEvent eEvent, void* _value)
 {
 }
 
-void CPartAutoCombinator::PartsMakeTime()
+void CPartAutoCombinator::CombineParts()
 {
 	m_fElapsedTime += g_pTimeManager->GetElapsedTime();
 
@@ -108,7 +108,7 @@ void CPartAutoCombinator::PartsMakeTime()
 	{
 		m_fElapsedTime = 0;
 		Make();
-		CombineParts();
+		ReadytoCarryParts();
 	}
 }
 
@@ -147,12 +147,12 @@ void CPartAutoCombinator::CombinatorRender()
 
 }
 
-void CPartAutoCombinator::PartsInsert(CParts* p)
+void CPartAutoCombinator::InsertParts(CParts* p)
 {
 	m_multimapParts.insert(std::make_pair(p->GetPartsID(), p));
 }
 
-void CPartAutoCombinator::CombineParts()
+void CPartAutoCombinator::ReadytoCarryParts()
 {
 	m_isCombine = true; //들고가기 가능하게 하는 bool
 	for (auto it : m_multimapParts)
