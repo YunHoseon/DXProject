@@ -2,7 +2,7 @@
 class cSpriteNode;
 class cBtnSprite;
 
-class cButton
+class CUI
 {
 public:
 	struct Sprite
@@ -12,8 +12,8 @@ public:
 	};
 	
 public:
-	cButton();
-	virtual ~cButton();
+	CUI();
+	virtual ~CUI();
 	virtual void WndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam);
 	virtual void Move(D3DXVECTOR2 vMove);
 	virtual bool InCheck(POINT pt);

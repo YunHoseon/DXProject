@@ -152,8 +152,8 @@
     <ClInclude Include="CBlueprint.h" />
     <ClInclude Include="CBoxCollision.h" />
     <ClInclude Include="cBtnSprite.h" />
-    <ClInclude Include="cButton.h" />
-    <ClInclude Include="cButtonMenu.h" />
+    <ClInclude Include="CUI.h" />
+    <ClInclude Include="CPauseUI.h" />
     <ClInclude Include="CCamera.h" />
     <ClInclude Include="CCharacter.h" />
     <ClInclude Include="CCombinatorButton.h" />
@@ -211,8 +211,8 @@
     <ClCompile Include="CBlueprint.cpp" />
     <ClCompile Include="CBoxCollision.cpp" />
     <ClCompile Include="cBtnSprite.cpp" />
-    <ClCompile Include="cButton.cpp" />
-    <ClCompile Include="cButtonMenu.cpp" />
+    <ClCompile Include="CUI.cpp" />
+    <ClCompile Include="CPauseUI.cpp" />
     <ClCompile Include="CCamera.cpp" />
     <ClCompile Include="CCharacter.cpp" />
     <ClCompile Include="CCombinatorButton.cpp" />

@@ -1,26 +1,26 @@
 #include "stdafx.h"
-#include "cButton.h"
-#include "cButtonMenu.h"
+#include "CUI.h"
+#include "CPauseUI.h"
 #include "cBtnSprite.h"
 
 
-cButtonMenu::cButtonMenu()
+CPauseUI::CPauseUI()
 	:m_isClick(NULL)
 {
 
 }
 
 
-cButtonMenu::~cButtonMenu()
+CPauseUI::~CPauseUI()
 {
 	if(m_pRoot)
 		m_pRoot->Destroy();
 
 }
 
-void cButtonMenu::Setup(bool* bCheck)
+void CPauseUI::Setup(bool* bCheck)
 {
-	m_isClick = bCheck;
+	/*m_isClick = bCheck;
 
 	
 	Sprite sp;
@@ -61,12 +61,12 @@ void cButtonMenu::Setup(bool* bCheck)
 	m_pRoot->AddChild(m_cExit);
 	sp.st_Position = D3DXVECTOR2(400, 80); sp.st_SpriteSize = g_pUITextureManager->GetTextureSize("UI/btn-main-menu.png");
 	m_vecSprite.push_back(sp);
-	m_vecBtn.push_back(m_cExit);
+	m_vecBtn.push_back(m_cExit);*/
 
 
 }
 
-void cButtonMenu::Update()
+void CPauseUI::Update()
 {
 	if (!m_isOnOff)
 		return;
@@ -74,7 +74,7 @@ void cButtonMenu::Update()
 		m_pRoot->Update();
 }
 
-void cButtonMenu::Render()
+void CPauseUI::Render()
 {
 	if (!m_isOnOff)
 		return;
@@ -82,7 +82,7 @@ void cButtonMenu::Render()
 		m_pRoot->Render();
 }
 
-void cButtonMenu::WndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam)
+void CPauseUI::WndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam)
 {
 	if (!m_isOnOff)
 		return;
@@ -142,7 +142,7 @@ void cButtonMenu::WndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam)
 		
 }
 
-void cButtonMenu::ClickEvent(EVENT ev)
+void CPauseUI::ClickEvent(EVENT ev)
 {
 	switch (ev)
 	{
@@ -159,7 +159,7 @@ void cButtonMenu::ClickEvent(EVENT ev)
 	}
 }
 
-int cButtonMenu::ChildBtnInCheck(POINT pt)
+int CPauseUI::ChildBtnInCheck(POINT pt)
 {
 	for (int i = 0; i < m_vecSprite.size(); i++)
 	{

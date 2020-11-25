@@ -1,8 +1,8 @@
 #include "stdafx.h"
-#include "cButton.h"
+#include "CUI.h"
 
 
-cButton::cButton()
+CUI::CUI()
 	:m_pRoot(NULL)
 	, m_ptMouseClick({ 0,0 })
 	, m_ptMouseMove({ 0,0 })
@@ -16,22 +16,22 @@ cButton::cButton()
 }
 
 
-cButton::~cButton()
+CUI::~CUI()
 {
 }
 
-void cButton::WndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam)
+void CUI::WndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam)
 {
 	
 }
 
-void cButton::Move(D3DXVECTOR2 vMove)
+void CUI::Move(D3DXVECTOR2 vMove)
 {
 	m_vPosition += vMove;
 	D3DXMatrixTranslation(&m_matWorld, (FLOAT)m_vPosition.x, (FLOAT)m_vPosition.y, 0);
 }
 
-bool cButton::InCheck(POINT MousePt)
+bool CUI::InCheck(POINT MousePt)
 {
 	if (m_vPosition.x <= MousePt.x && m_vPosition.x + m_vSize.x >= MousePt.x
 		&& m_vPosition.y <= MousePt.y && m_vPosition.y + m_vSize.y >= MousePt.y)
@@ -41,7 +41,7 @@ bool cButton::InCheck(POINT MousePt)
 	return false;
 }
 
-void cButton::BtnOnOff()
+void CUI::BtnOnOff()
 {
 	m_isOnOff = !m_isOnOff;
 }

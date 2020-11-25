@@ -1,9 +1,10 @@
 #pragma once
-#include "cButton.h"
-class cButton;
+#include "CUI.h"
 
-class cButtonMenu :
-	public cButton
+class CUI;
+
+class CPauseUI :
+	public CUI
 {
 	enum EVENT
 	{
@@ -13,8 +14,8 @@ private:
 	bool* m_isClick;
 	
 public:
-	cButtonMenu();
-	~cButtonMenu();
+	CPauseUI();
+	~CPauseUI();
 
 	
 
