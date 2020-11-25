@@ -11,7 +11,6 @@ CWall::CWall()
 
 CWall::~CWall()
 {
-	SafeRelease(m_wallTexture);
 }
 
 void CWall::Setup()

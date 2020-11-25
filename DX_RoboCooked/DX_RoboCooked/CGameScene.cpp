@@ -34,7 +34,16 @@ CGameScene::CGameScene()
 
 CGameScene::~CGameScene()
 {
-	SafeDelete(m_pField);
+	for (CActor* it : m_vecStaticActor)
+	{
+		SafeDelete(it);
+	}
+
+	for (CInteractiveActor* it : m_vecObject)
+	{
+		SafeDelete(it);
+	}
+
 	for (CInteractiveActor* it : m_vecParts)
 	{
 		SafeDelete(it);
@@ -44,7 +53,9 @@ CGameScene::~CGameScene()
 	{
 		SafeDelete(it);
 	}
-	SafeDelete(m_pDebugParts);
+
+
+
 }
 
 void CGameScene::Init()
@@ -255,9 +266,6 @@ void CGameScene::CheckAroundCombinator(CPartCombinator* combinator)
 		it.first->SetCPartCombinator(combinator);
 		
 	}
-
-
-
 }
 
 void CGameScene::SendPartsToOutlet(CParts * parts, COutlet * outlet)

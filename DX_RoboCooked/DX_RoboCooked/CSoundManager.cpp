@@ -20,8 +20,6 @@ void SoundManager::Destroy()
 	{
 		it.second->release();
 	}
-	
-	delete m_fmodSystem;
 }
 
 void SoundManager::init()

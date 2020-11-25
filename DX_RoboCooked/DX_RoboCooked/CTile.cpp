@@ -11,7 +11,6 @@ CTile::CTile()
 CTile::~CTile()
 {
 	SafeRelease(m_PlaneTexture);
-	SafeRelease(m_pCubeTile);
 }
 
 void CTile::AddEvent(eEvent eEvent)

@@ -14,7 +14,6 @@ public:
 	void OnEvent(eEvent eEvent, void* _value) override;
 	void CombineParts() override;
 
-
 	void DischargeParts() override;
 	void InsertParts(CParts* p) override;
 	void ReadytoCarryParts() override;

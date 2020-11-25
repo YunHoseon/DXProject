@@ -19,6 +19,7 @@ public:
 	void SetCurrentScene(CScene* Scene);
 	CScene* GetCurrentScene();
 	
+	void Destroy();
 private:
 	std::map<std::string,CScene*> m_SceneList;
 	CScene* m_pCurrentScene;

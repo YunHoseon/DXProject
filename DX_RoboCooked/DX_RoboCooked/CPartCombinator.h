@@ -70,11 +70,7 @@ public:
 	void SetCombinatorLoadState(eCombinatorLoadState st) { m_eCombinatorLoadState = st; }
 	INT GetCombinatorPartsCount() { return m_nPartsCount; }
 
-
 private:
 	CParts* Make() override = 0;
 	virtual void Setup(float fAngle, D3DXVECTOR3 vPosition){};
-
-	
 };
-

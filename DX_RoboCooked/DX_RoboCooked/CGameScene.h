@@ -27,7 +27,7 @@ private:
 	CParts*						m_pDebugParts;
 public:
 	CGameScene();
-	~CGameScene();
+	virtual ~CGameScene();
 
 public:
 	virtual void Init();
