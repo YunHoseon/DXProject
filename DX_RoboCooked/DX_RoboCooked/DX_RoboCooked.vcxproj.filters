@@ -37,9 +37,6 @@
     <Filter Include="GameScene\Combinator">
       <UniqueIdentifier>{991f2475-d3b2-470e-8ffd-615888b96791}</UniqueIdentifier>
     </Filter>
-    <Filter Include="UI">
-      <UniqueIdentifier>{43a4fa16-aa2d-4891-a8ef-b1c9d9a8d0cc}</UniqueIdentifier>
-    </Filter>
   </ItemGroup>
   <ItemGroup>
     <Text Include="ReadMe.txt" />
@@ -198,20 +195,8 @@
     <ClInclude Include="CWall.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="cBtnSprite.h">
-      <Filter>UI</Filter>
-    </ClInclude>
-    <ClInclude Include="cButton.h">
-      <Filter>UI</Filter>
-    </ClInclude>
-    <ClInclude Include="cButtonMenu.h">
-      <Filter>UI</Filter>
-    </ClInclude>
-    <ClInclude Include="cSprite.h">
-      <Filter>UI</Filter>
-    </ClInclude>
-    <ClInclude Include="cSpriteNode.h">
-      <Filter>UI</Filter>
+    <ClInclude Include="CBlueprint.h">
+      <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -362,20 +347,8 @@
     <ClCompile Include="CWall.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="cBtnSprite.cpp">
-      <Filter>UI</Filter>
-    </ClCompile>
-    <ClCompile Include="cButton.cpp">
-      <Filter>UI</Filter>
-    </ClCompile>
-    <ClCompile Include="cButtonMenu.cpp">
-      <Filter>UI</Filter>
-    </ClCompile>
-    <ClCompile Include="cSprite.cpp">
-      <Filter>UI</Filter>
-    </ClCompile>
-    <ClCompile Include="cSpriteNode.cpp">
-      <Filter>UI</Filter>
+    <ClCompile Include="CBlueprint.cpp">
+      <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
