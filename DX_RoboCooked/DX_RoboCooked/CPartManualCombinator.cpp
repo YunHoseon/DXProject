@@ -181,7 +181,20 @@ void CPartManualCombinator::Update()
 
 void CPartManualCombinator::Render()
 {
-	CombinatorRender();
+	g_pD3DDevice->SetTransform(D3DTS_WORLD, &m_matWorld);
+	g_pD3DDevice->SetTexture(0, m_CombinatorTexture);
+
+	D3DMATERIAL9 mtlStorage;
+	ZeroMemory(&mtlStorage, sizeof(D3DMATERIAL9));
+	mtlStorage.Ambient = D3DXCOLOR(0.7f, 0.7f, 0.7f, 1.0f);
+	mtlStorage.Diffuse = D3DXCOLOR(0.7f, 0.7f, 0.7f, 1.0f);
+	mtlStorage.Specular = D3DXCOLOR(0.7f, 0.7f, 0.7f, 1.0f);
+
+	g_pD3DDevice->SetMaterial(&mtlStorage);
+	g_pD3DDevice->SetFVF(ST_PNT_VERTEX::FVF);
+	g_pD3DDevice->DrawPrimitiveUP(D3DPT_TRIANGLELIST, m_vecVertex.size() / 3, &m_vecVertex[0],
+		sizeof(ST_PNT_VERTEX));
+	g_pD3DDevice->SetTexture(0, 0);
 
 	_DEBUG_COMMENT if (m_pCollision)
 		_DEBUG_COMMENT m_pCollision->Render();
@@ -277,23 +290,6 @@ void CPartManualCombinator::DischargeParts()
 	m_vecDischargeParts.erase(m_vecDischargeParts.begin());
 }
 
-void CPartManualCombinator::CombinatorRender()
-{
-	g_pD3DDevice->SetTransform(D3DTS_WORLD, &m_matWorld);
-	g_pD3DDevice->SetTexture(0, m_CombinatorTexture);
-
-	D3DMATERIAL9 mtlStorage;
-	ZeroMemory(&mtlStorage, sizeof(D3DMATERIAL9));
-	mtlStorage.Ambient = D3DXCOLOR(0.7f, 0.7f, 0.7f, 1.0f);
-	mtlStorage.Diffuse = D3DXCOLOR(0.7f, 0.7f, 0.7f, 1.0f);
-	mtlStorage.Specular = D3DXCOLOR(0.7f, 0.7f, 0.7f, 1.0f);
-
-	g_pD3DDevice->SetMaterial(&mtlStorage);
-	g_pD3DDevice->SetFVF(ST_PNT_VERTEX::FVF);
-	g_pD3DDevice->DrawPrimitiveUP(D3DPT_TRIANGLELIST, m_vecVertex.size() / 3, &m_vecVertex[0],
-		sizeof(ST_PNT_VERTEX));
-	g_pD3DDevice->SetTexture(0, 0);
-}
 
 void CPartManualCombinator::InsertParts(CParts* p)
 {

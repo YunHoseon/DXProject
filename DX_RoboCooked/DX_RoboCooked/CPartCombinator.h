@@ -60,7 +60,6 @@ public:
 	virtual void OnEvent(eEvent eEvent, void* _value) override = 0;
 	virtual void CombineParts() = 0;
 	virtual void DischargeParts() = 0;
-	virtual void CombinatorRender() = 0;
 	virtual void InsertParts(CParts* p) = 0 ;
 	virtual void ReadytoCarryParts() = 0;
 	
