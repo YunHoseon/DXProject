@@ -100,10 +100,6 @@ void CPartAutoCombinator::OnEvent(eEvent eEvent, void* _value)
 {
 }
 
-void CPartAutoCombinator::CombineParts()
-{
-}
-
 void CPartAutoCombinator::PartsMakeTime()
 {
 	m_fElapsedTime += g_pTimeManager->GetElapsedTime();
@@ -112,18 +108,8 @@ void CPartAutoCombinator::PartsMakeTime()
 	{
 		m_fElapsedTime = 0;
 		Make();
-		AutoCombine();
+		CombineParts();
 	}
-}
-
-void CPartAutoCombinator::AutoCombine()
-{
-	m_isCombine = true; //들고가기 가능하게 하는 bool
-	for (auto it : m_multimapParts)
-	{
-		m_vecDischargeParts.push_back(it.second);
-	}
-	m_multimapParts.clear();
 }
 
 void CPartAutoCombinator::DischargeParts()
@@ -164,6 +150,16 @@ void CPartAutoCombinator::CombinatorRender()
 void CPartAutoCombinator::PartsInsert(CParts* p)
 {
 	m_multimapParts.insert(std::make_pair(p->GetPartsID(), p));
+}
+
+void CPartAutoCombinator::CombineParts()
+{
+	m_isCombine = true; //들고가기 가능하게 하는 bool
+	for (auto it : m_multimapParts)
+	{
+		m_vecDischargeParts.push_back(it.second);
+	}
+	m_multimapParts.clear();
 }
 
 CParts* CPartAutoCombinator::Make()

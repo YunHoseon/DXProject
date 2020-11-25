@@ -248,20 +248,6 @@ void CPartManualCombinator::OnEvent(eEvent eEvent, void* _value)
 {
 }
 
-void CPartManualCombinator::CombineParts()
-{
-	/*
-	 * 적재불가능 상태이면 MAKE 함수 호출후 쿨타임 주고 아래로 내려가게
-	 */
-	if(m_eCombinatorLoadState == eCombinatorLoadState::LoadImpossible)
-	{
-		m_isTimeCheck = true;
-		return;
-	}
-	
-	ManualCombine();
-}
-
 void CPartManualCombinator::PartsMakeTime()
 {
 	m_fElapsedTime += g_pTimeManager->GetElapsedTime();
@@ -271,19 +257,11 @@ void CPartManualCombinator::PartsMakeTime()
 		m_isTimeCheck = false;
 		m_fElapsedTime = 0;
 		Make();
-		ManualCombine();
+		CombineParts();
 	}
 }
 
-void CPartManualCombinator::ManualCombine()
-{
-	m_isCombine = true; //들고가기 가능하게 하는 bool
-	for (auto it : m_multimapParts)
-	{
-		m_vecDischargeParts.push_back(it.second);
-	}
-	m_multimapParts.clear();
-}
+
 
 void CPartManualCombinator::DischargeParts()
 {
@@ -328,4 +306,20 @@ void CPartManualCombinator::PartsInsert(CParts* p)
 	}
 	*/
 
+}
+
+void CPartManualCombinator::CombineParts()
+{
+	if (m_eCombinatorLoadState == eCombinatorLoadState::LoadImpossible)
+	{
+		m_isTimeCheck = true;
+		return;
+	}
+
+	m_isCombine = true; //들고가기 가능하게 하는 bool
+	for (auto it : m_multimapParts)
+	{
+		m_vecDischargeParts.push_back(it.second);
+	}
+	m_multimapParts.clear();
 }
