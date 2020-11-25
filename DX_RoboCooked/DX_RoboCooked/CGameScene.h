@@ -21,6 +21,7 @@ private:
 	vector<CInteractiveActor*>	m_vecParts;
 	vector<CCharacter*>			m_vecCharacters;
 
+	bool						m_isTimeStop;
 	/* µð¹ö±ë¿ë */
 	CDebugPlayer1*				m_pDebugSphere;
 	CDebugPlayer2*				m_pDebugCube;
@@ -33,6 +34,8 @@ public:
 	virtual void Init();
 	virtual void Render();
 	virtual void Update();
+	void PausePlayGame();
+
 	void GetInteractObject(CCharacter* pCharacter) override;
 	void AddParts(CParts* parts) override;
 	void DownParts(CCharacter* pCharacter,CParts* parts,D3DXVECTOR3 vDir) override;

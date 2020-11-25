@@ -25,11 +25,13 @@ CGameScene::CGameScene()
 	, m_pDebugSphere(NULL)
 	, m_pDebugCube(NULL)
 	, m_pDebugParts(NULL)
+	, m_isTimeStop(false)
 {
 	//Sound Add
 	g_SoundManager->AddBGM("data/sound/bgm.mp3");
 	g_SoundManager->AddSFX("data/sound/effBBam.mp3", "BBam");
 	g_SoundManager->AddSFX("data/sound/effMelem.mp3", "Melem");
+
 }
 
 CGameScene::~CGameScene()
@@ -143,6 +145,10 @@ void CGameScene::Render()
 
 void CGameScene::Update()
 {
+	if (m_isTimeStop)
+		return;
+
+
 	{
 		// Gravity Update
 		//if (m_pDebugCube)
@@ -200,6 +206,12 @@ void CGameScene::Update()
 		if (m_pDebugSphere)
 			m_pDebugSphere->Update();
 	}
+}
+
+void CGameScene::PausePlayGame()
+{
+		m_isTimeStop = !m_isTimeStop;
+
 }
 
 
