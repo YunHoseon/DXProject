@@ -23,10 +23,19 @@ void CTestPhysics::ApplyBound(CActor* pA, CActor* pB)
 		// 마찰력 = -1 * 마찰계수 * 수직항력 * Normalization(velocity)
 		// 수직항력 = vNormal * dot(vNormal, -velocity)
 		//D3DXVECTOR3 vNormalForce = vNormal * 0.02;
-		D3DXVECTOR3 vNormalForce = vNormal * -D3DXVec3Dot(&vNormal, &pA->GetAcceleration()); // 임시. 나중에 가속도를 속도로 바꿔야함.
+		// 노멀과 방향의 각도가 같으면 생략
+		float power = -D3DXVec3Dot(&vNormal, &pA->GetAcceleration());
+		D3DXVECTOR3 vNormalForce;
+		if (power > 0)
+		{
+			vNormalForce = vNormal * power; // 임시. 나중에 가속도를 속도로 바꿔야함.
+			pA->AddForce(vNormalForce);
+		}
+		
 		D3DXVECTOR3 vTempVelocity = pA->GetVelocity() + pA->GetAcceleration();
+		_DEBUG_COMMENT cout << "vNormal : " << vNormal.x << ", " << vNormal.y << ", " << vNormal.z << endl;
+		_DEBUG_COMMENT cout << "vNormalForce : " << vNormalForce.x << ", " << vNormalForce.y << ", " << vNormalForce.z << endl;
 		//D3DXVECTOR3 vNormalForce = vNormal * (D3DXVec3Dot(&vNormal, &vTempVelocity) * -1.f);
-		pA->AddForce(vNormalForce);
 		vTempVelocity = pA->GetVelocity() + pA->GetAcceleration();
 		vTempVelocity *= -0.02f;
 		//D3DXVECTOR3 vMinusVelocity;

@@ -218,14 +218,16 @@ bool CBoxCollision::CollideToBox(CBoxCollision* pTargetCollider, D3DXVECTOR3* pN
 bool CBoxCollision::CollideToSphere(CSphereCollision* pTargetCollider, D3DXVECTOR3* pNormal)
 {
 	// OBB
-	D3DXVECTOR3 vDist = m_vCenterPos - pTargetCollider->GetCenter();
+	D3DXVECTOR3 vDist = pTargetCollider->GetCenter() - m_vCenterPos;
+	const float& fTargetRadius = pTargetCollider->GetRadius();
+	
 	float fDist = D3DXVec3Length(&vDist);
 
 	D3DXVECTOR3 v;
 	v = (m_vAxisDir[0] * m_fAxisHalfLen[0])
 		+ (m_vAxisDir[1] * m_fAxisHalfLen[1])
 		+ (m_vAxisDir[2] * m_fAxisHalfLen[2]);
-	if (fDist > D3DXVec3Length(&(m_vCenterPos - v)) + pTargetCollider->GetRadius())
+	if (fDist > D3DXVec3Length(&(m_vCenterPos - v)) + fTargetRadius)
 		return false;
 
 	if (fDist == 0)
@@ -235,11 +237,8 @@ bool CBoxCollision::CollideToSphere(CSphereCollision* pTargetCollider, D3DXVECTO
 		return true;
 	}
 	
-	D3DXVec3Normalize(&vDist, &vDist);
-
 	vector<D3DXVECTOR3> vecVertex;
 	D3DXVECTOR3 vNormal(0,0,0);
-	bool isCollide = false;
 	int plusMinus[2] = { 1, -1 };
 
 	for (int i = 0; i < 2; ++i)
@@ -251,26 +250,18 @@ bool CBoxCollision::CollideToSphere(CSphereCollision* pTargetCollider, D3DXVECTO
 				v =	  (m_vAxisDir[0] * m_fAxisHalfLen[0] * plusMinus[i])
 					+ (m_vAxisDir[1] * m_fAxisHalfLen[1] * plusMinus[j])
 					+ (m_vAxisDir[2] * m_fAxisHalfLen[2] * plusMinus[k]);
-
-				float fTraceDist = D3DXVec3Dot(&vDist, &v);
-				if (fDist + fTraceDist <= pTargetCollider->GetRadius())
-				{
-					isCollide = true;
-					vNormal += v;
-				}
 				vecVertex.push_back(v);
 				
 			}
 		}
 	}
-	/*
+
 	float r0, r1, r;
-	D3DXVECTOR3 vTempNormal;
 	// x축 obb
-	r = D3DXVec3Dot(&m_vAxisDir[0], &pTargetCollider->GetCenter());
+	r = D3DXVec3Dot(&m_vAxisDir[0], &vDist);
 	r0 = D3DXVec3Dot(&m_vAxisDir[0], &vecVertex[1]);
 	r1 = D3DXVec3Dot(&m_vAxisDir[0], &vecVertex[5]);
-	if (r + pTargetCollider->GetRadius() < r1 || r - pTargetCollider->GetRadius() > r0)
+	if (r + fTargetRadius < r1 || r - fTargetRadius > r0)
 		return false;
 	if (r >= r0)
 		vNormal += m_vAxisDir[0];
@@ -278,11 +269,11 @@ bool CBoxCollision::CollideToSphere(CSphereCollision* pTargetCollider, D3DXVECTO
 		vNormal += -m_vAxisDir[0];
 
 	// y축 obb
-	r = D3DXVec3Dot(&m_vAxisDir[1], &pTargetCollider->GetCenter());
+	r = D3DXVec3Dot(&m_vAxisDir[1], &vDist);
 	r0 = D3DXVec3Dot(&m_vAxisDir[1], &vecVertex[5]);
 	r1 = D3DXVec3Dot(&m_vAxisDir[1], &vecVertex[7]);
 	
-	if (r + pTargetCollider->GetRadius() < r1 || r - pTargetCollider->GetRadius() > r0)
+	if (r + fTargetRadius < r1 || r - fTargetRadius > r0)
 		return false;
 	if (r >= r0)
 		vNormal += m_vAxisDir[1];
@@ -290,10 +281,10 @@ bool CBoxCollision::CollideToSphere(CSphereCollision* pTargetCollider, D3DXVECTO
 		vNormal += -m_vAxisDir[1];
 
 	// z축 obb
-	r = D3DXVec3Dot(&m_vAxisDir[2], &pTargetCollider->GetCenter());
+	r = D3DXVec3Dot(&m_vAxisDir[2], &vDist);
 	r0 = D3DXVec3Dot(&m_vAxisDir[2], &vecVertex[0]);
 	r1 = D3DXVec3Dot(&m_vAxisDir[2], &vecVertex[1]);
-	if (r + pTargetCollider->GetRadius() < r1 || r - pTargetCollider->GetRadius() > r0)
+	if (r + fTargetRadius < r1 || r - fTargetRadius > r0)
 		return false;
 	if (r >= r0)
 		vNormal += m_vAxisDir[2];
@@ -301,184 +292,22 @@ bool CBoxCollision::CollideToSphere(CSphereCollision* pTargetCollider, D3DXVECTO
 		vNormal += -m_vAxisDir[2];
 
 
-	m_isCollide = true;
-	pTargetCollider->SetIsCollide(true);
-	if (pNormal)
-		*pNormal = *D3DXVec3Normalize(&vNormal, &vNormal);
-	return true;
-	*/
-	
-	/*
-	if(isCollide)
+	// 대각축
+	D3DXVec3Normalize(&vDist, &vDist);
+	for (int i = 0; i < 8; ++i)
 	{
-//                4-------------0
-//              /|             /|
-//             / |            / |
-//            /  |           /  |
-//           5-------------1    |
-//           |   |         |    |
-//           |   6-------------2
-//           |  /          |  /
-//           | /           | /
-//           7-------------3
-//
-		vector<D3DXPLANE> vecPyramid(4);
+		r0 = D3DXVec3Dot(&vDist, &vecVertex[i]);
+		if(fDist - fTargetRadius <= r0)
 		{
-			// 상단
-			D3DXPlaneFromPoints(&vecPyramid[0], &m_vCenterPos, &vecVertex[5], &vecVertex[1]);
-			D3DXPlaneFromPoints(&vecPyramid[1], &m_vCenterPos, &vecVertex[1], &vecVertex[0]);
-			D3DXPlaneFromPoints(&vecPyramid[2], &m_vCenterPos, &vecVertex[0], &vecVertex[4]);
-			D3DXPlaneFromPoints(&vecPyramid[3], &m_vCenterPos, &vecVertex[4], &vecVertex[5]);
-
-			if (
-				D3DXPlaneDotCoord(&vecPyramid[0], &pTargetCollider->GetCenter()) <= 0 &&
-				D3DXPlaneDotCoord(&vecPyramid[1], &pTargetCollider->GetCenter()) <= 0 &&
-				D3DXPlaneDotCoord(&vecPyramid[2], &pTargetCollider->GetCenter()) <= 0 &&
-				D3DXPlaneDotCoord(&vecPyramid[3], &pTargetCollider->GetCenter()) <= 0 
-				)
-			{
-				D3DXVec3Cross(&vNormal, &(vecVertex[4] - vecVertex[5]), &(vecVertex[1] - vecVertex[5]));
-				D3DXVec3Normalize(&vNormal, &vNormal);
-				m_isCollide = true;
-				pTargetCollider->SetIsCollide(true);
-				if (pNormal)
-					*pNormal = *D3DXVec3Normalize(&vNormal, &vNormal);
-				return true;
-			}
+			m_isCollide = true;
+			pTargetCollider->SetIsCollide(true);
+			if (pNormal)
+				*pNormal = *D3DXVec3Normalize(&vNormal, &vNormal);
+			return true;
 		}
-
-		{
-			// 우측
-			D3DXPlaneFromPoints(&vecPyramid[0], &m_vCenterPos, &vecVertex[0], &vecVertex[1]);
-			D3DXPlaneFromPoints(&vecPyramid[1], &m_vCenterPos, &vecVertex[1], &vecVertex[3]);
-			D3DXPlaneFromPoints(&vecPyramid[2], &m_vCenterPos, &vecVertex[3], &vecVertex[2]);
-			D3DXPlaneFromPoints(&vecPyramid[3], &m_vCenterPos, &vecVertex[2], &vecVertex[0]);
-
-			if (
-				D3DXPlaneDotCoord(&vecPyramid[0], &pTargetCollider->GetCenter()) <= 0 &&
-				D3DXPlaneDotCoord(&vecPyramid[1], &pTargetCollider->GetCenter()) <= 0 &&
-				D3DXPlaneDotCoord(&vecPyramid[2], &pTargetCollider->GetCenter()) <= 0 &&
-				D3DXPlaneDotCoord(&vecPyramid[3], &pTargetCollider->GetCenter()) <= 0
-				)
-			{
-				D3DXVec3Cross(&vNormal, &(vecVertex[0] - vecVertex[1]), &(vecVertex[3] - vecVertex[1]));
-				D3DXVec3Normalize(&vNormal, &vNormal);
-				m_isCollide = true;
-				pTargetCollider->SetIsCollide(true);
-				if (pNormal)
-					*pNormal = *D3DXVec3Normalize(&vNormal, &vNormal);
-				return true;
-			}
-		}
-
-		{
-			// 좌측
-			D3DXPlaneFromPoints(&vecPyramid[0], &m_vCenterPos, &vecVertex[5], &vecVertex[4]);
-			D3DXPlaneFromPoints(&vecPyramid[1], &m_vCenterPos, &vecVertex[4], &vecVertex[6]);
-			D3DXPlaneFromPoints(&vecPyramid[2], &m_vCenterPos, &vecVertex[6], &vecVertex[7]);
-			D3DXPlaneFromPoints(&vecPyramid[3], &m_vCenterPos, &vecVertex[7], &vecVertex[5]);
-
-			if (
-				D3DXPlaneDotCoord(&vecPyramid[0], &pTargetCollider->GetCenter()) <= 0 &&
-				D3DXPlaneDotCoord(&vecPyramid[1], &pTargetCollider->GetCenter()) <= 0 &&
-				D3DXPlaneDotCoord(&vecPyramid[2], &pTargetCollider->GetCenter()) <= 0 &&
-				D3DXPlaneDotCoord(&vecPyramid[3], &pTargetCollider->GetCenter()) <= 0
-				)
-			{
-				D3DXVec3Cross(&vNormal, &(vecVertex[4] - vecVertex[5]), &(vecVertex[7] - vecVertex[5]));
-				D3DXVec3Normalize(&vNormal, &vNormal);
-				m_isCollide = true;
-				pTargetCollider->SetIsCollide(true);
-				if (pNormal)
-					*pNormal = *D3DXVec3Normalize(&vNormal, &vNormal);
-				return true;
-			}
-		}
-
-		{
-			// 전면
-			D3DXPlaneFromPoints(&vecPyramid[0], &m_vCenterPos, &vecVertex[1], &vecVertex[5]);
-			D3DXPlaneFromPoints(&vecPyramid[1], &m_vCenterPos, &vecVertex[5], &vecVertex[7]);
-			D3DXPlaneFromPoints(&vecPyramid[2], &m_vCenterPos, &vecVertex[7], &vecVertex[3]);
-			D3DXPlaneFromPoints(&vecPyramid[3], &m_vCenterPos, &vecVertex[3], &vecVertex[1]);
-
-			if (
-				D3DXPlaneDotCoord(&vecPyramid[0], &pTargetCollider->GetCenter()) <= 0 &&
-				D3DXPlaneDotCoord(&vecPyramid[1], &pTargetCollider->GetCenter()) <= 0 &&
-				D3DXPlaneDotCoord(&vecPyramid[2], &pTargetCollider->GetCenter()) <= 0 &&
-				D3DXPlaneDotCoord(&vecPyramid[3], &pTargetCollider->GetCenter()) <= 0
-				)
-			{
-				D3DXVec3Cross(&vNormal, &(vecVertex[5] - vecVertex[1]), &(vecVertex[3] - vecVertex[1]));
-				D3DXVec3Normalize(&vNormal, &vNormal);
-				m_isCollide = true;
-				pTargetCollider->SetIsCollide(true);
-				if (pNormal)
-					*pNormal = *D3DXVec3Normalize(&vNormal, &vNormal);
-				return true;
-			}
-		}
-
-		{
-			// 후면
-			D3DXPlaneFromPoints(&vecPyramid[0], &m_vCenterPos, &vecVertex[4], &vecVertex[0]);
-			D3DXPlaneFromPoints(&vecPyramid[1], &m_vCenterPos, &vecVertex[0], &vecVertex[2]);
-			D3DXPlaneFromPoints(&vecPyramid[2], &m_vCenterPos, &vecVertex[2], &vecVertex[6]);
-			D3DXPlaneFromPoints(&vecPyramid[3], &m_vCenterPos, &vecVertex[6], &vecVertex[4]);
-
-			if (
-				D3DXPlaneDotCoord(&vecPyramid[0], &pTargetCollider->GetCenter()) <= 0 &&
-				D3DXPlaneDotCoord(&vecPyramid[1], &pTargetCollider->GetCenter()) <= 0 &&
-				D3DXPlaneDotCoord(&vecPyramid[2], &pTargetCollider->GetCenter()) <= 0 &&
-				D3DXPlaneDotCoord(&vecPyramid[3], &pTargetCollider->GetCenter()) <= 0
-				)
-			{
-				D3DXVec3Cross(&vNormal, &(vecVertex[0] - vecVertex[2]), &(vecVertex[6] - vecVertex[2]));
-				D3DXVec3Normalize(&vNormal, &vNormal);
-				m_isCollide = true;
-				pTargetCollider->SetIsCollide(true);
-				if (pNormal)
-					*pNormal = *D3DXVec3Normalize(&vNormal, &vNormal);
-				return true;
-			}
-		}
-
-		{
-			// 하단
-			D3DXPlaneFromPoints(&vecPyramid[0], &m_vCenterPos, &vecVertex[6], &vecVertex[2]);
-			D3DXPlaneFromPoints(&vecPyramid[1], &m_vCenterPos, &vecVertex[2], &vecVertex[3]);
-			D3DXPlaneFromPoints(&vecPyramid[2], &m_vCenterPos, &vecVertex[3], &vecVertex[7]);
-			D3DXPlaneFromPoints(&vecPyramid[3], &m_vCenterPos, &vecVertex[7], &vecVertex[6]);
-
-			if (
-				D3DXPlaneDotCoord(&vecPyramid[0], &pTargetCollider->GetCenter()) <= 0 &&
-				D3DXPlaneDotCoord(&vecPyramid[1], &pTargetCollider->GetCenter()) <= 0 &&
-				D3DXPlaneDotCoord(&vecPyramid[2], &pTargetCollider->GetCenter()) <= 0 &&
-				D3DXPlaneDotCoord(&vecPyramid[3], &pTargetCollider->GetCenter()) <= 0
-				)
-			{
-				D3DXVec3Cross(&vNormal, &(vecVertex[6] - vecVertex[2]), &(vecVertex[3] - vecVertex[2]));
-				D3DXVec3Normalize(&vNormal, &vNormal);
-				m_isCollide = true;
-				pTargetCollider->SetIsCollide(true);
-				if (pNormal)
-					*pNormal = *D3DXVec3Normalize(&vNormal, &vNormal);
-				return true;
-			}
-		}
-	}
-	*/
-
-	if(vNormal != D3DXVECTOR3(0,0,0))
-	{
-		m_isCollide = true;
-		pTargetCollider->SetIsCollide(true);
-		if (pNormal)
-			*pNormal = *D3DXVec3Normalize(&vNormal, &vNormal);
-		return true;
 	}
 	return false;
-
+	
 	
 }
 

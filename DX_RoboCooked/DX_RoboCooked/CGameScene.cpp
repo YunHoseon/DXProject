@@ -165,6 +165,8 @@ void CGameScene::Update()
 	
 	// collide -> update
 	{// collide
+		//if (m_pDebugSphere)
+		//	CTestPhysics::ApplyBound(m_pDebugSphere, m_vecObject[2]);
 		if (m_pDebugSphere && m_pDebugCube)
 			CTestPhysics::ApplyBound(m_pDebugSphere, m_pDebugCube);
 
