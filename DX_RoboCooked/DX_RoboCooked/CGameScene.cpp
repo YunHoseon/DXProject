@@ -256,8 +256,6 @@ void CGameScene::CheckAroundCombinator(CPartCombinator* combinator)
 		
 	}
 
-
-
 }
 
 void CGameScene::SendPartsToOutlet(CParts * parts, COutlet * outlet)

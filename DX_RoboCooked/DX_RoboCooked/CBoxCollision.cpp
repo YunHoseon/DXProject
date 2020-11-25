@@ -264,6 +264,51 @@ bool CBoxCollision::CollideToSphere(CSphereCollision* pTargetCollider, D3DXVECTO
 		}
 	}
 	/*
+	float r0, r1, r;
+	D3DXVECTOR3 vTempNormal;
+	// x축 obb
+	r = D3DXVec3Dot(&m_vAxisDir[0], &pTargetCollider->GetCenter());
+	r0 = D3DXVec3Dot(&m_vAxisDir[0], &vecVertex[1]);
+	r1 = D3DXVec3Dot(&m_vAxisDir[0], &vecVertex[5]);
+	if (r + pTargetCollider->GetRadius() < r1 || r - pTargetCollider->GetRadius() > r0)
+		return false;
+	if (r >= r0)
+		vNormal += m_vAxisDir[0];
+	else if (r <= r1)
+		vNormal += -m_vAxisDir[0];
+
+	// y축 obb
+	r = D3DXVec3Dot(&m_vAxisDir[1], &pTargetCollider->GetCenter());
+	r0 = D3DXVec3Dot(&m_vAxisDir[1], &vecVertex[5]);
+	r1 = D3DXVec3Dot(&m_vAxisDir[1], &vecVertex[7]);
+	
+	if (r + pTargetCollider->GetRadius() < r1 || r - pTargetCollider->GetRadius() > r0)
+		return false;
+	if (r >= r0)
+		vNormal += m_vAxisDir[1];
+	else if (r <= r1)
+		vNormal += -m_vAxisDir[1];
+
+	// z축 obb
+	r = D3DXVec3Dot(&m_vAxisDir[2], &pTargetCollider->GetCenter());
+	r0 = D3DXVec3Dot(&m_vAxisDir[2], &vecVertex[0]);
+	r1 = D3DXVec3Dot(&m_vAxisDir[2], &vecVertex[1]);
+	if (r + pTargetCollider->GetRadius() < r1 || r - pTargetCollider->GetRadius() > r0)
+		return false;
+	if (r >= r0)
+		vNormal += m_vAxisDir[2];
+	else if (r <= r1)
+		vNormal += -m_vAxisDir[2];
+
+
+	m_isCollide = true;
+	pTargetCollider->SetIsCollide(true);
+	if (pNormal)
+		*pNormal = *D3DXVec3Normalize(&vNormal, &vNormal);
+	return true;
+	*/
+	
+	/*
 	if(isCollide)
 	{
 //                4-------------0
@@ -436,3 +481,4 @@ bool CBoxCollision::CollideToSphere(CSphereCollision* pTargetCollider, D3DXVECTO
 
 	
 }
+

@@ -7,7 +7,7 @@
 CDebugPlayer2::CDebugPlayer2(IInteractCenter* pInteractCenter) 
 {
 	m_pInteractCenter = pInteractCenter;
-	m_vPosition = m_cube.vCenter;
+	//m_vPosition = m_cube.vCenter;
 	m_vPosition = D3DXVECTOR3(-2, 0, 0);
 	D3DXMatrixIdentity(&m_matWorld);
 	
