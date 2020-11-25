@@ -170,8 +170,8 @@ void CGameScene::Update()
 		if (m_pDebugSphere && m_pDebugCube)
 			CTestPhysics::ApplyBound(m_pDebugSphere, m_pDebugCube);
 
-		//if (m_pDebugSphere && m_pField)
-		//	CTestPhysics::ApplyBound(m_pDebugSphere, m_pField);
+		if (m_pDebugSphere && m_pField)
+			CTestPhysics::ApplyBound(m_pDebugSphere, m_pField);
 		
 		for (CInteractiveActor* obj : m_vecObject)
 		{
