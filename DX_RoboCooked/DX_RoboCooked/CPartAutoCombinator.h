@@ -17,7 +17,7 @@ public:
 
 	void DischargeParts() override;
 	void CombinatorRender() override;
-	void PartsInsert(CParts* p) override;
+	void InsertParts(CParts* p) override;
 	void ReadytoCarryParts() override;
 
 

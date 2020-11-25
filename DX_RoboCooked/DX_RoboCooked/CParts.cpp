@@ -98,7 +98,7 @@ void CParts::MoveParts()
 	
 	if(fLength < 0.1f && fLength > -0.1f)
 	{
-		m_pPartsCombinator->PartsInsert(this);
+		m_pPartsCombinator->InsertParts(this);
 		m_pPartsCombinator = NULL;
 		m_isMoveParts = false;
 		return;
