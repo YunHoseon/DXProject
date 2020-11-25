@@ -25,16 +25,27 @@ CGameScene::CGameScene()
 	, m_pDebugSphere(NULL)
 	, m_pDebugCube(NULL)
 	, m_pDebugParts(NULL)
+	, m_isTimeStop(false)
 {
 	//Sound Add
 	g_SoundManager->AddBGM("data/sound/bgm.mp3");
 	g_SoundManager->AddSFX("data/sound/effBBam.mp3", "BBam");
 	g_SoundManager->AddSFX("data/sound/effMelem.mp3", "Melem");
+
 }
 
 CGameScene::~CGameScene()
 {
-	SafeDelete(m_pField);
+	for (CActor* it : m_vecStaticActor)
+	{
+		SafeDelete(it);
+	}
+
+	for (CInteractiveActor* it : m_vecObject)
+	{
+		SafeDelete(it);
+	}
+
 	for (CInteractiveActor* it : m_vecParts)
 	{
 		SafeDelete(it);
@@ -44,7 +55,9 @@ CGameScene::~CGameScene()
 	{
 		SafeDelete(it);
 	}
-	SafeDelete(m_pDebugParts);
+
+
+
 }
 
 void CGameScene::Init()
@@ -132,6 +145,10 @@ void CGameScene::Render()
 
 void CGameScene::Update()
 {
+	if (m_isTimeStop)
+		return;
+
+
 	{
 		// Gravity Update
 		//if (m_pDebugCube)
@@ -189,6 +206,12 @@ void CGameScene::Update()
 		if (m_pDebugSphere)
 			m_pDebugSphere->Update();
 	}
+}
+
+void CGameScene::PausePlayGame()
+{
+		m_isTimeStop = !m_isTimeStop;
+
 }
 
 
@@ -255,7 +278,6 @@ void CGameScene::CheckAroundCombinator(CPartCombinator* combinator)
 		it.first->SetCPartCombinator(combinator);
 		
 	}
-
 }
 
 void CGameScene::SendPartsToOutlet(CParts * parts, COutlet * outlet)

@@ -12,17 +12,14 @@ public:
 
 	void Update() override;
 	void Render() override;
-
 	void Interact(CCharacter* pCharacter) override;
 	void PartsInteract(CParts* pParts) override;
 	void OnEvent(eEvent eEvent, void* _value) override;
-	void CombineParts();
-	void PartsMakeTime() override;
-
-	void ManualCombine();
+	void CombineParts() override;
 	void DischargeParts() override;
-	void CombinatorRender() override;
-	void PartsInsert(CParts* p) override;
+	void InsertParts(CParts* p) override;
+	void ReadytoCarryParts() override;
+	void CheckCombineisFull();
 
 private:
 	CParts* Make() override;

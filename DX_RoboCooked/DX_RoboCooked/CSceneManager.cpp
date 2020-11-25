@@ -12,10 +12,10 @@ CSceneManager::CSceneManager():CSingleton<CSceneManager>()
 
 CSceneManager::~CSceneManager()
 {
-	for(auto it : m_SceneList)
-	{
-		SafeDelete(it.second);
-	}
+	//for(auto it : m_SceneList)
+	//{
+	//	SafeDelete(it.second);
+	//}
 	
 }
 
@@ -65,5 +65,13 @@ void CSceneManager::SetCurrentScene(CScene* Scene)
 CScene* CSceneManager::GetCurrentScene()
 {
 	return m_pCurrentScene;
+}
+
+void CSceneManager::Destroy()
+{
+	for (auto it : m_SceneList)
+	{
+		SafeDelete(it.second);
+	}
 }
 

@@ -2,9 +2,8 @@
 #include "CActor.h"
 #include "CCharacter.h"
 
-
-
-class CDebugPlayer1 : public CCharacter
+class CDebugPlayer1 
+	: public CCharacter
 {
 private:
 	ST_SPHERE			m_sphere;

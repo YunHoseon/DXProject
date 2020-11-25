@@ -149,7 +149,11 @@
   <ItemGroup>
     <ClInclude Include="CActor.h" />
     <ClInclude Include="CAllocateHierachy.h" />
+    <ClInclude Include="CBlueprint.h" />
     <ClInclude Include="CBoxCollision.h" />
+    <ClInclude Include="cBtnSprite.h" />
+    <ClInclude Include="CUI.h" />
+    <ClInclude Include="CPauseUI.h" />
     <ClInclude Include="CCamera.h" />
     <ClInclude Include="CCharacter.h" />
     <ClInclude Include="CCombinatorButton.h" />
@@ -161,6 +165,8 @@
     <ClInclude Include="CPartStorage.h" />
     <ClInclude Include="CPartVending.h" />
     <ClInclude Include="CSoundManager.h" />
+    <ClInclude Include="cSprite.h" />
+    <ClInclude Include="cSpriteNode.h" />
     <ClInclude Include="CTestPhysics.h" />
     <ClInclude Include="CWall.h" />
     <ClInclude Include="ICollisionArea.h" />
@@ -202,7 +208,11 @@
   <ItemGroup>
     <ClCompile Include="CActor.cpp" />
     <ClCompile Include="CAllocateHierachy.cpp" />
+    <ClCompile Include="CBlueprint.cpp" />
     <ClCompile Include="CBoxCollision.cpp" />
+    <ClCompile Include="cBtnSprite.cpp" />
+    <ClCompile Include="CUI.cpp" />
+    <ClCompile Include="CPauseUI.cpp" />
     <ClCompile Include="CCamera.cpp" />
     <ClCompile Include="CCharacter.cpp" />
     <ClCompile Include="CCombinatorButton.cpp" />
@@ -214,6 +224,8 @@
     <ClCompile Include="CPartStorage.cpp" />
     <ClCompile Include="CPartVending.cpp" />
     <ClCompile Include="CSoundManager.cpp" />
+    <ClCompile Include="cSprite.cpp" />
+    <ClCompile Include="cSpriteNode.cpp" />
     <ClCompile Include="CTestPhysics.cpp" />
     <ClCompile Include="CWall.cpp" />
     <ClCompile Include="ICollisionArea.cpp" />

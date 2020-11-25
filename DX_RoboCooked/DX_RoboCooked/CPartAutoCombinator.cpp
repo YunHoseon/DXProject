@@ -42,7 +42,7 @@ void CPartAutoCombinator::Update()
 
 	if (m_eCombinatorLoadState == eCombinatorLoadState::LoadImpossible &&
 		m_eCombinatorActionState == eCombinatorActionState::Usable)
-		PartsMakeTime();
+		CombineParts();
 	
 	if(m_isCombine && m_pParts == nullptr)
 		DischargeParts();
@@ -53,7 +53,20 @@ void CPartAutoCombinator::Update()
 
 void CPartAutoCombinator::Render()
 {
-	CombinatorRender();
+	g_pD3DDevice->SetTransform(D3DTS_WORLD, &m_matWorld);
+	g_pD3DDevice->SetTexture(0, m_CombinatorTexture);
+
+	D3DMATERIAL9 mtlStorage;
+	ZeroMemory(&mtlStorage, sizeof(D3DMATERIAL9));
+	mtlStorage.Ambient = D3DXCOLOR(0.7f, 0.7f, 0.7f, 1.0f);
+	mtlStorage.Diffuse = D3DXCOLOR(0.7f, 0.7f, 0.7f, 1.0f);
+	mtlStorage.Specular = D3DXCOLOR(0.7f, 0.7f, 0.7f, 1.0f);
+
+	g_pD3DDevice->SetMaterial(&mtlStorage);
+	g_pD3DDevice->SetFVF(ST_PNT_VERTEX::FVF);
+	g_pD3DDevice->DrawPrimitiveUP(D3DPT_TRIANGLELIST, m_vecVertex.size() / 3, &m_vecVertex[0],
+		sizeof(ST_PNT_VERTEX));
+	g_pD3DDevice->SetTexture(0, 0);
 
 	_DEBUG_COMMENT if (m_pCollision)
 		_DEBUG_COMMENT m_pCollision->Render();
@@ -102,28 +115,14 @@ void CPartAutoCombinator::OnEvent(eEvent eEvent, void* _value)
 
 void CPartAutoCombinator::CombineParts()
 {
-}
-
-void CPartAutoCombinator::PartsMakeTime()
-{
 	m_fElapsedTime += g_pTimeManager->GetElapsedTime();
 
 	if (m_fElapsedTime >= m_fCombineTime)
 	{
 		m_fElapsedTime = 0;
 		Make();
-		AutoCombine();
+		ReadytoCarryParts();
 	}
-}
-
-void CPartAutoCombinator::AutoCombine()
-{
-	m_isCombine = true; //들고가기 가능하게 하는 bool
-	for (auto it : m_multimapParts)
-	{
-		m_vecDischargeParts.push_back(it.second);
-	}
-	m_multimapParts.clear();
 }
 
 void CPartAutoCombinator::DischargeParts()
@@ -142,28 +141,19 @@ void CPartAutoCombinator::DischargeParts()
 	m_vecDischargeParts.erase(m_vecDischargeParts.begin());
 }
 
-void CPartAutoCombinator::CombinatorRender()
-{
-	g_pD3DDevice->SetTransform(D3DTS_WORLD, &m_matWorld);
-	g_pD3DDevice->SetTexture(0, m_CombinatorTexture);
-
-	D3DMATERIAL9 mtlStorage;
-	ZeroMemory(&mtlStorage, sizeof(D3DMATERIAL9));
-	mtlStorage.Ambient = D3DXCOLOR(0.7f, 0.7f, 0.7f, 1.0f);
-	mtlStorage.Diffuse = D3DXCOLOR(0.7f, 0.7f, 0.7f, 1.0f);
-	mtlStorage.Specular = D3DXCOLOR(0.7f, 0.7f, 0.7f, 1.0f);
-
-	g_pD3DDevice->SetMaterial(&mtlStorage);
-	g_pD3DDevice->SetFVF(ST_PNT_VERTEX::FVF);
-	g_pD3DDevice->DrawPrimitiveUP(D3DPT_TRIANGLELIST, m_vecVertex.size() / 3, &m_vecVertex[0],
-		sizeof(ST_PNT_VERTEX));
-	g_pD3DDevice->SetTexture(0, 0);
-
-}
-
-void CPartAutoCombinator::PartsInsert(CParts* p)
+void CPartAutoCombinator::InsertParts(CParts* p)
 {
 	m_multimapParts.insert(std::make_pair(p->GetPartsID(), p));
+}
+
+void CPartAutoCombinator::ReadytoCarryParts()
+{
+	m_isCombine = true; //들고가기 가능하게 하는 bool
+	for (auto it : m_multimapParts)
+	{
+		m_vecDischargeParts.push_back(it.second);
+	}
+	m_multimapParts.clear();
 }
 
 CParts* CPartAutoCombinator::Make()

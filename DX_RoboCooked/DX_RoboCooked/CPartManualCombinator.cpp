@@ -170,7 +170,7 @@ void CPartManualCombinator::Update()
 {
 
 	if (m_isTimeCheck && m_eCombinatorActionState == eCombinatorActionState::Usable)
-		PartsMakeTime();
+		CombineParts();
 	
 	if (m_isCombine && m_pParts == nullptr)
 		DischargeParts();
@@ -181,7 +181,20 @@ void CPartManualCombinator::Update()
 
 void CPartManualCombinator::Render()
 {
-	CombinatorRender();
+	g_pD3DDevice->SetTransform(D3DTS_WORLD, &m_matWorld);
+	g_pD3DDevice->SetTexture(0, m_CombinatorTexture);
+
+	D3DMATERIAL9 mtlStorage;
+	ZeroMemory(&mtlStorage, sizeof(D3DMATERIAL9));
+	mtlStorage.Ambient = D3DXCOLOR(0.7f, 0.7f, 0.7f, 1.0f);
+	mtlStorage.Diffuse = D3DXCOLOR(0.7f, 0.7f, 0.7f, 1.0f);
+	mtlStorage.Specular = D3DXCOLOR(0.7f, 0.7f, 0.7f, 1.0f);
+
+	g_pD3DDevice->SetMaterial(&mtlStorage);
+	g_pD3DDevice->SetFVF(ST_PNT_VERTEX::FVF);
+	g_pD3DDevice->DrawPrimitiveUP(D3DPT_TRIANGLELIST, m_vecVertex.size() / 3, &m_vecVertex[0],
+		sizeof(ST_PNT_VERTEX));
+	g_pD3DDevice->SetTexture(0, 0);
 
 	_DEBUG_COMMENT if (m_pCollision)
 		_DEBUG_COMMENT m_pCollision->Render();
@@ -250,20 +263,6 @@ void CPartManualCombinator::OnEvent(eEvent eEvent, void* _value)
 
 void CPartManualCombinator::CombineParts()
 {
-	/*
-	 * 적재불가능 상태이면 MAKE 함수 호출후 쿨타임 주고 아래로 내려가게
-	 */
-	if(m_eCombinatorLoadState == eCombinatorLoadState::LoadImpossible)
-	{
-		m_isTimeCheck = true;
-		return;
-	}
-	
-	ManualCombine();
-}
-
-void CPartManualCombinator::PartsMakeTime()
-{
 	m_fElapsedTime += g_pTimeManager->GetElapsedTime();
 
 	if(m_fElapsedTime >= m_fCombineTime)
@@ -271,19 +270,11 @@ void CPartManualCombinator::PartsMakeTime()
 		m_isTimeCheck = false;
 		m_fElapsedTime = 0;
 		Make();
-		ManualCombine();
+		ReadytoCarryParts();
 	}
 }
 
-void CPartManualCombinator::ManualCombine()
-{
-	m_isCombine = true; //들고가기 가능하게 하는 bool
-	for (auto it : m_multimapParts)
-	{
-		m_vecDischargeParts.push_back(it.second);
-	}
-	m_multimapParts.clear();
-}
+
 
 void CPartManualCombinator::DischargeParts()
 {
@@ -299,33 +290,30 @@ void CPartManualCombinator::DischargeParts()
 	m_vecDischargeParts.erase(m_vecDischargeParts.begin());
 }
 
-void CPartManualCombinator::CombinatorRender()
-{
-	g_pD3DDevice->SetTransform(D3DTS_WORLD, &m_matWorld);
-	g_pD3DDevice->SetTexture(0, m_CombinatorTexture);
 
-	D3DMATERIAL9 mtlStorage;
-	ZeroMemory(&mtlStorage, sizeof(D3DMATERIAL9));
-	mtlStorage.Ambient = D3DXCOLOR(0.7f, 0.7f, 0.7f, 1.0f);
-	mtlStorage.Diffuse = D3DXCOLOR(0.7f, 0.7f, 0.7f, 1.0f);
-	mtlStorage.Specular = D3DXCOLOR(0.7f, 0.7f, 0.7f, 1.0f);
-
-	g_pD3DDevice->SetMaterial(&mtlStorage);
-	g_pD3DDevice->SetFVF(ST_PNT_VERTEX::FVF);
-	g_pD3DDevice->DrawPrimitiveUP(D3DPT_TRIANGLELIST, m_vecVertex.size() / 3, &m_vecVertex[0],
-		sizeof(ST_PNT_VERTEX));
-	g_pD3DDevice->SetTexture(0, 0);
-}
-
-void CPartManualCombinator::PartsInsert(CParts* p)
+void CPartManualCombinator::InsertParts(CParts* p)
 {
 	m_multimapParts.insert(std::make_pair(p->GetPartsID(), p));
-	
-	/*
-	if (m_multimapParts.size() == m_nMaxPartsCount)
-	{
-		m_eCombinatorActionState = eCombinatorActionState::Usable;
-	}
-	*/
 
+}
+
+void CPartManualCombinator::ReadytoCarryParts()
+{
+	CheckCombineisFull();
+
+	m_isCombine = true; //들고가기 가능하게 하는 bool
+	for (auto it : m_multimapParts)
+	{
+		m_vecDischargeParts.push_back(it.second);
+	}
+	m_multimapParts.clear();
+}
+
+void CPartManualCombinator::CheckCombineisFull()
+{
+	if (m_eCombinatorLoadState == eCombinatorLoadState::LoadImpossible)
+	{
+		m_isTimeCheck = true;
+		return;
+	}
 }
