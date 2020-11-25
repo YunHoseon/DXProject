@@ -37,6 +37,9 @@
     <Filter Include="GameScene\Combinator">
       <UniqueIdentifier>{991f2475-d3b2-470e-8ffd-615888b96791}</UniqueIdentifier>
     </Filter>
+    <Filter Include="UI">
+      <UniqueIdentifier>{9f665a7d-c539-4289-b0c2-baaa0fe5d74a}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <Text Include="ReadMe.txt" />
@@ -198,6 +201,21 @@
     <ClInclude Include="CBlueprint.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="cBtnSprite.h">
+      <Filter>UI</Filter>
+    </ClInclude>
+    <ClInclude Include="cButton.h">
+      <Filter>UI</Filter>
+    </ClInclude>
+    <ClInclude Include="cButtonMenu.h">
+      <Filter>UI</Filter>
+    </ClInclude>
+    <ClInclude Include="cSprite.h">
+      <Filter>UI</Filter>
+    </ClInclude>
+    <ClInclude Include="cSpriteNode.h">
+      <Filter>UI</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="stdafx.cpp">
@@ -349,6 +367,21 @@
     </ClCompile>
     <ClCompile Include="CBlueprint.cpp">
       <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="cBtnSprite.cpp">
+      <Filter>UI</Filter>
+    </ClCompile>
+    <ClCompile Include="cButton.cpp">
+      <Filter>UI</Filter>
+    </ClCompile>
+    <ClCompile Include="cButtonMenu.cpp">
+      <Filter>UI</Filter>
+    </ClCompile>
+    <ClCompile Include="cSprite.cpp">
+      <Filter>UI</Filter>
+    </ClCompile>
+    <ClCompile Include="cSpriteNode.cpp">
+      <Filter>UI</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
