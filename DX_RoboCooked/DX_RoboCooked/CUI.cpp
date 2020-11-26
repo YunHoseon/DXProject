@@ -28,15 +28,4 @@ void CUI::Move(D3DXVECTOR2 vMove)
 	D3DXMatrixTranslation(&m_matWorld, (FLOAT)m_vPosition.x, (FLOAT)m_vPosition.y, 0);
 }
 
-bool CUI::InCheck(POINT MousePt)
-{
-	if (m_vPosition.x <= MousePt.x && m_vPosition.x + m_vSize.x >= MousePt.x
-		&& m_vPosition.y <= MousePt.y && m_vPosition.y + m_vSize.y >= MousePt.y)
-		return true;
-
-	
-	return false;
-}
-
-
 

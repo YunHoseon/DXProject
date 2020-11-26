@@ -18,11 +18,10 @@ public:
 
 	
 
-	virtual void Setup();
-	virtual void Update();
-	virtual void Render();
-	virtual void WndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam);
-	virtual void ClickEvent(EVENT ev);
-	virtual int ChildBtnInCheck(POINT pt);
+	void Setup();
+	void Update();
+	void Render();
+	void WndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam);
+
 };
 

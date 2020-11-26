@@ -2,7 +2,7 @@
 #include "CGameScene.h"
 #include "CField.h"
 #include "CInteractiveActor.h"
-#include "CParts.h" //생성할때 사용하기위해
+#include "CParts.h" 
 #include "CPartStorage.h"
 #include "ICollisionArea.h"
 #include "CActor.h"
@@ -15,6 +15,7 @@
 #include "CPartVending.h"
 #include "CTestPhysics.h"
 #include "CWall.h"
+#include "CPauseUI.h"
 
 /* 디버깅용 */
 #include "CDebugPlayer1.h"
@@ -56,6 +57,8 @@ CGameScene::~CGameScene()
 		SafeDelete(it);
 	}
 
+
+	SafeDelete(m_pDebugPauseUI);
 
 
 }
@@ -118,6 +121,9 @@ void CGameScene::Init()
 	if (m_pDebugParts2)
 		m_pDebugParts2->Setup();
 	m_vecParts.push_back(m_pDebugParts2);
+
+
+	m_pDebugPauseUI = new CPauseUI;
 }
 
 void CGameScene::Render()
@@ -141,6 +147,11 @@ void CGameScene::Render()
 	{
 		it->Render();
 	}
+
+	//UITEST
+	//if (m_pDebugPauseUI)
+	//	m_pDebugPauseUI->Render();
+
 }
 
 void CGameScene::Update()
@@ -224,12 +235,16 @@ void CGameScene::Update()
 
 		if (m_pDebugSphere)
 			m_pDebugSphere->Update();
+
+		//UITEST
+		if (m_pDebugPauseUI)
+			m_pDebugPauseUI->Update();
 	}
 }
 
 void CGameScene::PausePlayGame()
 {
-		m_isTimeStop = !m_isTimeStop;
+	m_isTimeStop = !m_isTimeStop;
 
 }
 

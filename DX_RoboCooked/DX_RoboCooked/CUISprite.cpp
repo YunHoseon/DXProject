@@ -1,23 +1,24 @@
 #include "stdafx.h"
 #include "CUISprite.h"
 
-CUISprite::CUISprite(char* OffBtnPath, char* OffFileName, char* OnBtnPath, char* OnFileName)
+CUISprite::CUISprite(char* OffBtnPath, char* OnBtnPath, char* HoverBtnPath, D3DXVECTOR2 vPosition)
 {
-//	string sFullPath(OffBtnPath);
-//	sFullPath += (string("/") + string(OffFileName));
-//
-//	m_pOffTextureUI = g_pTextureManager->GetTexture(sFullPath);
-////	m_InfoOffImage = g_pTextureManager->GetTexture(sFullPath);
-//
-//	if (OnBtnPath == NULL)
-//		return;
-//	sFullPath = OnBtnPath;
-//	sFullPath += (string("/") + string(OnFileName));
-//
-//	//m_pOnTextureUI = g_pUITextureManager->GetTexture(sFullPath);
-//	//m_InfoOnImage = g_pUITextureManager->GetTextureInfo(sFullPath);
-//	
+	Setup(vPosition);
 
+
+	string Path(OffBtnPath);
+
+	m_pDisabledTextureUI = g_pUITextureManager->GetTexture(Path);
+	m_DisabledInfo = g_pUITextureManager->GetTextureInfo(Path);
+
+	if (OnBtnPath == NULL)
+		return;
+
+	Path = OnBtnPath;
+
+	m_pActiveTextureUI = g_pUITextureManager->GetTexture(Path);
+	m_ActiveInfo = g_pUITextureManager->GetTextureInfo(Path);
+	
 
 	
 }

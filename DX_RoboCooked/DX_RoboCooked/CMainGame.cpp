@@ -74,6 +74,7 @@ void CMainGame::Render()
 	if (m_pScene)
 		m_pScene->Render();
 	
+
 	/*if (m_pDebugParts)
 		m_pDebugParts->Render();
 	*/

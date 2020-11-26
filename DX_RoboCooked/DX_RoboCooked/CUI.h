@@ -5,18 +5,18 @@ class CUISprite;
 class CUI
 {
 public:
-	struct Sprite
-	{
-		D3DXVECTOR2 st_SpriteSize;
-		D3DXVECTOR2 st_Position;
-	};
-	
+	//struct Sprite
+	//{
+	//	D3DXVECTOR2 st_SpriteSize;
+	//	D3DXVECTOR2 st_Position;
+	//};
+	//
 public:
 	CUI();
 	virtual ~CUI();
 	virtual void WndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam);
 	virtual void Move(D3DXVECTOR2 vMove);
-	virtual bool InCheck(POINT pt);
+
 
 
 	
@@ -24,8 +24,8 @@ public:
 	cSpriteNode*		m_pRoot;
 	D3DXMATRIXA16		m_matWorld;
 
-	vector<Sprite>		m_vecSprite;
-	vector<CUISprite*>  m_vecBtn;
+	//vector<Sprite>	m_vecSprite;
+	//vector<CUISprite*>  m_vecBtn;
 
 	
 	D3DXVECTOR2			m_vPosition;

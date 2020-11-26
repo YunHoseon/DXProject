@@ -242,25 +242,21 @@ void CPartManualCombinator::PartsInteract(CParts* pParts)
 
 	if (m_nPartsCount > m_nMaxPartsCount)
 	{
-		m_eCombinatorLoadState = eCombinatorLoadState::LoadImpossible;
 		return;
 	}
+	else
+	{
+		if(m_nPartsCount == m_nMaxPartsCount)
+			m_eCombinatorLoadState = eCombinatorLoadState::LoadImpossible;
 
-	pParts->GetCollision()->SetActive(false);
-	pParts->SetCombinatorPosition(m_vPosition);
-	pParts->SetMoveParts(true);
-	
-	//switch (m_eLevel)
-	//{
-	//case eCombinatorPartsLevel::ONE:
-	//	if (m_multimapParts.size() >= m_nMaxPartsCount)
-	//		m_eCombinatorLoadState = eCombinatorLoadState::LoadImpossible;
-	//	break;
-	//case eCombinatorPartsLevel::TWO:
-	//	if (m_multimapParts.size() >= m_nMaxPartsCount)
-	//		m_eCombinatorLoadState = eCombinatorLoadState::LoadImpossible;
-	//	break;
-	//}
+		pParts->GetCollision()->SetActive(false);
+		pParts->SetCombinatorPosition(m_vPosition);
+		pParts->SetMoveParts(true);
+	}
+
+
+
+
 }
 
 void CPartManualCombinator::OnEvent(eEvent eEvent, void* _value)
@@ -273,6 +269,7 @@ void CPartManualCombinator::CombineParts()
 
 	if(m_fElapsedTime >= m_fCombineTime)
 	{
+		m_eCombinatorLoadState = eCombinatorLoadState::LoadPossible;
 		m_isTimeCheck = false;
 		m_fElapsedTime = 0;
 		Make();
@@ -306,6 +303,8 @@ void CPartManualCombinator::InsertParts(CParts* p)
 void CPartManualCombinator::ReadytoCarryParts()
 {
 	CheckCombineisFull();
+	if (m_isTimeCheck)
+		return;
 
 	m_isCombine = true; //들고가기 가능하게 하는 bool
 	for (auto it : m_multimapParts)
@@ -320,6 +319,5 @@ void CPartManualCombinator::CheckCombineisFull()
 	if (m_eCombinatorLoadState == eCombinatorLoadState::LoadImpossible)
 	{
 		m_isTimeCheck = true;
-		return;
 	}
 }
