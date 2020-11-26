@@ -9,6 +9,10 @@ private:
 
 
 public:
+	CUITextureManager();
+	~CUITextureManager();
+
+public:
 	LPDIRECT3DTEXTURE9 GetTexture(char* szFullPath);
 	LPDIRECT3DTEXTURE9 GetTexture(std::string &szFullPath);
 	
@@ -19,8 +23,6 @@ public:
 	D3DXVECTOR2 GetTextureSize(std::string &szFullpath);
 
 	
-	void Destroy();
-
-	
+	void Destroy();	
 };
 

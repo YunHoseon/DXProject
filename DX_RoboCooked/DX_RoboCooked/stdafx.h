@@ -206,6 +206,7 @@ struct ST_PLAYER_INPUTKEY
 #include "InputManager.h"
 #include "CSoundManager.h"
 #include "CPartsManager.h"
+#include "CUITextureManager.h"
 
 #define __SLASH(x) /##x
 #define __DOUBLE_SLASH __SLASH(/)
