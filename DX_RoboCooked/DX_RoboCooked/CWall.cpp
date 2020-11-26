@@ -122,23 +122,15 @@ void CWall::Setup()
 		D3DXVec3TransformCoord(&m_vecVertex[i].p, &m_vecVertex[i].p, &mat);
 
 	Create_Font();
+
+	ZeroMemory(&m_stMtlWall, sizeof(D3DMATERIAL9));
+	m_stMtlWall.Ambient = D3DXCOLOR(0.7f, 0.7f, 0.7f, 1.0f);
+	m_stMtlWall.Diffuse = D3DXCOLOR(0.7f, 0.7f, 0.7f, 1.0f);
+	m_stMtlWall.Specular = D3DXCOLOR(0.7f, 0.7f, 0.7f, 1.0f);
 }
 
 void CWall::Update()
 {
-	/*if (GetKeyState('O') & 0X8000)
-	{
-		n_RotAngleX -= 2;
-		if (n_RotAngleX <= 0)
-			n_RotAngleX = 0;
-	}
-	if (GetKeyState('P') & 0X8000)
-	{
-		n_RotAngleX += 2;
-		if (n_RotAngleX >= 90)
-			n_RotAngleX = 90;
-	}*/
-
 	D3DXMatrixRotationX(&m_matR, D3DXToRadian(n_RotAngleX));
 	D3DXMatrixTranslation(&m_matT, 0, -1.5f, 6);
 	m_matWorld = m_matR * m_matT;
@@ -160,12 +152,6 @@ void CWall::Render()
 
 	g_pD3DDevice->SetTransform(D3DTS_WORLD, &m_matWorld);
 	g_pD3DDevice->SetTexture(0, m_wallTexture);
-
-	ZeroMemory(&m_stMtlWall, sizeof(D3DMATERIAL9));
-	m_stMtlWall.Ambient = D3DXCOLOR(0.7f, 0.7f, 0.7f, 1.0f);
-	m_stMtlWall.Diffuse = D3DXCOLOR(0.7f, 0.7f, 0.7f, 1.0f);
-	m_stMtlWall.Specular = D3DXCOLOR(0.7f, 0.7f, 0.7f, 1.0f);
-
 	g_pD3DDevice->SetMaterial(&m_stMtlWall);
 	g_pD3DDevice->SetFVF(ST_PNT_VERTEX::FVF);
 	g_pD3DDevice->DrawPrimitiveUP(D3DPT_TRIANGLELIST, m_vecVertex.size() / 3, &m_vecVertex[0],

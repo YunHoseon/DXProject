@@ -17,7 +17,7 @@ public:
 	void Setup();
 	void Update() override;
 	void Render() override;
-	void OnEvent(eEvent eEvent, void* _value);
+	void OnEvent(eEvent eEvent, void* _value) override;
 
 	void Create_Font();
 	void ReleaseKey();
