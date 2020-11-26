@@ -212,7 +212,6 @@ void CGameScene::Update()
 				CTestPhysics::ApplyBound(part, pStaticActor);
 			}
 		}
-		// part-part, part-obj ÇÊ¿ä
 	}
 	{// update
 		for (CActor* it : m_vecStaticActor)
