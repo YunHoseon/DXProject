@@ -175,6 +175,6 @@ void CPartStorage::Interact(CCharacter* pCharacter)
 		parts->SetGrabPosition(&pCharacter->GetGrabPartsPosition());
 		m_pInteractCenter->AddParts(parts);
 		pCharacter->SetParts(parts);
-		pCharacter->SetPlayerState(ePlayerState::Grab);
+		//pCharacter->SetPlayerState(ePlayerState::Grab);
 	}
 }

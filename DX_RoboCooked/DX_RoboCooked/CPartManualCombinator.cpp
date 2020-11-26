@@ -228,7 +228,7 @@ void CPartManualCombinator::Interact(CCharacter* pCharacter)
 	if (m_pParts == nullptr ||  pCharacter->GetPlayerState() != ePlayerState::None)
 		return;
 
-	pCharacter->SetPlayerState(ePlayerState::Grab);
+	//pCharacter->SetPlayerState(ePlayerState::Grab);
 	pCharacter->SetParts(m_pParts);
 	m_pParts->SetGrabPosition(&pCharacter->GetGrabPartsPosition());
 	m_pParts->GetCollision()->SetActive(true);

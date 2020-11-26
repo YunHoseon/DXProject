@@ -24,6 +24,8 @@ CCharacter::CCharacter(int nPlayerNum)
 	m_stMtlSphere.Ambient = D3DXCOLOR(0.7f, 0.7f, 0.7f, 1.0f);
 	m_stMtlSphere.Diffuse = D3DXCOLOR(0.7f, 0.7f, 0.7f, 1.0f);
 	m_stMtlSphere.Specular = D3DXCOLOR(0.7f, 0.7f, 0.7f, 1.0f);
+
+	g_pPartsManager;
 }
 
 CCharacter::~CCharacter()
