@@ -2,15 +2,6 @@
 #include "CUITextureManager.h"
 
 
-CUITextureManager::CUITextureManager()
-{
-}
-
-
-CUITextureManager::~CUITextureManager()
-{
-}
-
 LPDIRECT3DTEXTURE9 CUITextureManager::GetTexture(char* szFullPath)
 {
 	if (m_mapTexture.find(szFullPath) == m_mapTexture.end())
