@@ -19,8 +19,8 @@ protected:
 	float				m_fRotY;
 
 	
-	ICollisionArea*		m_pCollision;
 	// for physics
+	ICollisionArea*		m_pCollision;
 	D3DXVECTOR3			m_vPosition;
 	D3DXVECTOR3			m_vVelocity;
 	D3DXVECTOR3			m_vAcceleration;
