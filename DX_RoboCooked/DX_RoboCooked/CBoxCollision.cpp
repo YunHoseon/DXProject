@@ -103,8 +103,8 @@ bool CBoxCollision::CollideToBox(CBoxCollision* pTargetCollider, D3DXVECTOR3* pN
 	const float cutOff = 0.999999f;
 	bool existsParallelPair = false;
 
-	D3DXVECTOR3 D = pTargetCollider->m_vCenterPos - this->m_vCenterPos;
-	if (D3DXVec3LengthSq(&D) > 3.0f)
+	D3DXVECTOR3 vDist = pTargetCollider->m_vCenterPos - this->m_vCenterPos;
+	if (D3DXVec3LengthSq(&vDist) > 3.0f)
 		return false;
 	
 	for (int a = 0; a < 3; ++a)
@@ -118,7 +118,7 @@ bool CBoxCollision::CollideToBox(CBoxCollision* pTargetCollider, D3DXVECTOR3* pN
 			if (absCos[a][b] > cutOff)
 				existsParallelPair = true; // 직각이란 뜻
 		}
-		dist[a] = D3DXVec3Dot(&this->m_vAxisDir[a], &D);
+		dist[a] = D3DXVec3Dot(&this->m_vAxisDir[a], &vDist);
 		r = abs(dist[a]);
 
 		r0 = this->m_fAxisHalfLen[a];
@@ -132,7 +132,7 @@ bool CBoxCollision::CollideToBox(CBoxCollision* pTargetCollider, D3DXVECTOR3* pN
 
 	for (int b = 0; b < 3; ++b)
 	{
-		r = abs(D3DXVec3Dot(&pTargetCollider->m_vAxisDir[b], &D));
+		r = abs(D3DXVec3Dot(&pTargetCollider->m_vAxisDir[b], &vDist));
 		r0 = this->m_fAxisHalfLen[0] * absCos[0][b] +
 			this->m_fAxisHalfLen[1] * absCos[1][b] +
 			this->m_fAxisHalfLen[2] * absCos[2][b];
@@ -144,6 +144,11 @@ bool CBoxCollision::CollideToBox(CBoxCollision* pTargetCollider, D3DXVECTOR3* pN
 
 	if (existsParallelPair)
 	{
+		if (pNormal)
+		{
+			D3DXVec3Normalize(&vDist, &-vDist);
+			*pNormal = vDist;
+		}
 		m_isCollide = true;
 		pTargetCollider->SetIsCollide(true);
 		return true;
@@ -212,6 +217,13 @@ bool CBoxCollision::CollideToBox(CBoxCollision* pTargetCollider, D3DXVECTOR3* pN
 		}
 
 	}
+	if (pNormal)
+	{
+		D3DXVec3Normalize(&vDist, &-vDist);
+		*pNormal = vDist;
+	}
+	m_isCollide = true;
+	pTargetCollider->SetIsCollide(true);
 	return true;
 }
 
@@ -302,7 +314,7 @@ bool CBoxCollision::CollideToSphere(CSphereCollision* pTargetCollider, D3DXVECTO
 			m_isCollide = true;
 			pTargetCollider->SetIsCollide(true);
 			if (pNormal)
-				*pNormal = *D3DXVec3Normalize(&vNormal, &vNormal);
+				*pNormal = *D3DXVec3Normalize(&vNormal, &-vNormal);
 			return true;
 		}
 	}
