@@ -168,6 +168,7 @@
     <ClInclude Include="cSprite.h" />
     <ClInclude Include="cSpriteNode.h" />
     <ClInclude Include="CTestPhysics.h" />
+    <ClInclude Include="CUITextureManager.h" />
     <ClInclude Include="CWall.h" />
     <ClInclude Include="ICollisionArea.h" />
     <ClInclude Include="CDeviceManager.h" />
@@ -227,6 +228,7 @@
     <ClCompile Include="cSprite.cpp" />
     <ClCompile Include="cSpriteNode.cpp" />
     <ClCompile Include="CTestPhysics.cpp" />
+    <ClCompile Include="CUITextureManager.cpp" />
     <ClCompile Include="CWall.cpp" />
     <ClCompile Include="ICollisionArea.cpp" />
     <ClCompile Include="CDeviceManager.cpp" />

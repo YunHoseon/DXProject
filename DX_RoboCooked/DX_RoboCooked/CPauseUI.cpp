@@ -20,7 +20,7 @@ CPauseUI::~CPauseUI()
 void CPauseUI::Setup()
 {
 
-	/*Sprite sp;
+	//Sprite sp;
 	
 	D3DXVECTOR2 vecTemp(0,0);
 	CUISprite* m_cBody = new CUISprite("UI","panel-info.png",NULL,NULL);
@@ -28,8 +28,8 @@ void CPauseUI::Setup()
 	
 	m_cBody->SetParentWorldTM(&m_matWorld);
 	m_pRoot = m_cBody;
-	sp.st_Position = D3DXVECTOR2(0, 0); sp.st_SpriteSize = g_pUITextureManager->GetTextureSize("UI/panel-info.png");
-	m_vecSprite.push_back(sp);
+	//sp.st_Position = D3DXVECTOR2(0, 0); sp.st_SpriteSize = g_pUITextureManager->GetTextureSize("UI/panel-info.png");
+	//m_vecSprite.push_back(sp);
 	m_vSize = g_pUITextureManager->GetTextureSize("UI/panel-info.png");
 	m_vecBtn.push_back(m_cBody);
 
@@ -58,7 +58,7 @@ void CPauseUI::Setup()
 	m_pRoot->AddChild(m_cExit);
 	sp.st_Position = D3DXVECTOR2(400, 80); sp.st_SpriteSize = g_pUITextureManager->GetTextureSize("UI/btn-main-menu.png");
 	m_vecSprite.push_back(sp);
-	m_vecBtn.push_back(m_cExit);*/
+	m_vecBtn.push_back(m_cExit);
 
 
 }
