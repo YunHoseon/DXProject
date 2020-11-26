@@ -40,6 +40,9 @@
     <Filter Include="UI">
       <UniqueIdentifier>{9f665a7d-c539-4289-b0c2-baaa0fe5d74a}</UniqueIdentifier>
     </Filter>
+    <Filter Include="GameScene\Character">
+      <UniqueIdentifier>{f9d12338-b253-4e46-b47c-676cdf613917}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <Text Include="ReadMe.txt" />
@@ -150,16 +153,7 @@
     <ClInclude Include="IPartGenerator.h">
       <Filter>GameScene</Filter>
     </ClInclude>
-    <ClInclude Include="CCharacter.h">
-      <Filter>GameScene</Filter>
-    </ClInclude>
     <ClInclude Include="CParts.h">
-      <Filter>GameScene</Filter>
-    </ClInclude>
-    <ClInclude Include="CDebugPlayer2.h">
-      <Filter>GameScene</Filter>
-    </ClInclude>
-    <ClInclude Include="CDebugPlayer1.h">
       <Filter>GameScene</Filter>
     </ClInclude>
     <ClInclude Include="IInteractCenter.h">
@@ -218,6 +212,15 @@
     </ClInclude>
     <ClInclude Include="CUITextureManager.h">
       <Filter>Manager</Filter>
+    </ClInclude>
+    <ClInclude Include="CDebugPlayer1.h">
+      <Filter>GameScene\Character</Filter>
+    </ClInclude>
+    <ClInclude Include="CDebugPlayer2.h">
+      <Filter>GameScene\Character</Filter>
+    </ClInclude>
+    <ClInclude Include="CCharacter.h">
+      <Filter>GameScene\Character</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -326,15 +329,6 @@
     <ClCompile Include="CParts.cpp">
       <Filter>GameScene</Filter>
     </ClCompile>
-    <ClCompile Include="CDebugPlayer2.cpp">
-      <Filter>GameScene</Filter>
-    </ClCompile>
-    <ClCompile Include="CDebugPlayer1.cpp">
-      <Filter>GameScene</Filter>
-    </ClCompile>
-    <ClCompile Include="CCharacter.cpp">
-      <Filter>GameScene</Filter>
-    </ClCompile>
     <ClCompile Include="IInteractCenter.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
@@ -388,6 +382,15 @@
     </ClCompile>
     <ClCompile Include="CUITextureManager.cpp">
       <Filter>Manager</Filter>
+    </ClCompile>
+    <ClCompile Include="CDebugPlayer1.cpp">
+      <Filter>GameScene\Character</Filter>
+    </ClCompile>
+    <ClCompile Include="CDebugPlayer2.cpp">
+      <Filter>GameScene\Character</Filter>
+    </ClCompile>
+    <ClCompile Include="CCharacter.cpp">
+      <Filter>GameScene\Character</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

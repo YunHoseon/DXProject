@@ -38,7 +38,7 @@ public:
 
 	void GetInteractObject(CCharacter* pCharacter) override;
 	void AddParts(CParts* parts) override;
-	void DownParts(CCharacter* pCharacter,CParts* parts,D3DXVECTOR3 vDir) override;
+	//void DownParts(CCharacter* pCharacter,CParts* parts,D3DXVECTOR3 vDir) override;
 	void CheckAroundCombinator(CPartCombinator* combinator) override;
 	void SendPartsToOutlet(CParts* parts, COutlet* outlet) override;
 };

@@ -32,6 +32,8 @@ using std::list;
 #include <assert.h>
 #include <unordered_set>
 using std::unordered_set;
+#include <array>
+using std::array;
 
 #include <d3dx9.h>
 

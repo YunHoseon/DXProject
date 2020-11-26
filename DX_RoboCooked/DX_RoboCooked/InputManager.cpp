@@ -48,3 +48,8 @@ void CInputManager::WndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lPara
 		break;
 	}
 }
+
+ST_PLAYER_INPUTKEY* CInputManager::GetInputKey(int n)
+{
+	return m_pKeyboard->GetInputKey(n);
+}
