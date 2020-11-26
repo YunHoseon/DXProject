@@ -40,8 +40,15 @@ void CParts::Update()
 	if (m_isMoveParts)
 		MoveParts();
 	
-	if (m_vGrabPosition)
+	else if (m_vGrabPosition)
 		m_vPosition = *m_vGrabPosition;
+
+	else
+	{
+		m_vVelocity += m_vAcceleration;
+		m_vPosition += m_vVelocity;
+		SetForce();
+	}
 	
 	D3DXMatrixRotationX(&m_matR, D3DXToRadian(m_fRotAngle));
 	D3DXMatrixTranslation(&m_matT, m_vPosition.x , m_vPosition.y, m_vPosition.z);
@@ -79,9 +86,11 @@ void CParts::DownParts(D3DXVECTOR3 vDir)
 	m_vGrabPosition = NULL;
 	D3DXVec3Normalize(&vDir, &vDir);
 	
-	m_vPosition.x += (vDir.x/0.9f);
-	m_vPosition.y  = vDir.y;
-	m_vPosition.z += (vDir.z/0.9f);
+	//m_vPosition.x += (vDir.x/0.9f);
+	//m_vPosition.y  = 0;//vDir.y;
+	//m_vPosition.z += (vDir.z/0.9f);
+
+	AddForce(vDir * 0.2f);
 }
 
 void CParts::PartsRotate()
@@ -105,6 +114,14 @@ void CParts::MoveParts()
 	}
 	D3DXVec3Normalize(&vDirection, &vDirection);
 	m_vPosition += vDirection*0.01f;
+}
+
+void CParts::AddForce(const D3DXVECTOR3& vForce)
+{
+	if (m_isMoveParts || m_vGrabPosition)
+		return;
+	CActor::AddForce(vForce);
+
 }
 
 

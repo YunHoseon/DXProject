@@ -157,19 +157,27 @@ void CGameScene::Update()
 		if (m_pDebugSphere)
 			CTestPhysics::ApplyGravity(m_pDebugSphere);
 
-		//for (CInteractiveActor* part : m_vecParts)
-		//{
-		//	CTestPhysics::ApplyGravity(part);
-		//}
+		for (CInteractiveActor* part : m_vecParts)
+		{
+			CTestPhysics::ApplyGravity(part);
+		}
 	}
 	
 	// collide -> update
 	{// collide
+		//if (m_pDebugSphere)
+		//	CTestPhysics::ApplyBound(m_pDebugSphere, m_vecObject[2]);
 		if (m_pDebugSphere && m_pDebugCube)
 			CTestPhysics::ApplyBound(m_pDebugSphere, m_pDebugCube);
 
-		//if (m_pDebugSphere && m_pField)
-		//	CTestPhysics::ApplyBound(m_pDebugSphere, m_pField);
+		for (CActor* pStaticActor : m_vecStaticActor)
+		{
+			CTestPhysics::ApplyBound(m_pDebugSphere, pStaticActor);
+			for (CInteractiveActor* part : m_vecParts)
+			{
+				CTestPhysics::ApplyBound(part, pStaticActor);
+			}
+		}
 		
 		for (CInteractiveActor* obj : m_vecObject)
 		{

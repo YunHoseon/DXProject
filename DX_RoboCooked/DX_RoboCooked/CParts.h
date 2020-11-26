@@ -66,5 +66,7 @@ public:
 	eCombinatorPartsLevel GetCombinPartsLevel() const { return m_eLevel; }
 
 	void SetCPartCombinator(CPartCombinator* p) { m_pPartsCombinator = p; }
+
+	void AddForce(const D3DXVECTOR3& vForce) override;
 };
 

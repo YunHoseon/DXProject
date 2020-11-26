@@ -1,6 +1,7 @@
 #include "stdafx.h"
 #include "CCombinatorButton.h"
 #include "CBoxCollision.h"
+#include "CPartCombinator.h"
 
 
 CCombinatorButton::CCombinatorButton(CPartCombinator* pPartCombinator)

@@ -1,6 +1,6 @@
 #pragma once
 #include "CInteractiveActor.h"
-#include "CPartCombinator.h"
+//#include "CPartCombinator.h"
 
 class CPartCombinator;
 
