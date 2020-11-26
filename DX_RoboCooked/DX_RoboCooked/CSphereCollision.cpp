@@ -52,7 +52,9 @@ void CSphereCollision::Update()
 
 bool CSphereCollision::CollideToBox(CBoxCollision* pTargetCollider, D3DXVECTOR3* pNormal)
 {
-	return pTargetCollider->CollideToSphere(this, pNormal);
+	bool b = pTargetCollider->CollideToSphere(this, pNormal);
+	*pNormal *= -1;
+	return b;
 }
 
 bool CSphereCollision::CollideToSphere(CSphereCollision* pTargetCollider, D3DXVECTOR3* pNormal)

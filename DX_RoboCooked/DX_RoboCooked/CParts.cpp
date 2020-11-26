@@ -45,8 +45,11 @@ void CParts::Update()
 
 	else
 	{
-		m_vVelocity += m_vAcceleration;
-		m_vPosition += m_vVelocity;
+		if (m_pCollision->GetActive())
+		{
+			m_vVelocity += m_vAcceleration;
+			m_vPosition += m_vVelocity;
+		}
 		SetForce();
 	}
 	
