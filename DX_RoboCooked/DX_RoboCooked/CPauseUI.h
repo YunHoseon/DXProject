@@ -10,8 +10,7 @@ class CPauseUI :
 	{
 		EN_BODY = 0 ,EN_OK,EN_CANCEL,EN_EXIT
 	};
-private:
-	bool* m_isClick;
+
 	
 public:
 	CPauseUI();
@@ -19,7 +18,7 @@ public:
 
 	
 
-	virtual void Setup(bool* bClick);
+	virtual void Setup();
 	virtual void Update();
 	virtual void Render();
 	virtual void WndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam);

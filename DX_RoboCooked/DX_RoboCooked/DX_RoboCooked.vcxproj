@@ -151,7 +151,7 @@
     <ClInclude Include="CAllocateHierachy.h" />
     <ClInclude Include="CBlueprint.h" />
     <ClInclude Include="CBoxCollision.h" />
-    <ClInclude Include="cBtnSprite.h" />
+    <ClInclude Include="CUISprite.h" />
     <ClInclude Include="CUI.h" />
     <ClInclude Include="CPauseUI.h" />
     <ClInclude Include="CCamera.h" />
@@ -210,7 +210,7 @@
     <ClCompile Include="CAllocateHierachy.cpp" />
     <ClCompile Include="CBlueprint.cpp" />
     <ClCompile Include="CBoxCollision.cpp" />
-    <ClCompile Include="cBtnSprite.cpp" />
+    <ClCompile Include="CUISprite.cpp" />
     <ClCompile Include="CUI.cpp" />
     <ClCompile Include="CPauseUI.cpp" />
     <ClCompile Include="CCamera.cpp" />

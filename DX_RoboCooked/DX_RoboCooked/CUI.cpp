@@ -8,9 +8,6 @@ CUI::CUI()
 	, m_ptMouseMove({ 0,0 })
 	, m_vPosition({ 0,0 })
 	, m_vSize({0,0})
-	, m_isMouseDown(false)
-	, m_isMouseBtnDown(false)
-	, m_isOnOff(true)
 {
 	D3DXMatrixIdentity(&m_matWorld);
 }
@@ -41,9 +38,5 @@ bool CUI::InCheck(POINT MousePt)
 	return false;
 }
 
-void CUI::BtnOnOff()
-{
-	m_isOnOff = !m_isOnOff;
-}
 
 
