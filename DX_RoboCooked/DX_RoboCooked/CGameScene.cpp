@@ -15,6 +15,7 @@
 #include "CPartVending.h"
 #include "CTestPhysics.h"
 #include "CWall.h"
+#include "CBlueprint.h"
 
 /* µð¹ö±ë¿ë */
 #include "CDebugPlayer1.h"
@@ -31,7 +32,6 @@ CGameScene::CGameScene()
 	g_SoundManager->AddBGM("data/sound/bgm.mp3");
 	g_SoundManager->AddSFX("data/sound/effBBam.mp3", "BBam");
 	g_SoundManager->AddSFX("data/sound/effMelem.mp3", "Melem");
-
 }
 
 CGameScene::~CGameScene()
@@ -55,9 +55,6 @@ CGameScene::~CGameScene()
 	{
 		SafeDelete(it);
 	}
-
-
-
 }
 
 void CGameScene::Init()
@@ -97,6 +94,10 @@ void CGameScene::Init()
 	CPartVending* partVending = new CPartVending(outlet, this, "2");
 	partVending->Setup(0, D3DXVECTOR3(1, 0, -3));
 	m_vecObject.push_back(partVending);
+
+	CBlueprint* blueprint = new CBlueprint;
+	blueprint->Setup();
+	m_vecStaticActor.push_back(blueprint);
 
 	m_pDebugSphere = new CDebugPlayer1(this);
 	if (m_pDebugSphere)
