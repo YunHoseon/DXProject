@@ -101,18 +101,6 @@ void CPartAutoCombinator::PartsInteract(CParts* pParts)
 	pParts->GetCollision()->SetActive(false);
 	pParts->SetCombinatorPosition(m_vPosition);
 	pParts->SetMoveParts(true);
-
-	/*switch (m_eLevel)
-	{
-	case eCombinatorPartsLevel::ONE:
-		if (m_multimapParts.size() > m_nMaxPartsCount)
-			m_eCombinatorLoadState = eCombinatorLoadState::LoadImpossible;
-		break;
-	case eCombinatorPartsLevel::TWO:
-		if (m_multimapParts.size() > m_nMaxPartsCount)
-			m_eCombinatorLoadState = eCombinatorLoadState::LoadImpossible;
-		break;
-	}*/
 }
 
 void CPartAutoCombinator::OnEvent(eEvent eEvent, void* _value)
