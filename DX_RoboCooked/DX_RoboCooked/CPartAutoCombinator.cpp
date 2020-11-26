@@ -14,7 +14,7 @@ CPartAutoCombinator::CPartAutoCombinator(IInteractCenter* pInteractCenter, eComb
 	m_pParts = nullptr;
 	m_isCombine = false;
 	m_eCombinatorLoadState = eCombinatorLoadState::LoadPossible;
-	m_eCombinatorActionState = eCombinatorActionState::Unusable;
+	m_eCombinatorActionState = eCombinatorActionState::Usable;
 	m_fElapsedTime = 0;
 	m_fCombineTime = 5.0f;
 	m_nPartsCount = 0;
@@ -91,22 +91,28 @@ void CPartAutoCombinator::Interact(CCharacter* pCharacter)
 void CPartAutoCombinator::PartsInteract(CParts* pParts)
 {
 	m_nPartsCount++;
+	
+	if (m_nPartsCount > m_nMaxPartsCount)
+	{
+		m_eCombinatorLoadState = eCombinatorLoadState::LoadImpossible;
+		return;
+	}
 
 	pParts->GetCollision()->SetActive(false);
 	pParts->SetCombinatorPosition(m_vPosition);
 	pParts->SetMoveParts(true);
 
-	switch (m_eLevel)
+	/*switch (m_eLevel)
 	{
 	case eCombinatorPartsLevel::ONE:
-		if (m_multimapParts.size() >= m_nMaxPartsCount)
+		if (m_multimapParts.size() > m_nMaxPartsCount)
 			m_eCombinatorLoadState = eCombinatorLoadState::LoadImpossible;
 		break;
 	case eCombinatorPartsLevel::TWO:
-		if (m_multimapParts.size() >= m_nMaxPartsCount)
+		if (m_multimapParts.size() > m_nMaxPartsCount)
 			m_eCombinatorLoadState = eCombinatorLoadState::LoadImpossible;
 		break;
-	}
+	}*/
 }
 
 void CPartAutoCombinator::OnEvent(eEvent eEvent, void* _value)

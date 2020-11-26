@@ -18,6 +18,7 @@ CMainGame::~CMainGame()
 	SafeDelete(m_pCamera);
 	SafeDelete(m_pGrid);
 
+	g_pUITextureManager->Destroy();
 	g_pTextureManager->Destroy();
 	g_SceneManager->Destroy();
 	g_SoundManager->Destroy();
