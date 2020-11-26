@@ -102,6 +102,8 @@ void CParts::PartsRotate()
 
 void CParts::MoveParts()
 {
+	m_vVelocity = g_vZero;
+	SetForce();
 	D3DXVECTOR3 vDirection = m_vCombinatorPosition - m_vPosition;
 	float fLength = D3DXVec3Length(&vDirection);
 	

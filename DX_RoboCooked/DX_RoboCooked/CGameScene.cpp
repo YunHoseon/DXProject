@@ -170,12 +170,14 @@ void CGameScene::Update()
 		if (m_pDebugSphere && m_pDebugCube)
 			CTestPhysics::ApplyBound(m_pDebugSphere, m_pDebugCube);
 
-		for (CActor* pStaticActor : m_vecStaticActor)
+		for (CInteractiveActor* part : m_vecParts)
 		{
-			CTestPhysics::ApplyBound(m_pDebugSphere, pStaticActor);
-			for (CInteractiveActor* part : m_vecParts)
+			CTestPhysics::ApplyBound(m_pDebugSphere, part);
+			CTestPhysics::ApplyBound(m_pDebugCube, part);
+			for (CInteractiveActor* part2 : m_vecParts)
 			{
-				CTestPhysics::ApplyBound(part, pStaticActor);
+				if(part != part2)
+					CTestPhysics::ApplyBound(part2, part);
 			}
 		}
 		
@@ -183,12 +185,20 @@ void CGameScene::Update()
 		{
 			CTestPhysics::ApplyBound(m_pDebugSphere, obj);
 			CTestPhysics::ApplyBound(m_pDebugCube, obj);
+
+			for (CInteractiveActor* part : m_vecParts)
+			{
+				CTestPhysics::ApplyBound(part, obj);
+			}
 		}
 
-		for (CInteractiveActor* part : m_vecParts)
+		for (CActor* pStaticActor : m_vecStaticActor)
 		{
-			CTestPhysics::ApplyBound(m_pDebugSphere, part);
-			CTestPhysics::ApplyBound(m_pDebugCube, part);
+			CTestPhysics::ApplyBound(m_pDebugSphere, pStaticActor);
+			for (CInteractiveActor* part : m_vecParts)
+			{
+				CTestPhysics::ApplyBound(part, pStaticActor);
+			}
 		}
 		// part-part, part-obj ÇÊ¿ä
 	}
