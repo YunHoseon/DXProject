@@ -6,14 +6,12 @@
 
 
 CDebugPlayer1::CDebugPlayer1(IInteractCenter* pInteractCenter)
-	: m_pMeshSphere(nullptr)
-	, m_ElapsTimeF(0), m_ElapsTimeG(0), m_ElapsTimeH(0)
+	: CCharacter(0)
+	//,m_pMeshSphere(nullptr)
+	//, m_ElapsTimeF(0), m_ElapsTimeG(0), m_ElapsTimeH(0)
 {
 	m_pInteractCenter = pInteractCenter;
-	m_vPosition = m_sphere.vCenter;
-	m_vPosition.y += 2;
-	//m_vPosition.z += 3;
-	D3DXMatrixIdentity(&m_matWorld);
+	m_vPosition = g_vZero;
 
 	g_EventManager->Attach(eEvent::KeyPress, this);
 	g_EventManager->Attach(eEvent::KeyRelease, this);
@@ -22,21 +20,19 @@ CDebugPlayer1::CDebugPlayer1(IInteractCenter* pInteractCenter)
 
 CDebugPlayer1::~CDebugPlayer1()
 {
-	SafeRelease(m_pMeshSphere);
+	//SafeRelease(m_pMeshSphere);
+	SafeDelete(m_pInteractCollision);
+	SafeDelete(m_pCollision);
+	SafeRelease(m_pMesh);
 }
 
 void CDebugPlayer1::Setup()
 {
-	m_pCollision = new CSphereCollision({}, 0.5f, &m_matWorld);
-	m_pInteractCollision = new CBoxCollision(D3DXVECTOR3(0, 0, 0.5f), D3DXVECTOR3(0.3f, 0.3f, 0.3f), &m_matWorld);
-	D3DXCreateSphere(g_pD3DDevice, 0.5f, 10, 10, &m_pMeshSphere, NULL);
-
-	ZeroMemory(&m_stMtlSphere, sizeof(D3DMATERIAL9));
-	m_stMtlSphere.Ambient = D3DXCOLOR(0.7f, 0.7f, 0.7f, 1.0f);
-	m_stMtlSphere.Diffuse = D3DXCOLOR(0.7f, 0.7f, 0.7f, 1.0f);
-	m_stMtlSphere.Specular = D3DXCOLOR(0.7f, 0.7f, 0.7f, 1.0f);
+	m_pCollision = new CSphereCollision(g_vZero, 0.5f, &m_matWorld);
+	m_pInteractCollision = new CBoxCollision(D3DXVECTOR3(0, 0, 0.5f), D3DXVECTOR3(0.5f, 0.5f, 0.5f), &m_matWorld);
+	D3DXCreateSphere(g_pD3DDevice, 0.5f, 10, 10, &m_pMesh, NULL);
 }
-
+/*
 void CDebugPlayer1::Update()
 {
 	Move();
@@ -146,7 +142,7 @@ void CDebugPlayer1::PressKey(void* _value)
 		}
 	}
 
-	_DEBUG_COMMENT cout << m_fRotY << endl;
+	//_DEBUG_COMMENT cout << m_fRotY << endl;
 }
 
 void CDebugPlayer1::ReleaseKey(void* _value)
@@ -164,7 +160,6 @@ void CDebugPlayer1::Move()
 	if (m_pCollision)
 		m_pCollision->Update();
 	SetForce();
-	//m_vVelocity *= 0;
 }
 
 void CDebugPlayer1::Rotate(float fTargetRot)
@@ -181,7 +176,6 @@ void CDebugPlayer1::Rotate(float fTargetRot)
 	m_matWorld = m_matS * m_matR * m_matT;
 	SetForce(m_vDirection * m_fBaseSpeed);
 	
-	//m_vDirection *= m_fSpeed;
 	if (m_pCollision)
 		m_pCollision->Update();
 
@@ -194,3 +188,4 @@ void CDebugPlayer1::SetKeyChange(void* _value)
 	ST_PLAYER_INPUTKEY *data = static_cast<ST_PLAYER_INPUTKEY*>(_value);
 	m_stInputKey = *data;
 }
+*/

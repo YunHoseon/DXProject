@@ -73,7 +73,7 @@ D3DXVECTOR2 CUITextureManager::GetTextureSize(char* szFullPath)
 	D3DXVECTOR2 vTemp(0,0);
 	if (m_mapTextureInFo.find(szFullPath) == m_mapTextureInFo.end())
 	{
-		return vTemp;
+		GetTextureInfo(szFullPath);
 	}
 	vTemp.x = m_mapTextureInFo[szFullPath].Width;
 	vTemp.y = m_mapTextureInFo[szFullPath].Height;

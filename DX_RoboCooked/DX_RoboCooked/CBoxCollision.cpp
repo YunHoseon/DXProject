@@ -322,4 +322,3 @@ bool CBoxCollision::CollideToSphere(CSphereCollision* pTargetCollider, D3DXVECTO
 	
 	
 }
-

@@ -5,7 +5,7 @@ class CUISprite :
 {
 
 public:
-	CUISprite(char* OffBtnPath, char* OffFileName , char* OnBtnPath, char* OnFileName);
+	CUISprite(char* OffBtnPath,char* OnBtnPath, char* HoverBtnPath , D3DXVECTOR2 vPosition);
 	~CUISprite();
 
 	virtual void Setup(D3DXVECTOR2 vecTranslation);

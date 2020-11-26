@@ -2,7 +2,7 @@
 #include "CGameScene.h"
 #include "CField.h"
 #include "CInteractiveActor.h"
-#include "CParts.h" //생성할때 사용하기위해
+#include "CParts.h" 
 #include "CPartStorage.h"
 #include "ICollisionArea.h"
 #include "CActor.h"
@@ -15,7 +15,7 @@
 #include "CPartVending.h"
 #include "CTestPhysics.h"
 #include "CWall.h"
-#include "CBlueprint.h"
+#include "CPauseUI.h"
 
 /* 디버깅용 */
 #include "CDebugPlayer1.h"
@@ -32,6 +32,7 @@ CGameScene::CGameScene()
 	g_SoundManager->AddBGM("data/sound/bgm.mp3");
 	g_SoundManager->AddSFX("data/sound/effBBam.mp3", "BBam");
 	g_SoundManager->AddSFX("data/sound/effMelem.mp3", "Melem");
+
 }
 
 CGameScene::~CGameScene()
@@ -55,6 +56,11 @@ CGameScene::~CGameScene()
 	{
 		SafeDelete(it);
 	}
+
+
+	SafeDelete(m_pDebugPauseUI);
+
+
 }
 
 void CGameScene::Init()
@@ -95,10 +101,6 @@ void CGameScene::Init()
 	partVending->Setup(0, D3DXVECTOR3(1, 0, -3));
 	m_vecObject.push_back(partVending);
 
-	CBlueprint* blueprint = new CBlueprint;
-	blueprint->Setup();
-	m_vecStaticActor.push_back(blueprint);
-
 	m_pDebugSphere = new CDebugPlayer1(this);
 	if (m_pDebugSphere)
 		m_pDebugSphere->Setup();
@@ -119,6 +121,9 @@ void CGameScene::Init()
 	if (m_pDebugParts2)
 		m_pDebugParts2->Setup();
 	m_vecParts.push_back(m_pDebugParts2);
+
+
+	m_pDebugPauseUI = new CPauseUI;
 }
 
 void CGameScene::Render()
@@ -142,6 +147,11 @@ void CGameScene::Render()
 	{
 		it->Render();
 	}
+
+	//UITEST
+	//if (m_pDebugPauseUI)
+	//	m_pDebugPauseUI->Render();
+
 }
 
 void CGameScene::Update()
@@ -152,8 +162,8 @@ void CGameScene::Update()
 
 	{
 		// Gravity Update
-		//if (m_pDebugCube)
-		//	CTestPhysics::ApplyGravity(m_pDebugCube);
+		if (m_pDebugCube)
+			CTestPhysics::ApplyGravity(m_pDebugCube);
 
 		if (m_pDebugSphere)
 			CTestPhysics::ApplyGravity(m_pDebugSphere);
@@ -195,6 +205,7 @@ void CGameScene::Update()
 
 		for (CActor* pStaticActor : m_vecStaticActor)
 		{
+			CTestPhysics::ApplyBound(m_pDebugCube, pStaticActor);
 			CTestPhysics::ApplyBound(m_pDebugSphere, pStaticActor);
 			for (CInteractiveActor* part : m_vecParts)
 			{
@@ -224,12 +235,16 @@ void CGameScene::Update()
 
 		if (m_pDebugSphere)
 			m_pDebugSphere->Update();
+
+		//UITEST
+		if (m_pDebugPauseUI)
+			m_pDebugPauseUI->Update();
 	}
 }
 
 void CGameScene::PausePlayGame()
 {
-		m_isTimeStop = !m_isTimeStop;
+	m_isTimeStop = !m_isTimeStop;
 
 }
 
@@ -257,18 +272,18 @@ void CGameScene::GetInteractObject(CCharacter* pCharacter)
 
 void CGameScene::AddParts(CParts * parts)
 {
-	if(parts != nullptr)
+	if (parts)
 		m_vecParts.push_back(parts);
 }
 
-void CGameScene::DownParts(CCharacter* pCharacter,CParts* parts, D3DXVECTOR3 vDir)
-{
-	if (parts != nullptr)
-	{
-		pCharacter->SetPlayerState(ePlayerState::None);
-		parts->DownParts(vDir);
-	}
-}
+//void CGameScene::DownParts(CCharacter* pCharacter,CParts* parts, D3DXVECTOR3 vDir)
+//{
+//	if (parts != nullptr)
+//	{
+//		pCharacter->SetPlayerState(ePlayerState::None);
+//		parts->DownParts(vDir);
+//	}
+//}
 
 void CGameScene::CheckAroundCombinator(CPartCombinator* combinator)
 {

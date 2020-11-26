@@ -14,8 +14,8 @@ cSprite::cSprite()
 cSprite::~cSprite()
 {
 	SafeRelease(m_pSprite);
-	SafeRelease(m_pOffTextureUI);
-	SafeRelease(m_pOnTextureUI);
+	SafeRelease(m_pDisabledTextureUI);
+	SafeRelease(m_pActiveTextureUI);
 }
 
 void cSprite::Setup()
@@ -44,8 +44,8 @@ void cSprite::Render()
 
 	if(!m_btnCheck)
 	{
-		SetRect(&rc, 0, 0, m_InfoOffImage.Width, m_InfoOffImage.Height);
-		m_pSprite->Draw(m_pOffTextureUI,
+		SetRect(&rc, 0, 0, m_DisabledInfo.Width, m_DisabledInfo.Height);
+		m_pSprite->Draw(m_pDisabledTextureUI,
 			&rc,
 			&D3DXVECTOR3(0, 0, 0),
 			&D3DXVECTOR3(0, 0, 0),
@@ -53,8 +53,8 @@ void cSprite::Render()
 	}
 	else
 	{
-		SetRect(&rc, 0, 0, m_InfoOnImage.Width, m_InfoOnImage.Height);
-		m_pSprite->Draw(m_pOnTextureUI,
+		SetRect(&rc, 0, 0, m_ActiveInfo.Width, m_ActiveInfo.Height);
+		m_pSprite->Draw(m_pActiveTextureUI,
 			&rc,
 			&D3DXVECTOR3(0, 0, 0),
 			&D3DXVECTOR3(0, 0, 0),

@@ -6,7 +6,7 @@
 
 CPauseUI::CPauseUI()
 {
-
+	Setup();
 }
 
 
@@ -19,46 +19,31 @@ CPauseUI::~CPauseUI()
 
 void CPauseUI::Setup()
 {
+	RECT rc;
+	GetClientRect(g_hWnd, &rc);
+	m_vSize = g_pUITextureManager->GetTextureSize("data/UI/panel-info.png");
 
-	Sprite sp;
-	
-	D3DXVECTOR2 vecTemp(0,0);
-	CUISprite* m_cBody = new CUISprite("UI","panel-info.png",NULL,NULL);
-	m_cBody->Setup(vecTemp);
+	D3DXVECTOR2 vecTemp(rc.right/2.0f - m_vSize.x,rc.bottom/2.0f - m_vSize.y);
+	CUISprite* m_cBody = new CUISprite("data/UI/panel-info.png",NULL,NULL , vecTemp);
 	
 	m_cBody->SetParentWorldTM(&m_matWorld);
 	m_pRoot = m_cBody;
-	//sp.st_Position = D3DXVECTOR2(0, 0); sp.st_SpriteSize = g_pUITextureManager->GetTextureSize("UI/panel-info.png");
-	//m_vecSprite.push_back(sp);
-	m_vSize = g_pUITextureManager->GetTextureSize("UI/panel-info.png");
-	m_vecBtn.push_back(m_cBody);
+
 
 	
 	vecTemp = D3DXVECTOR2(130, 330);
-	CUISprite* m_cOk = new CUISprite("UI", "btn-med-over.png", "UI", "btn-med-down.png");
-	m_cOk->Setup(vecTemp);
+	CUISprite* m_cOk = new CUISprite("data/UI/btn-med-over.png", "data/UI/btn-med-down.png", "data/UI/btn-med-up.png" , vecTemp);
 	m_pRoot->AddChild(m_cOk);
-	sp.st_Position = D3DXVECTOR2(130, 330); sp.st_SpriteSize = g_pUITextureManager->GetTextureSize("UI/btn-med-over.png");
-	m_vecSprite.push_back(sp);
-	m_vecBtn.push_back(m_cOk);
-
 	
 	vecTemp = D3DXVECTOR2(130, 400);
-	CUISprite* m_cCancel = new CUISprite("UI", "btn-med-over.png", "UI", "btn-med-down.png");
-	m_cCancel->Setup(vecTemp);
+	CUISprite* m_cCancel = new CUISprite("data/UI/btn-med-over.png","data/UI/btn-med-down.png", "data/UI/btn-med-up.png" , vecTemp);
 	m_pRoot->AddChild(m_cCancel);
-	sp.st_Position = D3DXVECTOR2(130, 400); sp.st_SpriteSize = g_pUITextureManager->GetTextureSize("UI/btn-med-over.png");
-	m_vecSprite.push_back(sp);
-	m_vecBtn.push_back(m_cCancel);
 
 
 	vecTemp = D3DXVECTOR2(400, 80);
-	CUISprite* m_cExit = new CUISprite("UI", "btn-main-menu.png",NULL,NULL);
-	m_cExit->Setup(vecTemp);
+	CUISprite* m_cExit = new CUISprite("data/UI/btn-main-menu.png",NULL,NULL , vecTemp);
 	m_pRoot->AddChild(m_cExit);
-	sp.st_Position = D3DXVECTOR2(400, 80); sp.st_SpriteSize = g_pUITextureManager->GetTextureSize("UI/btn-main-menu.png");
-	m_vecSprite.push_back(sp);
-	m_vecBtn.push_back(m_cExit);
+
 
 
 }
@@ -87,34 +72,5 @@ void CPauseUI::WndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam)
 		break;
 	}
 		
-}
-
-void CPauseUI::ClickEvent(EVENT ev)
-{
-	switch (ev)
-	{
-	case EN_OK:
-		m_vecBtn[ev]->BtnOnOff();
-		break;
-	case EN_CANCEL:
-		m_vecBtn[ev]->BtnOnOff();
-		break;
-	case EN_EXIT:
-		break;
-
-	}
-}
-
-int CPauseUI::ChildBtnInCheck(POINT pt)
-{
-	for (int i = 0; i < m_vecSprite.size(); i++)
-	{
-		if(EN_BODY == i)continue;
-
-		if (m_vPosition.x+ m_vecSprite[i].st_Position.x <= pt.x &&m_vPosition.x + m_vecSprite[i].st_Position.x + m_vecSprite[i].st_SpriteSize.x >= pt.x
-			&& m_vPosition.y + m_vecSprite[i].st_Position.y <= pt.y &&m_vPosition.y + m_vecSprite[i].st_Position.y + m_vecSprite[i].st_SpriteSize.y >= pt.y)
-			return i;
-	}
-	return 0;
 }
 

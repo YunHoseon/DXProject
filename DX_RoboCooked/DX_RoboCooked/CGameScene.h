@@ -6,6 +6,7 @@ class CField;
 class CInteractiveActor;
 class CParts;
 class CCharacter;
+class CPauseUI;
 
 /* µð¹ö±ë¿ë */
 class CDebugPlayer1;
@@ -26,6 +27,8 @@ private:
 	CDebugPlayer1*				m_pDebugSphere;
 	CDebugPlayer2*				m_pDebugCube;
 	CParts*						m_pDebugParts;
+	CPauseUI*					m_pDebugPauseUI;
+
 public:
 	CGameScene();
 	virtual ~CGameScene();
@@ -38,7 +41,7 @@ public:
 
 	void GetInteractObject(CCharacter* pCharacter) override;
 	void AddParts(CParts* parts) override;
-	void DownParts(CCharacter* pCharacter,CParts* parts,D3DXVECTOR3 vDir) override;
+	//void DownParts(CCharacter* pCharacter,CParts* parts,D3DXVECTOR3 vDir) override;
 	void CheckAroundCombinator(CPartCombinator* combinator) override;
 	void SendPartsToOutlet(CParts* parts, COutlet* outlet) override;
 };
