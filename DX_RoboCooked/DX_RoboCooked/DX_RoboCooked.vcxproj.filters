@@ -216,6 +216,9 @@
     <ClInclude Include="CPauseUI.h">
       <Filter>UI</Filter>
     </ClInclude>
+    <ClInclude Include="CUITextureManager.h">
+      <Filter>Manager</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="stdafx.cpp">
@@ -382,6 +385,9 @@
     </ClCompile>
     <ClCompile Include="CPauseUI.cpp">
       <Filter>UI</Filter>
+    </ClCompile>
+    <ClCompile Include="CUITextureManager.cpp">
+      <Filter>Manager</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
