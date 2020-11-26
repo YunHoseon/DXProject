@@ -1,7 +1,7 @@
 #include "stdafx.h"
-#include "cBtnSprite.h"
+#include "CUISprite.h"
 
-cBtnSprite::cBtnSprite(char* OffBtnPath, char* OffFileName, char* OnBtnPath, char* OnFileName)
+CUISprite::CUISprite(char* OffBtnPath, char* OffFileName, char* OnBtnPath, char* OnFileName)
 {
 //	string sFullPath(OffBtnPath);
 //	sFullPath += (string("/") + string(OffFileName));
@@ -22,11 +22,11 @@ cBtnSprite::cBtnSprite(char* OffBtnPath, char* OffFileName, char* OnBtnPath, cha
 	
 }
 
-cBtnSprite::~cBtnSprite()
+CUISprite::~CUISprite()
 {
 }
 
-void cBtnSprite::Setup(D3DXVECTOR2 vecTranslation)
+void CUISprite::Setup(D3DXVECTOR2 vecTranslation)
 {
 	D3DXMatrixTranslation(&matTranslation, vecTranslation.x, vecTranslation.y, 0);
 }

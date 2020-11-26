@@ -201,9 +201,6 @@
     <ClInclude Include="CBlueprint.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="cBtnSprite.h">
-      <Filter>UI</Filter>
-    </ClInclude>
     <ClInclude Include="cSprite.h">
       <Filter>UI</Filter>
     </ClInclude>
@@ -211,6 +208,9 @@
       <Filter>UI</Filter>
     </ClInclude>
     <ClInclude Include="CUI.h">
+      <Filter>UI</Filter>
+    </ClInclude>
+    <ClInclude Include="CUISprite.h">
       <Filter>UI</Filter>
     </ClInclude>
     <ClInclude Include="CPauseUI.h">
@@ -368,9 +368,6 @@
     <ClCompile Include="CBlueprint.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="cBtnSprite.cpp">
-      <Filter>UI</Filter>
-    </ClCompile>
     <ClCompile Include="cSprite.cpp">
       <Filter>UI</Filter>
     </ClCompile>
@@ -378,6 +375,9 @@
       <Filter>UI</Filter>
     </ClCompile>
     <ClCompile Include="CUI.cpp">
+      <Filter>UI</Filter>
+    </ClCompile>
+    <ClCompile Include="CUISprite.cpp">
       <Filter>UI</Filter>
     </ClCompile>
     <ClCompile Include="CPauseUI.cpp">
