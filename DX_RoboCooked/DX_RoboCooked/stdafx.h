@@ -49,7 +49,7 @@ extern HWND g_hWnd;
 
 #define SafeDeleteArray(p) { if(p) delete[] p; p = NULL; }
 
-#define ELIPSE 0.00001f
+#define EPSILON 0.00001f
 
 #define BLOCK_SIZE 1.0f
 

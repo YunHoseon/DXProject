@@ -29,7 +29,7 @@ D3DXVECTOR3 CBoxCollision::GetCollideNormal(CBoxCollision* pTargetCollider)
 		for (int j = 0; j < 3; ++j)
 		{
 			D3DXPLANE plane;
-			D3DXPlaneFromPointNormal(&plane, &arrMinMax[i], &(n * m_arrAxisDir[j]));
+			D3DXPlaneFromPointNormal(&plane, &arrMinMax[i], &(n * pTargetCollider->m_arrAxisDir[j]));
 			vecPlane.push_back(plane);
 		}
 	}
@@ -40,8 +40,8 @@ D3DXVECTOR3 CBoxCollision::GetCollideNormal(CBoxCollision* pTargetCollider)
 	{
 		if (D3DXPlaneIntersectLine(&v, &plane, &m_vCenterPos, &pTargetCollider->m_vCenterPos))
 		{
-			float fDist = D3DXVec3Length(&(pTargetCollider->m_vCenterPos - v));
-			if(fDist < fMinDist)
+			float fDist = D3DXVec3Dot(&(pTargetCollider->m_vCenterPos - m_vCenterPos), &(pTargetCollider->m_vCenterPos - v));
+			if(fDist > 0 && fDist < fMinDist)
 			{
 				fMinDist = fDist;
 				vNormal = D3DXVECTOR3(plane.a, plane.b, plane.c);
