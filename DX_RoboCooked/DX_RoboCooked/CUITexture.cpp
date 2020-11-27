@@ -4,16 +4,24 @@
 
 CUITexture::CUITexture(char* ActivePath, char* DisabledPath, char* HoverPath)
 {
+	D3DXCreateSprite(g_pD3DDevice, &m_Sprite);
+
+	if (ActivePath == NULL)
+		return;
+
 	m_ActiveTexture		= g_pUITextureManager->GetTexture(ActivePath);
 	m_ActiveInfo		= g_pUITextureManager->GetTextureInfo(ActivePath);
 
+	if (DisabledPath == NULL)
+		return;
 	m_DisabledTexture	= g_pUITextureManager->GetTexture(DisabledPath);
 	m_DisabledInfo		= g_pUITextureManager->GetTextureInfo(DisabledPath);
 
+	if (HoverPath == NULL)
+		return;
 	m_HoverTexture		= g_pUITextureManager->GetTexture(HoverPath);
 	m_HoverInfo			= g_pUITextureManager->GetTextureInfo(HoverPath);
 
-	D3DXCreateSprite(g_pD3DDevice, &m_Sprite);
 }
 
 

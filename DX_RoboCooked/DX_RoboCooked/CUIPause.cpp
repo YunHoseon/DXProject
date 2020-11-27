@@ -17,13 +17,11 @@ CUIPause::~CUIPause()
 
 void CUIPause::Setup()
 {
-	/*CUI* BackBoard = new CUITexture(NULL,NULL,NULL);
+	CUI* BackBoard = new CUITexture("data/UI/panel-info.png", NULL, NULL);
 	CUI* BackBoardText = new CUIText;
 
-
-
 	Add(BackBoard);
-	Add(BackBoardText);*/
+	Add(BackBoardText);
 }
 
 void CUIPause::Update()

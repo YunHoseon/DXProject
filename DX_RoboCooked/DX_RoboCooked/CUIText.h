@@ -4,6 +4,8 @@
 class CUIText :
 	public CUI
 {
+private:
+	string m_sText;
 public:
 	CUIText();
 	~CUIText();
