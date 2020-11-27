@@ -6,18 +6,9 @@
 #include "IInteractCenter.h"
 #include "CCharacter.h"
 
-CPartAutoCombinator::CPartAutoCombinator(IInteractCenter* pInteractCenter, eCombinatorPartsLevel eType, float fAngle, D3DXVECTOR3 vPosition)
+CPartAutoCombinator::CPartAutoCombinator(IInteractCenter* pInteractCenter, eCombinatorPartsLevel eType, float fAngle, D3DXVECTOR3 vPosition):
+	CPartCombinator(pInteractCenter, eType, fAngle, vPosition)
 {
-	m_eLevel = eType;
-	m_vPosition = D3DXVECTOR3(0, 0, 0);
-	m_pInteractCenter = pInteractCenter;
-	m_pParts = nullptr;
-	m_isCombine = false;
-	m_eCombinatorLoadState = eCombinatorLoadState::LoadPossible;
-	m_eCombinatorActionState = eCombinatorActionState::Usable;
-	m_fElapsedTime = 0;
-	m_fCombineTime = 5.0f;
-	m_nPartsCount = 0;
 
 	switch (m_eLevel)
 	{
@@ -27,7 +18,6 @@ CPartAutoCombinator::CPartAutoCombinator(IInteractCenter* pInteractCenter, eComb
 	case eCombinatorPartsLevel::TWO:
 		m_nMaxPartsCount = 3;
 		break;
-
 	}
 	Setup(fAngle, vPosition);
 }
@@ -259,12 +249,12 @@ void CPartAutoCombinator::Setup(float fAngle, D3DXVECTOR3 vPosition)
 
 	D3DXMatrixRotationY(&m_matR, D3DXToRadian(fAngle));
 	D3DXMatrixTranslation(&m_matT, vPosition.x, 0, vPosition.z);
-	m_vPosition = vPosition;
-	m_vOnCombinatorPosition = D3DXVECTOR3(vPosition.x, vPosition.y + 1.0f, vPosition.z);
+	//m_vPosition = vPosition;
+	//m_vOnCombinatorPosition = D3DXVECTOR3(vPosition.x, vPosition.y + 1.0f, vPosition.z);
 
-	m_pCollision = new CBoxCollision(D3DXVECTOR3(0, 0, 0), D3DXVECTOR3(1.0f, 1.0f, 1.0f), &m_matWorld);
+	m_pCollision = new CBoxCollision(g_vZero, D3DXVECTOR3(1.0f, 1.0f, 1.0f), &m_matWorld);
 
-	m_pPartsInteractCollision = new CSphereCollision(D3DXVECTOR3(0, 0, 0), 2.0f, &m_matWorld);
+	m_pPartsInteractCollision = new CSphereCollision(g_vZero, 2.0f, &m_matWorld);
 
 
 	m_matWorld = m_matS * m_matR * m_matT;

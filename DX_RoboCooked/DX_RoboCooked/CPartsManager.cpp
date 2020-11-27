@@ -30,10 +30,18 @@ void CPartsManager::Load()
 		_DEBUG_COMMENT cout << "ID : " << st.sID << endl;
 		_DEBUG_COMMENT cout << "Formula : " << st.sFormula << endl;
 		_DEBUG_COMMENT cout << "Mass : " << st.fMass << endl << endl;
+
+		m_mapPartsAttr.emplace(st.sID, st);
+		m_mapFormula.emplace(st.sFormula, st.sID);
 	}
 }
 
-CParts* CPartsManager::CreateParts(string& sID)
+CParts* CPartsManager::CreateParts(string sID)
 {
 	return nullptr;
+}
+
+string CPartsManager::GetIDFromFormula(string sFormula)
+{
+	return "";
 }

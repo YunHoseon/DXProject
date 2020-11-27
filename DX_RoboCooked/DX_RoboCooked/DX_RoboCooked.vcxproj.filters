@@ -49,7 +49,7 @@
     <Filter Include="GameScene\PartsGen">
       <UniqueIdentifier>{f06b2a7b-b547-4972-9951-7e73fabcee8a}</UniqueIdentifier>
     </Filter>
-    <Filter Include="GameScene\Factory">
+    <Filter Include="Manager\Factory">
       <UniqueIdentifier>{257ea775-a605-4615-8082-d1d21b4bd2cc}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
@@ -214,7 +214,7 @@
       <Filter>GameScene\Actor</Filter>
     </ClInclude>
     <ClInclude Include="CPartsManager.h">
-      <Filter>GameScene\Factory</Filter>
+      <Filter>Manager\Factory</Filter>
     </ClInclude>
     <ClInclude Include="CUIPause.h">
       <Filter>UI</Filter>
@@ -378,7 +378,7 @@
       <Filter>GameScene\Actor</Filter>
     </ClCompile>
     <ClCompile Include="CPartsManager.cpp">
-      <Filter>GameScene\Factory</Filter>
+      <Filter>Manager\Factory</Filter>
     </ClCompile>
     <ClCompile Include="CUIPause.cpp">
       <Filter>UI</Filter>

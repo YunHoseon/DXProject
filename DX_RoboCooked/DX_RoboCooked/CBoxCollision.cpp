@@ -69,6 +69,19 @@ CBoxCollision::CBoxCollision(D3DXVECTOR3 vOriginPos, D3DXVECTOR3 vSize, D3DXMATR
 	m_fAxisHalfLen[2] = vSize.z * 0.5f;
 }
 
+CBoxCollision::CBoxCollision(LPD3DXMESH pMesh, D3DXMATRIXA16* pmatWorld) : ICollisionArea()
+{
+	m_eType = eColideType::Box;
+	m_arrOriginAxisDir[0] = D3DXVECTOR3(1, 0, 0);
+	m_arrOriginAxisDir[1] = D3DXVECTOR3(0, 1, 0);
+	m_arrOriginAxisDir[2] = D3DXVECTOR3(0, 0, 1);
+
+	m_arrAxisDir = m_arrOriginAxisDir;
+
+	
+	
+}
+
 CBoxCollision::~CBoxCollision()
 {
 }
@@ -211,19 +224,19 @@ bool CBoxCollision::CollideToBox(CBoxCollision* pTargetCollider, D3DXVECTOR3* pN
 			// : 0
 			r = abs(dist[0] * cos[2][0] - dist[2] * cos[0][0]);
 			r0 = this->m_fAxisHalfLen[0] * absCos[2][0] + this->m_fAxisHalfLen[2] * absCos[0][0];
-			r1 = this->m_fAxisHalfLen[1] * absCos[1][2] + this->m_fAxisHalfLen[2] * absCos[1][1];
+			r1 = pTargetCollider->m_fAxisHalfLen[1] * absCos[1][2] + pTargetCollider->m_fAxisHalfLen[2] * absCos[1][1];
 			if (r > r0 + r1) return false;
 
 			// : 1
 			r = abs(dist[0] * cos[2][1] - dist[2] * cos[0][1]);
 			r0 = this->m_fAxisHalfLen[0] * absCos[2][1] + this->m_fAxisHalfLen[2] * absCos[0][1];
-			r1 = this->m_fAxisHalfLen[0] * absCos[1][2] + this->m_fAxisHalfLen[2] * absCos[1][0];
+			r1 = pTargetCollider->m_fAxisHalfLen[0] * absCos[1][2] + pTargetCollider->m_fAxisHalfLen[2] * absCos[1][0];
 			if (r > r0 + r1) return false;
 
 			// : 2
 			r = abs(dist[0] * cos[2][2] - dist[2] * cos[0][2]);
 			r0 = this->m_fAxisHalfLen[0] * absCos[2][2] + this->m_fAxisHalfLen[2] * absCos[0][2];
-			r1 = this->m_fAxisHalfLen[0] * absCos[1][1] + this->m_fAxisHalfLen[1] * absCos[1][0];
+			r1 = pTargetCollider->m_fAxisHalfLen[0] * absCos[1][1] + pTargetCollider->m_fAxisHalfLen[1] * absCos[1][0];
 			if (r > r0 + r1) return false;
 		}
 
@@ -232,19 +245,19 @@ bool CBoxCollision::CollideToBox(CBoxCollision* pTargetCollider, D3DXVECTOR3* pN
 			// : 3
 			r = abs(dist[1] * cos[0][0] - dist[2] * cos[1][0]);
 			r0 = this->m_fAxisHalfLen[0] * absCos[1][0] + this->m_fAxisHalfLen[1] * absCos[0][0];
-			r1 = this->m_fAxisHalfLen[1] * absCos[2][2] + this->m_fAxisHalfLen[2] * absCos[2][1];
+			r1 = pTargetCollider->m_fAxisHalfLen[1] * absCos[2][2] + pTargetCollider->m_fAxisHalfLen[2] * absCos[2][1];
 			if (r > r0 + r1) return false;
 
 			// : 4
 			r = abs(dist[1] * cos[0][1] - dist[2] * cos[1][1]);
 			r0 = this->m_fAxisHalfLen[0] * absCos[1][1] + this->m_fAxisHalfLen[1] * absCos[0][1];
-			r1 = this->m_fAxisHalfLen[0] * absCos[2][2] + this->m_fAxisHalfLen[2] * absCos[2][0];
+			r1 = pTargetCollider->m_fAxisHalfLen[0] * absCos[2][2] + pTargetCollider->m_fAxisHalfLen[2] * absCos[2][0];
 			if (r > r0 + r1) return false;
 
 			// : 5
 			r = abs(dist[1] * cos[0][2] - dist[2] * cos[1][2]);
 			r0 = this->m_fAxisHalfLen[0] * absCos[1][2] + this->m_fAxisHalfLen[1] * absCos[0][2];
-			r1 = this->m_fAxisHalfLen[0] * absCos[2][1] + this->m_fAxisHalfLen[1] * absCos[2][0];
+			r1 = pTargetCollider->m_fAxisHalfLen[0] * absCos[2][1] + pTargetCollider->m_fAxisHalfLen[1] * absCos[2][0];
 			if (r > r0 + r1) return false;
 		}
 
@@ -252,19 +265,19 @@ bool CBoxCollision::CollideToBox(CBoxCollision* pTargetCollider, D3DXVECTOR3* pN
 			// : 6
 			r = abs(dist[2] * cos[1][0] - dist[1] * cos[2][0]);
 			r0 = this->m_fAxisHalfLen[1] * absCos[2][0] + this->m_fAxisHalfLen[2] * absCos[1][0];
-			r1 = this->m_fAxisHalfLen[1] * absCos[0][2] + this->m_fAxisHalfLen[2] * absCos[0][1];
+			r1 = pTargetCollider->m_fAxisHalfLen[1] * absCos[0][2] + pTargetCollider->m_fAxisHalfLen[2] * absCos[0][1];
 			if (r > r0 + r1) return false;
 
 			// : 7
 			r = abs(dist[2] * cos[1][1] - dist[1] * cos[2][1]);
 			r0 = this->m_fAxisHalfLen[1] * absCos[2][1] + this->m_fAxisHalfLen[2] * absCos[1][1];
-			r1 = this->m_fAxisHalfLen[0] * absCos[0][2] + this->m_fAxisHalfLen[2] * absCos[0][0];
+			r1 = pTargetCollider->m_fAxisHalfLen[0] * absCos[0][2] + pTargetCollider->m_fAxisHalfLen[2] * absCos[0][0];
 			if (r > r0 + r1) return false;
 
 			// : 8
 			r = abs(dist[2] * cos[1][2] - dist[1] * cos[2][2]);
 			r0 = this->m_fAxisHalfLen[1] * absCos[2][2] + this->m_fAxisHalfLen[2] * absCos[1][2];
-			r1 = this->m_fAxisHalfLen[0] * absCos[0][1] + this->m_fAxisHalfLen[1] * absCos[0][0];
+			r1 = pTargetCollider->m_fAxisHalfLen[0] * absCos[0][1] + pTargetCollider->m_fAxisHalfLen[1] * absCos[0][0];
 			if (r > r0 + r1) return false;
 		}
 

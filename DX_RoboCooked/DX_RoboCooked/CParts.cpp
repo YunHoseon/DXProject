@@ -124,4 +124,11 @@ void CParts::AddForce(const D3DXVECTOR3& vForce)
 
 }
 
+void CParts::AddAcceleration(const D3DXVECTOR3& vAccel)
+{
+	if (m_isMoveParts || m_vGrabPosition)
+		return;
+	CActor::AddAcceleration(vAccel);
+}
+
 

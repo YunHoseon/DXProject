@@ -28,5 +28,8 @@ public:
 	CParts * Make() override;
 	void OnEvent(eEvent eEvent, void* _value);
 	void Interact(CCharacter* pCharacter) override;
+
+	void AddAcceleration(const D3DXVECTOR3& vAccel) override {}
+	void AddForce(const D3DXVECTOR3& vForce) override {}
 };
 

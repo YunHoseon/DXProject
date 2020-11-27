@@ -33,5 +33,8 @@ public:
 	D3DXVECTOR3 GetPosition() { return m_vPosition; }
 	eOutletState GetState() { return m_eOutletState; }
 	void SetState(eOutletState state) { m_eOutletState = state; }
+
+	void AddAcceleration(const D3DXVECTOR3& vAccel) override {}
+	void AddForce(const D3DXVECTOR3& vForce) override {}
 };
 

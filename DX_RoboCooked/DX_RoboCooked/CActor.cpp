@@ -3,17 +3,18 @@
 #include "ICollisionArea.h"
 
 
-CActor::CActor()
-	: m_pInteractCenter(nullptr)
-	, m_pCollision(nullptr)
-	, m_fRotY(0)
-	, m_vDirection(0, 0, 1)
-	, m_vPosition(0, 0, 0)
-	, m_fBaseSpeed(0)
-	, m_fSpeed(m_fBaseSpeed)
-	, m_fMass(1)
-	, m_vVelocity(0,0,0)
-	, m_vAcceleration(0,0,0)
+CActor::CActor() :
+	m_pInteractCenter(nullptr),
+	m_pCollision(nullptr),
+	m_fRotY(0),
+	m_vDirection(0, 0, 1),
+	m_vPosition(0, 0, 0),
+	m_fBaseSpeed(0),
+	m_fSpeed(m_fBaseSpeed),
+	m_fMass(1),
+	m_fFriction(0),
+	m_vVelocity(0, 0, 0),
+	m_vAcceleration(0, 0, 0)
 {
 	D3DXMatrixIdentity(&m_matS);
 	D3DXMatrixIdentity(&m_matR);
@@ -45,6 +46,11 @@ void CActor::SetScale(float x, float y, float z)
 	m_vScale = D3DXVECTOR3(x, y, z);
 	D3DXMatrixScaling(&m_matS, x, y, z);
 	m_matWorld = m_matS * m_matR * m_matT;
+}
+
+void CActor::AddAcceleration(const D3DXVECTOR3& vAccel)
+{
+	m_vAcceleration += vAccel;
 }
 
 void CActor::AddForce(const D3DXVECTOR3& vForce)

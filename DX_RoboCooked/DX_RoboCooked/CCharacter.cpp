@@ -171,7 +171,7 @@ void CCharacter::PressKey(void* _value)
 			if(CurrentTime - m_arrElapsedTime[2] > m_arrCoolDown[2])
 			{
 				//대시 -> 점멸로 수정해야함
-				AddForce(m_vDirection);
+				AddAcceleration(m_vDirection);
 				g_SoundManager->PlaySFX("Melem");
 				m_arrElapsedTime[2] = CurrentTime;
 			}

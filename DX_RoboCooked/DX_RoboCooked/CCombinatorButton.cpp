@@ -7,6 +7,7 @@
 CCombinatorButton::CCombinatorButton(CPartCombinator* pPartCombinator)
 			:m_pPartCombinator(pPartCombinator)
 {
+	m_fMass = 9999.f;
 }
 
 

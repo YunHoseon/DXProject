@@ -6,6 +6,8 @@
 const float Y = -1.0f;
 CField::CField(): m_stMtlTile({})
 {
+	m_fFriction = 0.2f; // test
+	m_fMass = 9999.f;
 }
 
 

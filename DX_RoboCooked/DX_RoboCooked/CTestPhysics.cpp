@@ -12,8 +12,7 @@ void CTestPhysics::ApplyGravity(CActor* pA)
 {
 	//return;
 	D3DXVECTOR3 gravity(0, -0.01f, 0);
-	gravity *= pA->GetMass();
-	pA->AddForce(gravity);
+	pA->AddAcceleration(gravity);
 }
 
 void CTestPhysics::ApplyBound(CActor* pA, CActor* pB)
@@ -25,17 +24,29 @@ void CTestPhysics::ApplyBound(CActor* pA, CActor* pB)
 		// 수직항력 = vNormal * dot(vNormal, -velocity)
 		// 노멀과 방향의 각도가 같으면 생략
 		
-		D3DXVECTOR3 vTempVelocity = pA->GetVelocity() + pA->GetAcceleration();
+		D3DXVECTOR3 vTempVelocity = (pA->GetVelocity() + pA->GetAcceleration()) + (pB->GetVelocity() + pB->GetAcceleration());
 		float power = -D3DXVec3Dot(&vNormal, &vTempVelocity);
-		D3DXVECTOR3 vNormalForce;
+		D3DXVECTOR3 vNormalForce(g_vZero);
 		if (power > 0)
+			vNormalForce = vNormal * power * 1.0f; // 탄성계수
+
+		else if (power < 0)
+			vNormalForce = -vNormal * power * 1.0f; // 탄성계수
+
+		if (pA->GetMass() < pB->GetMass())
+			pA->AddAcceleration(vNormalForce); // 수직항력
+		else if (pA->GetMass() > pB->GetMass())
+			pB->AddAcceleration(-vNormalForce);
+		else
 		{
-			vNormalForce = vNormal * power * pA->GetMass() * 1.0f; // 탄성계수
-			pA->AddForce(vNormalForce); // 수직항력
-			vTempVelocity = pA->GetVelocity() + pA->GetAcceleration();
+			pA->AddAcceleration(vNormalForce * 0.5f);
+			pB->AddAcceleration(-vNormalForce * 0.5f);
 		}
 		
-		vTempVelocity *= -0.2f * pA->GetMass(); // -1 * 마찰계수
-		pA->AddForce(vTempVelocity); // 마찰력
+		vTempVelocity = (pA->GetVelocity() + pA->GetAcceleration()) * -1 * pB->GetFriction(); // -1 * 마찰계수
+		pA->AddAcceleration(vTempVelocity); // 마찰력
+
+		vTempVelocity = (pB->GetVelocity() + pB->GetAcceleration()) * -1 * pA->GetFriction(); // -1 * 마찰계수
+		pB->AddAcceleration(vTempVelocity); // 마찰력
 	}
 }

@@ -68,5 +68,6 @@ public:
 	void SetCPartCombinator(CPartCombinator* p) { m_pPartsCombinator = p; }
 
 	void AddForce(const D3DXVECTOR3& vForce) override;
+	void AddAcceleration(const D3DXVECTOR3& vAccel) override;
 };
 
