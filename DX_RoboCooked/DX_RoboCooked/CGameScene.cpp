@@ -128,7 +128,8 @@ void CGameScene::Init()
 		m_pDebugParts2->Setup();
 	m_vecParts.push_back(m_pDebugParts2);
 
-	m_pDebugPauseUI = new CUIPause;
+	m_pDebugPauseUI = new CUIButton;
+	m_pDebugPauseUI->Setup();
 }
 
 void CGameScene::Render()

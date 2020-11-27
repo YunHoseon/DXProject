@@ -10,7 +10,7 @@ protected:
 	CUI*				m_pParent;
 	D3DXMATRIXA16		m_matWorld;
 	Synthesize(D3DXMATRIXA16*, m_pParentWorldTM, ParentWorldTM);
-	
+	D3DXVECTOR2			m_vPosition;
 public:
 	virtual void Update() {}
 	virtual void Render() {}

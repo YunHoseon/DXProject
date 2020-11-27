@@ -2,9 +2,10 @@
 #include "CUITexture.h"
 
 
-CUITexture::CUITexture(char* ActivePath, char* DisabledPath, char* HoverPath)
+CUITexture::CUITexture(char* ActivePath, char* DisabledPath, char* HoverPath, D3DXVECTOR2 vPos)
 {
 	D3DXCreateSprite(g_pD3DDevice, &m_Sprite);
+	m_vPosition = vPos;
 
 	if (ActivePath == NULL)
 		return;
@@ -32,6 +33,14 @@ CUITexture::~CUITexture()
 
 void CUITexture::Update()
 {
+	D3DXMATRIXA16 matS,matT,matR;
+	D3DXMatrixIdentity(&matS);
+	D3DXMatrixIdentity(&matR);
+	D3DXMatrixIdentity(&matT);
+
+	D3DXMatrixTranslation(&matT, m_vPosition.x, m_vPosition.y,0);
+	m_matWorld = matS * matR * matT;
+
 	if (m_pParentWorldTM)
 		m_matWorld *= *m_pParentWorldTM;
 }

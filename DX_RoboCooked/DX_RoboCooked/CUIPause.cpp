@@ -4,27 +4,55 @@
 #include "CUIText.h"
 #include "CUITexture.h"
 
-CUIPause::CUIPause()
-{
-	Setup();
-}
-
-
-CUIPause::~CUIPause()
+CUIButton::CUIButton()
 {
 }
 
 
-void CUIPause::Setup()
+CUIButton::~CUIButton()
 {
-	CUI* BackBoard = new CUITexture("data/UI/panel-info.png", NULL, NULL);
-	CUI* BackBoardText = new CUIText("asd");
-
-	Add(BackBoard);
-	Add(BackBoardText);
 }
 
-void CUIPause::Update()
+
+void CUIButton::Setup()
+{
+	D3DXVECTOR2 vec2;
+
+	vec2 = D3DXVECTOR2(500,100);
+	CUI* Texture = new CUITexture("data/UI/panel-info.png", NULL, NULL, vec2);
+	vec2 = D3DXVECTOR2 (700, 250);
+	CUI* Text = new CUIText("UI_TEST",vec2);
+	
+	Add(Texture);
+	Add(Text);
+
+
+	CUI* OKButton = new CUIButton;
+	Add(OKButton);
+
+	vec2 = D3DXVECTOR2(630, 400);
+	Texture = new CUITexture("data/UI/btn-med-over.png", NULL, NULL, vec2);
+	vec2 = D3DXVECTOR2(750, 420);
+	Text = new CUIText("OK", vec2);
+
+	OKButton->Add(Texture);
+	OKButton->Add(Text);
+
+	CUI* NoButton = new CUIButton;
+	Add(NoButton);
+
+	vec2 = D3DXVECTOR2(630, 500);
+	Texture = new CUITexture("data/UI/btn-med-over.png", NULL, NULL, vec2);
+	vec2 = D3DXVECTOR2(750, 520);
+	Text = new CUIText("NO", vec2);
+
+	NoButton->Add(Texture);
+	NoButton->Add(Text);
+
+
+}
+
+void CUIButton::Update()
 {
 	for (const auto c : m_listUIchildren)
 	{
@@ -32,7 +60,7 @@ void CUIPause::Update()
 	}
 }
 
-void CUIPause::Render()
+void CUIButton::Render()
 {
 	for (const auto c : m_listUIchildren)
 	{
@@ -40,13 +68,13 @@ void CUIPause::Render()
 	}
 }
 
-void CUIPause::Add(CUI * component)
+void CUIButton::Add(CUI * component)
 {
 	this->m_listUIchildren.push_back(component);
 	component->SetParent(this);
 }
 
-void CUIPause::Remove(CUI * component)
+void CUIButton::Remove(CUI * component)
 {
 	m_listUIchildren.remove(component);
 	component->SetParent(nullptr);

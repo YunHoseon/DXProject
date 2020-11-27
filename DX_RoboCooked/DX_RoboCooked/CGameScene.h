@@ -6,7 +6,7 @@ class CField;
 class CInteractiveActor;
 class CParts;
 class CCharacter;
-class CUIPause;
+class CUIButton;
 
 /* µð¹ö±ë¿ë */
 class CDebugPlayer1;
@@ -27,7 +27,7 @@ private:
 	CDebugPlayer1*				m_pDebugSphere;
 	CDebugPlayer2*				m_pDebugCube;
 	CParts*						m_pDebugParts;
-	CUIPause*					m_pDebugPauseUI;
+	CUIButton*					m_pDebugPauseUI;
 
 public:
 	CGameScene();

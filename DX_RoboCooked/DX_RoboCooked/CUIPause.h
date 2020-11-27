@@ -5,15 +5,15 @@ class CUI;
 class CUITexture;
 class CUIText;
 
-class CUIPause :
+class CUIButton :
 	public CUI
 {
 private:
 	std::list<CUI*> m_listUIchildren;
 
 public:
-	CUIPause();
-	~CUIPause();
+	CUIButton();
+	~CUIButton();
 	
 	void Setup();
 	void Update();

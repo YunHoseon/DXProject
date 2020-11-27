@@ -5,6 +5,7 @@
 CUI::CUI()
 	: m_pParent(nullptr)
 	, m_pParentWorldTM(nullptr)
+	, m_vPosition(0,0)
 {
 	D3DXMatrixIdentity(&m_matWorld);
 }
