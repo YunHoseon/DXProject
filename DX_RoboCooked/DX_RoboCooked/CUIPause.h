@@ -23,6 +23,7 @@ public:
 public:
 	void Add(CUI *component) override;
 	void Remove(CUI *component) override;
+	void OnEvent(eEvent eEvent, void* _value) override;
 
 
 

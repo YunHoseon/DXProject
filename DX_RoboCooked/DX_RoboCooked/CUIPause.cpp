@@ -6,6 +6,8 @@
 
 CUIButton::CUIButton()
 {
+	g_EventManager->Attach(eEvent::MouseClick, this);
+
 }
 
 
@@ -16,6 +18,7 @@ CUIButton::~CUIButton()
 
 void CUIButton::Setup()
 {
+
 	D3DXVECTOR2 vec2;
 
 	vec2 = D3DXVECTOR2(500,100);
@@ -78,4 +81,14 @@ void CUIButton::Remove(CUI * component)
 {
 	m_listUIchildren.remove(component);
 	component->SetParent(nullptr);
+}
+
+void CUIButton::OnEvent(eEvent eEvent, void * _value)
+{
+	ST_MouseEvent *data = static_cast<ST_MouseEvent*>(_value);
+
+	for (auto it : m_listUIchildren)
+	{
+		cout << it->CheckIn(data->pt) << endl;
+	}
 }

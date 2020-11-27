@@ -7,11 +7,14 @@ CUITexture::CUITexture(char* ActivePath, char* DisabledPath, char* HoverPath, D3
 	D3DXCreateSprite(g_pD3DDevice, &m_Sprite);
 	m_vPosition = vPos;
 
+
 	if (ActivePath == NULL)
 		return;
 
 	m_ActiveTexture		= g_pUITextureManager->GetTexture(ActivePath);
 	m_ActiveInfo		= g_pUITextureManager->GetTextureInfo(ActivePath);
+
+	m_vSize = D3DXVECTOR2(m_ActiveInfo.Width, m_ActiveInfo.Height);
 
 	if (DisabledPath == NULL)
 		return;

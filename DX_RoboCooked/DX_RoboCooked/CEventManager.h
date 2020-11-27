@@ -15,7 +15,8 @@ enum class eEvent
 	PartsHold,
 	PartsSpin,
 	PartsPut,
-	PartsThrow
+	PartsThrow,
+	MouseClick
 };
 
 

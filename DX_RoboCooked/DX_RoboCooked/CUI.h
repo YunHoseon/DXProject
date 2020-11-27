@@ -1,6 +1,7 @@
 #pragma once
+#include "CEventListener.h"
 
-class CUI
+class CUI : public CEventListener
 {
 public:
 	CUI();
@@ -11,6 +12,7 @@ protected:
 	D3DXMATRIXA16		m_matWorld;
 	Synthesize(D3DXMATRIXA16*, m_pParentWorldTM, ParentWorldTM);
 	D3DXVECTOR2			m_vPosition;
+	D3DXVECTOR2			m_vSize;
 public:
 	virtual void Update() {}
 	virtual void Render() {}
@@ -22,5 +24,6 @@ public:
 	virtual void Add(CUI *component) {}
 	virtual void Remove(CUI *component) {}
 	virtual void Setup() {}
+	virtual bool CheckIn(POINT pt);
 };
 
