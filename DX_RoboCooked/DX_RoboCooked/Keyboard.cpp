@@ -8,24 +8,25 @@ CKeyboard::CKeyboard()
 {
 	m_eKeyState = E_NONE;
 
-	m_stInputKey[0].moveFowardKey = 'W';
-	m_stInputKey[0].moveLeftKey = 'A';
-	m_stInputKey[0].moveBackKey = 'S';
-	m_stInputKey[0].moveRightKey = 'D';
-	m_stInputKey[0].interactableKey1 = 'F';
-	m_stInputKey[0].interactableKey2 = 'G';
-	m_stInputKey[0].interactableKey3 = 'H';
+	m_arrBaseInputKey[0].moveFowardKey = 'W';
+	m_arrBaseInputKey[0].moveLeftKey = 'A';
+	m_arrBaseInputKey[0].moveBackKey = 'S';
+	m_arrBaseInputKey[0].moveRightKey = 'D';
+	m_arrBaseInputKey[0].interactableKey1 = 'F';
+	m_arrBaseInputKey[0].interactableKey2 = 'G';
+	m_arrBaseInputKey[0].interactableKey3 = 'H';
 
-	m_stInputKey[1].moveFowardKey = VK_UP;
-	m_stInputKey[1].moveLeftKey = VK_LEFT;
-	m_stInputKey[1].moveBackKey = VK_DOWN;
-	m_stInputKey[1].moveRightKey = VK_RIGHT;
-	m_stInputKey[1].interactableKey1 = VK_OEM_COMMA;
-	m_stInputKey[1].interactableKey2 = VK_OEM_PERIOD;
-	m_stInputKey[1].interactableKey3 = VK_OEM_2;
+	m_arrBaseInputKey[1].moveFowardKey = VK_UP;
+	m_arrBaseInputKey[1].moveLeftKey = VK_LEFT;
+	m_arrBaseInputKey[1].moveBackKey = VK_DOWN;
+	m_arrBaseInputKey[1].moveRightKey = VK_RIGHT;
+	m_arrBaseInputKey[1].interactableKey1 = VK_OEM_COMMA;
+	m_arrBaseInputKey[1].interactableKey2 = VK_OEM_PERIOD;
+	m_arrBaseInputKey[1].interactableKey3 = VK_OEM_2;
 
-	g_EventManager->CallEvent(eEvent::Player1KeyChange, (void*)&m_stInputKey[0]);
-	g_EventManager->CallEvent(eEvent::Player2KeyChange, (void*)&m_stInputKey[1]);
+	m_arrInputKey = m_arrBaseInputKey;
+	g_EventManager->CallEvent(eEvent::Player1KeyChange, (void*)&m_arrInputKey[0]);
+	g_EventManager->CallEvent(eEvent::Player2KeyChange, (void*)&m_arrInputKey[1]);
 }
 
 CKeyboard::~CKeyboard()
@@ -35,7 +36,7 @@ CKeyboard::~CKeyboard()
 void CKeyboard::Update()
  {
 	ST_KeyInputEvent data;
-
+	
 	unordered_set<WPARAM>::iterator it;
 	for(it = m_setKey.begin(); it != m_setKey.end(); it++)
 	{
@@ -114,7 +115,8 @@ void CKeyboard::ReleaseKey(WPARAM keyID, LPARAM lParam)
 
 	m_setKey.erase(new_vk);
 	m_eKeyState = E_BTNUP;
-	g_EventManager->CallEvent(eEvent::KeyRelease, NULL);
+	ST_KeyInputEvent data{ new_vk };
+	g_EventManager->CallEvent(eEvent::KeyRelease, (void*)&data);
 }
 
 void CKeyboard::OnEvent(eEvent eEvent, void* _value)
@@ -133,7 +135,12 @@ void CKeyboard::OnEvent(eEvent eEvent, void* _value)
 void CKeyboard::SetKeyChange(int n, void* _value)
 {
 	ST_PLAYER_INPUTKEY *data = static_cast<ST_PLAYER_INPUTKEY*>(_value);
-	m_stInputKey[n - 1] = *data;
+	m_arrInputKey[n - 1] = *data;
+}
+
+void CKeyboard::Reset()
+{
+	m_arrInputKey = m_arrBaseInputKey;
 }
 
 //void CKeyboard::JudgeDash(WPARAM keyID)

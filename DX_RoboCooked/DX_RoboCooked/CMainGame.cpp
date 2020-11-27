@@ -29,6 +29,7 @@ CMainGame::~CMainGame()
 void CMainGame::Setup()
 {
 	SetLight();
+	InputManager;
 	
 	m_pGrid = new CGrid;
 	if (m_pGrid)

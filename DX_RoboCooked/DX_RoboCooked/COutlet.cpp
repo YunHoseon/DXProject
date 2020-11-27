@@ -167,7 +167,7 @@ void COutlet::Interact(CCharacter* pCharacter)
 		pCharacter->SetParts(m_pMyParts);									//캐릭터에게 어떤파츠를 들고있는지 알려줌
 		m_pMyParts->SetGrabPosition(&pCharacter->GetGrabPartsPosition());	//캐릭터를 따라가게함
 		
-		pCharacter->SetPlayerState(ePlayerState::Grab);
+		//pCharacter->SetPlayerState(ePlayerState::Grab);
 		m_eOutletState = eOutletState::None;
 		m_pMyParts = NULL;
 	}

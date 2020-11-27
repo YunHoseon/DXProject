@@ -1,5 +1,5 @@
 #pragma once
-#include "inc/fmod.hpp"
+#include "include/fmod.hpp"
 #pragma comment(lib,"fmodex_vc.lib")
 #include <string>
 #include <map>

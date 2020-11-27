@@ -151,7 +151,10 @@
     <ClInclude Include="CAllocateHierachy.h" />
     <ClInclude Include="CBlueprint.h" />
     <ClInclude Include="CBoxCollision.h" />
+    <ClInclude Include="CPartsManager.h" />
+    <ClInclude Include="CUISprite.h" />
     <ClInclude Include="CUI.h" />
+    <ClInclude Include="CPauseUI.h" />
     <ClInclude Include="CCamera.h" />
     <ClInclude Include="CCharacter.h" />
     <ClInclude Include="CCombinatorButton.h" />
@@ -159,13 +162,12 @@
     <ClInclude Include="CPartAutoCombinator.h" />
     <ClInclude Include="CPartCombinator.h" />
     <ClInclude Include="CPartManualCombinator.h" />
-    <ClInclude Include="CPartsParser.h" />
     <ClInclude Include="CPartStorage.h" />
     <ClInclude Include="CPartVending.h" />
     <ClInclude Include="CSoundManager.h" />
+    <ClInclude Include="cSprite.h" />
+    <ClInclude Include="cSpriteNode.h" />
     <ClInclude Include="CTestPhysics.h" />
-    <ClInclude Include="CUIPause.h" />
-    <ClInclude Include="CUIText.h" />
     <ClInclude Include="CUITextureManager.h" />
     <ClInclude Include="CWall.h" />
     <ClInclude Include="ICollisionArea.h" />
@@ -197,20 +199,21 @@
     <ClInclude Include="Keyboard.h" />
     <ClInclude Include="Mouse.h" />
     <ClInclude Include="CParts.h" />
-    <ClInclude Include="CPartsManager.h" />
     <ClInclude Include="Resource.h" />
     <ClInclude Include="CSingleton.h" />
     <ClInclude Include="stdafx.h" />
     <ClInclude Include="targetver.h" />
     <ClInclude Include="CTile.h" />
-    <ClInclude Include="CUITexture.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="CActor.cpp" />
     <ClCompile Include="CAllocateHierachy.cpp" />
     <ClCompile Include="CBlueprint.cpp" />
     <ClCompile Include="CBoxCollision.cpp" />
+    <ClCompile Include="CPartsManager.cpp" />
+    <ClCompile Include="CUISprite.cpp" />
     <ClCompile Include="CUI.cpp" />
+    <ClCompile Include="CPauseUI.cpp" />
     <ClCompile Include="CCamera.cpp" />
     <ClCompile Include="CCharacter.cpp" />
     <ClCompile Include="CCombinatorButton.cpp" />
@@ -218,13 +221,12 @@
     <ClCompile Include="CPartAutoCombinator.cpp" />
     <ClCompile Include="CPartCombinator.cpp" />
     <ClCompile Include="CPartManualCombinator.cpp" />
-    <ClCompile Include="CPartsParser.cpp" />
     <ClCompile Include="CPartStorage.cpp" />
     <ClCompile Include="CPartVending.cpp" />
     <ClCompile Include="CSoundManager.cpp" />
+    <ClCompile Include="cSprite.cpp" />
+    <ClCompile Include="cSpriteNode.cpp" />
     <ClCompile Include="CTestPhysics.cpp" />
-    <ClCompile Include="CUIPause.cpp" />
-    <ClCompile Include="CUIText.cpp" />
     <ClCompile Include="CUITextureManager.cpp" />
     <ClCompile Include="CWall.cpp" />
     <ClCompile Include="ICollisionArea.cpp" />
@@ -257,7 +259,6 @@
     <ClCompile Include="Keyboard.cpp" />
     <ClCompile Include="Mouse.cpp" />
     <ClCompile Include="CParts.cpp" />
-    <ClCompile Include="CPartsManager.cpp" />
     <ClCompile Include="stdafx.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Create</PrecompiledHeader>
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Create</PrecompiledHeader>
@@ -265,7 +266,6 @@
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Create</PrecompiledHeader>
     </ClCompile>
     <ClCompile Include="CTile.cpp" />
-    <ClCompile Include="CUITexture.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="DX_RoboCooked.rc" />
@@ -277,7 +277,6 @@
   <ItemGroup>
     <None Include="ClassDiagram.cd" />
     <None Include="ClassDiagram1.cd" />
-    <None Include="ClassDiagram2.cd" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

@@ -1,14 +1,23 @@
-#pragma once
-
+﻿#pragma once
 #define g_pPartsManager CPartsManager::GetInstance()
-
-class CPartsParser;
+class CParts;
+struct ST_Parts_Attr
+{
+	string sID;
+	string sFormula;
+	//D3DXVECTOR3 vScale;
+	float fMass;
+	LPD3DXMESH	pMesh;
+	LPDIRECT3DTEXTURE9	pTexture;
+};
 class CPartsManager : public CSingleton<CPartsManager>
 {
-public:
+private:
+	friend class CSingleton<CPartsManager>;
 	CPartsManager();
 	~CPartsManager();
-
-	void GetPartsData(char* szFullPath);
+	map<string, ST_Parts_Attr> m_mapPartsAttr;
+public:
+	void Load();
+	CParts* CreateParts(string& sID);
 };
-

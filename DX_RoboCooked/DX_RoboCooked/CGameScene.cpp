@@ -158,8 +158,8 @@ void CGameScene::Update()
 
 	{
 		// Gravity Update
-		//if (m_pDebugCube)
-		//	CTestPhysics::ApplyGravity(m_pDebugCube);
+		if (m_pDebugCube)
+			CTestPhysics::ApplyGravity(m_pDebugCube);
 
 		if (m_pDebugSphere)
 			CTestPhysics::ApplyGravity(m_pDebugSphere);
@@ -201,13 +201,13 @@ void CGameScene::Update()
 
 		for (CActor* pStaticActor : m_vecStaticActor)
 		{
+			CTestPhysics::ApplyBound(m_pDebugCube, pStaticActor);
 			CTestPhysics::ApplyBound(m_pDebugSphere, pStaticActor);
 			for (CInteractiveActor* part : m_vecParts)
 			{
 				CTestPhysics::ApplyBound(part, pStaticActor);
 			}
 		}
-		// part-part, part-obj ÇÊ¿ä
 	}
 	{// update
 		for (CActor* it : m_vecStaticActor)
@@ -264,18 +264,18 @@ void CGameScene::GetInteractObject(CCharacter* pCharacter)
 
 void CGameScene::AddParts(CParts * parts)
 {
-	if(parts != nullptr)
+	if (parts)
 		m_vecParts.push_back(parts);
 }
 
-void CGameScene::DownParts(CCharacter* pCharacter,CParts* parts, D3DXVECTOR3 vDir)
-{
-	if (parts != nullptr)
-	{
-		pCharacter->SetPlayerState(ePlayerState::None);
-		parts->DownParts(vDir);
-	}
-}
+//void CGameScene::DownParts(CCharacter* pCharacter,CParts* parts, D3DXVECTOR3 vDir)
+//{
+//	if (parts != nullptr)
+//	{
+//		pCharacter->SetPlayerState(ePlayerState::None);
+//		parts->DownParts(vDir);
+//	}
+//}
 
 void CGameScene::CheckAroundCombinator(CPartCombinator* combinator)
 {

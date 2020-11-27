@@ -81,19 +81,14 @@ void CParts::Interact(CCharacter* pCharacter)
 {
 	SetGrabPosition(&pCharacter->GetGrabPartsPosition());
 	pCharacter->SetParts(this);
-	pCharacter->SetPlayerState(ePlayerState::Grab);
+	//pCharacter->SetPlayerState(ePlayerState::Grab);
 }
 
-void CParts::DownParts(D3DXVECTOR3 vDir)
+void CParts::DownParts(D3DXVECTOR3 vForce)
 {
 	m_vGrabPosition = NULL;
-	D3DXVec3Normalize(&vDir, &vDir);
-	
-	//m_vPosition.x += (vDir.x/0.9f);
-	//m_vPosition.y  = 0;//vDir.y;
-	//m_vPosition.z += (vDir.z/0.9f);
 
-	AddForce(vDir * 0.2f);
+	AddForce(vForce);
 }
 
 void CParts::PartsRotate()

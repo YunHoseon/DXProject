@@ -32,11 +32,15 @@ using std::list;
 #include <assert.h>
 #include <unordered_set>
 using std::unordered_set;
+#include <array>
+using std::array;
 
 #include <d3dx9.h>
 
 #pragma comment(lib, "d3d9.lib")
 #pragma comment(lib, "d3dx9.lib")
+#include "include/nlohmann/json.hpp"
+using nlohmann::json;
 
 extern HWND g_hWnd;
 #define SafeRelease(p) { if(p) p->Release(); p = NULL; }
@@ -45,7 +49,7 @@ extern HWND g_hWnd;
 
 #define SafeDeleteArray(p) { if(p) delete[] p; p = NULL; }
 
-#define ELIPSE 0.000001f
+#define ELIPSE 0.00001f
 
 #define BLOCK_SIZE 1.0f
 
@@ -207,6 +211,7 @@ struct ST_PLAYER_INPUTKEY
 #include "CSoundManager.h"
 #include "CPartsManager.h"
 #include "CUITextureManager.h"
+
 
 #define __SLASH(x) /##x
 #define __DOUBLE_SLASH __SLASH(/)

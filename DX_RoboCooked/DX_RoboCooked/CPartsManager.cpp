@@ -1,33 +1,39 @@
-#include "stdafx.h"
+ï»¿#include "stdafx.h"
 #include "CPartsManager.h"
-#include "CPartsParser.h"
-
+#include <fstream>
 
 CPartsManager::CPartsManager()
 {
+	Load();
 }
-
 
 CPartsManager::~CPartsManager()
 {
 }
 
-void CPartsManager::GetPartsData(char* szFullPath)
+void CPartsManager::Load()
 {
-	CPartsParser* pPartsParser = new CPartsParser;
-	int size;	// ¹®¼­ Å©±â
-	char* doc = pPartsParser->ReadFile(szFullPath, &size);
-	if (doc == NULL)
-	{
-		_DEBUG_COMMENT cout << "µ¥ÀÌÅÍ ¾øÀ½" << endl;
-		return;
-	}
+	std::ifstream is("data/js/PartsData.json");
+	json j;
+	is >> j;
 
-	JSON partsJson;
-	memset(&partsJson, 0, sizeof(JSON));
-	pPartsParser->ParseJSON(doc, size, &partsJson);
-	pPartsParser->SavePartsData(partsJson);
-	pPartsParser->FreeJSON(&partsJson);
-	free(doc);
-	SafeDelete(pPartsParser);
+	// 1. ì¡°í•©ì‹ìœ¼ë¡œë§Œ ê²€ìƒ‰
+	// 2. IDë¡œë§Œ ê²€ìƒ‰
+	// 3. ë‘ ê°€ì§€ ì ‘ê·¼ì ì„ ëª¨ë‘ ì œê³µ
+
+	for (int i = 0; i < j.size(); ++i)
+	{
+		ST_Parts_Attr st;
+		st.sID = j[i]["ID"];
+		st.fMass = j[i]["Mass"];
+		st.sFormula = j[i]["Formula"];
+		_DEBUG_COMMENT cout << "ID : " << st.sID << endl;
+		_DEBUG_COMMENT cout << "Formula : " << st.sFormula << endl;
+		_DEBUG_COMMENT cout << "Mass : " << st.fMass << endl << endl;
+	}
+}
+
+CParts* CPartsManager::CreateParts(string& sID)
+{
+	return nullptr;
 }

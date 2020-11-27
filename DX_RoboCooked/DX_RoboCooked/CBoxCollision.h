@@ -5,11 +5,12 @@ class CBoxCollision : public ICollisionArea
 {
 protected:
 	
-	D3DXVECTOR3			m_vOriginAxisDir[3];
-	D3DXVECTOR3			m_vAxisDir[3];
+	array<D3DXVECTOR3,3>			m_arrOriginAxisDir;
+	array<D3DXVECTOR3,3>			m_arrAxisDir;
 
 	float				m_fAxisHalfLen[3];
 
+	D3DXVECTOR3	GetCollideNormal(CBoxCollision* pTargetCollider);
 public:
 	CBoxCollision(D3DXVECTOR3 vOriginPos, D3DXVECTOR3 vSize, D3DXMATRIXA16* pmatWorld = nullptr);
 	~CBoxCollision() override;

@@ -31,14 +31,26 @@
     <Filter Include="GameScene\Collider">
       <UniqueIdentifier>{9b16d774-c905-40a9-86d3-36ac247c8ec1}</UniqueIdentifier>
     </Filter>
-    <Filter Include="GameScene\Physics">
-      <UniqueIdentifier>{de962a97-9bfd-4690-8917-aba481ea7e8d}</UniqueIdentifier>
-    </Filter>
     <Filter Include="GameScene\Combinator">
       <UniqueIdentifier>{991f2475-d3b2-470e-8ffd-615888b96791}</UniqueIdentifier>
     </Filter>
     <Filter Include="UI">
       <UniqueIdentifier>{9f665a7d-c539-4289-b0c2-baaa0fe5d74a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="GameScene\Character">
+      <UniqueIdentifier>{f9d12338-b253-4e46-b47c-676cdf613917}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="GameScene\Actor">
+      <UniqueIdentifier>{d12ad4a4-76e2-4f29-8b57-59c289cafc71}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="GameScene\Actor\Physics">
+      <UniqueIdentifier>{de962a97-9bfd-4690-8917-aba481ea7e8d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="GameScene\PartsGen">
+      <UniqueIdentifier>{f06b2a7b-b547-4972-9951-7e73fabcee8a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="GameScene\Factory">
+      <UniqueIdentifier>{257ea775-a605-4615-8082-d1d21b4bd2cc}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -114,15 +126,6 @@
     <ClInclude Include="Mouse.h">
       <Filter>Manager\InputManager</Filter>
     </ClInclude>
-    <ClInclude Include="CTile.h">
-      <Filter>GameScene</Filter>
-    </ClInclude>
-    <ClInclude Include="CActor.h">
-      <Filter>GameScene</Filter>
-    </ClInclude>
-    <ClInclude Include="CField.h">
-      <Filter>GameScene</Filter>
-    </ClInclude>
     <ClInclude Include="CSphereCollision.h">
       <Filter>GameScene\Collider</Filter>
     </ClInclude>
@@ -141,44 +144,14 @@
     <ClInclude Include="CSoundManager.h">
       <Filter>Manager</Filter>
     </ClInclude>
-    <ClInclude Include="CInteractiveActor.h">
-      <Filter>GameScene</Filter>
-    </ClInclude>
-    <ClInclude Include="CPartStorage.h">
-      <Filter>GameScene</Filter>
-    </ClInclude>
-    <ClInclude Include="IPartGenerator.h">
-      <Filter>GameScene</Filter>
-    </ClInclude>
-    <ClInclude Include="CCharacter.h">
-      <Filter>GameScene</Filter>
-    </ClInclude>
-    <ClInclude Include="CParts.h">
-      <Filter>GameScene</Filter>
-    </ClInclude>
-    <ClInclude Include="CDebugPlayer2.h">
-      <Filter>GameScene</Filter>
-    </ClInclude>
-    <ClInclude Include="CDebugPlayer1.h">
-      <Filter>GameScene</Filter>
-    </ClInclude>
     <ClInclude Include="IInteractCenter.h">
       <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="CPartVending.h">
-      <Filter>GameScene</Filter>
-    </ClInclude>
-    <ClInclude Include="COutlet.h">
-      <Filter>GameScene</Filter>
     </ClInclude>
     <ClInclude Include="CGameScene.h">
       <Filter>GameScene</Filter>
     </ClInclude>
-    <ClInclude Include="CPartsParser.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="CTestPhysics.h">
-      <Filter>GameScene\Physics</Filter>
+      <Filter>GameScene\Actor\Physics</Filter>
     </ClInclude>
     <ClInclude Include="CCombinatorButton.h">
       <Filter>GameScene\Combinator</Filter>
@@ -192,29 +165,68 @@
     <ClInclude Include="CPartManualCombinator.h">
       <Filter>GameScene\Combinator</Filter>
     </ClInclude>
-    <ClInclude Include="CPartsManager.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="CWall.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="CBlueprint.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="cSprite.h">
+      <Filter>UI</Filter>
+    </ClInclude>
+    <ClInclude Include="cSpriteNode.h">
+      <Filter>UI</Filter>
+    </ClInclude>
     <ClInclude Include="CUI.h">
+      <Filter>UI</Filter>
+    </ClInclude>
+    <ClInclude Include="CUISprite.h">
+      <Filter>UI</Filter>
+    </ClInclude>
+    <ClInclude Include="CPauseUI.h">
       <Filter>UI</Filter>
     </ClInclude>
     <ClInclude Include="CUITextureManager.h">
       <Filter>Manager</Filter>
     </ClInclude>
-    <ClInclude Include="CUIText.h">
-      <Filter>UI</Filter>
+    <ClInclude Include="CDebugPlayer1.h">
+      <Filter>GameScene\Character</Filter>
     </ClInclude>
-    <ClInclude Include="CUITexture.h">
-      <Filter>UI</Filter>
+    <ClInclude Include="CDebugPlayer2.h">
+      <Filter>GameScene\Character</Filter>
     </ClInclude>
-    <ClInclude Include="CUIPause.h">
-      <Filter>UI</Filter>
+    <ClInclude Include="CCharacter.h">
+      <Filter>GameScene\Character</Filter>
+    </ClInclude>
+    <ClInclude Include="CActor.h">
+      <Filter>GameScene\Actor</Filter>
+    </ClInclude>
+    <ClInclude Include="CInteractiveActor.h">
+      <Filter>GameScene\Actor</Filter>
+    </ClInclude>
+    <ClInclude Include="CPartStorage.h">
+      <Filter>GameScene\PartsGen</Filter>
+    </ClInclude>
+    <ClInclude Include="CPartVending.h">
+      <Filter>GameScene\PartsGen</Filter>
+    </ClInclude>
+    <ClInclude Include="COutlet.h">
+      <Filter>GameScene\PartsGen</Filter>
+    </ClInclude>
+    <ClInclude Include="CParts.h">
+      <Filter>GameScene\PartsGen</Filter>
+    </ClInclude>
+    <ClInclude Include="IPartGenerator.h">
+      <Filter>GameScene\PartsGen</Filter>
+    </ClInclude>
+    <ClInclude Include="CTile.h">
+      <Filter>GameScene\Actor</Filter>
+    </ClInclude>
+    <ClInclude Include="CField.h">
+      <Filter>GameScene\Actor</Filter>
+    </ClInclude>
+    <ClInclude Include="CPartsManager.h">
+      <Filter>GameScene\Factory</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -281,15 +293,6 @@
     <ClCompile Include="Mouse.cpp">
       <Filter>Manager\InputManager</Filter>
     </ClCompile>
-    <ClCompile Include="CTile.cpp">
-      <Filter>GameScene</Filter>
-    </ClCompile>
-    <ClCompile Include="CActor.cpp">
-      <Filter>GameScene</Filter>
-    </ClCompile>
-    <ClCompile Include="CField.cpp">
-      <Filter>GameScene</Filter>
-    </ClCompile>
     <ClCompile Include="CSphereCollision.cpp">
       <Filter>GameScene\Collider</Filter>
     </ClCompile>
@@ -308,44 +311,14 @@
     <ClCompile Include="CSoundManager.cpp">
       <Filter>Manager</Filter>
     </ClCompile>
-    <ClCompile Include="CInteractiveActor.cpp">
-      <Filter>GameScene</Filter>
-    </ClCompile>
-    <ClCompile Include="CPartStorage.cpp">
-      <Filter>GameScene</Filter>
-    </ClCompile>
-    <ClCompile Include="IPartGenerator.cpp">
-      <Filter>GameScene</Filter>
-    </ClCompile>
     <ClCompile Include="CGameScene.cpp">
-      <Filter>GameScene</Filter>
-    </ClCompile>
-    <ClCompile Include="CParts.cpp">
-      <Filter>GameScene</Filter>
-    </ClCompile>
-    <ClCompile Include="CDebugPlayer2.cpp">
-      <Filter>GameScene</Filter>
-    </ClCompile>
-    <ClCompile Include="CDebugPlayer1.cpp">
-      <Filter>GameScene</Filter>
-    </ClCompile>
-    <ClCompile Include="CCharacter.cpp">
       <Filter>GameScene</Filter>
     </ClCompile>
     <ClCompile Include="IInteractCenter.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="CPartVending.cpp">
-      <Filter>GameScene</Filter>
-    </ClCompile>
-    <ClCompile Include="COutlet.cpp">
-      <Filter>GameScene</Filter>
-    </ClCompile>
-    <ClCompile Include="CPartsParser.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="CTestPhysics.cpp">
-      <Filter>GameScene\Physics</Filter>
+      <Filter>GameScene\Actor\Physics</Filter>
     </ClCompile>
     <ClCompile Include="CCombinatorButton.cpp">
       <Filter>GameScene\Combinator</Filter>
@@ -359,29 +332,68 @@
     <ClCompile Include="CPartAutoCombinator.cpp">
       <Filter>GameScene\Combinator</Filter>
     </ClCompile>
-    <ClCompile Include="CPartsManager.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="CWall.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="CBlueprint.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="cSprite.cpp">
+      <Filter>UI</Filter>
+    </ClCompile>
+    <ClCompile Include="cSpriteNode.cpp">
+      <Filter>UI</Filter>
+    </ClCompile>
     <ClCompile Include="CUI.cpp">
+      <Filter>UI</Filter>
+    </ClCompile>
+    <ClCompile Include="CUISprite.cpp">
+      <Filter>UI</Filter>
+    </ClCompile>
+    <ClCompile Include="CPauseUI.cpp">
       <Filter>UI</Filter>
     </ClCompile>
     <ClCompile Include="CUITextureManager.cpp">
       <Filter>Manager</Filter>
     </ClCompile>
-    <ClCompile Include="CUIText.cpp">
-      <Filter>UI</Filter>
+    <ClCompile Include="CDebugPlayer1.cpp">
+      <Filter>GameScene\Character</Filter>
     </ClCompile>
-    <ClCompile Include="CUITexture.cpp">
-      <Filter>UI</Filter>
+    <ClCompile Include="CDebugPlayer2.cpp">
+      <Filter>GameScene\Character</Filter>
     </ClCompile>
-    <ClCompile Include="CUIPause.cpp">
-      <Filter>UI</Filter>
+    <ClCompile Include="CCharacter.cpp">
+      <Filter>GameScene\Character</Filter>
+    </ClCompile>
+    <ClCompile Include="CActor.cpp">
+      <Filter>GameScene\Actor</Filter>
+    </ClCompile>
+    <ClCompile Include="CInteractiveActor.cpp">
+      <Filter>GameScene\Actor</Filter>
+    </ClCompile>
+    <ClCompile Include="CPartStorage.cpp">
+      <Filter>GameScene\PartsGen</Filter>
+    </ClCompile>
+    <ClCompile Include="CPartVending.cpp">
+      <Filter>GameScene\PartsGen</Filter>
+    </ClCompile>
+    <ClCompile Include="COutlet.cpp">
+      <Filter>GameScene\PartsGen</Filter>
+    </ClCompile>
+    <ClCompile Include="CParts.cpp">
+      <Filter>GameScene\PartsGen</Filter>
+    </ClCompile>
+    <ClCompile Include="IPartGenerator.cpp">
+      <Filter>GameScene\PartsGen</Filter>
+    </ClCompile>
+    <ClCompile Include="CTile.cpp">
+      <Filter>GameScene\Actor</Filter>
+    </ClCompile>
+    <ClCompile Include="CField.cpp">
+      <Filter>GameScene\Actor</Filter>
+    </ClCompile>
+    <ClCompile Include="CPartsManager.cpp">
+      <Filter>GameScene\Factory</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -400,6 +412,5 @@
   <ItemGroup>
     <None Include="ClassDiagram.cd" />
     <None Include="ClassDiagram1.cd" />
-    <None Include="ClassDiagram2.cd" />
   </ItemGroup>
 </Project>

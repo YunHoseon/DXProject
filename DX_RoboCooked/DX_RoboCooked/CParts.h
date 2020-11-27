@@ -35,7 +35,7 @@ public:
 	void OnEvent(eEvent eEvent, void* _value);
 	void Interact(CCharacter* pCharacter) override;
 	
-	void DownParts(D3DXVECTOR3 vDir);
+	void DownParts(D3DXVECTOR3 vForce);
 	void PartsRotate();
 	void MoveParts();
 	void SetCombinatorPosition(D3DXVECTOR3 vPosition){ m_vCombinatorPosition = vPosition; }
