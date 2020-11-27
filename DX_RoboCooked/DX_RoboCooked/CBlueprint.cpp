@@ -2,9 +2,15 @@
 #include "CBlueprint.h"
 
 
-CBlueprint::CBlueprint()
-	:n_RotAngleY(0)
+CBlueprint::CBlueprint(string partsID)
+	:m_nRotAngleY(0)
+	,m_isCompleted(false)
 {
+	m_sRightPartsID = partsID;
+	D3DXMatrixScaling(&m_matS, 2.0f, 0.1f, 2.8f);
+	D3DXMatrixTranslation(&m_matT, 5.0f, -0.5f, -3.0f);
+	m_BlueprintTexture = g_pTextureManager->GetTexture(("data/Texture/Blueprint.jpg"));
+	//파츠 아이디에 따라 m_matS,텍스쳐 다르게
 }
 
 
@@ -111,16 +117,13 @@ void CBlueprint::Setup()
 	}
 
 	m_vecVertex = vecVertex;
-	m_BlueprintTexture = g_pTextureManager->GetTexture(("data/Texture/Blueprint.jpg"));
-	D3DXMATRIXA16 matS, matT, mat;
-	D3DXMatrixScaling(&matS, 4.0f, 0.1f, 5.0f);
-	D3DXMatrixTranslation(&matT, 5.0f, -0.5f, -3.0f);
-	mat = matS * matT;
+	D3DXMATRIXA16 mat;
+	mat = m_matS * m_matT;
 
 	for (size_t i = 0; i < m_vecVertex.size(); ++i)
 		D3DXVec3TransformCoord(&m_vecVertex[i].p, &m_vecVertex[i].p, &mat);
 
-	D3DXMatrixRotationY(&m_matR, D3DXToRadian(n_RotAngleY));
+	D3DXMatrixRotationY(&m_matR, D3DXToRadian(m_nRotAngleY));
 	m_matWorld = m_matR;
 }
 
