@@ -154,8 +154,8 @@ void CGameScene::Render()
 		it->Render();
 	}
 
-	if (m_pDebugPauseUI)
-		m_pDebugPauseUI->Render();
+	//if (m_pDebugPauseUI)
+	//	m_pDebugPauseUI->Render();
 }
 
 void CGameScene::Update()
