@@ -15,7 +15,7 @@
 #include "CPartVending.h"
 #include "CTestPhysics.h"
 #include "CWall.h"
-#include "CPauseUI.h"
+
 
 /* µð¹ö±ë¿ë */
 #include "CDebugPlayer1.h"
@@ -123,7 +123,6 @@ void CGameScene::Init()
 	m_vecParts.push_back(m_pDebugParts2);
 
 
-	m_pDebugPauseUI = new CPauseUI;
 }
 
 void CGameScene::Render()
@@ -148,9 +147,6 @@ void CGameScene::Render()
 		it->Render();
 	}
 
-	//UITEST
-	//if (m_pDebugPauseUI)
-	//	m_pDebugPauseUI->Render();
 
 }
 
@@ -235,9 +231,6 @@ void CGameScene::Update()
 		if (m_pDebugSphere)
 			m_pDebugSphere->Update();
 
-		//UITEST
-		if (m_pDebugPauseUI)
-			m_pDebugPauseUI->Update();
 	}
 }
 
