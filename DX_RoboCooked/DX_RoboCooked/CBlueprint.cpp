@@ -1,6 +1,6 @@
 #include "stdafx.h"
 #include "CBlueprint.h"
-
+#include "CBoxCollision.h"
 
 CBlueprint::CBlueprint(string partsID)
 	:m_nRotAngleY(0)
@@ -125,14 +125,18 @@ void CBlueprint::Setup()
 
 	D3DXMatrixRotationY(&m_matR, D3DXToRadian(m_nRotAngleY));
 	m_matWorld = m_matR;
+
+	m_pCollision = new CBoxCollision(D3DXVECTOR3(5.0f, -0.5f, -3.0f), D3DXVECTOR3(2.0f, 0.1f, 2.8f), &m_matWorld);
+	m_pCollision->Update();
 }
 
 void CBlueprint::Update()
-{	
+{
 }
 
 void CBlueprint::Render()
 {
+	m_pCollision->Render();
 	g_pD3DDevice->SetTransform(D3DTS_WORLD, &m_matWorld);
 	g_pD3DDevice->SetTexture(0, m_BlueprintTexture);
 	g_pD3DDevice->SetFVF(ST_PNT_VERTEX::FVF);
