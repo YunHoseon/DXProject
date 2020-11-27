@@ -8,24 +8,19 @@ class CUIText;
 class CUIButton :
 	public CUI
 {
-private:
+protected:
 	std::list<CUI*> m_listUIchildren;
 
 public:
 	CUIButton();
-	~CUIButton();
+	virtual ~CUIButton();
 	
-	void Setup();
-	void Update();
-	void Render();
-
+	virtual void Setup() = 0;
+	virtual void Update() = 0;
+	virtual void Render() = 0;
 
 public:
-	void Add(CUI *component) override;
-	void Remove(CUI *component) override;
-	void OnEvent(eEvent eEvent, void* _value) override;
-	virtual bool CheckIn(POINT pt);
-
-
+	virtual void Add(CUI *component) override;
+	virtual void Remove(CUI *component) override;
+	//virtual bool CheckIn(POINT pt);
 };
-

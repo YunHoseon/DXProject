@@ -52,6 +52,9 @@
     <Filter Include="GameScene\Factory">
       <UniqueIdentifier>{257ea775-a605-4615-8082-d1d21b4bd2cc}</UniqueIdentifier>
     </Filter>
+    <Filter Include="UI\Button">
+      <UniqueIdentifier>{78ec4cfa-4d2a-4f0c-a621-b60f2a71f011}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <Text Include="ReadMe.txt" />
@@ -225,6 +228,18 @@
     <ClInclude Include="CUIButton.h">
       <Filter>UI</Filter>
     </ClInclude>
+    <ClInclude Include="CUICloseButton.h">
+      <Filter>UI\Button</Filter>
+    </ClInclude>
+    <ClInclude Include="CUIBoardButton.h">
+      <Filter>UI\Button</Filter>
+    </ClInclude>
+    <ClInclude Include="CUIBarButton.h">
+      <Filter>UI\Button</Filter>
+    </ClInclude>
+    <ClInclude Include="CUIPauseButton.h">
+      <Filter>UI\Button</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="stdafx.cpp">
@@ -388,6 +403,18 @@
     </ClCompile>
     <ClCompile Include="CUIButton.cpp">
       <Filter>UI</Filter>
+    </ClCompile>
+    <ClCompile Include="CUICloseButton.cpp">
+      <Filter>UI\Button</Filter>
+    </ClCompile>
+    <ClCompile Include="CUIBoardButton.cpp">
+      <Filter>UI\Button</Filter>
+    </ClCompile>
+    <ClCompile Include="CUIBarButton.cpp">
+      <Filter>UI\Button</Filter>
+    </ClCompile>
+    <ClCompile Include="CUIPauseButton.cpp">
+      <Filter>UI\Button</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
