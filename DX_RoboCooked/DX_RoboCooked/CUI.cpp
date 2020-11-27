@@ -27,8 +27,6 @@ bool CUI::CheckIn(POINT pt)
 	if (m_vPosition.x <= pt.x && m_vPosition.x + m_vSize.x >= pt.x
 		&& m_vPosition.y <= pt.y && m_vPosition.y + m_vSize.y >= pt.y)
 		return true;
-
-
 	return false;
 }
 

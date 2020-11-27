@@ -15,7 +15,7 @@
 #include "CPartVending.h"
 #include "CTestPhysics.h"
 #include "CWall.h"
-#include "CUIPause.h"
+#include "CUIButton.h"
 #include "CBlueprint.h"
 
 

@@ -1,12 +1,12 @@
 #include "stdafx.h"
-#include "CUIPause.h"
+#include "CUIButton.h"
 #include "CUI.h"
 #include "CUIText.h"
 #include "CUITexture.h"
 
+
 CUIButton::CUIButton()
 {
-	g_EventManager->Attach(eEvent::MouseClick, this);
 
 }
 
@@ -18,6 +18,7 @@ CUIButton::~CUIButton()
 
 void CUIButton::Setup()
 {
+	g_EventManager->Attach(eEvent::MouseClick, this);
 
 	D3DXVECTOR2 vec2;
 
@@ -91,4 +92,14 @@ void CUIButton::OnEvent(eEvent eEvent, void * _value)
 	{
 		cout << it->CheckIn(data->pt) << endl;
 	}
+}
+
+bool CUIButton::CheckIn(POINT pt)
+{
+	for (auto it : m_listUIchildren)
+	{
+		cout << it->CheckIn(pt) << endl;
+	}
+
+	return false;
 }
