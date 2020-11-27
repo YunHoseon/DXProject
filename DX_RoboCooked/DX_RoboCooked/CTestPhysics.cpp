@@ -12,6 +12,7 @@ void CTestPhysics::ApplyGravity(CActor* pA)
 {
 	//return;
 	D3DXVECTOR3 gravity(0, -0.01f, 0);
+	gravity *= pA->GetMass();
 	pA->AddForce(gravity);
 }
 
@@ -29,12 +30,12 @@ void CTestPhysics::ApplyBound(CActor* pA, CActor* pB)
 		D3DXVECTOR3 vNormalForce;
 		if (power > 0)
 		{
-			vNormalForce = vNormal * power * 1.0f; // 탄성계수
+			vNormalForce = vNormal * power * pA->GetMass() * 1.0f; // 탄성계수
 			pA->AddForce(vNormalForce); // 수직항력
 			vTempVelocity = pA->GetVelocity() + pA->GetAcceleration();
 		}
 		
-		vTempVelocity *= -0.2f; // -1 * 마찰계수
+		vTempVelocity *= -0.2f * pA->GetMass(); // -1 * 마찰계수
 		pA->AddForce(vTempVelocity); // 마찰력
 	}
 }

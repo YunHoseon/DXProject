@@ -43,6 +43,9 @@ public:
 	virtual void SetKeyChange(void* _value);
 	virtual void Move();
 	virtual void Rotate(float fTargetRot);
+	virtual void AddForce(const D3DXVECTOR3& vForce) override;
+	virtual void SetForce(const D3DXVECTOR3& vForce = g_vZero) override;
+	virtual float GetMass() override;
 	
 	D3DXVECTOR3& GetGrabPartsPosition() { return m_vGrabPartsPosition; }
 	ICollisionArea* GetInteractCollsion() { return m_pInteractCollision; }

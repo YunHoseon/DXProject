@@ -33,6 +33,20 @@ bool CActor::Collide(CActor* target, D3DXVECTOR3* pNormal)
 	return false;
 }
 
+void CActor::SetScale(const D3DXVECTOR3& vScale)
+{
+	m_vScale = vScale;
+	D3DXMatrixScaling(&m_matS, vScale.x, vScale.y, vScale.z);
+	m_matWorld = m_matS * m_matR * m_matT;
+}
+
+void CActor::SetScale(float x, float y, float z)
+{
+	m_vScale = D3DXVECTOR3(x, y, z);
+	D3DXMatrixScaling(&m_matS, x, y, z);
+	m_matWorld = m_matS * m_matR * m_matT;
+}
+
 void CActor::AddForce(const D3DXVECTOR3& vForce)
 {
 	m_vAcceleration += vForce / m_fMass;

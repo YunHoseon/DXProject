@@ -267,3 +267,27 @@ void CCharacter::Rotate(float fTargetRot)
 	D3DXVECTOR3 dummy;
 	D3DXQuaternionToAxisAngle(&stLerpRot, &dummy, &m_fRotY);
 }
+
+void CCharacter::AddForce(const D3DXVECTOR3& vForce)
+{
+	if (m_pParts)
+		m_vAcceleration += vForce / (m_fMass + m_pParts->GetMass());
+	else
+		m_vAcceleration += vForce / m_fMass;
+}
+
+void CCharacter::SetForce(const D3DXVECTOR3& vForce)
+{
+	if (m_pParts)
+		m_vAcceleration = vForce / (m_fMass + m_pParts->GetMass());
+	else
+		m_vAcceleration = vForce / m_fMass;
+}
+
+float CCharacter::GetMass()
+{
+	if (m_pParts)
+		return m_fMass + m_pParts->GetMass();
+	else
+		return m_fMass;
+}
