@@ -15,6 +15,8 @@ public:
 	void Render() override;
 	void Update() override;
 	void OnEvent(eEvent eEvent, void* _value) {};
+	void AddAcceleration(const D3DXVECTOR3& vAccel) override {}
+	void AddForce(const D3DXVECTOR3& vForce) override {}
 private:
 	vector<CTile*>					m_vecTile;
 	D3DMATERIAL9					m_stMtlTile;

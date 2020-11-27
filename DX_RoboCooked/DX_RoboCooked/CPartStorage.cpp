@@ -5,9 +5,11 @@
 #include "CCharacter.h"
 #include "CGameScene.h"
 
-CPartStorage::CPartStorage(IInteractCenter* pInteractCenter)
+CPartStorage::CPartStorage(IInteractCenter* pInteractCenter):
+	m_storageTexture(nullptr)
 {
 	m_pInteractCenter = pInteractCenter;
+	m_fMass = 9999.f;
 }
 
 

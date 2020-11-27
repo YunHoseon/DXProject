@@ -47,7 +47,6 @@ protected:
 
 
 public:
-	CPartCombinator(){};
 	CPartCombinator(IInteractCenter* pInteractCenter, eCombinatorPartsLevel eType, float fAngle, D3DXVECTOR3 vPosition) ;
 	virtual ~CPartCombinator();
 
@@ -70,6 +69,9 @@ public:
 	void SetCombinatorLoadState(eCombinatorLoadState st) { m_eCombinatorLoadState = st; }
 	INT GetCombinatorPartsCount() { return m_nPartsCount; }
 
+
+	void AddAcceleration(const D3DXVECTOR3& vAccel) override {}
+	void AddForce(const D3DXVECTOR3& vForce) override {}
 private:
 	CParts* Make() override = 0;
 	virtual void Setup(float fAngle, D3DXVECTOR3 vPosition){};

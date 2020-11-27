@@ -5,12 +5,14 @@
 #include "CParts.h"
 #include "CGameScene.h"
 
-CPartVending::CPartVending(COutlet* outlet, IInteractCenter* pInteractCenter, string sPartsID)
-	:m_pOutlet(outlet)
-	, m_ePartVendingState(ePartVendingState::Usable)
+CPartVending::CPartVending(COutlet* outlet, IInteractCenter* pInteractCenter, string sPartsID) :
+	m_pOutlet(outlet),
+	m_ePartVendingState(ePartVendingState::Usable),
+	m_PartVendingTexture(nullptr)
 {
 	m_pInteractCenter = pInteractCenter;
 	m_sID = sPartsID;
+	m_fMass = 9999.f;
 }
 
 

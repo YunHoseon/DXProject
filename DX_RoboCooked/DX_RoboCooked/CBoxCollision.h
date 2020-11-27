@@ -13,6 +13,7 @@ protected:
 	D3DXVECTOR3	GetCollideNormal(CBoxCollision* pTargetCollider);
 public:
 	CBoxCollision(D3DXVECTOR3 vOriginPos, D3DXVECTOR3 vSize, D3DXMATRIXA16* pmatWorld = nullptr);
+	CBoxCollision(LPD3DXMESH pMesh, D3DXMATRIXA16* pmatWorld = nullptr);
 	~CBoxCollision() override;
 	void Render() override;
 	void Update() override;

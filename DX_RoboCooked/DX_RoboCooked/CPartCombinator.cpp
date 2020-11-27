@@ -4,14 +4,23 @@
 #include "IInteractCenter.h"
 
 
-
-CPartCombinator::CPartCombinator(IInteractCenter* pInteractCenter, eCombinatorPartsLevel eType , float fAngle, D3DXVECTOR3 vPosition)
-	: m_eLevel(eType), m_eCombinatorLoadState(eCombinatorLoadState::LoadPossible), m_CombinatorTexture(nullptr),
-	  m_pPartsInteractCollision(NULL)
-	  , m_vOnCombinatorPosition(0, 0, 0)
-	  , m_pParts(NULL), m_isCombine(false) , m_fElapsedTime(0) , m_fCombineTime(0) 
-	  , m_eCombinatorActionState(eCombinatorActionState::Unusable) , m_nMaxPartsCount(0)
+CPartCombinator::CPartCombinator(IInteractCenter* pInteractCenter, eCombinatorPartsLevel eType , float fAngle, D3DXVECTOR3 vPosition) :
+	m_eLevel(eType),
+	m_eCombinatorLoadState(eCombinatorLoadState::LoadPossible),
+	m_CombinatorTexture(nullptr),
+	m_pPartsInteractCollision(NULL),
+	m_vOnCombinatorPosition(vPosition.x, vPosition.y + 1.0f, vPosition.z),
+	m_pParts(NULL),
+	m_isCombine(false),
+	m_fElapsedTime(0),
+	m_fCombineTime(5.f),
+	m_nPartsCount(0),
+	m_eCombinatorActionState(eCombinatorActionState::Usable),
+	m_nMaxPartsCount(0)
 {
+	m_pInteractCenter = pInteractCenter;
+	m_vPosition = vPosition;
+	m_fMass = 9999.f;
 }
 
 

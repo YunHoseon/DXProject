@@ -20,5 +20,8 @@ public:
 	void Update() override;
 	void Render() override;
 	void Setup(float fAngle, D3DXVECTOR3 vPosition);
+
+	void AddAcceleration(const D3DXVECTOR3& vAccel) override {}
+	void AddForce(const D3DXVECTOR3& vForce) override {}
 };
 

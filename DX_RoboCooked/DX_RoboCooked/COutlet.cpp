@@ -6,10 +6,13 @@
 #include "IInteractCenter.h"
 #include "CParts.h"
 
-COutlet::COutlet(IInteractCenter* pInteractCenter)
-	: m_eOutletState(eOutletState::None)
+COutlet::COutlet(IInteractCenter* pInteractCenter) :
+	m_eOutletState(eOutletState::None),
+	m_PartVendingTexture(nullptr),
+	m_pMyParts(nullptr)
 {
 	m_pInteractCenter = pInteractCenter;
+	m_fMass = 9999.f;
 }
 
 

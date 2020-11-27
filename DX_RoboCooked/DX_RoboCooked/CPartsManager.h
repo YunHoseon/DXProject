@@ -16,8 +16,10 @@ private:
 	friend class CSingleton<CPartsManager>;
 	CPartsManager();
 	~CPartsManager();
-	map<string, ST_Parts_Attr> m_mapPartsAttr;
+	map<string, ST_Parts_Attr>	m_mapPartsAttr;
+	map<string, string>			m_mapFormula;
 public:
 	void Load();
-	CParts* CreateParts(string& sID);
+	CParts* CreateParts(string sID);
+	string GetIDFromFormula(string sFormula);
 };

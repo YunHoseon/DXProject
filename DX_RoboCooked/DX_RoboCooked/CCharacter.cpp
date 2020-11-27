@@ -171,7 +171,7 @@ void CCharacter::PressKey(void* _value)
 			if(CurrentTime - m_arrElapsedTime[2] > m_arrCoolDown[2])
 			{
 				//대시 -> 점멸로 수정해야함
-				AddForce(m_vDirection);
+				AddAcceleration(m_vDirection);
 				g_SoundManager->PlaySFX("Melem");
 				m_arrElapsedTime[2] = CurrentTime;
 			}
@@ -259,6 +259,7 @@ void CCharacter::Rotate(float fTargetRot)
 
 	D3DXVec3TransformNormal(&m_vDirection, &D3DXVECTOR3(0, 0, 1), &m_matR);
 	m_matWorld = m_matS * m_matR * m_matT;
+
 	SetForce(m_vDirection * m_fBaseSpeed);
 
 	if (m_pCollision)

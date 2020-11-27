@@ -29,6 +29,7 @@ protected:
 	float				m_fBaseSpeed;
 	float				m_fSpeed;
 	float				m_fMass;
+	float				m_fFriction;
 	
 public:
 
@@ -36,9 +37,9 @@ public:
 	virtual void Render() = 0;
 	virtual bool Collide(CActor* target, D3DXVECTOR3* pNormal = nullptr);
 
-	const D3DXVECTOR3 GetScale() { return m_vScale; }
-	void SetScale(const D3DXVECTOR3& vScale);
-	void SetScale(float x, float y, float z);
+	virtual const D3DXVECTOR3 GetScale() { return m_vScale; }
+	virtual void SetScale(const D3DXVECTOR3& vScale);
+	virtual void SetScale(float x, float y, float z);
 
 	// for physics
 	ICollisionArea* GetCollision() { return m_pCollision; }
@@ -50,9 +51,12 @@ public:
 	const D3DXVECTOR3& GetVelocity() { return m_vVelocity; }
 	const D3DXVECTOR3& GetAcceleration() { return m_vAcceleration; }
 
+	virtual void AddAcceleration(const D3DXVECTOR3& vAccel);
 	virtual void AddForce(const D3DXVECTOR3& vForce);
 	virtual void SetForce(const D3DXVECTOR3& vForce = D3DXVECTOR3(0, 0, 0));
 
+
 	virtual float GetMass() { return m_fMass; }
+	virtual float GetFriction(D3DXVECTOR3 vPosition = g_vZero) { return m_fFriction; }
 };
 

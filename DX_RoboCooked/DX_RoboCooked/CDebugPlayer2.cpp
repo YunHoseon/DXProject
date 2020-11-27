@@ -24,11 +24,11 @@ CDebugPlayer2::~CDebugPlayer2()
 
 void CDebugPlayer2::Setup()
 {
-	m_pCollision = new CBoxCollision(g_vZero, D3DXVECTOR3(1, 1, 1), &m_matWorld);
-	//m_pCollision = new CSphereCollision(g_vZero, 0.5f, &m_matWorld);
+	//m_pCollision = new CBoxCollision(g_vZero, D3DXVECTOR3(1, 1, 1), &m_matWorld);
+	m_pCollision = new CSphereCollision(g_vZero, 0.5f, &m_matWorld);
 	m_pInteractCollision = new CBoxCollision(D3DXVECTOR3(0, 0, 0.5f), D3DXVECTOR3(0.5f, 0.5f, 0.5f), &m_matWorld);
-	D3DXCreateBox(g_pD3DDevice, 0.8f, 0.8f, 0.8f, &m_pMesh, NULL);
-	//D3DXCreateSphere(g_pD3DDevice, 0.5f, 10, 10, &m_pMesh, NULL);
+	//D3DXCreateBox(g_pD3DDevice, 0.8f, 0.8f, 0.8f, &m_pMesh, NULL);
+	D3DXCreateSphere(g_pD3DDevice, 0.5f, 10, 10, &m_pMesh, NULL);
 }
 /*
 void CDebugPlayer2::Update()
