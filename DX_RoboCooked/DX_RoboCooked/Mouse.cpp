@@ -17,6 +17,11 @@ void CMouse::PressLBtn(LPARAM lParam)
 {
 	m_eMouseState = E_CLICK;
 	m_mousePoint = { LOWORD(lParam), HIWORD(lParam) };
+
+	ST_MouseEvent data;
+	data.pt = m_mousePoint;
+	
+	g_EventManager->CallEvent(eEvent::MouseClick, (void*)&data);
 }
 
 void CMouse::ReleaseLBtn(WPARAM keyID)

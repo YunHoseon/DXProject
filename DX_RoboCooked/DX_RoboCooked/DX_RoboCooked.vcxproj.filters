@@ -216,13 +216,13 @@
     <ClInclude Include="CPartsManager.h">
       <Filter>Manager\Factory</Filter>
     </ClInclude>
-    <ClInclude Include="CUIPause.h">
-      <Filter>UI</Filter>
-    </ClInclude>
     <ClInclude Include="CUIText.h">
       <Filter>UI</Filter>
     </ClInclude>
     <ClInclude Include="CUITexture.h">
+      <Filter>UI</Filter>
+    </ClInclude>
+    <ClInclude Include="CUIButton.h">
       <Filter>UI</Filter>
     </ClInclude>
   </ItemGroup>
@@ -380,13 +380,13 @@
     <ClCompile Include="CPartsManager.cpp">
       <Filter>Manager\Factory</Filter>
     </ClCompile>
-    <ClCompile Include="CUIPause.cpp">
-      <Filter>UI</Filter>
-    </ClCompile>
     <ClCompile Include="CUIText.cpp">
       <Filter>UI</Filter>
     </ClCompile>
     <ClCompile Include="CUITexture.cpp">
+      <Filter>UI</Filter>
+    </ClCompile>
+    <ClCompile Include="CUIButton.cpp">
       <Filter>UI</Filter>
     </ClCompile>
   </ItemGroup>

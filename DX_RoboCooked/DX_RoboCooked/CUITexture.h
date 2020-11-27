@@ -18,7 +18,7 @@ private:
 
 
 public:
-	CUITexture(char* ActivePath, char* DisabledPath ,char* HoverPath);
+	CUITexture(char* ActivePath, char* DisabledPath ,char* HoverPath,D3DXVECTOR2 vPos);
 	~CUITexture();
 
 	void Update() override;

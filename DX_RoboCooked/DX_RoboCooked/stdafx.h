@@ -147,6 +147,11 @@ struct ST_KeyInputEvent
 	WPARAM wKey;
 };
 
+struct ST_MouseEvent
+{
+	POINT pt;
+};
+
 struct ST_PLAYER_INPUTKEY
 {
 	WPARAM moveFowardKey;

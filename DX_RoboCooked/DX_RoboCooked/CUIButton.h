@@ -5,15 +5,15 @@ class CUI;
 class CUITexture;
 class CUIText;
 
-class CUIPause :
+class CUIButton :
 	public CUI
 {
 private:
 	std::list<CUI*> m_listUIchildren;
 
 public:
-	CUIPause();
-	~CUIPause();
+	CUIButton();
+	~CUIButton();
 	
 	void Setup();
 	void Update();
@@ -23,7 +23,8 @@ public:
 public:
 	void Add(CUI *component) override;
 	void Remove(CUI *component) override;
-
+	void OnEvent(eEvent eEvent, void* _value) override;
+	virtual bool CheckIn(POINT pt);
 
 
 };

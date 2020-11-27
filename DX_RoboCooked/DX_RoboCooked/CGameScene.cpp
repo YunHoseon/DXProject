@@ -15,7 +15,7 @@
 #include "CPartVending.h"
 #include "CTestPhysics.h"
 #include "CWall.h"
-#include "CUIPause.h"
+#include "CUIButton.h"
 #include "CBlueprint.h"
 
 
@@ -128,7 +128,8 @@ void CGameScene::Init()
 		m_pDebugParts2->Setup();
 	m_vecParts.push_back(m_pDebugParts2);
 
-	m_pDebugPauseUI = new CUIPause;
+	m_pDebugPauseUI = new CUIButton;
+	m_pDebugPauseUI->Setup();
 }
 
 void CGameScene::Render()
@@ -153,7 +154,8 @@ void CGameScene::Render()
 		it->Render();
 	}
 
-
+	if (m_pDebugPauseUI)
+		m_pDebugPauseUI->Render();
 }
 
 void CGameScene::Update()
@@ -237,6 +239,9 @@ void CGameScene::Update()
 		if (m_pDebugSphere)
 			m_pDebugSphere->Update();
 
+
+		if (m_pDebugPauseUI)
+			m_pDebugPauseUI->Update();
 	}
 }
 

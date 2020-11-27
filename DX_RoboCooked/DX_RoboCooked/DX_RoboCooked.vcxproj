@@ -164,7 +164,7 @@
     <ClInclude Include="CPartVending.h" />
     <ClInclude Include="CSoundManager.h" />
     <ClInclude Include="CTestPhysics.h" />
-    <ClInclude Include="CUIPause.h" />
+    <ClInclude Include="CUIButton.h" />
     <ClInclude Include="CUIText.h" />
     <ClInclude Include="CUITexture.h" />
     <ClInclude Include="CUITextureManager.h" />
@@ -222,7 +222,7 @@
     <ClCompile Include="CPartVending.cpp" />
     <ClCompile Include="CSoundManager.cpp" />
     <ClCompile Include="CTestPhysics.cpp" />
-    <ClCompile Include="CUIPause.cpp" />
+    <ClCompile Include="CUIButton.cpp" />
     <ClCompile Include="CUIText.cpp" />
     <ClCompile Include="CUITexture.cpp" />
     <ClCompile Include="CUITextureManager.cpp" />
