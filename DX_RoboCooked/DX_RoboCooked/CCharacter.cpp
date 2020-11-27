@@ -259,6 +259,7 @@ void CCharacter::Rotate(float fTargetRot)
 
 	D3DXVec3TransformNormal(&m_vDirection, &D3DXVECTOR3(0, 0, 1), &m_matR);
 	m_matWorld = m_matS * m_matR * m_matT;
+
 	SetForce(m_vDirection * m_fBaseSpeed);
 
 	if (m_pCollision)
