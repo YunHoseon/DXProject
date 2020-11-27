@@ -7,7 +7,10 @@ class CUIText :
 private:
 	string m_sText;
 public:
-	CUIText();
+	CUIText(char* ptext);
 	~CUIText();
+
+	void Update() override;
+	void Render() override;
 };
 

@@ -18,7 +18,7 @@ CUIPause::~CUIPause()
 void CUIPause::Setup()
 {
 	CUI* BackBoard = new CUITexture("data/UI/panel-info.png", NULL, NULL);
-	CUI* BackBoardText = new CUIText;
+	CUI* BackBoardText = new CUIText("asd");
 
 	Add(BackBoard);
 	Add(BackBoardText);
