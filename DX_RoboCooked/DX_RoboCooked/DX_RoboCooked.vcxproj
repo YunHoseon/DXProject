@@ -152,9 +152,7 @@
     <ClInclude Include="CBlueprint.h" />
     <ClInclude Include="CBoxCollision.h" />
     <ClInclude Include="CPartsManager.h" />
-    <ClInclude Include="CUISprite.h" />
     <ClInclude Include="CUI.h" />
-    <ClInclude Include="CPauseUI.h" />
     <ClInclude Include="CCamera.h" />
     <ClInclude Include="CCharacter.h" />
     <ClInclude Include="CCombinatorButton.h" />
@@ -165,9 +163,10 @@
     <ClInclude Include="CPartStorage.h" />
     <ClInclude Include="CPartVending.h" />
     <ClInclude Include="CSoundManager.h" />
-    <ClInclude Include="cSprite.h" />
-    <ClInclude Include="cSpriteNode.h" />
     <ClInclude Include="CTestPhysics.h" />
+    <ClInclude Include="CUIPause.h" />
+    <ClInclude Include="CUIText.h" />
+    <ClInclude Include="CUITexture.h" />
     <ClInclude Include="CUITextureManager.h" />
     <ClInclude Include="CWall.h" />
     <ClInclude Include="ICollisionArea.h" />
@@ -211,9 +210,7 @@
     <ClCompile Include="CBlueprint.cpp" />
     <ClCompile Include="CBoxCollision.cpp" />
     <ClCompile Include="CPartsManager.cpp" />
-    <ClCompile Include="CUISprite.cpp" />
     <ClCompile Include="CUI.cpp" />
-    <ClCompile Include="CPauseUI.cpp" />
     <ClCompile Include="CCamera.cpp" />
     <ClCompile Include="CCharacter.cpp" />
     <ClCompile Include="CCombinatorButton.cpp" />
@@ -224,9 +221,10 @@
     <ClCompile Include="CPartStorage.cpp" />
     <ClCompile Include="CPartVending.cpp" />
     <ClCompile Include="CSoundManager.cpp" />
-    <ClCompile Include="cSprite.cpp" />
-    <ClCompile Include="cSpriteNode.cpp" />
     <ClCompile Include="CTestPhysics.cpp" />
+    <ClCompile Include="CUIPause.cpp" />
+    <ClCompile Include="CUIText.cpp" />
+    <ClCompile Include="CUITexture.cpp" />
     <ClCompile Include="CUITextureManager.cpp" />
     <ClCompile Include="CWall.cpp" />
     <ClCompile Include="ICollisionArea.cpp" />

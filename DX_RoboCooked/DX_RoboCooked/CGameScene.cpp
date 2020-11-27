@@ -15,7 +15,9 @@
 #include "CPartVending.h"
 #include "CTestPhysics.h"
 #include "CWall.h"
-#include "CPauseUI.h"
+#include "CUIPause.h"
+#include "CBlueprint.h"
+
 
 /* µð¹ö±ë¿ë */
 #include "CDebugPlayer1.h"
@@ -101,6 +103,10 @@ void CGameScene::Init()
 	partVending->Setup(0, D3DXVECTOR3(1, 0, -3));
 	m_vecObject.push_back(partVending);
 
+	CBlueprint* blueprint = new CBlueprint("C00");
+	blueprint->Setup();
+	m_vecStaticActor.push_back(blueprint);
+
 	m_pDebugSphere = new CDebugPlayer1(this);
 	if (m_pDebugSphere)
 		m_pDebugSphere->Setup();
@@ -122,8 +128,7 @@ void CGameScene::Init()
 		m_pDebugParts2->Setup();
 	m_vecParts.push_back(m_pDebugParts2);
 
-
-	m_pDebugPauseUI = new CPauseUI;
+	m_pDebugPauseUI = new CUIPause;
 }
 
 void CGameScene::Render()
@@ -148,9 +153,6 @@ void CGameScene::Render()
 		it->Render();
 	}
 
-	//UITEST
-	//if (m_pDebugPauseUI)
-	//	m_pDebugPauseUI->Render();
 
 }
 
@@ -235,9 +237,6 @@ void CGameScene::Update()
 		if (m_pDebugSphere)
 			m_pDebugSphere->Update();
 
-		//UITEST
-		if (m_pDebugPauseUI)
-			m_pDebugPauseUI->Update();
 	}
 }
 

@@ -1,38 +1,26 @@
 #pragma once
-class cSpriteNode;
-class CUISprite;
 
 class CUI
 {
 public:
-	//struct Sprite
-	//{
-	//	D3DXVECTOR2 st_SpriteSize;
-	//	D3DXVECTOR2 st_Position;
-	//};
-	//
-public:
 	CUI();
 	virtual ~CUI();
-	virtual void WndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam);
-	virtual void Move(D3DXVECTOR2 vMove);
 
-
-
+protected:
+	CUI*				m_pParent;
+	D3DXMATRIXA16		m_matWorld;
+	Synthesize(D3DXMATRIXA16*, m_pParentWorldTM, ParentWorldTM);
 	
 public:
-	cSpriteNode*		m_pRoot;
-	D3DXMATRIXA16		m_matWorld;
-
-	//vector<Sprite>	m_vecSprite;
-	//vector<CUISprite*>  m_vecBtn;
-
-	
-	D3DXVECTOR2			m_vPosition;
-	D3DXVECTOR2			m_vSize;
-	POINT				m_ptMouseClick;
-	POINT				m_ptMouseMove;
-	
-
+	virtual void Update() {}
+	virtual void Render() {}
+	void SetParent(CUI *parent);
+	CUI *GetParent() const 
+	{
+		return this->m_pParent;
+	}
+	virtual void Add(CUI *component) {}
+	virtual void Remove(CUI *component) {}
+	virtual void Setup() {}
 };
 
