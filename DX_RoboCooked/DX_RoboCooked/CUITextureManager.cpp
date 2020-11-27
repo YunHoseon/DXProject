@@ -12,6 +12,8 @@ CUITextureManager::~CUITextureManager()
 
 LPDIRECT3DTEXTURE9 CUITextureManager::GetTexture(char* szFullPath)
 {
+	if (szFullPath == NULL)
+		return NULL;
 	if (m_mapTexture.find(szFullPath) == m_mapTexture.end())
 	{
 		D3DXCreateTextureFromFileExA(

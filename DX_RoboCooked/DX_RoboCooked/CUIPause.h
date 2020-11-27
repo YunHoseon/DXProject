@@ -1,8 +1,7 @@
 #pragma once
 #include "CUI.h"
-#include "CUIText.h"
-#include "CUITexture.h"
 
+class CUI;
 class CUITexture;
 class CUIText;
 
@@ -10,10 +9,22 @@ class CUIPause :
 	public CUI
 {
 private:
-	CUITexture*		m_pUITexture;
-	CUIText*		m_pUIText;
+	std::list<CUI*> m_listUIchildren;
+
 public:
 	CUIPause();
 	~CUIPause();
+	
+	void Setup();
+	void Update();
+	void Render();
+
+
+public:
+	void Add(CUI *component) override;
+	void Remove(CUI *component) override;
+
+
+
 };
 

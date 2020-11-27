@@ -15,6 +15,7 @@
 #include "CPartVending.h"
 #include "CTestPhysics.h"
 #include "CWall.h"
+#include "CUIPause.h"
 
 
 /* µð¹ö±ë¿ë */
@@ -122,7 +123,7 @@ void CGameScene::Init()
 		m_pDebugParts2->Setup();
 	m_vecParts.push_back(m_pDebugParts2);
 
-
+	m_pDebugPauseUI = new CUIPause;
 }
 
 void CGameScene::Render()

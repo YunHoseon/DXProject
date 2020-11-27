@@ -14,5 +14,11 @@ CUI::~CUI()
 {
 }
 
+void CUI::SetParent(CUI * parent)
+{
+	this->m_pParent = parent;
+	m_pParentWorldTM = &parent->m_matWorld;
+}
+
 
 

@@ -1,5 +1,8 @@
 #pragma once
-class CUIText
+#include "CUI.h"
+
+class CUIText :
+	public CUI
 {
 public:
 	CUIText();
