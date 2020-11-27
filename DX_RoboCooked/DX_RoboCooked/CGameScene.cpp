@@ -16,6 +16,7 @@
 #include "CTestPhysics.h"
 #include "CWall.h"
 #include "CUIPause.h"
+#include "CBlueprint.h"
 
 
 /* µð¹ö±ë¿ë */
@@ -101,6 +102,10 @@ void CGameScene::Init()
 	CPartVending* partVending = new CPartVending(outlet, this, "2");
 	partVending->Setup(0, D3DXVECTOR3(1, 0, -3));
 	m_vecObject.push_back(partVending);
+
+	CBlueprint* blueprint = new CBlueprint("C00");
+	blueprint->Setup();
+	m_vecStaticActor.push_back(blueprint);
 
 	m_pDebugSphere = new CDebugPlayer1(this);
 	if (m_pDebugSphere)
