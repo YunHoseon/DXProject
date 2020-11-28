@@ -64,10 +64,7 @@ CGameScene::~CGameScene()
 		SafeDelete(it);
 	}
 
-
 	SafeDelete(m_pDebugPauseUI);
-
-
 }
 
 void CGameScene::Init()
@@ -168,7 +165,6 @@ void CGameScene::Update()
 	if (m_isTimeStop)
 		return;
 
-
 	{
 		// Gravity Update
 		if (m_pDebugCube)
@@ -244,7 +240,6 @@ void CGameScene::Update()
 		if (m_pDebugSphere)
 			m_pDebugSphere->Update();
 
-
 		if (m_pDebugPauseUI)
 			m_pDebugPauseUI->Update();
 	}
@@ -253,7 +248,6 @@ void CGameScene::Update()
 void CGameScene::PausePlayGame()
 {
 	m_isTimeStop = !m_isTimeStop;
-
 }
 
 
@@ -312,7 +306,6 @@ void CGameScene::CheckAroundCombinator(CPartCombinator* combinator)
 			veclength[data] = D3DXVec3Length(&vDirection);	
 		}
 	}
-
 
 	for(auto it : veclength)
 	{
