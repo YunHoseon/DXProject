@@ -13,6 +13,7 @@ CBlueprint::CBlueprint(string partsID)
 	D3DXMatrixTranslation(&m_matT, 5.0f, -0.5f, -3.0f);
 	m_blueprintTexture = g_pTextureManager->GetTexture("data/Texture/Blueprint.jpg");
 	//파츠 아이디에 따라 m_matS,텍스쳐 다르게
+	
 }
 
 
@@ -25,7 +26,7 @@ void CBlueprint::Setup()
 	vector<ST_PNT_VERTEX> vecVertex;
 	ST_PNT_VERTEX v;
 	v.n = D3DXVECTOR3(0, 1, 0);
-
+	
 	{
 		//front
 		v.p = D3DXVECTOR3(-BLOCK_SIZE / (2.0f), -BLOCK_SIZE / (2.0f), -BLOCK_SIZE / (2.0f));	v.t = D3DXVECTOR2(0, 1);
