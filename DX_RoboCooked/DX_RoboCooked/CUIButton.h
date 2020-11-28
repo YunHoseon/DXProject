@@ -10,8 +10,10 @@ class CUIButton :
 	public CUI
 {
 protected:
-	CUITexture*		m_pTexture;
-	CUIText*		m_pText;
+	WPARAM					  m_wActiveButton;
+	CUITexture*				  m_pTexture;
+	CUIText*				  m_pText;
+	std::array<ST_PLAYER_INPUTKEY*, 2>	m_pInputKey;
 
 public:
 	CUIButton();

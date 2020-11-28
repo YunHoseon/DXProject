@@ -3,8 +3,9 @@
 class CUIPauseButton :
 	public CUIButton
 {
+
 public:
-	CUIPauseButton(D3DXVECTOR2 vPos);
+	CUIPauseButton(D3DXVECTOR2 vPos,WPARAM wParam);
 	~CUIPauseButton();
 
 public:
@@ -12,5 +13,6 @@ public:
 	void OnEvent(eEvent eEvent, void * _value);
 	void ClickEvent(void* _value);
 	void HoverEvent(void* _value);
+	void KeyPressEvent(void* _value);
 };
 
