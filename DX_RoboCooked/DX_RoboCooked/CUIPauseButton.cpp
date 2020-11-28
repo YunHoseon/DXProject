@@ -22,6 +22,8 @@ CUIPauseButton::~CUIPauseButton()
 
 void CUIPauseButton::Setup()
 {
+	g_EventManager->Attach(eEvent::MouseClick, this);
+
 	CUI* board = new CUIBoardButton(D3DXVECTOR2(m_vPosition.x, m_vPosition.y));
 	Add(board);
 
@@ -31,22 +33,16 @@ void CUIPauseButton::Setup()
 	CUI* bar = new CUIBarButton(D3DXVECTOR2(m_vPosition.x+130, m_vPosition.y+300));
 	board->Add(bar);
 
-	bar = new CUIBarButton(D3DXVECTOR2(m_vPosition.x+130, m_vPosition.y+370));
-	board->Add(bar);
+	//bar = new CUIBarButton(D3DXVECTOR2(m_vPosition.x+130, m_vPosition.y+370));
+	//board->Add(bar);
 }
 
-void CUIPauseButton::Update()
+void CUIPauseButton::OnEvent(eEvent eEvent, void * _value)
 {
-	for (const auto c : m_listUIchildren)
-	{
-		c->Update();
-	}
-}
+	ST_MouseEvent *data = static_cast<ST_MouseEvent*>(_value);
 
-void CUIPauseButton::Render()
-{
-	for (const auto c : m_listUIchildren)
+	for (auto it : m_listUIchildren)
 	{
-		c->Render();
+		it->CheckIn(data->pt);
 	}
 }

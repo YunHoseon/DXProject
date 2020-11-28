@@ -18,26 +18,10 @@ CUIBoardButton::~CUIBoardButton()
 
 void CUIBoardButton::Setup()
 {
-	CUI* Texture = new CUITexture("data/UI/panel-info.png", NULL, NULL, m_vPosition);
-	CUI* Text = new CUIText("UI_TEST");
+	m_pTexture = new CUITexture("data/UI/panel-info.png", NULL, NULL, m_vPosition);
+	m_pText = new CUIText("UI_TEST");
 
-	Add(Texture);
-	Add(Text);
-
+	D3DXIMAGE_INFO Info = g_pUITextureManager->GetTextureInfo("data/UI/panel-info.png");
+	m_vSize = D3DXVECTOR2(Info.Width, Info.Height);
 }
 
-void CUIBoardButton::Update()
-{
-	for (const auto c : m_listUIchildren)
-	{
-		c->Update();
-	}
-}
-
-void CUIBoardButton::Render()
-{
-	for (const auto c : m_listUIchildren)
-	{
-		c->Render();
-	}
-}

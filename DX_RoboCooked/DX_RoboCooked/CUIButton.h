@@ -5,19 +5,22 @@ class CUI;
 class CUITexture;
 class CUIText;
 
+
 class CUIButton :
 	public CUI
 {
 protected:
-	std::list<CUI*> m_listUIchildren;
+	CUITexture*		m_pTexture;
+	CUIText*		m_pText;
 
 public:
 	CUIButton();
 	virtual ~CUIButton();
 	
 	virtual void Setup() = 0;
-	virtual void Update() = 0;
-	virtual void Render() = 0;
+	virtual void Update();
+	virtual void Render();
+
 
 public:
 	virtual void Add(CUI *component) override;

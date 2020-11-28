@@ -18,23 +18,9 @@ CUICloseButton::~CUICloseButton()
 
 void CUICloseButton::Setup()
 {
-	CUI* Texture = new CUITexture("data/UI/btn-main-menu.png", NULL, NULL, m_vPosition);
-	Add(Texture);
-}
+	m_pTexture = new CUITexture("data/UI/btn-main-menu.png", "data/UI/arrow-btn-r-up.png", NULL, m_vPosition);
 
-void CUICloseButton::Update()
-{
-	for (const auto c : m_listUIchildren)
-	{
-		c->Update();
-	}
-}
+	D3DXIMAGE_INFO Info = g_pUITextureManager->GetTextureInfo("data/UI/btn-main-menu.png");
+	m_vSize = D3DXVECTOR2(Info.Width, Info.Height);
 
-void CUICloseButton::Render()
-{
-	for (const auto c : m_listUIchildren)
-	{
-		c->Render();
-	}
 }
-

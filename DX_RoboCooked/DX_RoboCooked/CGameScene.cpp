@@ -159,8 +159,8 @@ void CGameScene::Render()
 		it->Render();
 	}
 
-	/*if (m_pDebugPauseUI)
-		m_pDebugPauseUI->Render();*/
+	if (m_pDebugPauseUI)
+		m_pDebugPauseUI->Render();
 }
 
 void CGameScene::Update()
@@ -318,7 +318,6 @@ void CGameScene::CheckAroundCombinator(CPartCombinator* combinator)
 	{
 		combinator->PartsInteract(it.first);
 		it.first->SetCPartCombinator(combinator);
-		
 	}
 }
 

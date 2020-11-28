@@ -6,6 +6,7 @@ CUI::CUI()
 	: m_pParent(nullptr)
 	, m_vPosition(0,0)
 	, m_vSize(0,0)
+	, m_eUIState(eUIState::Disabled)
 {
 
 }
@@ -20,13 +21,39 @@ void CUI::SetParent(CUI * parent)
 	this->m_pParent = parent;
 }
 
-bool CUI::CheckIn(POINT pt)
+//bool CUI::CheckIn(POINT pt)
+//{
+//	if (m_vPosition.x <= pt.x && m_vPosition.x + m_vSize.x >= pt.x
+//		&& m_vPosition.y <= pt.y && m_vPosition.y + m_vSize.y >= pt.y)
+//		return true;
+//	return false;
+//}
+
+
+
+void CUI::CheckIn(POINT pt)
 {
-	if (m_vPosition.x <= pt.x && m_vPosition.x + m_vSize.x >= pt.x
-		&& m_vPosition.y <= pt.y && m_vPosition.y + m_vSize.y >= pt.y)
-		return true;
-	return false;
+	for (auto it : m_listUIchildren)
+	{
+		if (it->m_vPosition.x <= pt.x && it->m_vPosition.x + it->m_vSize.x >= pt.x
+			&& it->m_vPosition.y <= pt.y && it->m_vPosition.y + it->m_vSize.y >= pt.y)
+		{
+			if (it->GetlistUIchildrenSize() == 0)
+			{
+				if (it->GetUIState() == eUIState::Disabled)
+				{
+					it->SetUIState(eUIState::Active);
+				}
+				else if (it->GetUIState() == eUIState::Active)
+				{
+					it->SetUIState(eUIState::Disabled);
+				}
+			}
+			else
+			{
+				it->CheckIn(pt);
+			}
+		}
+	}
+	return;
 }
-
-
-

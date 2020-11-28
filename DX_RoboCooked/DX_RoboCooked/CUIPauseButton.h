@@ -9,7 +9,6 @@ public:
 
 public:
 	virtual void Setup() override;
-	virtual void Update() override;
-	virtual void Render() override;
+	void OnEvent(eEvent eEvent, void * _value);
 };
 
