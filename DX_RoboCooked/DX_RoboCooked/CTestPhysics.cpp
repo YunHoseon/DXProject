@@ -2,15 +2,8 @@
 #include "CTestPhysics.h"
 #include "CActor.h"
 
-//void CTestPhysics::ApplyPhysics(CActor* pA, CActor* pB)
-//{
-//	ApplyGravity(pA);
-//	ApplyBound(pA, pB);
-//}
-
 void CTestPhysics::ApplyGravity(CActor* pA)
 {
-	//return;
 	D3DXVECTOR3 gravity(0, -0.01f, 0);
 	pA->AddAcceleration(gravity);
 }

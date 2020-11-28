@@ -56,5 +56,5 @@ void CEventManager::CallEvent(eEvent eEvent, void* value)
 
 void CEventManager::ErrorSend()
 {
-	std::cout << "publisher또는 subscriber 가 없습니다." << std::endl;
+	_DEBUG_COMMENT std::cout << "publisher또는 subscriber 가 없습니다." << std::endl;
 }
