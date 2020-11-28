@@ -17,7 +17,7 @@ CUIBarButton::~CUIBarButton()
 
 void CUIBarButton::Setup()
 {
-	m_pTexture = new CUITexture("data/UI/btn-med-over.png", "data/UI/btn-med-down.png", NULL, m_vPosition);
+	m_pTexture = new CUITexture("data/UI/btn-med-over.png", "data/UI/btn-med-down.png", "data/UI/btn-med-up.png", m_vPosition);
 	
 	D3DXIMAGE_INFO Info = g_pUITextureManager->GetTextureInfo("data/UI/btn-med-over.png");
 	m_vSize = D3DXVECTOR2(Info.Width, Info.Height);

@@ -10,5 +10,7 @@ public:
 public:
 	virtual void Setup() override;
 	void OnEvent(eEvent eEvent, void * _value);
+	void ClickEvent(void* _value);
+	void HoverEvent(void* _value);
 };
 
