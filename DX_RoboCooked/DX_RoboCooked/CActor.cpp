@@ -25,6 +25,7 @@ CActor::CActor() :
 
 CActor::~CActor()
 {
+	
 }
 
 bool CActor::Collide(CActor* target, D3DXVECTOR3* pNormal)

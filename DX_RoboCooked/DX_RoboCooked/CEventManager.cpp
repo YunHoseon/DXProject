@@ -17,7 +17,7 @@ void CEventManager::Attach(eEvent eEvent, CEventListener* observer)
 
 bool CEventManager::Detach(eEvent eEvent, CEventListener* observer)
 {
-	std::set<CEventListener*>::iterator it = std::find(m_mapEventMap[eEvent].begin(), m_mapEventMap[eEvent].end(), observer);
+	std::set<CEventListener*>::iterator it = m_mapEventMap[eEvent].find(observer);
 	if (it != m_mapEventMap[eEvent].end())
 	{
 		m_mapEventMap[eEvent].erase(it);
@@ -31,13 +31,8 @@ void CEventManager::DetachAll(CEventListener* _observer)
 	std::map<eEvent, std::set<CEventListener*>>::iterator it = m_mapEventMap.begin();
 	while (it != m_mapEventMap.end())
 	{
-		for each(auto ob in it->second)
-		{
-			if (ob == _observer)
-			{
-				it->second.erase(ob);
-			}	
-		}
+		if(it->second.find(_observer) != it->second.end())
+			it->second.erase(_observer);
 		++it;
 	}
 }
@@ -56,5 +51,5 @@ void CEventManager::CallEvent(eEvent eEvent, void* value)
 
 void CEventManager::ErrorSend()
 {
-	std::cout << "publisher또는 subscriber 가 없습니다." << std::endl;
+	_DEBUG_COMMENT std::cout << "publisher또는 subscriber 가 없습니다." << std::endl;
 }

@@ -1,16 +1,19 @@
 #include "stdafx.h"
 #include "CBlueprint.h"
 #include "CBoxCollision.h"
+#include "CParts.h"
 
 CBlueprint::CBlueprint(string partsID)
 	:m_nRotAngleY(0)
 	,m_isCompleted(false)
+	, m_onBlueprintParts(NULL)
 {
 	m_sRightPartsID = partsID;
 	D3DXMatrixScaling(&m_matS, 2.0f, 0.1f, 2.8f);
 	D3DXMatrixTranslation(&m_matT, 5.0f, -0.5f, -3.0f);
-	m_BlueprintTexture = g_pTextureManager->GetTexture(("data/Texture/Blueprint.jpg"));
+	m_blueprintTexture = g_pTextureManager->GetTexture("data/Texture/Blueprint.jpg");
 	//파츠 아이디에 따라 m_matS,텍스쳐 다르게
+	
 }
 
 
@@ -23,7 +26,7 @@ void CBlueprint::Setup()
 	vector<ST_PNT_VERTEX> vecVertex;
 	ST_PNT_VERTEX v;
 	v.n = D3DXVECTOR3(0, 1, 0);
-
+	
 	{
 		//front
 		v.p = D3DXVECTOR3(-BLOCK_SIZE / (2.0f), -BLOCK_SIZE / (2.0f), -BLOCK_SIZE / (2.0f));	v.t = D3DXVECTOR2(0, 1);
@@ -132,13 +135,25 @@ void CBlueprint::Setup()
 
 void CBlueprint::Update()
 {
+	if (m_onBlueprintParts != NULL && m_onBlueprintParts->GetPosition() != GetCollision()->GetCenter())
+	{
+		D3DXVECTOR3 vDirection = GetCollision()->GetCenter() - m_onBlueprintParts->GetPosition();
+		float vecLength = D3DXVec3Length(&vDirection);
+		if (vecLength < 0.01f)
+		{
+			m_onBlueprintParts->SetPosition(GetCollision()->GetCenter());
+			return;
+		}
+		D3DXVec3Normalize(&vDirection, &vDirection);
+		m_onBlueprintParts->SetPosition(m_onBlueprintParts->GetPosition() + vDirection);
+	}
 }
 
 void CBlueprint::Render()
 {
 	m_pCollision->Render();
 	g_pD3DDevice->SetTransform(D3DTS_WORLD, &m_matWorld);
-	g_pD3DDevice->SetTexture(0, m_BlueprintTexture);
+	g_pD3DDevice->SetTexture(0, m_blueprintTexture);
 	g_pD3DDevice->SetFVF(ST_PNT_VERTEX::FVF);
 	g_pD3DDevice->DrawPrimitiveUP(D3DPT_TRIANGLELIST, m_vecVertex.size() / 3, &m_vecVertex[0],
 		sizeof(ST_PNT_VERTEX));
