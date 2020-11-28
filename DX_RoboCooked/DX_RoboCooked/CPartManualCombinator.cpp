@@ -11,7 +11,6 @@
 CPartManualCombinator::CPartManualCombinator(IInteractCenter* pInteractCenter, eCombinatorPartsLevel eType, float fAngle, D3DXVECTOR3 vPosition):
 	CPartCombinator(pInteractCenter, eType, fAngle, vPosition)
 {
-
 	switch (m_eLevel)
 	{
 	case eCombinatorPartsLevel::ONE:
@@ -21,7 +20,6 @@ CPartManualCombinator::CPartManualCombinator(IInteractCenter* pInteractCenter, e
 		m_nMaxPartsCount = 3;
 		break;
 	}
-
 
 	Setup(fAngle, vPosition);
 }

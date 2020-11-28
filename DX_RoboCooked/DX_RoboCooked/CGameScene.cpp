@@ -105,7 +105,7 @@ void CGameScene::Init()
 	partVending->Setup(0, D3DXVECTOR3(1, 0, -3));
 	m_vecObject.push_back(partVending);
 
-	CBlueprint* blueprint = new CBlueprint("C00");
+	CBlueprint* blueprint = new CBlueprint("C00", m_vecParts);
 	blueprint->Setup();
 	m_vecStaticActor.push_back(blueprint);
 

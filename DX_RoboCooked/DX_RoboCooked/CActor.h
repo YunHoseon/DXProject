@@ -57,6 +57,7 @@ public:
 
 
 	virtual float GetMass() { return m_fMass; }
+	virtual void SetMass(float mass) { m_fMass = mass; }
 	virtual float GetFriction(D3DXVECTOR3 vPosition = g_vZero) { return m_fFriction; }
 };
 

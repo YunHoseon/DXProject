@@ -1,6 +1,7 @@
 #pragma once
 #include "CActor.h"
 
+class CInteractiveActor;
 class CParts;
 class CBlueprint :
 	public CActor
@@ -12,8 +13,9 @@ private:
 	vector<ST_PNT_VERTEX>	m_vecVertex;
 	LPDIRECT3DTEXTURE9		m_blueprintTexture;
 	CParts*					m_onBlueprintParts;	//설계도 위의 파츠
+	vector<CInteractiveActor*>*		m_pVecParts;
 public:
-	CBlueprint(string partsID);
+	CBlueprint(string partsID, vector<CInteractiveActor*>& vecParts);
 	~CBlueprint();
 
 	void Setup();
