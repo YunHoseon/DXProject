@@ -45,6 +45,15 @@ void CMouse::JudgeLDoubleClick(WPARAM keyID)
 	m_elapsedTime = GetTickCount();
 }
 
+void CMouse::HoverMouse(LPARAM lParam)
+{
+	POINT pt = { LOWORD(lParam), HIWORD(lParam) };
+	ST_MouseEvent data;
+	data.pt = pt;
+
+	g_EventManager->CallEvent(eEvent::MouseHover, (void*)&data);
+}
+
 POINT CMouse::GetMousePoint()
 {
 	std::cout << "x : " << m_mousePoint.x << "  y : " << m_mousePoint.y << std::endl;

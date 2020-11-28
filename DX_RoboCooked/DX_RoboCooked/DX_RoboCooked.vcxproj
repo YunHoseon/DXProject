@@ -152,6 +152,7 @@
     <ClInclude Include="CBlueprint.h" />
     <ClInclude Include="CBoxCollision.h" />
     <ClInclude Include="CPartsManager.h" />
+    <ClInclude Include="CUICloseButton.h" />
     <ClInclude Include="CUI.h" />
     <ClInclude Include="CCamera.h" />
     <ClInclude Include="CCharacter.h" />
@@ -203,6 +204,9 @@
     <ClInclude Include="stdafx.h" />
     <ClInclude Include="targetver.h" />
     <ClInclude Include="CTile.h" />
+    <ClInclude Include="CUIBoardButton.h" />
+    <ClInclude Include="CUIBarButton.h" />
+    <ClInclude Include="CUIPauseButton.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="CActor.cpp" />
@@ -210,6 +214,7 @@
     <ClCompile Include="CBlueprint.cpp" />
     <ClCompile Include="CBoxCollision.cpp" />
     <ClCompile Include="CPartsManager.cpp" />
+    <ClCompile Include="CUICloseButton.cpp" />
     <ClCompile Include="CUI.cpp" />
     <ClCompile Include="CCamera.cpp" />
     <ClCompile Include="CCharacter.cpp" />
@@ -264,6 +269,9 @@
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Create</PrecompiledHeader>
     </ClCompile>
     <ClCompile Include="CTile.cpp" />
+    <ClCompile Include="CUIBoardButton.cpp" />
+    <ClCompile Include="CUIBarButton.cpp" />
+    <ClCompile Include="CUIPauseButton.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="DX_RoboCooked.rc" />

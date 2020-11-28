@@ -46,6 +46,9 @@ void CInputManager::WndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lPara
 
 	case WM_RBUTTONUP:
 		break;
+	case WM_MOUSEMOVE:
+		m_pMouse->HoverMouse(lParam);
+		break;
 
 	}
 }

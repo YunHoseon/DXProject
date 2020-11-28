@@ -18,6 +18,11 @@
 #include "CUIButton.h"
 #include "CBlueprint.h"
 
+#include "CUICloseButton.h"
+#include "CUIBoardButton.h"
+#include "CUIBarButton.h"
+#include "CUIPauseButton.h"
+
 
 /* µð¹ö±ë¿ë */
 #include "CDebugPlayer1.h"
@@ -128,7 +133,7 @@ void CGameScene::Init()
 		m_pDebugParts2->Setup();
 	m_vecParts.push_back(m_pDebugParts2);
 
-	m_pDebugPauseUI = new CUIButton;
+	m_pDebugPauseUI = new CUIPauseButton(D3DXVECTOR2(100,100));
 	m_pDebugPauseUI->Setup();
 }
 
@@ -154,8 +159,8 @@ void CGameScene::Render()
 		it->Render();
 	}
 
-	if (m_pDebugPauseUI)
-		m_pDebugPauseUI->Render();
+	/*if (m_pDebugPauseUI)
+		m_pDebugPauseUI->Render();*/
 }
 
 void CGameScene::Update()
@@ -313,7 +318,6 @@ void CGameScene::CheckAroundCombinator(CPartCombinator* combinator)
 	{
 		combinator->PartsInteract(it.first);
 		it.first->SetCPartCombinator(combinator);
-		
 	}
 }
 
