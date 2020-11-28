@@ -130,7 +130,7 @@ void CGameScene::Init()
 		m_pDebugParts2->Setup();
 	m_vecParts.push_back(m_pDebugParts2);
 
-	m_pDebugPauseUI = new CUIPauseButton(D3DXVECTOR2(100,100));
+	m_pDebugPauseUI = new CUIPauseButton(D3DXVECTOR2(100,100),27);
 	m_pDebugPauseUI->Setup();
 }
 
@@ -156,8 +156,8 @@ void CGameScene::Render()
 		it->Render();
 	}
 
-	/*if (m_pDebugPauseUI)
-		m_pDebugPauseUI->Render();*/
+	if (m_pDebugPauseUI)
+		m_pDebugPauseUI->Render();
 }
 
 void CGameScene::Update()

@@ -5,8 +5,12 @@
 
 
 
-CUIButton::CUIButton():m_pTexture(nullptr),m_pText(nullptr)
+CUIButton::CUIButton()
+	: m_pTexture(nullptr)
+	, m_pText(nullptr)
 {
+	m_pInputKey[0] = InputManager->GetInputKey(0);
+	m_pInputKey[1] = InputManager->GetInputKey(1);
 
 }
 
@@ -74,6 +78,9 @@ CUIButton::~CUIButton()
 
 void CUIButton::Update()
 {
+	if (!m_isActive)
+		return;
+
 	switch (m_eUIState)
 	{
 	case eUIState::Disabled:
@@ -110,6 +117,9 @@ void CUIButton::Update()
 
 void CUIButton::Render()
 {
+	if (!m_isActive)
+		return;
+
 	for (const auto c : m_listUIchildren)
 	{
 		c->Render();

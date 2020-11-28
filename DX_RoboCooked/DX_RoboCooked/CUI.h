@@ -23,6 +23,7 @@ protected:
 	D3DXVECTOR2			m_vPosition;
 	D3DXVECTOR2			m_vSize;
 	std::list<CUI*>		m_listUIchildren;
+	bool				m_isActive;
 public:
 	virtual void Update() {}
 	virtual void Render() {}
@@ -36,6 +37,8 @@ public:
 	virtual void Setup() {}
 	virtual void CheckIn(POINT pt);
 	virtual void CheckInHover(POINT pt);
+	void InvertActive();
+
 	INT GetlistUIchildrenSize() { return m_listUIchildren.size(); }
 
 	eUIState GetUIState() { return m_eUIState; }

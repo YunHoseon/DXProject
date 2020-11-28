@@ -10,9 +10,10 @@
 
 
 
-CUIPauseButton::CUIPauseButton(D3DXVECTOR2 vPos)
+CUIPauseButton::CUIPauseButton(D3DXVECTOR2 vPos, WPARAM wParam)
 {
 	m_vPosition = vPos;
+	m_wActiveButton = wParam;
 }
 
 
@@ -24,6 +25,7 @@ void CUIPauseButton::Setup()
 {
 	g_EventManager->Attach(eEvent::MouseClick, this);
 	g_EventManager->Attach(eEvent::MouseHover, this);
+	g_EventManager->Attach(eEvent::KeyPress, this);
 
 
 	CUI* board = new CUIBoardButton(D3DXVECTOR2(m_vPosition.x, m_vPosition.y));
@@ -41,7 +43,6 @@ void CUIPauseButton::Setup()
 
 void CUIPauseButton::OnEvent(eEvent eEvent, void * _value)
 {
-
 	switch (eEvent)
 	{
 	case eEvent::MouseClick:
@@ -50,15 +51,14 @@ void CUIPauseButton::OnEvent(eEvent eEvent, void * _value)
 	case eEvent::MouseHover:
 		HoverEvent(_value);
 		break;
+	case eEvent::KeyPress:
+		KeyPressEvent(_value);
+		break;
 	}
-
-
-
 }
 
 void CUIPauseButton::ClickEvent(void* _value)
 {
-	
 	ST_MouseEvent *data = static_cast<ST_MouseEvent*>(_value);
 
 	for (auto it : m_listUIchildren)
@@ -74,5 +74,30 @@ void CUIPauseButton::HoverEvent(void* _value)
 	for (auto it : m_listUIchildren)
 	{
 		it->CheckInHover(data->pt);
+	}
+}
+
+void CUIPauseButton::KeyPressEvent(void * _value)
+{
+	ST_KeyInputEvent *data = static_cast<ST_KeyInputEvent*>(_value);
+
+	if (data->wKey == m_wActiveButton)
+	{
+		for (auto it : m_listUIchildren)
+		{
+			it->InvertActive();
+		}
+		m_isActive = !m_isActive;
+
+		if (m_isActive)
+		{
+			g_EventManager->Attach(eEvent::MouseClick, this);
+			g_EventManager->Attach(eEvent::MouseHover, this);
+		}
+		else
+		{
+			g_EventManager->Detach(eEvent::MouseClick, this);
+			g_EventManager->Detach(eEvent::MouseHover, this);
+		}
 	}
 }
