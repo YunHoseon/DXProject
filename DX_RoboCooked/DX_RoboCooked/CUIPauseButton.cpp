@@ -26,6 +26,7 @@ void CUIPauseButton::Setup()
 	g_EventManager->Attach(eEvent::MouseClick, this);
 	g_EventManager->Attach(eEvent::MouseHover, this);
 	g_EventManager->Attach(eEvent::KeyPress, this);
+	g_EventManager->Attach(eEvent::MouseRelease, this);
 
 
 	CUI* board = new CUIBoardButton(D3DXVECTOR2(m_vPosition.x, m_vPosition.y));
@@ -54,18 +55,12 @@ void CUIPauseButton::OnEvent(eEvent eEvent, void * _value)
 	case eEvent::KeyPress:
 		KeyPressEvent(_value);
 		break;
+	case eEvent::MouseRelease:
+		MouseReleaseEvent(_value);
+		break;
 	}
 }
 
-void CUIPauseButton::ClickEvent(void* _value)
-{
-	ST_MouseEvent *data = static_cast<ST_MouseEvent*>(_value);
-
-	for (auto it : m_listUIchildren)
-	{
-		it->CheckIn(data->pt);
-	}
-}
 
 void CUIPauseButton::HoverEvent(void* _value)
 {
@@ -99,5 +94,25 @@ void CUIPauseButton::KeyPressEvent(void * _value)
 			g_EventManager->Detach(eEvent::MouseClick, this);
 			g_EventManager->Detach(eEvent::MouseHover, this);
 		}
+	}
+}
+
+void CUIPauseButton::ClickEvent(void* _value)
+{
+	ST_MouseEvent *data = static_cast<ST_MouseEvent*>(_value);
+
+	for (auto it : m_listUIchildren)
+	{
+		it->CheckPressIn(data->pt);
+	}
+}
+
+void CUIPauseButton::MouseReleaseEvent(void * _value)
+{
+	ST_MouseEvent *data = static_cast<ST_MouseEvent*>(_value);
+
+	for (auto it : m_listUIchildren)
+	{
+		it->CheckReleaseIn(data->pt);
 	}
 }

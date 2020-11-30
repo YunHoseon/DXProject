@@ -28,10 +28,16 @@ void CTestPhysics::ApplyBound(CActor* pA, CActor* pB)
 		
 
 		if (power[0] > 0)
+		{
 			vNormalForce[0] = vNormal * power[0] * 1.0f; // 탄성계수. 1.0이면 튕기지 않음
+			vNormalForce[1] = -vNormal * power[0] * 1.0f;
+		}
 
 		if (power[1] > 0)
+		{
+			vNormalForce[0] = vNormal * power[1] * 1.0f;
 			vNormalForce[1] = -vNormal * power[1] * 1.0f;
+		}
 
 		if (pA->GetMass() < pB->GetMass())
 			pA->AddAcceleration(vNormalForce[0]); // 수직항력 적용

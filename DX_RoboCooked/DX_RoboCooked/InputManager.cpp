@@ -39,6 +39,7 @@ void CInputManager::WndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lPara
 
 	case WM_LBUTTONUP:
 		m_pMouse->ReleaseLBtn(wParam);
+		m_pMouse->ReleaseLBtn(lParam);
 		break;
 
 	case WM_RBUTTONDOWN:

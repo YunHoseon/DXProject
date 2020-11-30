@@ -17,7 +17,8 @@ enum class eEvent
 	PartsPut,
 	PartsThrow,
 	MouseClick,
-	MouseHover
+	MouseHover,
+	MouseRelease
 };
 
 
