@@ -165,7 +165,7 @@ void CBlueprint::Update()
 			m_onBlueprintParts->SetPosition(D3DXVECTOR3(5.0f, 0.f, -3.0f));
 			m_onBlueprintParts->GetCollision()->SetActive(false);
 			this->GetCollision()->SetCenter(GetCollision()->GetCenter() + D3DXVECTOR3(0, 0.5f, 0));
-			this->SetMass(9999);
+			//this->SetMass(9999);
 			return;
 		}
 		D3DXVec3Normalize(&vDir, &vDir);
