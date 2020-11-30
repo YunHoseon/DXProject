@@ -37,9 +37,13 @@ public:
 	virtual void Render() = 0;
 	virtual bool Collide(CActor* target, D3DXVECTOR3* pNormal = nullptr);
 
-	virtual const D3DXVECTOR3 GetScale() { return m_vScale; }
+	virtual const D3DXVECTOR3& GetScale() { return m_vScale; }
 	virtual void SetScale(const D3DXVECTOR3& vScale);
 	virtual void SetScale(float x, float y, float z);
+
+	virtual const D3DXVECTOR3& GetPosition() { return m_vPosition; }
+	virtual void SetPosition(D3DXVECTOR3 vPosition);
+	virtual void SetPosition(float x, float y, float z);
 
 	// for physics
 	ICollisionArea* GetCollision() { return m_pCollision; }

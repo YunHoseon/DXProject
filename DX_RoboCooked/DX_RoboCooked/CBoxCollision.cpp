@@ -73,15 +73,35 @@ CBoxCollision::CBoxCollision(D3DXVECTOR3 vOriginPos, D3DXVECTOR3 vSize, D3DXMATR
 
 CBoxCollision::CBoxCollision(LPD3DXMESH pMesh, D3DXMATRIXA16* pmatWorld) : ICollisionArea()
 {
+	assert(pMesh);
+	
 	m_eType = eColideType::Box;
 	m_arrOriginAxisDir[0] = D3DXVECTOR3(1, 0, 0);
 	m_arrOriginAxisDir[1] = D3DXVECTOR3(0, 1, 0);
 	m_arrOriginAxisDir[2] = D3DXVECTOR3(0, 0, 1);
 
 	m_arrAxisDir = m_arrOriginAxisDir;
+	m_pmatWorldTM = pmatWorld;
 
+	D3DXVECTOR3* pVertices;
+	D3DXVECTOR3 vMin, vMax;
+
+
+	pMesh->LockVertexBuffer(D3DLOCK_READONLY, (void**)&pVertices);
+
+	D3DXComputeBoundingBox(pVertices, pMesh->GetNumVertices(),
+
+		pMesh->GetNumBytesPerVertex(), &vMin, &vMax);
+
+	pMesh->UnlockVertexBuffer();
 	
-	
+	m_vOriginCenterPos = (vMin + vMax) * 0.5f;
+	m_vCenterPos = m_vOriginCenterPos;
+	D3DXVECTOR3 vLen = (vMax - vMin) * 0.5f;
+	m_fOriginAxisHalfLen[0] = vLen.x;
+	m_fOriginAxisHalfLen[1] = vLen.y;
+	m_fOriginAxisHalfLen[2] = vLen.z;
+	m_fAxisHalfLen = m_fOriginAxisHalfLen;
 }
 
 CBoxCollision::~CBoxCollision()
@@ -391,7 +411,8 @@ bool CBoxCollision::CollideToSphere(CSphereCollision* pTargetCollider, D3DXVECTO
 
 void CBoxCollision::SetScale(float x, float y, float z)
 {
-	m_fAxisHalfLen[0] = m_fOriginAxisHalfLen[0] * x;
-	m_fAxisHalfLen[1] = m_fOriginAxisHalfLen[1] * y;
-	m_fAxisHalfLen[2] = m_fOriginAxisHalfLen[2] * z;
+	return;
+	m_fAxisHalfLen[0] = m_fOriginAxisHalfLen[0];// *(1 + x) * 0.5f;
+	m_fAxisHalfLen[1] = m_fOriginAxisHalfLen[1];// *(1 + y) * 0.5f;
+	m_fAxisHalfLen[2] = m_fOriginAxisHalfLen[2];// *(1 + z) * 0.5f;
 }

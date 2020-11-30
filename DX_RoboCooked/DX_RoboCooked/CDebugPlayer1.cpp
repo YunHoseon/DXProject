@@ -29,7 +29,7 @@ CDebugPlayer1::~CDebugPlayer1()
 void CDebugPlayer1::Setup()
 {
 	m_pCollision = new CSphereCollision(g_vZero, 0.5f, &m_matWorld);
-	m_pInteractCollision = new CBoxCollision(D3DXVECTOR3(0, 0, 0.5f), D3DXVECTOR3(0.5f, 0.5f, 0.5f), &m_matWorld);
+	m_pInteractCollision = new CBoxCollision(D3DXVECTOR3(0, 0, 0.5f), D3DXVECTOR3(1.f, 1.f, 1.f), &m_matWorld);
 	D3DXCreateSphere(g_pD3DDevice, 0.5f, 10, 10, &m_pMesh, NULL);
 }
 /*
@@ -114,7 +114,7 @@ void CDebugPlayer1::PressKey(void* _value)
 			}
 			else if (m_ePlayerState == ePlayerState::Grab)
 			{
-				m_pInteractCenter->DownParts(this, m_pParts, m_vDirection);
+				m_pInteractCenter->ThrowParts(this, m_pParts, m_vDirection);
 			}
 			g_SoundManager->PlaySFX("Melem");
 			m_ElapsTimeF = CurrentTime;

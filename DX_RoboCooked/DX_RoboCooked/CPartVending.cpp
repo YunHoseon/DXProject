@@ -169,8 +169,7 @@ void CPartVending::OnEvent(eEvent eEvent, void* _value)
 
 CParts* CPartVending::Make()
 {
-	CParts* parts = new CParts(m_sID);
-	parts->Setup();
+	CParts* parts = g_pPartsManager->CreateParts(m_sID);
 	return parts;
 }
 

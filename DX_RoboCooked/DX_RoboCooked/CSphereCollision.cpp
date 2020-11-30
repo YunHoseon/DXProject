@@ -18,6 +18,30 @@ CSphereCollision::CSphereCollision(D3DXVECTOR3 vOriginPos, float fRadius, D3DXMA
 	D3DXCreateSphere(g_pD3DDevice, fRadius, 20, 20, &m_pMesh, nullptr);
 }
 
+CSphereCollision::CSphereCollision(LPD3DXMESH pMesh, D3DXMATRIXA16* pmatWorld):
+	m_pMesh(nullptr)
+{
+	assert(pMesh);
+	m_eType = eColideType::Sphere;
+	m_pmatWorldTM = pmatWorld;
+	
+	D3DXVECTOR3* pVertices;
+
+	pMesh->LockVertexBuffer(D3DLOCK_READONLY, (void**)&pVertices);
+
+	D3DXComputeBoundingSphere(pVertices, pMesh->GetNumVertices(),
+
+		pMesh->GetNumBytesPerVertex(), &m_vOriginCenterPos, &m_fOriginRadius);
+
+	pMesh->UnlockVertexBuffer();
+	m_vCenterPos = m_vOriginCenterPos;
+	m_fRadius = m_fOriginRadius;
+
+	_RELEASE_COMMENT return;
+	D3DXCreateSphere(g_pD3DDevice, m_fOriginRadius, 20, 20, &m_pMesh, nullptr);
+	
+}
+
 CSphereCollision::~CSphereCollision()
 {
 }

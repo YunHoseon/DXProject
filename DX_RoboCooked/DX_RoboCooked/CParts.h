@@ -1,7 +1,7 @@
 #pragma once
 #include "CInteractiveActor.h"
 #include "CPartCombinator.h"
-
+#include "CStaticMesh.h"
 class CCharacter;
 class CParts :
 	public CInteractiveActor
@@ -10,26 +10,26 @@ private:
 	D3DXVECTOR3						m_vCombinatorPosition;
 	D3DXVECTOR3*					m_vGrabPosition;
 
-	ST_SPHERE						m_sphere;
-	LPD3DXMESH						m_pMeshSphere;
-	D3DMATERIAL9					m_stMtlParts;
+	//ST_SPHERE						m_sphere;
+	//LPD3DXMESH						m_pMeshSphere;
+	//D3DMATERIAL9					m_stMtlParts;
+
+	CStaticMesh						m_cMesh;
 
 	bool							m_isMoveParts;
 	string							m_sPartsID;
 	float							m_fRotAngle;
-	float							m_fWeight;
-	D3DXVECTOR3						m_vSize;
 	eCombinatorPartsLevel			m_eLevel;
 	string							m_sFormula;
 	CPartCombinator*				m_pPartsCombinator;
 
 
 public:
-	CParts(string sPartsID);
+	CParts(string sPartsID, string sFormula, float fMass);
 	CParts(CParts* pParts);
 	virtual ~CParts();
 
-	void Setup();
+	void Setup(D3DXVECTOR3& vScale);
 	void Update() override;
 	void Render() override;
 	CParts* Clone();
@@ -37,27 +37,20 @@ public:
 	void OnEvent(eEvent eEvent, void* _value);
 	void Interact(CCharacter* pCharacter) override;
 	
-	void DownParts(D3DXVECTOR3 vForce);
+	void ThrowParts(D3DXVECTOR3 vForce);
 	void PartsRotate();
 	void MoveParts();
 	void SetCombinatorPosition(D3DXVECTOR3 vPosition){ m_vCombinatorPosition = vPosition; }
 
+	CStaticMesh* GetStaticMesh() { return &m_cMesh; }
 	/* getter setter */
 	
 	string GetPartsID() { return m_sPartsID; }
 	void SetPartsID(string	ID) { m_sPartsID = ID; }
-
-	float GetWeight() { return m_fWeight; }
-	void SetWeight(float weight) { m_fWeight = weight; }
-
-	D3DXVECTOR3 GetSize() { return m_vSize; }
-	void SetSize(D3DXVECTOR3 size) { m_vSize = size; }
 	
-	D3DXVECTOR3 GetPosition() { return m_vPosition; }
-	void SetPosition(D3DXVECTOR3 vPosition) { m_vPosition = vPosition; }
 
 	string GetFormula() { return m_sFormula; }
-	void SetFormula(string sFormula) { m_sFormula= sFormula; }
+	void SetFormula(string sFormula) { m_sFormula = sFormula; }
 	
 	D3DXVECTOR3* GetGrabPosition() { return m_vGrabPosition; }
 	void SetGrabPosition(D3DXVECTOR3* vPosition) { m_vGrabPosition = vPosition; }

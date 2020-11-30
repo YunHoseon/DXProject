@@ -151,7 +151,9 @@
     <ClInclude Include="CAllocateHierachy.h" />
     <ClInclude Include="CBlueprint.h" />
     <ClInclude Include="CBoxCollision.h" />
+    <ClInclude Include="CMeshLoader.h" />
     <ClInclude Include="CPartsManager.h" />
+    <ClInclude Include="CStaticMesh.h" />
     <ClInclude Include="CUICloseButton.h" />
     <ClInclude Include="CUI.h" />
     <ClInclude Include="CCamera.h" />
@@ -164,7 +166,7 @@
     <ClInclude Include="CPartStorage.h" />
     <ClInclude Include="CPartVending.h" />
     <ClInclude Include="CSoundManager.h" />
-    <ClInclude Include="CTestPhysics.h" />
+    <ClInclude Include="CPhysicsApplyer.h" />
     <ClInclude Include="CUIButton.h" />
     <ClInclude Include="CUIText.h" />
     <ClInclude Include="CUITexture.h" />
@@ -213,7 +215,9 @@
     <ClCompile Include="CAllocateHierachy.cpp" />
     <ClCompile Include="CBlueprint.cpp" />
     <ClCompile Include="CBoxCollision.cpp" />
+    <ClCompile Include="CMeshLoader.cpp" />
     <ClCompile Include="CPartsManager.cpp" />
+    <ClCompile Include="CStaticMesh.cpp" />
     <ClCompile Include="CUICloseButton.cpp" />
     <ClCompile Include="CUI.cpp" />
     <ClCompile Include="CCamera.cpp" />
@@ -226,7 +230,7 @@
     <ClCompile Include="CPartStorage.cpp" />
     <ClCompile Include="CPartVending.cpp" />
     <ClCompile Include="CSoundManager.cpp" />
-    <ClCompile Include="CTestPhysics.cpp" />
+    <ClCompile Include="CPhysicsApplyer.cpp" />
     <ClCompile Include="CUIButton.cpp" />
     <ClCompile Include="CUIText.cpp" />
     <ClCompile Include="CUITexture.cpp" />

@@ -13,7 +13,7 @@
 #include "CPartAutoCombinator.h"
 #include "COutlet.h"
 #include "CPartVending.h"
-#include "CTestPhysics.h"
+#include "CPhysicsApplyer.h"
 #include "CWall.h"
 #include "CUIButton.h"
 #include "CBlueprint.h"
@@ -84,7 +84,7 @@ void CGameScene::Init()
 	m_vecStaticActor.push_back(wall);
 
 	CPartStorage* partStorage = new CPartStorage(this);
-	partStorage->Setup(0, D3DXVECTOR3(5, 0, 2) , "1");
+	partStorage->Setup(0, D3DXVECTOR3(5, 0, 2) , "A00");
 	m_vecObject.push_back(partStorage);
 
 	CPartCombinator* partManualCombinator = new CPartManualCombinator(this, eCombinatorPartsLevel::ONE , 45.0f , D3DXVECTOR3(-2, 0, 2));
@@ -101,7 +101,7 @@ void CGameScene::Init()
 	outlet->Setup(0, D3DXVECTOR3(1, 0, 3));
 	m_vecObject.push_back(outlet);
 	
-	CPartVending* partVending = new CPartVending(outlet, this, "2");
+	CPartVending* partVending = new CPartVending(outlet, this, "A01");
 	partVending->Setup(0, D3DXVECTOR3(1, 0, -3));
 	m_vecObject.push_back(partVending);
 
@@ -120,15 +120,15 @@ void CGameScene::Init()
 	m_vecCharacters.push_back(m_pDebugCube);
 	m_vecCharacters.push_back(m_pDebugSphere);
 
-	m_pDebugParts = new CParts("999");
-	if (m_pDebugParts)
-		m_pDebugParts->Setup();
-	m_vecParts.push_back(m_pDebugParts);
-	
-	CParts* m_pDebugParts2 = new CParts("999");
-	if (m_pDebugParts2)
-		m_pDebugParts2->Setup();
-	m_vecParts.push_back(m_pDebugParts2);
+	//m_pDebugParts = new CParts("999");
+	//if (m_pDebugParts)
+	//	m_pDebugParts->Setup();
+	//m_vecParts.push_back(m_pDebugParts);
+	//
+	//CParts* m_pDebugParts2 = new CParts("999");
+	//if (m_pDebugParts2)
+	//	m_pDebugParts2->Setup();
+	//m_vecParts.push_back(m_pDebugParts2);
 
 	m_pDebugPauseUI = new CUIPauseButton(D3DXVECTOR2(100,100),27);
 	m_pDebugPauseUI->Setup();
@@ -168,53 +168,53 @@ void CGameScene::Update()
 	{
 		// Gravity Update
 		if (m_pDebugCube)
-			CTestPhysics::ApplyGravity(m_pDebugCube);
+			CPhysicsApplyer::ApplyGravity(m_pDebugCube);
 
 		if (m_pDebugSphere)
-			CTestPhysics::ApplyGravity(m_pDebugSphere);
+			CPhysicsApplyer::ApplyGravity(m_pDebugSphere);
 
 		for (CInteractiveActor* part : m_vecParts)
 		{
-			CTestPhysics::ApplyGravity(part);
+			CPhysicsApplyer::ApplyGravity(part);
 		}
 	}
 	
 	// collide -> update
 	{// collide
 		//if (m_pDebugSphere)
-		//	CTestPhysics::ApplyBound(m_pDebugSphere, m_vecObject[2]);
+		//	CPhysicsApplyer::ApplyBound(m_pDebugSphere, m_vecObject[2]);
 		if (m_pDebugSphere && m_pDebugCube)
-			CTestPhysics::ApplyBound(m_pDebugSphere, m_pDebugCube);
+			CPhysicsApplyer::ApplyBound(m_pDebugSphere, m_pDebugCube);
 
 		for (CInteractiveActor* part : m_vecParts)
 		{
-			CTestPhysics::ApplyBound(m_pDebugSphere, part);
-			CTestPhysics::ApplyBound(m_pDebugCube, part);
+			CPhysicsApplyer::ApplyBound(m_pDebugSphere, part);
+			CPhysicsApplyer::ApplyBound(m_pDebugCube, part);
 			for (CInteractiveActor* part2 : m_vecParts)
 			{
 				if(part != part2)
-					CTestPhysics::ApplyBound(part2, part);
+					CPhysicsApplyer::ApplyBound(part2, part);
 			}
 		}
 		
 		for (CInteractiveActor* obj : m_vecObject)
 		{
-			CTestPhysics::ApplyBound(m_pDebugSphere, obj);
-			CTestPhysics::ApplyBound(m_pDebugCube, obj);
+			CPhysicsApplyer::ApplyBound(m_pDebugSphere, obj);
+			CPhysicsApplyer::ApplyBound(m_pDebugCube, obj);
 
 			for (CInteractiveActor* part : m_vecParts)
 			{
-				CTestPhysics::ApplyBound(part, obj);
+				CPhysicsApplyer::ApplyBound(part, obj);
 			}
 		}
 
 		for (CActor* pStaticActor : m_vecStaticActor)
 		{
-			CTestPhysics::ApplyBound(m_pDebugCube, pStaticActor);
-			CTestPhysics::ApplyBound(m_pDebugSphere, pStaticActor);
+			CPhysicsApplyer::ApplyBound(m_pDebugCube, pStaticActor);
+			CPhysicsApplyer::ApplyBound(m_pDebugSphere, pStaticActor);
 			for (CInteractiveActor* part : m_vecParts)
 			{
-				CTestPhysics::ApplyBound(part, pStaticActor);
+				CPhysicsApplyer::ApplyBound(part, pStaticActor);
 			}
 		}
 	}
@@ -278,12 +278,12 @@ void CGameScene::AddParts(CParts * parts)
 		m_vecParts.push_back(parts);
 }
 
-//void CGameScene::DownParts(CCharacter* pCharacter,CParts* parts, D3DXVECTOR3 vDir)
+//void CGameScene::ThrowParts(CCharacter* pCharacter,CParts* parts, D3DXVECTOR3 vDir)
 //{
 //	if (parts != nullptr)
 //	{
 //		pCharacter->SetPlayerState(ePlayerState::None);
-//		parts->DownParts(vDir);
+//		parts->ThrowParts(vDir);
 //	}
 //}
 

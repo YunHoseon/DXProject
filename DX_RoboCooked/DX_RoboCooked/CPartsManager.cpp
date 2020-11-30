@@ -1,6 +1,8 @@
 ﻿#include "stdafx.h"
 #include "CPartsManager.h"
 #include <fstream>
+
+#include "CMeshLoader.h"
 #include "CParts.h"
 
 CPartsManager::CPartsManager()
@@ -10,6 +12,10 @@ CPartsManager::CPartsManager()
 
 CPartsManager::~CPartsManager()
 {
+	for (auto && p : m_mapParts)
+	{
+		SafeDelete(p.second);
+	}
 }
 
 void CPartsManager::Load()
@@ -24,16 +30,18 @@ void CPartsManager::Load()
 
 	for (int i = 0; i < j.size(); ++i)
 	{
-		//ST_Parts_Attr st;
-		//st.sID = j[i]["ID"];
-		//st.fMass = j[i]["Mass"];
-		//st.sFormula = j[i]["Formula"];
-		//_DEBUG_COMMENT cout << "ID : " << st.sID << endl;
-		//_DEBUG_COMMENT cout << "Formula : " << st.sFormula << endl;
-		//_DEBUG_COMMENT cout << "Mass : " << st.fMass << endl << endl;
+		string id = j[i]["ID"];
+		string filename = j[i]["Filename"];
+		float fMass = j[i]["Mass"];
+		fMass *= 0.1f;
+		CParts* part = new CParts(id, j[i]["Formula"], fMass);
+		CMeshLoader::LoadMesh(filename,"data/model/parts", part->GetStaticMesh());
+		part->Setup(D3DXVECTOR3(j[i]["Size"][0], j[i]["Size"][1], j[i]["Size"][2]));
+		//part->Setup(D3DXVECTOR3(0.5, 0.5, 0.5));
 
-		//m_mapParts.emplace(st.sID, st);
-		//m_mapFormula.emplace(st.sFormula, st.sID);
+		m_mapParts.emplace(id, part);
+		m_mapFormula.emplace(j[i]["Formula"], j[i]["ID"]);
+		
 	}
 }
 

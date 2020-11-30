@@ -125,7 +125,7 @@ void CCharacter::PressKey(void* _value)
 				if (m_arrKeyDown[0] == false)
 					m_arrKeyDown[0] = true;
 
-				if (m_fThrowPower < 0.2f)
+				if (m_fThrowPower < 0.1f)
 					m_fThrowPower += 0.005f;
 
 				_DEBUG_COMMENT cout << "throw power : " << m_fThrowPower << endl;
@@ -195,7 +195,7 @@ void CCharacter::ReleaseKey(void* _value)
 			break;
 		case ePlayerState::Grab: 
 			SetPlayerState(ePlayerState::None);
-			m_pParts->DownParts(m_vDirection * m_fThrowPower);
+			m_pParts->ThrowParts(m_vDirection * m_fThrowPower);
 			m_pParts = nullptr;
 			g_SoundManager->PlaySFX("Melem");
 			m_fThrowPower = 0;

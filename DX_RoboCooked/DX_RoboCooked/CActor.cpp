@@ -14,7 +14,8 @@ CActor::CActor() :
 	m_fMass(1),
 	m_fFriction(0),
 	m_vVelocity(0, 0, 0),
-	m_vAcceleration(0, 0, 0)
+	m_vAcceleration(0, 0, 0),
+	m_vScale(1,1,1)
 {
 	D3DXMatrixIdentity(&m_matS);
 	D3DXMatrixIdentity(&m_matR);
@@ -51,6 +52,24 @@ void CActor::SetScale(float x, float y, float z)
 	m_matWorld = m_matS * m_matR * m_matT;
 	if (m_pCollision)
 		m_pCollision->SetScale(x, y, z);
+}
+
+void CActor::SetPosition(D3DXVECTOR3 vPosition)
+{
+	m_vPosition = vPosition;
+	D3DXMatrixTranslation(&m_matT, vPosition.x, vPosition.y, vPosition.z);
+	m_matWorld = m_matS * m_matR * m_matT;
+	if (m_pCollision)
+		m_pCollision->Update();
+}
+
+void CActor::SetPosition(float x, float y, float z)
+{
+	m_vPosition = D3DXVECTOR3(x, y, z);
+	D3DXMatrixTranslation(&m_matT, x, y, z);
+	m_matWorld = m_matS * m_matR * m_matT;
+	if (m_pCollision)
+		m_pCollision->Update();
 }
 
 void CActor::AddAcceleration(const D3DXVECTOR3& vAccel)

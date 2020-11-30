@@ -22,7 +22,7 @@ protected:
 	D3DXVECTOR3			m_vGrabPartsPosition;
 	CParts*				m_pParts;
 
-	// 키다운 관련. 상태패턴 고민 필요
+	// 키다운 관련.
 	array<float, 3>		m_arrElapsedTime;
 	array<float, 3>		m_arrCoolDown;
 	array<bool, 3>		m_arrKeyDown;

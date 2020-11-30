@@ -153,9 +153,6 @@
     <ClInclude Include="CGameScene.h">
       <Filter>GameScene</Filter>
     </ClInclude>
-    <ClInclude Include="CTestPhysics.h">
-      <Filter>GameScene\Actor\Physics</Filter>
-    </ClInclude>
     <ClInclude Include="CCombinatorButton.h">
       <Filter>GameScene\Combinator</Filter>
     </ClInclude>
@@ -239,6 +236,15 @@
     </ClInclude>
     <ClInclude Include="CUIPauseButton.h">
       <Filter>UI\Button</Filter>
+    </ClInclude>
+    <ClInclude Include="CPhysicsApplyer.h">
+      <Filter>GameScene\Actor\Physics</Filter>
+    </ClInclude>
+    <ClInclude Include="CMeshLoader.h">
+      <Filter>Manager\Factory</Filter>
+    </ClInclude>
+    <ClInclude Include="CStaticMesh.h">
+      <Filter>Manager\Factory</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -329,9 +335,6 @@
     <ClCompile Include="IInteractCenter.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="CTestPhysics.cpp">
-      <Filter>GameScene\Actor\Physics</Filter>
-    </ClCompile>
     <ClCompile Include="CCombinatorButton.cpp">
       <Filter>GameScene\Combinator</Filter>
     </ClCompile>
@@ -415,6 +418,15 @@
     </ClCompile>
     <ClCompile Include="CUIPauseButton.cpp">
       <Filter>UI\Button</Filter>
+    </ClCompile>
+    <ClCompile Include="CPhysicsApplyer.cpp">
+      <Filter>GameScene\Actor\Physics</Filter>
+    </ClCompile>
+    <ClCompile Include="CMeshLoader.cpp">
+      <Filter>Manager\Factory</Filter>
+    </ClCompile>
+    <ClCompile Include="CStaticMesh.cpp">
+      <Filter>Manager\Factory</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

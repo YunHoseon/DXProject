@@ -30,7 +30,7 @@ public:
 	void Interact(CCharacter* pCharacter);
 	void AcceptPartsFromVending(CParts* parts);
 
-	D3DXVECTOR3 GetPosition() { return m_vPosition; }
+	const D3DXVECTOR3& GetPosition() { return m_vPosition; }
 	eOutletState GetState() { return m_eOutletState; }
 	void SetState(eOutletState state) { m_eOutletState = state; }
 

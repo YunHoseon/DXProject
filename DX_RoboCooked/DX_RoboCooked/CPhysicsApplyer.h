@@ -2,7 +2,7 @@
 
 class CActor;
 
-class CTestPhysics
+class CPhysicsApplyer
 {
 public:
 	//static void ApplyPhysics(CActor* pA, CActor* pB);

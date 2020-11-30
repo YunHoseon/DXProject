@@ -1,14 +1,14 @@
 ﻿#include "stdafx.h"
-#include "CTestPhysics.h"
+#include "CPhysicsApplyer.h"
 #include "CActor.h"
 
-void CTestPhysics::ApplyGravity(CActor* pA)
+void CPhysicsApplyer::ApplyGravity(CActor* pA)
 {
 	D3DXVECTOR3 gravity(0, -0.01f, 0);
 	pA->AddAcceleration(gravity);
 }
 
-void CTestPhysics::ApplyBound(CActor* pA, CActor* pB)
+void CPhysicsApplyer::ApplyBound(CActor* pA, CActor* pB)
 {
 	D3DXVECTOR3 vNormal(0, 0, 0);
 	if (pA->Collide(pB, &vNormal))
