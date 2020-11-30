@@ -22,6 +22,7 @@ public:
 	ICollisionArea();
 	virtual ~ICollisionArea() {}
 	const D3DXVECTOR3& GetCenter() { return m_vCenterPos; }
+	void SetCenter(D3DXVECTOR3& vCenter) { m_vCenterPos = vCenter; }
 
 	bool Collide(ICollisionArea* pTargetCollider, D3DXVECTOR3* pNormal = nullptr);
 	virtual void Render() = 0;

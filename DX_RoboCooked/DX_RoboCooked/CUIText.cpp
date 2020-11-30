@@ -5,7 +5,7 @@
 CUIText::CUIText(char* ptext)
 {
 	m_sText = ptext;
-	
+	//SetRect(&m_rcText, 0, 0, vPos.x, vPos.y);
 }
 
 
@@ -28,5 +28,4 @@ void CUIText::Render()
 		&m_rcText,
 		DT_LEFT | DT_TOP | DT_NOCLIP,
 		D3DCOLOR_XRGB(255, 255, 0));
-
 }

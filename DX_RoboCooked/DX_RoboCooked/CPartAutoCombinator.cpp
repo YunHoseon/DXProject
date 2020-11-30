@@ -9,7 +9,6 @@
 CPartAutoCombinator::CPartAutoCombinator(IInteractCenter* pInteractCenter, eCombinatorPartsLevel eType, float fAngle, D3DXVECTOR3 vPosition):
 	CPartCombinator(pInteractCenter, eType, fAngle, vPosition)
 {
-
 	switch (m_eLevel)
 	{
 	case eCombinatorPartsLevel::ONE:
@@ -29,7 +28,6 @@ CPartAutoCombinator::~CPartAutoCombinator()
 
 void CPartAutoCombinator::Update()
 {
-
 	if (m_eCombinatorLoadState == eCombinatorLoadState::LoadImpossible &&
 		m_eCombinatorActionState == eCombinatorActionState::Usable)
 		CombineParts();
@@ -75,7 +73,6 @@ void CPartAutoCombinator::Interact(CCharacter* pCharacter)
 	m_pParts->SetGrabPosition(&pCharacter->GetGrabPartsPosition());
 	m_pParts->GetCollision()->SetActive(true);
 	m_pParts = nullptr;
-	
 }
 
 void CPartAutoCombinator::PartsInteract(CParts* pParts)
@@ -255,7 +252,6 @@ void CPartAutoCombinator::Setup(float fAngle, D3DXVECTOR3 vPosition)
 	m_pCollision = new CBoxCollision(g_vZero, D3DXVECTOR3(1.0f, 1.0f, 1.0f), &m_matWorld);
 
 	m_pPartsInteractCollision = new CSphereCollision(g_vZero, 2.0f, &m_matWorld);
-
 
 	m_matWorld = m_matS * m_matR * m_matT;
 	if (m_pCollision)

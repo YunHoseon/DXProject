@@ -1,6 +1,7 @@
 #pragma once
 #include "CActor.h"
 
+class CInteractiveActor;
 class CParts;
 class CBlueprint :
 	public CActor
@@ -10,10 +11,11 @@ private:
 	bool			m_isCompleted;			//완성되었는가
 	string			m_sRightPartsID;		//설계도와 부합하는 파츠 ID
 	vector<ST_PNT_VERTEX>	m_vecVertex;
-	LPDIRECT3DTEXTURE9		m_BlueprintTexture;
-	CParts*					m_myParts;		//무적 상태를 부여하기 위해
+	LPDIRECT3DTEXTURE9		m_blueprintTexture;
+	CParts*					m_onBlueprintParts;	//설계도 위의 파츠
+	vector<CInteractiveActor*>*		m_pVecParts;
 public:
-	CBlueprint(string partsID);
+	CBlueprint(string partsID, vector<CInteractiveActor*>& vecParts);
 	~CBlueprint();
 
 	void Setup();

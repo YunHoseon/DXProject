@@ -8,6 +8,7 @@ CUI::CUI()
 	, m_vSize(0,0)
 	, m_eUIState(eUIState::Disabled)
 	, m_eUIPastState(eUIState::Disabled)
+	, m_isActive(false)
 {
 
 }
@@ -84,4 +85,13 @@ void CUI::CheckInHover(POINT pt)
 		}	
 	}
 	return;
+}
+
+void CUI::InvertActive()
+{
+	for (auto it : m_listUIchildren)
+	{
+		it->InvertActive();
+	}
+	m_isActive = !m_isActive;
 }

@@ -64,10 +64,7 @@ CGameScene::~CGameScene()
 		SafeDelete(it);
 	}
 
-
 	SafeDelete(m_pDebugPauseUI);
-
-
 }
 
 void CGameScene::Init()
@@ -108,7 +105,7 @@ void CGameScene::Init()
 	partVending->Setup(0, D3DXVECTOR3(1, 0, -3));
 	m_vecObject.push_back(partVending);
 
-	CBlueprint* blueprint = new CBlueprint("C00");
+	CBlueprint* blueprint = new CBlueprint("C00", m_vecParts);
 	blueprint->Setup();
 	m_vecStaticActor.push_back(blueprint);
 
@@ -133,7 +130,7 @@ void CGameScene::Init()
 		m_pDebugParts2->Setup();
 	m_vecParts.push_back(m_pDebugParts2);
 
-	m_pDebugPauseUI = new CUIPauseButton(D3DXVECTOR2(100,100));
+	m_pDebugPauseUI = new CUIPauseButton(D3DXVECTOR2(100,100),27);
 	m_pDebugPauseUI->Setup();
 }
 
@@ -159,15 +156,14 @@ void CGameScene::Render()
 		it->Render();
 	}
 
-	//if (m_pDebugPauseUI)
-	//	m_pDebugPauseUI->Render();
+	if (m_pDebugPauseUI)
+		m_pDebugPauseUI->Render();
 }
 
 void CGameScene::Update()
 {
 	if (m_isTimeStop)
 		return;
-
 
 	{
 		// Gravity Update
@@ -244,7 +240,6 @@ void CGameScene::Update()
 		if (m_pDebugSphere)
 			m_pDebugSphere->Update();
 
-
 		if (m_pDebugPauseUI)
 			m_pDebugPauseUI->Update();
 	}
@@ -253,7 +248,6 @@ void CGameScene::Update()
 void CGameScene::PausePlayGame()
 {
 	m_isTimeStop = !m_isTimeStop;
-
 }
 
 
@@ -312,7 +306,6 @@ void CGameScene::CheckAroundCombinator(CPartCombinator* combinator)
 			veclength[data] = D3DXVec3Length(&vDirection);	
 		}
 	}
-
 
 	for(auto it : veclength)
 	{
