@@ -9,6 +9,7 @@ CUI::CUI()
 	, m_eUIState(eUIState::Disabled)
 	, m_eUIPastState(eUIState::Disabled)
 	, m_isActive(false)
+	, m_isPress(false)
 {
 
 }
@@ -33,29 +34,59 @@ void CUI::SetParent(CUI * parent)
 
 
 
-void CUI::CheckIn(POINT pt)
+void CUI::CheckPressIn(POINT pt)
 {
 	for (auto it : m_listUIchildren)
 	{
 		if (it->m_vPosition.x <= pt.x && it->m_vPosition.x + it->m_vSize.x >= pt.x
 			&& it->m_vPosition.y <= pt.y && it->m_vPosition.y + it->m_vSize.y >= pt.y)
 		{
+			
 			if (it->GetlistUIchildrenSize() == 0)
 			{
-				if (it->GetUIState() == eUIState::Hover)
+
+				if (it->m_isPress == false)
 				{
-					it->SetUIState(eUIState::Active);
+					it->m_isPress = true;
 				}
-				else if (it->GetUIState() == eUIState::Active)
+
+			}
+			else
+			{
+				it->CheckPressIn(pt);
+			}	
+		}
+	}
+}
+
+void CUI::CheckReleaseIn(POINT pt)
+{
+	for (auto it : m_listUIchildren)
+	{
+		if (it->m_vPosition.x <= pt.x && it->m_vPosition.x + it->m_vSize.x >= pt.x
+			&& it->m_vPosition.y <= pt.y && it->m_vPosition.y + it->m_vSize.y >= pt.y)
+		{
+
+			if (it->GetlistUIchildrenSize() == 0)
+			{
+				if (it->m_isPress)
 				{
-					it->SetUIState(eUIState::Disabled);
+					if (it->GetUIState() == eUIState::Hover)
+					{
+						it->SetUIState(eUIState::Active);
+					}
+					else if (it->GetUIState() == eUIState::Active)
+					{
+						it->SetUIState(eUIState::Disabled);
+					}
 				}
 			}
 			else
 			{
-				it->CheckIn(pt);
+				it->CheckReleaseIn(pt);
 			}
 		}
+		it->m_isPress = false;
 	}
 }
 

@@ -24,6 +24,7 @@ protected:
 	D3DXVECTOR2			m_vSize;
 	std::list<CUI*>		m_listUIchildren;
 	bool				m_isActive;
+	bool				m_isPress;
 public:
 	virtual void Update() {}
 	virtual void Render() {}
@@ -35,7 +36,8 @@ public:
 	virtual void Add(CUI *component) {}
 	virtual void Remove(CUI *component) {}
 	virtual void Setup() {}
-	virtual void CheckIn(POINT pt);
+	virtual void CheckPressIn(POINT pt);
+	virtual void CheckReleaseIn(POINT pt);
 	virtual void CheckInHover(POINT pt);
 	void InvertActive();
 

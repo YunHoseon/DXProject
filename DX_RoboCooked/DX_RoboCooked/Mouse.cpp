@@ -33,6 +33,16 @@ void CMouse::ReleaseLBtn(WPARAM keyID)
 	GetMousePoint();
 }
 
+void CMouse::ReleaseLBtn(LPARAM lParam)
+{
+	m_mousePoint = { LOWORD(lParam), HIWORD(lParam) };
+
+	ST_MouseEvent data;
+	data.pt = m_mousePoint;
+
+	g_EventManager->CallEvent(eEvent::MouseRelease, (void*)&data);
+}
+
 void CMouse::JudgeLDoubleClick(WPARAM keyID)
 {
 	DWORD currentTime = GetTickCount();

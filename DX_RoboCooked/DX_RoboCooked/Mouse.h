@@ -15,6 +15,7 @@ public:
 
 	void PressLBtn(LPARAM lParam);
 	void ReleaseLBtn(WPARAM keyID);
+	void ReleaseLBtn(LPARAM lParam);
 	void JudgeLDoubleClick(WPARAM keyID);
 	void HoverMouse(LPARAM lParam);
 

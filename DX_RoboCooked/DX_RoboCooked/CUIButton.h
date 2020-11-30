@@ -13,6 +13,7 @@ protected:
 	WPARAM					  m_wActiveButton;
 	CUITexture*				  m_pTexture;
 	CUIText*				  m_pText;
+
 	std::array<ST_PLAYER_INPUTKEY*, 2>	m_pInputKey;
 
 public:
@@ -27,5 +28,5 @@ public:
 public:
 	virtual void Add(CUI *component) override;
 	virtual void Remove(CUI *component) override;
-	//virtual bool CheckIn(POINT pt);
+
 };
