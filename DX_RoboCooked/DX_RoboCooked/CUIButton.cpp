@@ -17,6 +17,10 @@ CUIButton::CUIButton()
 
 CUIButton::~CUIButton()
 {
+	for (CUI * p : m_listUIchildren)
+	{
+		SafeDelete(p);
+	}
 }
 
 void CUIButton::Update()
