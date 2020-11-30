@@ -11,8 +11,6 @@ CBlueprint::CBlueprint(string partsID, vector<CInteractiveActor*>& vecParts)
 {
 	m_sRightPartsID = partsID;
 	m_pVecParts = &vecParts;
-	D3DXMatrixScaling(&m_matS, 2.0f, 0.1f, 2.8f);
-	D3DXMatrixTranslation(&m_matT, 5.0f, -0.5f, -3.0f);
 	m_blueprintTexture = g_pTextureManager->GetTexture("data/Texture/Blueprint.jpg");
 	//파츠 아이디에 따라 m_matS,텍스쳐 다르게
 }
@@ -121,16 +119,12 @@ void CBlueprint::Setup()
 	}
 
 	m_vecVertex = vecVertex;
-	D3DXMATRIXA16 mat;
-	mat = m_matS * m_matT;
-
-	for (size_t i = 0; i < m_vecVertex.size(); ++i)
-		D3DXVec3TransformCoord(&m_vecVertex[i].p, &m_vecVertex[i].p, &mat);
-
+	SetScale(D3DXVECTOR3(2.0f, 0.1f, 2.8f));
 	D3DXMatrixRotationY(&m_matR, D3DXToRadian(m_nRotAngleY));
-	m_matWorld = m_matR;
+	D3DXMatrixTranslation(&m_matT, 5.0f, -0.5f, -3.0f);
+	m_matWorld = m_matS * m_matR * m_matT;
 
-	m_pCollision = new CBoxCollision(D3DXVECTOR3(5.0f, -0.5f, -3.0f), D3DXVECTOR3(2.0f, 0.1f, 2.8f), &m_matWorld);
+	m_pCollision = new CBoxCollision(g_vZero, D3DXVECTOR3(1.0f, 1.0f, 1.0f), &m_matWorld);
 	m_pCollision->Update();
 }
 
@@ -159,13 +153,12 @@ void CBlueprint::Update()
 	{
 		D3DXVECTOR3 vDir = D3DXVECTOR3(5.0f, 0.f, -3.0f) - m_onBlueprintParts->GetPosition();
 		float fDist = D3DXVec3Length(&vDir);
-		cout << "fdist : " << fDist << endl;
+
 		if (fDist <= 0.3f)
 		{
 			m_onBlueprintParts->SetPosition(D3DXVECTOR3(5.0f, 0.f, -3.0f));
-			m_onBlueprintParts->GetCollision()->SetActive(false);
-			this->GetCollision()->SetCenter(GetCollision()->GetCenter() + D3DXVECTOR3(0, 0.5f, 0));
-			this->SetMass(9999);
+			//m_onBlueprintParts->GetCollision()->SetActive(false);
+			this->GetCollision()->SetActive(false);
 			return;
 		}
 		D3DXVec3Normalize(&vDir, &vDir);
