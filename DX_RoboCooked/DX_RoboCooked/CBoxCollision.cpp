@@ -51,7 +51,8 @@ D3DXVECTOR3 CBoxCollision::GetCollideNormal(CBoxCollision* pTargetCollider)
 	return vNormal;
 }
 
-CBoxCollision::CBoxCollision(D3DXVECTOR3 vOriginPos, D3DXVECTOR3 vSize, D3DXMATRIXA16* pmatWorld): ICollisionArea()
+CBoxCollision::CBoxCollision(D3DXVECTOR3 vOriginPos, D3DXVECTOR3 vSize, D3DXMATRIXA16* pmatWorld):
+	ICollisionArea()
 {
 	m_eType = eColideType::Box;
 
@@ -63,10 +64,11 @@ CBoxCollision::CBoxCollision(D3DXVECTOR3 vOriginPos, D3DXVECTOR3 vSize, D3DXMATR
 	m_arrOriginAxisDir[2] = D3DXVECTOR3(0, 0, 1);
 
 	m_arrAxisDir = m_arrOriginAxisDir;
-	
-	m_fAxisHalfLen[0] = vSize.x * 0.5f;
-	m_fAxisHalfLen[1] = vSize.y * 0.5f;
-	m_fAxisHalfLen[2] = vSize.z * 0.5f;
+
+	m_fOriginAxisHalfLen[0] = vSize.x * 0.5f;
+	m_fOriginAxisHalfLen[1] = vSize.y * 0.5f;
+	m_fOriginAxisHalfLen[2] = vSize.z * 0.5f;
+	m_fAxisHalfLen = m_fOriginAxisHalfLen;
 }
 
 CBoxCollision::CBoxCollision(LPD3DXMESH pMesh, D3DXMATRIXA16* pmatWorld) : ICollisionArea()
@@ -385,4 +387,11 @@ bool CBoxCollision::CollideToSphere(CSphereCollision* pTargetCollider, D3DXVECTO
 	return false;
 	
 	
+}
+
+void CBoxCollision::SetScale(float x, float y, float z)
+{
+	m_fAxisHalfLen[0] = m_fOriginAxisHalfLen[0] * x;
+	m_fAxisHalfLen[1] = m_fOriginAxisHalfLen[1] * y;
+	m_fAxisHalfLen[2] = m_fOriginAxisHalfLen[2] * z;
 }

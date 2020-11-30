@@ -4,7 +4,9 @@
 #include "CBoxCollision.h"
 
 //static LPD3DXMESH pMesh = nullptr;
-CSphereCollision::CSphereCollision(D3DXVECTOR3 vOriginPos, float fRadius, D3DXMATRIXA16* pmatWorld): fRadius(fRadius),
+CSphereCollision::CSphereCollision(D3DXVECTOR3 vOriginPos, float fRadius, D3DXMATRIXA16* pmatWorld) :
+	m_fOriginRadius(fRadius) ,
+	m_fRadius(fRadius),
 	m_pMesh(nullptr)
 {
 	m_eType = eColideType::Sphere;
@@ -12,8 +14,7 @@ CSphereCollision::CSphereCollision(D3DXVECTOR3 vOriginPos, float fRadius, D3DXMA
 	m_vCenterPos = vOriginPos;
 	m_pmatWorldTM = pmatWorld;
 
-	_RELEASE_COMMENT return ;
-
+	_RELEASE_COMMENT return;
 	D3DXCreateSphere(g_pD3DDevice, fRadius, 20, 20, &m_pMesh, nullptr);
 }
 
@@ -62,11 +63,18 @@ bool CSphereCollision::CollideToSphere(CSphereCollision* pTargetCollider, D3DXVE
 {
 	D3DXVECTOR3 vDist = m_vCenterPos - pTargetCollider->GetCenter();
 	
-	if (D3DXVec3LengthSq(&vDist) > (fRadius + pTargetCollider->fRadius) * (fRadius + pTargetCollider->fRadius))
+	if (D3DXVec3LengthSq(&vDist) > (m_fRadius + pTargetCollider->m_fRadius) * (m_fRadius + pTargetCollider->m_fRadius))
 		return false;
 	if (pNormal)
 		*pNormal = *D3DXVec3Normalize(&vDist, &vDist);
 	m_isCollide = true;
 	pTargetCollider->SetIsCollide(true);
 	return true;
+}
+
+void CSphereCollision::SetScale(float x, float y, float z)
+{
+	float fMax = max(x, y);
+	fMax = max(fMax, z);
+	m_fRadius = m_fOriginRadius * fMax;
 }

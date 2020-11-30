@@ -15,6 +15,15 @@ CParts::CParts(string sPartsID)
 	std::cout << "ÆÄÃ÷ ID : " << m_sPartsID << std::endl;
 }
 
+CParts::CParts(CParts* pParts)
+{
+}
+
+CParts* CParts::Clone()
+{
+	return nullptr;
+}
+
 CParts::~CParts()
 {
 }

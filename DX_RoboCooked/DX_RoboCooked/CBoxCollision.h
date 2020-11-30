@@ -5,10 +5,11 @@ class CBoxCollision : public ICollisionArea
 {
 protected:
 	
-	array<D3DXVECTOR3,3>			m_arrOriginAxisDir;
-	array<D3DXVECTOR3,3>			m_arrAxisDir;
+	array<D3DXVECTOR3, 3>			m_arrOriginAxisDir;
+	array<D3DXVECTOR3, 3>			m_arrAxisDir;
 
-	float				m_fAxisHalfLen[3];
+	array<float, 3>				m_fOriginAxisHalfLen;
+	array<float, 3>				m_fAxisHalfLen;
 
 	D3DXVECTOR3	GetCollideNormal(CBoxCollision* pTargetCollider);
 public:
@@ -19,4 +20,5 @@ public:
 	void Update() override;
 	bool CollideToBox(CBoxCollision* pTargetCollider, D3DXVECTOR3* pNormal = nullptr) override;
 	bool CollideToSphere(CSphereCollision* pTargetCollider, D3DXVECTOR3* pNormal = nullptr) override;
+	void SetScale(float x, float y, float z) override;
 };

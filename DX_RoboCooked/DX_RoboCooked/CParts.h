@@ -26,11 +26,13 @@ private:
 
 public:
 	CParts(string sPartsID);
+	CParts(CParts* pParts);
 	virtual ~CParts();
 
 	void Setup();
 	void Update() override;
 	void Render() override;
+	CParts* Clone();
 	
 	void OnEvent(eEvent eEvent, void* _value);
 	void Interact(CCharacter* pCharacter) override;
@@ -50,18 +52,18 @@ public:
 
 	D3DXVECTOR3 GetSize() { return m_vSize; }
 	void SetSize(D3DXVECTOR3 size) { m_vSize = size; }
+	
+	D3DXVECTOR3 GetPosition() { return m_vPosition; }
+	void SetPosition(D3DXVECTOR3 vPosition) { m_vPosition = vPosition; }
 
 	string GetFormula() { return m_sFormula; }
 	void SetFormula(string sFormula) { m_sFormula= sFormula; }
-	
-	void SetPosition(D3DXVECTOR3 vPosition) { m_vPosition = vPosition; }
 	
 	D3DXVECTOR3* GetGrabPosition() { return m_vGrabPosition; }
 	void SetGrabPosition(D3DXVECTOR3* vPosition) { m_vGrabPosition = vPosition; }
 	
 	bool GetMoveParts() { return m_isMoveParts; }
 	void SetMoveParts(bool b) { m_isMoveParts = b; }
-	D3DXVECTOR3 GetPosition() { return m_vPosition; }
 
 	eCombinatorPartsLevel GetCombinPartsLevel() const { return m_eLevel; }
 

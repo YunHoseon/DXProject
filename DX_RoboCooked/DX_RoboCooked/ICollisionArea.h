@@ -31,4 +31,5 @@ public:
 	void SetIsCollide(bool b) { m_isCollide = b; }
 	bool GetActive() { return m_isActive; }
 	void SetActive(bool b) { m_isActive = b; }
+	virtual void SetScale(float x, float y, float z) = 0;
 };

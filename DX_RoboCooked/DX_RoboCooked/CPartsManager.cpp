@@ -1,6 +1,7 @@
 ﻿#include "stdafx.h"
 #include "CPartsManager.h"
 #include <fstream>
+#include "CParts.h"
 
 CPartsManager::CPartsManager()
 {
@@ -23,25 +24,25 @@ void CPartsManager::Load()
 
 	for (int i = 0; i < j.size(); ++i)
 	{
-		ST_Parts_Attr st;
-		st.sID = j[i]["ID"];
-		st.fMass = j[i]["Mass"];
-		st.sFormula = j[i]["Formula"];
-		_DEBUG_COMMENT cout << "ID : " << st.sID << endl;
-		_DEBUG_COMMENT cout << "Formula : " << st.sFormula << endl;
-		_DEBUG_COMMENT cout << "Mass : " << st.fMass << endl << endl;
+		//ST_Parts_Attr st;
+		//st.sID = j[i]["ID"];
+		//st.fMass = j[i]["Mass"];
+		//st.sFormula = j[i]["Formula"];
+		//_DEBUG_COMMENT cout << "ID : " << st.sID << endl;
+		//_DEBUG_COMMENT cout << "Formula : " << st.sFormula << endl;
+		//_DEBUG_COMMENT cout << "Mass : " << st.fMass << endl << endl;
 
-		m_mapPartsAttr.emplace(st.sID, st);
-		m_mapFormula.emplace(st.sFormula, st.sID);
+		//m_mapParts.emplace(st.sID, st);
+		//m_mapFormula.emplace(st.sFormula, st.sID);
 	}
 }
 
 CParts* CPartsManager::CreateParts(string sID)
 {
-	return nullptr;
+	return m_mapParts[sID]->Clone();
 }
 
 string CPartsManager::GetIDFromFormula(string sFormula)
 {
-	return "";
+	return m_mapFormula[sFormula];
 }

@@ -40,6 +40,8 @@ void CActor::SetScale(const D3DXVECTOR3& vScale)
 	m_vScale = vScale;
 	D3DXMatrixScaling(&m_matS, vScale.x, vScale.y, vScale.z);
 	m_matWorld = m_matS * m_matR * m_matT;
+	if (m_pCollision)
+		m_pCollision->SetScale(vScale.x, vScale.y, vScale.z);
 }
 
 void CActor::SetScale(float x, float y, float z)
@@ -47,6 +49,8 @@ void CActor::SetScale(float x, float y, float z)
 	m_vScale = D3DXVECTOR3(x, y, z);
 	D3DXMatrixScaling(&m_matS, x, y, z);
 	m_matWorld = m_matS * m_matR * m_matT;
+	if (m_pCollision)
+		m_pCollision->SetScale(x, y, z);
 }
 
 void CActor::AddAcceleration(const D3DXVECTOR3& vAccel)

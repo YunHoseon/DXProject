@@ -37,5 +37,5 @@ public:
 
 private:
 	std::map<eEvent, std::set<CEventListener*>> m_mapEventMap;
-	eEvent m_eEvent;
+	//eEvent m_eEvent;
 };
