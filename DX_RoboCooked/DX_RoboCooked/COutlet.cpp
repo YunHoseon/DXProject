@@ -172,7 +172,7 @@ void COutlet::Interact(CCharacter* pCharacter)
 		
 		//pCharacter->SetPlayerState(ePlayerState::Grab);
 		m_eOutletState = eOutletState::None;
-		m_pMyParts = NULL;
+		m_pMyParts = nullptr;
 	}
 }
 

@@ -173,6 +173,7 @@ void CBoxCollision::Update()
 	for (int i = 0; i < 3; ++i)
 	{
 		D3DXVec3TransformNormal(&m_arrAxisDir[i], &m_arrOriginAxisDir[i], m_pmatWorldTM);
+		D3DXVec3Normalize(&m_arrAxisDir[i], &m_arrAxisDir[i]);
 	}
 
 	D3DXVec3TransformCoord(&m_vCenterPos, &m_vOriginCenterPos, m_pmatWorldTM);
@@ -189,6 +190,16 @@ bool CBoxCollision::CollideToBox(CBoxCollision* pTargetCollider, D3DXVECTOR3* pN
 	bool existsParallelPair = false;
 
 	D3DXVECTOR3 vDist = pTargetCollider->m_vCenterPos - this->m_vCenterPos;
+	//array<float, 3> arrDiagLen;
+	//arrDiagLen[0] = D3DXVec3Length(&(pTargetCollider->m_arrAxisDir[0] * pTargetCollider->m_fAxisHalfLen[0]));
+	//arrDiagLen[1] = D3DXVec3Length(&(pTargetCollider->m_arrAxisDir[1] * pTargetCollider->m_fAxisHalfLen[1]));
+	//arrDiagLen[2] = D3DXVec3Length(&(pTargetCollider->m_arrAxisDir[2] * pTargetCollider->m_fAxisHalfLen[2]));
+	//float fTargetDiagonal = D3DXVec3Length(&D3DXVECTOR3(arrDiagLen[0], arrDiagLen[1], arrDiagLen[2]));
+
+	//arrDiagLen[0] = D3DXVec3Length(&(m_arrAxisDir[0] * m_fAxisHalfLen[0]));
+	//arrDiagLen[1] = D3DXVec3Length(&(m_arrAxisDir[1] * m_fAxisHalfLen[1]));
+	//arrDiagLen[2] = D3DXVec3Length(&(m_arrAxisDir[2] * m_fAxisHalfLen[2]));
+	//float fThisDiagonal = D3DXVec3Length(&D3DXVECTOR3(arrDiagLen[0], arrDiagLen[1], arrDiagLen[2]));
 	float fTargetDiagonal = D3DXVec3Length(&D3DXVECTOR3(pTargetCollider->m_fAxisHalfLen[0], pTargetCollider->m_fAxisHalfLen[1], pTargetCollider->m_fAxisHalfLen[2]));
 	float fThisDiagonal = D3DXVec3Length(&D3DXVECTOR3(m_fAxisHalfLen[0], m_fAxisHalfLen[1], m_fAxisHalfLen[2]));
 	if (D3DXVec3Length(&vDist) > fTargetDiagonal + fThisDiagonal)
@@ -411,8 +422,8 @@ bool CBoxCollision::CollideToSphere(CSphereCollision* pTargetCollider, D3DXVECTO
 
 void CBoxCollision::SetScale(float x, float y, float z)
 {
-	return;
-	m_fAxisHalfLen[0] = m_fOriginAxisHalfLen[0];// *(1 + x) * 0.5f;
-	m_fAxisHalfLen[1] = m_fOriginAxisHalfLen[1];// *(1 + y) * 0.5f;
-	m_fAxisHalfLen[2] = m_fOriginAxisHalfLen[2];// *(1 + z) * 0.5f;
+	//return;
+	m_fAxisHalfLen[0] = m_fOriginAxisHalfLen[0] * x;// *(1 + x) * 0.5f;
+	m_fAxisHalfLen[1] = m_fOriginAxisHalfLen[1] * y;// *(1 + y) * 0.5f;
+	m_fAxisHalfLen[2] = m_fOriginAxisHalfLen[2] * z;// *(1 + z) * 0.5f;
 }

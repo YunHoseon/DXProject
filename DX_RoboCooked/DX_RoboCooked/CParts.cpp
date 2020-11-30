@@ -60,7 +60,7 @@ void CParts::Update()
 		}
 		SetForce();
 	}
-	D3DXMatrixRotationX(&m_matR, D3DXToRadian(m_fRotAngle));
+	
 	D3DXMatrixTranslation(&m_matT, m_vPosition.x , m_vPosition.y, m_vPosition.z);
 	m_matWorld = m_matS * m_matR * m_matT;
 
@@ -103,6 +103,8 @@ void CParts::PartsRotate()
 	m_fRotAngle += 90.0f;
 	if (m_fRotAngle == 360.0f)
 		m_fRotAngle = 0;
+
+	D3DXMatrixRotationY(&m_matR, D3DXToRadian(m_fRotAngle));
 }
 
 void CParts::MoveParts()
