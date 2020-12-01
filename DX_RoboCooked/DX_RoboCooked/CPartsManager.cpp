@@ -47,10 +47,14 @@ void CPartsManager::Load()
 
 CParts* CPartsManager::CreateParts(string sID)
 {
-	return m_mapParts[sID]->Clone();
+	if(m_mapParts.find(sID) != m_mapParts.end())
+		return m_mapParts[sID]->Clone();
+	return m_mapParts["D00"]->Clone();
 }
 
 string CPartsManager::GetIDFromFormula(string sFormula)
 {
-	return m_mapFormula[sFormula];
+	if (m_mapFormula.find(sFormula) != m_mapFormula.end())
+		return m_mapFormula[sFormula];
+	return m_mapFormula[""];
 }

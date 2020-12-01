@@ -426,4 +426,8 @@ void CBoxCollision::SetScale(float x, float y, float z)
 	m_fAxisHalfLen[0] = m_fOriginAxisHalfLen[0] * x;// *(1 + x) * 0.5f;
 	m_fAxisHalfLen[1] = m_fOriginAxisHalfLen[1] * y;// *(1 + y) * 0.5f;
 	m_fAxisHalfLen[2] = m_fOriginAxisHalfLen[2] * z;// *(1 + z) * 0.5f;
+
+	m_fAxisHalfLen[0] = m_fAxisHalfLen[0] > 0.3f ? m_fAxisHalfLen[0] : 0.3f;
+	m_fAxisHalfLen[1] =	m_fAxisHalfLen[1] > 0.3f ? m_fAxisHalfLen[1] : 0.3f;
+	m_fAxisHalfLen[2] =	m_fAxisHalfLen[2] > 0.3f ? m_fAxisHalfLen[2] : 0.3f;
 }
