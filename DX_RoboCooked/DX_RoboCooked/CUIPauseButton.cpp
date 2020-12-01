@@ -6,12 +6,13 @@
 #include "CUIBoardButton.h"
 #include "CUIBarButton.h"
 #include "CUICloseButton.h"
+#include "IInteractCenter.h"
 
 
 
-
-CUIPauseButton::CUIPauseButton(D3DXVECTOR2 vPos, WPARAM wParam)
+CUIPauseButton::CUIPauseButton(D3DXVECTOR2 vPos, WPARAM wParam, IInteractCenter* pInteractCenter)
 {
+	m_pInteractCenter = pInteractCenter;
 	m_vPosition = vPos;
 	m_wActiveButton = wParam;
 }
@@ -102,7 +103,7 @@ void CUIPauseButton::KeyPressEvent(void * _value)
 				g_EventManager->Detach(eEvent::MouseClick, this);
 				g_EventManager->Detach(eEvent::MouseHover, this);
 			}
-
+			m_pInteractCenter->PausePlayGame();
 		}
 
 		

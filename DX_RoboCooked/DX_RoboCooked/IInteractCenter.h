@@ -15,4 +15,5 @@ public:
 	//virtual void ThrowParts(CCharacter* pCharacter,CParts* parts, D3DXVECTOR3 vDir) = 0;
 	virtual void CheckAroundCombinator(CPartCombinator* combinator) = 0;
 	virtual void SendPartsToOutlet(CParts* parts, COutlet* outlet) = 0;
+	virtual void PausePlayGame() = 0;
 };
