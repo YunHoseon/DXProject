@@ -37,7 +37,6 @@ public:
 	virtual void Init();
 	virtual void Render();
 	virtual void Update();
-	void PausePlayGame();
 
 	void GetInteractObject(CCharacter* pCharacter) override;
 	void AddParts(CParts* parts) override;
@@ -45,5 +44,7 @@ public:
 	//void ThrowParts(CCharacter* pCharacter,CParts* parts,D3DXVECTOR3 vDir) override;
 	void CheckAroundCombinator(CPartCombinator* combinator) override;
 	void SendPartsToOutlet(CParts* parts, COutlet* outlet) override;
+	void PausePlayGame() override;
+
 };
 

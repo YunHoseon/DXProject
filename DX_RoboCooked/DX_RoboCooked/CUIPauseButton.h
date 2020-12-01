@@ -1,11 +1,18 @@
 #pragma once
 #include "CUIButton.h"
+
+class IInteractCenter;
+
+
 class CUIPauseButton :
 	public CUIButton
 {
 
+private:
+	IInteractCenter*	m_pInteractCenter;
+
 public:
-	CUIPauseButton(D3DXVECTOR2 vPos,WPARAM wParam);
+	CUIPauseButton(D3DXVECTOR2 vPos,WPARAM wParam, IInteractCenter* pInteractCenter);
 	~CUIPauseButton();
 
 public:

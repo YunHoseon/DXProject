@@ -136,8 +136,6 @@ void CPartManualCombinator::Setup(float fAngle, D3DXVECTOR3 vPosition)
 
 	D3DXMatrixRotationY(&m_matR, D3DXToRadian(fAngle));
 	D3DXMatrixTranslation(&m_matT, vPosition.x, 0, vPosition.z);
-	//m_vPosition = vPosition;
-	//m_vOnCombinatorPosition = D3DXVECTOR3(vPosition.x, vPosition.y + 1.0f, vPosition.z);
 
 	m_pCollision = new CBoxCollision(D3DXVECTOR3(0, 0, 0), D3DXVECTOR3(1.0f, 1.0f, 1.0f), &m_matWorld);
 	m_pPartsInteractCollision = new CSphereCollision(D3DXVECTOR3(0, 0, 0), 2.0f, &m_matWorld);
@@ -259,12 +257,6 @@ void CPartManualCombinator::CombineParts()
 		m_pInteractCenter->AddParts(parts);
 
 		m_isCombine = true;
-
-		//m_pParts = *m_vecDischargeParts.begin();
-		//m_pParts->SetPosition(m_vOnCombinatorPosition);
-		//m_vecDischargeParts.clear();
-
-		//ReadytoCarryParts();
 	}
 }
 
@@ -295,11 +287,9 @@ void CPartManualCombinator::ReadytoCarryParts()
 {
 	CheckCombineisFull();
 	if (m_isTimeCheck)
-	{
 		return;
-	}
 
-	m_isCombine = true; //들고가기 가능하게 하는 bool
+	m_isCombine = true; 
 	for (auto it : m_multimapParts)
 	{
 		m_vecDischargeParts.push_back(it.second);
@@ -310,7 +300,6 @@ void CPartManualCombinator::ReadytoCarryParts()
 void CPartManualCombinator::CheckCombineisFull()
 {
 	if (m_eCombinatorLoadState == eCombinatorLoadState::LoadImpossible)
-	{
 		m_isTimeCheck = true;
-	}
+	
 }
