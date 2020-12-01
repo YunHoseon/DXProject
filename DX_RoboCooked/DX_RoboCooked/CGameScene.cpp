@@ -250,9 +250,7 @@ void CGameScene::ToggleStop()
 	m_isTimeStop = !m_isTimeStop;
 }
 
-void CGameScene::GetStop()
-{
-}
+
 
 
 void CGameScene::GetInteractObject(CCharacter* pCharacter)
