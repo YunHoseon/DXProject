@@ -252,7 +252,6 @@ void CGameScene::ToggleStop()
 
 
 
-
 void CGameScene::GetInteractObject(CCharacter* pCharacter)
 {
 	for (CInteractiveActor * it : m_vecParts)
@@ -334,7 +333,7 @@ void CGameScene::CheckAroundCombinator(CPartCombinator* combinator)
 	}
 }
 
-void CGameScene::SendPartsToOutlet(CParts * parts, COutlet * outlet)
-{
-	outlet->AcceptPartsFromVending(parts);
-}
+//void CGameScene::SendPartsToOutlet(CParts * parts, COutlet * outlet)
+//{
+//	outlet->AcceptPartsFromVending(parts);
+//}
