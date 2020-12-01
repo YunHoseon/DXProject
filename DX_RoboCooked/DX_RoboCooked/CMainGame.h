@@ -8,7 +8,7 @@ class CMainGame
 private:
 	CGrid*					m_pGrid;
 	CCamera*				m_pCamera;
-	CScene*					m_pScene;
+	//CScene*					m_pScene;
 
 public:
 	CMainGame();
