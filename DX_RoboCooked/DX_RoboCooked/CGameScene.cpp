@@ -123,14 +123,14 @@ void CGameScene::Init()
 	{// 테스트용 부품
 		CParts* pParts;
 		pParts = g_pPartsManager->CreateParts("T00"); pParts->SetPosition(-1, 0, 4); m_vecParts.push_back(pParts);
-		pParts = g_pPartsManager->CreateParts("T01"); pParts->SetPosition(0, 0, 4); m_vecParts.push_back(pParts);
-		pParts = g_pPartsManager->CreateParts("T02"); pParts->SetPosition(1, 0, 4); m_vecParts.push_back(pParts);
-		pParts = g_pPartsManager->CreateParts("T03"); pParts->SetPosition(2, 0, 4); m_vecParts.push_back(pParts);
-		pParts = g_pPartsManager->CreateParts("T04"); pParts->SetPosition(3, 0, 4); m_vecParts.push_back(pParts);
-		pParts = g_pPartsManager->CreateParts("T05"); pParts->SetPosition(4, 0, 4); m_vecParts.push_back(pParts);
-		pParts = g_pPartsManager->CreateParts("T06"); pParts->SetPosition(5, 0, 4); m_vecParts.push_back(pParts);
-		pParts = g_pPartsManager->CreateParts("T07"); pParts->SetPosition(6, 0, 4); m_vecParts.push_back(pParts);
-		pParts = g_pPartsManager->CreateParts("T08"); pParts->SetPosition(7, 0, 4); m_vecParts.push_back(pParts);
+		pParts = g_pPartsManager->CreateParts("T01"); pParts->SetPosition( 0, 0, 4); m_vecParts.push_back(pParts);
+		pParts = g_pPartsManager->CreateParts("T02"); pParts->SetPosition( 1, 0, 4); m_vecParts.push_back(pParts);
+		pParts = g_pPartsManager->CreateParts("T03"); pParts->SetPosition( 2, 0, 4); m_vecParts.push_back(pParts);
+		pParts = g_pPartsManager->CreateParts("T04"); pParts->SetPosition( 3, 0, 4); m_vecParts.push_back(pParts);
+		pParts = g_pPartsManager->CreateParts("T05"); pParts->SetPosition( 4, 0, 4); m_vecParts.push_back(pParts);
+		pParts = g_pPartsManager->CreateParts("T06"); pParts->SetPosition( 5, 0, 4); m_vecParts.push_back(pParts);
+		pParts = g_pPartsManager->CreateParts("T07"); pParts->SetPosition( 6, 0, 4); m_vecParts.push_back(pParts);
+		pParts = g_pPartsManager->CreateParts("T08"); pParts->SetPosition( 7, 0, 4); m_vecParts.push_back(pParts);
 	}
 
 	m_pDebugPauseUI = new CUIPauseButton(D3DXVECTOR2(100,100),27);
