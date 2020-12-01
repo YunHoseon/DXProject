@@ -6,12 +6,13 @@
 #include "CUIBoardButton.h"
 #include "CUIBarButton.h"
 #include "CUICloseButton.h"
+#include "IInteractCenter.h"
 
 
 
-
-CUIPauseButton::CUIPauseButton(D3DXVECTOR2 vPos, WPARAM wParam)
+CUIPauseButton::CUIPauseButton(D3DXVECTOR2 vPos, WPARAM wParam, IInteractCenter* pInteractCenter)
 {
+	m_pInteractCenter = pInteractCenter;
 	m_vPosition = vPos;
 	m_wActiveButton = wParam;
 }
@@ -26,6 +27,7 @@ void CUIPauseButton::Setup()
 	g_EventManager->Attach(eEvent::MouseClick, this);
 	g_EventManager->Attach(eEvent::MouseHover, this);
 	g_EventManager->Attach(eEvent::KeyPress, this);
+	g_EventManager->Attach(eEvent::KeyRelease, this);
 	g_EventManager->Attach(eEvent::MouseRelease, this);
 
 
@@ -55,6 +57,9 @@ void CUIPauseButton::OnEvent(eEvent eEvent, void * _value)
 	case eEvent::KeyPress:
 		KeyPressEvent(_value);
 		break;
+	case eEvent::KeyRelease:
+		KeyReleaseEvent(_value);
+		break;
 	case eEvent::MouseRelease:
 		MouseReleaseEvent(_value);
 		break;
@@ -78,22 +83,40 @@ void CUIPauseButton::KeyPressEvent(void * _value)
 
 	if (data->wKey == m_wActiveButton)
 	{
-		for (auto it : m_listUIchildren)
+		if (m_isKeyDown == false)
 		{
-			it->InvertActive();
-		}
-		m_isActive = !m_isActive;
+			m_isKeyDown = true;
 
-		if (m_isActive)
-		{
-			g_EventManager->Attach(eEvent::MouseClick, this);
-			g_EventManager->Attach(eEvent::MouseHover, this);
+			for (auto it : m_listUIchildren)
+			{
+				it->InvertActive();
+			}
+			m_isActive = !m_isActive;
+
+			if (m_isActive)
+			{
+				g_EventManager->Attach(eEvent::MouseClick, this);
+				g_EventManager->Attach(eEvent::MouseHover, this);
+			}
+			else
+			{
+				g_EventManager->Detach(eEvent::MouseClick, this);
+				g_EventManager->Detach(eEvent::MouseHover, this);
+			}
+			m_pInteractCenter->ToggleStop();
 		}
-		else
-		{
-			g_EventManager->Detach(eEvent::MouseClick, this);
-			g_EventManager->Detach(eEvent::MouseHover, this);
-		}
+
+		
+	}
+}
+
+void CUIPauseButton::KeyReleaseEvent(void * _value)
+{
+	ST_KeyInputEvent* data = static_cast<ST_KeyInputEvent*>(_value);
+	
+	if (data->wKey == m_wActiveButton)
+	{
+		m_isKeyDown = false;
 	}
 }
 

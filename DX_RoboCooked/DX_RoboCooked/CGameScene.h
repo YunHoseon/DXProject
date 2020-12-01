@@ -8,7 +8,7 @@ class CParts;
 class CCharacter;
 class CUIButton;
 
-/* µð¹ö±ë¿ë */
+/* ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ */
 class CDebugPlayer1;
 class CDebugPlayer2;
 
@@ -23,7 +23,7 @@ private:
 	vector<CCharacter*>			m_vecCharacters;
 
 	bool						m_isTimeStop;
-	/* µð¹ö±ë¿ë */
+	/* ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ */
 	CDebugPlayer1*				m_pDebugSphere;
 	CDebugPlayer2*				m_pDebugCube;
 	CParts*						m_pDebugParts;
@@ -37,12 +37,15 @@ public:
 	virtual void Init();
 	virtual void Render();
 	virtual void Update();
-	void PausePlayGame();
 
 	void GetInteractObject(CCharacter* pCharacter) override;
 	void AddParts(CParts* parts) override;
+	void DeleteParts(CParts* parts) override;
 	//void ThrowParts(CCharacter* pCharacter,CParts* parts,D3DXVECTOR3 vDir) override;
 	void CheckAroundCombinator(CPartCombinator* combinator) override;
-	void SendPartsToOutlet(CParts* parts, COutlet* outlet) override;
+	//void SendPartsToOutlet(CParts* parts, COutlet* outlet) override;
+	void ToggleStop() override;
+	bool GetStop() override {return m_isTimeStop;}
+
 };
 

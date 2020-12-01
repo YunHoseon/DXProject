@@ -118,6 +118,7 @@ void CParts::MoveParts()
 	{
 		m_pPartsCombinator->InsertParts(this);
 		m_pPartsCombinator = NULL;
+		m_vPosition = D3DXVECTOR3(0, -100, 0);
 		m_isMoveParts = false;
 		return;
 	}

@@ -136,8 +136,6 @@ void CPartManualCombinator::Setup(float fAngle, D3DXVECTOR3 vPosition)
 
 	D3DXMatrixRotationY(&m_matR, D3DXToRadian(fAngle));
 	D3DXMatrixTranslation(&m_matT, vPosition.x, 0, vPosition.z);
-	//m_vPosition = vPosition;
-	//m_vOnCombinatorPosition = D3DXVECTOR3(vPosition.x, vPosition.y + 1.0f, vPosition.z);
 
 	m_pCollision = new CBoxCollision(D3DXVECTOR3(0, 0, 0), D3DXVECTOR3(1.0f, 1.0f, 1.0f), &m_matWorld);
 	m_pPartsInteractCollision = new CSphereCollision(D3DXVECTOR3(0, 0, 0), 2.0f, &m_matWorld);
@@ -149,6 +147,7 @@ void CPartManualCombinator::Setup(float fAngle, D3DXVECTOR3 vPosition)
 	if (m_pPartsInteractCollision)
 		m_pPartsInteractCollision->Update();
 	
+	m_isTimeCheck = false;
 }
 
 
@@ -195,18 +194,16 @@ CParts* CPartManualCombinator::Make()
 	 * 조합식 매니저로 조합식들고와서 조합 
 	 */
 	string strResult;
-	for(auto it : m_multimapParts)
+	for (auto it : m_multimapParts)
 	{
 		strResult += it.first;
+		m_pInteractCenter->DeleteParts(it.second);
 	}
-	//매니저로 조합식들 들고와서
-	//그 조합식과 동일한게있다면
-	//m_vecDischargeParts
-	CParts* parts = NULL;
-	//if(동일한게있다면)
-	//parts = manager->CreateParts(strResult);
+	m_multimapParts.clear();
+
+	CParts* Parts = g_pPartsManager->CreateParts(g_pPartsManager->GetIDFromFormula(strResult));
 	
-	return parts;
+	return Parts;
 }
 
 void CPartManualCombinator::Interact(CCharacter* pCharacter)
@@ -230,19 +227,14 @@ void CPartManualCombinator::PartsInteract(CParts* pParts)
 	{
 		return;
 	}
-	else
-	{
-		if(m_nPartsCount == m_nMaxPartsCount)
-			m_eCombinatorLoadState = eCombinatorLoadState::LoadImpossible;
 
-		pParts->GetCollision()->SetActive(false);
-		pParts->SetCombinatorPosition(m_vPosition);
-		pParts->SetMoveParts(true);
-	}
+	if(m_nPartsCount == m_nMaxPartsCount)
+		m_eCombinatorLoadState = eCombinatorLoadState::LoadImpossible;
 
-
-
-
+	pParts->GetCollision()->SetActive(false);
+	pParts->SetCombinatorPosition(m_vPosition);
+	pParts->SetMoveParts(true);
+	
 }
 
 void CPartManualCombinator::OnEvent(eEvent eEvent, void* _value)
@@ -258,8 +250,13 @@ void CPartManualCombinator::CombineParts()
 		m_eCombinatorLoadState = eCombinatorLoadState::LoadPossible;
 		m_isTimeCheck = false;
 		m_fElapsedTime = 0;
-		Make();
-		ReadytoCarryParts();
+		
+		CParts* parts = Make();
+
+		m_vecDischargeParts.push_back(parts);
+		m_pInteractCenter->AddParts(parts);
+
+		m_isCombine = true;
 	}
 }
 
@@ -292,7 +289,7 @@ void CPartManualCombinator::ReadytoCarryParts()
 	if (m_isTimeCheck)
 		return;
 
-	m_isCombine = true; //들고가기 가능하게 하는 bool
+	m_isCombine = true; 
 	for (auto it : m_multimapParts)
 	{
 		m_vecDischargeParts.push_back(it.second);
@@ -303,7 +300,6 @@ void CPartManualCombinator::ReadytoCarryParts()
 void CPartManualCombinator::CheckCombineisFull()
 {
 	if (m_eCombinatorLoadState == eCombinatorLoadState::LoadImpossible)
-	{
 		m_isTimeCheck = true;
-	}
+	
 }

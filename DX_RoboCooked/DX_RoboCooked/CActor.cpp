@@ -6,7 +6,7 @@
 CActor::CActor() :
 	m_pInteractCenter(nullptr),
 	m_pCollision(nullptr),
-	m_fRotY(0),
+	m_fRotY(D3DX_PI),
 	m_vDirection(0, 0, 1),
 	m_vPosition(0, 0, 0),
 	m_fBaseSpeed(0),
@@ -18,7 +18,8 @@ CActor::CActor() :
 	m_vScale(1,1,1)
 {
 	D3DXMatrixIdentity(&m_matS);
-	D3DXMatrixIdentity(&m_matR);
+	D3DXMatrixRotationY(&m_matR, m_fRotY);
+	//D3DXMatrixIdentity(&m_matR);
 	D3DXMatrixIdentity(&m_matT);
 	m_matWorld = m_matS * m_matR * m_matT;
 }

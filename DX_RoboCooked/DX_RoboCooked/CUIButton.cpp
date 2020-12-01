@@ -8,6 +8,7 @@
 CUIButton::CUIButton()
 	: m_pTexture(nullptr)
 	, m_pText(nullptr)
+	, m_isKeyDown(false)
 {
 	m_pInputKey[0] = InputManager->GetInputKey(0);
 	m_pInputKey[1] = InputManager->GetInputKey(1);

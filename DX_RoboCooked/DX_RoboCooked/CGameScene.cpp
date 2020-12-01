@@ -130,7 +130,7 @@ void CGameScene::Init()
 	//	m_pDebugParts2->Setup();
 	//m_vecParts.push_back(m_pDebugParts2);
 
-	m_pDebugPauseUI = new CUIPauseButton(D3DXVECTOR2(100,100),27);
+	m_pDebugPauseUI = new CUIPauseButton(D3DXVECTOR2(100,100),27,this);
 	m_pDebugPauseUI->Setup();
 }
 
@@ -245,10 +245,11 @@ void CGameScene::Update()
 	}
 }
 
-void CGameScene::PausePlayGame()
+void CGameScene::ToggleStop()
 {
 	m_isTimeStop = !m_isTimeStop;
 }
+
 
 
 void CGameScene::GetInteractObject(CCharacter* pCharacter)
@@ -276,6 +277,24 @@ void CGameScene::AddParts(CParts * parts)
 {
 	if (parts)
 		m_vecParts.push_back(parts);
+}
+
+void CGameScene::DeleteParts(CParts * parts)
+{
+	if (parts)
+	{
+		int Cnt = 0;
+		for (auto it : m_vecParts)
+		{
+			if (it == parts)
+			{
+				SafeDelete(it);
+				m_vecParts.erase(m_vecParts.begin() + Cnt);
+				return;
+			}
+			Cnt++;
+		}
+	}
 }
 
 //void CGameScene::ThrowParts(CCharacter* pCharacter,CParts* parts, D3DXVECTOR3 vDir)
@@ -314,7 +333,7 @@ void CGameScene::CheckAroundCombinator(CPartCombinator* combinator)
 	}
 }
 
-void CGameScene::SendPartsToOutlet(CParts * parts, COutlet * outlet)
-{
-	outlet->AcceptPartsFromVending(parts);
-}
+//void CGameScene::SendPartsToOutlet(CParts * parts, COutlet * outlet)
+//{
+//	outlet->AcceptPartsFromVending(parts);
+//}
