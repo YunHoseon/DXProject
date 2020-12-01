@@ -128,8 +128,7 @@ void CBlueprint::Setup()
 	m_matWorld = m_matS * m_matR * m_matT;
 
 	m_pCollision = new CBoxCollision(g_vZero, D3DXVECTOR3(1, 1, 1), &m_matWorld);
-	m_pInteractCollision = new CBoxCollision(D3DXVECTOR3(0, 1, 0), D3DXVECTOR3(1.0f, 1.0f, 1.0f), &m_matWorld);
-	m_pInteractCollision->SetActive(true);
+	m_pInteractCollision = new CBoxCollision(D3DXVECTOR3(0, 1, 0), D3DXVECTOR3(2.0f, 1.0f, 2.8f), &m_matWorld);
 	SetScale(D3DXVECTOR3(2.0f, 0.1f, 2.8f));
 	if(m_pCollision)
 		m_pCollision->Update();
@@ -139,14 +138,14 @@ void CBlueprint::Update()
 {
 	CheckOnBlueprintParts();
 
-	if (m_onBlueprintParts != nullptr && m_onBlueprintParts->GetPosition() != D3DXVECTOR3(5.0f, 0.f, -3.0f))
+	if (m_onBlueprintParts != nullptr && m_onBlueprintParts->GetPosition() != this->GetPosition())
 	{
-		D3DXVECTOR3 vDir = D3DXVECTOR3(5.0f, 0.f, -3.0f) - m_onBlueprintParts->GetPosition();
+		D3DXVECTOR3 vDir = this->GetPosition() - m_onBlueprintParts->GetPosition();
 		float fDist = D3DXVec3Length(&vDir);
-
+		_DEBUG_COMMENT cout << this->GetPosition() << endl;
 		if (fDist <= 0.2f)
 		{
-			m_onBlueprintParts->SetPosition(D3DXVECTOR3(5.0f, 0.f, -3.0f));
+			m_onBlueprintParts->SetPosition(this->GetPosition());
 			m_onBlueprintParts->GetCollision()->SetActive(false);
 			return;
 		}
