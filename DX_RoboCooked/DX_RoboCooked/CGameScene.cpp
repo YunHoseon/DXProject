@@ -245,9 +245,13 @@ void CGameScene::Update()
 	}
 }
 
-void CGameScene::PausePlayGame()
+void CGameScene::ToggleStop()
 {
 	m_isTimeStop = !m_isTimeStop;
+}
+
+void CGameScene::GetStop()
+{
 }
 
 
