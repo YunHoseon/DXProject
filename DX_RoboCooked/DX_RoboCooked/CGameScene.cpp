@@ -332,7 +332,7 @@ void CGameScene::CheckAroundCombinator(CPartCombinator* combinator)
 	}
 }
 
-void CGameScene::SendPartsToOutlet(CParts * parts, COutlet * outlet)
-{
-	outlet->AcceptPartsFromVending(parts);
-}
+//void CGameScene::SendPartsToOutlet(CParts * parts, COutlet * outlet)
+//{
+//	outlet->AcceptPartsFromVending(parts);
+//}
