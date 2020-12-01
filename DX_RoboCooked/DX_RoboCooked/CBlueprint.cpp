@@ -121,7 +121,7 @@ void CBlueprint::Setup()
 	m_vecVertex = vecVertex;
 	SetScale(D3DXVECTOR3(2.0f, 0.1f, 2.8f));
 	D3DXMatrixRotationY(&m_matR, D3DXToRadian(m_nRotAngleY));
-	D3DXMatrixTranslation(&m_matT, 5.0f, -0.5f, -3.0f);
+	D3DXMatrixTranslation(&m_matT, -5.0f, -0.5f, .0f);
 	m_matWorld = m_matS * m_matR * m_matT;
 
 	m_pCollision = new CBoxCollision(g_vZero, D3DXVECTOR3(1.0f, 1.0f, 1.0f), &m_matWorld);

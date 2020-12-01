@@ -84,25 +84,25 @@ void CGameScene::Init()
 	m_vecStaticActor.push_back(wall);
 
 	CPartStorage* partStorage = new CPartStorage(this);
-	partStorage->Setup(0, D3DXVECTOR3(5, 0, 2) , "A00");
+	partStorage->Setup(0, D3DXVECTOR3(-6, 0, 2) , "A00");
 	m_vecObject.push_back(partStorage);
 
-	CPartCombinator* partManualCombinator = new CPartManualCombinator(this, eCombinatorPartsLevel::ONE , 45.0f , D3DXVECTOR3(-2, 0, 2));
+	CPartCombinator* partManualCombinator = new CPartManualCombinator(this, eCombinatorPartsLevel::ONE , 45.0f , D3DXVECTOR3(-4, 0, 2));
 	m_vecObject.push_back(partManualCombinator);
 
 	CCombinatorButton* combinatorButton = new CCombinatorButton(partManualCombinator);
-	combinatorButton->Setup(0,D3DXVECTOR3(1,0,-1));
+	combinatorButton->Setup(0,D3DXVECTOR3(-3,0,-1));
 	m_vecObject.push_back(combinatorButton);
 
 	CPartCombinator* partAutoCombinator = new CPartAutoCombinator(this, eCombinatorPartsLevel::ONE, 0, D3DXVECTOR3(-4, 0, -3));
 	m_vecObject.push_back(partAutoCombinator);
 
 	COutlet* outlet = new COutlet(this);
-	outlet->Setup(0, D3DXVECTOR3(1, 0, 3));
+	outlet->Setup(0, D3DXVECTOR3(-6, 0, 3));
 	m_vecObject.push_back(outlet);
 	
 	CPartVending* partVending = new CPartVending(outlet, this, "A01");
-	partVending->Setup(0, D3DXVECTOR3(1, 0, -3));
+	partVending->Setup(0, D3DXVECTOR3(-3, 0, -3));
 	m_vecObject.push_back(partVending);
 
 	CBlueprint* blueprint = new CBlueprint("C00", m_vecParts);
@@ -120,15 +120,18 @@ void CGameScene::Init()
 	m_vecCharacters.push_back(m_pDebugCube);
 	m_vecCharacters.push_back(m_pDebugSphere);
 
-	//m_pDebugParts = new CParts("999");
-	//if (m_pDebugParts)
-	//	m_pDebugParts->Setup();
-	//m_vecParts.push_back(m_pDebugParts);
-	//
-	//CParts* m_pDebugParts2 = new CParts("999");
-	//if (m_pDebugParts2)
-	//	m_pDebugParts2->Setup();
-	//m_vecParts.push_back(m_pDebugParts2);
+	{// 테스트용 부품
+		CParts* pParts;
+		pParts = g_pPartsManager->CreateParts("T00"); pParts->SetPosition(-1, 0, 4); m_vecParts.push_back(pParts);
+		pParts = g_pPartsManager->CreateParts("T01"); pParts->SetPosition(0, 0, 4); m_vecParts.push_back(pParts);
+		pParts = g_pPartsManager->CreateParts("T02"); pParts->SetPosition(1, 0, 4); m_vecParts.push_back(pParts);
+		pParts = g_pPartsManager->CreateParts("T03"); pParts->SetPosition(2, 0, 4); m_vecParts.push_back(pParts);
+		pParts = g_pPartsManager->CreateParts("T04"); pParts->SetPosition(3, 0, 4); m_vecParts.push_back(pParts);
+		pParts = g_pPartsManager->CreateParts("T05"); pParts->SetPosition(4, 0, 4); m_vecParts.push_back(pParts);
+		pParts = g_pPartsManager->CreateParts("T06"); pParts->SetPosition(5, 0, 4); m_vecParts.push_back(pParts);
+		pParts = g_pPartsManager->CreateParts("T07"); pParts->SetPosition(6, 0, 4); m_vecParts.push_back(pParts);
+		pParts = g_pPartsManager->CreateParts("T08"); pParts->SetPosition(7, 0, 4); m_vecParts.push_back(pParts);
+	}
 
 	m_pDebugPauseUI = new CUIPauseButton(D3DXVECTOR2(100,100),27);
 	m_pDebugPauseUI->Setup();

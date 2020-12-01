@@ -125,8 +125,8 @@ void CCharacter::PressKey(void* _value)
 				if (m_arrKeyDown[0] == false)
 					m_arrKeyDown[0] = true;
 
-				if (m_fThrowPower < 0.1f)
-					m_fThrowPower += 0.005f;
+				if (m_fThrowPower < 0.2f - EPSILON)
+					m_fThrowPower += 0.0005f;
 
 				_DEBUG_COMMENT cout << "throw power : " << m_fThrowPower << endl;
 			}
