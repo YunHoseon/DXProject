@@ -44,7 +44,8 @@ public:
 	//void ThrowParts(CCharacter* pCharacter,CParts* parts,D3DXVECTOR3 vDir) override;
 	void CheckAroundCombinator(CPartCombinator* combinator) override;
 	void SendPartsToOutlet(CParts* parts, COutlet* outlet) override;
-	void PausePlayGame() override;
+	void ToggleStop() override;
+	bool GetStop() override {return m_isTimeStop;}
 
 };
 
