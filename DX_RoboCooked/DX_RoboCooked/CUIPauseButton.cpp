@@ -103,7 +103,7 @@ void CUIPauseButton::KeyPressEvent(void * _value)
 				g_EventManager->Detach(eEvent::MouseClick, this);
 				g_EventManager->Detach(eEvent::MouseHover, this);
 			}
-			m_pInteractCenter->PausePlayGame();
+			m_pInteractCenter->ToggleStop();
 		}
 
 		
