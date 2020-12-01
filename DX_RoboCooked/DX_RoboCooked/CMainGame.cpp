@@ -47,7 +47,7 @@ void CMainGame::Setup()
 
 void CMainGame::Update()
 {
-	g_pTimeManager->update();
+	g_pTimeManager->Update();
 	
 	InputManager->Update();
 	

@@ -56,6 +56,9 @@ extern HWND g_hWnd;
 #define WIDTH 16
 #define HEIGHT 12
 const D3DXVECTOR3 g_vZero(0, 0, 0);
+const float g_fFramerate = 60;
+const float g_fBaseDeltaTime = 1 / g_fFramerate;
+const float g_frBaseDeltaTime = 1 / g_fBaseDeltaTime;
 
 struct ST_PC_VERTEX
 {
