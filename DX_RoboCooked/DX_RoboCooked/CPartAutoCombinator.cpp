@@ -35,7 +35,7 @@ void CPartAutoCombinator::Update()
 	if(m_isCombine && m_pParts == nullptr)
 		DischargeParts();
 
-	if (m_eCombinatorLoadState == eCombinatorLoadState::LoadPossible)
+	if (m_eCombinatorLoadState == eCombinatorLoadState::LoadPossible && m_pParts == nullptr)
 		m_pInteractCenter->CheckAroundCombinator(this);
 }
 
@@ -67,8 +67,6 @@ void CPartAutoCombinator::Interact(CCharacter* pCharacter)
 {
 	if (m_pParts == nullptr || pCharacter->GetPlayerState() != ePlayerState::None)
 		return;
-
-	//pCharacter->SetPlayerState(ePlayerState::Grab);
 	pCharacter->SetParts(m_pParts);
 	m_pParts->SetGrabPosition(&pCharacter->GetGrabPartsPosition());
 	m_pParts->GetCollision()->SetActive(true);
@@ -81,9 +79,12 @@ void CPartAutoCombinator::PartsInteract(CParts* pParts)
 	
 	if (m_nPartsCount > m_nMaxPartsCount)
 	{
-		m_eCombinatorLoadState = eCombinatorLoadState::LoadImpossible;
 		return;
 	}
+
+	if(m_nPartsCount == m_nMaxPartsCount)
+		m_eCombinatorLoadState = eCombinatorLoadState::LoadImpossible;
+
 
 	pParts->GetCollision()->SetActive(false);
 	pParts->SetCombinatorPosition(m_vPosition);
@@ -101,25 +102,29 @@ void CPartAutoCombinator::CombineParts()
 	if (m_fElapsedTime >= m_fCombineTime)
 	{
 		m_fElapsedTime = 0;
-		Make();
 		ReadytoCarryParts();
 	}
 }
 
 void CPartAutoCombinator::DischargeParts()
 {
-	if (m_vecDischargeParts.empty())
-	{
-		m_nPartsCount = 0;
-		m_eCombinatorActionState = eCombinatorActionState::Unusable;
+	//if (m_vecDischargeParts.empty())
+	//{
+	//	m_nPartsCount = 0;
+	//	m_eCombinatorActionState = eCombinatorActionState::Unusable;
+	//	m_eCombinatorLoadState = eCombinatorLoadState::LoadPossible;
+	//	m_isCombine = false;
+	//	return;
+	//}
 
-		m_eCombinatorLoadState = eCombinatorLoadState::LoadPossible;
-		m_isCombine = false;
-		return;
-	}
+	m_nPartsCount = 0;
+	m_eCombinatorActionState = eCombinatorActionState::Unusable;
+	m_eCombinatorLoadState = eCombinatorLoadState::LoadPossible;
+	m_isCombine = false;
+
 	m_pParts = *m_vecDischargeParts.begin();
 	m_pParts->SetPosition(m_vOnCombinatorPosition);
-	m_vecDischargeParts.erase(m_vecDischargeParts.begin());
+	m_vecDischargeParts.clear();
 }
 
 void CPartAutoCombinator::InsertParts(CParts* p)
@@ -129,17 +134,26 @@ void CPartAutoCombinator::InsertParts(CParts* p)
 
 void CPartAutoCombinator::ReadytoCarryParts()
 {
-	m_isCombine = true; //들고가기 가능하게 하는 bool
-	for (auto it : m_multimapParts)
-	{
-		m_vecDischargeParts.push_back(it.second);
-	}
-	m_multimapParts.clear();
+	m_isCombine = true;
+	CParts* parts = Make();
+
+	m_vecDischargeParts.push_back(parts);
+	m_pInteractCenter->AddParts(parts);
 }
 
 CParts* CPartAutoCombinator::Make()
 {
-	return nullptr;
+	string strResult;
+	for (auto it : m_multimapParts)
+	{
+		strResult += it.first;
+		m_pInteractCenter->DeleteParts(it.second);
+	}
+	m_multimapParts.clear();
+
+	CParts* Parts = g_pPartsManager->CreateParts(g_pPartsManager->GetIDFromFormula(strResult));
+	
+	return Parts;
 }
 
 void CPartAutoCombinator::Setup(float fAngle, D3DXVECTOR3 vPosition)
@@ -246,8 +260,6 @@ void CPartAutoCombinator::Setup(float fAngle, D3DXVECTOR3 vPosition)
 
 	D3DXMatrixRotationY(&m_matR, D3DXToRadian(fAngle));
 	D3DXMatrixTranslation(&m_matT, vPosition.x, 0, vPosition.z);
-	//m_vPosition = vPosition;
-	//m_vOnCombinatorPosition = D3DXVECTOR3(vPosition.x, vPosition.y + 1.0f, vPosition.z);
 
 	m_pCollision = new CBoxCollision(g_vZero, D3DXVECTOR3(1.0f, 1.0f, 1.0f), &m_matWorld);
 

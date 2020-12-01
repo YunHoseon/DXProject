@@ -278,6 +278,24 @@ void CGameScene::AddParts(CParts * parts)
 		m_vecParts.push_back(parts);
 }
 
+void CGameScene::DeleteParts(CParts * parts)
+{
+	if (parts)
+	{
+		int Cnt = 0;
+		for (auto it : m_vecParts)
+		{
+			if (it == parts)
+			{
+				SafeDelete(it);
+				m_vecParts.erase(m_vecParts.begin() + Cnt);
+				return;
+			}
+			Cnt++;
+		}
+	}
+}
+
 //void CGameScene::ThrowParts(CCharacter* pCharacter,CParts* parts, D3DXVECTOR3 vDir)
 //{
 //	if (parts != nullptr)
