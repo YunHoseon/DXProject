@@ -438,7 +438,7 @@
       <Filter>Manager\Factory</Filter>
     </ClCompile>
     <ClCompile Include="CMonster.cpp">
-      <Filter>Source Files</Filter>
+      <Filter>GameScene\Monster</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
