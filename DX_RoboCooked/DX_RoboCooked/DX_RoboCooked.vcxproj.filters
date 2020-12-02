@@ -252,6 +252,9 @@
     <ClInclude Include="CStaticMesh.h">
       <Filter>Manager\Factory</Filter>
     </ClInclude>
+    <ClInclude Include="CMonster.h">
+      <Filter>GameScene\Monster</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="stdafx.cpp">
@@ -433,6 +436,9 @@
     </ClCompile>
     <ClCompile Include="CStaticMesh.cpp">
       <Filter>Manager\Factory</Filter>
+    </ClCompile>
+    <ClCompile Include="CMonster.cpp">
+      <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

@@ -152,6 +152,7 @@
     <ClInclude Include="CBlueprint.h" />
     <ClInclude Include="CBoxCollision.h" />
     <ClInclude Include="CMeshLoader.h" />
+    <ClInclude Include="CMonster.h" />
     <ClInclude Include="CPartsManager.h" />
     <ClInclude Include="CStaticMesh.h" />
     <ClInclude Include="CUICloseButton.h" />
@@ -216,6 +217,7 @@
     <ClCompile Include="CBlueprint.cpp" />
     <ClCompile Include="CBoxCollision.cpp" />
     <ClCompile Include="CMeshLoader.cpp" />
+    <ClCompile Include="CMonster.cpp" />
     <ClCompile Include="CPartsManager.cpp" />
     <ClCompile Include="CStaticMesh.cpp" />
     <ClCompile Include="CUICloseButton.cpp" />
