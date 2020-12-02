@@ -4,6 +4,7 @@ class CParts;
 class CCharacter;
 class CPartCombinator;
 class COutlet;
+class CCrowdControl;
 
 class IInteractCenter
 {
@@ -17,4 +18,5 @@ public:
 	//virtual void SendPartsToOutlet(CParts* parts, COutlet* outlet) = 0;
 	virtual void ToggleStop() = 0;
 	virtual bool GetStop() = 0;
+	virtual void CC(CCrowdControl* pCC) = 0;
 };
