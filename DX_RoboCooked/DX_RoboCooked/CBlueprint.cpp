@@ -138,7 +138,7 @@ void CBlueprint::Update()
 {
 	CheckOnBlueprintParts();
 
-	/*if (m_onBlueprintParts != nullptr && m_onBlueprintParts->GetPosition() != this->GetPosition())
+	if (m_onBlueprintParts != nullptr && m_onBlueprintParts->GetPosition() != this->GetPosition())
 	{
 		D3DXVECTOR3 vDir = this->GetPosition() - m_onBlueprintParts->GetPosition();
 		float fDist = D3DXVec3Length(&vDir);
@@ -153,7 +153,7 @@ void CBlueprint::Update()
 		m_onBlueprintParts->SetPosition(m_onBlueprintParts->GetPosition() + vDir * 0.01f);
 	}
 	if (m_pInteractCollision)
-		m_pInteractCollision->Update();*/
+		m_pInteractCollision->Update();
 }
 
 void CBlueprint::Render()
