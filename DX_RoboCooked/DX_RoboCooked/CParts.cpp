@@ -126,6 +126,13 @@ void CParts::MoveParts()
 	m_vPosition += vDirection*0.01f;
 }
 
+void CParts::SetGrabPosition(D3DXVECTOR3* vPosition)
+{
+	m_vGrabPosition = vPosition;
+	if (vPosition)
+		m_vVelocity = g_vZero;
+}
+
 void CParts::AddForce(const D3DXVECTOR3& vForce)
 {
 	if (m_isMoveParts || m_vGrabPosition)

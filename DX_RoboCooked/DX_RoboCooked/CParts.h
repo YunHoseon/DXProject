@@ -53,8 +53,8 @@ public:
 	void SetFormula(string sFormula) { m_sFormula = sFormula; }
 	
 	D3DXVECTOR3* GetGrabPosition() { return m_vGrabPosition; }
-	void SetGrabPosition(D3DXVECTOR3* vPosition) { m_vGrabPosition = vPosition; }
-	
+	void SetGrabPosition(D3DXVECTOR3* vPosition);
+
 	bool GetMoveParts() { return m_isMoveParts; }
 	void SetMoveParts(bool b) { m_isMoveParts = b; }
 

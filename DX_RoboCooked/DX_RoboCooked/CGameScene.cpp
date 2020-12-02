@@ -107,7 +107,7 @@ void CGameScene::Init()
 
 	CBlueprint* blueprint = new CBlueprint("C00", m_vecParts);
 	blueprint->Setup();
-	m_vecStaticActor.push_back(blueprint);
+	m_vecObject.push_back(blueprint);
 
 	m_pDebugSphere = new CDebugPlayer1(this);
 	if (m_pDebugSphere)

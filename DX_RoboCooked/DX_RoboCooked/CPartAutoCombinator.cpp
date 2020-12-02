@@ -123,7 +123,8 @@ void CPartAutoCombinator::DischargeParts()
 	m_isCombine = false;
 
 	m_pParts = *m_vecDischargeParts.begin();
-	m_pParts->SetPosition(m_vOnCombinatorPosition);
+	//m_pParts->SetPosition(m_vOnCombinatorPosition);
+	m_pParts->SetGrabPosition(&m_vOnCombinatorPosition);
 	m_vecDischargeParts.clear();
 }
 

@@ -1,10 +1,10 @@
 #pragma once
-#include "CActor.h"
+#include "CInteractiveActor.h"
 
-class CInteractiveActor;
+//class CInteractiveActor;
 class CParts;
 class CBlueprint :
-	public CActor
+	public CInteractiveActor
 {
 private:
 	int				m_nRotAngleY;			//설계도의 Y축 회전
@@ -28,5 +28,6 @@ public:
 
 	void AddAcceleration(const D3DXVECTOR3& vAccel) override {}
 	void AddForce(const D3DXVECTOR3& vForce) override {}
+	void Interact(CCharacter* pCharacter) override;
 };
 
