@@ -15,7 +15,7 @@ private:
 	vector<CInteractiveActor*>*		m_pVecParts;
 
 	D3DXMATRIXA16		m_matInteractCollision;
-	ICollisionArea*		m_pInteractCollision;
+	ICollisionArea*		m_pPartsPosition;
 public:
 	CBlueprint(string partsID, vector<CInteractiveActor*>& vecParts, D3DXVECTOR3 position, D3DXVECTOR3 scale);
 	~CBlueprint();

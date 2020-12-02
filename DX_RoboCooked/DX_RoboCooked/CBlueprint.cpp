@@ -10,7 +10,7 @@ CBlueprint::CBlueprint(string partsID, vector<CInteractiveActor*>& vecParts, D3D
 	: m_nRotAngleY(0)
 	, m_isCompleted(false)
 	, m_onBlueprintParts(NULL)
-	, m_pInteractCollision(nullptr)
+	, m_pPartsPosition(nullptr)
 {
 	m_sRightPartsID = partsID;
 	m_pVecParts = &vecParts;
@@ -24,7 +24,7 @@ CBlueprint::CBlueprint(string partsID, vector<CInteractiveActor*>& vecParts, D3D
 
 CBlueprint::~CBlueprint()
 {
-	SafeDelete(m_pInteractCollision);
+	SafeDelete(m_pPartsPosition);
 }
 
 void CBlueprint::Setup()
@@ -134,12 +134,12 @@ void CBlueprint::Setup()
 	m_matInteractCollision = m_matT;
 	m_pCollision = new CBoxCollision(D3DXVECTOR3(0, -2.f, 0), D3DXVECTOR3(1, 1, 1), &m_matWorld);
 	SetScale(D3DXVECTOR3(2.0f, 0.1f, 2.8f));
-	m_pInteractCollision = new CSphereCollision(D3DXVECTOR3(0, 1.f, 0), 1.f, &m_matInteractCollision);
+	m_pPartsPosition = new CSphereCollision(D3DXVECTOR3(0, 1.f, 0), 1.f, &m_matInteractCollision);
 	
 	if(m_pCollision)
 		m_pCollision->Update();
-	if (m_pInteractCollision)
-		m_pInteractCollision->Update();
+	if (m_pPartsPosition)
+		m_pPartsPosition->Update();
 }
 
 void CBlueprint::Update()
@@ -151,8 +151,8 @@ void CBlueprint::Render()
 {
 	_DEBUG_COMMENT if (m_pCollision)
 		_DEBUG_COMMENT m_pCollision->Render();
-	_DEBUG_COMMENT if (m_pInteractCollision)
-		_DEBUG_COMMENT m_pInteractCollision->Render();
+	_DEBUG_COMMENT if (m_pPartsPosition)
+		_DEBUG_COMMENT m_pPartsPosition->Render();
 
 	g_pD3DDevice->SetTransform(D3DTS_WORLD, &m_matWorld);
 	g_pD3DDevice->SetTexture(0, m_blueprintTexture);
@@ -177,7 +177,7 @@ void CBlueprint::CheckOnBlueprintParts()
 			if (it->Collide(this))
 			{
 				m_onBlueprintParts = (CParts*)it;
-				m_onBlueprintParts->SetGrabPosition(&m_pInteractCollision->GetCenter());
+				m_onBlueprintParts->SetGrabPosition(&m_pPartsPosition->GetCenter());
 				m_onBlueprintParts->GetCollision()->SetActive(false);
 				break;
 			}
