@@ -17,6 +17,7 @@
 #include "CWall.h"
 #include "CUIButton.h"
 #include "CBlueprint.h"
+#include "CMonster.h"
 
 #include "CUICloseButton.h"
 #include "CUIBoardButton.h"
@@ -105,7 +106,7 @@ void CGameScene::Init()
 	partVending->Setup(0, D3DXVECTOR3(1, 0, -3));
 	m_vecObject.push_back(partVending);
 
-	CBlueprint* blueprint = new CBlueprint("C00", m_vecParts, D3DXVECTOR3(0,0,0), D3DXVECTOR3(0, 0, 0));
+	CBlueprint* blueprint = new CBlueprint("A00", m_vecParts, D3DXVECTOR3(0,0,0), D3DXVECTOR3(0, 0, 0));
 	blueprint->Setup();
 	m_vecObject.push_back(blueprint);
 
@@ -132,6 +133,9 @@ void CGameScene::Init()
 
 	m_pDebugPauseUI = new CUIPauseButton(D3DXVECTOR2(100,100),27,this);
 	m_pDebugPauseUI->Setup();
+
+	CMonster* monster = new CMonster(this);
+	m_vecMonster.push_back(monster);
 }
 
 void CGameScene::Render()
@@ -155,6 +159,12 @@ void CGameScene::Render()
 	{
 		it->Render();
 	}
+
+	for (CMonster* it : m_vecMonster)
+	{
+		it->Render();
+	}
+
 
 	if (m_pDebugPauseUI)
 		m_pDebugPauseUI->Render();
@@ -234,6 +244,11 @@ void CGameScene::Update()
 			it->Update();
 		}
 
+		for (CMonster* it : m_vecMonster)
+		{
+			it->Update();
+		}
+
 		if (m_pDebugCube)
 			m_pDebugCube->Update();
 
@@ -250,7 +265,10 @@ void CGameScene::ToggleStop()
 	m_isTimeStop = !m_isTimeStop;
 }
 
-
+void CGameScene::CC(CCrowdControl * pCC)
+{
+	cout << "돌리기 횟수로인한 괴수 스킬" << endl;
+}
 
 void CGameScene::GetInteractObject(CCharacter* pCharacter)
 {

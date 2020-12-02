@@ -105,6 +105,8 @@ void CParts::PartsRotate()
 		m_fRotAngle = 0;
 
 	D3DXMatrixRotationY(&m_matR, D3DXToRadian(m_fRotAngle));
+
+	g_EventManager->CallEvent(eEvent::PartsSpin, NULL);
 }
 
 void CParts::MoveParts()

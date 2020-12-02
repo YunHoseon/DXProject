@@ -7,8 +7,8 @@ class CInteractiveActor;
 class CParts;
 class CCharacter;
 class CUIButton;
+class CMonster;
 
-/* ������ */
 class CDebugPlayer1;
 class CDebugPlayer2;
 
@@ -21,9 +21,10 @@ private:
 	vector<CInteractiveActor*>	m_vecObject;
 	vector<CInteractiveActor*>	m_vecParts;
 	vector<CCharacter*>			m_vecCharacters;
+	vector<CMonster*>			m_vecMonster;
+
 
 	bool						m_isTimeStop;
-	/* ������ */
 	CDebugPlayer1*				m_pDebugSphere;
 	CDebugPlayer2*				m_pDebugCube;
 	CParts*						m_pDebugParts;
@@ -46,6 +47,7 @@ public:
 	//void SendPartsToOutlet(CParts* parts, COutlet* outlet) override;
 	void ToggleStop() override;
 	bool GetStop() override {return m_isTimeStop;}
+	void CC(CCrowdControl* pCC) override;
 
 };
 
