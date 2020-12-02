@@ -174,9 +174,6 @@
     <ClInclude Include="CWall.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="CBlueprint.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="CUI.h">
       <Filter>UI</Filter>
     </ClInclude>
@@ -254,6 +251,12 @@
     </ClInclude>
     <ClInclude Include="CMonster.h">
       <Filter>GameScene\Monster</Filter>
+    </ClInclude>
+    <ClInclude Include="CBlueprint.h">
+      <Filter>GameScene</Filter>
+    </ClInclude>
+    <ClInclude Include="CCrowdControl.h">
+      <Filter>GameScene\Monster\CrowdControl</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -359,9 +362,6 @@
     <ClCompile Include="CWall.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="CBlueprint.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="CUI.cpp">
       <Filter>UI</Filter>
     </ClCompile>
@@ -439,6 +439,12 @@
     </ClCompile>
     <ClCompile Include="CMonster.cpp">
       <Filter>GameScene\Monster</Filter>
+    </ClCompile>
+    <ClCompile Include="CBlueprint.cpp">
+      <Filter>GameScene</Filter>
+    </ClCompile>
+    <ClCompile Include="CCrowdControl.cpp">
+      <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

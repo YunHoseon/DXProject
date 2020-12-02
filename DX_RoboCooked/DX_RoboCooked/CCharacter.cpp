@@ -250,6 +250,8 @@ void CCharacter::Move()
 
 void CCharacter::Rotate(float fTargetRot)
 {
+	fTargetRot = fTargetRot < D3DX_PI * 2 ? fTargetRot : fTargetRot - D3DX_PI * 2;
+	
 	D3DXQUATERNION stLerpRot, stCurrentRot, stTargetRot;
 	D3DXQuaternionRotationAxis(&stCurrentRot, &D3DXVECTOR3(0, 1, 0), m_fRotY);
 	D3DXQuaternionRotationAxis(&stTargetRot, &D3DXVECTOR3(0, 1, 0), fTargetRot);

@@ -151,6 +151,7 @@
     <ClInclude Include="CAllocateHierachy.h" />
     <ClInclude Include="CBlueprint.h" />
     <ClInclude Include="CBoxCollision.h" />
+    <ClInclude Include="CCrowdControl.h" />
     <ClInclude Include="CMeshLoader.h" />
     <ClInclude Include="CMonster.h" />
     <ClInclude Include="CPartsManager.h" />
@@ -216,6 +217,7 @@
     <ClCompile Include="CAllocateHierachy.cpp" />
     <ClCompile Include="CBlueprint.cpp" />
     <ClCompile Include="CBoxCollision.cpp" />
+    <ClCompile Include="CCrowdControl.cpp" />
     <ClCompile Include="CMeshLoader.cpp" />
     <ClCompile Include="CMonster.cpp" />
     <ClCompile Include="CPartsManager.cpp" />
