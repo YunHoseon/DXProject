@@ -1,7 +1,6 @@
 #pragma once
 #include "CInteractiveActor.h"
 
-//class CInteractiveActor;
 class CParts;
 class CBlueprint :
 	public CInteractiveActor
@@ -14,9 +13,11 @@ private:
 	LPDIRECT3DTEXTURE9		m_blueprintTexture;
 	CParts*					m_onBlueprintParts;	//설계도 위의 파츠
 	vector<CInteractiveActor*>*		m_pVecParts;
+
+	D3DXMATRIXA16		m_matInteractCollision;
 	ICollisionArea*		m_pInteractCollision;
 public:
-	CBlueprint(string partsID, vector<CInteractiveActor*>& vecParts);
+	CBlueprint(string partsID, vector<CInteractiveActor*>& vecParts, D3DXVECTOR3 position, D3DXVECTOR3 scale);
 	~CBlueprint();
 
 	void Setup();
