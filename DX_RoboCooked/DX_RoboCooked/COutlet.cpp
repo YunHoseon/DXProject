@@ -128,6 +128,8 @@ void COutlet::Setup(float fAngle, D3DXVECTOR3 vPosition)
 	m_matWorld = m_matS * m_matR * m_matT;
 	if (m_pCollision)
 		m_pCollision->Update();
+	m_vOnGrabPosition = vPosition;
+	m_vOnGrabPosition.y += 1.0f;
 	
 }
 
@@ -180,5 +182,6 @@ void COutlet::AcceptPartsFromVending(CParts * parts)
 {
 	m_eOutletState = eOutletState::Loaded;
 	m_pMyParts = parts;
-	parts->SetPosition(this->GetPosition() + D3DXVECTOR3(0, 1.0f, 0));
+	//parts->SetPosition(this->GetPosition() + D3DXVECTOR3(0, 1.0f, 0));
+	parts->SetGrabPosition(&m_vOnGrabPosition);
 }

@@ -272,7 +272,8 @@ void CPartManualCombinator::DischargeParts()
 		return;
 	}
 	m_pParts = *m_vecDischargeParts.begin();
-	m_pParts->SetPosition(m_vOnCombinatorPosition);
+	//m_pParts->SetPosition(m_vOnCombinatorPosition);
+	m_pParts->SetGrabPosition(&m_vOnCombinatorPosition);
 	m_vecDischargeParts.erase(m_vecDischargeParts.begin());
 }
 
