@@ -15,6 +15,7 @@ CBlueprint::CBlueprint(string partsID, vector<CInteractiveActor*>& vecParts, D3D
 	m_sRightPartsID = partsID;
 	m_pVecParts = &vecParts;
 	m_blueprintTexture = g_pTextureManager->GetTexture("data/Texture/Blueprint.jpg");
+	m_completeBlueprintTexture = g_pTextureManager->GetTexture("data/Texture/CompleteBlueprint.jpg");
 	//파츠 아이디에 따라 m_matS,텍스쳐 다르게
 	m_fFriction = 0.2f;
 
@@ -125,7 +126,7 @@ void CBlueprint::Setup()
 		vecVertex.push_back(v);
 	}
 
-	m_vecVertex = vecVertex;
+	m_vecVertex_Multi = vecVertex;
 	
 	D3DXMatrixRotationY(&m_matR, D3DXToRadian(m_nRotAngleY));
 	D3DXMatrixTranslation(&m_matT, 5.0f, -0.5f, -3.0f);
@@ -134,7 +135,7 @@ void CBlueprint::Setup()
 	m_matInteractCollision = m_matT;
 	m_pCollision = new CBoxCollision(D3DXVECTOR3(0, -2.f, 0), D3DXVECTOR3(1, 1, 1), &m_matWorld);
 	SetScale(D3DXVECTOR3(2.0f, 0.1f, 2.8f));
-	m_pPartsPosition = new CSphereCollision(D3DXVECTOR3(0, 1.f, 0), 1.f, &m_matInteractCollision);
+	m_pPartsPosition = new CSphereCollision(D3DXVECTOR3(0, 0.5f, 0), 1.f, &m_matInteractCollision);
 	
 	if(m_pCollision)
 		m_pCollision->Update();
@@ -144,7 +145,7 @@ void CBlueprint::Setup()
 
 void CBlueprint::Update()
 {
-	CheckOnBlueprintParts(); // --> 설계도에 부품을 붙인 상황
+	StoreOnBlueprintParts(); // --> 설계도에 부품을 붙인 상황
 }
 
 void CBlueprint::Render()
@@ -154,18 +155,25 @@ void CBlueprint::Render()
 	_DEBUG_COMMENT if (m_pPartsPosition)
 		_DEBUG_COMMENT m_pPartsPosition->Render();
 
-	g_pD3DDevice->SetTransform(D3DTS_WORLD, &m_matWorld);
-	g_pD3DDevice->SetTexture(0, m_blueprintTexture);
-	g_pD3DDevice->SetFVF(ST_PNT_VERTEX::FVF);
-	g_pD3DDevice->DrawPrimitiveUP(D3DPT_TRIANGLELIST, m_vecVertex.size() / 3, &m_vecVertex[0], sizeof(ST_PNT_VERTEX));
-	g_pD3DDevice->SetTexture(0, 0);
+	if (CheckBluePrintComplete() == true && m_onBlueprintParts)
+	{
+		MultiTexture_Render();
+	}
+	else
+	{
+		g_pD3DDevice->SetTransform(D3DTS_WORLD, &m_matWorld);
+		g_pD3DDevice->SetTexture(0, m_blueprintTexture);
+		g_pD3DDevice->SetFVF(ST_PNT_VERTEX::FVF);
+		g_pD3DDevice->DrawPrimitiveUP(D3DPT_TRIANGLELIST, m_vecVertex_Multi.size() / 3, &m_vecVertex_Multi[0], sizeof(ST_PNT_VERTEX));
+		g_pD3DDevice->SetTexture(0, 0);
+	}
 }
 
 void CBlueprint::OnEvent(eEvent eEvent, void * _value)
 {
 }
 
-void CBlueprint::CheckOnBlueprintParts()
+void CBlueprint::StoreOnBlueprintParts()
 {
 	if (m_onBlueprintParts)
 		return;
@@ -185,6 +193,15 @@ void CBlueprint::CheckOnBlueprintParts()
 	}
 }
 
+bool CBlueprint::CheckBluePrintComplete()
+{
+	if (m_onBlueprintParts && m_sRightPartsID == m_onBlueprintParts->GetPartsID())
+	{
+		m_isCompleted = true;
+	}
+	return m_isCompleted;
+}
+
 void CBlueprint::Interact(CCharacter* pCharacter)
 {
 	if(m_onBlueprintParts)
@@ -197,5 +214,55 @@ void CBlueprint::Interact(CCharacter* pCharacter)
 			m_onBlueprintParts->GetCollision()->SetActive(true);
 			m_onBlueprintParts = nullptr;
 		}
+	}
+}
+
+void CBlueprint::MultiTexture_Render()
+{
+	g_pD3DDevice->SetRenderState(D3DRS_LIGHTING, false);
+	for (int i = 0; i < 2; i++)
+	{
+		g_pD3DDevice->SetSamplerState(i, D3DSAMP_ADDRESSU, D3DTADDRESS_WRAP);
+		g_pD3DDevice->SetSamplerState(i, D3DSAMP_ADDRESSV, D3DTADDRESS_WRAP);
+		g_pD3DDevice->SetSamplerState(i, D3DSAMP_ADDRESSW, D3DTADDRESS_WRAP);
+
+		g_pD3DDevice->SetSamplerState(i, D3DSAMP_MAGFILTER, D3DTEXF_LINEAR);
+		g_pD3DDevice->SetSamplerState(i, D3DSAMP_MINFILTER, D3DTEXF_LINEAR);
+		g_pD3DDevice->SetSamplerState(i, D3DSAMP_MIPFILTER, D3DTEXF_LINEAR);
+	}
+	g_pD3DDevice->SetTextureStageState(1, D3DTSS_TEXCOORDINDEX, 0);
+	g_pD3DDevice->SetTextureStageState(2, D3DTSS_TEXCOORDINDEX, 0);
+	g_pD3DDevice->SetTextureStageState(3, D3DTSS_TEXCOORDINDEX, 0);
+
+	g_pD3DDevice->SetTexture(0, m_blueprintTexture);
+	g_pD3DDevice->SetTexture(1, m_completeBlueprintTexture);
+
+	g_pD3DDevice->SetTextureStageState(1, D3DTSS_COLORARG1, D3DTA_CURRENT);
+	g_pD3DDevice->SetTextureStageState(1, D3DTSS_COLORARG1, D3DTA_TEXTURE);
+	g_pD3DDevice->SetTextureStageState(1, D3DTSS_COLOROP, D3DTOP_ADDSMOOTH);
+	g_pD3DDevice->SetTextureStageState(2, D3DTSS_COLOROP, D3DTOP_DISABLE);
+
+	g_pD3DDevice->SetTransform(D3DTS_WORLD, &m_matWorld);
+
+	g_pD3DDevice->SetFVF(ST_PNT_VERTEX::FVF);
+	g_pD3DDevice->DrawPrimitiveUP(D3DPT_TRIANGLELIST,
+		m_vecVertex_Multi.size() / 3,
+		&m_vecVertex_Multi[0],
+		sizeof(ST_PNT_VERTEX));
+
+	g_pD3DDevice->SetTexture(0, NULL);
+	g_pD3DDevice->SetTexture(1, NULL);
+	g_pD3DDevice->SetTexture(2, NULL);
+
+	g_pD3DDevice->SetTextureStageState(1, D3DTSS_COLOROP, D3DTOP_DISABLE);
+	g_pD3DDevice->SetTextureStageState(2, D3DTSS_COLOROP, D3DTOP_DISABLE);
+	g_pD3DDevice->SetTextureStageState(1, D3DTSS_RESULTARG, D3DTA_CURRENT);
+	g_pD3DDevice->SetTextureStageState(2, D3DTSS_RESULTARG, D3DTA_CURRENT);
+
+	for (int i = 0; i < 2; ++i)
+	{
+		g_pD3DDevice->SetSamplerState(i, D3DSAMP_MAGFILTER, D3DTEXF_NONE);
+		g_pD3DDevice->SetSamplerState(i, D3DSAMP_MINFILTER, D3DTEXF_NONE);
+		g_pD3DDevice->SetSamplerState(i, D3DSAMP_MIPFILTER, D3DTEXF_NONE);
 	}
 }
