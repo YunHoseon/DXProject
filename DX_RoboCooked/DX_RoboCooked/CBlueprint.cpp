@@ -1,6 +1,7 @@
 #include "stdafx.h"
 #include "CBlueprint.h"
 #include "CBoxCollision.h"
+#include "CCharacter.h"
 #include "CParts.h"
 #include "CInteractiveActor.h"
 
@@ -132,11 +133,13 @@ void CBlueprint::Setup()
 	SetScale(D3DXVECTOR3(2.0f, 0.1f, 2.8f));
 	if(m_pCollision)
 		m_pCollision->Update();
+	if (m_pInteractCollision)
+		m_pInteractCollision->Update();
 }
 
 void CBlueprint::Update()
 {
-	CheckOnBlueprintParts();
+	CheckOnBlueprintParts(); // --> 설계도에 부품을 붙인 상황
 
 	/*if (m_onBlueprintParts != nullptr && m_onBlueprintParts->GetPosition() != this->GetPosition())
 	{
@@ -151,9 +154,7 @@ void CBlueprint::Update()
 		}
 		D3DXVec3Normalize(&vDir, &vDir);
 		m_onBlueprintParts->SetPosition(m_onBlueprintParts->GetPosition() + vDir * 0.01f);
-	}
-	if (m_pInteractCollision)
-		m_pInteractCollision->Update();*/
+	}*/
 }
 
 void CBlueprint::Render()
@@ -176,6 +177,9 @@ void CBlueprint::OnEvent(eEvent eEvent, void * _value)
 
 void CBlueprint::CheckOnBlueprintParts()
 {
+	if (m_onBlueprintParts)
+		return;
+	
 	if (m_onBlueprintParts == nullptr)
 	{
 		for (CInteractiveActor* it : *m_pVecParts)
@@ -183,14 +187,30 @@ void CBlueprint::CheckOnBlueprintParts()
 			if (it->Collide(this))
 			{
 				m_onBlueprintParts = (CParts*)it;
+				m_onBlueprintParts->SetGrabPosition(&m_pInteractCollision->GetCenter());
+				//m_onBlueprintParts->SetGrabPosition(&m_pCollision->GetCenter());
 				break;
 			}
 		}
 	}
-	else
+	//else
+	//{
+	//	if (m_onBlueprintParts->Collide(this) == false /*파츠들면 널로*/)
+	//	{
+	//		m_onBlueprintParts = nullptr;
+	//	}
+	//}
+}
+
+void CBlueprint::Interact(CCharacter* pCharacter)
+{
+	if(m_onBlueprintParts)
 	{
-		if (m_onBlueprintParts->Collide(this) == false /*파츠들면 널로*/)
+		// 캐릭터 손에 들려두는 작업
+		if (pCharacter->GetPlayerState() == ePlayerState::None)
 		{
+			pCharacter->SetParts(m_onBlueprintParts);									//캐릭터에게 어떤파츠를 들고있는지 알려줌
+			m_onBlueprintParts->SetGrabPosition(&pCharacter->GetGrabPartsPosition());	//캐릭터를 따라가게함
 			m_onBlueprintParts = nullptr;
 		}
 	}
