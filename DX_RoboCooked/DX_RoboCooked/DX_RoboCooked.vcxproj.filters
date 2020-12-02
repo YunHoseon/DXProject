@@ -55,6 +55,12 @@
     <Filter Include="UI\Button">
       <UniqueIdentifier>{78ec4cfa-4d2a-4f0c-a621-b60f2a71f011}</UniqueIdentifier>
     </Filter>
+    <Filter Include="GameScene\Monster">
+      <UniqueIdentifier>{5f2a9327-7bf9-4016-99dd-68851749c3b7}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="GameScene\Monster\CrowdControl">
+      <UniqueIdentifier>{e615c889-dac7-4e3f-acc3-997f132e9a6a}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <Text Include="ReadMe.txt" />
