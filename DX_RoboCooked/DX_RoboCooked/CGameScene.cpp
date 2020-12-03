@@ -245,6 +245,12 @@ void CGameScene::Update()
 				CPhysicsApplyer::ApplyBound(part, pStaticActor);
 			}
 		}
+
+		for (CBlueprint* blueprint : m_vecBlueprints)
+		{
+			CPhysicsApplyer::ApplyBound(m_pDebugCube, blueprint);
+			CPhysicsApplyer::ApplyBound(m_pDebugSphere, blueprint);
+		}
 	}
 	{// update
 		for (CActor* it : m_vecStaticActor)
@@ -344,7 +350,7 @@ void CGameScene::DeleteParts(CParts * parts)
 	if (parts)
 	{
 		int Cnt = 0;
-		for (auto it : m_vecParts)
+		for (CInteractiveActor* it : m_vecParts)
 		{
 			if (it == parts)
 			{
@@ -378,7 +384,7 @@ void CGameScene::CheckAroundCombinator(CPartCombinator* combinator)
 		if (data->GetGrabPosition() != NULL)
 			continue;
 
-		if (combinator->GetCombinPartsLevel() == data->GetCombinPartsLevel() &&
+		if (combinator->GetCombinPartsLevel() == data->GetCombinePartsLevel() &&
 			combinator->GetInteractCollsion()->Collide(it->GetCollision()))
 		{
 			D3DXVECTOR3 vDirection = combinator->GetPosition() - data->GetPosition();

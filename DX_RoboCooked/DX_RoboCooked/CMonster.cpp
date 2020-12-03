@@ -10,7 +10,7 @@ CMonster::CMonster(IInteractCenter* pInteractCenter)
 
 CMonster::~CMonster()
 {
-	g_EventManager->Detach(eEvent::Player1KeyChange, this);
+	Destroy();
 }
 
 void CMonster::Update()
@@ -24,6 +24,11 @@ void CMonster::Update()
 
 void CMonster::Render()
 {
+}
+
+void CMonster::Destroy()
+{
+	g_EventManager->Detach(eEvent::PartsSpin, this);
 }
 
 
@@ -51,7 +56,6 @@ bool CMonster::Istriggered()
 	if (m_nSpinParts % 4 == 0)
 		return true;
 	
-
 	return false;
 }
 

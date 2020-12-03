@@ -261,6 +261,9 @@
     <ClInclude Include="ConcreteCC.h">
       <Filter>GameScene\Monster\CrowdControl</Filter>
     </ClInclude>
+    <ClInclude Include="StaticMeshManager.h">
+      <Filter>Manager</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="stdafx.cpp">
@@ -451,6 +454,9 @@
     </ClCompile>
     <ClCompile Include="ConcreteCC.cpp">
       <Filter>GameScene\Monster\CrowdControl</Filter>
+    </ClCompile>
+    <ClCompile Include="StaticMeshManager.cpp">
+      <Filter>Manager</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

@@ -20,6 +20,7 @@ public:
 public:
 	virtual void Update();
 	virtual void Render();
+	virtual void Destroy();
 	CCrowdControl* ChooseCC();
 	virtual void OnEvent(eEvent eEvent, void* _value) override;
 	virtual bool Istriggered();

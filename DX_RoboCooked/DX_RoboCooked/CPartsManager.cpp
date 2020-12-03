@@ -41,7 +41,6 @@ void CPartsManager::Load()
 
 		m_mapParts.emplace(id, part);
 		m_mapFormula.emplace(j[i]["Formula"], j[i]["ID"]);
-		
 	}
 
 
