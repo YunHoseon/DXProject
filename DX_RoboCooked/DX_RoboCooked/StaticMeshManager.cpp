@@ -11,8 +11,9 @@ CStaticMeshManager::~CStaticMeshManager()
 {
 }
 
-CStaticMesh CStaticMeshManager::GetStaticMesh(string name)
+CStaticMesh* CStaticMeshManager::GetStaticMesh(string name)
 {
+	return nullptr;
 }
 
 void CStaticMeshManager::Load()

@@ -10,7 +10,7 @@ public:
 	CStaticMeshManager();
 	~CStaticMeshManager();
 
-	CStaticMesh GetStaticMesh(string name);
+	CStaticMesh* GetStaticMesh(string name);
 	void Load();
 };
 
