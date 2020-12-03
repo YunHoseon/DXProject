@@ -17,7 +17,7 @@ private:
 	CPartsManager();
 	~CPartsManager();
 	map<string, CParts*>	m_mapParts;
-	map<string, string>			m_mapFormula;
+	map<string, string>		m_mapFormula;
 public:
 	void Load();
 	CParts* CreateParts(string sID);
