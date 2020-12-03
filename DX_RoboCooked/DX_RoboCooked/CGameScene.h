@@ -7,6 +7,7 @@ class CInteractiveActor;
 class CParts;
 class CCharacter;
 class CUIButton;
+class CBlueprint;
 class CMonster;
 
 class CDebugPlayer1;
@@ -21,6 +22,7 @@ private:
 	vector<CInteractiveActor*>	m_vecObject;
 	vector<CInteractiveActor*>	m_vecParts;
 	vector<CCharacter*>			m_vecCharacters;
+	vector<CBlueprint*>			m_vecBlueprints;
 	vector<CMonster*>			m_vecMonster;
 
 
@@ -49,5 +51,6 @@ public:
 	bool GetStop() override {return m_isTimeStop;}
 	void CC(CCrowdControl* pCC) override;
 
+	bool IsGameClear();
 };
 
