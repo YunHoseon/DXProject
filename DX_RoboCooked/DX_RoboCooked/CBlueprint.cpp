@@ -9,7 +9,7 @@
 CBlueprint::CBlueprint(string partsID, vector<CInteractiveActor*>& vecParts, D3DXVECTOR3 position, D3DXVECTOR3 scale, float angle, float partsAngle)
 	: m_isCompleted(false)
 	, m_onBlueprintParts(NULL)
-	, m_pPartsPosition(nullptr)
+	, m_pInteracteCollision(nullptr)
 {
 	m_sRightPartsID = partsID;
 	m_pVecParts = &vecParts;
@@ -28,7 +28,7 @@ CBlueprint::CBlueprint(string partsID, vector<CInteractiveActor*>& vecParts, D3D
 
 CBlueprint::~CBlueprint()
 {
-	SafeDelete(m_pPartsPosition);
+	SafeDelete(m_pInteracteCollision);
 }
 
 void CBlueprint::Setup()
@@ -136,14 +136,16 @@ void CBlueprint::Setup()
 	m_matWorld = m_matS * m_matR * m_matT;
 
 	m_matInteractCollision = m_matT;
-	m_pCollision = new CBoxCollision(D3DXVECTOR3(0, -2.f, 0), D3DXVECTOR3(1, 1, 1), &m_matWorld);
+	m_pCollision = new CSphereCollision(D3DXVECTOR3(0, 0.5f, 0), 1.0f, &m_matInteractCollision);
+	m_pCollision->SetActive(false);
 	SetScale(m_vScale);
-	m_pPartsPosition = new CSphereCollision(D3DXVECTOR3(0, 0.5f, 0), 1.f, &m_matInteractCollision);
+	m_pCollision->SetScale(1, 1, 1);
+	m_pInteracteCollision = new CSphereCollision(D3DXVECTOR3(0, 0.5f, 0), 1.0f, &m_matInteractCollision);
 	
 	if(m_pCollision)
 		m_pCollision->Update();
-	if (m_pPartsPosition)
-		m_pPartsPosition->Update();
+	if (m_pInteracteCollision)
+		m_pInteracteCollision->Update();
 }
 
 void CBlueprint::Update()
@@ -155,8 +157,8 @@ void CBlueprint::Render()
 {
 	_DEBUG_COMMENT if (m_pCollision)
 		_DEBUG_COMMENT m_pCollision->Render();
-	_DEBUG_COMMENT if (m_pPartsPosition)
-		_DEBUG_COMMENT m_pPartsPosition->Render();
+	_DEBUG_COMMENT if (m_pInteracteCollision)
+		_DEBUG_COMMENT m_pInteracteCollision->Render();
 
 	if (CheckBluePrintComplete() == true && m_onBlueprintParts)
 	{
@@ -186,11 +188,13 @@ void CBlueprint::StoreOnBlueprintParts()
 	{
 		for (CInteractiveActor* it : *m_pVecParts)
 		{
-			if (it->Collide(this))
+			if (it->GetCollision()->Collide(m_pInteracteCollision))
 			{
 				m_onBlueprintParts = (CParts*)it;
-				m_onBlueprintParts->SetGrabPosition(&m_pPartsPosition->GetCenter());
+				m_onBlueprintParts->SetGrabPosition(&m_pInteracteCollision->GetCenter());
 				m_onBlueprintParts->GetCollision()->SetActive(false);
+				m_pCollision->SetActive(true);
+				m_pInteracteCollision->SetActive(false);
 				break;
 			}
 		}
@@ -214,11 +218,13 @@ void CBlueprint::Interact(CCharacter* pCharacter)
 		// 캐릭터 손에 들려두는 작업
 		if (pCharacter->GetPlayerState() == ePlayerState::None)
 		{
-			m_onBlueprintParts->SetGrabPosition(&pCharacter->GetGrabPartsPosition());
 			m_onBlueprintParts->GetCollision()->SetActive(true);
-			pCharacter->SetParts(m_onBlueprintParts);									
+			m_onBlueprintParts->SetGrabPosition(&pCharacter->GetGrabPartsPosition());
+			pCharacter->SetParts(m_onBlueprintParts);
 			m_onBlueprintParts = nullptr;
 			m_isCompleted = false;
+			m_pCollision->SetActive(false);
+			m_pInteracteCollision->SetActive(true);
 		}
 	}
 }
