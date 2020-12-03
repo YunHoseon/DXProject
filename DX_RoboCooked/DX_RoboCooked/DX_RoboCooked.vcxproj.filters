@@ -444,7 +444,7 @@
       <Filter>GameScene</Filter>
     </ClCompile>
     <ClCompile Include="CCrowdControl.cpp">
-      <Filter>Source Files</Filter>
+      <Filter>GameScene\Monster\CrowdControl</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

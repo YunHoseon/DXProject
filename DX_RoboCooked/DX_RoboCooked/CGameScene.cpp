@@ -344,7 +344,7 @@ void CGameScene::DeleteParts(CParts * parts)
 	if (parts)
 	{
 		int Cnt = 0;
-		for (auto it : m_vecParts)
+		for (CInteractiveActor* it : m_vecParts)
 		{
 			if (it == parts)
 			{
