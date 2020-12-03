@@ -29,18 +29,18 @@
 #include "CDebugPlayer1.h"
 #include "CDebugPlayer2.h"
 
-CGameScene::CGameScene()
-	:m_pField(NULL)
-	, m_pDebugSphere(NULL)
-	, m_pDebugCube(NULL)
-	, m_pDebugParts(NULL)
-	, m_isTimeStop(false)
+CGameScene::CGameScene() :
+	m_pField(NULL),
+	m_pDebugSphere(NULL),
+	m_pDebugCube(NULL),
+	m_pDebugParts(NULL),
+	m_pDebugPauseUI(nullptr),
+	m_isTimeStop(false)
 {
 	//Sound Add
 	g_SoundManager->AddBGM("data/sound/bgm.mp3");
 	g_SoundManager->AddSFX("data/sound/effBBam.mp3", "BBam");
 	g_SoundManager->AddSFX("data/sound/effMelem.mp3", "Melem");
-
 }
 
 CGameScene::~CGameScene()
@@ -109,13 +109,13 @@ void CGameScene::Init()
 	CBlueprint* blueprint = new CBlueprint("A00", m_vecParts, 
 		D3DXVECTOR3(5.0f, -0.5f, -3.0f), D3DXVECTOR3(2.0f, 0.1f, 2.8f), 0, 0);
 	blueprint->Setup();
-	m_vecObject.push_back(blueprint);
+	//m_vecObject.push_back(blueprint);
 	m_vecBlueprints.push_back(blueprint);
 
 	CBlueprint* blueprint2 = new CBlueprint("A01", m_vecParts,
 		D3DXVECTOR3(5.0f, -0.5f, 0), D3DXVECTOR3(2.0f, 0.1f, 2.8f), 90, 90);
 	blueprint2->Setup();
-	m_vecObject.push_back(blueprint2);
+	//m_vecObject.push_back(blueprint2);
 	m_vecBlueprints.push_back(blueprint2);
 
 	m_pDebugSphere = new CDebugPlayer1(this);
@@ -168,6 +168,11 @@ void CGameScene::Render()
 		it->Render();
 	}
 
+	for (CBlueprint* it : m_vecBlueprints)
+	{
+		it->Render();
+	}
+	
 	for (CMonster* it : m_vecMonster)
 	{
 		it->Render();
@@ -256,6 +261,11 @@ void CGameScene::Update()
 		{
 			it->Update();
 		}
+		
+		for (CBlueprint* it : m_vecBlueprints)
+		{
+			it->Update();
+		}
 
 		for (CMonster* it : m_vecMonster)
 		{
@@ -305,6 +315,15 @@ void CGameScene::GetInteractObject(CCharacter* pCharacter)
 	}
 
 	for (CInteractiveActor * it : m_vecObject)
+	{
+		if (pCharacter->GetInteractCollsion()->Collide(it->GetCollision()))
+		{
+			it->Interact(pCharacter);
+			return;
+		}
+	}
+
+	for (CBlueprint *  it : m_vecBlueprints)
 	{
 		if (pCharacter->GetInteractCollsion()->Collide(it->GetCollision()))
 		{

@@ -214,9 +214,9 @@ void CBlueprint::Interact(CCharacter* pCharacter)
 		// 캐릭터 손에 들려두는 작업
 		if (pCharacter->GetPlayerState() == ePlayerState::None)
 		{
-			pCharacter->SetParts(m_onBlueprintParts);									
 			m_onBlueprintParts->SetGrabPosition(&pCharacter->GetGrabPartsPosition());
 			m_onBlueprintParts->GetCollision()->SetActive(true);
+			pCharacter->SetParts(m_onBlueprintParts);									
 			m_onBlueprintParts = nullptr;
 			m_isCompleted = false;
 		}
