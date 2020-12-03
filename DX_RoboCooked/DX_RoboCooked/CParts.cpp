@@ -55,7 +55,6 @@ void CParts::Update()
 	}
 	else
 	{
-		m_pCollision->SetActive(true);
 		if (m_pCollision->GetActive())
 		{
 			m_vVelocity += m_vAcceleration;
@@ -97,7 +96,7 @@ void CParts::Interact(CCharacter* pCharacter)
 void CParts::ThrowParts(D3DXVECTOR3 vForce)
 {
 	m_vGrabPosition = NULL;
-
+	m_pCollision->SetActive(true);
 	AddForce(vForce);
 }
 
