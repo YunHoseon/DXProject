@@ -447,7 +447,7 @@
       <Filter>GameScene</Filter>
     </ClCompile>
     <ClCompile Include="CCrowdControl.cpp">
-      <Filter>Source Files</Filter>
+      <Filter>GameScene\Monster\CrowdControl</Filter>
     </ClCompile>
     <ClCompile Include="StaticMeshManager.cpp">
       <Filter>Manager</Filter>
