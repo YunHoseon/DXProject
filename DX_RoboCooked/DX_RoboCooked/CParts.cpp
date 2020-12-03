@@ -6,7 +6,7 @@
 #include "CCharacter.h"
 
 CParts::CParts(string sPartsID, string sFormula, float fMass)
-	: m_vGrabPosition(nullptr), m_isMoveParts(false), m_fRotAngle(0.0f),
+	: m_vGrabPosition(nullptr), m_isMoveParts(false), m_nRotAngleY(0.0f),
 	  m_eLevel(eCombinatorPartsLevel::ONE), m_vCombinatorPosition(0, 0, 0) , m_pPartsCombinator(NULL),
 	m_sPartsID(sPartsID), m_sFormula(sFormula)
 {
@@ -100,11 +100,11 @@ void CParts::ThrowParts(D3DXVECTOR3 vForce)
 
 void CParts::PartsRotate()
 {
-	m_fRotAngle += 90.0f;
-	if (m_fRotAngle == 360.0f)
-		m_fRotAngle = 0;
+	m_nRotAngleY += 90;
+	if (m_nRotAngleY == 360)
+		m_nRotAngleY = 0;
 
-	D3DXMatrixRotationY(&m_matR, D3DXToRadian(m_fRotAngle));
+	D3DXMatrixRotationY(&m_matR, D3DXToRadian(m_nRotAngleY));
 
 	g_EventManager->CallEvent(eEvent::PartsSpin, NULL);
 }

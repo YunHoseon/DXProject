@@ -6,18 +6,21 @@
 #include "CParts.h"
 #include "CInteractiveActor.h"
 
-CBlueprint::CBlueprint(string partsID, vector<CInteractiveActor*>& vecParts, D3DXVECTOR3 position, D3DXVECTOR3 scale)
-	: m_nRotAngleY(0)
-	, m_isCompleted(false)
+CBlueprint::CBlueprint(string partsID, vector<CInteractiveActor*>& vecParts, D3DXVECTOR3 position, D3DXVECTOR3 scale, float angle, float partsAngle)
+	: m_isCompleted(false)
 	, m_onBlueprintParts(NULL)
 	, m_pPartsPosition(nullptr)
 {
 	m_sRightPartsID = partsID;
 	m_pVecParts = &vecParts;
+	m_vPosition = position;
+	m_vScale = scale;
 	m_blueprintTexture = g_pTextureManager->GetTexture("data/Texture/Blueprint.jpg");
 	m_completeBlueprintTexture = g_pTextureManager->GetTexture("data/Texture/CompleteBlueprint.jpg");
 	//파츠 아이디에 따라 m_matS,텍스쳐 다르게
 	m_fFriction = 0.2f;
+	m_nRightPartsAngleY = partsAngle;
+	m_nRotAngleY = angle;
 
 	D3DXMatrixIdentity(&m_matInteractCollision);
 }
@@ -129,12 +132,12 @@ void CBlueprint::Setup()
 	m_vecVertex_Multi = vecVertex;
 	
 	D3DXMatrixRotationY(&m_matR, D3DXToRadian(m_nRotAngleY));
-	D3DXMatrixTranslation(&m_matT, 5.0f, -0.5f, -3.0f);
+	D3DXMatrixTranslation(&m_matT, m_vPosition.x, m_vPosition.y, m_vPosition.z);
 	m_matWorld = m_matS * m_matR * m_matT;
 
 	m_matInteractCollision = m_matT;
 	m_pCollision = new CBoxCollision(D3DXVECTOR3(0, -2.f, 0), D3DXVECTOR3(1, 1, 1), &m_matWorld);
-	SetScale(D3DXVECTOR3(2.0f, 0.1f, 2.8f));
+	SetScale(m_vScale);
 	m_pPartsPosition = new CSphereCollision(D3DXVECTOR3(0, 0.5f, 0), 1.f, &m_matInteractCollision);
 	
 	if(m_pCollision)
@@ -164,7 +167,8 @@ void CBlueprint::Render()
 		g_pD3DDevice->SetTransform(D3DTS_WORLD, &m_matWorld);
 		g_pD3DDevice->SetTexture(0, m_blueprintTexture);
 		g_pD3DDevice->SetFVF(ST_PNT_VERTEX::FVF);
-		g_pD3DDevice->DrawPrimitiveUP(D3DPT_TRIANGLELIST, m_vecVertex_Multi.size() / 3, &m_vecVertex_Multi[0], sizeof(ST_PNT_VERTEX));
+		g_pD3DDevice->DrawPrimitiveUP(D3DPT_TRIANGLELIST, m_vecVertex_Multi.size() / 3, 
+			&m_vecVertex_Multi[0], sizeof(ST_PNT_VERTEX));
 		g_pD3DDevice->SetTexture(0, 0);
 	}
 }
@@ -195,7 +199,8 @@ void CBlueprint::StoreOnBlueprintParts()
 
 bool CBlueprint::CheckBluePrintComplete()
 {
-	if (m_onBlueprintParts && m_sRightPartsID == m_onBlueprintParts->GetPartsID())
+	if (m_onBlueprintParts && m_sRightPartsID == m_onBlueprintParts->GetPartsID()
+		&& m_nRightPartsAngleY == m_onBlueprintParts->GetPartsAngle())
 	{
 		m_isCompleted = true;
 	}
@@ -213,6 +218,7 @@ void CBlueprint::Interact(CCharacter* pCharacter)
 			m_onBlueprintParts->SetGrabPosition(&pCharacter->GetGrabPartsPosition());
 			m_onBlueprintParts->GetCollision()->SetActive(true);
 			m_onBlueprintParts = nullptr;
+			m_isCompleted = false;
 		}
 	}
 }

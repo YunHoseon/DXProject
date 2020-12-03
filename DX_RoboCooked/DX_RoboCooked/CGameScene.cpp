@@ -106,9 +106,17 @@ void CGameScene::Init()
 	partVending->Setup(0, D3DXVECTOR3(1, 0, -3));
 	m_vecObject.push_back(partVending);
 
-	CBlueprint* blueprint = new CBlueprint("A00", m_vecParts, D3DXVECTOR3(0,0,0), D3DXVECTOR3(0, 0, 0));
+	CBlueprint* blueprint = new CBlueprint("A00", m_vecParts, 
+		D3DXVECTOR3(5.0f, -0.5f, -3.0f), D3DXVECTOR3(2.0f, 0.1f, 2.8f), 0, 0);
 	blueprint->Setup();
 	m_vecObject.push_back(blueprint);
+	m_vecBlueprints.push_back(blueprint);
+
+	CBlueprint* blueprint2 = new CBlueprint("A01", m_vecParts,
+		D3DXVECTOR3(5.0f, -0.5f, 0), D3DXVECTOR3(2.0f, 0.1f, 2.8f), 90, 90);
+	blueprint2->Setup();
+	m_vecObject.push_back(blueprint2);
+	m_vecBlueprints.push_back(blueprint2);
 
 	m_pDebugSphere = new CDebugPlayer1(this);
 	if (m_pDebugSphere)
@@ -174,6 +182,11 @@ void CGameScene::Update()
 {
 	if (m_isTimeStop)
 		return;
+
+	if(IsGameClear())
+	{
+		_DEBUG_COMMENT cout << "게임 클리어" << endl;
+	}
 
 	{
 		// Gravity Update
@@ -268,6 +281,16 @@ void CGameScene::ToggleStop()
 void CGameScene::CC(CCrowdControl * pCC)
 {
 	cout << "돌리기 횟수로인한 괴수 스킬" << endl;
+}
+
+bool CGameScene::IsGameClear()
+{
+	for (CBlueprint* it : m_vecBlueprints)
+	{
+		if (it->GetIsCompleted() == false)
+			return false;
+	}
+	return true;
 }
 
 void CGameScene::GetInteractObject(CCharacter* pCharacter)
