@@ -60,7 +60,7 @@ public:
 	bool GetMoveParts() { return m_isMoveParts; }
 	void SetMoveParts(bool b) { m_isMoveParts = b; }
 
-	eCombinatorPartsLevel GetCombinPartsLevel() const { return m_eLevel; }
+	eCombinatorPartsLevel GetCombinePartsLevel() const { return m_eLevel; }
 
 	void SetCPartCombinator(CPartCombinator* p) { m_pPartsCombinator = p; }
 

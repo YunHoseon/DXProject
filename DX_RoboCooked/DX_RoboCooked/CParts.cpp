@@ -49,10 +49,13 @@ void CParts::Update()
 		MoveParts();
 	
 	else if (m_vGrabPosition)
+	{
 		m_vPosition = *m_vGrabPosition;
-
+		m_pCollision->SetActive(false);
+	}
 	else
 	{
+		m_pCollision->SetActive(true);
 		if (m_pCollision->GetActive())
 		{
 			m_vVelocity += m_vAcceleration;
@@ -125,7 +128,7 @@ void CParts::MoveParts()
 		return;
 	}
 	D3DXVec3Normalize(&vDirection, &vDirection);
-	m_vPosition += vDirection*0.01f;
+	m_vPosition += vDirection * 0.01f;
 }
 
 void CParts::SetGrabPosition(D3DXVECTOR3* vPosition)

@@ -15,7 +15,7 @@ private:
 	vector<CInteractiveActor*>*		m_pVecParts;
 
 	D3DXMATRIXA16		m_matInteractCollision;
-	ICollisionArea*		m_pPartsPosition;
+	ICollisionArea*		m_pInteracteCollision;
 
 	LPDIRECT3DTEXTURE9		m_blueprintTexture;
 	LPDIRECT3DTEXTURE9		m_completeBlueprintTexture;
