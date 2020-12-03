@@ -258,6 +258,9 @@
     <ClInclude Include="CCrowdControl.h">
       <Filter>GameScene\Monster\CrowdControl</Filter>
     </ClInclude>
+    <ClInclude Include="ConcreteCC.h">
+      <Filter>GameScene\Monster\CrowdControl</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="stdafx.cpp">
@@ -444,7 +447,10 @@
       <Filter>GameScene</Filter>
     </ClCompile>
     <ClCompile Include="CCrowdControl.cpp">
-      <Filter>Source Files</Filter>
+      <Filter>GameScene\Monster\CrowdControl</Filter>
+    </ClCompile>
+    <ClCompile Include="ConcreteCC.cpp">
+      <Filter>GameScene\Monster\CrowdControl</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

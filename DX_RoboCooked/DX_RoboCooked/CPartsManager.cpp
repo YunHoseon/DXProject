@@ -43,6 +43,15 @@ void CPartsManager::Load()
 		m_mapFormula.emplace(j[i]["Formula"], j[i]["ID"]);
 		
 	}
+
+
+
+	//map<string, CStaticMesh*> mapMesh;
+	//string name;
+	//CStaticMesh* mesh;
+	//name = "PartsComb1";
+	//CMeshLoader::LoadMesh("MixMch1.X", "data/model/object", mesh);
+	//mapMesh.emplace(name, mesh);
 }
 
 CParts* CPartsManager::CreateParts(string sID)

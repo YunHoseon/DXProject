@@ -60,7 +60,7 @@ CStaticMesh::~CStaticMesh()
 }
 
 // 머티리얼, 텍스처 세팅하고 렌더. 기타 옵션은 밖에서 해줘야 함
-void CStaticMesh::Render()
+void CStaticMesh::Render(LPDIRECT3DTEXTURE9 pBlendTexture)
 {
 	if(m_pMesh)
 	{

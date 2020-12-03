@@ -12,4 +12,11 @@ public:
 	virtual bool IsOverlapable() { return false; }
 	virtual bool IsMovable() { return true; }
 	virtual bool IsProtected() { return false; }
+	// 타겟을 지정하는 함수
+
+	virtual bool IsEnd() { return false; }
+	virtual CCrowdControl* Clone() = 0;
 };
+
+
+#include "ConcreteCC.h"

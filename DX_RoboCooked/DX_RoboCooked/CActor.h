@@ -45,6 +45,8 @@ public:
 	virtual void SetPosition(D3DXVECTOR3 vPosition);
 	virtual void SetPosition(float x, float y, float z);
 
+	virtual void SetRotationY(float rot);
+
 	// for physics
 	ICollisionArea* GetCollision() { return m_pCollision; }
 	

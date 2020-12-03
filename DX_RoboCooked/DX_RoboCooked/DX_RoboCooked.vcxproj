@@ -154,6 +154,7 @@
     <ClInclude Include="CCrowdControl.h" />
     <ClInclude Include="CMeshLoader.h" />
     <ClInclude Include="CMonster.h" />
+    <ClInclude Include="ConcreteCC.h" />
     <ClInclude Include="CPartsManager.h" />
     <ClInclude Include="CStaticMesh.h" />
     <ClInclude Include="CUICloseButton.h" />
@@ -220,6 +221,7 @@
     <ClCompile Include="CCrowdControl.cpp" />
     <ClCompile Include="CMeshLoader.cpp" />
     <ClCompile Include="CMonster.cpp" />
+    <ClCompile Include="ConcreteCC.cpp" />
     <ClCompile Include="CPartsManager.cpp" />
     <ClCompile Include="CStaticMesh.cpp" />
     <ClCompile Include="CUICloseButton.cpp" />

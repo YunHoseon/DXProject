@@ -73,6 +73,15 @@ void CActor::SetPosition(float x, float y, float z)
 		m_pCollision->Update();
 }
 
+void CActor::SetRotationY(float rot)
+{
+	m_fRotY = rot;
+	D3DXMatrixRotationY(&m_matR, m_fRotY);
+	m_matWorld = m_matS * m_matR * m_matT;
+	if (m_pCollision)
+		m_pCollision->Update();
+}
+
 void CActor::AddAcceleration(const D3DXVECTOR3& vAccel)
 {
 	m_vAcceleration += vAccel;

@@ -4,6 +4,7 @@
 #include "CGameScene.h"
 #include "ICollisionArea.h"
 
+#include "CCrowdControl.h"
 
 CCharacter::CCharacter(int nPlayerNum)
 	: m_ePlayerState(ePlayerState::None)
