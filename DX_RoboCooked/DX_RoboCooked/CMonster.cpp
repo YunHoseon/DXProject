@@ -45,6 +45,9 @@ void CMonster::OnEvent(eEvent eEvent, void * _value)
 
 bool CMonster::Istriggered()
 {
+	if (m_nSpinParts == 0)
+		return false;
+	
 	if (m_nSpinParts % 4 == 0)
 		return true;
 	
