@@ -26,11 +26,15 @@ protected:
 	array<float, 3>		m_arrElapsedTime;
 	array<float, 3>		m_arrCoolDown;
 	array<bool, 3>		m_arrKeyDown;
+	bool				m_isMoveKeyDown;
 	// 수정중
 	const ST_PLAYER_INPUTKEY* m_pInputKey;
 	LPD3DXMESH			m_pMesh;
 	D3DMATERIAL9		m_stMtlSphere;
+	float				m_fMinThrowPower;
+	float				m_fMaxThrowPower;
 	float				m_fThrowPower;
+	float				m_fThrowPowerUpSpeed;
 	// 상태이상 관련 멤버 추가 필요
 public:
 	CCharacter(int nPlayerNum);

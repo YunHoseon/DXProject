@@ -21,4 +21,5 @@ public:
 	bool CollideToBox(CBoxCollision* pTargetCollider, D3DXVECTOR3* pNormal = nullptr) override;
 	bool CollideToSphere(CSphereCollision* pTargetCollider, D3DXVECTOR3* pNormal = nullptr) override;
 	void SetScale(float x, float y, float z) override;
+	void RotateOriginAxis(float x, float y, float z);
 };

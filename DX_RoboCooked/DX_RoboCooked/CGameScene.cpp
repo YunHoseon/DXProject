@@ -28,6 +28,7 @@
 /* µð¹ö±ë¿ë */
 #include "CDebugPlayer1.h"
 #include "CDebugPlayer2.h"
+#include "CTestStair.h"
 
 CGameScene::CGameScene() :
 	m_pField(NULL),
@@ -126,8 +127,8 @@ void CGameScene::Init()
 	if (m_pDebugCube)
 		m_pDebugCube->Setup();
 
-	m_vecCharacters.push_back(m_pDebugCube);
 	m_vecCharacters.push_back(m_pDebugSphere);
+	m_vecCharacters.push_back(m_pDebugCube);
 
 	//m_pDebugParts = new CParts("999");
 	//if (m_pDebugParts)
@@ -144,6 +145,8 @@ void CGameScene::Init()
 
 	CMonster* monster = new CMonster(this);
 	m_vecMonster.push_back(monster);
+
+	m_vecStaticActor.push_back(new CTestStair);
 }
 
 void CGameScene::Render()
@@ -194,12 +197,10 @@ void CGameScene::Update()
 	}
 
 	{
-		// Gravity Update
-		if (m_pDebugCube)
-			CPhysicsApplyer::ApplyGravity(m_pDebugCube);
-
-		if (m_pDebugSphere)
-			CPhysicsApplyer::ApplyGravity(m_pDebugSphere);
+		for (CCharacter * character : m_vecCharacters)
+		{
+			CPhysicsApplyer::ApplyGravity(character);
+		}
 
 		for (CInteractiveActor* part : m_vecParts)
 		{
@@ -209,15 +210,17 @@ void CGameScene::Update()
 	
 	// collide -> update
 	{// collide
-		//if (m_pDebugSphere)
-		//	CPhysicsApplyer::ApplyBound(m_pDebugSphere, m_vecObject[2]);
-		if (m_pDebugSphere && m_pDebugCube)
-			CPhysicsApplyer::ApplyBound(m_pDebugSphere, m_pDebugCube);
+		if (m_vecCharacters.size() == 2)
+		{
+			CPhysicsApplyer::ApplyBound(m_vecCharacters[0], m_vecCharacters[1]);
+		}
 
 		for (CInteractiveActor* part : m_vecParts)
 		{
-			CPhysicsApplyer::ApplyBound(m_pDebugSphere, part);
-			CPhysicsApplyer::ApplyBound(m_pDebugCube, part);
+			for (CCharacter* character : m_vecCharacters)
+			{
+				CPhysicsApplyer::ApplyBound(character, part);
+			}
 			for (CInteractiveActor* part2 : m_vecParts)
 			{
 				if(part != part2)
@@ -227,9 +230,10 @@ void CGameScene::Update()
 		
 		for (CInteractiveActor* obj : m_vecObject)
 		{
-			CPhysicsApplyer::ApplyBound(m_pDebugSphere, obj);
-			CPhysicsApplyer::ApplyBound(m_pDebugCube, obj);
-
+			for (CCharacter* character : m_vecCharacters)
+			{
+				CPhysicsApplyer::ApplyBound(character, obj);
+			}
 			for (CInteractiveActor* part : m_vecParts)
 			{
 				CPhysicsApplyer::ApplyBound(part, obj);
@@ -238,8 +242,10 @@ void CGameScene::Update()
 
 		for (CActor* pStaticActor : m_vecStaticActor)
 		{
-			CPhysicsApplyer::ApplyBound(m_pDebugCube, pStaticActor);
-			CPhysicsApplyer::ApplyBound(m_pDebugSphere, pStaticActor);
+			for (CCharacter* character : m_vecCharacters)
+			{
+				CPhysicsApplyer::ApplyBound(character, pStaticActor);
+			}
 			for (CInteractiveActor* part : m_vecParts)
 			{
 				CPhysicsApplyer::ApplyBound(part, pStaticActor);
@@ -248,8 +254,10 @@ void CGameScene::Update()
 
 		for (CBlueprint* blueprint : m_vecBlueprints)
 		{
-			CPhysicsApplyer::ApplyBound(m_pDebugCube, blueprint);
-			CPhysicsApplyer::ApplyBound(m_pDebugSphere, blueprint);
+			for (CCharacter* character : m_vecCharacters)
+			{
+				CPhysicsApplyer::ApplyBound(character, blueprint);
+			}
 		}
 	}
 	{// update
@@ -278,11 +286,10 @@ void CGameScene::Update()
 			it->Update();
 		}
 
-		if (m_pDebugCube)
-			m_pDebugCube->Update();
-
-		if (m_pDebugSphere)
-			m_pDebugSphere->Update();
+		for (CCharacter* character : m_vecCharacters)
+		{
+			character->Update();
+		}
 
 		if (m_pDebugPauseUI)
 			m_pDebugPauseUI->Update();
