@@ -157,10 +157,9 @@ void CBoxCollision::Render()
 	
 	drawVertex.push_back(drawPoint[6]); drawVertex.push_back(drawPoint[2]);
 	drawVertex.push_back(drawPoint[7]); drawVertex.push_back(drawPoint[3]);
-	D3DXMATRIXA16 matWorld;
-	D3DXMatrixIdentity(&matWorld);
+
 	g_pD3DDevice->SetRenderState(D3DRS_LIGHTING, false);
-	g_pD3DDevice->SetTransform(D3DTS_WORLD, &matWorld);
+	g_pD3DDevice->SetTransform(D3DTS_WORLD, &g_matIdentity);
 	//g_pD3DDevice->SetTransform(D3DTS_WORLD, m_pmatWorldTM);
 	g_pD3DDevice->SetTexture(0, NULL);
 	g_pD3DDevice->SetFVF(ST_PC_VERTEX::FVF);

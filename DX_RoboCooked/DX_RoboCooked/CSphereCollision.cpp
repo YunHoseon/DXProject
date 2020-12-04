@@ -54,7 +54,17 @@ void CSphereCollision::Render()
 	{
 		g_pD3DDevice->SetRenderState(D3DRS_LIGHTING, true);
 		g_pD3DDevice->SetRenderState(D3DRS_FILLMODE, D3DFILL_WIREFRAME);
-		g_pD3DDevice->SetTransform(D3DTS_WORLD, m_pmatWorldTM);
+		//if(m_pmatWorldTM)
+		//	g_pD3DDevice->SetTransform(D3DTS_WORLD, m_pmatWorldTM);
+		//else
+		{
+			D3DXMATRIXA16 matLocal, matT, matS;
+			D3DXMatrixTranslation(&matT, m_vCenterPos.x, m_vCenterPos.y, m_vCenterPos.z);
+			float scale = m_fRadius / m_fOriginRadius;
+			D3DXMatrixScaling(&matS, scale, scale, scale);
+			matLocal = matS * matT;
+			g_pD3DDevice->SetTransform(D3DTS_WORLD, &matLocal);
+		}
 		g_pD3DDevice->SetTexture(0, NULL);
 		D3DMATERIAL9 stMtl{};
 		float a = m_isCollide ? 0 : 1;
@@ -71,7 +81,8 @@ void CSphereCollision::Render()
 
 void CSphereCollision::Update()
 {
-	D3DXVec3TransformCoord(&m_vCenterPos, &m_vOriginCenterPos, m_pmatWorldTM);
+	if (m_pmatWorldTM)
+		D3DXVec3TransformCoord(&m_vCenterPos, &m_vOriginCenterPos, m_pmatWorldTM);
 	
 }
 

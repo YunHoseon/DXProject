@@ -42,6 +42,7 @@ void CPartAutoCombinator::Update()
 void CPartAutoCombinator::Render()
 {
 	g_pD3DDevice->SetTransform(D3DTS_WORLD, &m_matWorld);
+	m_pSMesh->Render();
 
 	_DEBUG_COMMENT if (m_pCollision)
 		_DEBUG_COMMENT m_pCollision->Render();
@@ -49,7 +50,6 @@ void CPartAutoCombinator::Render()
 	_DEBUG_COMMENT if (m_pPartsInteractCollision)
 		_DEBUG_COMMENT m_pPartsInteractCollision->Render();
 
-	m_pSMesh->Render();
 }
 
 void CPartAutoCombinator::Interact(CCharacter* pCharacter)
@@ -148,18 +148,17 @@ CParts* CPartAutoCombinator::Make()
 
 void CPartAutoCombinator::Setup(float fAngle, D3DXVECTOR3 vPosition)
 {
-	D3DXMatrixRotationY(&m_matR, D3DXToRadian(fAngle));
-	D3DXMatrixTranslation(&m_matT, vPosition.x, 0, vPosition.z);
-
-	m_matWorld = m_matS * m_matR * m_matT;
+	SetRotationY(D3DXToRadian(fAngle));
+	SetPosition(vPosition.x, vPosition.y - 0.5, vPosition.z);
 	
 	m_pSMesh = g_pStaticMeshManager->GetStaticMesh("AutoCombinator");
 	m_pCollision = new CBoxCollision(m_pSMesh->GetMesh(), &m_matWorld);
-	m_pPartsInteractCollision = new CSphereCollision(g_vZero, 2.0f, &m_matWorld);
+	m_pPartsInteractCollision = new CSphereCollision(D3DXVECTOR3(0,0.5,0), 2.0f, &m_matWorld);
 	SetScale(0.01f, 0.01f, 0.01f);
-
 	if (m_pCollision)
 		m_pCollision->Update();
+
 	if (m_pPartsInteractCollision)
 		m_pPartsInteractCollision->Update();
+	
 }

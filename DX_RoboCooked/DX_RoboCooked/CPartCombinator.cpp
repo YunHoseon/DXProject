@@ -9,7 +9,7 @@ CPartCombinator::CPartCombinator(IInteractCenter* pInteractCenter, eCombinatorPa
 	m_eCombinatorLoadState(eCombinatorLoadState::LoadPossible),
 	m_CombinatorTexture(nullptr),
 	m_pPartsInteractCollision(NULL),
-	m_vOnCombinatorPosition(vPosition.x, vPosition.y + 1.0f, vPosition.z),
+	m_vOnCombinatorPosition(vPosition.x, vPosition.y + 2.5f, vPosition.z),
 	m_pParts(NULL),
 	m_isCombine(false),
 	m_fElapsedTime(0),
