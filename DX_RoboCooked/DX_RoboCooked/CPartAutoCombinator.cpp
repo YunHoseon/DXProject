@@ -149,12 +149,17 @@ CParts* CPartAutoCombinator::Make()
 void CPartAutoCombinator::Setup(float fAngle, D3DXVECTOR3 vPosition)
 {
 	SetRotationY(D3DXToRadian(fAngle));
-	SetPosition(vPosition.x, vPosition.y - 0.5, vPosition.z);
-	
 	m_pSMesh = g_pStaticMeshManager->GetStaticMesh("AutoCombinator");
 	m_pCollision = new CBoxCollision(m_pSMesh->GetMesh(), &m_matWorld);
-	m_pPartsInteractCollision = new CSphereCollision(D3DXVECTOR3(0,0.5,0), 2.0f, &m_matWorld);
+
 	SetScale(0.01f, 0.01f, 0.01f);
+	SetPosition(vPosition);
+
+	// 메시 크기에 따라 y값 보정
+	float y = vPosition.y - 0.5f + m_pCollision->GetHeight() * 0.5f + (vPosition.y - m_pCollision->GetCenter().y);
+	SetPosition(vPosition.x, y, vPosition.z);
+	
+	m_pPartsInteractCollision = new CSphereCollision(D3DXVECTOR3(0, m_pCollision->GetCenter().y,0), 2.0f, &m_matWorld);
 	if (m_pCollision)
 		m_pCollision->Update();
 

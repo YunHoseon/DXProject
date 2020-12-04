@@ -19,4 +19,5 @@ public:
 	bool CollideToBox(CBoxCollision* pTargetCollider, D3DXVECTOR3* pNormal) override;
 	bool CollideToSphere(CSphereCollision* pTargetCollider, D3DXVECTOR3* pNormal) override;
 	void SetScale(float x, float y, float z) override;
+	float GetHeight() override { return m_fRadius * 2; }
 };
