@@ -13,6 +13,7 @@ CPartVending::CPartVending(COutlet* outlet, IInteractCenter* pInteractCenter, st
 	m_pInteractCenter = pInteractCenter;
 	m_sID = sPartsID;
 	m_fMass = 9999.f;
+	m_fFriction = 0.2f;
 }
 
 

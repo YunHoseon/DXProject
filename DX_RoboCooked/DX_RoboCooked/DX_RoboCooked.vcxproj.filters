@@ -261,8 +261,11 @@
     <ClInclude Include="ConcreteCC.h">
       <Filter>GameScene\Monster\CrowdControl</Filter>
     </ClInclude>
-    <ClInclude Include="StaticMeshManager.h">
+    <ClInclude Include="CStaticMeshManager.h">
       <Filter>Manager</Filter>
+    </ClInclude>
+    <ClInclude Include="CTestStair.h">
+      <Filter>GameScene\Actor</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -455,8 +458,11 @@
     <ClCompile Include="ConcreteCC.cpp">
       <Filter>GameScene\Monster\CrowdControl</Filter>
     </ClCompile>
-    <ClCompile Include="StaticMeshManager.cpp">
+    <ClCompile Include="CStaticMeshManager.cpp">
       <Filter>Manager</Filter>
+    </ClCompile>
+    <ClCompile Include="CTestStair.cpp">
+      <Filter>GameScene\Actor</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

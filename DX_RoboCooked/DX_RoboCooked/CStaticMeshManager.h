@@ -1,6 +1,6 @@
 #pragma once
 #include "CStaticMesh.h"
-#define g_StaticMeshManager CStaticMeshManager::GetInstance()
+#define g_pStaticMeshManager CStaticMeshManager::GetInstance()
 
 class CStaticMeshManager : public CSingleton<CStaticMeshManager>
 {

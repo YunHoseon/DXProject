@@ -33,7 +33,7 @@ void CPhysicsApplyer::ApplyBound(CActor* pA, CActor* pB)
 			vNormalForce[1] = -vNormal * power[0] * 1.0f;
 		}
 
-		if (power[1] > 0)
+		else if (power[1] > 0)
 		{
 			vNormalForce[0] = vNormal * power[1] * 1.0f;
 			vNormalForce[1] = -vNormal * power[1] * 1.0f;
