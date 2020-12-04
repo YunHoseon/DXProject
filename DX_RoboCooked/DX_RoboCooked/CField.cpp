@@ -24,7 +24,7 @@ void CField::Setup(int iWidth, int iHeight)
 
 	float fMaxZ = (iHeight / 2.0f) * BLOCK_SIZE;
 	float fMinZ = -fMaxZ;
-
+	/*
 	vector<ST_PNT_VERTEX> vecVertex;
 	ST_PNT_VERTEX v;
 	v.n = D3DXVECTOR3(0, 1, 0);
@@ -139,21 +139,24 @@ void CField::Setup(int iWidth, int iHeight)
 	pMesh->GenerateAdjacency(0.0f, &vecAdj[0]);
 	pMesh->OptimizeInplace(D3DXMESHOPT_ATTRSORT | D3DXMESHOPT_COMPACT | D3DXMESHOPT_VERTEXCACHE,
 		&vecAdj[0], 0, 0, 0);
-
+	*/
 	for (float i = fMinZ + (BLOCK_SIZE/2); i <= fMaxZ; i+=BLOCK_SIZE)
 	{
 		for (float j = fMinX + (BLOCK_SIZE / 2); j <= fMaxX; j += BLOCK_SIZE)
 		{
-		
-			CTile* pTile = new CTile;
-			ST_CUBE cube;
-			cube.vCenter = D3DXVECTOR3((float)j, Y, (float)i);
-			pTile->SetCube(cube);
 
-			pTile->SetMeshCubeTile(pMesh);
-			pTile->AddEvent(eEvent::TileMove);
-			pTile->SetPlaneTexture(g_pTextureManager->GetTexture("data/Texture/Albedo00.jpg"));
-			m_vecTile.push_back(pTile);
+			// 타일 생성
+
+			
+			//CTile* pTile = new CTile;
+			//ST_CUBE cube;
+			//cube.vCenter = D3DXVECTOR3((float)j, Y, (float)i);
+			//pTile->SetCube(cube);
+
+			//pTile->SetMeshCubeTile(pMesh);
+			//pTile->AddEvent(eEvent::TileMove);
+			//pTile->SetPlaneTexture(g_pTextureManager->GetTexture("data/Texture/Albedo00.jpg"));
+			//m_vecTile.push_back(pTile);
 			
 		}
 	}
@@ -166,10 +169,10 @@ void CField::Setup(int iWidth, int iHeight)
 	//		m_vecTile[i]->SetPlaneTexture(g_pTextureManager->GetTexture("data/Texture/Albedo00.jpg"));
 	//}
 
-	ZeroMemory(&m_stMtlTile, sizeof(D3DMATERIAL9));
-	m_stMtlTile.Ambient = D3DXCOLOR(0.7f, 0.7f, 0.7f, 1.0f);
-	m_stMtlTile.Diffuse = D3DXCOLOR(0.7f, 0.7f, 0.7f, 1.0f);
-	m_stMtlTile.Specular = D3DXCOLOR(0.7f, 0.7f, 0.7f, 1.0f);
+	//ZeroMemory(&m_stMtlTile, sizeof(D3DMATERIAL9));
+	//m_stMtlTile.Ambient = D3DXCOLOR(0.7f, 0.7f, 0.7f, 1.0f);
+	//m_stMtlTile.Diffuse = D3DXCOLOR(0.7f, 0.7f, 0.7f, 1.0f);
+	//m_stMtlTile.Specular = D3DXCOLOR(0.7f, 0.7f, 0.7f, 1.0f);
 	m_pCollision = new CBoxCollision(D3DXVECTOR3(0, Y, 0), D3DXVECTOR3(BLOCK_SIZE * (fMaxX - fMinX), BLOCK_SIZE, BLOCK_SIZE * (fMaxZ - fMinZ)), &m_matWorld);
 	
 	m_pCollision->Update();
@@ -178,7 +181,7 @@ void CField::Setup(int iWidth, int iHeight)
 
 void CField::Render()
 {
-	g_pD3DDevice->SetMaterial(&m_stMtlTile);
+	//g_pD3DDevice->SetMaterial(&m_stMtlTile);
 
 	for each(auto c in m_vecTile)
 	{
