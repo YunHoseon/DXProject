@@ -6,17 +6,22 @@
 
 #include "CCrowdControl.h"
 
-CCharacter::CCharacter(int nPlayerNum)
-	: m_ePlayerState(ePlayerState::None)
-	, m_pInteractCollision(nullptr)
-	, m_vGrabPartsPosition(0, 1, 0)
-	, m_pParts(NULL)
-	, m_arrElapsedTime({0,0,0})
-	, m_arrCoolDown({0,0,3})
-	, m_arrKeyDown({false, false, false})
-	, m_pInputKey(InputManager->GetInputKey(nPlayerNum))
-	, m_pMesh(nullptr)
-	, m_stMtlSphere({}), m_fThrowPower(0)
+CCharacter::CCharacter(int nPlayerNum) :
+	m_ePlayerState(ePlayerState::None),
+	m_pInteractCollision(nullptr),
+	m_vGrabPartsPosition(0, 1, 0),
+	m_pParts(NULL),
+	m_arrElapsedTime({0, 0, 0}),
+	m_arrCoolDown({0, 0, 3}),
+	m_arrKeyDown({false, false, false}),
+	m_isMoveKeyDown(false),
+	m_pInputKey(InputManager->GetInputKey(nPlayerNum)),
+	m_pMesh(nullptr),
+	m_stMtlSphere({}),
+	m_fMinThrowPower(0.01f),
+	m_fMaxThrowPower(0.1f),
+	m_fThrowPower(m_fMinThrowPower),
+	m_fThrowPowerUpSpeed(0.003f)
 {
 	m_fBaseSpeed = 0.02f;
 	m_fSpeed = m_fBaseSpeed;
@@ -25,8 +30,6 @@ CCharacter::CCharacter(int nPlayerNum)
 	m_stMtlSphere.Ambient = D3DXCOLOR(0.7f, 0.7f, 0.7f, 1.0f);
 	m_stMtlSphere.Diffuse = D3DXCOLOR(0.7f, 0.7f, 0.7f, 1.0f);
 	m_stMtlSphere.Specular = D3DXCOLOR(0.7f, 0.7f, 0.7f, 1.0f);
-
-	
 }
 
 CCharacter::~CCharacter()
@@ -56,6 +59,7 @@ void CCharacter::Update()
 {
 	Move();
 	m_vGrabPartsPosition.x = m_vPosition.x;
+	m_vGrabPartsPosition.y = m_vPosition.y + 1.0f;
 	m_vGrabPartsPosition.z = m_vPosition.z;
 
 	if (m_pInteractCollision)
@@ -126,9 +130,11 @@ void CCharacter::PressKey(void* _value)
 				if (m_arrKeyDown[0] == false)
 					m_arrKeyDown[0] = true;
 
-				if (m_fThrowPower < 0.1f)
-					m_fThrowPower += 0.005f;
-
+				if (m_fThrowPower < m_fMaxThrowPower)
+					m_fThrowPower += m_fThrowPowerUpSpeed;
+				if (m_fThrowPower > m_fMaxThrowPower)
+					m_fThrowPower = m_fMaxThrowPower;
+			
 				_DEBUG_COMMENT cout << "throw power : " << m_fThrowPower << endl;
 			}
 			break;
@@ -199,7 +205,7 @@ void CCharacter::ReleaseKey(void* _value)
 			m_pParts->ThrowParts(m_vDirection * m_fThrowPower);
 			m_pParts = nullptr;
 			g_SoundManager->PlaySFX("Melem");
-			m_fThrowPower = 0;
+			m_fThrowPower = m_fMinThrowPower;
 			break;
 		default: ;
 		}
@@ -239,6 +245,13 @@ void CCharacter::SetKeyChange(void* _value)
 
 void CCharacter::Move()
 {
+	if (m_pCollision->GetIsCollide() == false && m_isMoveKeyDown)
+	{
+		AddForce(-m_vDirection * m_fBaseSpeed);
+		m_isMoveKeyDown = false;
+	}
+	
+	
 	m_vVelocity += m_vAcceleration;
 	m_vPosition += m_vVelocity;
 
@@ -247,12 +260,13 @@ void CCharacter::Move()
 	if (m_pCollision)
 		m_pCollision->Update();
 	SetForce();
+	
 }
 
 void CCharacter::Rotate(float fTargetRot)
 {
 	fTargetRot = fTargetRot < D3DX_PI * 2 ? fTargetRot : fTargetRot - D3DX_PI * 2;
-	
+	m_isMoveKeyDown = true;
 	D3DXQUATERNION stLerpRot, stCurrentRot, stTargetRot;
 	D3DXQuaternionRotationAxis(&stCurrentRot, &D3DXVECTOR3(0, 1, 0), m_fRotY);
 	D3DXQuaternionRotationAxis(&stTargetRot, &D3DXVECTOR3(0, 1, 0), fTargetRot);

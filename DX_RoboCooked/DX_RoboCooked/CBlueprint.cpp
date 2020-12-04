@@ -21,7 +21,7 @@ CBlueprint::CBlueprint(string partsID, vector<CInteractiveActor*>& vecParts, D3D
 	m_fFriction = 0.2f;
 	m_nRightPartsAngleY = partsAngle;
 	m_nRotAngleY = angle;
-
+	m_fMass = 9999.f;
 	D3DXMatrixIdentity(&m_matInteractCollision);
 }
 

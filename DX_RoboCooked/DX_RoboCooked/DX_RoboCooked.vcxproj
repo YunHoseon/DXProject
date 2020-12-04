@@ -157,6 +157,7 @@
     <ClInclude Include="ConcreteCC.h" />
     <ClInclude Include="CPartsManager.h" />
     <ClInclude Include="CStaticMesh.h" />
+    <ClInclude Include="CTestStair.h" />
     <ClInclude Include="CUICloseButton.h" />
     <ClInclude Include="CUI.h" />
     <ClInclude Include="CCamera.h" />
@@ -225,6 +226,7 @@
     <ClCompile Include="ConcreteCC.cpp" />
     <ClCompile Include="CPartsManager.cpp" />
     <ClCompile Include="CStaticMesh.cpp" />
+    <ClCompile Include="CTestStair.cpp" />
     <ClCompile Include="CUICloseButton.cpp" />
     <ClCompile Include="CUI.cpp" />
     <ClCompile Include="CCamera.cpp" />
