@@ -60,6 +60,7 @@ void CPartAutoCombinator::Interact(CCharacter* pCharacter)
 	m_pParts->SetGrabPosition(&pCharacter->GetGrabPartsPosition());
 	m_pParts->GetCollision()->SetActive(true);
 	m_pParts = nullptr;
+	m_eCombinatorActionState = eCombinatorActionState::Usable;
 }
 
 void CPartAutoCombinator::PartsInteract(CParts* pParts)
