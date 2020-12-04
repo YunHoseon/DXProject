@@ -12,22 +12,17 @@ CMonsterHarpy::~CMonsterHarpy()
 {
 }
 
-CCrowdControl * CMonsterHarpy::ChooseCC()
-{
-	return nullptr;
-}
-
 eSkill CMonsterHarpy::FirstSkill()
 {
-	return eSkill::CrowdControl;
+	return eSkill::KeyRevers;
 }
 
 eSkill CMonsterHarpy::SecondSkill()
 {
-	return eSkill::CCObjectMake;
+	return eSkill::SandWind;
 }
 
 eSkill CMonsterHarpy::UltimateSkill()
 {
-	return eSkill::CrowdControl;
+	return eSkill::Flurry;
 }

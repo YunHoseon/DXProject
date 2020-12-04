@@ -38,22 +38,13 @@ void CMonster::Update()
 		ChooseSkillCondition();
 	}
 
-
-	switch (m_stSkillUsing.SkillProperty)
+	if (m_stSkillUsing.SkillProperty != eSkill::None)
 	{
-	case eSkill::CrowdControl:
-		m_pInteractCenter->CC(ChooseCC());
-		break;
-	case eSkill::ObjectMake:
-		break;
-	case eSkill::PartsDestroy:
-		break;
-	case eSkill::CCObjectMake:
-		m_pInteractCenter->CC(ChooseCC());
-		break;
-	default:
-		break;
+		m_pInteractCenter->MonsterSkill(m_stSkillUsing.SkillProperty);
+		SetSkillProperty(eSkill::None);
 	}
+
+
 }
 
 void CMonster::Render()
@@ -63,12 +54,6 @@ void CMonster::Render()
 void CMonster::Destroy()
 {
 	
-}
-
-CCrowdControl * CMonster::ChooseCC()
-{
-	//return m_arrCC[0].Clone();
-	return nullptr;
 }
 
 void CMonster::OnEvent(eEvent eEvent, void * _value)

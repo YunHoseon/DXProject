@@ -5,6 +5,7 @@ class CCharacter;
 class CPartCombinator;
 class COutlet;
 class CCrowdControl;
+enum class eSkill;
 
 class IInteractCenter
 {
@@ -18,5 +19,6 @@ public:
 	//virtual void SendPartsToOutlet(CParts* parts, COutlet* outlet) = 0;
 	virtual void ToggleStop() = 0;
 	virtual bool GetStop() = 0;
-	virtual void CC(CCrowdControl* pCC) = 0;
+	virtual void MonsterSkill(eSkill skill) = 0;
+
 };

@@ -19,10 +19,12 @@ enum class eSkillCondition
 enum class eSkill
 {
 	None,
-	CrowdControl,
-	ObjectMake,
-	PartsDestroy,
-	CCObjectMake
+	KeyLock,
+	SlowMove,
+	DestroyParts,
+	KeyRevers,
+	SandWind,
+	Flurry
 };
 
 enum class eSkillLevel
@@ -71,13 +73,13 @@ public:
 	virtual void Render();
 	virtual void Destroy();
 	virtual void OnEvent(eEvent eEvent, void* _value) override;
-
-	virtual CCrowdControl* ChooseCC();
+	
 	virtual eSkill FirstSkill() { return eSkill::None; };
 	virtual eSkill SecondSkill() { return eSkill::None; };
 	virtual eSkill UltimateSkill() { return eSkill::None; };
 
 
+	void SetSkillProperty(eSkill skill) { m_stSkillUsing.SkillProperty = skill; }
 	void ChooseSkillCondition();
 
 	void TravelDistanceSkill(void* _value);

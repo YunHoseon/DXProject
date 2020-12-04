@@ -12,22 +12,18 @@ CMonsterMedusa::~CMonsterMedusa()
 {
 }
 
-CCrowdControl * CMonsterMedusa::ChooseCC()
-{
-	return nullptr;
-}
 
 eSkill CMonsterMedusa::FirstSkill()
 {
-	return eSkill::CrowdControl;
+	return eSkill::KeyLock;
 }
 
 eSkill CMonsterMedusa::SecondSkill()
 {
-	return eSkill::CrowdControl;
+	return eSkill::SlowMove;
 }
 
 eSkill CMonsterMedusa::UltimateSkill()
 {
-	return eSkill::PartsDestroy;
+	return eSkill::DestroyParts;
 }

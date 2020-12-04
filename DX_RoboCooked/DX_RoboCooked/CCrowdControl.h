@@ -18,5 +18,3 @@ public:
 	virtual CCrowdControl* Clone() = 0;
 };
 
-
-#include "ConcreteCC.h"

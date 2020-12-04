@@ -21,6 +21,9 @@
 #include "CStair.h"
 #include "CWater.h"
 #include "CSand3.h"
+#include "CCrowdControl.h"
+#include "CCCSpeedDown.h"
+#include "CCCSpeedUp.h"
 
 #include "CUICloseButton.h"
 #include "CUIBoardButton.h"
@@ -304,11 +307,52 @@ void CGameScene::ToggleStop()
 	m_isTimeStop = !m_isTimeStop;
 }
 
+void CGameScene::MonsterSkill(eSkill skill)
+{
+	switch (skill)
+	{
+	case eSkill::KeyLock:
+		break;
+	case eSkill::SlowMove:
+		break;
+	case eSkill::DestroyParts:
+		break;
+	case eSkill::KeyRevers:
+		break;
+	case eSkill::SandWind:
+		break;
+	case eSkill::Flurry:
+		break;
+	}
+
+	CC(ChooseCC(skill));
+}
+
+CCrowdControl* CGameScene::ChooseCC(eSkill skill)
+{
+
+	switch (skill)
+	{
+	case eSkill::KeyLock:
+		//return new CCCSpeedDown();
+		break;
+	case eSkill::SlowMove:
+		break;
+	case eSkill::KeyRevers:
+		break;
+	case eSkill::SandWind:
+		break;
+	}
+
+	return nullptr;
+}
+
 void CGameScene::CC(CCrowdControl * pCC)
 {
+	if (pCC == nullptr)
+		return;
+
 	g_EventManager->CallEvent(eEvent::CrowdControl, NULL);
-
-
 
 }
 

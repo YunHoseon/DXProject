@@ -258,9 +258,6 @@
     <ClInclude Include="CCrowdControl.h">
       <Filter>GameScene\Monster\CrowdControl</Filter>
     </ClInclude>
-    <ClInclude Include="ConcreteCC.h">
-      <Filter>GameScene\Monster\CrowdControl</Filter>
-    </ClInclude>
     <ClInclude Include="CStaticMeshManager.h">
       <Filter>Manager</Filter>
     </ClInclude>
@@ -284,6 +281,12 @@
     </ClInclude>
     <ClInclude Include="CMonsterMedusa.h">
       <Filter>GameScene\Monster</Filter>
+    </ClInclude>
+    <ClInclude Include="CCCSpeedUp.h">
+      <Filter>GameScene\Monster\CrowdControl</Filter>
+    </ClInclude>
+    <ClInclude Include="CCCSpeedDown.h">
+      <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -470,9 +473,6 @@
     <ClCompile Include="CCrowdControl.cpp">
       <Filter>GameScene\Monster\CrowdControl</Filter>
     </ClCompile>
-    <ClCompile Include="ConcreteCC.cpp">
-      <Filter>GameScene\Monster\CrowdControl</Filter>
-    </ClCompile>
     <ClCompile Include="CStaticMeshManager.cpp">
       <Filter>Manager</Filter>
     </ClCompile>
@@ -496,6 +496,12 @@
     </ClCompile>
     <ClCompile Include="CMonsterMedusa.cpp">
       <Filter>GameScene\Monster</Filter>
+    </ClCompile>
+    <ClCompile Include="CCCSpeedUp.cpp">
+      <Filter>GameScene\Monster\CrowdControl</Filter>
+    </ClCompile>
+    <ClCompile Include="CCCSpeedDown.cpp">
+      <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

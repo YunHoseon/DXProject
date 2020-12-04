@@ -2,6 +2,7 @@
 #include "CActor.h"
 #include "CScene.h"
 #include "IInteractCenter.h"
+#include "CMonster.h"
 class CField;
 class CInteractiveActor;
 class CParts;
@@ -9,6 +10,7 @@ class CCharacter;
 class CUIButton;
 class CBlueprint;
 class CMonster;
+
 
 class CDebugPlayer1;
 class CDebugPlayer2;
@@ -49,7 +51,9 @@ public:
 	//void SendPartsToOutlet(CParts* parts, COutlet* outlet) override;
 	void ToggleStop() override;
 	bool GetStop() override {return m_isTimeStop;}
-	void CC(CCrowdControl* pCC) override;
+	void MonsterSkill(eSkill skill) override;
+	CCrowdControl* ChooseCC(eSkill skill);
+	void CC(CCrowdControl* pCC);
 
 	bool IsGameClear();
 };
