@@ -156,6 +156,8 @@
     <ClInclude Include="CMonster.h" />
     <ClInclude Include="ConcreteCC.h" />
     <ClInclude Include="CPartsManager.h" />
+    <ClInclude Include="CSand3.h" />
+    <ClInclude Include="CStair.h" />
     <ClInclude Include="CStaticMesh.h" />
     <ClInclude Include="CTestStair.h" />
     <ClInclude Include="CUICloseButton.h" />
@@ -176,6 +178,7 @@
     <ClInclude Include="CUITexture.h" />
     <ClInclude Include="CUITextureManager.h" />
     <ClInclude Include="CWall.h" />
+    <ClInclude Include="CWater.h" />
     <ClInclude Include="ICollisionArea.h" />
     <ClInclude Include="CDeviceManager.h" />
     <ClInclude Include="CEventManager.h" />
@@ -225,6 +228,8 @@
     <ClCompile Include="CMonster.cpp" />
     <ClCompile Include="ConcreteCC.cpp" />
     <ClCompile Include="CPartsManager.cpp" />
+    <ClCompile Include="CSand3.cpp" />
+    <ClCompile Include="CStair.cpp" />
     <ClCompile Include="CStaticMesh.cpp" />
     <ClCompile Include="CTestStair.cpp" />
     <ClCompile Include="CUICloseButton.cpp" />
@@ -245,6 +250,7 @@
     <ClCompile Include="CUITexture.cpp" />
     <ClCompile Include="CUITextureManager.cpp" />
     <ClCompile Include="CWall.cpp" />
+    <ClCompile Include="CWater.cpp" />
     <ClCompile Include="ICollisionArea.cpp" />
     <ClCompile Include="CDeviceManager.cpp" />
     <ClCompile Include="CEventManager.cpp" />

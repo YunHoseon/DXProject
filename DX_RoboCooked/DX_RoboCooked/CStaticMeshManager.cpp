@@ -10,6 +10,11 @@ CStaticMeshManager::CStaticMeshManager()
 
 CStaticMeshManager::~CStaticMeshManager()
 {
+	for (auto it : m_mapStaticMesh)
+	{
+		SafeDelete(it.second);
+	}
+	m_mapStaticMesh.clear();
 }
 
 CStaticMesh* CStaticMeshManager::GetStaticMesh(string name)
@@ -19,14 +24,24 @@ CStaticMesh* CStaticMeshManager::GetStaticMesh(string name)
 
 void CStaticMeshManager::Load()
 {
-	CStaticMesh* StaticMesh = new CStaticMesh;
-	CStaticMesh* StaticMesh2 = new CStaticMesh;
-	
-	string name = "AutoCombinator";
-	CMeshLoader::LoadMesh("MixMch1.X", "data/model/object", StaticMesh);
-	m_mapStaticMesh.emplace(name, StaticMesh);
+	vector<ST_StaticMesh_Data> vecData;
+	ST_StaticMesh_Data data;
 
-	name = "ManualCombinator";
-	CMeshLoader::LoadMesh("MixMch2.X", "data/model/object", StaticMesh2);
-	m_mapStaticMesh.emplace(name, StaticMesh2);
+	data.fileName = "MixMch1.X"; data.objectName = "AutoCombinator"; data.filePath = "data/model/object";
+	vecData.push_back(data);
+	data.fileName = "MixMch2.X"; data.objectName = "ManualCombinator"; data.filePath = "data/model/object";
+	vecData.push_back(data);
+	data.fileName = "모래타일3.X"; data.objectName = "Sand3"; data.filePath = "data/model/tile";
+	vecData.push_back(data);		
+	data.fileName = "물타일.X"; data.objectName = "Water"; data.filePath = "data/model/tile";
+	vecData.push_back(data);
+	data.fileName = "모래돌_타일_계단 일반.X"; data.objectName = "Stair"; data.filePath = "data/model/tile";
+	vecData.push_back(data);
+
+	for (ST_StaticMesh_Data datas : vecData)
+	{
+		CStaticMesh* staticMesh = new CStaticMesh;
+		CMeshLoader::LoadMesh(datas.fileName, datas.filePath, staticMesh);
+		m_mapStaticMesh.emplace(datas.objectName, staticMesh);
+	}
 }
