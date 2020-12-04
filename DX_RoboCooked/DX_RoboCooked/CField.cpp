@@ -1,5 +1,6 @@
 #include "stdafx.h"
 #include "CField.h"
+#include "CWater.h"
 
 #include "CBoxCollision.h"
 
@@ -146,8 +147,9 @@ void CField::Setup(int iWidth, int iHeight)
 		{
 
 			// 타일 생성
+			CWater* testWater = new CWater(D3DXVECTOR3((float)j, Y, (float)i));
+			m_vecTile.push_back(testWater);
 
-			
 			//CTile* pTile = new CTile;
 			//ST_CUBE cube;
 			//cube.vCenter = D3DXVECTOR3((float)j, Y, (float)i);

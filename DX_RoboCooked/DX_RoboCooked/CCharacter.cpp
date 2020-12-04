@@ -254,6 +254,11 @@ void CCharacter::Move()
 	m_vVelocity += m_vAcceleration;
 	m_vPosition += m_vVelocity;
 
+	ST_TravelDistanceEvent data;
+	data.fDistance = D3DXVec3Length(&m_vVelocity);
+	g_EventManager->CallEvent(eEvent::TravelDistance, (void*)&data);
+
+
 	D3DXMatrixTranslation(&m_matT, m_vPosition.x, m_vPosition.y, m_vPosition.z);
 	m_matWorld = m_matS * m_matR * m_matT;
 	if (m_pCollision)

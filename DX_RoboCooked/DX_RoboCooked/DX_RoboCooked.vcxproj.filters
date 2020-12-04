@@ -61,8 +61,8 @@
     <Filter Include="GameScene\Monster\CrowdControl">
       <UniqueIdentifier>{e615c889-dac7-4e3f-acc3-997f132e9a6a}</UniqueIdentifier>
     </Filter>
-    <Filter Include="GameScene\Actor\Tile">
-      <UniqueIdentifier>{cf2085b6-0955-4d90-9440-1284298bc6cd}</UniqueIdentifier>
+    <Filter Include="GameScene\Tile">
+      <UniqueIdentifier>{a2e5ed5e-c21e-4595-a998-63a305bf4584}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -213,6 +213,9 @@
     <ClInclude Include="IPartGenerator.h">
       <Filter>GameScene\PartsGen</Filter>
     </ClInclude>
+    <ClInclude Include="CField.h">
+      <Filter>GameScene\Actor</Filter>
+    </ClInclude>
     <ClInclude Include="CPartsManager.h">
       <Filter>Manager\Factory</Filter>
     </ClInclude>
@@ -261,14 +264,26 @@
     <ClInclude Include="CStaticMeshManager.h">
       <Filter>Manager</Filter>
     </ClInclude>
-    <ClInclude Include="CField.h">
-      <Filter>GameScene\Actor\Tile</Filter>
+    <ClInclude Include="CTestStair.h">
+      <Filter>GameScene\Actor</Filter>
     </ClInclude>
     <ClInclude Include="CTile.h">
-      <Filter>GameScene\Actor\Tile</Filter>
+      <Filter>GameScene\Tile</Filter>
     </ClInclude>
-    <ClInclude Include="CTestStair.h">
-      <Filter>GameScene\Actor\Tile</Filter>
+    <ClInclude Include="CSand3.h">
+      <Filter>GameScene\Tile</Filter>
+    </ClInclude>
+    <ClInclude Include="CWater.h">
+      <Filter>GameScene\Tile</Filter>
+    </ClInclude>
+    <ClInclude Include="CStair.h">
+      <Filter>GameScene\Tile</Filter>
+    </ClInclude>
+    <ClInclude Include="CMonsterHarpy.h">
+      <Filter>GameScene\Monster</Filter>
+    </ClInclude>
+    <ClInclude Include="CMonsterMedusa.h">
+      <Filter>GameScene\Monster</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -410,6 +425,9 @@
     <ClCompile Include="IPartGenerator.cpp">
       <Filter>GameScene\PartsGen</Filter>
     </ClCompile>
+    <ClCompile Include="CField.cpp">
+      <Filter>GameScene\Actor</Filter>
+    </ClCompile>
     <ClCompile Include="CPartsManager.cpp">
       <Filter>Manager\Factory</Filter>
     </ClCompile>
@@ -458,14 +476,26 @@
     <ClCompile Include="CStaticMeshManager.cpp">
       <Filter>Manager</Filter>
     </ClCompile>
-    <ClCompile Include="CField.cpp">
-      <Filter>GameScene\Actor\Tile</Filter>
+    <ClCompile Include="CTestStair.cpp">
+      <Filter>GameScene\Actor</Filter>
     </ClCompile>
     <ClCompile Include="CTile.cpp">
-      <Filter>GameScene\Actor\Tile</Filter>
+      <Filter>GameScene\Tile</Filter>
     </ClCompile>
-    <ClCompile Include="CTestStair.cpp">
-      <Filter>GameScene\Actor\Tile</Filter>
+    <ClCompile Include="CSand3.cpp">
+      <Filter>GameScene\Tile</Filter>
+    </ClCompile>
+    <ClCompile Include="CWater.cpp">
+      <Filter>GameScene\Tile</Filter>
+    </ClCompile>
+    <ClCompile Include="CStair.cpp">
+      <Filter>GameScene\Tile</Filter>
+    </ClCompile>
+    <ClCompile Include="CMonsterHarpy.cpp">
+      <Filter>GameScene\Monster</Filter>
+    </ClCompile>
+    <ClCompile Include="CMonsterMedusa.cpp">
+      <Filter>GameScene\Monster</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
