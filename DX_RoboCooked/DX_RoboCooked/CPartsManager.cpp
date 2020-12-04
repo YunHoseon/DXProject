@@ -43,8 +43,6 @@ void CPartsManager::Load()
 		m_mapFormula.emplace(j[i]["Formula"], j[i]["ID"]);
 	}
 
-
-
 	//map<string, CStaticMesh*> mapMesh;
 	//string name;
 	//CStaticMesh* mesh;

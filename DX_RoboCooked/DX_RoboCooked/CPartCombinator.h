@@ -43,7 +43,7 @@ protected:
 	float							m_fCombineTime;
 	INT								m_nPartsCount;
 	INT								m_nMaxPartsCount;
-
+	CStaticMesh*					m_pSMesh;
 
 
 public:
