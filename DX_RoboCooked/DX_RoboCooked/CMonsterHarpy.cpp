@@ -4,6 +4,7 @@
 
 CMonsterHarpy::CMonsterHarpy(IInteractCenter* pInteractCenter):CMonster(pInteractCenter)
 {
+	m_fFirstSkillCoolDownTime = 30;
 }
 
 

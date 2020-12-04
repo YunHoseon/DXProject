@@ -14,7 +14,6 @@ CMonster::CMonster(IInteractCenter* pInteractCenter)
 			, m_nCrowdControlCount(0)
 			, m_nThrowPartsCount(0)
 			, m_nSpinPartsCount(0)
-			, m_SkillUsing(eSkill::None)
 {
 	ChooseSkillCondition();
 }
@@ -28,18 +27,33 @@ void CMonster::Update()
 {
 	if (FirstSkillTriggered())
 	{
-		FirstSkill();
+		m_stSkillUsing.SkillProperty = FirstSkill();
+		m_stSkillUsing.SkillLevel = eSkillLevel::One;
 	}
-
 
 	if (SecondSkillTriggered())
 	{
-		SecondSkill();
+		m_stSkillUsing.SkillProperty = SecondSkill();
+		m_stSkillUsing.SkillLevel = eSkillLevel::Two;
 		ChooseSkillCondition();
 	}
 
-	//m_pInteractCenter->CC(ChooseCC());
-	
+
+	switch (m_stSkillUsing.SkillProperty)
+	{
+	case eSkill::CrowdControl:
+		m_pInteractCenter->CC(ChooseCC());
+		break;
+	case eSkill::ObjectMake:
+		break;
+	case eSkill::PartsDestroy:
+		break;
+	case eSkill::CCObjectMake:
+		m_pInteractCenter->CC(ChooseCC());
+		break;
+	default:
+		break;
+	}
 }
 
 void CMonster::Render()
@@ -114,6 +128,9 @@ bool CMonster::SecondSkillTriggered()
 
 bool CMonster::FirstSkillTriggered()
 {
+	if (m_stSkillUsing.SkillLevel != eSkillLevel::One)
+		return false;
+
 	m_fFirstSkillElapsedTime += g_pTimeManager->GetElapsedTime();
 
 	if (m_fFirstSkillElapsedTime >= m_fFirstSkillCoolDownTime)

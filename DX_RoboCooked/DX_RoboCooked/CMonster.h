@@ -25,6 +25,22 @@ enum class eSkill
 	CCObjectMake
 };
 
+enum class eSkillLevel
+{
+	None,
+	One,
+	Two,
+	Ultimate
+};
+
+struct ST_Skill
+{
+	eSkill		 SkillProperty;
+	eSkillLevel	 SkillLevel;
+	
+	ST_Skill():SkillProperty(eSkill::None), SkillLevel(eSkillLevel::None){}
+};
+
 
 class CMonster : public CEventListener
 {
@@ -34,7 +50,9 @@ protected:
 	eEvent						m_eSkillEvent;
 	FLOAT						m_fFirstSkillCoolDownTime;
 	FLOAT						m_fFirstSkillElapsedTime;
-	eSkill						m_SkillUsing;
+	ST_Skill					m_stSkillUsing;
+	/*eSkill					m_SkillUsing;
+	eSkillLevel					m_SkillLevel;*/
 
 	//조건리스트 
 	FLOAT						m_fTravelDistance;//1

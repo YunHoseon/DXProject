@@ -4,6 +4,7 @@
 
 CMonsterMedusa::CMonsterMedusa(IInteractCenter* pInteractCenter):CMonster(pInteractCenter)
 {
+	m_fFirstSkillCoolDownTime = 40;
 }
 
 
