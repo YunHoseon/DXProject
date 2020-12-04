@@ -165,5 +165,4 @@ void CPartAutoCombinator::Setup(float fAngle, D3DXVECTOR3 vPosition)
 
 	if (m_pPartsInteractCollision)
 		m_pPartsInteractCollision->Update();
-	
 }

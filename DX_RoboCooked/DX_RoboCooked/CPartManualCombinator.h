@@ -4,7 +4,7 @@ class CPartManualCombinator :
 	public CPartCombinator
 {
 private:
-	bool							m_isTimeCheck;
+	bool m_isTimeCheck;
 
 public:
 	CPartManualCombinator(IInteractCenter* pInteractCenter, eCombinatorPartsLevel eType, float fAngle, D3DXVECTOR3 vPosition);
