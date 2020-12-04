@@ -18,6 +18,9 @@
 #include "CUIButton.h"
 #include "CBlueprint.h"
 #include "CMonster.h"
+#include "CStair.h"
+#include "CWater.h"
+#include "CSand3.h"
 
 #include "CUICloseButton.h"
 #include "CUIBoardButton.h"
