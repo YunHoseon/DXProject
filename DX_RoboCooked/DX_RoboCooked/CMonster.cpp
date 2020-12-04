@@ -4,7 +4,9 @@
 CMonster::CMonster(IInteractCenter* pInteractCenter) 
 			: m_pInteractCenter(pInteractCenter)
 			, m_eSkillCondition()
-			, m_eSkillEvent(eEvent::NONE)
+			, m_eSkillEvent(eEvent::None)
+			, m_fFirstSkillCoolDownTime(0.0f)
+			, m_fFirstSkillElapsedTime(0.0f)
 			, m_isArrive(false)
 			, m_fTravelDistance(0.0f)
 			, m_nCombinUseCount(0)
@@ -12,6 +14,7 @@ CMonster::CMonster(IInteractCenter* pInteractCenter)
 			, m_nCrowdControlCount(0)
 			, m_nThrowPartsCount(0)
 			, m_nSpinPartsCount(0)
+			, m_SkillUsing(eSkill::None)
 {
 	ChooseSkillCondition();
 }
@@ -23,10 +26,20 @@ CMonster::~CMonster()
 
 void CMonster::Update()
 {
-	if (Istriggered())
+	if (FirstSkillTriggered())
 	{
-		m_pInteractCenter->CC(ChooseCC()); //상태이상만 넘기고 
+		FirstSkill();
 	}
+
+
+	if (SecondSkillTriggered())
+	{
+		SecondSkill();
+		ChooseSkillCondition();
+	}
+
+	//m_pInteractCenter->CC(ChooseCC());
+	
 }
 
 void CMonster::Render()
@@ -73,68 +86,96 @@ void CMonster::OnEvent(eEvent eEvent, void * _value)
 
 }
 
-bool CMonster::Istriggered()
+bool CMonster::SecondSkillTriggered()
 {
-	if (m_nSpinPartsCount == 0)
-		return false;
-	
-	if (m_nSpinPartsCount % 4 == 0)
+	if (m_fTravelDistance >= 25.0f)
 		return true;
-	
+
+	if (m_isArrive)
+		return true;
+
+	if (m_nCombinUseCount >= 4)
+		return true;
+
+	if (m_nVendingUseCount >= 4)
+		return true;
+
+	if (m_nCrowdControlCount >= 2)
+		return true;
+
+	if (m_nThrowPartsCount >= 4)
+		return true;
+
+	if (m_nSpinPartsCount >= 5)
+		return true;
+
+	return false;
+}
+
+bool CMonster::FirstSkillTriggered()
+{
+	m_fFirstSkillElapsedTime += g_pTimeManager->GetElapsedTime();
+
+	if (m_fFirstSkillElapsedTime >= m_fFirstSkillCoolDownTime)
+	{
+		m_fFirstSkillElapsedTime = 0;
+		return true;
+	}
+
 	return false;
 }
 
 void CMonster::ChooseSkillCondition()
 {
+	SkillConditionInit();
+
 	int random = rand() % 100;
 
-	if (random < 16)
 	{
-		m_eSkillCondition = eSkillCondition::TravelDistance;
-		g_EventManager->Attach(eEvent::TravelDistance, this);
-		m_eSkillEvent = eEvent::TravelDistance;
+		if (random < 16)
+		{
+			m_eSkillCondition = eSkillCondition::TravelDistance;
+			g_EventManager->Attach(eEvent::TravelDistance, this);
+			m_eSkillEvent = eEvent::TravelDistance;
+		}
+		else if (random < 30)
+		{
+			m_eSkillCondition = eSkillCondition::SpecificArea;
+			g_EventManager->Attach(eEvent::SpecificArea, this);
+			m_eSkillEvent = eEvent::SpecificArea;
+		}
+		else if (random < 48)
+		{
+			m_eSkillCondition = eSkillCondition::CombinUse;
+			g_EventManager->Attach(eEvent::CombinUse, this);
+			m_eSkillEvent = eEvent::CombinUse;
+		}
+		else if (random < 62)
+		{
+			m_eSkillCondition = eSkillCondition::VendingUse;
+			g_EventManager->Attach(eEvent::VendingUse, this);
+			m_eSkillEvent = eEvent::VendingUse;
+		}
+		else if (random < 74)
+		{
+			m_eSkillCondition = eSkillCondition::CrowdControl;
+			g_EventManager->Attach(eEvent::CrowdControl, this);
+			m_eSkillEvent = eEvent::CrowdControl;
+		}
+		else if (random < 86)
+		{
+			m_eSkillCondition = eSkillCondition::ThrowParts;
+			g_EventManager->Attach(eEvent::ThrowParts, this);
+			m_eSkillEvent = eEvent::ThrowParts;
+		}
+		else
+		{
+			m_eSkillCondition = eSkillCondition::SpinParts;
+			g_EventManager->Attach(eEvent::SpinParts, this);
+			m_eSkillEvent = eEvent::SpinParts;
+		}
 	}
-	else if (random < 30)
-	{
-		m_eSkillCondition = eSkillCondition::SpecificArea;
-		g_EventManager->Attach(eEvent::SpecificArea, this);
-		m_eSkillEvent = eEvent::SpecificArea;
-	}
-	else if (random < 48)
-	{
-		m_eSkillCondition = eSkillCondition::CombinUse;
-		g_EventManager->Attach(eEvent::CombinUse, this);
-		m_eSkillEvent = eEvent::CombinUse;
-	}
-	else if (random < 62)
-	{
-		m_eSkillCondition = eSkillCondition::VendingUse;
-		g_EventManager->Attach(eEvent::VendingUse, this);
-		m_eSkillEvent = eEvent::VendingUse;
-	}
-	else if (random < 74)
-	{
-		m_eSkillCondition = eSkillCondition::CrowdControl;
-		g_EventManager->Attach(eEvent::CrowdControl, this);
-		m_eSkillEvent = eEvent::CrowdControl;
-	}
-	else if (random < 86)
-	{
-		m_eSkillCondition = eSkillCondition::CastParts;
-		g_EventManager->Attach(eEvent::ThrowParts, this);
-		m_eSkillEvent = eEvent::ThrowParts;
-	}
-	else
-	{
-		m_eSkillCondition = eSkillCondition::SpinParts;
-		g_EventManager->Attach(eEvent::SpinParts, this);
-		m_eSkillEvent = eEvent::SpinParts;
-	}
-
-	if (m_eSkillEvent == eEvent::NONE)
-		return;
-
-	SkillConditionInit();
+	
 }
 
 void CMonster::TravelDistanceSkill(void * _value)
@@ -146,7 +187,8 @@ void CMonster::TravelDistanceSkill(void * _value)
 
 void CMonster::SkillConditionInit()
 {
-
+	if (m_eSkillEvent == eEvent::None)
+		return;
 	g_EventManager->Detach(m_eSkillEvent, this);
 
 	switch (m_eSkillEvent)

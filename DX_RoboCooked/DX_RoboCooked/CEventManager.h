@@ -6,7 +6,7 @@ class CEventListener;
 
 enum class eEvent
 {
-	NONE,
+	None,
 	Tick,
 	KeyPress,
 	KeyRelease,

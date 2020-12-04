@@ -279,6 +279,12 @@
     <ClInclude Include="CStair.h">
       <Filter>GameScene\Tile</Filter>
     </ClInclude>
+    <ClInclude Include="CMonsterHarpy.h">
+      <Filter>GameScene\Monster</Filter>
+    </ClInclude>
+    <ClInclude Include="CMonsterMedusa.h">
+      <Filter>GameScene\Monster</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="stdafx.cpp">
@@ -484,6 +490,12 @@
     </ClCompile>
     <ClCompile Include="CStair.cpp">
       <Filter>GameScene\Tile</Filter>
+    </ClCompile>
+    <ClCompile Include="CMonsterHarpy.cpp">
+      <Filter>GameScene\Monster</Filter>
+    </ClCompile>
+    <ClCompile Include="CMonsterMedusa.cpp">
+      <Filter>GameScene\Monster</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

@@ -306,7 +306,10 @@ void CGameScene::ToggleStop()
 
 void CGameScene::CC(CCrowdControl * pCC)
 {
-	cout << "돌리기 횟수로인한 괴수 스킬" << endl;
+	g_EventManager->CallEvent(eEvent::CrowdControl, NULL);
+
+
+
 }
 
 bool CGameScene::IsGameClear()
