@@ -19,7 +19,7 @@ public:
 	virtual void Update() override;
 	virtual void AddEvent(eEvent eEvent);
 	virtual void OnEvent(eEvent eEvent, void* _value) override;
-	virtual 
+
 	virtual void AddAcceleration(const D3DXVECTOR3& vAccel) override {}
 	virtual void AddForce(const D3DXVECTOR3& vForce) override {}
 };
