@@ -98,6 +98,8 @@ void CParts::ThrowParts(D3DXVECTOR3 vForce)
 	m_vGrabPosition = nullptr;
 	m_pCollision->SetActive(true);
 	AddForce(vForce);
+
+	g_EventManager->CallEvent(eEvent::ThrowParts, NULL);
 }
 
 void CParts::PartsRotate()
@@ -108,7 +110,7 @@ void CParts::PartsRotate()
 
 	D3DXMatrixRotationY(&m_matR, D3DXToRadian(m_nRotAngleY));
 
-	g_EventManager->CallEvent(eEvent::PartsSpin, NULL);
+	g_EventManager->CallEvent(eEvent::SpinParts, NULL);
 }
 
 void CParts::MoveParts()

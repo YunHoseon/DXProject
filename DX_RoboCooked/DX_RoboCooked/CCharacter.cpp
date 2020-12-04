@@ -1,9 +1,7 @@
 #include "stdafx.h"
 #include "CCharacter.h"
-
 #include "CGameScene.h"
 #include "ICollisionArea.h"
-
 #include "CCrowdControl.h"
 
 CCharacter::CCharacter(int nPlayerNum) :
@@ -204,6 +202,7 @@ void CCharacter::ReleaseKey(void* _value)
 			SetPlayerState(ePlayerState::None);
 			m_pParts->ThrowParts(m_vDirection * m_fThrowPower);
 			m_pParts = nullptr;
+			
 			g_SoundManager->PlaySFX("Melem");
 			m_fThrowPower = m_fMinThrowPower;
 			break;

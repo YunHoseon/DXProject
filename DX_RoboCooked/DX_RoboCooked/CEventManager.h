@@ -6,6 +6,7 @@ class CEventListener;
 
 enum class eEvent
 {
+	NONE,
 	Tick,
 	KeyPress,
 	KeyRelease,
@@ -13,12 +14,18 @@ enum class eEvent
 	Player2KeyChange,
 	TileMove,
 	PartsHold,
-	PartsSpin,
+	SpinParts,
 	PartsPut,
 	PartsThrow,
 	MouseClick,
 	MouseHover,
-	MouseRelease
+	MouseRelease,
+	ThrowParts,
+	CrowdControl,
+	VendingUse,
+	CombinUse,
+	SpecificArea,
+	TravelDistance
 };
 
 

@@ -17,6 +17,8 @@
 #include <memory.h>
 #include <tchar.h>
 #include <iostream>
+#include <cstdlib>
+#include <time.h>
 
 // TODO: reference additional headers your program requires here
 #include <vector>
@@ -161,6 +163,10 @@ struct ST_MouseEvent
 	POINT pt;
 };
 
+struct ST_TravelDistanceEvent
+{
+	float fDistance;
+};
 struct ST_PLAYER_INPUTKEY
 {
 	WPARAM moveFowardKey;
