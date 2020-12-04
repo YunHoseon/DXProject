@@ -45,7 +45,7 @@ int APIENTRY wWinMain(_In_ HINSTANCE hInstance,
     }
 
     HACCEL hAccelTable = LoadAccelerators(hInstance, MAKEINTRESOURCE(IDC_DX_ROBOCOOKED));
-
+	srand((unsigned int)time(NULL));
 	g_pMainGame = new CMainGame;
 	g_pMainGame->Setup();
 

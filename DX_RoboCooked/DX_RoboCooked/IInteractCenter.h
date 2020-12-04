@@ -6,11 +6,6 @@ class CPartCombinator;
 class COutlet;
 class CCrowdControl;
 
-enum class CrowdControl
-{
-	
-};
-
 class IInteractCenter
 {
 public:
