@@ -78,6 +78,8 @@ void CPartAutoCombinator::PartsInteract(CParts* pParts)
 	pParts->GetCollision()->SetActive(false);
 	pParts->SetCombinatorPosition(m_vPosition);
 	pParts->SetMoveParts(true);
+
+	g_EventManager->CallEvent(eEvent::CombinUse, NULL);
 }
 
 void CPartAutoCombinator::OnEvent(eEvent eEvent, void* _value)

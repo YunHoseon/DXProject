@@ -12,9 +12,19 @@ enum class eSkillCondition
 	CombinUse,
 	VendingUse,
 	CrowdControl,
-	CastParts,
+	ThrowParts,
 	SpinParts
 };
+
+enum class eSkill
+{
+	None,
+	CrowdControl,
+	ObjectMake,
+	PartsDestroy,
+	CCObjectMake
+};
+
 
 class CMonster : public CEventListener
 {
@@ -22,6 +32,10 @@ protected:
 	IInteractCenter*			m_pInteractCenter;
 	eSkillCondition				m_eSkillCondition;
 	eEvent						m_eSkillEvent;
+	FLOAT						m_fFirstSkillCoolDownTime;
+	FLOAT						m_fFirstSkillElapsedTime;
+	eSkill						m_SkillUsing;
+
 	//조건리스트 
 	FLOAT						m_fTravelDistance;//1
 	BOOL						m_isArrive; //2
@@ -33,15 +47,19 @@ protected:
 
 public:
 	CMonster(IInteractCenter* pInteractCenter);
-	~CMonster();
+	virtual ~CMonster();
 public:
 	virtual void Update();
 	virtual void Render();
-	virtual void SkillConditionInit();
 	virtual void Destroy();
-	CCrowdControl* ChooseCC();
 	virtual void OnEvent(eEvent eEvent, void* _value) override;
-	virtual bool Istriggered();
+
+	virtual CCrowdControl* ChooseCC();
+	virtual eSkill FirstSkill() { return eSkill::None; };
+	virtual eSkill SecondSkill() { return eSkill::None; };
+	virtual eSkill UltimateSkill() { return eSkill::None; };
+
+
 	void ChooseSkillCondition();
 
 	void TravelDistanceSkill(void* _value);
@@ -52,5 +70,8 @@ public:
 	void ThrowPartsSkill() { m_nThrowPartsCount++; }
 	void SpinPartsSkill(){ m_nSpinPartsCount++; }
 
-	
+private:
+	void SkillConditionInit();
+	bool SecondSkillTriggered();
+	bool FirstSkillTriggered();
 };

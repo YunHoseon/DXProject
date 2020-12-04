@@ -267,6 +267,12 @@
     <ClInclude Include="CTestStair.h">
       <Filter>GameScene\Actor</Filter>
     </ClInclude>
+    <ClInclude Include="CMonsterHarpy.h">
+      <Filter>GameScene\Monster</Filter>
+    </ClInclude>
+    <ClInclude Include="CMonsterMedusa.h">
+      <Filter>GameScene\Monster</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="stdafx.cpp">
@@ -463,6 +469,12 @@
     </ClCompile>
     <ClCompile Include="CTestStair.cpp">
       <Filter>GameScene\Actor</Filter>
+    </ClCompile>
+    <ClCompile Include="CMonsterHarpy.cpp">
+      <Filter>GameScene\Monster</Filter>
+    </ClCompile>
+    <ClCompile Include="CMonsterMedusa.cpp">
+      <Filter>GameScene\Monster</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

@@ -187,5 +187,6 @@ void CPartVending::Interact(CCharacter* pCharacter)
 		m_ePartVendingState = ePartVendingState::Unusable;
 		m_pOutlet->AcceptPartsFromVending(parts);
 		//m_pInteractCenter->SendPartsToOutlet(parts, m_pOutlet);
+		g_EventManager->CallEvent(eEvent::VendingUse, NULL);
 	}
 }
