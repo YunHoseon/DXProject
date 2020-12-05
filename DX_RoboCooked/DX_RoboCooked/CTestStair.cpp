@@ -13,7 +13,9 @@ CTestStair::CTestStair()
 	SetPosition(1, 0, -4);
 	m_fMass = 9999.f;
 	m_fFriction = 0.2f;
-	
+
+	//SetScale(1, 1, 2);
+	//pCollision->RotateOriginAxis(D3DX_PI * 0.25f * 0.25f, 0, 0);
 }
 
 CTestStair::~CTestStair()
