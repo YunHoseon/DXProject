@@ -11,6 +11,6 @@ public:
 	};
 
 	virtual void Render(D3DXVECTOR3& vPos) {};
-	virtual float MultiplySpeed() { return -0.001f; }
+	virtual float MultiplySpeed() { return 1.f; }
 };
 

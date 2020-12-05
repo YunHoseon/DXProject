@@ -255,8 +255,8 @@ void CCharacter::SetKeyChange(void* _value)
 
 void CCharacter::Move()
 {
-	//if (m_pCollision->GetIsCollide() == false && m_isMoveKeyDown)
-	if (m_isMoveKeyDown)
+	if (m_pCollision->GetIsCollide() == false && m_isMoveKeyDown)
+	//if (m_isMoveKeyDown)
 	{
 		AddForce(-m_vDirection * m_fBaseSpeed  * m_pCC->MultiplySpeed()) ;
 		m_isMoveKeyDown = false;
@@ -293,7 +293,7 @@ void CCharacter::Rotate(float fTargetRot)
 	D3DXVec3TransformNormal(&m_vDirection, &D3DXVECTOR3(0, 0, 1), &m_matR);
 	m_matWorld = m_matS * m_matR * m_matT;
 
-	SetForce(m_vDirection * m_fBaseSpeed);
+	SetForce(m_vDirection * m_fBaseSpeed * m_pCC->MultiplySpeed());
 
 	if (m_pCollision)
 		m_pCollision->Update();
