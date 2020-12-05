@@ -1,16 +1,14 @@
 #pragma once
 #include "CCrowdControl.h"
-class CCCSpeedDown :
+class CCCNone :
 	public CCrowdControl
 {
 public:
 	string& GetID()
-	{
-		string name = "SPEEDDOWN";
+	{ 
+		string name = "NONE";
 		return name;
 	};
-
 	virtual void Render(D3DXVECTOR3& vPos) {};
-	virtual float MultiplySpeed() { return -0.001f; }
 };
 

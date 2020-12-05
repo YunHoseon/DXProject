@@ -54,6 +54,7 @@ public:
 	void MonsterSkill(eSkill skill) override;
 	CCrowdControl* ChooseCC(eSkill skill);
 	void CC(CCrowdControl* pCC);
+	void MedusaUlt();
 
 	bool IsGameClear();
 };

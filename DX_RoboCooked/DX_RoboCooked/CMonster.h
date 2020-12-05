@@ -53,8 +53,6 @@ protected:
 	FLOAT						m_fFirstSkillCoolDownTime;
 	FLOAT						m_fFirstSkillElapsedTime;
 	ST_Skill					m_stSkillUsing;
-	/*eSkill					m_SkillUsing;
-	eSkillLevel					m_SkillLevel;*/
 
 	//조건리스트 
 	FLOAT						m_fTravelDistance;//1
@@ -79,9 +77,14 @@ public:
 	virtual eSkill UltimateSkill() { return eSkill::None; };
 
 
-	void SetSkillProperty(eSkill skill) { m_stSkillUsing.SkillProperty = skill; }
+
 	void ChooseSkillCondition();
 
+
+
+
+	void SetSkillProperty(eSkill skill) { m_stSkillUsing.SkillProperty = skill; }
+public:
 	void TravelDistanceSkill(void* _value);
 	void ArriveSkill() { m_isArrive = true; }
 	void CombinUseSkill() { m_nCombinUseCount++; }

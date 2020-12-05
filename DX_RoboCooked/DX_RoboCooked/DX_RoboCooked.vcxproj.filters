@@ -282,11 +282,11 @@
     <ClInclude Include="CMonsterMedusa.h">
       <Filter>GameScene\Monster</Filter>
     </ClInclude>
-    <ClInclude Include="CCCSpeedUp.h">
+    <ClInclude Include="CCCSpeedDown.h">
       <Filter>GameScene\Monster\CrowdControl</Filter>
     </ClInclude>
-    <ClInclude Include="CCCSpeedDown.h">
-      <Filter>Header Files</Filter>
+    <ClInclude Include="CCCNone.h">
+      <Filter>GameScene\Monster\CrowdControl</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -497,11 +497,11 @@
     <ClCompile Include="CMonsterMedusa.cpp">
       <Filter>GameScene\Monster</Filter>
     </ClCompile>
-    <ClCompile Include="CCCSpeedUp.cpp">
+    <ClCompile Include="CCCSpeedDown.cpp">
       <Filter>GameScene\Monster\CrowdControl</Filter>
     </ClCompile>
-    <ClCompile Include="CCCSpeedDown.cpp">
-      <Filter>Source Files</Filter>
+    <ClCompile Include="CCCNone.cpp">
+      <Filter>GameScene\Monster\CrowdControl</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

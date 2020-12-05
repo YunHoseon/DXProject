@@ -3,6 +3,7 @@
 #include "CGameScene.h"
 #include "ICollisionArea.h"
 #include "CCrowdControl.h"
+#include "CCCNone.h"
 
 CCharacter::CCharacter(int nPlayerNum) :
 	m_ePlayerState(ePlayerState::None),
@@ -19,7 +20,8 @@ CCharacter::CCharacter(int nPlayerNum) :
 	m_fMinThrowPower(0.01f),
 	m_fMaxThrowPower(0.1f),
 	m_fThrowPower(m_fMinThrowPower),
-	m_fThrowPowerUpSpeed(0.003f)
+	m_fThrowPowerUpSpeed(0.003f),
+	m_pCC(nullptr)
 {
 	m_fBaseSpeed = 0.02f;
 	m_fSpeed = m_fBaseSpeed;
@@ -28,12 +30,15 @@ CCharacter::CCharacter(int nPlayerNum) :
 	m_stMtlSphere.Ambient = D3DXCOLOR(0.7f, 0.7f, 0.7f, 1.0f);
 	m_stMtlSphere.Diffuse = D3DXCOLOR(0.7f, 0.7f, 0.7f, 1.0f);
 	m_stMtlSphere.Specular = D3DXCOLOR(0.7f, 0.7f, 0.7f, 1.0f);
+
+	m_pCC = new CCCNone;
 }
 
 CCharacter::~CCharacter()
 {
 	SafeDelete(m_pInteractCollision);
 	SafeRelease(m_pMesh);
+	SafeDelete(m_pCC);
 }
 
 void CCharacter::Render()
@@ -55,6 +60,12 @@ void CCharacter::Render()
 
 void CCharacter::Update()
 {
+
+	if (m_pCC->IsEnd())
+	{
+		SafeDelete(m_pCC);
+		m_pCC = new CCCNone;
+	}
 	Move();
 	m_vGrabPartsPosition.x = m_vPosition.x;
 	m_vGrabPartsPosition.y = m_vPosition.y + 1.0f;
@@ -244,9 +255,10 @@ void CCharacter::SetKeyChange(void* _value)
 
 void CCharacter::Move()
 {
-	if (m_pCollision->GetIsCollide() == false && m_isMoveKeyDown)
+	//if (m_pCollision->GetIsCollide() == false && m_isMoveKeyDown)
+	if (m_isMoveKeyDown)
 	{
-		AddForce(-m_vDirection * m_fBaseSpeed);
+		AddForce(-m_vDirection * m_fBaseSpeed  * m_pCC->MultiplySpeed()) ;
 		m_isMoveKeyDown = false;
 	}
 	
@@ -312,4 +324,18 @@ float CCharacter::GetMass()
 		return m_fMass + m_pParts->GetMass();
 	else
 		return m_fMass;
+}
+
+void CCharacter::SetCC(CCrowdControl * cc)
+{
+	/*if (m_pCC != nullptr)
+	{
+		if (cc->GetID() == m_pCC->GetID())
+		{
+			return;
+		}
+		SafeDelete(m_pCC);
+	}
+	m_pCC = cc;*/
+	
 }

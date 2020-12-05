@@ -31,7 +31,7 @@ public:
 	virtual bool CollideToSphere(CSphereCollision* pTargetCollider, D3DXVECTOR3* pNormal) = 0;
 	bool GetIsCollide() { return m_isCollide; }
 	void SetIsCollide(bool b) { m_isCollide = b; }
-	bool GetActive() { return m_isActive; }
+	virtual bool GetActive() { return m_isActive; }
 	void SetActive(bool b) { m_isActive = b; }
 	virtual void SetScale(float x, float y, float z) = 0;
 	virtual float GetHeight() = 0;

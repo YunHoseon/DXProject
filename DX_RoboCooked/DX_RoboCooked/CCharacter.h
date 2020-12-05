@@ -4,6 +4,7 @@
 
 class ICollisionArea;
 class CGameScene;
+class CCrowdControl;
 
 
 enum class ePlayerState
@@ -36,6 +37,7 @@ protected:
 	float				m_fThrowPower;
 	float				m_fThrowPowerUpSpeed;
 	// 상태이상 관련 멤버 추가 필요
+	CCrowdControl*		m_pCC;
 public:
 	CCharacter(int nPlayerNum);
 	virtual ~CCharacter();
@@ -57,5 +59,7 @@ public:
 	void SetPlayerState(ePlayerState state) { m_ePlayerState = state; }
 	void SetParts(CParts* pParts) { m_pParts = pParts; }
 	CParts* GetParts() { return m_pParts; }
+	void SetCC(CCrowdControl* cc);
+	
 };
 

@@ -23,12 +23,15 @@
 #include "CSand3.h"
 #include "CCrowdControl.h"
 #include "CCCSpeedDown.h"
-#include "CCCSpeedUp.h"
+#include "CCCNone.h"
 
 #include "CUICloseButton.h"
 #include "CUIBoardButton.h"
 #include "CUIBarButton.h"
 #include "CUIPauseButton.h"
+
+#include "CMonsterMedusa.h"
+#include "CMonsterHarpy.h"
 
 
 /* µð¹ö±ë¿ë */
@@ -149,7 +152,7 @@ void CGameScene::Init()
 	m_pDebugPauseUI = new CUIPauseButton(D3DXVECTOR2(100,100),27,this);
 	m_pDebugPauseUI->Setup();
 
-	CMonster* monster = new CMonster(this);
+	CMonster* monster = new CMonsterMedusa(this);
 	m_vecMonster.push_back(monster);
 
 	m_vecStaticActor.push_back(new CTestStair);
@@ -311,18 +314,19 @@ void CGameScene::MonsterSkill(eSkill skill)
 {
 	switch (skill)
 	{
-	case eSkill::KeyLock:
+	/*case eSkill::KeyLock:
 		break;
 	case eSkill::SlowMove:
-		break;
+		break;*/
 	case eSkill::DestroyParts:
+		MedusaUlt();
 		break;
-	case eSkill::KeyRevers:
+	/*case eSkill::KeyRevers:
 		break;
 	case eSkill::SandWind:
 		break;
 	case eSkill::Flurry:
-		break;
+		break;*/
 	}
 
 	CC(ChooseCC(skill));
@@ -334,25 +338,38 @@ CCrowdControl* CGameScene::ChooseCC(eSkill skill)
 	switch (skill)
 	{
 	case eSkill::KeyLock:
-		//return new CCCSpeedDown();
-		break;
+		return new CCCSpeedDown;
 	case eSkill::SlowMove:
-		break;
+		return new CCCSpeedDown;
 	case eSkill::KeyRevers:
-		break;
+		return new CCCSpeedDown;
 	case eSkill::SandWind:
-		break;
+		return new CCCSpeedDown;
+	case eSkill::Flurry:
+		return new CCCSpeedDown;
 	}
 
-	return nullptr;
+	return new CCCNone;
 }
 
 void CGameScene::CC(CCrowdControl * pCC)
 {
-	if (pCC == nullptr)
-		return;
-
 	g_EventManager->CallEvent(eEvent::CrowdControl, NULL);
+
+	for (CCharacter* it : m_vecCharacters)
+	{
+		it->SetCC(pCC);
+	}
+
+
+}
+
+void CGameScene::MedusaUlt()
+{
+	int index = rand() % m_vecParts.size();
+
+	CParts* data = static_cast<CParts*>(m_vecParts[index]);
+
 
 }
 
