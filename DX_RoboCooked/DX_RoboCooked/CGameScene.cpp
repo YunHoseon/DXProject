@@ -158,7 +158,7 @@ void CGameScene::Init()
 	CMonster* monster = new CMonsterMedusa(this);
 	m_vecMonster.push_back(monster);
 
-	m_vecStaticActor.push_back(new CTestStair);
+	m_vecStaticActor.push_back(new CStair(D3DXVECTOR3(1,0,-4)));
 }
 
 void CGameScene::Render()

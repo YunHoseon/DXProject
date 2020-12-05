@@ -24,3 +24,6 @@ public:
 	virtual void AddForce(const D3DXVECTOR3& vForce) override {}
 };
 
+#include "CSand3.h"
+#include "CWater.h"
+#include "CStair.h"

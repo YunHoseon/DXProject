@@ -6,7 +6,7 @@ CSand3::CSand3(D3DXVECTOR3 vPosition)
 {
 	m_pSMesh = g_pStaticMeshManager->GetStaticMesh("Sand3");
 	m_pCollision = new CBoxCollision(g_vZero, D3DXVECTOR3(100, 100, 100), &m_matWorld);
-
+	
 	SetScale(0.01f, 0.01f, 0.01f);
 	SetPosition(vPosition);
 
@@ -20,11 +20,6 @@ CSand3::CSand3(D3DXVECTOR3 vPosition)
 
 CSand3::~CSand3()
 {
-}
-
-void CSand3::Render()
-{
-	m_pSMesh->Render();
 }
 
 void CSand3::Update()

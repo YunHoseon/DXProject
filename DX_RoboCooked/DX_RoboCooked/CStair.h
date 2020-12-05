@@ -8,6 +8,5 @@ public:
 	~CStair();
 
 	void Render() override;
-	void Update() override;
 };
 
