@@ -98,6 +98,8 @@ void CCharacter::OnEvent(eEvent eEvent, void* _value)
 
 void CCharacter::PressKey(void* _value)
 {
+	if (m_pCC->IsMovable() == false)
+		return;
 	ST_KeyInputEvent* data = static_cast<ST_KeyInputEvent*>(_value);
 	const float& CurrentTime = g_pTimeManager->GetLastUpdateTime();
 	if (data->wKey == m_pInputKey->moveFowardKey)
@@ -108,7 +110,7 @@ void CCharacter::PressKey(void* _value)
 	{
 		if (m_fRotY - 0.5f < 0.f)
 			m_fRotY += D3DX_PI * 2.f;
-		Rotate(D3DX_PI * 1.5f);
+		Rotate(D3DX_PI * 1.5f );
 	}
 	else if (data->wKey == m_pInputKey->moveBackKey)
 	{
@@ -256,7 +258,6 @@ void CCharacter::SetKeyChange(void* _value)
 void CCharacter::Move()
 {
 	if (m_pCollision->GetIsCollide() == false && m_isMoveKeyDown)
-	//if (m_isMoveKeyDown)
 	{
 		AddForce(-m_vDirection * m_fBaseSpeed  * m_pCC->MultiplySpeed()) ;
 		m_isMoveKeyDown = false;
@@ -281,6 +282,7 @@ void CCharacter::Move()
 
 void CCharacter::Rotate(float fTargetRot)
 {
+	fTargetRot += m_pCC->ReverseRotate();
 	fTargetRot = fTargetRot < D3DX_PI * 2 ? fTargetRot : fTargetRot - D3DX_PI * 2;
 	m_isMoveKeyDown = true;
 	D3DXQUATERNION stLerpRot, stCurrentRot, stTargetRot;
@@ -328,14 +330,15 @@ float CCharacter::GetMass()
 
 void CCharacter::SetCC(CCrowdControl * cc)
 {
-	/*if (m_pCC != nullptr)
-	{
-		if (cc->GetID() == m_pCC->GetID())
-		{
-			return;
-		}
-		SafeDelete(m_pCC);
-	}
-	m_pCC = cc;*/
+	//if (m_pCC != nullptr)
+	//{
+	//	if (cc->GetID() == m_pCC->GetID())
+	//	{
+	//		return;
+	//	}
+	//	SafeDelete(m_pCC);
+	//}
+	SafeDelete(m_pCC);
+	m_pCC = cc;
 	
 }

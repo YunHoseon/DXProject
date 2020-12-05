@@ -152,7 +152,9 @@
     <ClInclude Include="CBlueprint.h" />
     <ClInclude Include="CBoxCollision.h" />
     <ClInclude Include="CCCNone.h" />
+    <ClInclude Include="CCCReverseKey.h" />
     <ClInclude Include="CCCSpeedDown.h" />
+    <ClInclude Include="CCCStopMove.h" />
     <ClInclude Include="CCrowdControl.h" />
     <ClInclude Include="CMeshLoader.h" />
     <ClInclude Include="CMonster.h" />
@@ -227,7 +229,9 @@
     <ClCompile Include="CBlueprint.cpp" />
     <ClCompile Include="CBoxCollision.cpp" />
     <ClCompile Include="CCCNone.cpp" />
+    <ClCompile Include="CCCReverseKey.cpp" />
     <ClCompile Include="CCCSpeedDown.cpp" />
+    <ClCompile Include="CCCStopMove.cpp" />
     <ClCompile Include="CCrowdControl.cpp" />
     <ClCompile Include="CMeshLoader.cpp" />
     <ClCompile Include="CMonster.cpp" />
