@@ -1,7 +1,7 @@
 #pragma once
 #include "CActor.h"
-#include "CTile.h"
 
+class CTile;
 
 class CField :
 	public CActor

@@ -105,7 +105,7 @@ void CCamera::WndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam)
 
 			float fDeltaX = (float)ptCurMouse.x - m_ptPrevMouse.x;
 			float fDeltaY = (float)ptCurMouse.y - m_ptPrevMouse.y;
-			//m_vCamRotAngle.y += (fDeltaX / 100.0f);
+			m_vCamRotAngle.y += (fDeltaX / 100.0f);
 			m_vCamRotAngle.x += (fDeltaY / 100.0f);
 
 			if (m_vCamRotAngle.x < -D3DX_PI / 5.0f + 0.0001f)
