@@ -2,11 +2,9 @@
 #include "CCCStopMove.h"
 
 
-CCCStopMove::CCCStopMove()
+CCCStopMove::CCCStopMove() : CCrowdControl()
 {
+	m_fCCDownTime = 10;
 }
 
 
-CCCStopMove::~CCCStopMove()
-{
-}

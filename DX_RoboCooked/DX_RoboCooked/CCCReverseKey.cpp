@@ -2,11 +2,8 @@
 #include "CCCReverseKey.h"
 
 
-CCCReverseKey::CCCReverseKey()
+CCCReverseKey::CCCReverseKey() : CCrowdControl()
 {
+	m_fCCDownTime = 10;
 }
 
-
-CCCReverseKey::~CCCReverseKey()
-{
-}

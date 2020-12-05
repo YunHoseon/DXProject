@@ -167,6 +167,11 @@ struct ST_TravelDistanceEvent
 {
 	float fDistance;
 };
+
+struct ST_TickEvent
+{
+	float fElapsedTime;
+};
 struct ST_PLAYER_INPUTKEY
 {
 	WPARAM moveFowardKey;

@@ -5,7 +5,6 @@ class CCCReverseKey :
 {
 public:
 	CCCReverseKey();
-	~CCCReverseKey();
 
 public:
 	string& GetID()

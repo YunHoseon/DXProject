@@ -330,14 +330,6 @@ float CCharacter::GetMass()
 
 void CCharacter::SetCC(CCrowdControl * cc)
 {
-	//if (m_pCC != nullptr)
-	//{
-	//	if (cc->GetID() == m_pCC->GetID())
-	//	{
-	//		return;
-	//	}
-	//	SafeDelete(m_pCC);
-	//}
 	SafeDelete(m_pCC);
 	m_pCC = cc;
 	

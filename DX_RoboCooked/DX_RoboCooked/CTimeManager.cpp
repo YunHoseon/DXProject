@@ -37,6 +37,10 @@ void CTimeManager::Update()
 	//}
 
 	m_dwLastUpdateTime = CurTime;
+	ST_TickEvent data;
+	data.fElapsedTime = m_fElapsedTime;
+	g_EventManager->CallEvent(eEvent::Tick, (void*)&data);
+
 
 }
 

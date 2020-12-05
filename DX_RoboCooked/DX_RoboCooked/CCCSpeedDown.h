@@ -4,6 +4,8 @@ class CCCSpeedDown :
 	public CCrowdControl
 {
 public:
+	CCCSpeedDown();
+public:
 	string& GetID()
 	{
 		string name = "SPEEDDOWN";

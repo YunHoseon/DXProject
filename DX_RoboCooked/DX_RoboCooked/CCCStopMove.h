@@ -5,7 +5,7 @@ class CCCStopMove :
 {
 public:
 	CCCStopMove();
-	~CCCStopMove();
+
 
 public:
 	string& GetID()
@@ -17,6 +17,5 @@ public:
 	virtual void Render(D3DXVECTOR3& vPos) {};
 	virtual bool IsMovable() { return false; }
 	virtual CCrowdControl* Clone() { return new CCCStopMove; };
-
 };
 
