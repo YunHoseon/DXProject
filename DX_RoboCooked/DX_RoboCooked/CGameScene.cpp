@@ -23,7 +23,10 @@
 #include "CSand3.h"
 #include "CCrowdControl.h"
 #include "CCCSpeedDown.h"
+#include "CCCReverseKey.h"
+#include "CCCStopMove.h"
 #include "CCCNone.h"
+
 
 #include "CUICloseButton.h"
 #include "CUIBoardButton.h"
@@ -338,15 +341,15 @@ CCrowdControl* CGameScene::ChooseCC(eSkill skill)
 	switch (skill)
 	{
 	case eSkill::KeyLock:
-		return new CCCSpeedDown;
+		return new CCCStopMove;
 	case eSkill::SlowMove:
 		return new CCCSpeedDown;
 	case eSkill::KeyRevers:
-		return new CCCSpeedDown;
-	case eSkill::SandWind:
+		return new CCCReverseKey;
+	/*case eSkill::SandWind:
 		return new CCCSpeedDown;
 	case eSkill::Flurry:
-		return new CCCSpeedDown;
+		return new CCCSpeedDown;*/
 	}
 
 	return new CCCNone;
@@ -358,10 +361,10 @@ void CGameScene::CC(CCrowdControl * pCC)
 
 	for (CCharacter* it : m_vecCharacters)
 	{
-		it->SetCC(pCC);
+		it->SetCC(pCC->Clone());
 	}
 
-
+	SafeDelete(pCC);
 }
 
 void CGameScene::MedusaUlt()

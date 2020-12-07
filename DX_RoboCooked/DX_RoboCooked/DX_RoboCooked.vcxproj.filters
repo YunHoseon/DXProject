@@ -288,6 +288,12 @@
     <ClInclude Include="CCCNone.h">
       <Filter>GameScene\Monster\CrowdControl</Filter>
     </ClInclude>
+    <ClInclude Include="CCCStopMove.h">
+      <Filter>GameScene\Monster\CrowdControl</Filter>
+    </ClInclude>
+    <ClInclude Include="CCCReverseKey.h">
+      <Filter>GameScene\Monster\CrowdControl</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="stdafx.cpp">
@@ -501,6 +507,12 @@
       <Filter>GameScene\Monster\CrowdControl</Filter>
     </ClCompile>
     <ClCompile Include="CCCNone.cpp">
+      <Filter>GameScene\Monster\CrowdControl</Filter>
+    </ClCompile>
+    <ClCompile Include="CCCReverseKey.cpp">
+      <Filter>GameScene\Monster\CrowdControl</Filter>
+    </ClCompile>
+    <ClCompile Include="CCCStopMove.cpp">
       <Filter>GameScene\Monster\CrowdControl</Filter>
     </ClCompile>
   </ItemGroup>

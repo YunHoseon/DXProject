@@ -4,6 +4,8 @@ class CCCSpeedDown :
 	public CCrowdControl
 {
 public:
+	CCCSpeedDown();
+public:
 	string& GetID()
 	{
 		string name = "SPEEDDOWN";
@@ -11,6 +13,7 @@ public:
 	};
 
 	virtual void Render(D3DXVECTOR3& vPos) {};
-	virtual float MultiplySpeed() { return 1.f; }
+	virtual float MultiplySpeed() { return 0.3f; }
+	virtual CCrowdControl* Clone() { return new CCCSpeedDown; };
 };
 
