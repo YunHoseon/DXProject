@@ -395,8 +395,6 @@ void CGameScene::MedusaUlt()
 
 	CSphereCollision Collsion(vec, 2.0f);
 
-	Collsion.Render();
-
 	//CSphereCollision* m_pCollision = new CSphereCollision(D3DXVECTOR3(vec.x, vec.y, vec.z), 2.0f);
 
 	//D3DXMATRIXA16 matWorld;
