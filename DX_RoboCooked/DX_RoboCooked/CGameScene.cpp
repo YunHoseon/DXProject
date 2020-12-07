@@ -21,6 +21,7 @@
 #include "CStair.h"
 #include "CWater.h"
 #include "CSand3.h"
+#include "CSphereCollision.h"
 #include "CCrowdControl.h"
 #include "CCCSpeedDown.h"
 #include "CCCReverseKey.h"
@@ -335,6 +336,20 @@ void CGameScene::MonsterSkill(eSkill skill)
 	CC(ChooseCC(skill));
 }
 
+bool CGameScene::CheckSpecificPartsID(string partsID)
+{
+	for (CInteractiveActor* it : m_vecParts)
+	{
+		CParts* data = static_cast<CParts*>(it);
+		if (data->GetPartsID() == partsID)
+		{
+			return true;
+		}
+	}
+
+	return false;
+}
+
 CCrowdControl* CGameScene::ChooseCC(eSkill skill)
 {
 
@@ -371,9 +386,29 @@ void CGameScene::MedusaUlt()
 {
 	int index = rand() % m_vecParts.size();
 
-	CParts* data = static_cast<CParts*>(m_vecParts[index]);
+	//CParts* data = static_cast<CParts*>(m_vecParts[index]);
+
+	D3DXVECTOR3 vec = m_vecParts[index]->GetPosition();
 
 
+//	CSphereCollision* m_pCollision = new CSphereCollision(D3DXVECTOR3(vec.x, vec.y, vec.z), 2.0f);
+	
+	D3DXMATRIXA16 matWorld;
+	D3DXMatrixTranslation(&matWorld, vec.x, vec.y, vec.z);
+	CSphereCollision* m_pCollision = new CSphereCollision(D3DXVECTOR3(vec.x, vec.y, vec.z), 2.0f,&matWorld);
+
+
+
+	m_pCollision->Update();
+
+	for (int i = 0; i < m_vecParts.size(); i++)
+	{
+		if (m_pCollision->Collide(m_vecParts[i]->GetCollision()))
+		{
+			SafeDelete(m_vecParts[i]);
+			m_vecParts.erase(m_vecParts.begin() + i);
+		}
+	}
 }
 
 bool CGameScene::IsGameClear()

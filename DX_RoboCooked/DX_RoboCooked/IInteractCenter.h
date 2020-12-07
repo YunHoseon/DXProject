@@ -20,5 +20,6 @@ public:
 	virtual void ToggleStop() = 0;
 	virtual bool GetStop() = 0;
 	virtual void MonsterSkill(eSkill skill) = 0;
+	virtual bool CheckSpecificPartsID(string partsID) = 0;
 
 };
