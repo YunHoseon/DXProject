@@ -38,6 +38,13 @@ void CStaticMeshManager::Load()
 	data.fileName = "모래돌_타일_계단 일반.X"; data.objectName = "Stair"; data.filePath = "data/model/tile";
 	vecData.push_back(data);
 
+	data.fileName = "Vending.X"; data.objectName = "Vending"; data.filePath = "data/model/object";
+	vecData.push_back(data);
+	data.fileName = "Switch1.X"; data.objectName = "Switch1"; data.filePath = "data/model/object";
+	vecData.push_back(data);
+	data.fileName = "Switch2.X"; data.objectName = "Switch2"; data.filePath = "data/model/object";
+	vecData.push_back(data);
+
 	for (ST_StaticMesh_Data datas : vecData)
 	{
 		CStaticMesh* staticMesh = new CStaticMesh;

@@ -97,7 +97,7 @@ void CGameScene::Init()
 	m_vecStaticActor.push_back(wall);
 
 	CPartStorage* partStorage = new CPartStorage(this);
-	partStorage->Setup(0, D3DXVECTOR3(5, 0, 2) , "A00");
+	partStorage->Setup(270, D3DXVECTOR3(5, 0, 2) , "A00");
 	m_vecObject.push_back(partStorage);
 
 	CPartCombinator* partManualCombinator = new CPartManualCombinator(this, eCombinatorPartsLevel::ONE , 45.0f , D3DXVECTOR3(-2, 0, 2));
