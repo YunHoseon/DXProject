@@ -36,3 +36,6 @@ public:
 	virtual void SetScale(float x, float y, float z) = 0;
 	virtual float GetHeight() = 0;
 };
+
+#include "CBoxCollision.h"
+#include "CSphereCollision.h"
