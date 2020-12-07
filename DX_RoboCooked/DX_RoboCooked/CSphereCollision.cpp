@@ -48,6 +48,7 @@ CSphereCollision::~CSphereCollision()
 
 void CSphereCollision::Render()
 {
+	_RELEASE_COMMENT m_isCollide = false;
 	_RELEASE_COMMENT return;
 
 	if(m_pMesh)

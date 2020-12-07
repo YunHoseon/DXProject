@@ -13,4 +13,5 @@ private:
 	
 	void GenIntArray(vector<int>& vecInt, int nVecSize, int nMin, int nMax);
 	int GenInt(int nMin, int nMax);
+	float GenFloat(float fMin, float fMax);
 };
