@@ -5,17 +5,15 @@
 #include "CParts.h"
 #include "CGameScene.h"
 
-CPartVending::CPartVending(COutlet* outlet, IInteractCenter* pInteractCenter, string sPartsID) :
-	m_pOutlet(outlet),
-	m_ePartVendingState(ePartVendingState::Usable),
-	m_PartVendingTexture(nullptr)
+CPartVending::CPartVending(COutlet *outlet, IInteractCenter *pInteractCenter, string sPartsID) : m_pOutlet(outlet),
+																								 m_ePartVendingState(ePartVendingState::Usable),
+																								 m_PartVendingTexture(nullptr)
 {
 	m_pInteractCenter = pInteractCenter;
 	m_sID = sPartsID;
 	m_fMass = 9999.f;
 	m_fFriction = 0.2f;
 }
-
 
 CPartVending::~CPartVending()
 {
@@ -24,7 +22,7 @@ CPartVending::~CPartVending()
 
 void CPartVending::Setup(float fAngle, D3DXVECTOR3 vPosition)
 {
-	SetRotationY(D3DXToRadian(fAngle));
+	SetRotationY(fAngle);
 	m_pSMesh = g_pStaticMeshManager->GetStaticMesh("Vending");
 	m_pCollision = new CBoxCollision(m_pSMesh->GetMesh(), &m_matWorld);
 
@@ -53,26 +51,24 @@ void CPartVending::Render()
 		_DEBUG_COMMENT m_pCollision->Render();
 }
 
-void CPartVending::OnEvent(eEvent eEvent, void* _value)
+void CPartVending::OnEvent(eEvent eEvent, void *_value)
 {
 }
 
-CParts* CPartVending::Make()
+CParts *CPartVending::Make()
 {
-	CParts* parts = g_pPartsManager->CreateParts(m_sID);
+	CParts *parts = g_pPartsManager->CreateParts(m_sID);
 	return parts;
 }
 
-void CPartVending::Interact(CCharacter* pCharacter)
+void CPartVending::Interact(CCharacter *pCharacter)
 {
-	if(m_ePartVendingState == ePartVendingState::Usable 
-		&& m_pOutlet->GetState() == eOutletState::None 
-		&& pCharacter->GetPlayerState() == ePlayerState::None)
+	if (m_ePartVendingState == ePartVendingState::Usable && m_pOutlet->GetState() == eOutletState::None && pCharacter->GetPlayerState() == ePlayerState::None)
 	{
-		CParts* parts = Make();
+		CParts *parts = Make();
 		parts->SetPosition(m_pOutlet->GetPosition() + D3DXVECTOR3(0, 1.0f, 0));
 		m_pInteractCenter->AddParts(parts);
-		
+
 		m_ePartVendingState = ePartVendingState::Unusable;
 		m_pOutlet->AcceptPartsFromVending(parts);
 		//m_pInteractCenter->SendPartsToOutlet(parts, m_pOutlet);

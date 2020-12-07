@@ -41,7 +41,9 @@ void CMainGame::Setup()
 
 	//m_pScene = new CGameScene;
 	//g_SceneManager->AddScene("GAMESCENE", new CGameScene);
-	g_SceneManager->SetCurrentScene(new CGameScene);
+	CGameScene* scene = new CGameScene;
+	//scene->Load("data/js", "SaveTest_AllActor.json");
+	g_SceneManager->SetCurrentScene(scene);
 	//g_pPartsManager->GetPartsData("data/js/PartsData.json");
 }
 

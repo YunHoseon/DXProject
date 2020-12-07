@@ -56,6 +56,7 @@ public:
 
 	const D3DXVECTOR3& GetVelocity() { return m_vVelocity; }
 	const D3DXVECTOR3& GetAcceleration() { return m_vAcceleration; }
+	const float& GetRotY() { return m_fRotY; }
 
 	virtual void AddAcceleration(const D3DXVECTOR3& vAccel);
 	virtual void AddForce(const D3DXVECTOR3& vForce);

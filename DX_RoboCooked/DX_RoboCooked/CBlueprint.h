@@ -6,16 +6,17 @@ class CBlueprint :
 	public CInteractiveActor
 {
 private:
-	int				m_nRotAngleY;			//설계도의 Y축 회전
+	//int				m_nRotAngleY;			//설계도의 Y축 회전
 	bool			m_isCompleted;			
 	string			m_sRightPartsID;		//설계도와 부합하는 파츠 ID
-	int				m_nRightPartsAngleY;	//설계도와 부합하는 파츠 회전값
+	//int				m_nRightPartsAngleY;	//설계도와 부합하는 파츠 회전값
+	float				m_fRightPartsAngleY;
 	vector<ST_PNT_VERTEX>	m_vecVertex;
 	CParts*					m_onBlueprintParts;	//설계도 위의 파츠
 	vector<CParts*>*		m_pVecParts;
 
-	D3DXMATRIXA16		m_matInteractCollision;
-	ICollisionArea*		m_pInteracteCollision;
+	//D3DXMATRIXA16		m_matInteractCollision;
+	ICollisionArea*		m_pInteractCollision;
 
 	LPDIRECT3DTEXTURE9		m_blueprintTexture;
 	LPDIRECT3DTEXTURE9		m_completeBlueprintTexture;
@@ -40,5 +41,8 @@ public:
 
 	/*getter setter*/
 	bool GetIsCompleted() { return m_isCompleted; }
+
+	void SetPosition(D3DXVECTOR3 vPosition) override;
+	void SetPosition(float x, float y, float z) override;
 };
 

@@ -3,32 +3,30 @@
 #include "CBoxCollision.h"
 #include "CPartCombinator.h"
 
-
-CCombinatorButton::CCombinatorButton(CPartCombinator* pPartCombinator)
-			:m_pPartCombinator(pPartCombinator)
+CCombinatorButton::CCombinatorButton(CPartCombinator *pPartCombinator)
+	: m_pPartCombinator(pPartCombinator)
 {
 	m_fMass = 9999.f;
 }
-
 
 CCombinatorButton::~CCombinatorButton()
 {
 	SafeRelease(m_CombinatorBtnTexture);
 }
 
-void CCombinatorButton::OnEvent(eEvent eEvent, void * _value)
+void CCombinatorButton::OnEvent(eEvent eEvent, void *_value)
 {
 }
 
-void CCombinatorButton::Interact(CCharacter * pCharacter)
+void CCombinatorButton::Interact(CCharacter *pCharacter)
 {
 	m_pPartCombinator->ReadytoCarryParts();
 }
 
 void CCombinatorButton::Update()
 {
-	 if (m_pCollision)
-		 m_pCollision->Update();
+	if (m_pCollision)
+		m_pCollision->Update();
 }
 
 void CCombinatorButton::Render()
@@ -42,7 +40,7 @@ void CCombinatorButton::Render()
 
 void CCombinatorButton::Setup(float fAngle, D3DXVECTOR3 vPosition)
 {
-	SetRotationY(D3DXToRadian(fAngle));
+	SetRotationY(fAngle);
 	m_pSMesh = g_pStaticMeshManager->GetStaticMesh("Switch1");
 	m_pCollision = new CBoxCollision(m_pSMesh->GetMesh(), &m_matWorld);
 

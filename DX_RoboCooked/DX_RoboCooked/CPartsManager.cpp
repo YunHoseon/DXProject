@@ -27,28 +27,23 @@ void CPartsManager::Load()
 	// 1. 조합식으로만 검색
 	// 2. ID로만 검색
 	// 3. 두 가지 접근점을 모두 제공
-
-	for (int i = 0; i < j.size(); ++i)
 	{
-		string id = j[i]["ID"];
-		string filename = j[i]["Filename"];
-		float fMass = j[i]["Mass"];
-		fMass *= 0.1f;
-		CParts* part = new CParts(id, j[i]["Formula"], fMass);
-		CMeshLoader::LoadMesh(filename,"data/model/parts", part->GetStaticMesh());
-		part->Setup(D3DXVECTOR3(j[i]["Size"][0], j[i]["Size"][1], j[i]["Size"][2]));
-		//part->Setup(D3DXVECTOR3(0.5, 0.5, 0.5));
+		for (int i = 0; i < j.size(); ++i)
+		{
+			string id = j[i]["ID"];
+			string filename = j[i]["Filename"];
+			float fMass = j[i]["Mass"];
+			fMass *= 0.1f;
+			CParts* part = new CParts(id, j[i]["Formula"], fMass);
+			CMeshLoader::LoadMesh(filename, "data/model/parts", part->GetStaticMesh());
+			part->Setup(D3DXVECTOR3(j[i]["Size"][0], j[i]["Size"][1], j[i]["Size"][2]));
+			//part->Setup(D3DXVECTOR3(0.5, 0.5, 0.5));
 
-		m_mapParts.emplace(id, part);
-		m_mapFormula.emplace(j[i]["Formula"], j[i]["ID"]);
+			m_mapParts.emplace(id, part);
+			m_mapFormula.emplace(j[i]["Formula"], j[i]["ID"]);
+		}
 	}
-
-	//map<string, CStaticMesh*> mapMesh;
-	//string name;
-	//CStaticMesh* mesh;
-	//name = "PartsComb1";
-	//CMeshLoader::LoadMesh("MixMch1.X", "data/model/object", mesh);
-	//mapMesh.emplace(name, mesh);
+	is.close();
 }
 
 CParts* CPartsManager::CreateParts(string sID)

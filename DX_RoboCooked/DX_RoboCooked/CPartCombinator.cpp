@@ -16,7 +16,8 @@ CPartCombinator::CPartCombinator(IInteractCenter* pInteractCenter, eCombinatorPa
 	m_fCombineTime(5.f),
 	m_nPartsCount(0),
 	m_eCombinatorActionState(eCombinatorActionState::Usable),
-	m_nMaxPartsCount(0)
+	m_nMaxPartsCount(0),
+	m_pSMesh(nullptr)
 {
 	m_pInteractCenter = pInteractCenter;
 	m_vPosition = vPosition;

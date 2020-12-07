@@ -10,6 +10,7 @@ class CCharacter;
 class CUIButton;
 class CBlueprint;
 class CMonster;
+class CTornado;
 
 
 class CDebugPlayer1;
@@ -22,11 +23,12 @@ private:
 	CField*						m_pField;
 	vector<CActor*>				m_vecStaticActor;
 	vector<CInteractiveActor*>	m_vecObject;
-	vector<CParts*>	m_vecParts;
+	vector<CParts*>				m_vecParts;
 	vector<CCharacter*>			m_vecCharacters;
 	vector<CBlueprint*>			m_vecBlueprints;
 	vector<CMonster*>			m_vecMonster;
-
+	D3DXVECTOR3					m_vWind;
+	CTornado*					m_pTornado;
 
 	bool						m_isTimeStop;
 	CDebugPlayer1*				m_pDebugSphere;
@@ -42,6 +44,7 @@ public:
 	virtual void Init();
 	virtual void Render();
 	virtual void Update();
+	void Load(string sFolder, string sFilename);
 
 	void GetInteractObject(CCharacter* pCharacter) override;
 	void AddParts(CParts* parts) override;
@@ -52,11 +55,17 @@ public:
 	void ToggleStop() override;
 	bool GetStop() override {return m_isTimeStop;}
 	void MonsterSkill(eSkill skill) override;
+	void FinishSkill(eSkill skill) override;
 	bool CheckSpecificPartsID(string parts) override;
+
+
 	CCrowdControl* ChooseCC(eSkill skill);
 	void CC(CCrowdControl* pCC);
 	void MedusaUlt();
-
+	void SetWindDirection();
+	void SetTornadoSkill();
+	void DeleteWind();
+	void DeleteTornado();
 	bool IsGameClear();
 };
 
