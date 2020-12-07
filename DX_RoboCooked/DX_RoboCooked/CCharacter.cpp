@@ -334,3 +334,11 @@ void CCharacter::SetCC(CCrowdControl * cc)
 	m_pCC = cc;
 	
 }
+
+void CCharacter::Reset()
+{
+	SetPosition(m_vDefaultPosition);
+	SetRotationY(D3DX_PI);
+	m_vVelocity = g_vZero;
+	m_vAcceleration = g_vZero;
+}

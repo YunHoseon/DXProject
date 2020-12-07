@@ -15,6 +15,10 @@ CDebugPlayer2::CDebugPlayer2(IInteractCenter* pInteractCenter): CCharacter(1)
 	g_EventManager->Attach(eEvent::KeyPress, this);
 	g_EventManager->Attach(eEvent::KeyRelease, this);
 	g_EventManager->Attach(eEvent::Player2KeyChange, this);
+
+	m_pCollision = new CSphereCollision(g_vZero, 0.5f, &m_matWorld);
+	m_pInteractCollision = new CBoxCollision(D3DXVECTOR3(0, 0, 0.5f), D3DXVECTOR3(.8f, .8f, .8f), &m_matWorld);
+	D3DXCreateSphere(g_pD3DDevice, 0.5f, 10, 10, &m_pMesh, NULL);
 }
 
 CDebugPlayer2::~CDebugPlayer2()
@@ -24,7 +28,5 @@ CDebugPlayer2::~CDebugPlayer2()
 
 void CDebugPlayer2::Setup()
 {
-	m_pCollision = new CSphereCollision(g_vZero, 0.5f, &m_matWorld);
-	m_pInteractCollision = new CBoxCollision(D3DXVECTOR3(0, 0, 0.5f), D3DXVECTOR3(.8f, .8f, .8f), &m_matWorld);
-	D3DXCreateSphere(g_pD3DDevice, 0.5f, 10, 10, &m_pMesh, NULL);
+
 }

@@ -9,26 +9,27 @@
 CBlueprint::CBlueprint(string partsID, vector<CParts*>& vecParts, D3DXVECTOR3 position, D3DXVECTOR3 scale, float angle, float partsAngle)
 	: m_isCompleted(false)
 	, m_onBlueprintParts(NULL)
-	, m_pInteracteCollision(nullptr)
+	, m_pInteractCollision(nullptr)
 {
 	m_sRightPartsID = partsID;
 	m_pVecParts = &vecParts;
-	m_vPosition = position;
-	m_vScale = scale;
 	m_blueprintTexture = g_pTextureManager->GetTexture("data/Texture/Blueprint.jpg");
 	m_completeBlueprintTexture = g_pTextureManager->GetTexture("data/Texture/CompleteBlueprint.jpg");
 	//파츠 아이디에 따라 m_matS,텍스쳐 다르게
 	m_fFriction = 0.2f;
-	m_nRightPartsAngleY = partsAngle;
-	m_nRotAngleY = angle;
+	SetPosition(position);
+	SetScale(scale);
+	SetRotationY(angle);
+	
+	m_fRightPartsAngleY = partsAngle;
 	m_fMass = 9999.f;
-	D3DXMatrixIdentity(&m_matInteractCollision);
+	//D3DXMatrixIdentity(&m_matInteractCollision);
 }
 
 
 CBlueprint::~CBlueprint()
 {
-	SafeDelete(m_pInteracteCollision);
+	SafeDelete(m_pInteractCollision);
 }
 
 void CBlueprint::Setup()
@@ -131,21 +132,19 @@ void CBlueprint::Setup()
 
 	m_vecVertex_Multi = vecVertex;
 	
-	D3DXMatrixRotationY(&m_matR, D3DXToRadian(m_nRotAngleY));
-	D3DXMatrixTranslation(&m_matT, m_vPosition.x, m_vPosition.y, m_vPosition.z);
-	m_matWorld = m_matS * m_matR * m_matT;
+	//D3DXMatrixRotationY(&m_matR, D3DXToRadian(m_nRotAngleY));
+	//D3DXMatrixTranslation(&m_matT, m_vPosition.x, m_vPosition.y, m_vPosition.z);
+	//m_matWorld = m_matS * m_matR * m_matT;
 
-	m_matInteractCollision = m_matT;
-	m_pCollision = new CSphereCollision(D3DXVECTOR3(0, 0.5f, 0), 1.0f, &m_matInteractCollision);
+	//m_matInteractCollision = m_matT;
+	m_pCollision = new CSphereCollision(D3DXVECTOR3(0, 0.5f, 0), 1.0f, &m_matWorld);
 	m_pCollision->SetActive(false);
-	SetScale(m_vScale);
-	m_pCollision->SetScale(1, 1, 1);
-	m_pInteracteCollision = new CSphereCollision(D3DXVECTOR3(0, 0.5f, 0), 1.0f, &m_matInteractCollision);
+	m_pInteractCollision = new CSphereCollision(D3DXVECTOR3(0, 0.5f, 0), 1.0f, &m_matWorld);
 	
 	if(m_pCollision)
 		m_pCollision->Update();
-	if (m_pInteracteCollision)
-		m_pInteracteCollision->Update();
+	if (m_pInteractCollision)
+		m_pInteractCollision->Update();
 }
 
 void CBlueprint::Update()
@@ -157,8 +156,8 @@ void CBlueprint::Render()
 {
 	_DEBUG_COMMENT if (m_pCollision)
 		_DEBUG_COMMENT m_pCollision->Render();
-	_DEBUG_COMMENT if (m_pInteracteCollision)
-		_DEBUG_COMMENT m_pInteracteCollision->Render();
+	_DEBUG_COMMENT if (m_pInteractCollision)
+		_DEBUG_COMMENT m_pInteractCollision->Render();
 
 	if (CheckBluePrintComplete() == true && m_onBlueprintParts)
 	{
@@ -188,13 +187,13 @@ void CBlueprint::StoreOnBlueprintParts()
 	{
 		for (CParts* it : *m_pVecParts)
 		{
-			if (it->GetCollision()->Collide(m_pInteracteCollision))
+			if (it->GetCollision()->Collide(m_pInteractCollision))
 			{
 				m_onBlueprintParts = it;
-				m_onBlueprintParts->SetGrabPosition(&m_pInteracteCollision->GetCenter());
+				m_onBlueprintParts->SetGrabPosition(&m_pInteractCollision->GetCenter());
 				m_onBlueprintParts->GetCollision()->SetActive(false);
 				m_pCollision->SetActive(true);
-				m_pInteracteCollision->SetActive(false);
+				m_pInteractCollision->SetActive(false);
 				break;
 			}
 		}
@@ -204,7 +203,7 @@ void CBlueprint::StoreOnBlueprintParts()
 bool CBlueprint::CheckBluePrintComplete()
 {
 	if (m_onBlueprintParts && m_sRightPartsID == m_onBlueprintParts->GetPartsID()
-		&& m_nRightPartsAngleY == m_onBlueprintParts->GetPartsAngle())
+		&& abs(m_fRightPartsAngleY - m_onBlueprintParts->GetRotY()) < EPSILON)
 	{
 		m_isCompleted = true;
 	}
@@ -224,7 +223,7 @@ void CBlueprint::Interact(CCharacter* pCharacter)
 			m_onBlueprintParts = nullptr;
 			m_isCompleted = false;
 			m_pCollision->SetActive(false);
-			m_pInteracteCollision->SetActive(true);
+			m_pInteractCollision->SetActive(true);
 		}
 	}
 }
@@ -277,4 +276,18 @@ void CBlueprint::MultiTexture_Render()
 		g_pD3DDevice->SetSamplerState(i, D3DSAMP_MINFILTER, D3DTEXF_NONE);
 		g_pD3DDevice->SetSamplerState(i, D3DSAMP_MIPFILTER, D3DTEXF_NONE);
 	}
+}
+
+void CBlueprint::SetPosition(D3DXVECTOR3 vPosition)
+{
+	CActor::SetPosition(vPosition);
+	if (m_pInteractCollision)
+		m_pInteractCollision->Update();
+}
+
+void CBlueprint::SetPosition(float x, float y, float z)
+{
+	CActor::SetPosition(x, y, z);
+	if (m_pInteractCollision)
+		m_pInteractCollision->Update();
 }

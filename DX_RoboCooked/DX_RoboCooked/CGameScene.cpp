@@ -37,6 +37,8 @@
 
 
 /* µð¹ö±ë¿ë */
+#include <fstream>
+
 #include "CDebugPlayer1.h"
 #include "CDebugPlayer2.h"
 #include "CTestStair.h"
@@ -97,10 +99,14 @@ void CGameScene::Init()
 	m_vecStaticActor.push_back(wall);
 
 	CPartStorage* partStorage = new CPartStorage(this);
-	partStorage->Setup(0, D3DXVECTOR3(5, 0, 2) , "A00");
+	partStorage->Setup(0, D3DXVECTOR3(5, 0, 2), "A00");
 	m_vecObject.push_back(partStorage);
 
-	CPartCombinator* partManualCombinator = new CPartManualCombinator(this, eCombinatorPartsLevel::ONE , 45.0f , D3DXVECTOR3(-2, 0, 2));
+	partStorage = new CPartStorage(this);
+	partStorage->Setup(0, D3DXVECTOR3(5, 0, 3), "A02");
+	m_vecObject.push_back(partStorage);
+
+	CPartCombinator* partManualCombinator = new CPartManualCombinator(this, eCombinatorPartsLevel::ONE , 0 , D3DXVECTOR3(-2, 0, 2));
 	m_vecObject.push_back(partManualCombinator);
 
 	CCombinatorButton* combinatorButton = new CCombinatorButton(partManualCombinator);
@@ -125,8 +131,9 @@ void CGameScene::Init()
 	m_vecBlueprints.push_back(blueprint);
 
 	CBlueprint* blueprint2 = new CBlueprint("A01", m_vecParts,
-		D3DXVECTOR3(5.0f, -0.5f, 0), D3DXVECTOR3(2.0f, 0.1f, 2.8f), 90, 90);
+		D3DXVECTOR3(5.0f, -0.5f, 0), D3DXVECTOR3(2.0f, 0.1f, 2.8f), D3DX_PI * 0.5f, D3DX_PI * 0.5f);
 	blueprint2->Setup();
+	blueprint2->SetPosition(-3.0f, -0.5f, 0);
 	//m_vecObject.push_back(blueprint2);
 	m_vecBlueprints.push_back(blueprint2);
 
@@ -141,15 +148,6 @@ void CGameScene::Init()
 	m_vecCharacters.push_back(m_pDebugSphere);
 	m_vecCharacters.push_back(m_pDebugCube);
 
-	//m_pDebugParts = new CParts("999");
-	//if (m_pDebugParts)
-	//	m_pDebugParts->Setup();
-	//m_vecParts.push_back(m_pDebugParts);
-	//
-	//CParts* m_pDebugParts2 = new CParts("999");
-	//if (m_pDebugParts2)
-	//	m_pDebugParts2->Setup();
-	//m_vecParts.push_back(m_pDebugParts2);
 
 	m_pDebugPauseUI = new CUIPauseButton(D3DXVECTOR2(100,100),27,this);
 	m_pDebugPauseUI->Setup();
@@ -305,6 +303,163 @@ void CGameScene::Update()
 		if (m_pDebugPauseUI)
 			m_pDebugPauseUI->Update();
 	}
+}
+
+void CGameScene::Load(string sFolder, string sFilename)
+{
+	string sFullname = sFolder + "/" + sFilename;
+	std::ifstream is(sFullname);
+	assert(is.is_open());
+	json j;
+	is >> j;
+
+	// blueprint
+	{
+		json jBP = j["Blueprint"];
+		for (auto && p : jBP)
+		{
+			string id = p["PartsID"];
+			D3DXVECTOR3 pos(p["Position"][0], p["Position"][1], p["Position"][2]);
+			float rotate = p["Rotate"];
+			D3DXVECTOR3 scale(p["Scale"][0], p["Scale"][1], p["Scale"][2]);
+			CBlueprint* blueprint = new CBlueprint(id, m_vecParts, pos, scale, rotate, rotate);
+			blueprint->Setup();
+			m_vecBlueprints.push_back(blueprint);
+		}
+	}
+	{
+		//outlet - vending
+		json jOutlet = j["Outlet"];
+		vector<COutlet*> vecOutlet;
+		for (auto&& p : jOutlet)
+		{
+			D3DXVECTOR3 pos(p["Position"][0], p["Position"][1], p["Position"][2]);
+			float rotate = p["Rotate"];
+			D3DXVECTOR3 scale(p["Scale"][0], p["Scale"][1], p["Scale"][2]);
+			COutlet* pOutlet = new COutlet(this);
+			pOutlet->SetScale(scale);
+			pOutlet->Setup(rotate, pos);
+			m_vecObject.push_back(pOutlet);
+			vecOutlet.push_back(pOutlet);
+		}
+		json jvending = j["PartVending"];
+		for (auto && p : jvending)
+		{
+			string id = p["PartsId"];
+			D3DXVECTOR3 pos(p["Position"][0], p["Position"][1], p["Position"][2]);
+			float rotate = p["Rotate"];
+			D3DXVECTOR3 scale(p["Scale"][0], p["Scale"][1], p["Scale"][2]);
+			CPartVending* vending = new CPartVending(vecOutlet[p["OutletIdx"]], this, id);
+			vending->Setup(rotate, pos);
+			vending->SetScale(scale);
+			m_vecObject.push_back(vending);
+		}
+	}
+	{
+		// manual - switch
+		json jManual = j["PartManualCombinator"];
+		vector<CPartManualCombinator*> vecManual;
+		for (auto&& p : jManual)
+		{
+			D3DXVECTOR3 pos(p["Position"][0], p["Position"][1], p["Position"][2]);
+			float rotate = p["Rotate"];
+			D3DXVECTOR3 scale(p["Scale"][0], p["Scale"][1], p["Scale"][2]);
+			CPartManualCombinator* manual = new CPartManualCombinator(this, (eCombinatorPartsLevel)0, rotate, pos);
+			//manual->SetScale(scale);
+			m_vecObject.push_back(manual);
+			vecManual.push_back(manual);
+		}
+		json jButton = j["CombinatorButton"];
+		for (auto&& p : jButton)
+		{
+			D3DXVECTOR3 pos(p["Position"][0], p["Position"][1], p["Position"][2]);
+			float rotate = p["Rotate"];
+			D3DXVECTOR3 scale(p["Scale"][0], p["Scale"][1], p["Scale"][2]);
+			CCombinatorButton* button = new CCombinatorButton(vecManual[p["PartManualCombinatorIdx"]]);
+			button->Setup(rotate, pos);
+			//button->SetScale(scale);
+			m_vecObject.push_back(button);
+		}
+	}
+	{
+		// auto
+		json jAuto = j["PartAutoCombinator"];
+		for (auto&& p : jAuto)
+		{
+			D3DXVECTOR3 pos(p["Position"][0], p["Position"][1], p["Position"][2]);
+			float rotate = p["Rotate"];
+			D3DXVECTOR3 scale(p["Scale"][0], p["Scale"][1], p["Scale"][2]);
+			CPartAutoCombinator* autoCombinator = new CPartAutoCombinator(this, (eCombinatorPartsLevel)0, rotate, pos);
+			//autoCombinator->SetScale(scale);
+			m_vecObject.push_back(autoCombinator);
+		}
+	}
+	{
+		// storage
+		json jStorage = j["PartStorage"];
+		for (auto&& p : jStorage)
+		{
+			string id = p["PartsId"];
+			D3DXVECTOR3 pos(p["Position"][0], p["Position"][1], p["Position"][2]);
+			float rotate = p["Rotate"];
+			D3DXVECTOR3 scale(p["Scale"][0], p["Scale"][1], p["Scale"][2]);
+			CPartStorage* storage = new CPartStorage(this);
+			storage->Setup(rotate, pos, id);
+			//storage->SetScale(scale);
+			m_vecObject.push_back(storage);
+		}
+	}
+	{
+		// parts
+		json jParts = j["Parts"];
+		for (auto&& p : jParts)
+		{
+			string id = p["PartsId"];
+			D3DXVECTOR3 pos(p["Position"][0], p["Position"][1], p["Position"][2]);
+			float rotate = p["Rotate"];
+			D3DXVECTOR3 scale(p["Scale"][0], p["Scale"][1], p["Scale"][2]);
+			CParts* parts = g_pPartsManager->CreateParts(id);
+			parts->SetPosition(pos);
+			parts->SetRotationY(rotate);
+			parts->SetScale(scale);
+			m_vecParts.push_back(parts);
+		}
+	}
+	{
+		// player1
+		if(!j["Player1"].empty())
+		{
+			auto&& p = j["Player1"][0];
+			CDebugPlayer1* player = new CDebugPlayer1(this);
+			D3DXVECTOR3 pos(p["Position"][0], p["Position"][1], p["Position"][2]);
+			float rotate = p["Rotate"];
+			D3DXVECTOR3 scale(p["Scale"][0], p["Scale"][1], p["Scale"][2]);
+			player->SetDefaultPosition(pos);
+			player->SetPosition(pos);
+			player->SetRotationY(rotate);
+			player->SetScale(scale);
+			m_vecCharacters.push_back(player);
+		}
+	}
+	{
+		// player2
+		if (!j["Player2"].empty())
+		{
+			auto&& p = j["Player2"][0];
+			CDebugPlayer2* player = new CDebugPlayer2(this);
+			D3DXVECTOR3 pos(p["Position"][0], p["Position"][1], p["Position"][2]);
+			float rotate = p["Rotate"];
+			D3DXVECTOR3 scale(p["Scale"][0], p["Scale"][1], p["Scale"][2]);
+			player->SetDefaultPosition(pos);
+			player->SetPosition(pos);
+			player->SetRotationY(rotate);
+			player->SetScale(scale);
+			m_vecCharacters.push_back(player);
+		}
+	}
+	
+	
+
 }
 
 void CGameScene::ToggleStop()

@@ -33,7 +33,7 @@ CPartManualCombinator::~CPartManualCombinator()
 
 void CPartManualCombinator::Setup(float fAngle, D3DXVECTOR3 vPosition)
 {
-	SetRotationY(D3DXToRadian(fAngle));
+	SetRotationY(fAngle);
 	m_pSMesh = g_pStaticMeshManager->GetStaticMesh("ManualCombinator");
 	m_pCollision = new CBoxCollision(m_pSMesh->GetMesh(), &m_matWorld);
 

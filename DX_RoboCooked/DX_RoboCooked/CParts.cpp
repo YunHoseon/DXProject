@@ -6,7 +6,7 @@
 #include "CCharacter.h"
 
 CParts::CParts(string sPartsID, string sFormula, float fMass)
-	: m_vGrabPosition(nullptr), m_isMoveParts(false), m_nRotAngleY(0.0f),
+	: m_vGrabPosition(nullptr), m_isMoveParts(false),
 	  m_eLevel(eCombinatorPartsLevel::ONE), m_vCombinatorPosition(0, 0, 0) , m_pPartsCombinator(NULL),
 	m_sPartsID(sPartsID), m_sFormula(sFormula)
 {
@@ -19,6 +19,7 @@ CParts::CParts(string sPartsID, string sFormula, float fMass)
 	case 'D': m_eLevel = eCombinatorPartsLevel::FOUR; break;
 	default: break;
 	}
+	SetRotationY(0);
 }
 
 CParts::CParts(CParts* pParts) :
@@ -45,7 +46,7 @@ CParts::~CParts()
 void CParts::Setup(D3DXVECTOR3& vScale)
 {
 	assert(m_cMesh.GetMesh());
-	m_pCollision = new CSphereCollision(m_cMesh.GetMesh(), &m_matWorld);
+	m_pCollision = new CBoxCollision(m_cMesh.GetMesh(), &m_matWorld);
 	SetScale(vScale);
 	if (m_pCollision)
 		m_pCollision->Update();
@@ -112,11 +113,11 @@ void CParts::ThrowParts(D3DXVECTOR3 vForce)
 
 void CParts::PartsRotate()
 {
-	m_nRotAngleY += 90;
-	if (m_nRotAngleY == 360)
-		m_nRotAngleY = 0;
-
-	D3DXMatrixRotationY(&m_matR, D3DXToRadian(m_nRotAngleY));
+	m_fRotY += D3DX_PI * 0.5f;
+	if (m_fRotY >= D3DX_PI * 2)
+		m_fRotY = 0;
+	
+	SetRotationY(m_fRotY);
 
 	g_EventManager->CallEvent(eEvent::SpinParts, NULL);
 }
@@ -137,7 +138,7 @@ void CParts::MoveParts()
 		return;
 	}
 	D3DXVec3Normalize(&vDirection, &vDirection);
-	m_vPosition += vDirection * 0.01f;
+	m_vPosition += vDirection * 0.05f;
 }
 
 void CParts::SetGrabPosition(D3DXVECTOR3* vPosition)

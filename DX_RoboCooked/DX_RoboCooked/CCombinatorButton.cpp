@@ -155,8 +155,8 @@ void CCombinatorButton::Setup(float fAngle, D3DXVECTOR3 vPosition)
 
 	m_CombinatorBtnTexture = g_pTextureManager->GetTexture(("data/Texture/stones.png"));
 
-	D3DXMatrixRotationY(&m_matR, D3DXToRadian(0.0f));
-	D3DXMatrixTranslation(&m_matT, vPosition.x, 0, vPosition.z);
-
 	m_pCollision = new CBoxCollision(D3DXVECTOR3(0, 0, 0), D3DXVECTOR3(1.0f, 1.0f, 1.0f), &m_matWorld);
+	SetPosition(vPosition);
+	SetRotationY(fAngle);
+
 }

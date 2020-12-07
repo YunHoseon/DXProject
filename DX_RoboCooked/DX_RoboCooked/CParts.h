@@ -18,7 +18,7 @@ private:
 
 	bool							m_isMoveParts;
 	string							m_sPartsID;
-	int								m_nRotAngleY;
+	//int								m_nRotAngleY;
 	eCombinatorPartsLevel			m_eLevel;
 	string							m_sFormula;
 	CPartCombinator*				m_pPartsCombinator;
@@ -49,7 +49,7 @@ public:
 	string GetPartsID() { return m_sPartsID; }
 	void SetPartsID(string	ID) { m_sPartsID = ID; }
 
-	int GetPartsAngle() { return m_nRotAngleY; }
+	//int GetPartsAngle() { return m_nRotAngleY; }
 	
 	string GetFormula() { return m_sFormula; }
 	void SetFormula(string sFormula) { m_sFormula = sFormula; }

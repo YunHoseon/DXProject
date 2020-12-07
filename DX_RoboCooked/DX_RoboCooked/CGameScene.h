@@ -42,6 +42,7 @@ public:
 	virtual void Init();
 	virtual void Render();
 	virtual void Update();
+	void Load(string sFolder, string sFilename);
 
 	void GetInteractObject(CCharacter* pCharacter) override;
 	void AddParts(CParts* parts) override;

@@ -20,13 +20,13 @@ CPartStorage::~CPartStorage()
 
 void CPartStorage::Update()
 {
-	//m_pSkinnedMesh->Update();
+	m_pSkinnedMesh->Update();
 }
 
 void CPartStorage::Render()
 {
 
-	g_pD3DDevice->SetTransform(D3DTS_WORLD, &g_matIdentity);
+	g_pD3DDevice->SetTransform(D3DTS_WORLD, &m_matWorld);
 	m_pSkinnedMesh->Render(nullptr);
 	
 	_DEBUG_COMMENT if (m_pCollision)
@@ -38,11 +38,10 @@ void CPartStorage::Setup(float fAngle, D3DXVECTOR3 vPosition, string sPartsID)
 	m_sID = sPartsID;
 
 	m_pSkinnedMesh = new CSkinnedMesh("data/model/object", "MTA_CV.X");
-	m_pSkinnedMesh->SetTransform(&m_matWorld);
-	//m_pCollision = new CBoxCollision((m_pSkinnedMesh->GetMax() + m_pSkinnedMesh->GetMin()) * 0.5f, m_pSkinnedMesh->GetMax() - m_pSkinnedMesh->GetMin(), &m_matWorld);
-	m_pCollision = new CBoxCollision(g_vZero, D3DXVECTOR3(1 / 0.015f, 1 / 0.015f, 1 / 0.015f), &m_matWorld);
+	m_pCollision = new CBoxCollision((m_pSkinnedMesh->GetMax() + m_pSkinnedMesh->GetMin()) * 0.5f, m_pSkinnedMesh->GetMax() - m_pSkinnedMesh->GetMin(), &m_matWorld);
+	//m_pCollision = new CBoxCollision(g_vZero, D3DXVECTOR3(1 / 0.015f, 1 / 0.015f, 1 / 0.015f), &m_matWorld);
 	
-	SetRotationY(D3DXToRadian(fAngle));
+	SetRotationY(fAngle);
 	SetPosition(vPosition);
 	SetScale(0.015, 0.015, 0.015);
 

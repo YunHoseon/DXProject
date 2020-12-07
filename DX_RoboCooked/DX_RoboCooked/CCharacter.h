@@ -23,6 +23,7 @@ protected:
 	D3DXVECTOR3			m_vGrabPartsPosition;
 	CParts*				m_pParts;
 
+	D3DXVECTOR3			m_vDefaultPosition;
 	// 키다운 관련.
 	array<float, 3>		m_arrElapsedTime;
 	array<float, 3>		m_arrCoolDown;
@@ -60,6 +61,9 @@ public:
 	void SetParts(CParts* pParts) { m_pParts = pParts; }
 	CParts* GetParts() { return m_pParts; }
 	void SetCC(CCrowdControl* cc);
+
+	virtual void SetDefaultPosition(D3DXVECTOR3 vPos) { m_vDefaultPosition = vPos; }
+	virtual void Reset();
 	
 };
 

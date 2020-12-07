@@ -123,15 +123,10 @@ void CPartVending::Setup(float fAngle, D3DXVECTOR3 vPosition)
 	m_vPosition = vPosition;
 	m_vecVertex = vecVertex;
 	m_PartVendingTexture = g_pTextureManager->GetTexture(("data/Texture/scifi_07.png"));
-	D3DXMatrixRotationY(&m_matR, D3DXToRadian(0.0f));
-	D3DXMatrixTranslation(&m_matT, vPosition.x, 0, vPosition.z);
 
 	m_pCollision = new CBoxCollision(D3DXVECTOR3(0, 0, 0), D3DXVECTOR3(1.0f, 1.0f, 1.0f), &m_matWorld);
-	
-	m_matWorld = m_matS * m_matR * m_matT;
-	
-	if (m_pCollision)
-		m_pCollision->Update();
+	SetRotationY(fAngle);
+	SetPosition(vPosition);
 }
 
 void CPartVending::Update()
