@@ -14,6 +14,7 @@ CMonster::CMonster(IInteractCenter* pInteractCenter)
 			, m_nCrowdControlCount(0)
 			, m_nThrowPartsCount(0)
 			, m_nSpinPartsCount(0)
+			, m_sSpecificPartsID("")
 {
 	ChooseSkillCondition();
 }
@@ -25,7 +26,6 @@ CMonster::~CMonster()
 
 void CMonster::Update()
 {
-	//cout << m_fTravelDistance << endl;
 	if (FirstSkillTriggered())
 	{
 		m_stSkillUsing.SkillProperty = FirstSkill();
@@ -38,6 +38,12 @@ void CMonster::Update()
 		m_stSkillUsing.SkillLevel = eSkillLevel::Two;
 		ChooseSkillCondition();
 	}
+
+	if (UltimateSkillTriggered())
+	{
+
+	}
+
 
 	if (m_stSkillUsing.SkillProperty != eSkill::None)
 	{
@@ -222,4 +228,12 @@ void CMonster::SkillConditionInit()
 		m_fTravelDistance = 0.0f;
 		break;
 	}
+}
+
+bool CMonster::UltimateSkillTriggered()
+{
+	if (m_pInteractCenter->CheckSpecificPartsID(m_sSpecificPartsID))
+		return true;
+
+	return false;
 }

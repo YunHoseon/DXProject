@@ -52,6 +52,7 @@ public:
 	void ToggleStop() override;
 	bool GetStop() override {return m_isTimeStop;}
 	void MonsterSkill(eSkill skill) override;
+	bool CheckSpecificPartsID(string parts) override;
 	CCrowdControl* ChooseCC(eSkill skill);
 	void CC(CCrowdControl* pCC);
 	void MedusaUlt();

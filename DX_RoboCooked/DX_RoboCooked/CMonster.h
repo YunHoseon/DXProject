@@ -63,6 +63,9 @@ protected:
 	INT							m_nThrowPartsCount;//6
 	INT							m_nSpinPartsCount;//7
 
+
+	string						m_sSpecificPartsID;
+
 public:
 	CMonster(IInteractCenter* pInteractCenter);
 	virtual ~CMonster();
@@ -95,6 +98,7 @@ public:
 
 private:
 	void SkillConditionInit();
+	bool UltimateSkillTriggered();
 	bool SecondSkillTriggered();
 	bool FirstSkillTriggered();
 };
