@@ -50,7 +50,8 @@ CGameScene::CGameScene() :
 	m_pDebugCube(NULL),
 	m_pDebugParts(NULL),
 	m_pDebugPauseUI(nullptr),
-	m_isTimeStop(false)
+	m_isTimeStop(false),
+	m_vWind(0,0,0)
 {
 	//Sound Add
 	g_SoundManager->AddBGM("data/sound/bgm.mp3");
@@ -221,6 +222,19 @@ void CGameScene::Update()
 			CPhysicsApplyer::ApplyGravity(part);
 		}
 	}
+
+
+	{
+		for (CCharacter * character : m_vecCharacters)
+		{
+			character->AddForce(m_vWind);
+		}
+
+		for (CInteractiveActor* part : m_vecParts)
+		{
+			part->AddForce(m_vWind);
+		}
+	}
 	
 	// collide -> update
 	{// collide
@@ -319,19 +333,13 @@ void CGameScene::MonsterSkill(eSkill skill)
 {
 	switch (skill)
 	{
-	/*case eSkill::KeyLock:
-		break;
-	case eSkill::SlowMove:
-		break;*/
 	case eSkill::DestroyParts:
 		MedusaUlt();
-		break;
-	/*case eSkill::KeyRevers:
 		break;
 	case eSkill::SandWind:
 		break;
 	case eSkill::Flurry:
-		break;*/
+		break;
 	}
 
 	CC(ChooseCC(skill));
@@ -362,10 +370,6 @@ CCrowdControl* CGameScene::ChooseCC(eSkill skill)
 		return new CCCSpeedDown;
 	case eSkill::KeyRevers:
 		return new CCCReverseKey;
-	/*case eSkill::SandWind:
-		return new CCCSpeedDown;
-	case eSkill::Flurry:
-		return new CCCSpeedDown;*/
 	}
 
 	return new CCCNone;
@@ -388,8 +392,6 @@ void CGameScene::MedusaUlt()
 	CRandomNumberGenerator rand;
 	int index = rand.GenInt(0, m_vecParts.size() - 1);
 
-	//CParts* data = static_cast<CParts*>(m_vecParts[index]);
-
 	D3DXVECTOR3 vec = m_vecParts[index]->GetPosition();
 
 	CSphereCollision Collsion(vec, 2.0f);
@@ -406,10 +408,8 @@ void CGameScene::MedusaUlt()
 		}
 	}
 
-
-
-
 }
+
 
 bool CGameScene::IsGameClear()
 {
