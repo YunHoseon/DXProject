@@ -6,7 +6,7 @@
 #include "CParts.h"
 #include "CInteractiveActor.h"
 
-CBlueprint::CBlueprint(string partsID, vector<CInteractiveActor*>& vecParts, D3DXVECTOR3 position, D3DXVECTOR3 scale, float angle, float partsAngle)
+CBlueprint::CBlueprint(string partsID, vector<CParts*>& vecParts, D3DXVECTOR3 position, D3DXVECTOR3 scale, float angle, float partsAngle)
 	: m_isCompleted(false)
 	, m_onBlueprintParts(NULL)
 	, m_pInteracteCollision(nullptr)
@@ -186,11 +186,11 @@ void CBlueprint::StoreOnBlueprintParts()
 	
 	if (m_onBlueprintParts == nullptr)
 	{
-		for (CInteractiveActor* it : *m_pVecParts)
+		for (CParts* it : *m_pVecParts)
 		{
 			if (it->GetCollision()->Collide(m_pInteracteCollision))
 			{
-				m_onBlueprintParts = (CParts*)it;
+				m_onBlueprintParts = it;
 				m_onBlueprintParts->SetGrabPosition(&m_pInteracteCollision->GetCenter());
 				m_onBlueprintParts->GetCollision()->SetActive(false);
 				m_pCollision->SetActive(true);

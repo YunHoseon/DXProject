@@ -8,7 +8,9 @@ class IPartGenerator;
 enum class eCombinatorPartsLevel
 {
 	ONE,
-	TWO
+	TWO,
+	THREE,
+	FOUR
 };
 
 enum class eCombinatorLoadState

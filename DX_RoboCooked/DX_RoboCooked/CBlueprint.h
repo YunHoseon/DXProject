@@ -12,7 +12,7 @@ private:
 	int				m_nRightPartsAngleY;	//설계도와 부합하는 파츠 회전값
 	vector<ST_PNT_VERTEX>	m_vecVertex;
 	CParts*					m_onBlueprintParts;	//설계도 위의 파츠
-	vector<CInteractiveActor*>*		m_pVecParts;
+	vector<CParts*>*		m_pVecParts;
 
 	D3DXMATRIXA16		m_matInteractCollision;
 	ICollisionArea*		m_pInteracteCollision;
@@ -21,7 +21,7 @@ private:
 	LPDIRECT3DTEXTURE9		m_completeBlueprintTexture;
 	vector<ST_PNT_VERTEX>	m_vecVertex_Multi;
 public:
-	CBlueprint(string partsID, vector<CInteractiveActor*>& vecParts, D3DXVECTOR3 position, D3DXVECTOR3 scale, float angle, float partsAngle);
+	CBlueprint(string partsID, vector<CParts*>& vecParts, D3DXVECTOR3 position, D3DXVECTOR3 scale, float angle, float partsAngle);
 	~CBlueprint();
 
 	void Setup();

@@ -11,6 +11,14 @@ CParts::CParts(string sPartsID, string sFormula, float fMass)
 	m_sPartsID(sPartsID), m_sFormula(sFormula)
 {
 	m_fMass = fMass;
+	switch (m_sPartsID[0])
+	{
+	case 'A': m_eLevel = eCombinatorPartsLevel::ONE; break;
+	case 'B': m_eLevel = eCombinatorPartsLevel::TWO; break;
+	case 'C': m_eLevel = eCombinatorPartsLevel::THREE; break;
+	case 'D': m_eLevel = eCombinatorPartsLevel::FOUR; break;
+	default: break;
+	}
 }
 
 CParts::CParts(CParts* pParts) :
