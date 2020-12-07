@@ -24,6 +24,7 @@
 #include "CCCReverseKey.h"
 #include "CCCStopMove.h"
 #include "CCCNone.h"
+#include "CTornado.h"
 
 
 #include "CUICloseButton.h"
@@ -47,7 +48,9 @@ CGameScene::CGameScene() :
 	m_pDebugCube(NULL),
 	m_pDebugParts(NULL),
 	m_pDebugPauseUI(nullptr),
-	m_isTimeStop(false)
+	m_isTimeStop(false),
+	m_vWind(0,0,0),
+	m_pTornado(nullptr)
 {
 	//Sound Add
 	g_SoundManager->AddBGM("data/sound/bgm.mp3");
@@ -78,6 +81,7 @@ CGameScene::~CGameScene()
 	}
 
 	SafeDelete(m_pDebugPauseUI);
+	SafeDelete(m_pTornado);
 }
 
 void CGameScene::Init()
@@ -158,6 +162,10 @@ void CGameScene::Init()
 	m_vecMonster.push_back(monster);
 
 	m_vecStaticActor.push_back(new CStair(D3DXVECTOR3(1,0,-4)));
+
+	//m_pTornado = new CTornado;
+	//m_pTornado->SetPosition(D3DXVECTOR3(3, 0, 0));
+	//m_pTornado->GetCollision()->SetActive(false);
 }
 
 void CGameScene::Render()
@@ -192,9 +200,11 @@ void CGameScene::Render()
 		it->Render();
 	}
 
-
 	if (m_pDebugPauseUI)
 		m_pDebugPauseUI->Render();
+
+	if (m_pTornado)
+		m_pTornado->Render();
 }
 
 void CGameScene::Update()
@@ -216,6 +226,32 @@ void CGameScene::Update()
 		for (CParts* part : m_vecParts)
 		{
 			CPhysicsApplyer::ApplyGravity(part);
+		}
+	}
+
+	{
+		for (CCharacter * character : m_vecCharacters)
+		{
+			character->AddForce(m_vWind);
+		}
+
+		for (CParts* part : m_vecParts)
+		{
+			part->AddForce(m_vWind);
+		}
+	}
+
+	{
+		if (m_pTornado)
+		{
+			for (CCharacter* character : m_vecCharacters)
+			{
+				D3DXVECTOR3 dir(0, 0, 0);
+				if (m_pTornado->Collide(character,&dir))
+				{
+					character->AddForce(dir*m_pTornado->GetPower());
+				}
+			}
 		}
 	}
 
@@ -304,6 +340,9 @@ void CGameScene::Update()
 
 		if (m_pDebugPauseUI)
 			m_pDebugPauseUI->Update();
+
+		if (m_pTornado)
+			m_pTornado->Update();
 	}
 }
 
@@ -316,34 +355,43 @@ void CGameScene::MonsterSkill(eSkill skill)
 {
 	switch (skill)
 	{
-	/*case eSkill::KeyLock:
-		break;
-	case eSkill::SlowMove:
-		break;*/
 	case eSkill::DestroyParts:
 		MedusaUlt();
 		break;
-	/*case eSkill::KeyRevers:
-		break;
 	case eSkill::SandWind:
+		SetWindDirection();
 		break;
-	case eSkill::Flurry:
-		break;*/
+	case eSkill::Tornado:
+		SetTornadoSkill();
+		break;
 	}
 
 	CC(ChooseCC(skill));
 }
 
+void CGameScene::FinishSkill(eSkill skill)
+{
+	switch (skill)
+	{
+	case eSkill::SandWind:
+		DeleteWind();
+		break;
+	case eSkill::Tornado:
+		DeleteTornado();
+		break;
+	}
+}
+
 bool CGameScene::CheckSpecificPartsID(string partsID)
 {
-	for (CParts* it : m_vecParts)
+	/*for (CParts* it : m_vecParts)
 	{
 		if (it->GetPartsID() == partsID)
 		{
 			return true;
 		}
 	}
-
+*/
 	return false;
 }
 
@@ -358,10 +406,6 @@ CCrowdControl* CGameScene::ChooseCC(eSkill skill)
 		return new CCCSpeedDown;
 	case eSkill::KeyRevers:
 		return new CCCReverseKey;
-	/*case eSkill::SandWind:
-		return new CCCSpeedDown;
-	case eSkill::Flurry:
-		return new CCCSpeedDown;*/
 	}
 
 	return new CCCNone;
@@ -400,10 +444,41 @@ void CGameScene::MedusaUlt()
 			--i;
 		}
 	}
+}
+
+void CGameScene::SetWindDirection()
+{
+	int windDirection = rand() % 2;
+
+	if (windDirection == 1)
+	{
+		m_vWind = D3DXVECTOR3(0.01f, 0, 0);
+	}
+	else
+	{
+		m_vWind = D3DXVECTOR3(-0.01f, 0, 0);
+	}
+
+}
+
+void CGameScene::SetTornadoSkill()
+{
+	if(m_pTornado == nullptr)
+		m_pTornado = new CTornado;
 
 
+	//m_pTornado->GetCollision()->SetActive(false);
+}
 
+void CGameScene::DeleteWind()
+{
+	m_vWind = D3DXVECTOR3(0, 0, 0);
+}
 
+void CGameScene::DeleteTornado()
+{
+	if (m_pTornado)
+		SafeDelete(m_pTornado);
 }
 
 bool CGameScene::IsGameClear()

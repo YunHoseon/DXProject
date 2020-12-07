@@ -294,6 +294,9 @@
     <ClInclude Include="CCCReverseKey.h">
       <Filter>GameScene\Monster\CrowdControl</Filter>
     </ClInclude>
+    <ClInclude Include="CTornado.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="stdafx.cpp">
@@ -514,6 +517,9 @@
     </ClCompile>
     <ClCompile Include="CCCStopMove.cpp">
       <Filter>GameScene\Monster\CrowdControl</Filter>
+    </ClCompile>
+    <ClCompile Include="CTornado.cpp">
+      <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

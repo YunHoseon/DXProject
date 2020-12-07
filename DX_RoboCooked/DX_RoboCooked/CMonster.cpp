@@ -5,8 +5,8 @@ CMonster::CMonster(IInteractCenter* pInteractCenter)
 			: m_pInteractCenter(pInteractCenter)
 			, m_eSkillCondition()
 			, m_eSkillEvent(eEvent::None)
-			, m_fFirstSkillCoolDownTime(0.0f)
-			, m_fFirstSkillElapsedTime(0.0f)
+			, m_fFirstSkillConditionTime(0.0f)
+			, m_fFirstSkillConditionElapsedTime(0.0f)
 			, m_isArrive(false)
 			, m_fTravelDistance(0.0f)
 			, m_nCombinUseCount(0)
@@ -15,6 +15,10 @@ CMonster::CMonster(IInteractCenter* pInteractCenter)
 			, m_nThrowPartsCount(0)
 			, m_nSpinPartsCount(0)
 			, m_sSpecificPartsID("")
+			, m_fFirstSkillElapsedTime(0.0f)
+			, m_fSecondSkillElapsedTime(0.0f)
+			, m_fUltimateSkillElapsedTime(0.0f)
+
 {
 	ChooseSkillCondition();
 }
@@ -28,29 +32,40 @@ void CMonster::Update()
 {
 	if (FirstSkillTriggered())
 	{
-		m_stSkillUsing.SkillProperty = FirstSkill();
-		m_stSkillUsing.SkillLevel = eSkillLevel::One;
+		m_stSkillUsing.FirstSkillProperty = FirstSkill();
+		m_stSkillUsing.isFirstSkill = true;
+		m_pInteractCenter->MonsterSkill(FirstSkill());
 	}
 
 	if (SecondSkillTriggered())
 	{
-		m_stSkillUsing.SkillProperty = SecondSkill();
-		m_stSkillUsing.SkillLevel = eSkillLevel::Two;
+		m_stSkillUsing.SecondSkillProperty = SecondSkill();
+		m_stSkillUsing.isSecondSkill = true;
 		ChooseSkillCondition();
+		m_pInteractCenter->MonsterSkill(SecondSkill());
 	}
 
 	if (UltimateSkillTriggered())
 	{
-
+		m_stSkillUsing.UltimateSkillProperty = UltimateSkill();
+		m_stSkillUsing.isUltimateSkill = true;
+		m_pInteractCenter->MonsterSkill(UltimateSkill());
 	}
 
-
-	if (m_stSkillUsing.SkillProperty != eSkill::None)
+	if (CheckDurationTimeFirstSkill())
 	{
-		m_pInteractCenter->MonsterSkill(m_stSkillUsing.SkillProperty);
-		SetSkillProperty(eSkill::None);
+		m_pInteractCenter->FinishSkill(m_stSkillUsing.FirstSkillProperty);
 	}
 
+	if (CheckDurationTimeSecondSkill())
+	{
+		m_pInteractCenter->FinishSkill(m_stSkillUsing.SecondSkillProperty);
+	}
+
+	if (CheckDurationTimeUltimateSkill())
+	{
+		m_pInteractCenter->FinishSkill(m_stSkillUsing.UltimateSkillProperty);
+	}
 
 }
 
@@ -94,6 +109,9 @@ void CMonster::OnEvent(eEvent eEvent, void * _value)
 
 bool CMonster::SecondSkillTriggered()
 {
+	if (m_stSkillUsing.isUltimateSkill)
+		return false;
+
 	if (m_fTravelDistance >= 25.0f)
 		return true;
 
@@ -120,14 +138,14 @@ bool CMonster::SecondSkillTriggered()
 
 bool CMonster::FirstSkillTriggered()
 {
-	if (m_stSkillUsing.SkillLevel == eSkillLevel::Two || m_stSkillUsing.SkillLevel == eSkillLevel::Ultimate)
+	if (m_stSkillUsing.isSecondSkill || m_stSkillUsing.isUltimateSkill)
 		return false;
 
-	m_fFirstSkillElapsedTime += g_pTimeManager->GetElapsedTime();
+	m_fFirstSkillConditionElapsedTime += g_pTimeManager->GetElapsedTime();
 
-	if (m_fFirstSkillElapsedTime >= m_fFirstSkillCoolDownTime)
+	if (m_fFirstSkillConditionElapsedTime >= m_fFirstSkillConditionTime)
 	{
-		m_fFirstSkillElapsedTime = 0;
+		m_fFirstSkillConditionElapsedTime = 0;
 		return true;
 	}
 
@@ -189,6 +207,59 @@ void CMonster::ChooseSkillCondition()
 	//g_EventManager->Attach(eEvent::TravelDistance, this);
 	//m_eSkillEvent = eEvent::TravelDistance;
 	
+}
+
+bool CMonster::CheckDurationTimeFirstSkill()
+{
+	if (!m_stSkillUsing.isFirstSkill)
+		return false;
+
+	m_fFirstSkillElapsedTime += g_pTimeManager->GetElapsedTime();
+
+	if (m_fFirstSkillElapsedTime >= FirstSkillTime())
+	{
+		m_stSkillUsing.isFirstSkill = false;
+		m_fFirstSkillElapsedTime = 0;
+		return true;
+	}
+	return false;
+}
+
+bool CMonster::CheckDurationTimeSecondSkill()
+{
+	if (!m_stSkillUsing.isSecondSkill)
+		return false;
+
+	m_fSecondSkillElapsedTime += g_pTimeManager->GetElapsedTime();
+
+	if (m_fFirstSkillElapsedTime >= SecondSkillTime())
+	{
+		m_stSkillUsing.isSecondSkill = false;
+		m_fSecondSkillElapsedTime = 0;
+		return true;
+	}
+	return false;
+}
+
+bool CMonster::CheckDurationTimeUltimateSkill()
+{
+	if (!m_stSkillUsing.isUltimateSkill)
+		return false;
+
+	m_fUltimateSkillElapsedTime += g_pTimeManager->GetElapsedTime();
+
+	if (m_fUltimateSkillElapsedTime >= FirstSkillTime())
+	{
+		m_stSkillUsing.isUltimateSkill = false;
+		m_fUltimateSkillElapsedTime = 0;
+		return true;
+	}
+	return false;
+}
+
+void CMonster::FinishSkill(eSkill skill)
+{
+	m_pInteractCenter->FinishSkill(skill);
 }
 
 void CMonster::TravelDistanceSkill(void * _value)
