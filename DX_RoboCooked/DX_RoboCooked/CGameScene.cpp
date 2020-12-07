@@ -18,10 +18,7 @@
 #include "CUIButton.h"
 #include "CBlueprint.h"
 #include "CMonster.h"
-#include "CStair.h"
-#include "CWater.h"
-#include "CSand3.h"
-#include "CSphereCollision.h"
+#include "CTile.h"
 #include "CCrowdControl.h"
 #include "CCCSpeedDown.h"
 #include "CCCReverseKey.h"
@@ -50,8 +47,7 @@ CGameScene::CGameScene() :
 	m_pDebugCube(NULL),
 	m_pDebugParts(NULL),
 	m_pDebugPauseUI(nullptr),
-	m_isTimeStop(false),
-	m_vWind(0,0,0)
+	m_isTimeStop(false)
 {
 	//Sound Add
 	g_SoundManager->AddBGM("data/sound/bgm.mp3");
@@ -171,7 +167,7 @@ void CGameScene::Render()
 		it->Render();
 	}
 
-	for (CInteractiveActor* it : m_vecParts)
+	for (CParts* it : m_vecParts)
 	{
 		it->Render();
 	}
@@ -217,25 +213,12 @@ void CGameScene::Update()
 			CPhysicsApplyer::ApplyGravity(character);
 		}
 
-		for (CInteractiveActor* part : m_vecParts)
+		for (CParts* part : m_vecParts)
 		{
 			CPhysicsApplyer::ApplyGravity(part);
 		}
 	}
 
-
-	{
-		for (CCharacter * character : m_vecCharacters)
-		{
-			character->AddForce(m_vWind);
-		}
-
-		for (CInteractiveActor* part : m_vecParts)
-		{
-			part->AddForce(m_vWind);
-		}
-	}
-	
 	// collide -> update
 	{// collide
 		if (m_vecCharacters.size() == 2)
@@ -243,13 +226,13 @@ void CGameScene::Update()
 			CPhysicsApplyer::ApplyBound(m_vecCharacters[0], m_vecCharacters[1]);
 		}
 
-		for (CInteractiveActor* part : m_vecParts)
+		for (CParts* part : m_vecParts)
 		{
 			for (CCharacter* character : m_vecCharacters)
 			{
 				CPhysicsApplyer::ApplyBound(character, part);
 			}
-			for (CInteractiveActor* part2 : m_vecParts)
+			for (CParts* part2 : m_vecParts)
 			{
 				if(part != part2)
 					CPhysicsApplyer::ApplyBound(part2, part);
@@ -262,7 +245,7 @@ void CGameScene::Update()
 			{
 				CPhysicsApplyer::ApplyBound(character, obj);
 			}
-			for (CInteractiveActor* part : m_vecParts)
+			for (CParts* part : m_vecParts)
 			{
 				CPhysicsApplyer::ApplyBound(part, obj);
 			}
@@ -274,7 +257,7 @@ void CGameScene::Update()
 			{
 				CPhysicsApplyer::ApplyBound(character, pStaticActor);
 			}
-			for (CInteractiveActor* part : m_vecParts)
+			for (CParts* part : m_vecParts)
 			{
 				CPhysicsApplyer::ApplyBound(part, pStaticActor);
 			}
@@ -294,7 +277,7 @@ void CGameScene::Update()
 			it->Update();
 		}
 
-		for (CInteractiveActor* it : m_vecParts)
+		for (CParts* it : m_vecParts)
 		{
 			it->Update();
 		}
@@ -333,13 +316,19 @@ void CGameScene::MonsterSkill(eSkill skill)
 {
 	switch (skill)
 	{
+	/*case eSkill::KeyLock:
+		break;
+	case eSkill::SlowMove:
+		break;*/
 	case eSkill::DestroyParts:
 		MedusaUlt();
+		break;
+	/*case eSkill::KeyRevers:
 		break;
 	case eSkill::SandWind:
 		break;
 	case eSkill::Flurry:
-		break;
+		break;*/
 	}
 
 	CC(ChooseCC(skill));
@@ -347,10 +336,9 @@ void CGameScene::MonsterSkill(eSkill skill)
 
 bool CGameScene::CheckSpecificPartsID(string partsID)
 {
-	for (CInteractiveActor* it : m_vecParts)
+	for (CParts* it : m_vecParts)
 	{
-		CParts* data = static_cast<CParts*>(it);
-		if (data->GetPartsID() == partsID)
+		if (it->GetPartsID() == partsID)
 		{
 			return true;
 		}
@@ -370,6 +358,10 @@ CCrowdControl* CGameScene::ChooseCC(eSkill skill)
 		return new CCCSpeedDown;
 	case eSkill::KeyRevers:
 		return new CCCReverseKey;
+	/*case eSkill::SandWind:
+		return new CCCSpeedDown;
+	case eSkill::Flurry:
+		return new CCCSpeedDown;*/
 	}
 
 	return new CCCNone;
@@ -389,27 +381,30 @@ void CGameScene::CC(CCrowdControl * pCC)
 
 void CGameScene::MedusaUlt()
 {
+	if (m_vecParts.empty())
+		return;
+	
 	CRandomNumberGenerator rand;
 	int index = rand.GenInt(0, m_vecParts.size() - 1);
 
 	D3DXVECTOR3 vec = m_vecParts[index]->GetPosition();
 
-	CSphereCollision Collsion(vec, 2.0f);
-
-	Collsion.Update();
+	CSphereCollision cCollsion(vec, 2.0f);
 
 	for (int i = 0; i < m_vecParts.size(); i++)
 	{
-		if (Collsion.Collide(m_vecParts[i]->GetCollision()))
+		if (cCollsion.Collide(m_vecParts[i]->GetCollision()))
 		{
 			SafeDelete(m_vecParts[i]);
 			m_vecParts.erase(m_vecParts.begin() + i);
-			i = 0;
+			--i;
 		}
 	}
 
-}
 
+
+
+}
 
 bool CGameScene::IsGameClear()
 {
@@ -423,7 +418,7 @@ bool CGameScene::IsGameClear()
 
 void CGameScene::GetInteractObject(CCharacter* pCharacter)
 {
-	for (CInteractiveActor * it : m_vecParts)
+	for (CParts * it : m_vecParts)
 	{
 		if (pCharacter->GetInteractCollsion()->Collide(it->GetCollision()))
 		{
@@ -489,25 +484,24 @@ void CGameScene::CheckAroundCombinator(CPartCombinator* combinator)
 	if (combinator->GetCombinatorLoadState() == eCombinatorLoadState::LoadImpossible)
 		return;
 
-	map<CParts*,float> veclength;
-	for (CInteractiveActor * it : m_vecParts)
+	map<float,CParts*> veclength;
+	for (CParts * it : m_vecParts)
 	{
-		CParts* data = static_cast<CParts*>(it);
-		if (data->GetGrabPosition() != NULL)
+		if (it->GetGrabPosition() != NULL)
 			continue;
 
-		if (combinator->GetCombinPartsLevel() == data->GetCombinePartsLevel() &&
+		if (combinator->GetCombinPartsLevel() == it->GetCombinePartsLevel() &&
 			combinator->GetInteractCollsion()->Collide(it->GetCollision()))
 		{
-			D3DXVECTOR3 vDirection = combinator->GetPosition() - data->GetPosition();
-			veclength[data] = D3DXVec3Length(&vDirection);	
+			D3DXVECTOR3 vDirection = combinator->GetPosition() - it->GetPosition();
+			veclength[D3DXVec3Length(&vDirection)] = it;
 		}
 	}
 
 	for(auto it : veclength)
 	{
-		combinator->PartsInteract(it.first);
-		it.first->SetCPartCombinator(combinator);
+		combinator->PartsInteract(it.second);
+		it.second->SetCPartCombinator(combinator);
 	}
 }
 

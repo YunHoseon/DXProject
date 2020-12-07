@@ -22,7 +22,7 @@ private:
 	CField*						m_pField;
 	vector<CActor*>				m_vecStaticActor;
 	vector<CInteractiveActor*>	m_vecObject;
-	vector<CInteractiveActor*>	m_vecParts;
+	vector<CParts*>	m_vecParts;
 	vector<CCharacter*>			m_vecCharacters;
 	vector<CBlueprint*>			m_vecBlueprints;
 	vector<CMonster*>			m_vecMonster;
