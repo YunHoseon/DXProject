@@ -121,13 +121,11 @@ void CGameScene::Init()
 	CBlueprint* blueprint = new CBlueprint("A00", m_vecParts, 
 		D3DXVECTOR3(5.0f, -0.5f, -3.0f), D3DXVECTOR3(2.0f, 0.1f, 2.8f), 0, 0);
 	blueprint->Setup();
-	//m_vecObject.push_back(blueprint);
 	m_vecBlueprints.push_back(blueprint);
 
 	CBlueprint* blueprint2 = new CBlueprint("A01", m_vecParts,
 		D3DXVECTOR3(5.0f, -0.5f, 0), D3DXVECTOR3(2.0f, 0.1f, 2.8f), 90, 90);
 	blueprint2->Setup();
-	//m_vecObject.push_back(blueprint2);
 	m_vecBlueprints.push_back(blueprint2);
 
 	m_pDebugSphere = new CDebugPlayer1(this);
@@ -140,16 +138,6 @@ void CGameScene::Init()
 
 	m_vecCharacters.push_back(m_pDebugSphere);
 	m_vecCharacters.push_back(m_pDebugCube);
-
-	//m_pDebugParts = new CParts("999");
-	//if (m_pDebugParts)
-	//	m_pDebugParts->Setup();
-	//m_vecParts.push_back(m_pDebugParts);
-	//
-	//CParts* m_pDebugParts2 = new CParts("999");
-	//if (m_pDebugParts2)
-	//	m_pDebugParts2->Setup();
-	//m_vecParts.push_back(m_pDebugParts2);
 
 	m_pDebugPauseUI = new CUIPauseButton(D3DXVECTOR2(100,100),27,this);
 	m_pDebugPauseUI->Setup();
