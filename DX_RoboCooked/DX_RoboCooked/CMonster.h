@@ -24,7 +24,7 @@ enum class eSkill
 	DestroyParts,
 	KeyRevers,
 	SandWind,
-	Flurry
+	Tornado
 };
 
 enum class eSkillLevel
@@ -37,10 +37,17 @@ enum class eSkillLevel
 
 struct ST_Skill
 {
-	eSkill		 SkillProperty;
-	eSkillLevel	 SkillLevel;
+	eSkill			FirstSkillProperty;
+	eSkill			SecondSkillProperty;
+	eSkill			UltimateSkillProperty;
+
+	bool			isFirstSkill;
+	bool			isSecondSkill;
+	bool			isUltimateSkill;
+
 	
-	ST_Skill():SkillProperty(eSkill::None), SkillLevel(eSkillLevel::None){}
+	
+	ST_Skill():FirstSkillProperty(eSkill::None), isFirstSkill(false),isSecondSkill(false),isUltimateSkill(false){}
 };
 
 
@@ -50,9 +57,13 @@ protected:
 	IInteractCenter*			m_pInteractCenter;
 	eSkillCondition				m_eSkillCondition;
 	eEvent						m_eSkillEvent;
-	FLOAT						m_fFirstSkillCoolDownTime;
+	FLOAT						m_fFirstSkillConditionTime;
+	FLOAT						m_fFirstSkillConditionElapsedTime;
 	FLOAT						m_fFirstSkillElapsedTime;
+	FLOAT						m_fSecondSkillElapsedTime;
+	FLOAT						m_fUltimateSkillElapsedTime;
 	ST_Skill					m_stSkillUsing;
+
 
 	//조건리스트 
 	FLOAT						m_fTravelDistance;//1
@@ -79,14 +90,18 @@ public:
 	virtual eSkill SecondSkill() { return eSkill::None; };
 	virtual eSkill UltimateSkill() { return eSkill::None; };
 
+	virtual FLOAT FirstSkillTime() = 0;
+	virtual FLOAT SecondSkillTime() = 0;
+	virtual FLOAT UltimateSkillTime() = 0;
 
 
-	void ChooseSkillCondition();
 
+	bool CheckDurationTimeFirstSkill();
+	bool CheckDurationTimeSecondSkill();
+	bool CheckDurationTimeUltimateSkill();
 
+	void FinishSkill(eSkill skill);
 
-
-	void SetSkillProperty(eSkill skill) { m_stSkillUsing.SkillProperty = skill; }
 public:
 	void TravelDistanceSkill(void* _value);
 	void ArriveSkill() { m_isArrive = true; }
@@ -97,6 +112,7 @@ public:
 	void SpinPartsSkill(){ m_nSpinPartsCount++; }
 
 private:
+	void ChooseSkillCondition();
 	void SkillConditionInit();
 	bool UltimateSkillTriggered();
 	bool SecondSkillTriggered();

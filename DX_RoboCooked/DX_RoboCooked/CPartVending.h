@@ -17,6 +17,7 @@ private:
 	vector<ST_PNT_VERTEX>	m_vecVertex;
 	LPDIRECT3DTEXTURE9		m_PartVendingTexture;
 	COutlet*				m_pOutlet;
+	CStaticMesh*			m_pSMesh;
 public:
 	CPartVending(COutlet* outlet, IInteractCenter* pInteractCenter, string nPartsID);
 	~CPartVending();

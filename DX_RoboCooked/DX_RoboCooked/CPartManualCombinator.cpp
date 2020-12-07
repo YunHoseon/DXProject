@@ -56,7 +56,6 @@ void CPartManualCombinator::Setup(float fAngle, D3DXVECTOR3 vPosition)
 
 void CPartManualCombinator::Update()
 {
-
 	if (m_isTimeCheck && m_eCombinatorActionState == eCombinatorActionState::Usable)
 		CombineParts();
 	

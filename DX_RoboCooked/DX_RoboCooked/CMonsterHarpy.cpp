@@ -4,7 +4,7 @@
 
 CMonsterHarpy::CMonsterHarpy(IInteractCenter* pInteractCenter):CMonster(pInteractCenter)
 {
-	m_fFirstSkillCoolDownTime = 30;
+	m_fFirstSkillConditionTime = 30;
 }
 
 
@@ -24,5 +24,5 @@ eSkill CMonsterHarpy::SecondSkill()
 
 eSkill CMonsterHarpy::UltimateSkill()
 {
-	return eSkill::Flurry;
+	return eSkill::Tornado;
 }

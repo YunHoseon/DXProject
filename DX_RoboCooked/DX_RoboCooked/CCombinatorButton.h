@@ -11,6 +11,7 @@ private:
 	vector<ST_PNT_VERTEX>	m_vecVertex;
 	LPDIRECT3DTEXTURE9		m_CombinatorBtnTexture;
 	CPartCombinator*		m_pPartCombinator;
+	CStaticMesh*			m_pSMesh;
 public:
 	CCombinatorButton(CPartCombinator* pPartCombinator);
 	~CCombinatorButton();
