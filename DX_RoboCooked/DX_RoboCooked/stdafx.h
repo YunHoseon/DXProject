@@ -238,6 +238,7 @@ struct ST_PLAYER_INPUTKEY
 #include "CUITextureManager.h"
 #include "CStaticMeshManager.h"
 
+#include "CRandomNumberGenerator.h"
 
 #define __SLASH(x) /##x
 #define __DOUBLE_SLASH __SLASH(/)
