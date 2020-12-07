@@ -36,6 +36,7 @@
 
 #include "CMonsterMedusa.h"
 #include "CMonsterHarpy.h"
+#include "CRandomNumberGenerator.h"
 
 
 /* µð¹ö±ë¿ë */
@@ -384,26 +385,30 @@ void CGameScene::CC(CCrowdControl * pCC)
 
 void CGameScene::MedusaUlt()
 {
-	int index = rand() % m_vecParts.size();
+	
+	CRandomNumberGenerator rand;
+	int index = rand.GenInt(0, m_vecParts.size() - 1);
 
 	//CParts* data = static_cast<CParts*>(m_vecParts[index]);
 
 	D3DXVECTOR3 vec = m_vecParts[index]->GetPosition();
 
+	CSphereCollision Collsion(vec, 2.0f);
 
-//	CSphereCollision* m_pCollision = new CSphereCollision(D3DXVECTOR3(vec.x, vec.y, vec.z), 2.0f);
-	
-	D3DXMATRIXA16 matWorld;
-	D3DXMatrixTranslation(&matWorld, vec.x, vec.y, vec.z);
-	CSphereCollision* m_pCollision = new CSphereCollision(D3DXVECTOR3(vec.x, vec.y, vec.z), 2.0f,&matWorld);
+	Collsion.Render();
 
+	//CSphereCollision* m_pCollision = new CSphereCollision(D3DXVECTOR3(vec.x, vec.y, vec.z), 2.0f);
 
+	//D3DXMATRIXA16 matWorld;
+	//D3DXMatrixTranslation(&matWorld, vec.x, vec.y, vec.z);
+	//CSphereCollision* m_pCollision = new CSphereCollision(D3DXVECTOR3(vec.x, vec.y, vec.z), 2.0f,&matWorld);
 
-	m_pCollision->Update();
+	//m_pCollision->Update();
+	Collsion.Update();
 
 	for (int i = 0; i < m_vecParts.size(); i++)
 	{
-		if (m_pCollision->Collide(m_vecParts[i]->GetCollision()))
+		if (Collsion.Collide(m_vecParts[i]->GetCollision()))
 		{
 			SafeDelete(m_vecParts[i]);
 			m_vecParts.erase(m_vecParts.begin() + i);

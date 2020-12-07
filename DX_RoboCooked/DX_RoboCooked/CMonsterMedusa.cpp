@@ -15,7 +15,7 @@ CMonsterMedusa::~CMonsterMedusa()
 
 eSkill CMonsterMedusa::FirstSkill()
 {
-	return eSkill::KeyLock;
+	return eSkill::DestroyParts;
 }
 
 eSkill CMonsterMedusa::SecondSkill()
