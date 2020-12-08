@@ -51,5 +51,5 @@ float CTimeManager::GetElapsedTime()
 
 float CTimeManager::GetLastUpdateTime()
 {
-	return m_dwLastUpdateTime.QuadPart / 0.000001f;
+	return m_dwLastUpdateTime.QuadPart * 0.0000001f;
 }

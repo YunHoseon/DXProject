@@ -44,7 +44,7 @@ void CStaticMeshManager::Load()
 	vecData.push_back(data);
 	data.fileName = "Switch2.X"; data.objectName = "Switch2"; data.filePath = "data/model/object";
 	vecData.push_back(data);
-
+	
 	for (ST_StaticMesh_Data datas : vecData)
 	{
 		CStaticMesh* staticMesh = new CStaticMesh;
