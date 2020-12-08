@@ -4,7 +4,8 @@
 
 CMonsterMedusa::CMonsterMedusa(IInteractCenter* pInteractCenter):CMonster(pInteractCenter)
 {
-	m_fFirstSkillConditionTime = 40;
+	m_fFirstSkillConditionTime = 40.0f;
+	m_fUltimateSkillConditionTime = 150.0f;
 }
 
 
@@ -13,18 +14,3 @@ CMonsterMedusa::~CMonsterMedusa()
 }
 
 
-eSkill CMonsterMedusa::FirstSkill()
-{
-	//return eSkill::SandWind;
-	return eSkill::KeyLock;
-}
-
-eSkill CMonsterMedusa::SecondSkill()
-{
-	return eSkill::SlowMove;
-}
-
-eSkill CMonsterMedusa::UltimateSkill()
-{
-	return eSkill::DestroyParts;
-}

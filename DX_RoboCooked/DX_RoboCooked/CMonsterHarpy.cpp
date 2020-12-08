@@ -4,7 +4,7 @@
 
 CMonsterHarpy::CMonsterHarpy(IInteractCenter* pInteractCenter):CMonster(pInteractCenter)
 {
-	m_fFirstSkillConditionTime = 30;
+	m_fFirstSkillConditionTime = 30.0f;
 }
 
 
@@ -12,17 +12,3 @@ CMonsterHarpy::~CMonsterHarpy()
 {
 }
 
-eSkill CMonsterHarpy::FirstSkill()
-{
-	return eSkill::KeyRevers;
-}
-
-eSkill CMonsterHarpy::SecondSkill()
-{
-	return eSkill::SandWind;
-}
-
-eSkill CMonsterHarpy::UltimateSkill()
-{
-	return eSkill::Tornado;
-}

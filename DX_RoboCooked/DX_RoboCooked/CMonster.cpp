@@ -4,7 +4,7 @@
 CMonster::CMonster(IInteractCenter* pInteractCenter) 
 			: m_pInteractCenter(pInteractCenter)
 			, m_eSkillCondition()
-			, m_eSkillEvent(eEvent::None)
+			, m_eSecondSkillEvent(eEvent::None)
 			, m_fFirstSkillConditionTime(0.0f)
 			, m_fFirstSkillConditionElapsedTime(0.0f)
 			, m_isArrive(false)
@@ -18,6 +18,7 @@ CMonster::CMonster(IInteractCenter* pInteractCenter)
 			, m_fFirstSkillElapsedTime(0.0f)
 			, m_fSecondSkillElapsedTime(0.0f)
 			, m_fUltimateSkillElapsedTime(0.0f)
+			, m_fUltimateSkillConditionTime(999.0f)
 
 {
 	ChooseSkillCondition();
@@ -43,6 +44,14 @@ void CMonster::Update()
 		m_stSkillUsing.isSecondSkill = true;
 		ChooseSkillCondition();
 		m_pInteractCenter->MonsterSkill(SecondSkill());
+	}
+
+	if (m_eSecondSkillEvent == eEvent::SpecificArea)
+	{
+		if (m_pInteractCenter->CheckSpecificArea())
+		{
+			m_isArrive = true;
+		}
 	}
 
 	if (UltimateSkillTriggered())
@@ -107,35 +116,6 @@ void CMonster::OnEvent(eEvent eEvent, void * _value)
 
 }
 
-bool CMonster::SecondSkillTriggered()
-{
-	if (m_stSkillUsing.isUltimateSkill)
-		return false;
-
-	if (m_fTravelDistance >= 25.0f)
-		return true;
-
-	if (m_isArrive)
-		return true;
-
-	if (m_nCombinUseCount >= 4)
-		return true;
-
-	if (m_nVendingUseCount >= 4)
-		return true;
-
-	if (m_nCrowdControlCount >= 2)
-		return true;
-
-	if (m_nThrowPartsCount >= 4)
-		return true;
-
-	if (m_nSpinPartsCount >= 5)
-		return true;
-
-	return false;
-}
-
 bool CMonster::FirstSkillTriggered()
 {
 	if (m_stSkillUsing.isSecondSkill || m_stSkillUsing.isUltimateSkill)
@@ -152,6 +132,57 @@ bool CMonster::FirstSkillTriggered()
 	return false;
 }
 
+bool CMonster::SecondSkillTriggered()
+{
+	if (m_stSkillUsing.isUltimateSkill)
+		return false;
+
+	if (m_fTravelDistance >= 32.0f)
+		return true;
+
+	if (m_isArrive)
+		return true;
+
+	if (m_nCombinUseCount >= 6)
+		return true;
+
+	if (m_nVendingUseCount >= 4)
+		return true;
+
+	if (m_nCrowdControlCount >= 3)
+		return true;
+
+	if (m_nThrowPartsCount >= 6)
+		return true;
+
+	if (m_nSpinPartsCount >= 6)
+		return true;
+
+	return false;
+}
+
+bool CMonster::UltimateSkillTriggered()
+{
+	if (!m_stSkillUsing.isUltimateSkill)
+		return false;
+
+	if (m_stSkillUsing.isUltimatePartsCheck && m_pInteractCenter->CheckSpecificPartsID(m_sSpecificPartsID))
+	{
+		m_stSkillUsing.isUltimatePartsCheck = false;
+		return true;
+	}
+
+	//2번째 조건 들어갈곳.
+
+	if (m_stSkillUsing.isUltimateTimeCheck && m_pInteractCenter->GetTime() < m_fUltimateSkillConditionTime)
+	{
+		m_stSkillUsing.isUltimateTimeCheck = false;
+		return true;
+	}
+
+	return false;
+}
+
 void CMonster::ChooseSkillCondition()
 {
 	SkillConditionInit();
@@ -162,51 +193,54 @@ void CMonster::ChooseSkillCondition()
 		{
 			m_eSkillCondition = eSkillCondition::TravelDistance;
 			g_EventManager->Attach(eEvent::TravelDistance, this);
-			m_eSkillEvent = eEvent::TravelDistance;
+			m_eSecondSkillEvent = eEvent::TravelDistance;
 		}
 		else if (random < 30)
 		{
 			m_eSkillCondition = eSkillCondition::SpecificArea;
 			g_EventManager->Attach(eEvent::SpecificArea, this);
-			m_eSkillEvent = eEvent::SpecificArea;
+			m_eSecondSkillEvent = eEvent::SpecificArea;
+			m_pInteractCenter->ElectIndexLot();
 		}
 		else if (random < 48)
 		{
 			m_eSkillCondition = eSkillCondition::CombinUse;
 			g_EventManager->Attach(eEvent::CombinUse, this);
-			m_eSkillEvent = eEvent::CombinUse;
+			m_eSecondSkillEvent = eEvent::CombinUse;
 		}
 		else if (random < 62)
 		{
 			m_eSkillCondition = eSkillCondition::VendingUse;
 			g_EventManager->Attach(eEvent::VendingUse, this);
-			m_eSkillEvent = eEvent::VendingUse;
+			m_eSecondSkillEvent = eEvent::VendingUse;
 		}
 		else if (random < 74)
 		{
 			m_eSkillCondition = eSkillCondition::CrowdControl;
 			g_EventManager->Attach(eEvent::CrowdControl, this);
-			m_eSkillEvent = eEvent::CrowdControl;
+			m_eSecondSkillEvent = eEvent::CrowdControl;
 		}
 		else if (random < 86)
 		{
 			m_eSkillCondition = eSkillCondition::ThrowParts;
 			g_EventManager->Attach(eEvent::ThrowParts, this);
-			m_eSkillEvent = eEvent::ThrowParts;
+			m_eSecondSkillEvent = eEvent::ThrowParts;
 		}
 		else
 		{
 			m_eSkillCondition = eSkillCondition::SpinParts;
 			g_EventManager->Attach(eEvent::SpinParts, this);
-			m_eSkillEvent = eEvent::SpinParts;
+			m_eSecondSkillEvent = eEvent::SpinParts;
 		}
 	}
 
+
+
 	//테스트용
-	//m_eSkillCondition = eSkillCondition::TravelDistance;
-	//g_EventManager->Attach(eEvent::TravelDistance, this);
-	//m_eSkillEvent = eEvent::TravelDistance;
-	
+	//m_eSkillCondition = eSkillCondition::SpecificArea;
+	//g_EventManager->Attach(eEvent::SpecificArea, this);
+	//m_eSecondSkillEvent = eEvent::SpecificArea;
+	//m_pInteractCenter->ElectIndexLot();
 }
 
 bool CMonster::CheckDurationTimeFirstSkill()
@@ -271,11 +305,11 @@ void CMonster::TravelDistanceSkill(void * _value)
 
 void CMonster::SkillConditionInit()
 {
-	if (m_eSkillEvent == eEvent::None)
+	if (m_eSecondSkillEvent == eEvent::None)
 		return;
-	g_EventManager->Detach(m_eSkillEvent, this);
+	g_EventManager->Detach(m_eSecondSkillEvent, this);
 
-	switch (m_eSkillEvent)
+	switch (m_eSecondSkillEvent)
 	{
 	case eEvent::SpinParts:
 		m_nSpinPartsCount = 0;
@@ -301,10 +335,3 @@ void CMonster::SkillConditionInit()
 	}
 }
 
-bool CMonster::UltimateSkillTriggered()
-{
-	if (m_pInteractCenter->CheckSpecificPartsID(m_sSpecificPartsID))
-		return true;
-
-	return false;
-}

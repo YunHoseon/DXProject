@@ -4,7 +4,6 @@
 
 CCCStopMove::CCCStopMove() : CCrowdControl()
 {
-	m_fCCDownTime = 10;
 }
 
 

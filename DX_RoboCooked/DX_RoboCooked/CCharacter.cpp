@@ -21,7 +21,8 @@ CCharacter::CCharacter(int nPlayerNum) :
 	m_fMaxThrowPower(0.1f),
 	m_fThrowPower(m_fMinThrowPower),
 	m_fThrowPowerUpSpeed(0.003f),
-	m_pCC(nullptr)
+	m_pCC(nullptr),
+	m_isDummy(false)
 {
 	m_fBaseSpeed = 0.02f;
 	m_fSpeed = m_fBaseSpeed;
@@ -60,12 +61,6 @@ void CCharacter::Render()
 
 void CCharacter::Update()
 {
-
-	if (m_pCC->IsEnd())
-	{
-		SafeDelete(m_pCC);
-		m_pCC = new CCCNone;
-	}
 	Move();
 	m_vGrabPartsPosition.x = m_vPosition.x;
 	m_vGrabPartsPosition.y = m_vPosition.y + 1.0f;
@@ -334,6 +329,12 @@ void CCharacter::SetCC(CCrowdControl * cc)
 	SafeDelete(m_pCC);
 	m_pCC = cc;
 	
+}
+
+void CCharacter::DeleteCC()
+{
+	SafeDelete(m_pCC);
+	m_pCC = new CCCNone;
 }
 
 void CCharacter::Reset()

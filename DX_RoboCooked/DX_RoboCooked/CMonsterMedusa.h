@@ -7,12 +7,12 @@ public:
 	CMonsterMedusa(IInteractCenter* pInteractCenter);
 	~CMonsterMedusa();
 
-	eSkill FirstSkill() override;
-	eSkill SecondSkill() override;
-	eSkill UltimateSkill() override;
+	eSkill FirstSkill() override { return eSkill::KeyLock; }
+	eSkill SecondSkill() override { return eSkill::SlowMove; }
+	eSkill UltimateSkill() override { return eSkill::DestroyParts; }
 
-	FLOAT FirstSkillTime() override { return 10.0f; };
-	FLOAT SecondSkillTime() override { return 10.0f; };
-	FLOAT UltimateSkillTime() override { return 10.0f; };
+	FLOAT FirstSkillTime() override { return 3.0f; };
+	FLOAT SecondSkillTime() override { return 5.0f; };
+	FLOAT UltimateSkillTime() override { return 5.0f; };
 };
 

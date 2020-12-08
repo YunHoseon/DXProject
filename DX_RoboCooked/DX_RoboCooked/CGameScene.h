@@ -29,8 +29,12 @@ private:
 	vector<CMonster*>			m_vecMonster;
 	D3DXVECTOR3					m_vWind;
 	CTornado*					m_pTornado;
+	FLOAT						m_fGameTime;	
+	BOOL						m_isTimeStop;
+	INT							m_nLotIndex;
 
-	bool						m_isTimeStop;
+
+
 	CDebugPlayer1*				m_pDebugSphere;
 	CDebugPlayer2*				m_pDebugCube;
 	CParts*						m_pDebugParts;
@@ -57,6 +61,11 @@ public:
 	void MonsterSkill(eSkill skill) override;
 	void FinishSkill(eSkill skill) override;
 	bool CheckSpecificPartsID(string parts) override;
+	float GetTime()override { return m_fGameTime; };
+	void ElectIndexLot() override;
+	bool CheckSpecificArea() override;
+	void CheckSandDummyArea(ICollisionArea* collison) override;
+
 
 
 	CCrowdControl* ChooseCC(eSkill skill);
@@ -66,6 +75,8 @@ public:
 	void SetTornadoSkill();
 	void DeleteWind();
 	void DeleteTornado();
+	void DeleteCC();
 	bool IsGameClear();
+	bool IsGameLose();
 };
 

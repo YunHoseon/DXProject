@@ -5,13 +5,25 @@
 
 CCombinatorButton::CCombinatorButton(CPartCombinator *pPartCombinator)
 	: m_pPartCombinator(pPartCombinator)
+	, m_pSMesh(nullptr)
 {
 	m_fMass = 9999.f;
+
+	switch (pPartCombinator->GetCombinPartsLevel())
+	{
+	case eCombinatorPartsLevel::ONE:
+		if (!m_pSMesh)
+			m_pSMesh = g_pStaticMeshManager->GetStaticMesh("SwitchLevel1");
+		break;
+	case eCombinatorPartsLevel::TWO:
+		if (!m_pSMesh)
+			m_pSMesh = g_pStaticMeshManager->GetStaticMesh("SwitchLevel2");
+		break;
+	}
 }
 
 CCombinatorButton::~CCombinatorButton()
 {
-	SafeRelease(m_CombinatorBtnTexture);
 }
 
 void CCombinatorButton::OnEvent(eEvent eEvent, void *_value)
@@ -41,7 +53,6 @@ void CCombinatorButton::Render()
 void CCombinatorButton::Setup(float fAngle, D3DXVECTOR3 vPosition)
 {
 	SetRotationY(fAngle);
-	m_pSMesh = g_pStaticMeshManager->GetStaticMesh("Switch1");
 	m_pCollision = new CBoxCollision(m_pSMesh->GetMesh(), &m_matWorld);
 
 	SetScale(0.01f, 0.01f, 0.01f);

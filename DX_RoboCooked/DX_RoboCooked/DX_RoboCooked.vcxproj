@@ -151,6 +151,7 @@
     <ClInclude Include="CAllocateHierachy.h" />
     <ClInclude Include="CBlueprint.h" />
     <ClInclude Include="CBoxCollision.h" />
+    <ClInclude Include="CBrick.h" />
     <ClInclude Include="CCCNone.h" />
     <ClInclude Include="CCCReverseKey.h" />
     <ClInclude Include="CCCSpeedDown.h" />
@@ -161,7 +162,11 @@
     <ClInclude Include="CMonsterHarpy.h" />
     <ClInclude Include="CMonsterMedusa.h" />
     <ClInclude Include="CPartsManager.h" />
-    <ClInclude Include="CSand3.h" />
+    <ClInclude Include="CSand.h" />
+    <ClInclude Include="CSandDummy.h" />
+    <ClInclude Include="CThickSand.h" />
+    <ClInclude Include="CFlowSand.h" />
+    <ClInclude Include="CSoil.h" />
     <ClInclude Include="CStair.h" />
     <ClInclude Include="CStaticMesh.h" />
     <ClInclude Include="CTestStair.h" />
@@ -229,6 +234,7 @@
     <ClCompile Include="CAllocateHierachy.cpp" />
     <ClCompile Include="CBlueprint.cpp" />
     <ClCompile Include="CBoxCollision.cpp" />
+    <ClCompile Include="CBrick.cpp" />
     <ClCompile Include="CCCNone.cpp" />
     <ClCompile Include="CCCReverseKey.cpp" />
     <ClCompile Include="CCCSpeedDown.cpp" />
@@ -239,7 +245,11 @@
     <ClCompile Include="CMonsterHarpy.cpp" />
     <ClCompile Include="CMonsterMedusa.cpp" />
     <ClCompile Include="CPartsManager.cpp" />
-    <ClCompile Include="CSand3.cpp" />
+    <ClCompile Include="CSand.cpp" />
+    <ClCompile Include="CSandDummy.cpp" />
+    <ClCompile Include="CThickSand.cpp" />
+    <ClCompile Include="CFlowSand.cpp" />
+    <ClCompile Include="CSoil.cpp" />
     <ClCompile Include="CStair.cpp" />
     <ClCompile Include="CStaticMesh.cpp" />
     <ClCompile Include="CTestStair.cpp" />

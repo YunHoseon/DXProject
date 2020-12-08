@@ -1,11 +1,11 @@
 #pragma once
 #include "CTile.h"
-class CSand3 :
+class CBrick :
 	public CTile
 {
 public:
-	CSand3(D3DXVECTOR3 vPosition);
-	~CSand3();
+	CBrick(D3DXVECTOR3 vPosition);
+	~CBrick();
 
 	void Update() override;
 };

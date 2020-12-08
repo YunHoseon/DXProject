@@ -25,6 +25,7 @@
 #include "CCCStopMove.h"
 #include "CCCNone.h"
 #include "CTornado.h"
+#include "CSandDummy.h"
 
 #include "CUICloseButton.h"
 #include "CUIBoardButton.h"
@@ -49,7 +50,9 @@ CGameScene::CGameScene() : m_pField(NULL),
 						   m_pDebugPauseUI(nullptr),
 						   m_isTimeStop(false),
 						   m_vWind(0, 0, 0),
-						   m_pTornado(nullptr)
+						   m_pTornado(nullptr),
+						   m_fGameTime(300.0f),
+						   m_nLotIndex(0)
 {
 	//Sound Add
 	g_SoundManager->AddBGM("data/sound/bgm.mp3");
@@ -87,6 +90,7 @@ void CGameScene::Init()
 {
 	//g_SoundManager->PlayBGM();
 	//g_SoundManager->SetBGMSound(0.5f);
+	m_fGameTime = 300.0f;
 
 	m_pField = new CField;
 	if (m_pField)
@@ -107,7 +111,7 @@ void CGameScene::Init()
 	partStorage->Setup(0, D3DXVECTOR3(5, 0, 3), "A02");
 	m_vecObject.push_back(partStorage);
 
-	CPartCombinator *partManualCombinator = new CPartManualCombinator(this, eCombinatorPartsLevel::ONE, 0, D3DXVECTOR3(-2, 0, 2));
+	CPartCombinator *partManualCombinator = new CPartManualCombinator(this, eCombinatorPartsLevel::TWO, 0, D3DXVECTOR3(-2, 0, 2));
 	m_vecObject.push_back(partManualCombinator);
 
 	CCombinatorButton *combinatorButton = new CCombinatorButton(partManualCombinator);
@@ -128,14 +132,12 @@ void CGameScene::Init()
 	CBlueprint *blueprint = new CBlueprint("A00", m_vecParts,
 										   D3DXVECTOR3(5.0f, -0.5f, -3.0f), D3DXVECTOR3(2.0f, 0.1f, 2.8f), 0, 0);
 	blueprint->Setup();
-	//m_vecObject.push_back(blueprint);
 	m_vecBlueprints.push_back(blueprint);
 
 	CBlueprint *blueprint2 = new CBlueprint("A01", m_vecParts,
 											D3DXVECTOR3(5.0f, -0.5f, 0), D3DXVECTOR3(2.0f, 0.1f, 2.8f), D3DX_PI * 0.5f, D3DX_PI * 0.5f);
 	blueprint2->Setup();
 	blueprint2->SetPosition(-3.0f, -0.5f, 0);
-	//m_vecObject.push_back(blueprint2);
 	m_vecBlueprints.push_back(blueprint2);
 
 	m_pDebugSphere = new CDebugPlayer1(this);
@@ -156,6 +158,8 @@ void CGameScene::Init()
 	m_vecMonster.push_back(monster);
 
 	m_vecStaticActor.push_back(new CStair(D3DXVECTOR3(1, 0, -4)));
+	m_vecStaticActor.push_back(new CSandDummy(this,D3DXVECTOR3(4, 0, 0)));
+
 
 	//m_pTornado = new CTornado;
 	//m_pTornado->SetPosition(D3DXVECTOR3(3, 0, 0));
@@ -521,6 +525,15 @@ void CGameScene::FinishSkill(eSkill skill)
 {
 	switch (skill)
 	{
+	case eSkill::KeyLock:
+		DeleteCC();
+		break;
+	case eSkill::SlowMove:
+		DeleteCC();
+		break;
+	case eSkill::KeyRevers:
+		DeleteCC();
+		break;
 	case eSkill::SandWind:
 		DeleteWind();
 		break;
@@ -532,15 +545,63 @@ void CGameScene::FinishSkill(eSkill skill)
 
 bool CGameScene::CheckSpecificPartsID(string partsID)
 {
-	/*for (CParts* it : m_vecParts)
+	for (CParts* it : m_vecParts)
 	{
 		if (it->GetPartsID() == partsID)
-		{
 			return true;
+	}
+
+	return false;
+}
+
+void CGameScene::ElectIndexLot()
+{
+	CRandomNumberGenerator rand;
+	m_nLotIndex = rand.GenInt(0, m_vecObject.size() - 1);
+}
+
+bool CGameScene::CheckSpecificArea()
+{
+	D3DXVECTOR3 pos = m_vecObject[m_nLotIndex]->GetPosition();
+	D3DXVECTOR3 size(1.5f, 100.0f, 1.5f);
+	CBoxCollision cCollsion(pos, size);
+
+	for (auto it : m_vecCharacters)
+	{
+		if (cCollsion.Collide(it->GetCollision()))
+			return true;
+	}
+
+	return false;
+}
+
+void CGameScene::CheckSandDummyArea(ICollisionArea* collison)
+{
+	for (auto it : m_vecCharacters)
+	{
+		if (it->GetParts() && collison->Collide(it->GetCollision())) // 더미안인데 파츠가있으면 들어오는곳 
+		{
+			it->SetCC(new CCCStopMove);
+		}
+
+		if (it->GetDummy() && it->GetParts() == nullptr) //더미안에서 파츠를 던지면 들어오는곳
+		{
+			it->SetCC(new CCCSpeedDown);
+		}
+
+		if (it->GetDummy() == false && collison->Collide(it->GetCollision())) //더미 밖에서 안으로 들어올때 들어오는곳
+		{
+			it->SetDummy(true);
+
+			it->SetCC(new CCCSpeedDown);
+			
+		}
+		else if(it->GetDummy() && collison->Collide(it->GetCollision()) == false) // 더미밖에서 들어오는곳 
+		{
+			it->SetDummy(false);
+			it->DeleteCC();
 		}
 	}
-*/
-	return false;
 }
 
 CCrowdControl *CGameScene::ChooseCC(eSkill skill)
@@ -627,6 +688,14 @@ void CGameScene::DeleteTornado()
 		SafeDelete(m_pTornado);
 }
 
+void CGameScene::DeleteCC()
+{
+	for (CCharacter *it : m_vecCharacters)
+	{
+		it->DeleteCC();
+	}
+}
+
 bool CGameScene::IsGameClear()
 {
 	for (CBlueprint *it : m_vecBlueprints)
@@ -635,6 +704,18 @@ bool CGameScene::IsGameClear()
 			return false;
 	}
 	return true;
+}
+
+bool CGameScene::IsGameLose()
+{
+	m_fGameTime -= g_pTimeManager->GetElapsedTime();
+
+	if (m_fGameTime <= 0)
+	{
+		return true;
+	}
+
+	return false;
 }
 
 void CGameScene::GetInteractObject(CCharacter *pCharacter)
