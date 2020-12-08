@@ -13,9 +13,13 @@ CPartAutoCombinator::CPartAutoCombinator(IInteractCenter* pInteractCenter, eComb
 	{
 	case eCombinatorPartsLevel::ONE:
 		m_nMaxPartsCount = 2;
+		if (!m_pSMesh)
+			m_pSMesh = g_pStaticMeshManager->GetStaticMesh("CombinatorLevel1");
 		break;
 	case eCombinatorPartsLevel::TWO:
 		m_nMaxPartsCount = 3;
+		if (!m_pSMesh)
+			m_pSMesh = g_pStaticMeshManager->GetStaticMesh("CombinatorLevel2");
 		break;
 	}
 	Setup(fAngle, vPosition);
@@ -152,8 +156,6 @@ CParts* CPartAutoCombinator::Make()
 void CPartAutoCombinator::Setup(float fAngle, D3DXVECTOR3 vPosition)
 {
 	SetRotationY(fAngle);
-	if (!m_pSMesh)
-		m_pSMesh = g_pStaticMeshManager->GetStaticMesh("AutoCombinator");
 	if (!m_pCollision)
 		m_pCollision = new CBoxCollision(m_pSMesh->GetMesh(), &m_matWorld);
 

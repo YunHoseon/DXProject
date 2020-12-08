@@ -24,6 +24,10 @@ public:
 	virtual void AddForce(const D3DXVECTOR3& vForce) override {}
 };
 
-#include "CSand3.h"
+#include "CSand.h"
+#include "CThickSand.h"
+#include "CFlowSand.h"
 #include "CWater.h"
+#include "CSoil.h"
+#include "CBrick.h"
 #include "CStair.h"

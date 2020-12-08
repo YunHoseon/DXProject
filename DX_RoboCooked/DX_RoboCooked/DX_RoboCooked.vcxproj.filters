@@ -267,9 +267,6 @@
     <ClInclude Include="CTile.h">
       <Filter>GameScene\Tile</Filter>
     </ClInclude>
-    <ClInclude Include="CSand3.h">
-      <Filter>GameScene\Tile</Filter>
-    </ClInclude>
     <ClInclude Include="CWater.h">
       <Filter>GameScene\Tile</Filter>
     </ClInclude>
@@ -296,6 +293,21 @@
     </ClInclude>
     <ClInclude Include="CTornado.h">
       <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="CBrick.h">
+      <Filter>GameScene\Tile</Filter>
+    </ClInclude>
+    <ClInclude Include="CSoil.h">
+      <Filter>GameScene\Tile</Filter>
+    </ClInclude>
+    <ClInclude Include="CFlowSand.h">
+      <Filter>GameScene\Tile</Filter>
+    </ClInclude>
+    <ClInclude Include="CThickSand.h">
+      <Filter>GameScene\Tile</Filter>
+    </ClInclude>
+    <ClInclude Include="CSand.h">
+      <Filter>GameScene\Tile</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -491,9 +503,6 @@
     <ClCompile Include="CTile.cpp">
       <Filter>GameScene\Tile</Filter>
     </ClCompile>
-    <ClCompile Include="CSand3.cpp">
-      <Filter>GameScene\Tile</Filter>
-    </ClCompile>
     <ClCompile Include="CWater.cpp">
       <Filter>GameScene\Tile</Filter>
     </ClCompile>
@@ -520,6 +529,21 @@
     </ClCompile>
     <ClCompile Include="CTornado.cpp">
       <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="CBrick.cpp">
+      <Filter>GameScene\Tile</Filter>
+    </ClCompile>
+    <ClCompile Include="CSoil.cpp">
+      <Filter>GameScene\Tile</Filter>
+    </ClCompile>
+    <ClCompile Include="CFlowSand.cpp">
+      <Filter>GameScene\Tile</Filter>
+    </ClCompile>
+    <ClCompile Include="CThickSand.cpp">
+      <Filter>GameScene\Tile</Filter>
+    </ClCompile>
+    <ClCompile Include="CSand.cpp">
+      <Filter>GameScene\Tile</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
