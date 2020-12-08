@@ -1,12 +1,12 @@
 #include "stdafx.h"
-#include "CSand3.h"
+#include "CSoil.h"
 #include "CBoxCollision.h"
 
-CSand3::CSand3(D3DXVECTOR3 vPosition)
+CSoil::CSoil(D3DXVECTOR3 vPosition)
 {
-	m_pSMesh = g_pStaticMeshManager->GetStaticMesh("Sand3");
+	m_pSMesh = g_pStaticMeshManager->GetStaticMesh("Soil");
 	m_pCollision = new CBoxCollision(g_vZero, D3DXVECTOR3(100, 100, 100), &m_matWorld);
-	
+
 	SetScale(0.01f, 0.01f, 0.01f);
 	SetPosition(vPosition);
 
@@ -15,13 +15,15 @@ CSand3::CSand3(D3DXVECTOR3 vPosition)
 
 	if (m_pCollision)
 		m_pCollision->Update();
+
+	m_fFriction = 0.2f;
 }
 
 
-CSand3::~CSand3()
+CSoil::~CSoil()
 {
 }
 
-void CSand3::Update()
+void CSoil::Update()
 {
 }

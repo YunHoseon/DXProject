@@ -107,7 +107,7 @@ void CGameScene::Init()
 	partStorage->Setup(0, D3DXVECTOR3(5, 0, 3), "A02");
 	m_vecObject.push_back(partStorage);
 
-	CPartCombinator *partManualCombinator = new CPartManualCombinator(this, eCombinatorPartsLevel::ONE, 0, D3DXVECTOR3(-2, 0, 2));
+	CPartCombinator *partManualCombinator = new CPartManualCombinator(this, eCombinatorPartsLevel::TWO, 0, D3DXVECTOR3(-2, 0, 2));
 	m_vecObject.push_back(partManualCombinator);
 
 	CCombinatorButton *combinatorButton = new CCombinatorButton(partManualCombinator);
@@ -128,14 +128,12 @@ void CGameScene::Init()
 	CBlueprint *blueprint = new CBlueprint("A00", m_vecParts,
 										   D3DXVECTOR3(5.0f, -0.5f, -3.0f), D3DXVECTOR3(2.0f, 0.1f, 2.8f), 0, 0);
 	blueprint->Setup();
-	//m_vecObject.push_back(blueprint);
 	m_vecBlueprints.push_back(blueprint);
 
 	CBlueprint *blueprint2 = new CBlueprint("A01", m_vecParts,
 											D3DXVECTOR3(5.0f, -0.5f, 0), D3DXVECTOR3(2.0f, 0.1f, 2.8f), D3DX_PI * 0.5f, D3DX_PI * 0.5f);
 	blueprint2->Setup();
 	blueprint2->SetPosition(-3.0f, -0.5f, 0);
-	//m_vecObject.push_back(blueprint2);
 	m_vecBlueprints.push_back(blueprint2);
 
 	m_pDebugSphere = new CDebugPlayer1(this);
