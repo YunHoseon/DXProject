@@ -1,14 +1,14 @@
 #pragma once
 #include "CActor.h"
-class CSandDummy :
+class CSandpile :
 	public CActor
 {
 private:
 	CStaticMesh*		m_pSMesh;
 	ICollisionArea*		m_pCollsionArea;
 public:
-	CSandDummy(IInteractCenter* InteractCenter , D3DXVECTOR3 vPosition);
-	~CSandDummy();
+	CSandpile(IInteractCenter* InteractCenter , D3DXVECTOR3 vPosition);
+	~CSandpile();
 	void Render() override;
 	void Update() override;
 };

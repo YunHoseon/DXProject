@@ -1,10 +1,10 @@
 #include "stdafx.h"
-#include "CSandDummy.h"
+#include "CSandpile.h"
 #include "CBoxCollision.h"
 #include "IInteractCenter.h"
 
 
-CSandDummy::CSandDummy(IInteractCenter* InteractCenter, D3DXVECTOR3 vPosition) : m_pCollsionArea(nullptr)
+CSandpile::CSandpile(IInteractCenter* InteractCenter, D3DXVECTOR3 vPosition) : m_pCollsionArea(nullptr)
 {
 	m_pSMesh = g_pStaticMeshManager->GetStaticMesh("Sandpile");
 	m_pInteractCenter = InteractCenter;
@@ -17,11 +17,11 @@ CSandDummy::CSandDummy(IInteractCenter* InteractCenter, D3DXVECTOR3 vPosition) :
 }
 
 
-CSandDummy::~CSandDummy()
+CSandpile::~CSandpile()
 {
 }
 
-void CSandDummy::Render()
+void CSandpile::Render()
 {
 	if (m_pSMesh)
 	{
@@ -34,7 +34,7 @@ void CSandDummy::Render()
 		_DEBUG_COMMENT 	m_pCollsionArea->Render();
 }
 
-void CSandDummy::Update()
+void CSandpile::Update()
 {
 	m_pInteractCenter->CheckSandDummyArea(m_pCollsionArea);
 }

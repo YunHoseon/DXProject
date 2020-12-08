@@ -25,7 +25,7 @@
 #include "CCCStopMove.h"
 #include "CCCNone.h"
 #include "CTornado.h"
-#include "CSandDummy.h"
+#include "CSandpile.h"
 
 #include "CUICloseButton.h"
 #include "CUIBoardButton.h"
@@ -158,7 +158,7 @@ void CGameScene::Init()
 	m_vecMonster.push_back(monster);
 
 	m_vecStaticActor.push_back(new CStair(D3DXVECTOR3(1, 0, -4)));
-	m_vecStaticActor.push_back(new CSandDummy(this,D3DXVECTOR3(4, 0, 0)));
+	m_vecStaticActor.push_back(new CSandpile(this,D3DXVECTOR3(4, 0, 0)));
 
 
 	//m_pTornado = new CTornado;

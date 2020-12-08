@@ -163,7 +163,7 @@
     <ClInclude Include="CMonsterMedusa.h" />
     <ClInclude Include="CPartsManager.h" />
     <ClInclude Include="CSand.h" />
-    <ClInclude Include="CSandDummy.h" />
+    <ClInclude Include="CSandpile.h" />
     <ClInclude Include="CThickSand.h" />
     <ClInclude Include="CFlowSand.h" />
     <ClInclude Include="CSoil.h" />
@@ -246,7 +246,7 @@
     <ClCompile Include="CMonsterMedusa.cpp" />
     <ClCompile Include="CPartsManager.cpp" />
     <ClCompile Include="CSand.cpp" />
-    <ClCompile Include="CSandDummy.cpp" />
+    <ClCompile Include="CSandpile.cpp" />
     <ClCompile Include="CThickSand.cpp" />
     <ClCompile Include="CFlowSand.cpp" />
     <ClCompile Include="CSoil.cpp" />
