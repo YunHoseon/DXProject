@@ -188,6 +188,7 @@ void CCharacter::PressKey(void* _value)
 				g_SoundManager->PlaySFX("Melem");
 				m_arrElapsedTime[2] = CurrentTime;
 			}
+			//_DEBUG_COMMENT cout << "current time : " << g_pTimeManager->GetElapsedTime() << endl;
 			_DEBUG_COMMENT cout << "cool down : " << CurrentTime - m_arrElapsedTime[2] <<endl;
 		}
 	}
