@@ -25,7 +25,7 @@
 #include "CCCStopMove.h"
 #include "CCCNone.h"
 #include "CTornado.h"
-#
+#include "CSandDummy.h"
 
 #include "CUICloseButton.h"
 #include "CUIBoardButton.h"
@@ -158,6 +158,8 @@ void CGameScene::Init()
 	m_vecMonster.push_back(monster);
 
 	m_vecStaticActor.push_back(new CStair(D3DXVECTOR3(1, 0, -4)));
+	m_vecStaticActor.push_back(new CSandDummy(D3DXVECTOR3(0, 1, 4)));
+
 
 	//m_pTornado = new CTornado;
 	//m_pTornado->SetPosition(D3DXVECTOR3(3, 0, 0));

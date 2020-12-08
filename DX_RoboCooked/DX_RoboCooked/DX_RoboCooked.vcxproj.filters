@@ -64,6 +64,9 @@
     <Filter Include="GameScene\Tile">
       <UniqueIdentifier>{a2e5ed5e-c21e-4595-a998-63a305bf4584}</UniqueIdentifier>
     </Filter>
+    <Filter Include="GameScene\Object">
+      <UniqueIdentifier>{878916bb-8b8b-4b2d-8a45-6036be2a23f8}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <Text Include="ReadMe.txt" />
@@ -309,6 +312,9 @@
     <ClInclude Include="CSand.h">
       <Filter>GameScene\Tile</Filter>
     </ClInclude>
+    <ClInclude Include="CSandDummy.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="stdafx.cpp">
@@ -544,6 +550,9 @@
     </ClCompile>
     <ClCompile Include="CSand.cpp">
       <Filter>GameScene\Tile</Filter>
+    </ClCompile>
+    <ClCompile Include="CSandDummy.cpp">
+      <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

@@ -3,8 +3,13 @@
 class CSandDummy :
 	public CActor
 {
+private:
+	CStaticMesh* m_pSMesh;
+
 public:
-	CSandDummy();
+	CSandDummy(D3DXVECTOR3 vPosition);
 	~CSandDummy();
+	void Render() override;
+	void Update() override;
 };
 
