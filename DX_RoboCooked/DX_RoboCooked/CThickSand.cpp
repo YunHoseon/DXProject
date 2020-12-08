@@ -7,7 +7,7 @@ CThickSand::CThickSand(D3DXVECTOR3 vPosition)
 	m_pSMesh = g_pStaticMeshManager->GetStaticMesh("ThickSand");
 	m_pCollision = new CBoxCollision(g_vZero, D3DXVECTOR3(100, 100, 100), &m_matWorld);
 
-	SetScale(0.0025f, 0.0025f, 0.0025f);
+	SetScale(0.0021f, 0.0021f, 0.0021f);
 	SetPosition(vPosition);
 
 	float y = vPosition.y - 0.5f + m_pCollision->GetHeight() * 0.5f + (vPosition.y - m_pCollision->GetCenter().y);
