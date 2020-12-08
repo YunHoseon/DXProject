@@ -37,6 +37,8 @@ void CStaticMeshManager::Load()
 	vecData.push_back(data);
 	data.fileName = "Switch2.X"; data.objectName = "SwitchLevel2"; data.filePath = "data/model/object";
 	vecData.push_back(data);
+	data.fileName = "모래더미.X"; data.objectName = "Sandpile"; data.filePath = "data/model/object";
+	vecData.push_back(data);
 
 	data.fileName = "모래타일1.X"; data.objectName = "Sand"; data.filePath = "data/model/tile";
 	vecData.push_back(data);
