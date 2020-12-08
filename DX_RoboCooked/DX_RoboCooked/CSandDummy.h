@@ -4,10 +4,10 @@ class CSandDummy :
 	public CActor
 {
 private:
-	CStaticMesh* m_pSMesh;
-
+	CStaticMesh*		m_pSMesh;
+	ICollisionArea*		m_pCollsionArea;
 public:
-	CSandDummy(D3DXVECTOR3 vPosition);
+	CSandDummy(IInteractCenter* InteractCenter , D3DXVECTOR3 vPosition);
 	~CSandDummy();
 	void Render() override;
 	void Update() override;

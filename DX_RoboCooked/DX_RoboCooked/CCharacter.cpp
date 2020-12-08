@@ -21,7 +21,8 @@ CCharacter::CCharacter(int nPlayerNum) :
 	m_fMaxThrowPower(0.1f),
 	m_fThrowPower(m_fMinThrowPower),
 	m_fThrowPowerUpSpeed(0.003f),
-	m_pCC(nullptr)
+	m_pCC(nullptr),
+	m_isDummy(false)
 {
 	m_fBaseSpeed = 0.02f;
 	m_fSpeed = m_fBaseSpeed;

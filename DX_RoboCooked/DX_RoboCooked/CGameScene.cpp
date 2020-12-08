@@ -158,7 +158,7 @@ void CGameScene::Init()
 	m_vecMonster.push_back(monster);
 
 	m_vecStaticActor.push_back(new CStair(D3DXVECTOR3(1, 0, -4)));
-	m_vecStaticActor.push_back(new CSandDummy(D3DXVECTOR3(0, 1, 4)));
+	m_vecStaticActor.push_back(new CSandDummy(this,D3DXVECTOR3(4, 0, 0)));
 
 
 	//m_pTornado = new CTornado;
@@ -573,6 +573,35 @@ bool CGameScene::CheckSpecificArea()
 	}
 
 	return false;
+}
+
+void CGameScene::CheckSandDummyArea(ICollisionArea* collison)
+{
+	for (auto it : m_vecCharacters)
+	{
+		if (it->GetParts() && collison->Collide(it->GetCollision())) // 더미안인데 파츠가있으면 들어오는곳 
+		{
+			it->SetCC(new CCCStopMove);
+		}
+
+		if (it->GetDummy() && it->GetParts() == nullptr) //더미안에서 파츠를 던지면 들어오는곳
+		{
+			it->SetCC(new CCCSpeedDown);
+		}
+
+		if (it->GetDummy() == false && collison->Collide(it->GetCollision())) //더미 밖에서 안으로 들어올때 들어오는곳
+		{
+			it->SetDummy(true);
+
+			it->SetCC(new CCCSpeedDown);
+			
+		}
+		else if(it->GetDummy() && collison->Collide(it->GetCollision()) == false) // 더미밖에서 들어오는곳 
+		{
+			it->SetDummy(false);
+			it->DeleteCC();
+		}
+	}
 }
 
 CCrowdControl *CGameScene::ChooseCC(eSkill skill)

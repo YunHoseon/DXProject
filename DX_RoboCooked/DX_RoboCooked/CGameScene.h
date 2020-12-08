@@ -64,6 +64,7 @@ public:
 	float GetTime()override { return m_fGameTime; };
 	void ElectIndexLot() override;
 	bool CheckSpecificArea() override;
+	void CheckSandDummyArea(ICollisionArea* collison) override;
 
 
 

@@ -5,6 +5,7 @@ class CCharacter;
 class CPartCombinator;
 class COutlet;
 class CCrowdControl;
+class ICollisionArea;
 enum class eSkill;
 
 class IInteractCenter
@@ -25,5 +26,6 @@ public:
 	virtual bool CheckSpecificPartsID(string partsID) = 0;
 	virtual void ElectIndexLot() = 0;
 	virtual bool CheckSpecificArea() = 0;
+	virtual void CheckSandDummyArea(ICollisionArea* collison) = 0;
 
 };

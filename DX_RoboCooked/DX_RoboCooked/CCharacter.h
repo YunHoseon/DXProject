@@ -39,6 +39,7 @@ protected:
 	float				m_fThrowPowerUpSpeed;
 	// 상태이상 관련 멤버 추가 필요
 	CCrowdControl*		m_pCC;
+	BOOL				m_isDummy;
 public:
 	CCharacter(int nPlayerNum);
 	virtual ~CCharacter();
@@ -60,6 +61,9 @@ public:
 	void SetPlayerState(ePlayerState state) { m_ePlayerState = state; }
 	void SetParts(CParts* pParts) { m_pParts = pParts; }
 	CParts* GetParts() { return m_pParts; }
+	void SetDummy(bool b) { m_isDummy = b; }
+	BOOL GetDummy() { return m_isDummy; }
+
 	void SetCC(CCrowdControl* cc);
 	void DeleteCC();
 
