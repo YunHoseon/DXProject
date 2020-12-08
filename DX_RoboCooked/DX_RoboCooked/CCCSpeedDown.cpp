@@ -3,6 +3,4 @@
 
 CCCSpeedDown::CCCSpeedDown(): CCrowdControl()
 {
-	m_fCCDownTime = 10;
-
 }

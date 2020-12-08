@@ -4,6 +4,5 @@
 
 CCCReverseKey::CCCReverseKey() : CCrowdControl()
 {
-	m_fCCDownTime = 10;
 }
 

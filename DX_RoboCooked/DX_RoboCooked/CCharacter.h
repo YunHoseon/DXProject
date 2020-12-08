@@ -61,6 +61,7 @@ public:
 	void SetParts(CParts* pParts) { m_pParts = pParts; }
 	CParts* GetParts() { return m_pParts; }
 	void SetCC(CCrowdControl* cc);
+	void DeleteCC();
 
 	virtual void SetDefaultPosition(D3DXVECTOR3 vPos) { m_vDefaultPosition = vPos; }
 	virtual void Reset();

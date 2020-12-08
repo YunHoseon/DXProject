@@ -45,9 +45,13 @@ struct ST_Skill
 	bool			isSecondSkill;
 	bool			isUltimateSkill;
 
+	bool			isUltimatePartsCheck;
+
+	bool			isUltimateTimeCheck;
+
 	
 	
-	ST_Skill():FirstSkillProperty(eSkill::None), isFirstSkill(false),isSecondSkill(false),isUltimateSkill(false){}
+	ST_Skill():FirstSkillProperty(eSkill::None), isFirstSkill(false),isSecondSkill(false),isUltimateSkill(false), isUltimatePartsCheck(true){}
 };
 
 
@@ -56,12 +60,15 @@ class CMonster : public CEventListener
 protected:
 	IInteractCenter*			m_pInteractCenter;
 	eSkillCondition				m_eSkillCondition;
-	eEvent						m_eSkillEvent;
+	eEvent						m_eSecondSkillEvent;
 	FLOAT						m_fFirstSkillConditionTime;
 	FLOAT						m_fFirstSkillConditionElapsedTime;
+
 	FLOAT						m_fFirstSkillElapsedTime;
 	FLOAT						m_fSecondSkillElapsedTime;
 	FLOAT						m_fUltimateSkillElapsedTime;
+
+	FLOAT						m_fUltimateSkillConditionTime;
 	ST_Skill					m_stSkillUsing;
 
 
