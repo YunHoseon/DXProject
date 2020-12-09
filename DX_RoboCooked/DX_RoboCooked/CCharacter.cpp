@@ -9,10 +9,10 @@ CCharacter::CCharacter(int nPlayerNum) :
 	m_ePlayerState(ePlayerState::None),
 	m_pInteractCollision(nullptr),
 	m_vGrabPartsPosition(0, 1, 0),
-	m_pParts(NULL),
-	m_arrElapsedTime({0, 0, 0}),
-	m_arrCoolDown({0, 0, 3}),
-	m_arrKeyDown({false, false, false}),
+	m_pParts(nullptr),
+	m_arrElapsedTime({ 0, 0, 0 }),
+	m_arrCoolDown({ 0, 0, 3 }),
+	m_arrKeyDown({ false, false, false }),
 	m_isMoveKeyDown(false),
 	m_pInputKey(InputManager->GetInputKey(nPlayerNum)),
 	m_pMesh(nullptr),
@@ -22,11 +22,11 @@ CCharacter::CCharacter(int nPlayerNum) :
 	m_fThrowPower(m_fMinThrowPower),
 	m_fThrowPowerUpSpeed(0.003f),
 	m_pCC(nullptr),
-	m_isDummy(false)
+	m_isDummy(false),
+	m_vDefaultPosition(0, 0, 0)
 {
 	m_fBaseSpeed = 0.02f;
-	m_fSpeed = m_fBaseSpeed;
-
+	
 	ZeroMemory(&m_stMtlSphere, sizeof(D3DMATERIAL9));
 	m_stMtlSphere.Ambient = D3DXCOLOR(0.7f, 0.7f, 0.7f, 1.0f);
 	m_stMtlSphere.Diffuse = D3DXCOLOR(0.7f, 0.7f, 0.7f, 1.0f);
@@ -100,12 +100,16 @@ void CCharacter::PressKey(void* _value)
 	{
 		if (m_pCC->IsMovable() == false)
 			return;
+		if (m_pParts && m_pCC->StopWithParts())
+			return; 
 
 		Rotate(0);
 	}
 	else if (data->wKey == m_pInputKey->moveLeftKey)
 	{
 		if (m_pCC->IsMovable() == false)
+			return;
+		if (m_pParts && m_pCC->StopWithParts())
 			return;
 
 		if (m_fRotY - 0.5f < 0.f)
@@ -116,12 +120,16 @@ void CCharacter::PressKey(void* _value)
 	{
 		if (m_pCC->IsMovable() == false)
 			return;
+		if (m_pParts && m_pCC->StopWithParts())
+			return;
 
 		Rotate(D3DX_PI);
 	}
 	else if (data->wKey == m_pInputKey->moveRightKey)
 	{
 		if (m_pCC->IsMovable() == false)
+			return;
+		if (m_pParts && m_pCC->StopWithParts())
 			return;
 
 		if (m_fRotY + 0.5f > D3DX_PI * 2.f)
@@ -278,7 +286,9 @@ void CCharacter::Move()
 	data.fDistance = D3DXVec3Length(&m_vVelocity);
 	g_EventManager->CallEvent(eEvent::TravelDistance, (void*)&data);
 
-
+	if (m_vPosition.y < -100)
+		Reset();
+	
 	D3DXMatrixTranslation(&m_matT, m_vPosition.x, m_vPosition.y, m_vPosition.z);
 	m_matWorld = m_matS * m_matR * m_matT;
 	if (m_pCollision)
