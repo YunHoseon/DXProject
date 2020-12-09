@@ -26,3 +26,9 @@ int CRandomNumberGenerator::GenInt(int nMin, int nMax)
 	std::uniform_int_distribution<int> dis(nMin, nMax);
 	return dis(gen);
 }
+
+float CRandomNumberGenerator::GenFloat(float fMin, float fMax)
+{
+	std::uniform_real_distribution<float> dis(fMin, fMax);
+	return dis(gen);
+}

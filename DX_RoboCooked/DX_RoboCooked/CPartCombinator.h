@@ -8,7 +8,9 @@ class IPartGenerator;
 enum class eCombinatorPartsLevel
 {
 	ONE,
-	TWO
+	TWO,
+	THREE,
+	FOUR
 };
 
 enum class eCombinatorLoadState
@@ -43,7 +45,7 @@ protected:
 	float							m_fCombineTime;
 	INT								m_nPartsCount;
 	INT								m_nMaxPartsCount;
-
+	CStaticMesh*					m_pSMesh;
 
 
 public:

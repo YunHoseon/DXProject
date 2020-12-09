@@ -15,12 +15,15 @@ CPartManualCombinator::CPartManualCombinator(IInteractCenter* pInteractCenter, e
 	{
 	case eCombinatorPartsLevel::ONE:
 		m_nMaxPartsCount = 2;
+		if (!m_pSMesh)
+			m_pSMesh = g_pStaticMeshManager->GetStaticMesh("CombinatorLevel1");
 		break;
 	case eCombinatorPartsLevel::TWO:
 		m_nMaxPartsCount = 3;
+		if (!m_pSMesh)
+			m_pSMesh = g_pStaticMeshManager->GetStaticMesh("CombinatorLevel2");
 		break;
 	}
-
 	Setup(fAngle, vPosition);
 }
 
@@ -34,127 +37,28 @@ CPartManualCombinator::~CPartManualCombinator()
 
 void CPartManualCombinator::Setup(float fAngle, D3DXVECTOR3 vPosition)
 {
-	vector<ST_PNT_VERTEX> vecVertex;
-	ST_PNT_VERTEX v;
-	v.n = D3DXVECTOR3(0, 1, 0);
+	SetRotationY(fAngle);
+	m_pCollision = new CBoxCollision(m_pSMesh->GetMesh(), &m_matWorld);
 
-	{
-		//front
-		v.p = D3DXVECTOR3(-BLOCK_SIZE / (2.0f), -BLOCK_SIZE / (2.0f), -BLOCK_SIZE / (2.0f));	v.t = D3DXVECTOR2(0, 1);
-		vecVertex.push_back(v);
-		v.p = D3DXVECTOR3(-BLOCK_SIZE / (2.0f), BLOCK_SIZE / (2.0f), -BLOCK_SIZE / (2.0f));		v.t = D3DXVECTOR2(0, 0);
-		vecVertex.push_back(v);
-		v.p = D3DXVECTOR3(BLOCK_SIZE / (2.0f), BLOCK_SIZE / (2.0f), -BLOCK_SIZE / (2.0f));		v.t = D3DXVECTOR2(1, 0);
-		vecVertex.push_back(v);
+	SetScale(0.01f, 0.01f, 0.01f);
+	SetPosition(vPosition);
 
-		v.p = D3DXVECTOR3(-BLOCK_SIZE / (2.0f), -BLOCK_SIZE / (2.0f), -BLOCK_SIZE / (2.0f));	v.t = D3DXVECTOR2(0, 1);
-		vecVertex.push_back(v);
-		v.p = D3DXVECTOR3(BLOCK_SIZE / (2.0f), BLOCK_SIZE / (2.0f), -BLOCK_SIZE / (2.0f));		v.t = D3DXVECTOR2(1, 0);
-		vecVertex.push_back(v);
-		v.p = D3DXVECTOR3(BLOCK_SIZE / (2.0f), -BLOCK_SIZE / (2.0f), -BLOCK_SIZE / (2.0f));		v.t = D3DXVECTOR2(1, 1);
-		vecVertex.push_back(v);
+	// 메시 크기에 따라 y값 보정
+	float y = vPosition.y - 0.5f + m_pCollision->GetHeight() * 0.5f + (vPosition.y - m_pCollision->GetCenter().y);
+	SetPosition(vPosition.x, y, vPosition.z);
+	m_pPartsInteractCollision = new CSphereCollision(D3DXVECTOR3(0, m_pCollision->GetCenter().y,0), 2.0f, &m_matWorld);
 
-		//back
-		v.p = D3DXVECTOR3(-BLOCK_SIZE / (2.0f), -BLOCK_SIZE / (2.0f), BLOCK_SIZE / (2.0f));		v.t = D3DXVECTOR2(0, 1);
-		vecVertex.push_back(v);
-		v.p = D3DXVECTOR3(BLOCK_SIZE / (2.0f), BLOCK_SIZE / (2.0f), BLOCK_SIZE / (2.0f));		v.t = D3DXVECTOR2(1, 0);
-		vecVertex.push_back(v);
-		v.p = D3DXVECTOR3(-BLOCK_SIZE / (2.0f), BLOCK_SIZE / (2.0f), BLOCK_SIZE / (2.0f));		v.t = D3DXVECTOR2(0, 0);
-		vecVertex.push_back(v);
-
-		v.p = D3DXVECTOR3(-BLOCK_SIZE / (2.0f), -BLOCK_SIZE / (2.0f), BLOCK_SIZE / (2.0f));		v.t = D3DXVECTOR2(0, 1);
-		vecVertex.push_back(v);
-		v.p = D3DXVECTOR3(BLOCK_SIZE / (2.0f), -BLOCK_SIZE / (2.0f), BLOCK_SIZE / (2.0f));		v.t = D3DXVECTOR2(1, 1);
-		vecVertex.push_back(v);
-		v.p = D3DXVECTOR3(BLOCK_SIZE / (2.0f), BLOCK_SIZE / (2.0f), BLOCK_SIZE / (2.0f));		v.t = D3DXVECTOR2(1, 0);
-		vecVertex.push_back(v);
-
-		//left
-		v.p = D3DXVECTOR3(-BLOCK_SIZE / (2.0f), -BLOCK_SIZE / (2.0f), BLOCK_SIZE / (2.0f));		v.t = D3DXVECTOR2(0, 1);
-		vecVertex.push_back(v);
-		v.p = D3DXVECTOR3(-BLOCK_SIZE / (2.0f), BLOCK_SIZE / (2.0f), BLOCK_SIZE / (2.0f));	    v.t = D3DXVECTOR2(0, 0);
-		vecVertex.push_back(v);
-		v.p = D3DXVECTOR3(-BLOCK_SIZE / (2.0f), BLOCK_SIZE / (2.0f), -BLOCK_SIZE / (2.0f));	    v.t = D3DXVECTOR2(1, 0);
-		vecVertex.push_back(v);
-
-		v.p = D3DXVECTOR3(-BLOCK_SIZE / (2.0f), -BLOCK_SIZE / (2.0f), BLOCK_SIZE / (2.0f));	    v.t = D3DXVECTOR2(0, 1);
-		vecVertex.push_back(v);
-		v.p = D3DXVECTOR3(-BLOCK_SIZE / (2.0f), BLOCK_SIZE / (2.0f), -BLOCK_SIZE / (2.0f));	    v.t = D3DXVECTOR2(1, 0);
-		vecVertex.push_back(v);
-		v.p = D3DXVECTOR3(-BLOCK_SIZE / (2.0f), -BLOCK_SIZE / (2.0f), -BLOCK_SIZE / (2.0f));	v.t = D3DXVECTOR2(1, 1);
-		vecVertex.push_back(v);
-
-		//right
-		v.p = D3DXVECTOR3(BLOCK_SIZE / (2.0f), -BLOCK_SIZE / (2.0f), -BLOCK_SIZE / (2.0f));		v.t = D3DXVECTOR2(0, 1);
-		vecVertex.push_back(v);
-		v.p = D3DXVECTOR3(BLOCK_SIZE / (2.0f), BLOCK_SIZE / (2.0f), -BLOCK_SIZE / (2.0f));	    v.t = D3DXVECTOR2(0, 0);
-		vecVertex.push_back(v);
-		v.p = D3DXVECTOR3(BLOCK_SIZE / (2.0f), BLOCK_SIZE / (2.0f), BLOCK_SIZE / (2.0f));		v.t = D3DXVECTOR2(1, 0);
-		vecVertex.push_back(v);
-
-		v.p = D3DXVECTOR3(BLOCK_SIZE / (2.0f), -BLOCK_SIZE / (2.0f), -BLOCK_SIZE / (2.0f));	    v.t = D3DXVECTOR2(0, 1);
-		vecVertex.push_back(v);
-		v.p = D3DXVECTOR3(BLOCK_SIZE / (2.0f), BLOCK_SIZE / (2.0f), BLOCK_SIZE / (2.0f));		v.t = D3DXVECTOR2(1, 0);
-		vecVertex.push_back(v);
-		v.p = D3DXVECTOR3(BLOCK_SIZE / (2.0f), -BLOCK_SIZE / (2.0f), BLOCK_SIZE / (2.0f));	    v.t = D3DXVECTOR2(1, 1);
-		vecVertex.push_back(v);
-
-		//top
-		v.p = D3DXVECTOR3(-BLOCK_SIZE / (2.0f), BLOCK_SIZE / (2.0f), -BLOCK_SIZE / (2.0f));		v.t = D3DXVECTOR2(0, 1);
-		vecVertex.push_back(v);
-		v.p = D3DXVECTOR3(-BLOCK_SIZE / (2.0f), BLOCK_SIZE / (2.0f), BLOCK_SIZE / (2.0f));	    v.t = D3DXVECTOR2(0, 0);
-		vecVertex.push_back(v);
-		v.p = D3DXVECTOR3(BLOCK_SIZE / (2.0f), BLOCK_SIZE / (2.0f), BLOCK_SIZE / (2.0f));		v.t = D3DXVECTOR2(1, 0);
-		vecVertex.push_back(v);
-
-		v.p = D3DXVECTOR3(-BLOCK_SIZE / (2.0f), BLOCK_SIZE / (2.0f), -BLOCK_SIZE / (2.0f));	    v.t = D3DXVECTOR2(0, 1);
-		vecVertex.push_back(v);
-		v.p = D3DXVECTOR3(BLOCK_SIZE / (2.0f), BLOCK_SIZE / (2.0f), BLOCK_SIZE / (2.0f));		v.t = D3DXVECTOR2(1, 0);
-		vecVertex.push_back(v);
-		v.p = D3DXVECTOR3(BLOCK_SIZE / (2.0f), BLOCK_SIZE / (2.0f), -BLOCK_SIZE / (2.0f));	    v.t = D3DXVECTOR2(1, 1);
-		vecVertex.push_back(v);
-
-		//bottom
-		v.p = D3DXVECTOR3(-BLOCK_SIZE / (2.0f), -BLOCK_SIZE / (2.0f), BLOCK_SIZE / (2.0f));		v.t = D3DXVECTOR2(0, 1);
-		vecVertex.push_back(v);
-		v.p = D3DXVECTOR3(-BLOCK_SIZE / (2.0f), -BLOCK_SIZE / (2.0f), -BLOCK_SIZE / (2.0f));	v.t = D3DXVECTOR2(0, 0);
-		vecVertex.push_back(v);
-		v.p = D3DXVECTOR3(BLOCK_SIZE / (2.0f), -BLOCK_SIZE / (2.0f), -BLOCK_SIZE / (2.0f));	    v.t = D3DXVECTOR2(1, 0);
-		vecVertex.push_back(v);
-
-		v.p = D3DXVECTOR3(-BLOCK_SIZE / (2.0f), -BLOCK_SIZE / (2.0f), BLOCK_SIZE / (2.0f));	    v.t = D3DXVECTOR2(0, 1);
-		vecVertex.push_back(v);
-		v.p = D3DXVECTOR3(BLOCK_SIZE / (2.0f), -BLOCK_SIZE / (2.0f), -BLOCK_SIZE / (2.0f));	    v.t = D3DXVECTOR2(1, 0);
-		vecVertex.push_back(v);
-		v.p = D3DXVECTOR3(BLOCK_SIZE / (2.0f), -BLOCK_SIZE / (2.0f), BLOCK_SIZE / (2.0f));	    v.t = D3DXVECTOR2(1, 1);
-		vecVertex.push_back(v);
-	}
-
-	m_vecVertex = vecVertex;
-
-	m_CombinatorTexture = g_pTextureManager->GetTexture(("data/Texture/city_manual.png"));
-
-	D3DXMatrixRotationY(&m_matR, D3DXToRadian(fAngle));
-	D3DXMatrixTranslation(&m_matT, vPosition.x, 0, vPosition.z);
-	//m_vPosition = vPosition;
-	//m_vOnCombinatorPosition = D3DXVECTOR3(vPosition.x, vPosition.y + 1.0f, vPosition.z);
-
-	m_pCollision = new CBoxCollision(D3DXVECTOR3(0, 0, 0), D3DXVECTOR3(1.0f, 1.0f, 1.0f), &m_matWorld);
-	m_pPartsInteractCollision = new CSphereCollision(D3DXVECTOR3(0, 0, 0), 2.0f, &m_matWorld);
-
-	m_matWorld = m_matS * m_matR * m_matT;
 	if (m_pCollision)
 		m_pCollision->Update();
-
 	if (m_pPartsInteractCollision)
 		m_pPartsInteractCollision->Update();
 	
+	m_isTimeCheck = false;
 }
 
 
 void CPartManualCombinator::Update()
 {
-
 	if (m_isTimeCheck && m_eCombinatorActionState == eCombinatorActionState::Usable)
 		CombineParts();
 	
@@ -168,19 +72,7 @@ void CPartManualCombinator::Update()
 void CPartManualCombinator::Render()
 {
 	g_pD3DDevice->SetTransform(D3DTS_WORLD, &m_matWorld);
-	g_pD3DDevice->SetTexture(0, m_CombinatorTexture);
-
-	D3DMATERIAL9 mtlStorage;
-	ZeroMemory(&mtlStorage, sizeof(D3DMATERIAL9));
-	mtlStorage.Ambient = D3DXCOLOR(0.7f, 0.7f, 0.7f, 1.0f);
-	mtlStorage.Diffuse = D3DXCOLOR(0.7f, 0.7f, 0.7f, 1.0f);
-	mtlStorage.Specular = D3DXCOLOR(0.7f, 0.7f, 0.7f, 1.0f);
-
-	g_pD3DDevice->SetMaterial(&mtlStorage);
-	g_pD3DDevice->SetFVF(ST_PNT_VERTEX::FVF);
-	g_pD3DDevice->DrawPrimitiveUP(D3DPT_TRIANGLELIST, m_vecVertex.size() / 3, &m_vecVertex[0],
-		sizeof(ST_PNT_VERTEX));
-	g_pD3DDevice->SetTexture(0, 0);
+	m_pSMesh->Render();
 
 	_DEBUG_COMMENT if (m_pCollision)
 		_DEBUG_COMMENT m_pCollision->Render();
@@ -195,18 +87,16 @@ CParts* CPartManualCombinator::Make()
 	 * 조합식 매니저로 조합식들고와서 조합 
 	 */
 	string strResult;
-	for(auto it : m_multimapParts)
+	for (auto it : m_multimapParts)
 	{
 		strResult += it.first;
+		m_pInteractCenter->DeleteParts(it.second);
 	}
-	//매니저로 조합식들 들고와서
-	//그 조합식과 동일한게있다면
-	//m_vecDischargeParts
-	CParts* parts = NULL;
-	//if(동일한게있다면)
-	//parts = manager->CreateParts(strResult);
+	m_multimapParts.clear();
+
+	CParts* Parts = g_pPartsManager->CreateParts(g_pPartsManager->GetIDFromFormula(strResult));
 	
-	return parts;
+	return Parts;
 }
 
 void CPartManualCombinator::Interact(CCharacter* pCharacter)
@@ -230,19 +120,16 @@ void CPartManualCombinator::PartsInteract(CParts* pParts)
 	{
 		return;
 	}
-	else
-	{
-		if(m_nPartsCount == m_nMaxPartsCount)
-			m_eCombinatorLoadState = eCombinatorLoadState::LoadImpossible;
 
-		pParts->GetCollision()->SetActive(false);
-		pParts->SetCombinatorPosition(m_vPosition);
-		pParts->SetMoveParts(true);
-	}
+	if(m_nPartsCount == m_nMaxPartsCount)
+		m_eCombinatorLoadState = eCombinatorLoadState::LoadImpossible;
 
+	pParts->GetCollision()->SetActive(false);
+	pParts->SetCombinatorPosition(m_vPosition);
+	pParts->SetMoveParts(true);
 
-
-
+	g_EventManager->CallEvent(eEvent::CombinUse, NULL);
+	
 }
 
 void CPartManualCombinator::OnEvent(eEvent eEvent, void* _value)
@@ -258,12 +145,15 @@ void CPartManualCombinator::CombineParts()
 		m_eCombinatorLoadState = eCombinatorLoadState::LoadPossible;
 		m_isTimeCheck = false;
 		m_fElapsedTime = 0;
-		Make();
-		ReadytoCarryParts();
+		
+		CParts* parts = Make();
+
+		m_vecDischargeParts.push_back(parts);
+		m_pInteractCenter->AddParts(parts);
+
+		m_isCombine = true;
 	}
 }
-
-
 
 void CPartManualCombinator::DischargeParts()
 {
@@ -275,10 +165,10 @@ void CPartManualCombinator::DischargeParts()
 		return;
 	}
 	m_pParts = *m_vecDischargeParts.begin();
-	m_pParts->SetPosition(m_vOnCombinatorPosition);
+	//m_pParts->SetPosition(m_vOnCombinatorPosition);
+	m_pParts->SetGrabPosition(&m_vOnCombinatorPosition);
 	m_vecDischargeParts.erase(m_vecDischargeParts.begin());
 }
-
 
 void CPartManualCombinator::InsertParts(CParts* p)
 {
@@ -292,7 +182,7 @@ void CPartManualCombinator::ReadytoCarryParts()
 	if (m_isTimeCheck)
 		return;
 
-	m_isCombine = true; //들고가기 가능하게 하는 bool
+	m_isCombine = true; 
 	for (auto it : m_multimapParts)
 	{
 		m_vecDischargeParts.push_back(it.second);
@@ -303,7 +193,6 @@ void CPartManualCombinator::ReadytoCarryParts()
 void CPartManualCombinator::CheckCombineisFull()
 {
 	if (m_eCombinatorLoadState == eCombinatorLoadState::LoadImpossible)
-	{
 		m_isTimeCheck = true;
-	}
+	
 }

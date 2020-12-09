@@ -2,15 +2,15 @@
 #include "CInteractiveActor.h"
 #include "IPartGenerator.h"
 
+class CSkinnedMesh;
 
 class CPartStorage :
 	public CInteractiveActor ,public IPartGenerator 
 {
 private:
-	vector<ST_PNT_VERTEX>	m_vecVertex; 
-	LPDIRECT3DTEXTURE9		m_storageTexture;
-
-	
+	CSkinnedMesh*			m_pSkinnedMesh;
+	bool					m_isInteractCalled;
+	float					m_fPassedTime;
 public:
 	CPartStorage(IInteractCenter* pInteractCenter);
 	~CPartStorage();
@@ -18,7 +18,7 @@ public:
 public:
 	void Update() override;
 	void Render() override;
-	void Setup(float fAngle ,D3DXVECTOR3 vecPosition,string sPartsID);
+	void Setup(float fAngle ,D3DXVECTOR3 vPosition,string sPartsID);
 	void Interact(CCharacter* pCharacter) override;
 	void OnEvent(eEvent eEvent, void* _value);
 

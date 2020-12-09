@@ -10,12 +10,11 @@ CActor::CActor() :
 	m_vDirection(0, 0, 1),
 	m_vPosition(0, 0, 0),
 	m_fBaseSpeed(0),
-	m_fSpeed(m_fBaseSpeed),
 	m_fMass(1),
-	m_fFriction(0),
+	m_fFriction(0), m_fRepulsivePower(1),
 	m_vVelocity(0, 0, 0),
 	m_vAcceleration(0, 0, 0),
-	m_vScale(1,1,1)
+	m_vScale(1, 1, 1)
 {
 	D3DXMatrixIdentity(&m_matS);
 	D3DXMatrixRotationY(&m_matR, m_fRotY);
@@ -68,6 +67,15 @@ void CActor::SetPosition(float x, float y, float z)
 {
 	m_vPosition = D3DXVECTOR3(x, y, z);
 	D3DXMatrixTranslation(&m_matT, x, y, z);
+	m_matWorld = m_matS * m_matR * m_matT;
+	if (m_pCollision)
+		m_pCollision->Update();
+}
+
+void CActor::SetRotationY(float rot)
+{
+	m_fRotY = rot;
+	D3DXMatrixRotationY(&m_matR, m_fRotY);
 	m_matWorld = m_matS * m_matR * m_matT;
 	if (m_pCollision)
 		m_pCollision->Update();

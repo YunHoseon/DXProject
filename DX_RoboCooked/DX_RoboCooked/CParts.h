@@ -18,7 +18,7 @@ private:
 
 	bool							m_isMoveParts;
 	string							m_sPartsID;
-	float							m_fRotAngle;
+	//int								m_nRotAngleY;
 	eCombinatorPartsLevel			m_eLevel;
 	string							m_sFormula;
 	CPartCombinator*				m_pPartsCombinator;
@@ -43,22 +43,24 @@ public:
 	void SetCombinatorPosition(D3DXVECTOR3 vPosition){ m_vCombinatorPosition = vPosition; }
 
 	CStaticMesh* GetStaticMesh() { return &m_cMesh; }
+
 	/* getter setter */
 	
 	string GetPartsID() { return m_sPartsID; }
 	void SetPartsID(string	ID) { m_sPartsID = ID; }
-	
 
+	//int GetPartsAngle() { return m_nRotAngleY; }
+	
 	string GetFormula() { return m_sFormula; }
 	void SetFormula(string sFormula) { m_sFormula = sFormula; }
 	
 	D3DXVECTOR3* GetGrabPosition() { return m_vGrabPosition; }
-	void SetGrabPosition(D3DXVECTOR3* vPosition) { m_vGrabPosition = vPosition; }
-	
+	void SetGrabPosition(D3DXVECTOR3* vPosition);
+
 	bool GetMoveParts() { return m_isMoveParts; }
 	void SetMoveParts(bool b) { m_isMoveParts = b; }
 
-	eCombinatorPartsLevel GetCombinPartsLevel() const { return m_eLevel; }
+	eCombinatorPartsLevel GetCombinePartsLevel() const { return m_eLevel; }
 
 	void SetCPartCombinator(CPartCombinator* p) { m_pPartsCombinator = p; }
 

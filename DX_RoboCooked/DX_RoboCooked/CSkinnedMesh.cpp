@@ -3,13 +3,19 @@
 #include "CAllocateHierachy.h"
 #include "CSkinnedMeshManager.h"
 
-CSkinnedMesh::CSkinnedMesh(): m_pRoot(nullptr), m_pAnimController(nullptr), m_fBlendTime(0.1f),
-                              m_fPassedBlendTime(0.0f),
-                              m_isAnimBlend(false), m_dAnimPeriod(0), m_fAnimTime(0), m_isInputOn(true), m_vMin{}, m_vMax{}
+CSkinnedMesh::CSkinnedMesh():
+	m_pRoot(nullptr),
+	m_pAnimController(nullptr),
+	m_fBlendTime(0.1f),
+	m_fPassedBlendTime(0.0f),
+	m_isAnimBlend(false),
+	m_dAnimPeriod(0),
+	m_fAnimTime(0),
+	m_isInputOn(true),
+	m_vMin(g_vZero),
+	m_vMax(g_vZero),
+	m_pmatWorldTM(nullptr)
 {
-	D3DXMatrixIdentity(&m_matWorldTM);
-	
-	
 }
 
 CSkinnedMesh::~CSkinnedMesh()
@@ -19,7 +25,7 @@ CSkinnedMesh::~CSkinnedMesh()
 	SafeRelease(m_pAnimController);
 }
 
-void CSkinnedMesh::setup(char* szFolder, char* szFile)
+void CSkinnedMesh::Setup(char* szFolder, char* szFile)
 {
 	string sFullPath(szFolder);
 	sFullPath = sFullPath + "/" + szFile;
@@ -41,7 +47,7 @@ void CSkinnedMesh::setup(char* szFolder, char* szFile)
 	SetupBoneMatrixPtrs(m_pRoot);
 }
 
-void CSkinnedMesh::update()
+void CSkinnedMesh::Update()
 {
 	if (m_isAnimBlend)
 	{
@@ -61,7 +67,7 @@ void CSkinnedMesh::update()
 	}
 	
 	m_pAnimController->AdvanceTime(g_pTimeManager->GetElapsedTime(), NULL);
-	update(m_pRoot, NULL);
+	Update((ST_BONE*)m_pRoot, m_pmatWorldTM);
 	UpdateSkinnedMesh(m_pRoot);
 
 	m_fAnimTime += g_pTimeManager->GetElapsedTime();
@@ -70,12 +76,10 @@ void CSkinnedMesh::update()
 		//m_isInputOn = true;
 		SetAnimationIndexBlend(IDLE);
 	}
-	
 }
 
-void CSkinnedMesh::update(LPD3DXFRAME pFrame, LPD3DXFRAME pParent)
+void CSkinnedMesh::Update(LPD3DXFRAME pFrame, LPD3DXFRAME pParent)
 {
-	
 	if (pFrame == NULL)
 		pFrame = m_pRoot;
 	ST_BONE* pBone = (ST_BONE*)pFrame;
@@ -88,17 +92,16 @@ void CSkinnedMesh::update(LPD3DXFRAME pFrame, LPD3DXFRAME pParent)
 
 	if(pFrame->pFrameFirstChild)
 	{
-		update(pFrame->pFrameFirstChild, pFrame);
-		
+		Update(pFrame->pFrameFirstChild, pFrame);
 	}
 
 	if(pFrame->pFrameSibling)
 	{
-		update(pFrame->pFrameSibling, pParent);
+		Update(pFrame->pFrameSibling, pParent);
 	}
 }
 
-void CSkinnedMesh::render(LPD3DXFRAME pFrame)
+void CSkinnedMesh::Render(LPD3DXFRAME pFrame)
 {
 	if (pFrame == nullptr)
 		pFrame = m_pRoot;
@@ -110,7 +113,7 @@ void CSkinnedMesh::render(LPD3DXFRAME pFrame)
 		ST_BONE_MESH* pBoneMesh = (ST_BONE_MESH*)pBone->pMeshContainer;
 		if(pBoneMesh->MeshData.pMesh)
 		{
-			g_pD3DDevice->SetTransform(D3DTS_WORLD, &pBone->CombinedTransformationMatrix);
+			//g_pD3DDevice->SetTransform(D3DTS_WORLD, &pBone->CombinedTransformationMatrix);
 			for (size_t i = 0; i < pBoneMesh->vecMtl.size(); ++i)
 			{
 				g_pD3DDevice->SetTexture(0, pBoneMesh->vecTexture[i]);
@@ -121,10 +124,10 @@ void CSkinnedMesh::render(LPD3DXFRAME pFrame)
 	}
 
 	if (pFrame->pFrameFirstChild)
-		render(pFrame->pFrameFirstChild);
+		Render(pFrame->pFrameFirstChild);
 
 	if (pFrame->pFrameSibling)
-		render(pFrame->pFrameSibling);
+		Render(pFrame->pFrameSibling);
 }
 
 void CSkinnedMesh::SetupBoneMatrixPtrs(LPD3DXFRAME pFrame)
@@ -193,7 +196,7 @@ void CSkinnedMesh::SetAnimationIndex(int nIndex)
 {
 	int num = m_pAnimController->GetNumAnimationSets();
 	if (nIndex > num) nIndex = nIndex % num;
-
+	
 	LPD3DXANIMATIONSET pAnimSet = NULL;
 	m_pAnimController->GetAnimationSet(nIndex, &pAnimSet);
 	m_pAnimController->SetTrackAnimationSet(0, pAnimSet);
@@ -280,8 +283,6 @@ void CSkinnedMesh::Load(char* szFolder, char* szFileName)
 
 	if (m_pRoot)
 		SetupBoneMatrixPtrs(m_pRoot);
-	
-	
 }
 
 void CSkinnedMesh::Destroy()
@@ -297,8 +298,8 @@ void CSkinnedMesh::UpdateAndRender()
 
 	if(m_pRoot)
 	{
-		Update((ST_BONE*)m_pRoot, &m_matWorldTM);
-		render(m_pRoot);
+		Update((ST_BONE*)m_pRoot, m_pmatWorldTM);
+		Render(m_pRoot);
 	}
 }
 
@@ -328,5 +329,13 @@ void CSkinnedMesh::SetRandomTrackPosition()
 
 void CSkinnedMesh::SetTransform(D3DXMATRIXA16* pmat)
 {
-	m_matWorldTM = *pmat;
+	m_pmatWorldTM = pmat;
+}
+
+double CSkinnedMesh::GetCurrentAnimPeriod()
+{
+	return m_dAnimPeriod;
+	/*LPD3DXANIMATIONSET curAnim;
+	m_pAnimController->GetTrackAnimationSet(0, &curAnim);
+	return curAnim->GetPeriod();*/
 }

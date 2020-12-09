@@ -20,10 +20,10 @@ protected:
 
 	enum AnimSet { ATK01, ATK02, ATK03, RUN, IDLE };
 public:
-	void setup(char* szFolder, char* szFile);
-	void update();
-	void update(LPD3DXFRAME pFrame, LPD3DXFRAME pParent);
-	void render(LPD3DXFRAME pFrame);
+	void Setup(char* szFolder, char* szFile);
+	void Update();
+	void Update(LPD3DXFRAME pFrame, LPD3DXFRAME pParent);
+	void Render(LPD3DXFRAME pFrame);
 	void SetupBoneMatrixPtrs(LPD3DXFRAME pFrame);
 	void UpdateSkinnedMesh(LPD3DXFRAME pFrame);
 
@@ -42,7 +42,9 @@ public:
 	void Update(ST_BONE* pCurrent, D3DXMATRIXA16* pmatParent);
 	void SetRandomTrackPosition();
 
-	D3DXMATRIXA16 m_matWorldTM;
+	D3DXMATRIXA16 * m_pmatWorldTM;
 	void SetTransform(D3DXMATRIXA16 * pmat);
+	double GetCurrentAnimPeriod();
+	LPD3DXANIMATIONCONTROLLER GetAnimController() { return m_pAnimController; }
 	
 };

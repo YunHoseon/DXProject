@@ -4,6 +4,7 @@
 
 class ICollisionArea;
 class CGameScene;
+class CCrowdControl;
 
 
 enum class ePlayerState
@@ -22,16 +23,23 @@ protected:
 	D3DXVECTOR3			m_vGrabPartsPosition;
 	CParts*				m_pParts;
 
+	D3DXVECTOR3			m_vDefaultPosition;
 	// 키다운 관련.
 	array<float, 3>		m_arrElapsedTime;
 	array<float, 3>		m_arrCoolDown;
 	array<bool, 3>		m_arrKeyDown;
+	bool				m_isMoveKeyDown;
 	// 수정중
 	const ST_PLAYER_INPUTKEY* m_pInputKey;
 	LPD3DXMESH			m_pMesh;
 	D3DMATERIAL9		m_stMtlSphere;
+	float				m_fMinThrowPower;
+	float				m_fMaxThrowPower;
 	float				m_fThrowPower;
+	float				m_fThrowPowerUpSpeed;
 	// 상태이상 관련 멤버 추가 필요
+	CCrowdControl*		m_pCC;
+	BOOL				m_isDummy;
 public:
 	CCharacter(int nPlayerNum);
 	virtual ~CCharacter();
@@ -53,5 +61,14 @@ public:
 	void SetPlayerState(ePlayerState state) { m_ePlayerState = state; }
 	void SetParts(CParts* pParts) { m_pParts = pParts; }
 	CParts* GetParts() { return m_pParts; }
+	void SetDummy(bool b) { m_isDummy = b; }
+	BOOL GetDummy() { return m_isDummy; }
+
+	void SetCC(CCrowdControl* cc);
+	void DeleteCC();
+
+	virtual void SetDefaultPosition(D3DXVECTOR3 vPos) { m_vDefaultPosition = vPos; }
+	virtual void Reset();
+	
 };
 

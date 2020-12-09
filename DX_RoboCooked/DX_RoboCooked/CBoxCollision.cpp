@@ -157,10 +157,9 @@ void CBoxCollision::Render()
 	
 	drawVertex.push_back(drawPoint[6]); drawVertex.push_back(drawPoint[2]);
 	drawVertex.push_back(drawPoint[7]); drawVertex.push_back(drawPoint[3]);
-	D3DXMATRIXA16 matWorld;
-	D3DXMatrixIdentity(&matWorld);
+
 	g_pD3DDevice->SetRenderState(D3DRS_LIGHTING, false);
-	g_pD3DDevice->SetTransform(D3DTS_WORLD, &matWorld);
+	g_pD3DDevice->SetTransform(D3DTS_WORLD, &g_matIdentity);
 	//g_pD3DDevice->SetTransform(D3DTS_WORLD, m_pmatWorldTM);
 	g_pD3DDevice->SetTexture(0, NULL);
 	g_pD3DDevice->SetFVF(ST_PC_VERTEX::FVF);
@@ -190,16 +189,7 @@ bool CBoxCollision::CollideToBox(CBoxCollision* pTargetCollider, D3DXVECTOR3* pN
 	bool existsParallelPair = false;
 
 	D3DXVECTOR3 vDist = pTargetCollider->m_vCenterPos - this->m_vCenterPos;
-	//array<float, 3> arrDiagLen;
-	//arrDiagLen[0] = D3DXVec3Length(&(pTargetCollider->m_arrAxisDir[0] * pTargetCollider->m_fAxisHalfLen[0]));
-	//arrDiagLen[1] = D3DXVec3Length(&(pTargetCollider->m_arrAxisDir[1] * pTargetCollider->m_fAxisHalfLen[1]));
-	//arrDiagLen[2] = D3DXVec3Length(&(pTargetCollider->m_arrAxisDir[2] * pTargetCollider->m_fAxisHalfLen[2]));
-	//float fTargetDiagonal = D3DXVec3Length(&D3DXVECTOR3(arrDiagLen[0], arrDiagLen[1], arrDiagLen[2]));
 
-	//arrDiagLen[0] = D3DXVec3Length(&(m_arrAxisDir[0] * m_fAxisHalfLen[0]));
-	//arrDiagLen[1] = D3DXVec3Length(&(m_arrAxisDir[1] * m_fAxisHalfLen[1]));
-	//arrDiagLen[2] = D3DXVec3Length(&(m_arrAxisDir[2] * m_fAxisHalfLen[2]));
-	//float fThisDiagonal = D3DXVec3Length(&D3DXVECTOR3(arrDiagLen[0], arrDiagLen[1], arrDiagLen[2]));
 	float fTargetDiagonal = D3DXVec3Length(&D3DXVECTOR3(pTargetCollider->m_fAxisHalfLen[0], pTargetCollider->m_fAxisHalfLen[1], pTargetCollider->m_fAxisHalfLen[2]));
 	float fThisDiagonal = D3DXVec3Length(&D3DXVECTOR3(m_fAxisHalfLen[0], m_fAxisHalfLen[1], m_fAxisHalfLen[2]));
 	if (D3DXVec3Length(&vDist) > fTargetDiagonal + fThisDiagonal)
@@ -431,3 +421,23 @@ void CBoxCollision::SetScale(float x, float y, float z)
 	m_fAxisHalfLen[1] =	m_fAxisHalfLen[1] > 0.3f ? m_fAxisHalfLen[1] : 0.3f;
 	m_fAxisHalfLen[2] =	m_fAxisHalfLen[2] > 0.3f ? m_fAxisHalfLen[2] : 0.3f;
 }
+
+void CBoxCollision::RotateOriginAxis(float x, float y, float z) // radian
+{
+	D3DXMATRIXA16 matX, matY, matZ, matR;
+	D3DXMatrixRotationX(&matX, x);
+	D3DXMatrixRotationY(&matY, y);
+	D3DXMatrixRotationZ(&matZ, z);
+	matR = matX * matY * matZ;
+
+	D3DXVec3TransformNormal(&m_arrOriginAxisDir[0], &m_arrOriginAxisDir[0], &matR);
+	D3DXVec3TransformNormal(&m_arrOriginAxisDir[1], &m_arrOriginAxisDir[1], &matR);
+	D3DXVec3TransformNormal(&m_arrOriginAxisDir[2], &m_arrOriginAxisDir[2], &matR);
+}
+
+void CBoxCollision::GetMinMax(D3DXVECTOR3* pMin, D3DXVECTOR3* pMax)
+{
+	*pMin = m_vCenterPos - D3DXVECTOR3(m_fAxisHalfLen[0], m_fAxisHalfLen[1], m_fAxisHalfLen[2]);
+	*pMax = m_vCenterPos + D3DXVECTOR3(m_fAxisHalfLen[0], m_fAxisHalfLen[1], m_fAxisHalfLen[2]);
+}
+

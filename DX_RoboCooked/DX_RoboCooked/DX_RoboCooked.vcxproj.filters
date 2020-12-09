@@ -55,6 +55,18 @@
     <Filter Include="UI\Button">
       <UniqueIdentifier>{78ec4cfa-4d2a-4f0c-a621-b60f2a71f011}</UniqueIdentifier>
     </Filter>
+    <Filter Include="GameScene\Monster">
+      <UniqueIdentifier>{5f2a9327-7bf9-4016-99dd-68851749c3b7}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="GameScene\Monster\CrowdControl">
+      <UniqueIdentifier>{e615c889-dac7-4e3f-acc3-997f132e9a6a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="GameScene\Tile">
+      <UniqueIdentifier>{a2e5ed5e-c21e-4595-a998-63a305bf4584}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="GameScene\Object">
+      <UniqueIdentifier>{878916bb-8b8b-4b2d-8a45-6036be2a23f8}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <Text Include="ReadMe.txt" />
@@ -168,9 +180,6 @@
     <ClInclude Include="CWall.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="CBlueprint.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="CUI.h">
       <Filter>UI</Filter>
     </ClInclude>
@@ -207,12 +216,6 @@
     <ClInclude Include="IPartGenerator.h">
       <Filter>GameScene\PartsGen</Filter>
     </ClInclude>
-    <ClInclude Include="CTile.h">
-      <Filter>GameScene\Actor</Filter>
-    </ClInclude>
-    <ClInclude Include="CField.h">
-      <Filter>GameScene\Actor</Filter>
-    </ClInclude>
     <ClInclude Include="CPartsManager.h">
       <Filter>Manager\Factory</Filter>
     </ClInclude>
@@ -245,6 +248,78 @@
     </ClInclude>
     <ClInclude Include="CStaticMesh.h">
       <Filter>Manager\Factory</Filter>
+    </ClInclude>
+    <ClInclude Include="CMonster.h">
+      <Filter>GameScene\Monster</Filter>
+    </ClInclude>
+    <ClInclude Include="CCrowdControl.h">
+      <Filter>GameScene\Monster\CrowdControl</Filter>
+    </ClInclude>
+    <ClInclude Include="CStaticMeshManager.h">
+      <Filter>Manager</Filter>
+    </ClInclude>
+    <ClInclude Include="CTile.h">
+      <Filter>GameScene\Tile</Filter>
+    </ClInclude>
+    <ClInclude Include="CWater.h">
+      <Filter>GameScene\Tile</Filter>
+    </ClInclude>
+    <ClInclude Include="CStair.h">
+      <Filter>GameScene\Tile</Filter>
+    </ClInclude>
+    <ClInclude Include="CMonsterHarpy.h">
+      <Filter>GameScene\Monster</Filter>
+    </ClInclude>
+    <ClInclude Include="CMonsterMedusa.h">
+      <Filter>GameScene\Monster</Filter>
+    </ClInclude>
+    <ClInclude Include="CCCSpeedDown.h">
+      <Filter>GameScene\Monster\CrowdControl</Filter>
+    </ClInclude>
+    <ClInclude Include="CCCNone.h">
+      <Filter>GameScene\Monster\CrowdControl</Filter>
+    </ClInclude>
+    <ClInclude Include="CCCStopMove.h">
+      <Filter>GameScene\Monster\CrowdControl</Filter>
+    </ClInclude>
+    <ClInclude Include="CCCReverseKey.h">
+      <Filter>GameScene\Monster\CrowdControl</Filter>
+    </ClInclude>
+    <ClInclude Include="CTornado.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="CBrick.h">
+      <Filter>GameScene\Tile</Filter>
+    </ClInclude>
+    <ClInclude Include="CSoil.h">
+      <Filter>GameScene\Tile</Filter>
+    </ClInclude>
+    <ClInclude Include="CFlowSand.h">
+      <Filter>GameScene\Tile</Filter>
+    </ClInclude>
+    <ClInclude Include="CThickSand.h">
+      <Filter>GameScene\Tile</Filter>
+    </ClInclude>
+    <ClInclude Include="CSand.h">
+      <Filter>GameScene\Tile</Filter>
+    </ClInclude>
+    <ClInclude Include="CSandpile.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="CCCSlowAndStop.h">
+      <Filter>GameScene\Monster\CrowdControl</Filter>
+    </ClInclude>
+    <ClInclude Include="CBlueprint.h">
+      <Filter>GameScene\Object</Filter>
+    </ClInclude>
+    <ClInclude Include="CField.h">
+      <Filter>GameScene\Tile</Filter>
+    </ClInclude>
+    <ClInclude Include="CTestStair.h">
+      <Filter>GameScene\Tile</Filter>
+    </ClInclude>
+    <ClInclude Include="CCactus.h">
+      <Filter>GameScene\Object</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -350,9 +425,6 @@
     <ClCompile Include="CWall.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="CBlueprint.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="CUI.cpp">
       <Filter>UI</Filter>
     </ClCompile>
@@ -389,12 +461,6 @@
     <ClCompile Include="IPartGenerator.cpp">
       <Filter>GameScene\PartsGen</Filter>
     </ClCompile>
-    <ClCompile Include="CTile.cpp">
-      <Filter>GameScene\Actor</Filter>
-    </ClCompile>
-    <ClCompile Include="CField.cpp">
-      <Filter>GameScene\Actor</Filter>
-    </ClCompile>
     <ClCompile Include="CPartsManager.cpp">
       <Filter>Manager\Factory</Filter>
     </ClCompile>
@@ -427,6 +493,78 @@
     </ClCompile>
     <ClCompile Include="CStaticMesh.cpp">
       <Filter>Manager\Factory</Filter>
+    </ClCompile>
+    <ClCompile Include="CMonster.cpp">
+      <Filter>GameScene\Monster</Filter>
+    </ClCompile>
+    <ClCompile Include="CCrowdControl.cpp">
+      <Filter>GameScene\Monster\CrowdControl</Filter>
+    </ClCompile>
+    <ClCompile Include="CStaticMeshManager.cpp">
+      <Filter>Manager</Filter>
+    </ClCompile>
+    <ClCompile Include="CTile.cpp">
+      <Filter>GameScene\Tile</Filter>
+    </ClCompile>
+    <ClCompile Include="CWater.cpp">
+      <Filter>GameScene\Tile</Filter>
+    </ClCompile>
+    <ClCompile Include="CStair.cpp">
+      <Filter>GameScene\Tile</Filter>
+    </ClCompile>
+    <ClCompile Include="CMonsterHarpy.cpp">
+      <Filter>GameScene\Monster</Filter>
+    </ClCompile>
+    <ClCompile Include="CMonsterMedusa.cpp">
+      <Filter>GameScene\Monster</Filter>
+    </ClCompile>
+    <ClCompile Include="CCCSpeedDown.cpp">
+      <Filter>GameScene\Monster\CrowdControl</Filter>
+    </ClCompile>
+    <ClCompile Include="CCCNone.cpp">
+      <Filter>GameScene\Monster\CrowdControl</Filter>
+    </ClCompile>
+    <ClCompile Include="CCCReverseKey.cpp">
+      <Filter>GameScene\Monster\CrowdControl</Filter>
+    </ClCompile>
+    <ClCompile Include="CCCStopMove.cpp">
+      <Filter>GameScene\Monster\CrowdControl</Filter>
+    </ClCompile>
+    <ClCompile Include="CTornado.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="CBrick.cpp">
+      <Filter>GameScene\Tile</Filter>
+    </ClCompile>
+    <ClCompile Include="CSoil.cpp">
+      <Filter>GameScene\Tile</Filter>
+    </ClCompile>
+    <ClCompile Include="CFlowSand.cpp">
+      <Filter>GameScene\Tile</Filter>
+    </ClCompile>
+    <ClCompile Include="CThickSand.cpp">
+      <Filter>GameScene\Tile</Filter>
+    </ClCompile>
+    <ClCompile Include="CSand.cpp">
+      <Filter>GameScene\Tile</Filter>
+    </ClCompile>
+    <ClCompile Include="CSandpile.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="CCCSlowAndStop.cpp">
+      <Filter>GameScene\Monster\CrowdControl</Filter>
+    </ClCompile>
+    <ClCompile Include="CBlueprint.cpp">
+      <Filter>GameScene\Object</Filter>
+    </ClCompile>
+    <ClCompile Include="CField.cpp">
+      <Filter>GameScene\Tile</Filter>
+    </ClCompile>
+    <ClCompile Include="CTestStair.cpp">
+      <Filter>GameScene\Tile</Filter>
+    </ClCompile>
+    <ClCompile Include="CCactus.cpp">
+      <Filter>GameScene\Object</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

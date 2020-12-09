@@ -1,7 +1,7 @@
 #pragma once
 #include "CActor.h"
-#include "CTile.h"
 
+class CTile;
 
 class CField :
 	public CActor
@@ -17,6 +17,8 @@ public:
 	void OnEvent(eEvent eEvent, void* _value) {};
 	void AddAcceleration(const D3DXVECTOR3& vAccel) override {}
 	void AddForce(const D3DXVECTOR3& vForce) override {}
+
+	//bool Collide(CActor* target, D3DXVECTOR3* pNormal) override;
 private:
 	vector<CTile*>					m_vecTile;
 	D3DMATERIAL9					m_stMtlTile;

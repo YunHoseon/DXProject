@@ -21,4 +21,8 @@ public:
 	bool CollideToBox(CBoxCollision* pTargetCollider, D3DXVECTOR3* pNormal = nullptr) override;
 	bool CollideToSphere(CSphereCollision* pTargetCollider, D3DXVECTOR3* pNormal = nullptr) override;
 	void SetScale(float x, float y, float z) override;
+	void RotateOriginAxis(float x, float y, float z);
+	float GetHeight() override { return m_fAxisHalfLen[1] * 2; }
+
+	void GetMinMax(D3DXVECTOR3* pMin, D3DXVECTOR3* pMax) override;
 };

@@ -18,7 +18,6 @@ public:
 	void InsertParts(CParts* p) override;
 	void ReadytoCarryParts() override;
 
-
 private:
 	CParts* Make() override;
 	void Setup(float fAngle, D3DXVECTOR3 vPosition) override;

@@ -6,11 +6,20 @@
 #include "CCharacter.h"
 
 CParts::CParts(string sPartsID, string sFormula, float fMass)
-	: m_vGrabPosition(nullptr), m_isMoveParts(false), m_fRotAngle(0.0f),
+	: m_vGrabPosition(nullptr), m_isMoveParts(false),
 	  m_eLevel(eCombinatorPartsLevel::ONE), m_vCombinatorPosition(0, 0, 0) , m_pPartsCombinator(NULL),
 	m_sPartsID(sPartsID), m_sFormula(sFormula)
 {
 	m_fMass = fMass;
+	switch (m_sPartsID[0])
+	{
+	case 'A': m_eLevel = eCombinatorPartsLevel::ONE; break;
+	case 'B': m_eLevel = eCombinatorPartsLevel::TWO; break;
+	case 'C': m_eLevel = eCombinatorPartsLevel::THREE; break;
+	case 'D': m_eLevel = eCombinatorPartsLevel::FOUR; break;
+	default: break;
+	}
+	SetRotationY(0);
 }
 
 CParts::CParts(CParts* pParts) :
@@ -37,7 +46,7 @@ CParts::~CParts()
 void CParts::Setup(D3DXVECTOR3& vScale)
 {
 	assert(m_cMesh.GetMesh());
-	m_pCollision = new CSphereCollision(m_cMesh.GetMesh(), &m_matWorld);
+	m_pCollision = new CBoxCollision(m_cMesh.GetMesh(), &m_matWorld);
 	SetScale(vScale);
 	if (m_pCollision)
 		m_pCollision->Update();
@@ -49,8 +58,10 @@ void CParts::Update()
 		MoveParts();
 	
 	else if (m_vGrabPosition)
+	{
 		m_vPosition = *m_vGrabPosition;
-
+		m_pCollision->SetActive(false);
+	}
 	else
 	{
 		if (m_pCollision->GetActive())
@@ -93,18 +104,22 @@ void CParts::Interact(CCharacter* pCharacter)
 
 void CParts::ThrowParts(D3DXVECTOR3 vForce)
 {
-	m_vGrabPosition = NULL;
-
+	m_vGrabPosition = nullptr;
+	m_pCollision->SetActive(true);
 	AddForce(vForce);
+
+	g_EventManager->CallEvent(eEvent::ThrowParts, NULL);
 }
 
 void CParts::PartsRotate()
 {
-	m_fRotAngle += 90.0f;
-	if (m_fRotAngle == 360.0f)
-		m_fRotAngle = 0;
+	m_fRotY += D3DX_PI * 0.5f;
+	if (m_fRotY >= D3DX_PI * 2)
+		m_fRotY = 0;
+	
+	SetRotationY(m_fRotY);
 
-	D3DXMatrixRotationY(&m_matR, D3DXToRadian(m_fRotAngle));
+	g_EventManager->CallEvent(eEvent::SpinParts, NULL);
 }
 
 void CParts::MoveParts()
@@ -118,11 +133,19 @@ void CParts::MoveParts()
 	{
 		m_pPartsCombinator->InsertParts(this);
 		m_pPartsCombinator = NULL;
+		m_vPosition = D3DXVECTOR3(0, -100, 0);
 		m_isMoveParts = false;
 		return;
 	}
 	D3DXVec3Normalize(&vDirection, &vDirection);
-	m_vPosition += vDirection*0.01f;
+	m_vPosition += vDirection * 0.05f;
+}
+
+void CParts::SetGrabPosition(D3DXVECTOR3* vPosition)
+{
+	m_vGrabPosition = vPosition;
+	if (vPosition)
+		m_vVelocity = g_vZero;
 }
 
 void CParts::AddForce(const D3DXVECTOR3& vForce)

@@ -4,178 +4,82 @@
 #include "CParts.h"
 #include "CCharacter.h"
 #include "CGameScene.h"
+#include "CSkinnedMesh.h"
 
-CPartStorage::CPartStorage(IInteractCenter* pInteractCenter):
-	m_storageTexture(nullptr)
+CPartStorage::CPartStorage(IInteractCenter *pInteractCenter)
+	: m_pSkinnedMesh(nullptr)
+	, m_isInteractCalled(false)
+	, m_fPassedTime(0)
 {
 	m_pInteractCenter = pInteractCenter;
 	m_fMass = 9999.f;
 }
 
-
 CPartStorage::~CPartStorage()
 {
-	SafeRelease(m_storageTexture);
 }
 
 void CPartStorage::Update()
 {
-	
+	//_DEBUG_COMMENT cout << m_pSkinnedMesh->GetCurrentAnimPeriod() << endl;
+	if (m_isInteractCalled)
+	{
+		m_fPassedTime += g_pTimeManager->GetElapsedTime();
+		if (m_pSkinnedMesh->GetCurrentAnimPeriod() <= m_fPassedTime)
+		{
+			m_isInteractCalled = false;
+			m_fPassedTime = 0.0f;
+		}
+		m_pSkinnedMesh->Update();
+	}
 }
 
 void CPartStorage::Render()
 {
-
 	g_pD3DDevice->SetTransform(D3DTS_WORLD, &m_matWorld);
-	g_pD3DDevice->SetTexture(0, m_storageTexture);
-	
-	D3DMATERIAL9 mtlStorage;
-	ZeroMemory(&mtlStorage, sizeof(D3DMATERIAL9));
-	mtlStorage.Ambient = D3DXCOLOR(0.7f, 0.7f, 0.7f, 1.0f);
-	mtlStorage.Diffuse = D3DXCOLOR(0.7f, 0.7f, 0.7f, 1.0f);
-	mtlStorage.Specular = D3DXCOLOR(0.7f, 0.7f, 0.7f, 1.0f);
-	
-	g_pD3DDevice->SetMaterial(&mtlStorage);
-	g_pD3DDevice->SetFVF(ST_PNT_VERTEX::FVF);
-	g_pD3DDevice->DrawPrimitiveUP(D3DPT_TRIANGLELIST, m_vecVertex.size()/3, &m_vecVertex[0],
-		sizeof(ST_PNT_VERTEX));
-	g_pD3DDevice->SetTexture(0, 0);
+	m_pSkinnedMesh->Render(nullptr);
 
 	_DEBUG_COMMENT if (m_pCollision)
 		_DEBUG_COMMENT m_pCollision->Render();
 }
 
-void CPartStorage::Setup(float fAngle, D3DXVECTOR3 vecPosition, string sPartsID)
+void CPartStorage::Setup(float fAngle, D3DXVECTOR3 vPosition, string sPartsID)
 {
 	m_sID = sPartsID;
-	
-	vector<ST_PNT_VERTEX> vecVertex;
-	ST_PNT_VERTEX v;
-	v.n = D3DXVECTOR3(0, 1, 0);
 
-	{
-		//front
-		v.p = D3DXVECTOR3(-BLOCK_SIZE / (2.0f), -BLOCK_SIZE / (2.0f), -BLOCK_SIZE / (2.0f));	v.t = D3DXVECTOR2(0, 1);
-		vecVertex.push_back(v);
-		v.p = D3DXVECTOR3(-BLOCK_SIZE / (2.0f), BLOCK_SIZE / (2.0f), -BLOCK_SIZE / (2.0f));		v.t = D3DXVECTOR2(0, 0);
-		vecVertex.push_back(v);
-		v.p = D3DXVECTOR3(BLOCK_SIZE / (2.0f), BLOCK_SIZE / (2.0f), -BLOCK_SIZE / (2.0f));		v.t = D3DXVECTOR2(1, 0);
-		vecVertex.push_back(v);
+	m_pSkinnedMesh = new CSkinnedMesh("data/model/object", "MTA_CV.X");
+	//m_pCollision = new CBoxCollision((m_pSkinnedMesh->GetMax() + m_pSkinnedMesh->GetMin()) * 0.5f, m_pSkinnedMesh->GetMax() - m_pSkinnedMesh->GetMin(), &m_matWorld);
+	m_pCollision = new CBoxCollision(g_vZero, D3DXVECTOR3(1 / 0.015f, 1 / 0.015f, 1 / 0.015f), &m_matWorld);
 
-		v.p = D3DXVECTOR3(-BLOCK_SIZE / (2.0f), -BLOCK_SIZE / (2.0f), -BLOCK_SIZE / (2.0f));	v.t = D3DXVECTOR2(0, 1);
-		vecVertex.push_back(v);
-		v.p = D3DXVECTOR3(BLOCK_SIZE / (2.0f), BLOCK_SIZE / (2.0f), -BLOCK_SIZE / (2.0f));		v.t = D3DXVECTOR2(1, 0);
-		vecVertex.push_back(v);
-		v.p = D3DXVECTOR3(BLOCK_SIZE / (2.0f), -BLOCK_SIZE / (2.0f), -BLOCK_SIZE / (2.0f));		v.t = D3DXVECTOR2(1, 1);
-		vecVertex.push_back(v);
+	SetRotationY(fAngle);
+	SetPosition(vPosition);
+	SetScale(0.015, 0.015, 0.015);
 
-		//back
-		v.p = D3DXVECTOR3(-BLOCK_SIZE / (2.0f), -BLOCK_SIZE / (2.0f), BLOCK_SIZE / (2.0f));		v.t = D3DXVECTOR2(0, 1);
-		vecVertex.push_back(v);
-		v.p = D3DXVECTOR3(BLOCK_SIZE / (2.0f), BLOCK_SIZE / (2.0f), BLOCK_SIZE / (2.0f));		v.t = D3DXVECTOR2(1, 0);
-		vecVertex.push_back(v);
-		v.p = D3DXVECTOR3(-BLOCK_SIZE / (2.0f), BLOCK_SIZE / (2.0f), BLOCK_SIZE / (2.0f));		v.t = D3DXVECTOR2(0, 0);
-		vecVertex.push_back(v);
-
-		v.p = D3DXVECTOR3(-BLOCK_SIZE / (2.0f), -BLOCK_SIZE / (2.0f), BLOCK_SIZE / (2.0f));		v.t = D3DXVECTOR2(0, 1);
-		vecVertex.push_back(v);
-		v.p = D3DXVECTOR3(BLOCK_SIZE / (2.0f), -BLOCK_SIZE / (2.0f), BLOCK_SIZE / (2.0f));		v.t = D3DXVECTOR2(1, 1);
-		vecVertex.push_back(v);
-		v.p = D3DXVECTOR3(BLOCK_SIZE / (2.0f), BLOCK_SIZE / (2.0f), BLOCK_SIZE / (2.0f));		v.t = D3DXVECTOR2(1, 0);
-		vecVertex.push_back(v);
-
-		//left
-		v.p = D3DXVECTOR3(-BLOCK_SIZE / (2.0f), -BLOCK_SIZE / (2.0f), BLOCK_SIZE / (2.0f));		v.t = D3DXVECTOR2(0, 1);
-		vecVertex.push_back(v);
-		v.p = D3DXVECTOR3(-BLOCK_SIZE / (2.0f), BLOCK_SIZE / (2.0f), BLOCK_SIZE / (2.0f));	    v.t = D3DXVECTOR2(0, 0);
-		vecVertex.push_back(v);
-		v.p = D3DXVECTOR3(-BLOCK_SIZE / (2.0f), BLOCK_SIZE / (2.0f), -BLOCK_SIZE / (2.0f));	    v.t = D3DXVECTOR2(1, 0);
-		vecVertex.push_back(v);
-
-		v.p = D3DXVECTOR3(-BLOCK_SIZE / (2.0f), -BLOCK_SIZE / (2.0f), BLOCK_SIZE / (2.0f));	    v.t = D3DXVECTOR2(0, 1);
-		vecVertex.push_back(v);
-		v.p = D3DXVECTOR3(-BLOCK_SIZE / (2.0f), BLOCK_SIZE / (2.0f), -BLOCK_SIZE / (2.0f));	    v.t = D3DXVECTOR2(1, 0);
-		vecVertex.push_back(v);
-		v.p = D3DXVECTOR3(-BLOCK_SIZE / (2.0f), -BLOCK_SIZE / (2.0f), -BLOCK_SIZE / (2.0f));	v.t = D3DXVECTOR2(1, 1);
-		vecVertex.push_back(v);
-
-		//right
-		v.p = D3DXVECTOR3(BLOCK_SIZE / (2.0f), -BLOCK_SIZE / (2.0f), -BLOCK_SIZE / (2.0f));		v.t = D3DXVECTOR2(0, 1);
-		vecVertex.push_back(v);
-		v.p = D3DXVECTOR3(BLOCK_SIZE / (2.0f), BLOCK_SIZE / (2.0f), -BLOCK_SIZE / (2.0f));	    v.t = D3DXVECTOR2(0, 0);
-		vecVertex.push_back(v);
-		v.p = D3DXVECTOR3(BLOCK_SIZE / (2.0f), BLOCK_SIZE / (2.0f), BLOCK_SIZE / (2.0f));		v.t = D3DXVECTOR2(1, 0);
-		vecVertex.push_back(v);
-
-		v.p = D3DXVECTOR3(BLOCK_SIZE / (2.0f), -BLOCK_SIZE / (2.0f), -BLOCK_SIZE / (2.0f));	    v.t = D3DXVECTOR2(0, 1);
-		vecVertex.push_back(v);
-		v.p = D3DXVECTOR3(BLOCK_SIZE / (2.0f), BLOCK_SIZE / (2.0f), BLOCK_SIZE / (2.0f));		v.t = D3DXVECTOR2(1, 0);
-		vecVertex.push_back(v);
-		v.p = D3DXVECTOR3(BLOCK_SIZE / (2.0f), -BLOCK_SIZE / (2.0f), BLOCK_SIZE / (2.0f));	    v.t = D3DXVECTOR2(1, 1);
-		vecVertex.push_back(v);
-
-		//top
-		v.p = D3DXVECTOR3(-BLOCK_SIZE / (2.0f), BLOCK_SIZE / (2.0f), -BLOCK_SIZE / (2.0f));		v.t = D3DXVECTOR2(0, 1);
-		vecVertex.push_back(v);
-		v.p = D3DXVECTOR3(-BLOCK_SIZE / (2.0f), BLOCK_SIZE / (2.0f), BLOCK_SIZE / (2.0f));	    v.t = D3DXVECTOR2(0, 0);
-		vecVertex.push_back(v);
-		v.p = D3DXVECTOR3(BLOCK_SIZE / (2.0f), BLOCK_SIZE / (2.0f), BLOCK_SIZE / (2.0f));		v.t = D3DXVECTOR2(1, 0);
-		vecVertex.push_back(v);
-
-		v.p = D3DXVECTOR3(-BLOCK_SIZE / (2.0f), BLOCK_SIZE / (2.0f), -BLOCK_SIZE / (2.0f));	    v.t = D3DXVECTOR2(0, 1);
-		vecVertex.push_back(v);
-		v.p = D3DXVECTOR3(BLOCK_SIZE / (2.0f), BLOCK_SIZE / (2.0f), BLOCK_SIZE / (2.0f));		v.t = D3DXVECTOR2(1, 0);
-		vecVertex.push_back(v);
-		v.p = D3DXVECTOR3(BLOCK_SIZE / (2.0f), BLOCK_SIZE / (2.0f), -BLOCK_SIZE / (2.0f));	    v.t = D3DXVECTOR2(1, 1);
-		vecVertex.push_back(v);
-
-		//bottom
-		v.p = D3DXVECTOR3(-BLOCK_SIZE / (2.0f), -BLOCK_SIZE / (2.0f), BLOCK_SIZE / (2.0f));		v.t = D3DXVECTOR2(0, 1);
-		vecVertex.push_back(v);
-		v.p = D3DXVECTOR3(-BLOCK_SIZE / (2.0f), -BLOCK_SIZE / (2.0f), -BLOCK_SIZE / (2.0f));	v.t = D3DXVECTOR2(0, 0);
-		vecVertex.push_back(v);
-		v.p = D3DXVECTOR3(BLOCK_SIZE / (2.0f), -BLOCK_SIZE / (2.0f), -BLOCK_SIZE / (2.0f));	    v.t = D3DXVECTOR2(1, 0);
-		vecVertex.push_back(v);
-
-		v.p = D3DXVECTOR3(-BLOCK_SIZE / (2.0f), -BLOCK_SIZE / (2.0f), BLOCK_SIZE / (2.0f));	    v.t = D3DXVECTOR2(0, 1);
-		vecVertex.push_back(v);
-		v.p = D3DXVECTOR3(BLOCK_SIZE / (2.0f), -BLOCK_SIZE / (2.0f), -BLOCK_SIZE / (2.0f));	    v.t = D3DXVECTOR2(1, 0);
-		vecVertex.push_back(v);
-		v.p = D3DXVECTOR3(BLOCK_SIZE / (2.0f), -BLOCK_SIZE / (2.0f), BLOCK_SIZE / (2.0f));	    v.t = D3DXVECTOR2(1, 1);
-		vecVertex.push_back(v);
-	}
-
-	m_vecVertex = vecVertex;
-
-	m_storageTexture = g_pTextureManager->GetTexture(("data/Texture/box.jpg"));
-
-	D3DXMatrixRotationY(&m_matR, D3DXToRadian(fAngle));
-	D3DXMatrixTranslation(&m_matT, vecPosition.x,0, vecPosition.z);
-
-	m_pCollision = new CBoxCollision(D3DXVECTOR3(0, 0, 0), D3DXVECTOR3(1.0f, 1.0f, 1.0f), &m_matWorld);
-	m_matWorld = m_matS * m_matR * m_matT;
 	if (m_pCollision)
 		m_pCollision->Update();
+	if (m_pSkinnedMesh)
+		m_pSkinnedMesh->Update();
 }
 
-void CPartStorage::OnEvent(eEvent eEvent, void * _value)
+void CPartStorage::OnEvent(eEvent eEvent, void *_value)
 {
 }
 
-CParts* CPartStorage::Make()
+CParts *CPartStorage::Make()
 {
-	CParts* parts = g_pPartsManager->CreateParts(m_sID);
+	CParts *parts = g_pPartsManager->CreateParts(m_sID);
 	return parts;
 }
 
-void CPartStorage::Interact(CCharacter* pCharacter)
+void CPartStorage::Interact(CCharacter *pCharacter)
 {
 	if (pCharacter->GetPlayerState() == ePlayerState::None)
 	{
-		CParts* parts = Make();
+		CParts *parts = Make();
 		parts->SetGrabPosition(&pCharacter->GetGrabPartsPosition());
 		m_pInteractCenter->AddParts(parts);
 		pCharacter->SetParts(parts);
 		//pCharacter->SetPlayerState(ePlayerState::Grab);
+		m_isInteractCalled = true;
 	}
 }

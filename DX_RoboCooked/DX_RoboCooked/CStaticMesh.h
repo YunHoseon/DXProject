@@ -23,5 +23,5 @@ public:
 	vector<D3DMATERIAL9>& GetVecMaterial() { return m_vecMaterial; }
 	vector<LPDIRECT3DTEXTURE9>& GetVecTexture() { return m_vecTexture; }
 
-	void Render();
+	void Render(LPDIRECT3DTEXTURE9 pBlendTexture = nullptr);
 };

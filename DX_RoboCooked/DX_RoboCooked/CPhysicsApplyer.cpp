@@ -4,7 +4,7 @@
 
 void CPhysicsApplyer::ApplyGravity(CActor* pA)
 {
-	D3DXVECTOR3 gravity(0, -0.01f, 0);
+	static D3DXVECTOR3 gravity(0, -0.01f, 0);
 	pA->AddAcceleration(gravity);
 }
 
@@ -29,14 +29,14 @@ void CPhysicsApplyer::ApplyBound(CActor* pA, CActor* pB)
 
 		if (power[0] > 0)
 		{
-			vNormalForce[0] = vNormal * power[0] * 1.0f; // 탄성계수. 1.0이면 튕기지 않음
-			vNormalForce[1] = -vNormal * power[0] * 1.0f;
+			vNormalForce[0] = vNormal * power[0] * pB->GetRepulsivePower(); // 탄성계수. 1.0이면 튕기지 않음
+			vNormalForce[1] = -vNormal * power[0] * pA->GetRepulsivePower();
 		}
 
-		if (power[1] > 0)
+		else if (power[1] > 0)
 		{
-			vNormalForce[0] = vNormal * power[1] * 1.0f;
-			vNormalForce[1] = -vNormal * power[1] * 1.0f;
+			vNormalForce[0] = vNormal * power[1] * pB->GetRepulsivePower();
+			vNormalForce[1] = -vNormal * power[1] * pA->GetRepulsivePower();
 		}
 
 		if (pA->GetMass() < pB->GetMass())

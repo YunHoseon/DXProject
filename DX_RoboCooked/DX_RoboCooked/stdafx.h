@@ -17,6 +17,8 @@
 #include <memory.h>
 #include <tchar.h>
 #include <iostream>
+#include <cstdlib>
+#include <time.h>
 
 // TODO: reference additional headers your program requires here
 #include <vector>
@@ -56,6 +58,15 @@ extern HWND g_hWnd;
 #define WIDTH 16
 #define HEIGHT 12
 const D3DXVECTOR3 g_vZero(0, 0, 0);
+const D3DXMATRIXA16 g_matIdentity(
+	1,0,0,0,
+	0,1,0,0,
+	0,0,1,0,
+	0,0,0,1
+);
+const float g_fFramerate = 60;
+const float g_fBaseDeltaTime = 1 / g_fFramerate;
+const float g_frBaseDeltaTime = 1 / g_fBaseDeltaTime;
 
 struct ST_PC_VERTEX
 {
@@ -152,6 +163,15 @@ struct ST_MouseEvent
 	POINT pt;
 };
 
+struct ST_TravelDistanceEvent
+{
+	float fDistance;
+};
+
+struct ST_TickEvent
+{
+	float fElapsedTime;
+};
 struct ST_PLAYER_INPUTKEY
 {
 	WPARAM moveFowardKey;
@@ -216,7 +236,9 @@ struct ST_PLAYER_INPUTKEY
 #include "CSoundManager.h"
 #include "CPartsManager.h"
 #include "CUITextureManager.h"
+#include "CStaticMeshManager.h"
 
+#include "CRandomNumberGenerator.h"
 
 #define __SLASH(x) /##x
 #define __DOUBLE_SLASH __SLASH(/)

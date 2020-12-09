@@ -1,16 +1,19 @@
 #include "stdafx.h"
 #include "CTile.h"
+#include "ICollisionArea.h"
 
 
-
-CTile::CTile()
+CTile::CTile():
+	m_pSMesh(nullptr)
 {
+	m_fMass = 9999.f;
+	SetRotationY(0);
 }
 
 
 CTile::~CTile()
 {
-	SafeRelease(m_PlaneTexture);
+	//SafeRelease(m_PlaneTexture);
 }
 
 void CTile::AddEvent(eEvent eEvent)
@@ -23,35 +26,20 @@ void CTile::OnEvent(eEvent eEvent, void* _value)
 	switch (eEvent)
 	{
 	case eEvent::TileMove:
-		D3DXMatrixScaling(&m_matS, 1.0f, 2.0f, 1.0f);
-		//D3DXMatrixTranslation(&m_matT, 1.0f, 2.0f, 1.0f);
-	/*	D3DXQUATERNION q;
-		D3DXVECTOR3 a(0, 1, 0);
-		D3DXQuaternionRotationAxis(&q, &a, D3DX_PI/4.0f);
-		D3DXMatrixRotationQuaternion(&m_matR, &q);*/
+		//D3DXMatrixScaling(&m_matS, 1.0f, 2.0f, 1.0f);
 		break;
 	}
 }
 
 void CTile::Render()
 {
-	D3DXMATRIXA16 matWorld;
-	D3DXMatrixIdentity(&matWorld);
-	
-	matWorld = m_matS * m_matR * m_matT;
-	
-	g_pD3DDevice->SetTexture(0, m_PlaneTexture);
-	
-	
-	matWorld._41 += m_stCube.vCenter.x;
-	matWorld._42 += m_stCube.vCenter.y;
-	matWorld._43 += m_stCube.vCenter.z;
-	
-	g_pD3DDevice->SetTransform(D3DTS_WORLD, &matWorld);
 
-	m_pCubeTile->DrawSubset(0);
-
-	g_pD3DDevice->SetTexture(0, 0);
+	if(m_pSMesh)
+	{
+		g_pD3DDevice->SetTransform(D3DTS_WORLD, &m_matWorld);
+		g_pD3DDevice->SetRenderState(D3DRS_LIGHTING, true);
+		m_pSMesh->Render();
+	}
 }
 
 void CTile::Update()

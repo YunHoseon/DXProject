@@ -27,9 +27,9 @@ protected:
 	D3DXVECTOR3			m_vAcceleration;
 	D3DXVECTOR3			m_vDirection;
 	float				m_fBaseSpeed;
-	float				m_fSpeed;
 	float				m_fMass;
 	float				m_fFriction;
+	float				m_fRepulsivePower;
 	
 public:
 
@@ -45,6 +45,8 @@ public:
 	virtual void SetPosition(D3DXVECTOR3 vPosition);
 	virtual void SetPosition(float x, float y, float z);
 
+	virtual void SetRotationY(float rot);
+
 	// for physics
 	ICollisionArea* GetCollision() { return m_pCollision; }
 	
@@ -54,6 +56,7 @@ public:
 
 	const D3DXVECTOR3& GetVelocity() { return m_vVelocity; }
 	const D3DXVECTOR3& GetAcceleration() { return m_vAcceleration; }
+	const float& GetRotY() { return m_fRotY; }
 
 	virtual void AddAcceleration(const D3DXVECTOR3& vAccel);
 	virtual void AddForce(const D3DXVECTOR3& vForce);
@@ -61,7 +64,9 @@ public:
 
 
 	virtual float GetMass() { return m_fMass; }
+	virtual void SetMass(float mass) { m_fMass = mass; }
 	
 	virtual float GetFriction(D3DXVECTOR3 vPosition = g_vZero) { return m_fFriction; }
+	virtual float GetRepulsivePower() { return m_fRepulsivePower; }
 };
 

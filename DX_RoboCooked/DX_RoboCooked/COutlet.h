@@ -17,6 +17,8 @@ private:
 	vector<ST_PNT_VERTEX>	m_vecVertex;
 	LPDIRECT3DTEXTURE9		m_PartVendingTexture;
 	CParts*					m_pMyParts;
+
+	D3DXVECTOR3				m_vOnGrabPosition;
 	
 public:
 	COutlet(IInteractCenter* pInteractCenter);
