@@ -208,7 +208,7 @@ void CGameScene::Update()
 
 	if (IsGameClear())
 	{
-		_DEBUG_COMMENT cout << "���� Ŭ����" << endl;
+		_DEBUG_COMMENT cout << "game clear!" << endl;
 	}
 
 	{

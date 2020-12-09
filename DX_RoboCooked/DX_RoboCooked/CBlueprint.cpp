@@ -199,9 +199,6 @@ void CBlueprint::StoreOnBlueprintParts()
 				break;
 			}
 		}
-
-
-		
 	}
 }
 
