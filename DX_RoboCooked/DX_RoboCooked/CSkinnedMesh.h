@@ -44,5 +44,7 @@ public:
 
 	D3DXMATRIXA16 * m_pmatWorldTM;
 	void SetTransform(D3DXMATRIXA16 * pmat);
+	double GetCurrentAnimPeriod();
+	LPD3DXANIMATIONCONTROLLER GetAnimController() { return m_pAnimController; }
 	
 };

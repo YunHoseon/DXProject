@@ -76,12 +76,10 @@ void CSkinnedMesh::Update()
 		//m_isInputOn = true;
 		SetAnimationIndexBlend(IDLE);
 	}
-	
 }
 
 void CSkinnedMesh::Update(LPD3DXFRAME pFrame, LPD3DXFRAME pParent)
 {
-	
 	if (pFrame == NULL)
 		pFrame = m_pRoot;
 	ST_BONE* pBone = (ST_BONE*)pFrame;
@@ -95,7 +93,6 @@ void CSkinnedMesh::Update(LPD3DXFRAME pFrame, LPD3DXFRAME pParent)
 	if(pFrame->pFrameFirstChild)
 	{
 		Update(pFrame->pFrameFirstChild, pFrame);
-		
 	}
 
 	if(pFrame->pFrameSibling)
@@ -286,8 +283,6 @@ void CSkinnedMesh::Load(char* szFolder, char* szFileName)
 
 	if (m_pRoot)
 		SetupBoneMatrixPtrs(m_pRoot);
-	
-	
 }
 
 void CSkinnedMesh::Destroy()
@@ -335,4 +330,12 @@ void CSkinnedMesh::SetRandomTrackPosition()
 void CSkinnedMesh::SetTransform(D3DXMATRIXA16* pmat)
 {
 	m_pmatWorldTM = pmat;
+}
+
+double CSkinnedMesh::GetCurrentAnimPeriod()
+{
+	return m_dAnimPeriod;
+	/*LPD3DXANIMATIONSET curAnim;
+	m_pAnimController->GetTrackAnimationSet(0, &curAnim);
+	return curAnim->GetPeriod();*/
 }
