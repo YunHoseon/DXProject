@@ -38,7 +38,7 @@ void CKeyboard::Update()
 	ST_KeyInputEvent data;
 	
 	unordered_set<WPARAM>::iterator it;
-	for(it = m_setKey.begin(); it != m_setKey.end(); it++)
+	for(it = m_setKey.begin(); it != m_setKey.end(); ++it)
 	{
 		data.wKey = *it;
 		//std::cout << *it << std::endl;

@@ -3,6 +3,7 @@
 #include "CScene.h"
 #include "IInteractCenter.h"
 #include "CMonster.h"
+class CTile;
 class CField;
 class CInteractiveActor;
 class CParts;
@@ -31,7 +32,7 @@ private:
 	FLOAT						m_fGameTime;	
 	BOOL						m_isTimeStop;
 	INT							m_nLotIndex;
-
+	vector<CTile*>				m_vecTile;
 
 
 	CDebugPlayer1*				m_pDebugSphere;

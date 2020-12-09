@@ -8,5 +8,6 @@ public:
 	~CWater();
 
 	void Update() override;
+	bool Collide(CActor* target, D3DXVECTOR3* pNormal) override;
 };
 

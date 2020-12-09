@@ -4,6 +4,8 @@
 
 CBrick::CBrick(D3DXVECTOR3 vPosition)
 {
+	m_eTileType = eTileType::Brick;
+	
 	m_pSMesh = g_pStaticMeshManager->GetStaticMesh("Brick");
 	m_pCollision = new CBoxCollision(g_vZero, D3DXVECTOR3(100, 100, 100), &m_matWorld);
 

@@ -1,5 +1,15 @@
 #pragma once
 #include "CActor.h"
+enum class eTileType
+{
+	FlowSand,
+	Stair,
+	Water,
+	Brick,
+	Sand,
+	Soil,
+	ThickSand
+};
 
 class CTile : public CActor
 {
@@ -22,6 +32,9 @@ public:
 
 	virtual void AddAcceleration(const D3DXVECTOR3& vAccel) override {}
 	virtual void AddForce(const D3DXVECTOR3& vForce) override {}
+
+	Synthesize(eTileType, m_eTileType, TileType);
+
 };
 
 #include "CSand.h"

@@ -39,6 +39,10 @@ void CStaticMeshManager::Load()
 	vecData.push_back(data);
 	data.fileName = "모래더미.X"; data.objectName = "Sandpile"; data.filePath = "data/model/object";
 	vecData.push_back(data);
+	data.fileName = "Cactus.X"; data.objectName = "Cactus"; data.filePath = "data/model/object";
+	vecData.push_back(data);
+	data.fileName = "Coffin.X"; data.objectName = "Coffin"; data.filePath = "data/model/object";
+	vecData.push_back(data);
 
 	data.fileName = "모래타일1.X"; data.objectName = "Sand"; data.filePath = "data/model/tile";
 	vecData.push_back(data);
@@ -54,6 +58,7 @@ void CStaticMeshManager::Load()
 	vecData.push_back(data);
 	data.fileName = "모래돌_타일_계단 일반.X"; data.objectName = "Stair"; data.filePath = "data/model/tile";
 	vecData.push_back(data);
+	
 	
 	for (ST_StaticMesh_Data datas : vecData)
 	{
