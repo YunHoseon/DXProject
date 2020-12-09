@@ -88,9 +88,10 @@ public:
 	virtual ~CMonster();
 public:
 	virtual void Update();
-	virtual void Render();
+	virtual void Render() = 0;
 	virtual void Destroy();
 	virtual void OnEvent(eEvent eEvent, void* _value) override;
+	virtual void MonsterUpdate() {};
 	
 	virtual eSkill FirstSkill() { return eSkill::None; };
 	virtual eSkill SecondSkill() { return eSkill::None; };
@@ -108,6 +109,7 @@ public:
 
 	void FinishSkill(eSkill skill);
 	void AddObjectPosition(D3DXVECTOR3 pos);
+	virtual void DeleteTornado() {};
 
 public:
 	void TravelDistanceSkill(void* _value);

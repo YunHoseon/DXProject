@@ -76,10 +76,8 @@ void CMonster::Update()
 		m_pInteractCenter->FinishSkill(m_stSkillUsing.UltimateSkillProperty);
 	}
 
-}
+	MonsterUpdate();
 
-void CMonster::Render()
-{
 }
 
 void CMonster::Destroy()
@@ -111,6 +109,9 @@ void CMonster::OnEvent(eEvent eEvent, void * _value)
 		break;
 	case eEvent::TravelDistance:
 		TravelDistanceSkill(_value);
+		break;
+	case eEvent::DeleteTornado:
+		DeleteTornado();
 		break;
 	}
 
@@ -187,59 +188,59 @@ void CMonster::ChooseSkillCondition()
 {
 	SkillConditionInit();
 
-	//int random = rand() % 100;
-	//{
-	//	if (random < 16)
-	//	{
-	//		m_eSkillCondition = eSkillCondition::TravelDistance;
-	//		g_EventManager->Attach(eEvent::TravelDistance, this);
-	//		m_eSecondSkillEvent = eEvent::TravelDistance;
-	//	}
-	//	else if (random < 30)
-	//	{
-	//		m_eSkillCondition = eSkillCondition::SpecificArea;
-	//		g_EventManager->Attach(eEvent::SpecificArea, this);
-	//		m_eSecondSkillEvent = eEvent::SpecificArea;
-	//		m_pInteractCenter->ElectIndexLot();
-	//	}
-	//	else if (random < 48)
-	//	{
-	//		m_eSkillCondition = eSkillCondition::CombinUse;
-	//		g_EventManager->Attach(eEvent::CombinUse, this);
-	//		m_eSecondSkillEvent = eEvent::CombinUse;
-	//	}
-	//	else if (random < 62)
-	//	{
-	//		m_eSkillCondition = eSkillCondition::VendingUse;
-	//		g_EventManager->Attach(eEvent::VendingUse, this);
-	//		m_eSecondSkillEvent = eEvent::VendingUse;
-	//	}
-	//	else if (random < 74)
-	//	{
-	//		m_eSkillCondition = eSkillCondition::CrowdControl;
-	//		g_EventManager->Attach(eEvent::CrowdControl, this);
-	//		m_eSecondSkillEvent = eEvent::CrowdControl;
-	//	}
-	//	else if (random < 86)
-	//	{
-	//		m_eSkillCondition = eSkillCondition::ThrowParts;
-	//		g_EventManager->Attach(eEvent::ThrowParts, this);
-	//		m_eSecondSkillEvent = eEvent::ThrowParts;
-	//	}
-	//	else
-	//	{
-	//		m_eSkillCondition = eSkillCondition::SpinParts;
-	//		g_EventManager->Attach(eEvent::SpinParts, this);
-	//		m_eSecondSkillEvent = eEvent::SpinParts;
-	//	}
-	//}
+	int random = rand() % 100;
+	{
+		if (random < 16)
+		{
+			m_eSkillCondition = eSkillCondition::TravelDistance;
+			g_EventManager->Attach(eEvent::TravelDistance, this);
+			m_eSecondSkillEvent = eEvent::TravelDistance;
+		}
+		else if (random < 30)
+		{
+			m_eSkillCondition = eSkillCondition::SpecificArea;
+			g_EventManager->Attach(eEvent::SpecificArea, this);
+			m_eSecondSkillEvent = eEvent::SpecificArea;
+			m_pInteractCenter->ElectIndexLot();
+		}
+		else if (random < 48)
+		{
+			m_eSkillCondition = eSkillCondition::CombinUse;
+			g_EventManager->Attach(eEvent::CombinUse, this);
+			m_eSecondSkillEvent = eEvent::CombinUse;
+		}
+		else if (random < 62)
+		{
+			m_eSkillCondition = eSkillCondition::VendingUse;
+			g_EventManager->Attach(eEvent::VendingUse, this);
+			m_eSecondSkillEvent = eEvent::VendingUse;
+		}
+		else if (random < 74)
+		{
+			m_eSkillCondition = eSkillCondition::CrowdControl;
+			g_EventManager->Attach(eEvent::CrowdControl, this);
+			m_eSecondSkillEvent = eEvent::CrowdControl;
+		}
+		else if (random < 86)
+		{
+			m_eSkillCondition = eSkillCondition::ThrowParts;
+			g_EventManager->Attach(eEvent::ThrowParts, this);
+			m_eSecondSkillEvent = eEvent::ThrowParts;
+		}
+		else
+		{
+			m_eSkillCondition = eSkillCondition::SpinParts;
+			g_EventManager->Attach(eEvent::SpinParts, this);
+			m_eSecondSkillEvent = eEvent::SpinParts;
+		}
+	}
 
 
 
 	//테스트용
-	m_eSkillCondition = eSkillCondition::TravelDistance;
-	g_EventManager->Attach(eEvent::TravelDistance, this);
-	m_eSecondSkillEvent = eEvent::TravelDistance;
+	//m_eSkillCondition = eSkillCondition::TravelDistance;
+	//g_EventManager->Attach(eEvent::TravelDistance, this);
+	//m_eSecondSkillEvent = eEvent::TravelDistance;
 }
 
 bool CMonster::CheckDurationTimeFirstSkill()

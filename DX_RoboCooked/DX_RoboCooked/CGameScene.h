@@ -28,7 +28,7 @@ private:
 	vector<CBlueprint*>			m_vecBlueprints;
 	vector<CMonster*>			m_vecMonster;
 	D3DXVECTOR3					m_vWind;
-	CTornado*					m_pTornado;
+	//CTornado*					m_pTornado;
 	FLOAT						m_fGameTime;	
 	BOOL						m_isTimeStop;
 	INT							m_nLotIndex;
@@ -65,7 +65,8 @@ public:
 	void ElectIndexLot() override;
 	bool CheckSpecificArea() override;
 	void CheckSandDummyArea(ICollisionArea* collison) override;
-	void SetTornado(D3DXVECTOR3 pos) override;
+	//void SetTornado(D3DXVECTOR3 pos) override;
+	void UpdateTornado(CTornado* tornado) override;
 
 
 	CCrowdControl* ChooseCC(eSkill skill);

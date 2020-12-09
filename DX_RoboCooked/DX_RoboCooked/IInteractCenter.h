@@ -6,6 +6,7 @@ class CPartCombinator;
 class COutlet;
 class CCrowdControl;
 class ICollisionArea;
+class CTornado;
 enum class eSkill;
 
 class IInteractCenter
@@ -27,6 +28,6 @@ public:
 	virtual void ElectIndexLot() = 0;
 	virtual bool CheckSpecificArea() = 0;
 	virtual void CheckSandDummyArea(ICollisionArea* collison) = 0;
-	virtual void SetTornado(D3DXVECTOR3 pos) = 0;
+	virtual void UpdateTornado(CTornado* tornado) = 0;
 
 };

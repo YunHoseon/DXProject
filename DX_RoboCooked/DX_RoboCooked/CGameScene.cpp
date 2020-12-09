@@ -43,7 +43,7 @@ CGameScene::CGameScene() : m_pField(NULL),
 						   m_pDebugPauseUI(nullptr),
 						   m_isTimeStop(false),
 						   m_vWind(0, 0, 0),
-						   m_pTornado(nullptr),
+						  // m_pTornado(nullptr),
 						   m_fGameTime(300.0f),
 						   m_nLotIndex(0)
 {
@@ -76,7 +76,7 @@ CGameScene::~CGameScene()
 	}
 
 	SafeDelete(m_pDebugPauseUI);
-	SafeDelete(m_pTornado);
+	//SafeDelete(m_pTornado);
 }
 
 void CGameScene::Init()
@@ -200,8 +200,8 @@ void CGameScene::Render()
 	if (m_pDebugPauseUI)
 		m_pDebugPauseUI->Render();
 
-	if (m_pTornado)
-		m_pTornado->Render();
+	/*if (m_pTornado)
+		m_pTornado->Render();*/
 }
 
 void CGameScene::Update()
@@ -238,19 +238,19 @@ void CGameScene::Update()
 		}
 	}
 
-	{
-		if (m_pTornado)
-		{
-			for (CCharacter *character : m_vecCharacters)
-			{
-				D3DXVECTOR3 dir(0, 0, 0);
-				if (m_pTornado->Collide(character, &dir))
-				{
-					character->AddForce(dir * m_pTornado->GetPower());
-				}
-			}
-		}
-	}
+	//{
+	//	if (m_pTornado)
+	//	{
+	//		for (CCharacter *character : m_vecCharacters)
+	//		{
+	//			D3DXVECTOR3 dir(0, 0, 0);
+	//			if (m_pTornado->Collide(character, &dir))
+	//			{
+	//				character->AddForce(dir * m_pTornado->GetPower());
+	//			}
+	//		}
+	//	}
+	//}
 
 	// collide -> update
 	{ // collide
@@ -338,8 +338,8 @@ void CGameScene::Update()
 		if (m_pDebugPauseUI)
 			m_pDebugPauseUI->Update();
 
-		if (m_pTornado)
-			m_pTornado->Update();
+		/*if (m_pTornado)
+			m_pTornado->Update();*/
 	}
 }
 
@@ -613,11 +613,23 @@ void CGameScene::CheckSandDummyArea(ICollisionArea* collison)
 	}
 }
 
-void CGameScene::SetTornado(D3DXVECTOR3 pos)
+void CGameScene::UpdateTornado(CTornado * tornado)
 {
-	if (m_pTornado == nullptr)
-		m_pTornado = new CTornado(pos);
+	for (CCharacter *character : m_vecCharacters)
+	{
+		D3DXVECTOR3 dir(0, 0, 0);
+		if (tornado->Collide(character, &dir))
+		{
+			character->AddForce(dir * tornado->GetPower());
+		}
+	}
 }
+
+//void CGameScene::SetTornado(D3DXVECTOR3 pos)
+//{
+//	if (m_pTornado == nullptr)
+//		m_pTornado = new CTornado(pos);
+//}
 
 CCrowdControl *CGameScene::ChooseCC(eSkill skill)
 {
@@ -691,8 +703,7 @@ void CGameScene::DeleteWind()
 
 void CGameScene::DeleteTornado()
 {
-	if (m_pTornado)
-		SafeDelete(m_pTornado);
+	g_EventManager->CallEvent(eEvent::DeleteTornado, NULL);
 }
 
 void CGameScene::DeleteCC()
