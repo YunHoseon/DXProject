@@ -71,7 +71,6 @@ protected:
 	FLOAT						m_fUltimateSkillConditionTime;
 	ST_Skill					m_stSkillUsing;
 
-
 	//조건리스트 
 	FLOAT						m_fTravelDistance;//1
 	BOOL						m_isArrive; //2
@@ -81,8 +80,8 @@ protected:
 	INT							m_nThrowPartsCount;//6
 	INT							m_nSpinPartsCount;//7
 
-
 	string						m_sSpecificPartsID;
+	vector<D3DXVECTOR3>			m_vecObjectPosition;
 
 public:
 	CMonster(IInteractCenter* pInteractCenter);
@@ -108,6 +107,7 @@ public:
 	bool CheckDurationTimeUltimateSkill();
 
 	void FinishSkill(eSkill skill);
+	void AddObjectPosition(D3DXVECTOR3 pos);
 
 public:
 	void TravelDistanceSkill(void* _value);

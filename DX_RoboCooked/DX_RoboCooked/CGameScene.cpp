@@ -147,17 +147,23 @@ void CGameScene::Init()
 	m_pDebugPauseUI = new CUIPauseButton(D3DXVECTOR2(100, 100), 27, this);
 	m_pDebugPauseUI->Setup();
 
-	CMonster *monster = new CMonsterMedusa(this);
-	m_vecMonster.push_back(monster);
+	//CMonster *Medusa = new CMonsterMedusa(this);
+	//m_vecMonster.push_back(Medusa);
+
+	CMonster *Harpy = new CMonsterHarpy(this);
+	m_vecMonster.push_back(Harpy);
+	Harpy->AddObjectPosition(D3DXVECTOR3(0, 0, 0));
+	Harpy->AddObjectPosition(D3DXVECTOR3(3, 0, 0));
+	Harpy->AddObjectPosition(D3DXVECTOR3(0, 0, 3));
+	Harpy->AddObjectPosition(D3DXVECTOR3(-3, 0, 0));
+	Harpy->AddObjectPosition(D3DXVECTOR3(0, 0, -3));
+
 
 	m_vecStaticActor.push_back(new CStair(D3DXVECTOR3(1, 0, -4)));
 	m_vecStaticActor.push_back(new CSandpile(this,D3DXVECTOR3(4, 0, 0)));
 	m_vecStaticActor.push_back(new CWater(D3DXVECTOR3(0, -1, -6.5)));
 	m_vecStaticActor.push_back(new CSand(D3DXVECTOR3(0, -1, -7.5)));
 
-	//m_pTornado = new CTornado;
-	//m_pTornado->SetPosition(D3DXVECTOR3(3, 0, 0));
-	//m_pTornado->GetCollision()->SetActive(false);
 }
 
 void CGameScene::Render()
@@ -507,9 +513,6 @@ void CGameScene::MonsterSkill(eSkill skill)
 	case eSkill::SandWind:
 		SetWindDirection();
 		break;
-	case eSkill::Tornado:
-		SetTornadoSkill();
-		break;
 	}
 
 	CC(ChooseCC(skill));
@@ -611,6 +614,12 @@ void CGameScene::CheckSandDummyArea(ICollisionArea* collison)
 	}
 }
 
+void CGameScene::SetTornado(D3DXVECTOR3 pos)
+{
+	if (m_pTornado == nullptr)
+		m_pTornado = new CTornado(pos);
+}
+
 CCrowdControl *CGameScene::ChooseCC(eSkill skill)
 {
 
@@ -674,14 +683,6 @@ void CGameScene::SetWindDirection()
 	{
 		m_vWind = D3DXVECTOR3(-0.01f, 0, 0);
 	}
-}
-
-void CGameScene::SetTornadoSkill()
-{
-	if (m_pTornado == nullptr)
-		m_pTornado = new CTornado;
-
-	//m_pTornado->GetCollision()->SetActive(false);
 }
 
 void CGameScene::DeleteWind()
