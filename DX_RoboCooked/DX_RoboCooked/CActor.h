@@ -27,9 +27,9 @@ protected:
 	D3DXVECTOR3			m_vAcceleration;
 	D3DXVECTOR3			m_vDirection;
 	float				m_fBaseSpeed;
-	float				m_fSpeed;
 	float				m_fMass;
 	float				m_fFriction;
+	float				m_fRepulsivePower;
 	
 public:
 
@@ -67,5 +67,6 @@ public:
 	virtual void SetMass(float mass) { m_fMass = mass; }
 	
 	virtual float GetFriction(D3DXVECTOR3 vPosition = g_vZero) { return m_fFriction; }
+	virtual float GetRepulsivePower() { return m_fRepulsivePower; }
 };
 

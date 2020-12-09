@@ -6,7 +6,7 @@ class CCrowdControl
 {
 public:
 	CCrowdControl();
-	~CCrowdControl();
+	virtual ~CCrowdControl();
 	virtual string& GetID() = 0;
 
 	virtual CCrowdControl* Clone() = 0;
@@ -16,6 +16,7 @@ public:
 	virtual bool IsOverlapable() { return false; }
 	virtual bool IsMovable() { return true; }
 	virtual bool IsProtected() { return false; }
+	virtual bool StopWithParts() { return false; }
 	// 타겟을 지정하는 함수
 };
 
