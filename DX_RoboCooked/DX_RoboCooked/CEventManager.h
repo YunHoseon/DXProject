@@ -25,7 +25,9 @@ enum class eEvent
 	VendingUse,
 	CombinUse,
 	SpecificArea,
-	TravelDistance
+	TravelDistance,
+	DeleteTornado,
+	ChangeCountBluePrint
 };
 
 

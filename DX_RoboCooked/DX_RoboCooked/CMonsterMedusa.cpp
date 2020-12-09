@@ -5,7 +5,7 @@
 CMonsterMedusa::CMonsterMedusa(IInteractCenter* pInteractCenter):CMonster(pInteractCenter)
 {
 	m_fFirstSkillConditionTime = 40.0f;
-	m_fUltimateSkillConditionTime = 150.0f;
+	m_fUltimateSkillConditionTime = 120.0f;
 }
 
 

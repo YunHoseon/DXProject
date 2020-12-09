@@ -1,16 +1,34 @@
 #include "stdafx.h"
 #include "CMonsterHarpy.h"
 #include "IInteractCenter.h"
+#include "CTornado.h"
 
 
-CMonsterHarpy::CMonsterHarpy(IInteractCenter* pInteractCenter):CMonster(pInteractCenter)
+CMonsterHarpy::CMonsterHarpy(IInteractCenter* pInteractCenter):CMonster(pInteractCenter), m_pTornado(nullptr)
 {
 	m_fFirstSkillConditionTime = 30.0f;
+	m_fUltimateSkillConditionTime = 120.0f;
 }
 
 
 CMonsterHarpy::~CMonsterHarpy()
 {
+	SafeDelete(m_pTornado);
+}
+
+void CMonsterHarpy::Render()
+{
+	if(m_pTornado)
+		m_pTornado->Render();
+}
+
+void CMonsterHarpy::MonsterUpdate()
+{
+	if (m_pTornado)
+	{
+		m_pTornado->Update();
+		m_pInteractCenter->UpdateTornado(m_pTornado);
+	}
 }
 
 eSkill CMonsterHarpy::SecondSkill()
@@ -20,9 +38,15 @@ eSkill CMonsterHarpy::SecondSkill()
 
 	CRandomNumberGenerator rand;
 	int index = rand.GenInt(0, m_vecObjectPosition.size() - 1);
+	m_pTornado = new CTornado(m_vecObjectPosition[index]);
+	g_EventManager->Attach(eEvent::DeleteTornado, this);
 
-	m_pInteractCenter->SetTornado(m_vecObjectPosition[index]);
 	return eSkill::Tornado; 
+}
+
+void CMonsterHarpy::DeleteTornado()
+{
+	SafeDelete(m_pTornado);
 }
 
 

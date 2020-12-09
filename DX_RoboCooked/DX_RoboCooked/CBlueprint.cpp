@@ -20,7 +20,6 @@ CBlueprint::CBlueprint(string partsID, vector<CParts*>& vecParts, D3DXVECTOR3 po
 	SetPosition(position);
 	SetScale(scale);
 	SetRotationY(angle);
-	
 	m_fRightPartsAngleY = partsAngle;
 	m_fMass = 9999.f;
 	//D3DXMatrixIdentity(&m_matInteractCollision);
@@ -150,6 +149,7 @@ void CBlueprint::Setup()
 void CBlueprint::Update()
 {
 	StoreOnBlueprintParts(); // --> 설계도에 부품을 붙인 상황
+	
 }
 
 void CBlueprint::Render()
@@ -159,7 +159,7 @@ void CBlueprint::Render()
 	_DEBUG_COMMENT if (m_pInteractCollision)
 		_DEBUG_COMMENT m_pInteractCollision->Render();
 
-	if (CheckBluePrintComplete() == true && m_onBlueprintParts)
+	if (m_isCompleted)
 	{
 		MultiTexture_Render();
 	}
@@ -194,20 +194,29 @@ void CBlueprint::StoreOnBlueprintParts()
 				m_onBlueprintParts->GetCollision()->SetActive(false);
 				m_pCollision->SetActive(true);
 				m_pInteractCollision->SetActive(false);
+
+				CheckBluePrintComplete();
 				break;
 			}
 		}
+
+
+		
 	}
 }
 
-bool CBlueprint::CheckBluePrintComplete()
+void CBlueprint::CheckBluePrintComplete()
 {
 	if (m_onBlueprintParts && m_sRightPartsID == m_onBlueprintParts->GetPartsID()
 		&& abs(m_fRightPartsAngleY - m_onBlueprintParts->GetRotY()) < EPSILON)
 	{
 		m_isCompleted = true;
+		g_EventManager->CallEvent(eEvent::ChangeCountBluePrint, this);
 	}
-	return m_isCompleted;
+	else
+	{
+		m_isCompleted = false;
+	}
 }
 
 void CBlueprint::Interact(CCharacter* pCharacter)
