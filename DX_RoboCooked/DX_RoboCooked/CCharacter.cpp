@@ -93,26 +93,37 @@ void CCharacter::OnEvent(eEvent eEvent, void* _value)
 
 void CCharacter::PressKey(void* _value)
 {
-	if (m_pCC->IsMovable() == false)
-		return;
+	
 	ST_KeyInputEvent* data = static_cast<ST_KeyInputEvent*>(_value);
 	const float& CurrentTime = g_pTimeManager->GetLastUpdateTime();
 	if (data->wKey == m_pInputKey->moveFowardKey)
 	{
+		if (m_pCC->IsMovable() == false)
+			return;
+
 		Rotate(0);
 	}
 	else if (data->wKey == m_pInputKey->moveLeftKey)
 	{
+		if (m_pCC->IsMovable() == false)
+			return;
+
 		if (m_fRotY - 0.5f < 0.f)
 			m_fRotY += D3DX_PI * 2.f;
 		Rotate(D3DX_PI * 1.5f );
 	}
 	else if (data->wKey == m_pInputKey->moveBackKey)
 	{
+		if (m_pCC->IsMovable() == false)
+			return;
+
 		Rotate(D3DX_PI);
 	}
 	else if (data->wKey == m_pInputKey->moveRightKey)
 	{
+		if (m_pCC->IsMovable() == false)
+			return;
+
 		if (m_fRotY + 0.5f > D3DX_PI * 2.f)
 			m_fRotY -= D3DX_PI * 2.f;
 		Rotate(D3DX_PI * 0.5f);
