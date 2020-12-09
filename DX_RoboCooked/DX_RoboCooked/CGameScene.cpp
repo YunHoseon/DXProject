@@ -70,7 +70,7 @@ CGameScene::~CGameScene()
 	for (CInteractiveActor *it : m_vecObject)
 	{
 		SafeDelete(it);
-	}
+	}	
 
 	for (CInteractiveActor *it : m_vecParts)
 	{
@@ -579,28 +579,41 @@ void CGameScene::CheckSandDummyArea(ICollisionArea* collison)
 {
 	for (auto it : m_vecCharacters)
 	{
-		if (it->GetParts() && collison->Collide(it->GetCollision())) // 더미안인데 파츠가있으면 들어오는곳 
+		if (it->GetDummy() == false &&  it->GetParts() && collison->Collide(it->GetCollision())) // 더미안인데 파츠가있으면 들어오는곳 
 		{
+			it->SetDummy(true);
 			it->SetCC(new CCCStopMove);
 		}
 
 		if (it->GetDummy() && it->GetParts() == nullptr) //더미안에서 파츠를 던지면 들어오는곳
 		{
-			it->SetCC(new CCCSpeedDown);
-		}
-
-		if (it->GetDummy() == false && collison->Collide(it->GetCollision())) //더미 밖에서 안으로 들어올때 들어오는곳
-		{
-			it->SetDummy(true);
-
-			it->SetCC(new CCCSpeedDown);
-			
-		}
-		else if(it->GetDummy() && collison->Collide(it->GetCollision()) == false) // 더미밖에서 들어오는곳 
-		{
 			it->SetDummy(false);
 			it->DeleteCC();
 		}
+
+
+		//if (it->GetParts() && collison->Collide(it->GetCollision())) // 더미안인데 파츠가있으면 들어오는곳 
+		//{
+		//	it->SetCC(new CCCStopMove);
+		//}
+
+		//if (it->GetDummy() && it->GetParts() == nullptr) //더미안에서 파츠를 던지면 들어오는곳
+		//{
+		//	it->SetCC(new CCCSpeedDown);
+		//}
+
+		//if (it->GetDummy() == false && collison->Collide(it->GetCollision())) //더미 밖에서 안으로 들어올때 들어오는곳
+		//{
+		//	it->SetDummy(true);
+
+		//	it->SetCC(new CCCSpeedDown);
+		//	
+		//}
+		//else if(it->GetDummy() && collison->Collide(it->GetCollision()) == false) // 더미밖에서 들어오는곳 
+		//{
+		//	it->SetDummy(false);
+		//	it->DeleteCC();
+		//}
 	}
 }
 
