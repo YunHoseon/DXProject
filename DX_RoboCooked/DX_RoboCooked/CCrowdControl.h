@@ -19,3 +19,8 @@ public:
 	// 타겟을 지정하는 함수
 };
 
+#include "CCCSpeedDown.h"
+#include "CCCReverseKey.h"
+#include "CCCStopMove.h"
+#include "CCCNone.h"
+#include "CCCSlowAndStop.h"

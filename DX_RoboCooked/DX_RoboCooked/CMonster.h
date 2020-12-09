@@ -125,3 +125,6 @@ private:
 	bool SecondSkillTriggered();
 	bool FirstSkillTriggered();
 };
+
+#include "CMonsterMedusa.h"
+#include "CMonsterHarpy.h"

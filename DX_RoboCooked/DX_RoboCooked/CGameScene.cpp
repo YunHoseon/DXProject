@@ -20,10 +20,7 @@
 #include "CMonster.h"
 #include "CTile.h"
 #include "CCrowdControl.h"
-#include "CCCSpeedDown.h"
-#include "CCCReverseKey.h"
-#include "CCCStopMove.h"
-#include "CCCNone.h"
+
 #include "CTornado.h"
 #include "CSandpile.h"
 
@@ -31,10 +28,6 @@
 #include "CUIBoardButton.h"
 #include "CUIBarButton.h"
 #include "CUIPauseButton.h"
-
-#include "CMonsterMedusa.h"
-#include "CMonsterHarpy.h"
-#include "CRandomNumberGenerator.h"
 
 /* ������ */
 #include <fstream>

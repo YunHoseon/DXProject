@@ -154,6 +154,7 @@
     <ClInclude Include="CBrick.h" />
     <ClInclude Include="CCCNone.h" />
     <ClInclude Include="CCCReverseKey.h" />
+    <ClInclude Include="CCCSlowAndStop.h" />
     <ClInclude Include="CCCSpeedDown.h" />
     <ClInclude Include="CCCStopMove.h" />
     <ClInclude Include="CCrowdControl.h" />
@@ -237,6 +238,7 @@
     <ClCompile Include="CBrick.cpp" />
     <ClCompile Include="CCCNone.cpp" />
     <ClCompile Include="CCCReverseKey.cpp" />
+    <ClCompile Include="CCCSlowAndStop.cpp" />
     <ClCompile Include="CCCSpeedDown.cpp" />
     <ClCompile Include="CCCStopMove.cpp" />
     <ClCompile Include="CCrowdControl.cpp" />
