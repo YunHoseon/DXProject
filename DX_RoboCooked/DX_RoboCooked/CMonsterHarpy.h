@@ -8,8 +8,8 @@ public:
 	~CMonsterHarpy();
 
 	eSkill FirstSkill() override { return eSkill::KeyRevers; }
-	eSkill SecondSkill() override { return eSkill::SandWind; }
-	eSkill UltimateSkill() override { return eSkill::Tornado; }
+	eSkill SecondSkill() override;
+	eSkill UltimateSkill() override { return eSkill::SandWind; }
 
 	FLOAT FirstSkillTime() override { return 5.0f; };
 	FLOAT SecondSkillTime() override { return 7.0f; };

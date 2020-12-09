@@ -4,7 +4,7 @@ class CTornado :
 	public CActor
 {
 public:
-	CTornado();
+	CTornado(D3DXVECTOR3 pos);
 	~CTornado();
 
 public:
