@@ -114,3 +114,9 @@ void CSphereCollision::SetScale(float x, float y, float z)
 	fMax = max(fMax, z);
 	m_fRadius = m_fOriginRadius * fMax;
 }
+
+void CSphereCollision::GetMinMax(D3DXVECTOR3* pMin, D3DXVECTOR3* pMax)
+{
+	*pMin = m_vCenterPos - D3DXVECTOR3(m_fRadius, m_fRadius, m_fRadius);
+	*pMax = m_vCenterPos + D3DXVECTOR3(m_fRadius, m_fRadius, m_fRadius);
+}
