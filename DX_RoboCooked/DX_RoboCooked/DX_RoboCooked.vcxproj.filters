@@ -216,9 +216,6 @@
     <ClInclude Include="IPartGenerator.h">
       <Filter>GameScene\PartsGen</Filter>
     </ClInclude>
-    <ClInclude Include="CField.h">
-      <Filter>GameScene\Actor</Filter>
-    </ClInclude>
     <ClInclude Include="CPartsManager.h">
       <Filter>Manager\Factory</Filter>
     </ClInclude>
@@ -255,17 +252,11 @@
     <ClInclude Include="CMonster.h">
       <Filter>GameScene\Monster</Filter>
     </ClInclude>
-    <ClInclude Include="CBlueprint.h">
-      <Filter>GameScene</Filter>
-    </ClInclude>
     <ClInclude Include="CCrowdControl.h">
       <Filter>GameScene\Monster\CrowdControl</Filter>
     </ClInclude>
     <ClInclude Include="CStaticMeshManager.h">
       <Filter>Manager</Filter>
-    </ClInclude>
-    <ClInclude Include="CTestStair.h">
-      <Filter>GameScene\Actor</Filter>
     </ClInclude>
     <ClInclude Include="CTile.h">
       <Filter>GameScene\Tile</Filter>
@@ -317,6 +308,18 @@
     </ClInclude>
     <ClInclude Include="CCCSlowAndStop.h">
       <Filter>GameScene\Monster\CrowdControl</Filter>
+    </ClInclude>
+    <ClInclude Include="CBlueprint.h">
+      <Filter>GameScene\Object</Filter>
+    </ClInclude>
+    <ClInclude Include="CField.h">
+      <Filter>GameScene\Tile</Filter>
+    </ClInclude>
+    <ClInclude Include="CTestStair.h">
+      <Filter>GameScene\Tile</Filter>
+    </ClInclude>
+    <ClInclude Include="CCactus.h">
+      <Filter>GameScene\Object</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -458,9 +461,6 @@
     <ClCompile Include="IPartGenerator.cpp">
       <Filter>GameScene\PartsGen</Filter>
     </ClCompile>
-    <ClCompile Include="CField.cpp">
-      <Filter>GameScene\Actor</Filter>
-    </ClCompile>
     <ClCompile Include="CPartsManager.cpp">
       <Filter>Manager\Factory</Filter>
     </ClCompile>
@@ -497,17 +497,11 @@
     <ClCompile Include="CMonster.cpp">
       <Filter>GameScene\Monster</Filter>
     </ClCompile>
-    <ClCompile Include="CBlueprint.cpp">
-      <Filter>GameScene</Filter>
-    </ClCompile>
     <ClCompile Include="CCrowdControl.cpp">
       <Filter>GameScene\Monster\CrowdControl</Filter>
     </ClCompile>
     <ClCompile Include="CStaticMeshManager.cpp">
       <Filter>Manager</Filter>
-    </ClCompile>
-    <ClCompile Include="CTestStair.cpp">
-      <Filter>GameScene\Actor</Filter>
     </ClCompile>
     <ClCompile Include="CTile.cpp">
       <Filter>GameScene\Tile</Filter>
@@ -559,6 +553,18 @@
     </ClCompile>
     <ClCompile Include="CCCSlowAndStop.cpp">
       <Filter>GameScene\Monster\CrowdControl</Filter>
+    </ClCompile>
+    <ClCompile Include="CBlueprint.cpp">
+      <Filter>GameScene\Object</Filter>
+    </ClCompile>
+    <ClCompile Include="CField.cpp">
+      <Filter>GameScene\Tile</Filter>
+    </ClCompile>
+    <ClCompile Include="CTestStair.cpp">
+      <Filter>GameScene\Tile</Filter>
+    </ClCompile>
+    <ClCompile Include="CCactus.cpp">
+      <Filter>GameScene\Object</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

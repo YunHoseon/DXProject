@@ -4,6 +4,8 @@
 
 CThickSand::CThickSand(D3DXVECTOR3 vPosition)
 {
+	m_eTileType = eTileType::ThickSand;
+	
 	m_pSMesh = g_pStaticMeshManager->GetStaticMesh("ThickSand");
 	m_pCollision = new CBoxCollision(g_vZero, D3DXVECTOR3(1 / 0.0021, 1 / 0.0021, 1 / 0.0021), &m_matWorld);
 

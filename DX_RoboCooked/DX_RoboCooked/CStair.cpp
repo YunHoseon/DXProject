@@ -4,6 +4,8 @@
 
 CStair::CStair(D3DXVECTOR3 vPosition)
 {
+	m_eTileType = eTileType::Stair;
+
 	m_pSMesh = g_pStaticMeshManager->GetStaticMesh("Stair");
 	//m_pCollision = new CBoxCollision(g_vZero, D3DXVECTOR3(100, 100, 100), &m_matWorld);
 	const float root22 = pow(2, 0.5) * 0.5;

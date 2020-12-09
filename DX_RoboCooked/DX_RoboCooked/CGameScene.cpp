@@ -33,6 +33,8 @@
 #include <filesystem>
 #include <fstream>
 
+
+#include "CCactus.h"
 #include "CDebugPlayer1.h"
 #include "CDebugPlayer2.h"
 
@@ -98,19 +100,32 @@ void CGameScene::Init()
 
 		float fMaxZ = (12 / 2.0f) * BLOCK_SIZE;
 		float fMinZ = -fMaxZ;
-		bool flip = false;
+		int flip = -1;
 		for (float i = fMinZ + (BLOCK_SIZE / 2); i <= fMaxZ; i += BLOCK_SIZE)
 		{
-			flip = !flip;
+			++flip;
 			for (float j = fMinX + (BLOCK_SIZE / 2); j <= fMaxX; j += BLOCK_SIZE)
 			{
 				// 타일 생성
 				CTile* testSand;
-				if(flip)
-					testSand = new CThickSand(D3DXVECTOR3((float)j, -1, (float)i));
-
-				else
+				switch (flip % 5)
+				{
+				case 0:
+					testSand = new CFlowSand(D3DXVECTOR3((float)j, -1, (float)i));
+					break;
+				case 1:
 					testSand = new CSand(D3DXVECTOR3((float)j, -1, (float)i));
+					break;
+				case 2:
+					testSand = new CSoil(D3DXVECTOR3((float)j, -1, (float)i));
+					break;
+				case 3:
+					testSand = new CThickSand(D3DXVECTOR3((float)j, -1, (float)i));
+					break;
+				case 4:
+					testSand = new CWater(D3DXVECTOR3((float)j, -1, (float)i));
+					break;
+				}
 				
 				m_vecTile.push_back(testSand);
 				//m_vecStaticActor.push_back(testSand);
@@ -189,6 +204,7 @@ void CGameScene::Init()
 	m_vecStaticActor.push_back(new CSandpile(this,D3DXVECTOR3(4, 0, 0)));
 	m_vecStaticActor.push_back(new CWater(D3DXVECTOR3(0, -1, -6.5)));
 	m_vecStaticActor.push_back(new CSand(D3DXVECTOR3(0, -1, -7.5)));
+	m_vecStaticActor.push_back(new CCactus(D3DXVECTOR3(0, 0, -5)));
 
 }
 

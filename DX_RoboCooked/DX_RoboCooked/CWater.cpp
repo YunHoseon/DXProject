@@ -4,6 +4,8 @@
 
 CWater::CWater(D3DXVECTOR3 vPosition)
 {
+	m_eTileType = eTileType::Water;
+
 	m_pSMesh = g_pStaticMeshManager->GetStaticMesh("Water");
 	m_pCollision = new CBoxCollision(g_vZero, D3DXVECTOR3(100, 100, 100), &m_matWorld);
 

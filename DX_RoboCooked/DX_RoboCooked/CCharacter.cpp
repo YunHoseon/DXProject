@@ -262,6 +262,17 @@ void CCharacter::ReleaseKey(void* _value)
 		}
 		m_arrKeyDown[2] = false;
 	}
+	
+	_DEBUG_COMMENT else if (data->wKey == 'K')
+	_DEBUG_COMMENT {
+	_DEBUG_COMMENT 	m_fBaseSpeed += 0.01f;
+	_DEBUG_COMMENT	cout << "chara speed : " << m_fBaseSpeed << endl;
+	_DEBUG_COMMENT }
+	_DEBUG_COMMENT else if (data->wKey == 'L')
+	_DEBUG_COMMENT {
+	_DEBUG_COMMENT 	m_fBaseSpeed -= 0.01f;
+	_DEBUG_COMMENT	cout << "chara speed : " << m_fBaseSpeed << endl;
+	_DEBUG_COMMENT }
 }
 
 void CCharacter::SetKeyChange(void* _value)

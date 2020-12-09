@@ -152,6 +152,7 @@
     <ClInclude Include="CBlueprint.h" />
     <ClInclude Include="CBoxCollision.h" />
     <ClInclude Include="CBrick.h" />
+    <ClInclude Include="CCactus.h" />
     <ClInclude Include="CCCNone.h" />
     <ClInclude Include="CCCReverseKey.h" />
     <ClInclude Include="CCCSlowAndStop.h" />
@@ -236,6 +237,7 @@
     <ClCompile Include="CBlueprint.cpp" />
     <ClCompile Include="CBoxCollision.cpp" />
     <ClCompile Include="CBrick.cpp" />
+    <ClCompile Include="CCactus.cpp" />
     <ClCompile Include="CCCNone.cpp" />
     <ClCompile Include="CCCReverseKey.cpp" />
     <ClCompile Include="CCCSlowAndStop.cpp" />
