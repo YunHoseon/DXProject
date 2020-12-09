@@ -28,3 +28,11 @@ CWater::~CWater()
 void CWater::Update()
 {
 }
+
+bool CWater::Collide(CActor* target, D3DXVECTOR3* pNormal)
+{
+	bool b = CActor::Collide(target, pNormal);
+	if(b)
+		target->GetCollision()->SetIsCollide(false);
+	return b;
+}

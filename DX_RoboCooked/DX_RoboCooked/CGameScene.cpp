@@ -202,7 +202,7 @@ void CGameScene::Init()
 	m_vecStaticActor.push_back(new CSandpile(this,D3DXVECTOR3(4, 0, 0)));
 	m_vecStaticActor.push_back(new CWater(D3DXVECTOR3(0, -1, -6.5)));
 	m_vecStaticActor.push_back(new CSand(D3DXVECTOR3(0, -1, -7.5)));
-	m_vecStaticActor.push_back(new CCactus(D3DXVECTOR3(0, 0, -5)));
+	m_vecStaticActor.push_back(new CCactus(D3DXVECTOR3(-5, 0, 2)));
 
 }
 
