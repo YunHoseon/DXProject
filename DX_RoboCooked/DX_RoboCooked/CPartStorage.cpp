@@ -6,7 +6,10 @@
 #include "CGameScene.h"
 #include "CSkinnedMesh.h"
 
-CPartStorage::CPartStorage(IInteractCenter *pInteractCenter) : m_pSkinnedMesh(nullptr)
+CPartStorage::CPartStorage(IInteractCenter *pInteractCenter)
+	: m_pSkinnedMesh(nullptr)
+	, m_isInteractCalled(false)
+	, m_fPassedTime(0)
 {
 	m_pInteractCenter = pInteractCenter;
 	m_fMass = 9999.f;
@@ -18,12 +21,21 @@ CPartStorage::~CPartStorage()
 
 void CPartStorage::Update()
 {
-	m_pSkinnedMesh->Update();
+	//_DEBUG_COMMENT cout << m_pSkinnedMesh->GetCurrentAnimPeriod() << endl;
+	if (m_isInteractCalled)
+	{
+		m_fPassedTime += g_pTimeManager->GetElapsedTime();
+		if (m_pSkinnedMesh->GetCurrentAnimPeriod() <= m_fPassedTime)
+		{
+			m_isInteractCalled = false;
+			m_fPassedTime = 0.0f;
+		}
+		m_pSkinnedMesh->Update();
+	}
 }
 
 void CPartStorage::Render()
 {
-
 	g_pD3DDevice->SetTransform(D3DTS_WORLD, &m_matWorld);
 	m_pSkinnedMesh->Render(nullptr);
 
@@ -68,5 +80,6 @@ void CPartStorage::Interact(CCharacter *pCharacter)
 		m_pInteractCenter->AddParts(parts);
 		pCharacter->SetParts(parts);
 		//pCharacter->SetPlayerState(ePlayerState::Grab);
+		m_isInteractCalled = true;
 	}
 }

@@ -2,7 +2,6 @@
 #include "CInteractiveActor.h"
 #include "IPartGenerator.h"
 
-
 class CSkinnedMesh;
 
 class CPartStorage :
@@ -10,7 +9,8 @@ class CPartStorage :
 {
 private:
 	CSkinnedMesh*			m_pSkinnedMesh;
-	
+	bool					m_isInteractCalled;
+	float					m_fPassedTime;
 public:
 	CPartStorage(IInteractCenter* pInteractCenter);
 	~CPartStorage();
