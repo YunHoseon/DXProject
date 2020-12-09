@@ -26,7 +26,8 @@ enum class eEvent
 	CombinUse,
 	SpecificArea,
 	TravelDistance,
-	DeleteTornado
+	DeleteTornado,
+	ChangeCountBluePrint
 };
 
 

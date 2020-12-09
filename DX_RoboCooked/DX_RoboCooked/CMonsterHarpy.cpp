@@ -7,6 +7,7 @@
 CMonsterHarpy::CMonsterHarpy(IInteractCenter* pInteractCenter):CMonster(pInteractCenter), m_pTornado(nullptr)
 {
 	m_fFirstSkillConditionTime = 30.0f;
+	m_fUltimateSkillConditionTime = 120.0f;
 }
 
 

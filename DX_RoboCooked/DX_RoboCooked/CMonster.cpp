@@ -19,8 +19,10 @@ CMonster::CMonster(IInteractCenter* pInteractCenter)
 			, m_fSecondSkillElapsedTime(0.0f)
 			, m_fUltimateSkillElapsedTime(0.0f)
 			, m_fUltimateSkillConditionTime(999.0f)
+			, m_nBluePrintChangeCount(0)
 
 {
+	g_EventManager->Attach(eEvent::ChangeCountBluePrint, this);
 	ChooseSkillCondition();
 }
 
@@ -113,6 +115,9 @@ void CMonster::OnEvent(eEvent eEvent, void * _value)
 	case eEvent::DeleteTornado:
 		DeleteTornado();
 		break;
+	case eEvent::ChangeCountBluePrint:
+		AddBluePrintCount();
+		break;
 	}
 
 }
@@ -164,7 +169,7 @@ bool CMonster::SecondSkillTriggered()
 
 bool CMonster::UltimateSkillTriggered()
 {
-	if (!m_stSkillUsing.isUltimateSkill)
+	if (m_stSkillUsing.isUltimateSkill)
 		return false;
 
 	if (m_stSkillUsing.isUltimatePartsCheck && m_pInteractCenter->CheckSpecificPartsID(m_sSpecificPartsID))
@@ -173,7 +178,12 @@ bool CMonster::UltimateSkillTriggered()
 		return true;
 	}
 
-	//2번째 조건 들어갈곳.
+	if (m_stSkillUsing.isUltimateBluePrintCheck && m_nBluePrintChangeCount >= 10)
+	{
+		m_stSkillUsing.isUltimateBluePrintCheck = false;
+		g_EventManager->Detach(eEvent::ChangeCountBluePrint, this);
+		return true;
+	}
 
 	if (m_stSkillUsing.isUltimateTimeCheck && m_pInteractCenter->GetTime() < m_fUltimateSkillConditionTime)
 	{
@@ -299,6 +309,11 @@ void CMonster::FinishSkill(eSkill skill)
 void CMonster::AddObjectPosition(D3DXVECTOR3 pos)
 {
 	m_vecObjectPosition.push_back(pos);
+}
+
+void CMonster::AddBluePrintCount()
+{
+	m_nBluePrintChangeCount++;
 }
 
 void CMonster::TravelDistanceSkill(void * _value)

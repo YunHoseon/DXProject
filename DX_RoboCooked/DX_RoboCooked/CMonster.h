@@ -46,12 +46,12 @@ struct ST_Skill
 	bool			isUltimateSkill;
 
 	bool			isUltimatePartsCheck;
-
+	bool			isUltimateBluePrintCheck;
 	bool			isUltimateTimeCheck;
 
 	
 	
-	ST_Skill():FirstSkillProperty(eSkill::None), isFirstSkill(false),isSecondSkill(false),isUltimateSkill(false), isUltimatePartsCheck(true){}
+	ST_Skill():isFirstSkill(false),isSecondSkill(false),isUltimateSkill(false), isUltimatePartsCheck(true), isUltimateBluePrintCheck(true), isUltimateTimeCheck(true){}
 };
 
 
@@ -80,6 +80,7 @@ protected:
 	INT							m_nThrowPartsCount;//6
 	INT							m_nSpinPartsCount;//7
 
+	INT							m_nBluePrintChangeCount;
 	string						m_sSpecificPartsID;
 	vector<D3DXVECTOR3>			m_vecObjectPosition;
 
@@ -109,6 +110,7 @@ public:
 
 	void FinishSkill(eSkill skill);
 	void AddObjectPosition(D3DXVECTOR3 pos);
+	void AddBluePrintCount();
 	virtual void DeleteTornado() {};
 
 public:
