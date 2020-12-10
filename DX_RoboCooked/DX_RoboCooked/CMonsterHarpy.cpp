@@ -29,7 +29,6 @@ void CMonsterHarpy::MonsterUpdate()
 {
 	if (m_pTornado)
 	{
-		m_pTornado->Update();
 		m_pInteractCenter->UpdateTornado(m_pTornado);
 	}
 }
@@ -50,6 +49,7 @@ eSkill CMonsterHarpy::SecondSkill()
 void CMonsterHarpy::DeleteTornado()
 {
 	SafeDelete(m_pTornado);
+	g_EventManager->Detach(eEvent::DeleteTornado, this);
 }
 
 

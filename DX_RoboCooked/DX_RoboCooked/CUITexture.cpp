@@ -38,6 +38,11 @@ void CUITexture::Update()
 
 void CUITexture::Render()
 {
+	
+}
+
+void CUITexture::RenderTexture(eUIState state)
+{
 	m_Sprite->Begin(D3DXSPRITE_ALPHABLEND | D3DXSPRITE_SORT_TEXTURE);
 	//이미지 출력
 	RECT rc;
@@ -45,8 +50,8 @@ void CUITexture::Render()
 	D3DXMATRIXA16 matWorld;
 	D3DXMatrixIdentity(&matWorld);
 	m_Sprite->SetTransform(&matWorld);
-	
-	if (m_eUIState == eUIState::Disabled)
+
+	if (state == eUIState::Disabled)
 	{
 		SetRect(&rc, 0, 0, m_DisabledInfo.Width, m_DisabledInfo.Height);
 		m_Sprite->Draw(m_DisabledTexture,
@@ -55,7 +60,7 @@ void CUITexture::Render()
 			&D3DXVECTOR3(m_vPosition.x, m_vPosition.y, 0),
 			D3DCOLOR_ARGB(150, 255, 255, 255));
 	}
-	else if (m_eUIState == eUIState::Active)
+	else if (state == eUIState::Active)
 	{
 		SetRect(&rc, 0, 0, m_ActiveInfo.Width, m_ActiveInfo.Height);
 		m_Sprite->Draw(m_ActiveTexture,
@@ -64,7 +69,7 @@ void CUITexture::Render()
 			&D3DXVECTOR3(m_vPosition.x, m_vPosition.y, 0),
 			D3DCOLOR_ARGB(150, 255, 255, 255));
 	}
-	else if (m_eUIState == eUIState::Hover)
+	else if (state == eUIState::Hover)
 	{
 		SetRect(&rc, 0, 0, m_HoverInfo.Width, m_HoverInfo.Height);
 		m_Sprite->Draw(m_HoverTexture,

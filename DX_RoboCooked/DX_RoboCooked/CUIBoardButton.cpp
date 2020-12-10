@@ -19,7 +19,7 @@ CUIBoardButton::~CUIBoardButton()
 void CUIBoardButton::Setup()
 {
 	m_pTexture = new CUITexture("data/UI/panel-info.png", NULL, NULL, m_vPosition);
-	m_pText = new CUIText("UI_TEST");
+	//m_pText = new CUIText("UI_TEST");
 
 	D3DXIMAGE_INFO Info = g_pUITextureManager->GetTextureInfo("data/UI/panel-info.png");
 	m_vSize = D3DXVECTOR2(Info.Width, Info.Height);

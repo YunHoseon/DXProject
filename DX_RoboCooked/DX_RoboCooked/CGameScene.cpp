@@ -184,7 +184,6 @@ void CGameScene::Init()
 	m_vecCharacters.push_back(m_pDebugCube);
 
 	m_pDebugPauseUI = new CUIPauseButton(D3DXVECTOR2(100, 100), 27, this);
-	m_pDebugPauseUI->Setup();
 
 	CMonster *Medusa = new CMonsterMedusa(this);
 	m_vecMonster.push_back(Medusa);
@@ -280,6 +279,12 @@ void CGameScene::Update()
 		{
 			part->AddForce(m_vWind);
 		}
+	}
+
+	{
+
+		//여기에 토네이도
+
 	}
 
 	// collide -> update
@@ -400,8 +405,6 @@ void CGameScene::Update()
 			character->Update();
 		}
 
-		if (m_pDebugPauseUI)
-			m_pDebugPauseUI->Update();
 	}
 }
 
@@ -639,29 +642,6 @@ void CGameScene::CheckSandDummyArea(ICollisionArea* collison)
 {
 	for (auto it : m_vecCharacters)
 	{
-		//if (it->GetDummy() == false &&  it->GetParts() && collison->Collide(it->GetCollision())) // 더미안인데 파츠가있으면 들어오는곳 
-		//{
-		//	it->SetDummy(true);
-		//	it->SetCC(new CCCStopMove);
-		//}
-
-		//if (it->GetDummy() && it->GetParts() == nullptr) //더미안에서 파츠를 던지면 들어오는곳
-		//{
-		//	it->SetDummy(false);
-		//	it->DeleteCC();
-		//}
-
-
-		//if (it->GetParts() && collison->Collide(it->GetCollision())) // 더미안인데 파츠가있으면 들어오는곳 
-		//{
-		//	it->SetCC(new CCCStopMove);
-		//}
-
-		//if (it->GetDummy() && it->GetParts() == nullptr) //더미안에서 파츠를 던지면 들어오는곳
-		//{
-		//	it->SetCC(new CCCSpeedDown);
-		//}
-
 		if (it->GetDummy() == false && collison->Collide(it->GetCollision())) //더미 밖에서 안으로 들어올때 들어오는곳
 		{
 			it->SetDummy(true);

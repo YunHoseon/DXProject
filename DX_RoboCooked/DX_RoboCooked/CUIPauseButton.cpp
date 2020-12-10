@@ -15,6 +15,7 @@ CUIPauseButton::CUIPauseButton(D3DXVECTOR2 vPos, WPARAM wParam, IInteractCenter*
 	m_pInteractCenter = pInteractCenter;
 	m_vPosition = vPos;
 	m_wActiveButton = wParam;
+	Setup();
 }
 
 
@@ -24,8 +25,8 @@ CUIPauseButton::~CUIPauseButton()
 
 void CUIPauseButton::Setup()
 {
-	g_EventManager->Attach(eEvent::MouseClick, this);
-	g_EventManager->Attach(eEvent::MouseHover, this);
+	//g_EventManager->Attach(eEvent::MouseClick, this);
+	//g_EventManager->Attach(eEvent::MouseHover, this);
 	g_EventManager->Attach(eEvent::KeyPress, this);
 	g_EventManager->Attach(eEvent::KeyRelease, this);
 	g_EventManager->Attach(eEvent::MouseRelease, this);
@@ -97,11 +98,13 @@ void CUIPauseButton::KeyPressEvent(void * _value)
 			{
 				g_EventManager->Attach(eEvent::MouseClick, this);
 				g_EventManager->Attach(eEvent::MouseHover, this);
+				g_EventManager->Attach(eEvent::MouseRelease, this);
 			}
 			else
 			{
 				g_EventManager->Detach(eEvent::MouseClick, this);
 				g_EventManager->Detach(eEvent::MouseHover, this);
+				g_EventManager->Detach(eEvent::MouseRelease, this);
 			}
 			m_pInteractCenter->ToggleStop();
 		}
