@@ -4,6 +4,8 @@
 
 CSoil::CSoil(D3DXVECTOR3 vPosition)
 {
+	m_eTileType = eTileType::Soil;
+	
 	m_pSMesh = g_pStaticMeshManager->GetStaticMesh("Soil");
 	m_pCollision = new CBoxCollision(g_vZero, D3DXVECTOR3(100, 100, 100), &m_matWorld);
 

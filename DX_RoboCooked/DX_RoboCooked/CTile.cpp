@@ -7,6 +7,7 @@ CTile::CTile():
 	m_pSMesh(nullptr)
 {
 	m_fMass = 9999.f;
+	SetRotationY(0);
 }
 
 

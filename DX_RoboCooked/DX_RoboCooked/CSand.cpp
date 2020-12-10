@@ -4,6 +4,8 @@
 
 CSand::CSand(D3DXVECTOR3 vPosition)
 {
+	m_eTileType = eTileType::Sand;
+	
 	m_pSMesh = g_pStaticMeshManager->GetStaticMesh("Sand");
 	m_pCollision = new CBoxCollision(g_vZero, D3DXVECTOR3(100, 100, 100), &m_matWorld);
 

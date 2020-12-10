@@ -4,6 +4,8 @@
 
 CFlowSand::CFlowSand(D3DXVECTOR3 vPosition)
 {
+	m_eTileType = eTileType::FlowSand;
+	
 	m_pSMesh = g_pStaticMeshManager->GetStaticMesh("FlowSand");
 	m_pCollision = new CBoxCollision(g_vZero, D3DXVECTOR3(100, 100, 100), &m_matWorld);
 	

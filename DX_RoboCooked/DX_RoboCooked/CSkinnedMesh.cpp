@@ -196,7 +196,7 @@ void CSkinnedMesh::SetAnimationIndex(int nIndex)
 {
 	int num = m_pAnimController->GetNumAnimationSets();
 	if (nIndex > num) nIndex = nIndex % num;
-
+	
 	LPD3DXANIMATIONSET pAnimSet = NULL;
 	m_pAnimController->GetAnimationSet(nIndex, &pAnimSet);
 	m_pAnimController->SetTrackAnimationSet(0, pAnimSet);

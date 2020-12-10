@@ -30,11 +30,13 @@
 #include "CUIPauseButton.h"
 
 /* ������ */
+#include <filesystem>
 #include <fstream>
 
+
+#include "CCactus.h"
 #include "CDebugPlayer1.h"
 #include "CDebugPlayer2.h"
-#include "CTestStair.h"
 
 CGameScene::CGameScene() : m_pField(NULL),
 						   m_pDebugSphere(NULL),
@@ -83,11 +85,50 @@ void CGameScene::Init()
 	//g_SoundManager->SetBGMSound(0.5f);
 	m_fGameTime = 300.0f;
 
-	m_pField = new CField;
-	if (m_pField)
+	//m_pField = new CField;
+	//if (m_pField)
+	//{
+	//	m_pField->Setup(WIDTH, HEIGHT);
+	//	m_vecStaticActor.push_back(m_pField);
+	//}
+
 	{
-		m_pField->Setup(WIDTH, HEIGHT);
-		m_vecStaticActor.push_back(m_pField);
+		float fMaxX = (16 / 2.0f) * BLOCK_SIZE;
+		float fMinX = -fMaxX;
+
+		float fMaxZ = (12 / 2.0f) * BLOCK_SIZE;
+		float fMinZ = -fMaxZ;
+		int flip = -1;
+		for (float i = fMinZ + (BLOCK_SIZE / 2); i <= fMaxZ; i += BLOCK_SIZE)
+		{
+			++flip;
+			for (float j = fMinX + (BLOCK_SIZE / 2); j <= fMaxX; j += BLOCK_SIZE)
+			{
+				// 타일 생성
+				CTile* testSand;
+				switch (flip % 5)
+				{
+				case 0:
+					testSand = new CFlowSand(D3DXVECTOR3((float)j, -1, (float)i));
+					break;
+				case 1:
+					testSand = new CSand(D3DXVECTOR3((float)j, -1, (float)i));
+					break;
+				case 2:
+					testSand = new CSoil(D3DXVECTOR3((float)j, -1, (float)i));
+					break;
+				case 3:
+					testSand = new CThickSand(D3DXVECTOR3((float)j, -1, (float)i));
+					break;
+				case 4:
+					testSand = new CWater(D3DXVECTOR3((float)j, -1, (float)i));
+					break;
+				}
+				
+				m_vecTile.push_back(testSand);
+				//m_vecStaticActor.push_back(testSand);
+			}
+		}
 	}
 
 	CWall *wall = new CWall;
@@ -161,6 +202,7 @@ void CGameScene::Init()
 	m_vecStaticActor.push_back(new CSandpile(this,D3DXVECTOR3(4, 0, 0)));
 	m_vecStaticActor.push_back(new CWater(D3DXVECTOR3(0, -1, -6.5)));
 	m_vecStaticActor.push_back(new CSand(D3DXVECTOR3(0, -1, -7.5)));
+	m_vecStaticActor.push_back(new CCactus(D3DXVECTOR3(-5, 0, 2)));
 
 }
 
@@ -196,6 +238,11 @@ void CGameScene::Render()
 		it->Render();
 	}
 
+	for (CTile*  it : m_vecTile)
+	{
+		it->Render();
+	}
+
 	if (m_pDebugPauseUI)
 		m_pDebugPauseUI->Render();
 
@@ -208,7 +255,7 @@ void CGameScene::Update()
 
 	if (IsGameClear())
 	{
-		_DEBUG_COMMENT cout << "���� Ŭ����" << endl;
+		_DEBUG_COMMENT cout << "game clear!" << endl;
 	}
 
 	{
@@ -285,6 +332,41 @@ void CGameScene::Update()
 			{
 				CPhysicsApplyer::ApplyBound(character, blueprint);
 			}
+		}
+
+		for (CTile* tile : m_vecTile)
+		{
+			D3DXVECTOR3 min, max;
+			tile->GetCollision()->GetMinMax(&min, &max);
+			for (CCharacter *character : m_vecCharacters)
+			{
+				if(
+					D3DXBoxBoundProbe(&min, &max, &character->GetPosition(), &D3DXVECTOR3( 1, 0, 0)) ||
+					D3DXBoxBoundProbe(&min, &max, &character->GetPosition(), &D3DXVECTOR3(-1, 0, 0)) ||
+					D3DXBoxBoundProbe(&min, &max, &character->GetPosition(), &D3DXVECTOR3( 0, 1, 0)) ||
+					D3DXBoxBoundProbe(&min, &max, &character->GetPosition(), &D3DXVECTOR3( 0,-1, 0)) ||
+					D3DXBoxBoundProbe(&min, &max, &character->GetPosition(), &D3DXVECTOR3( 0, 0, 1)) ||
+					D3DXBoxBoundProbe(&min, &max, &character->GetPosition(), &D3DXVECTOR3( 0, 0,-1))
+					)
+				{
+					CPhysicsApplyer::ApplyBound(character, tile);
+				}
+			}
+			for (CParts *part : m_vecParts)
+			{
+				if(
+					D3DXBoxBoundProbe(&min, &max, &part->GetPosition(), &D3DXVECTOR3( 1, 0, 0)) ||
+					D3DXBoxBoundProbe(&min, &max, &part->GetPosition(), &D3DXVECTOR3(-1, 0, 0)) ||
+					D3DXBoxBoundProbe(&min, &max, &part->GetPosition(), &D3DXVECTOR3( 0, 1, 0)) ||
+					D3DXBoxBoundProbe(&min, &max, &part->GetPosition(), &D3DXVECTOR3( 0,-1, 0)) ||
+					D3DXBoxBoundProbe(&min, &max, &part->GetPosition(), &D3DXVECTOR3( 0, 0, 1)) ||
+					D3DXBoxBoundProbe(&min, &max, &part->GetPosition(), &D3DXVECTOR3( 0, 0,-1))
+					)
+				{
+					CPhysicsApplyer::ApplyBound(part, tile);
+				}
+			}
+			
 		}
 	}
 	{ // update

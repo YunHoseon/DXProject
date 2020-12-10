@@ -434,3 +434,10 @@ void CBoxCollision::RotateOriginAxis(float x, float y, float z) // radian
 	D3DXVec3TransformNormal(&m_arrOriginAxisDir[1], &m_arrOriginAxisDir[1], &matR);
 	D3DXVec3TransformNormal(&m_arrOriginAxisDir[2], &m_arrOriginAxisDir[2], &matR);
 }
+
+void CBoxCollision::GetMinMax(D3DXVECTOR3* pMin, D3DXVECTOR3* pMax)
+{
+	*pMin = m_vCenterPos - D3DXVECTOR3(m_fAxisHalfLen[0], m_fAxisHalfLen[1], m_fAxisHalfLen[2]);
+	*pMax = m_vCenterPos + D3DXVECTOR3(m_fAxisHalfLen[0], m_fAxisHalfLen[1], m_fAxisHalfLen[2]);
+}
+
