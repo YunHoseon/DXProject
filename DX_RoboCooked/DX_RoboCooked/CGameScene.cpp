@@ -24,9 +24,6 @@
 #include "CTornado.h"
 #include "CSandpile.h"
 
-#include "CUICloseButton.h"
-#include "CUIBoardButton.h"
-#include "CUIBarButton.h"
 #include "CUIPauseButton.h"
 
 /* ������ */
@@ -183,11 +180,11 @@ void CGameScene::Init()
 	m_vecCharacters.push_back(m_pDebugSphere);
 	m_vecCharacters.push_back(m_pDebugCube);
 
-	m_pDebugPauseUI = new CUIPauseButton(D3DXVECTOR2(100, 100), 27, this);
-	m_pDebugPauseUI->Setup();
 
-	//CMonster *Medusa = new CMonsterMedusa(this);
-	//m_vecMonster.push_back(Medusa);
+	m_pDebugPauseUI = new CUIPauseButton(D3DXVECTOR2(150, 10), 27, this);
+
+	CMonster *Medusa = new CMonsterMedusa(this);
+	m_vecMonster.push_back(Medusa);
 
 	CMonster *Harpy = new CMonsterHarpy(this);
 	m_vecMonster.push_back(Harpy);
@@ -252,7 +249,7 @@ void CGameScene::Update()
 {
 	if (m_isTimeStop)
 		return;
-
+	
 	if (IsGameClear())
 	{
 		_DEBUG_COMMENT cout << "game clear!" << endl;
@@ -273,13 +270,25 @@ void CGameScene::Update()
 	{
 		for (CCharacter *character : m_vecCharacters)
 		{
-			character->AddForce(m_vWind);
+			character->AddForce(m_vWind * TimeRevision);
 		}
 
 		for (CParts *part : m_vecParts)
 		{
-			part->AddForce(m_vWind);
+			part->AddForce(m_vWind * TimeRevision);
 		}
+	}
+
+	{
+
+		for (CMonster* monster : m_vecMonster)
+		{
+			for (CCharacter *character : m_vecCharacters)
+			{
+				monster->AddForce(character);
+			}
+		}
+
 	}
 
 	// collide -> update
@@ -337,33 +346,40 @@ void CGameScene::Update()
 		for (CTile* tile : m_vecTile)
 		{
 			D3DXVECTOR3 min, max;
+			float dist;
 			tile->GetCollision()->GetMinMax(&min, &max);
 			for (CCharacter *character : m_vecCharacters)
 			{
-				if(
-					D3DXBoxBoundProbe(&min, &max, &character->GetPosition(), &D3DXVECTOR3( 1, 0, 0)) ||
-					D3DXBoxBoundProbe(&min, &max, &character->GetPosition(), &D3DXVECTOR3(-1, 0, 0)) ||
-					D3DXBoxBoundProbe(&min, &max, &character->GetPosition(), &D3DXVECTOR3( 0, 1, 0)) ||
-					D3DXBoxBoundProbe(&min, &max, &character->GetPosition(), &D3DXVECTOR3( 0,-1, 0)) ||
-					D3DXBoxBoundProbe(&min, &max, &character->GetPosition(), &D3DXVECTOR3( 0, 0, 1)) ||
-					D3DXBoxBoundProbe(&min, &max, &character->GetPosition(), &D3DXVECTOR3( 0, 0,-1))
-					)
+				if(D3DXVec3LengthSq(&(character->GetPosition() - tile->GetPosition())) < 5.f)
 				{
-					CPhysicsApplyer::ApplyBound(character, tile);
+					if(
+                    D3DXBoxBoundProbe(&min, &max, &character->GetPosition(), &D3DXVECTOR3( 1, 0, 0)) ||
+                    D3DXBoxBoundProbe(&min, &max, &character->GetPosition(), &D3DXVECTOR3(-1, 0, 0)) ||
+                    D3DXBoxBoundProbe(&min, &max, &character->GetPosition(), &D3DXVECTOR3( 0, 1, 0)) ||
+                    D3DXBoxBoundProbe(&min, &max, &character->GetPosition(), &D3DXVECTOR3( 0,-1, 0)) ||
+                    D3DXBoxBoundProbe(&min, &max, &character->GetPosition(), &D3DXVECTOR3( 0, 0, 1)) ||
+                    D3DXBoxBoundProbe(&min, &max, &character->GetPosition(), &D3DXVECTOR3( 0, 0,-1))
+                    )
+					{
+						CPhysicsApplyer::ApplyBound(character, tile);
+					}
 				}
 			}
 			for (CParts *part : m_vecParts)
 			{
-				if(
-					D3DXBoxBoundProbe(&min, &max, &part->GetPosition(), &D3DXVECTOR3( 1, 0, 0)) ||
-					D3DXBoxBoundProbe(&min, &max, &part->GetPosition(), &D3DXVECTOR3(-1, 0, 0)) ||
-					D3DXBoxBoundProbe(&min, &max, &part->GetPosition(), &D3DXVECTOR3( 0, 1, 0)) ||
-					D3DXBoxBoundProbe(&min, &max, &part->GetPosition(), &D3DXVECTOR3( 0,-1, 0)) ||
-					D3DXBoxBoundProbe(&min, &max, &part->GetPosition(), &D3DXVECTOR3( 0, 0, 1)) ||
-					D3DXBoxBoundProbe(&min, &max, &part->GetPosition(), &D3DXVECTOR3( 0, 0,-1))
-					)
+				if (D3DXVec3LengthSq(&(tile->GetPosition() - tile->GetPosition())) < 5.f)
 				{
-					CPhysicsApplyer::ApplyBound(part, tile);
+					if(
+                    D3DXBoxBoundProbe(&min, &max, &part->GetPosition(), &D3DXVECTOR3( 1, 0, 0)) ||
+                    D3DXBoxBoundProbe(&min, &max, &part->GetPosition(), &D3DXVECTOR3(-1, 0, 0)) ||
+                    D3DXBoxBoundProbe(&min, &max, &part->GetPosition(), &D3DXVECTOR3( 0, 1, 0)) ||
+                    D3DXBoxBoundProbe(&min, &max, &part->GetPosition(), &D3DXVECTOR3( 0,-1, 0)) ||
+                    D3DXBoxBoundProbe(&min, &max, &part->GetPosition(), &D3DXVECTOR3( 0, 0, 1)) ||
+                    D3DXBoxBoundProbe(&min, &max, &part->GetPosition(), &D3DXVECTOR3( 0, 0,-1))
+                    )
+					{
+						CPhysicsApplyer::ApplyBound(part, tile);
+					}
 				}
 			}
 			
@@ -400,8 +416,6 @@ void CGameScene::Update()
 			character->Update();
 		}
 
-		if (m_pDebugPauseUI)
-			m_pDebugPauseUI->Update();
 	}
 }
 
@@ -624,6 +638,8 @@ bool CGameScene::CheckSpecificArea()
 	D3DXVECTOR3 size(1.5f, 100.0f, 1.5f);
 	CBoxCollision cCollsion(pos, size);
 
+	cCollsion.Render();
+
 	for (auto it : m_vecCharacters)
 	{
 		if (cCollsion.Collide(it->GetCollision()))
@@ -637,29 +653,6 @@ void CGameScene::CheckSandDummyArea(ICollisionArea* collison)
 {
 	for (auto it : m_vecCharacters)
 	{
-		//if (it->GetDummy() == false &&  it->GetParts() && collison->Collide(it->GetCollision())) // 더미안인데 파츠가있으면 들어오는곳 
-		//{
-		//	it->SetDummy(true);
-		//	it->SetCC(new CCCStopMove);
-		//}
-
-		//if (it->GetDummy() && it->GetParts() == nullptr) //더미안에서 파츠를 던지면 들어오는곳
-		//{
-		//	it->SetDummy(false);
-		//	it->DeleteCC();
-		//}
-
-
-		//if (it->GetParts() && collison->Collide(it->GetCollision())) // 더미안인데 파츠가있으면 들어오는곳 
-		//{
-		//	it->SetCC(new CCCStopMove);
-		//}
-
-		//if (it->GetDummy() && it->GetParts() == nullptr) //더미안에서 파츠를 던지면 들어오는곳
-		//{
-		//	it->SetCC(new CCCSpeedDown);
-		//}
-
 		if (it->GetDummy() == false && collison->Collide(it->GetCollision())) //더미 밖에서 안으로 들어올때 들어오는곳
 		{
 			it->SetDummy(true);
@@ -671,18 +664,6 @@ void CGameScene::CheckSandDummyArea(ICollisionArea* collison)
 		{
 			it->SetDummy(false);
 			it->DeleteCC();
-		}
-	}
-}
-
-void CGameScene::UpdateTornado(CTornado * tornado)
-{
-	for (CCharacter *character : m_vecCharacters)
-	{
-		D3DXVECTOR3 dir(0, 0, 0);
-		if (tornado->Collide(character, &dir))
-		{
-			character->AddForce(dir * tornado->GetPower());
 		}
 	}
 }

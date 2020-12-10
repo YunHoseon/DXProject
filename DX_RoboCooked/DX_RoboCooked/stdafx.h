@@ -66,7 +66,7 @@ const D3DXMATRIXA16 g_matIdentity(
 );
 const float g_fFramerate = 60;
 const float g_fBaseDeltaTime = 1 / g_fFramerate;
-const float g_frBaseDeltaTime = 1 / g_fBaseDeltaTime;
+#define TimeRevision g_pTimeManager->GetElapsedTime() * g_fFramerate
 
 struct ST_PC_VERTEX
 {
@@ -255,8 +255,8 @@ struct ST_PLAYER_INPUTKEY
 	using std::cout;
 	using std::endl;
 #else
-	//#define _DEBUG_COMMENT __DOUBLE_SLASH
-	//#define _RELEASE_COMMENT
+	#define _DEBUG_COMMENT __DOUBLE_SLASH
+	#define _RELEASE_COMMENT
 
 #ifdef UNICODE
 #pragma comment(linker, "/entry:wWinMainCRTStartup /subsystem:console")
@@ -264,8 +264,8 @@ struct ST_PLAYER_INPUTKEY
 #pragma comment(linker, "/entry:WinMainCRTStartup /subsystem:console")
 #endif
 
-#define _DEBUG_COMMENT
-#define _RELEASE_COMMENT __DOUBLE_SLASH
+//#define _DEBUG_COMMENT
+//#define _RELEASE_COMMENT __DOUBLE_SLASH
 using std::cout;
 using std::endl;
 #endif

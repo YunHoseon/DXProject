@@ -17,6 +17,7 @@ CPartStorage::CPartStorage(IInteractCenter *pInteractCenter)
 
 CPartStorage::~CPartStorage()
 {
+	SafeDelete(m_pSkinnedMesh);
 }
 
 void CPartStorage::Update()

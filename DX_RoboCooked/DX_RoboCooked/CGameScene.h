@@ -65,7 +65,6 @@ public:
 	void ElectIndexLot() override;
 	bool CheckSpecificArea() override;
 	void CheckSandDummyArea(ICollisionArea* collison) override;
-	void UpdateTornado(CTornado* tornado) override;
 
 
 	CCrowdControl* ChooseCC(eSkill skill);

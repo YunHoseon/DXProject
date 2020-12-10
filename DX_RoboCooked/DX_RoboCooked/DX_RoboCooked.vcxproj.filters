@@ -228,15 +228,6 @@
     <ClInclude Include="CUIButton.h">
       <Filter>UI</Filter>
     </ClInclude>
-    <ClInclude Include="CUICloseButton.h">
-      <Filter>UI\Button</Filter>
-    </ClInclude>
-    <ClInclude Include="CUIBoardButton.h">
-      <Filter>UI\Button</Filter>
-    </ClInclude>
-    <ClInclude Include="CUIBarButton.h">
-      <Filter>UI\Button</Filter>
-    </ClInclude>
     <ClInclude Include="CUIPauseButton.h">
       <Filter>UI\Button</Filter>
     </ClInclude>
@@ -303,9 +294,6 @@
     <ClInclude Include="CSand.h">
       <Filter>GameScene\Tile</Filter>
     </ClInclude>
-    <ClInclude Include="CSandpile.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="CCCSlowAndStop.h">
       <Filter>GameScene\Monster\CrowdControl</Filter>
     </ClInclude>
@@ -320,6 +308,21 @@
     </ClInclude>
     <ClInclude Include="CCactus.h">
       <Filter>GameScene\Object</Filter>
+    </ClInclude>
+    <ClInclude Include="CSandpile.h">
+      <Filter>GameScene\Object</Filter>
+    </ClInclude>
+    <ClInclude Include="CUIStartButton.h">
+      <Filter>UI\Button</Filter>
+    </ClInclude>
+    <ClInclude Include="CUIPauseBoard.h">
+      <Filter>UI\Button</Filter>
+    </ClInclude>
+    <ClInclude Include="CUIResetButton.h">
+      <Filter>UI\Button</Filter>
+    </ClInclude>
+    <ClInclude Include="CUIEndButton.h">
+      <Filter>UI\Button</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -473,15 +476,6 @@
     <ClCompile Include="CUIButton.cpp">
       <Filter>UI</Filter>
     </ClCompile>
-    <ClCompile Include="CUICloseButton.cpp">
-      <Filter>UI\Button</Filter>
-    </ClCompile>
-    <ClCompile Include="CUIBoardButton.cpp">
-      <Filter>UI\Button</Filter>
-    </ClCompile>
-    <ClCompile Include="CUIBarButton.cpp">
-      <Filter>UI\Button</Filter>
-    </ClCompile>
     <ClCompile Include="CUIPauseButton.cpp">
       <Filter>UI\Button</Filter>
     </ClCompile>
@@ -548,9 +542,6 @@
     <ClCompile Include="CSand.cpp">
       <Filter>GameScene\Tile</Filter>
     </ClCompile>
-    <ClCompile Include="CSandpile.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="CCCSlowAndStop.cpp">
       <Filter>GameScene\Monster\CrowdControl</Filter>
     </ClCompile>
@@ -565,6 +556,21 @@
     </ClCompile>
     <ClCompile Include="CCactus.cpp">
       <Filter>GameScene\Object</Filter>
+    </ClCompile>
+    <ClCompile Include="CSandpile.cpp">
+      <Filter>GameScene\Object</Filter>
+    </ClCompile>
+    <ClCompile Include="CUIStartButton.cpp">
+      <Filter>UI\Button</Filter>
+    </ClCompile>
+    <ClCompile Include="CUIPauseBoard.cpp">
+      <Filter>UI\Button</Filter>
+    </ClCompile>
+    <ClCompile Include="CUIResetButton.cpp">
+      <Filter>UI\Button</Filter>
+    </ClCompile>
+    <ClCompile Include="CUIEndButton.cpp">
+      <Filter>UI\Button</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

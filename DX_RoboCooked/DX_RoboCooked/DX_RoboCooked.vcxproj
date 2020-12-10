@@ -173,7 +173,8 @@
     <ClInclude Include="CStaticMesh.h" />
     <ClInclude Include="CTestStair.h" />
     <ClInclude Include="CTornado.h" />
-    <ClInclude Include="CUICloseButton.h" />
+    <ClInclude Include="CUIEndButton.h" />
+    <ClInclude Include="CUIResetButton.h" />
     <ClInclude Include="CUI.h" />
     <ClInclude Include="CCamera.h" />
     <ClInclude Include="CCharacter.h" />
@@ -227,8 +228,8 @@
     <ClInclude Include="stdafx.h" />
     <ClInclude Include="targetver.h" />
     <ClInclude Include="CTile.h" />
-    <ClInclude Include="CUIBoardButton.h" />
-    <ClInclude Include="CUIBarButton.h" />
+    <ClInclude Include="CUIPauseBoard.h" />
+    <ClInclude Include="CUIStartButton.h" />
     <ClInclude Include="CUIPauseButton.h" />
   </ItemGroup>
   <ItemGroup>
@@ -258,7 +259,8 @@
     <ClCompile Include="CStaticMesh.cpp" />
     <ClCompile Include="CTestStair.cpp" />
     <ClCompile Include="CTornado.cpp" />
-    <ClCompile Include="CUICloseButton.cpp" />
+    <ClCompile Include="CUIEndButton.cpp" />
+    <ClCompile Include="CUIResetButton.cpp" />
     <ClCompile Include="CUI.cpp" />
     <ClCompile Include="CCamera.cpp" />
     <ClCompile Include="CCharacter.cpp" />
@@ -315,8 +317,8 @@
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Create</PrecompiledHeader>
     </ClCompile>
     <ClCompile Include="CTile.cpp" />
-    <ClCompile Include="CUIBoardButton.cpp" />
-    <ClCompile Include="CUIBarButton.cpp" />
+    <ClCompile Include="CUIPauseBoard.cpp" />
+    <ClCompile Include="CUIStartButton.cpp" />
     <ClCompile Include="CUIPauseButton.cpp" />
   </ItemGroup>
   <ItemGroup>

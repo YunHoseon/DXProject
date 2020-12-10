@@ -50,8 +50,8 @@ void CCharacter::Render()
 
 	_DEBUG_COMMENT if (m_pInteractCollision)
 		_DEBUG_COMMENT m_pInteractCollision->Render();
-	_DEBUG_COMMENT if (m_pCollision)
-		_DEBUG_COMMENT m_pCollision->Render();
+	if (m_pCollision) 
+		m_pCollision->Render();
 }
 
 void CCharacter::Update()
@@ -151,11 +151,11 @@ void CCharacter::PressKey(void* _value)
 					m_arrKeyDown[0] = true;
 
 				if (m_fThrowPower < m_fMaxThrowPower)
-					m_fThrowPower += m_fThrowPowerUpSpeed;
+					m_fThrowPower += m_fThrowPowerUpSpeed * TimeRevision;
 				if (m_fThrowPower > m_fMaxThrowPower)
 					m_fThrowPower = m_fMaxThrowPower;
 			
-				_DEBUG_COMMENT cout << "throw power : " << m_fThrowPower << endl;
+				cout << "throw power : " << m_fThrowPower << endl;
 			}
 			break;
 		default: ;
@@ -198,7 +198,11 @@ void CCharacter::PressKey(void* _value)
 			if(CurrentTime - m_arrElapsedTime[2] > m_arrCoolDown[2])
 			{
 				//대시 -> 점멸로 수정해야함
-				AddAcceleration(m_vDirection);
+				D3DXVECTOR3 jump = m_vDirection;
+				jump.y += .2f;
+				D3DXVec3Normalize(&jump, &jump);
+				SetPosition(m_vPosition.x, m_vPosition.y + 0.1f, m_vPosition.z);
+				SetAcceleration(jump * 0.4f * TimeRevision);
 				g_SoundManager->PlaySFX("Melem");
 				m_arrElapsedTime[2] = CurrentTime;
 			}
@@ -223,7 +227,7 @@ void CCharacter::ReleaseKey(void* _value)
 			break;
 		case ePlayerState::Grab: 
 			SetPlayerState(ePlayerState::None);
-			m_pParts->ThrowParts(m_vDirection * m_fThrowPower);
+			m_pParts->ThrowParts(m_vDirection * m_fThrowPower * TimeRevision);
 			m_pParts = nullptr;
 			
 			g_SoundManager->PlaySFX("Melem");
@@ -280,7 +284,7 @@ void CCharacter::Move()
 {
 	if (m_pCollision->GetIsCollide() == false && m_isMoveKeyDown)
 	{
-		AddForce(-m_vDirection * m_fBaseSpeed  * m_pCC->MultiplySpeed()) ;
+		AddForce(-m_vDirection * m_fBaseSpeed  * m_pCC->MultiplySpeed() * TimeRevision) ;
 		m_isMoveKeyDown = false;
 	}
 	
@@ -317,11 +321,11 @@ void CCharacter::Rotate(float fTargetRot)
 	D3DXVec3TransformNormal(&m_vDirection, &D3DXVECTOR3(0, 0, 1), &m_matR);
 	m_matWorld = m_matS * m_matR * m_matT;
 
-	SetForce(m_vDirection * m_fBaseSpeed * m_pCC->MultiplySpeed());
+	SetForce(m_vDirection * m_fBaseSpeed * m_pCC->MultiplySpeed() * TimeRevision);
 
 	if (m_pCollision)
 		m_pCollision->Update();
-
+	
 	D3DXVECTOR3 dummy;
 	D3DXQuaternionToAxisAngle(&stLerpRot, &dummy, &m_fRotY);
 }

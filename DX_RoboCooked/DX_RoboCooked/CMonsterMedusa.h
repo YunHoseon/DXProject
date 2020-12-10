@@ -7,6 +7,8 @@ public:
 	CMonsterMedusa(IInteractCenter* pInteractCenter);
 	~CMonsterMedusa();
 
+	void Render() override;
+
 	eSkill FirstSkill() override { return eSkill::KeyLock; }
 	eSkill SecondSkill() override { return eSkill::SlowMove; }
 	eSkill UltimateSkill() override { return eSkill::DestroyParts; }
