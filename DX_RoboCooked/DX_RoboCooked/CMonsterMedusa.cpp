@@ -6,10 +6,15 @@ CMonsterMedusa::CMonsterMedusa(IInteractCenter* pInteractCenter):CMonster(pInter
 {
 	m_fFirstSkillConditionTime = 40.0f;
 	m_fUltimateSkillConditionTime = 120.0f;
+	m_sSpecificPartsID = "B04";
 }
 
 
 CMonsterMedusa::~CMonsterMedusa()
+{
+}
+
+void CMonsterMedusa::Render()
 {
 }
 

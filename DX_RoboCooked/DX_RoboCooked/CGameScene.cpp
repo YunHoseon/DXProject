@@ -145,8 +145,8 @@ void CGameScene::Init()
 	m_pDebugPauseUI = new CUIPauseButton(D3DXVECTOR2(100, 100), 27, this);
 	m_pDebugPauseUI->Setup();
 
-	//CMonster *Medusa = new CMonsterMedusa(this);
-	//m_vecMonster.push_back(Medusa);
+	CMonster *Medusa = new CMonsterMedusa(this);
+	m_vecMonster.push_back(Medusa);
 
 	CMonster *Harpy = new CMonsterHarpy(this);
 	m_vecMonster.push_back(Harpy);
@@ -541,6 +541,8 @@ bool CGameScene::CheckSpecificArea()
 	D3DXVECTOR3 pos = m_vecObject[m_nLotIndex]->GetPosition();
 	D3DXVECTOR3 size(1.5f, 100.0f, 1.5f);
 	CBoxCollision cCollsion(pos, size);
+
+	cCollsion.Render();
 
 	for (auto it : m_vecCharacters)
 	{

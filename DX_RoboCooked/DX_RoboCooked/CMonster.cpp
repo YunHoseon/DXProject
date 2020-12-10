@@ -248,9 +248,10 @@ void CMonster::ChooseSkillCondition()
 
 
 	//테스트용
-	//m_eSkillCondition = eSkillCondition::TravelDistance;
-	//g_EventManager->Attach(eEvent::TravelDistance, this);
-	//m_eSecondSkillEvent = eEvent::TravelDistance;
+	/*m_eSkillCondition = eSkillCondition::SpecificArea;
+	g_EventManager->Attach(eEvent::SpecificArea, this);
+	m_eSecondSkillEvent = eEvent::SpecificArea;
+	m_pInteractCenter->ElectIndexLot();*/
 }
 
 bool CMonster::CheckDurationTimeFirstSkill()
