@@ -8,7 +8,7 @@
 CDebugPlayer2::CDebugPlayer2(IInteractCenter* pInteractCenter): CCharacter(1)
 {
 	m_pInteractCenter = pInteractCenter;
-	m_vPosition = g_vZero;
+	SetPosition(g_vZero);
 
 	m_pSkinnedMesh = new CSkinnedMesh;
 	m_pSkinnedMesh->Load("data/model/character", "로보토미_2P_달리기1.X");
