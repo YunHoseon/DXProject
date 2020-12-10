@@ -252,7 +252,7 @@ void CGameScene::Update()
 {
 	if (m_isTimeStop)
 		return;
-
+	
 	if (IsGameClear())
 	{
 		_DEBUG_COMMENT cout << "game clear!" << endl;
@@ -273,12 +273,12 @@ void CGameScene::Update()
 	{
 		for (CCharacter *character : m_vecCharacters)
 		{
-			character->AddForce(m_vWind);
+			character->AddForce(m_vWind * TimeRevision);
 		}
 
 		for (CParts *part : m_vecParts)
 		{
-			part->AddForce(m_vWind);
+			part->AddForce(m_vWind * TimeRevision);
 		}
 	}
 
@@ -337,33 +337,40 @@ void CGameScene::Update()
 		for (CTile* tile : m_vecTile)
 		{
 			D3DXVECTOR3 min, max;
+			float dist;
 			tile->GetCollision()->GetMinMax(&min, &max);
 			for (CCharacter *character : m_vecCharacters)
 			{
-				if(
-					D3DXBoxBoundProbe(&min, &max, &character->GetPosition(), &D3DXVECTOR3( 1, 0, 0)) ||
-					D3DXBoxBoundProbe(&min, &max, &character->GetPosition(), &D3DXVECTOR3(-1, 0, 0)) ||
-					D3DXBoxBoundProbe(&min, &max, &character->GetPosition(), &D3DXVECTOR3( 0, 1, 0)) ||
-					D3DXBoxBoundProbe(&min, &max, &character->GetPosition(), &D3DXVECTOR3( 0,-1, 0)) ||
-					D3DXBoxBoundProbe(&min, &max, &character->GetPosition(), &D3DXVECTOR3( 0, 0, 1)) ||
-					D3DXBoxBoundProbe(&min, &max, &character->GetPosition(), &D3DXVECTOR3( 0, 0,-1))
-					)
+				if(D3DXVec3LengthSq(&(character->GetPosition() - tile->GetPosition())) < 5.f)
 				{
-					CPhysicsApplyer::ApplyBound(character, tile);
+					if(
+                    D3DXBoxBoundProbe(&min, &max, &character->GetPosition(), &D3DXVECTOR3( 1, 0, 0)) ||
+                    D3DXBoxBoundProbe(&min, &max, &character->GetPosition(), &D3DXVECTOR3(-1, 0, 0)) ||
+                    D3DXBoxBoundProbe(&min, &max, &character->GetPosition(), &D3DXVECTOR3( 0, 1, 0)) ||
+                    D3DXBoxBoundProbe(&min, &max, &character->GetPosition(), &D3DXVECTOR3( 0,-1, 0)) ||
+                    D3DXBoxBoundProbe(&min, &max, &character->GetPosition(), &D3DXVECTOR3( 0, 0, 1)) ||
+                    D3DXBoxBoundProbe(&min, &max, &character->GetPosition(), &D3DXVECTOR3( 0, 0,-1))
+                    )
+					{
+						CPhysicsApplyer::ApplyBound(character, tile);
+					}
 				}
 			}
 			for (CParts *part : m_vecParts)
 			{
-				if(
-					D3DXBoxBoundProbe(&min, &max, &part->GetPosition(), &D3DXVECTOR3( 1, 0, 0)) ||
-					D3DXBoxBoundProbe(&min, &max, &part->GetPosition(), &D3DXVECTOR3(-1, 0, 0)) ||
-					D3DXBoxBoundProbe(&min, &max, &part->GetPosition(), &D3DXVECTOR3( 0, 1, 0)) ||
-					D3DXBoxBoundProbe(&min, &max, &part->GetPosition(), &D3DXVECTOR3( 0,-1, 0)) ||
-					D3DXBoxBoundProbe(&min, &max, &part->GetPosition(), &D3DXVECTOR3( 0, 0, 1)) ||
-					D3DXBoxBoundProbe(&min, &max, &part->GetPosition(), &D3DXVECTOR3( 0, 0,-1))
-					)
+				if (D3DXVec3LengthSq(&(tile->GetPosition() - tile->GetPosition())) < 5.f)
 				{
-					CPhysicsApplyer::ApplyBound(part, tile);
+					if(
+                    D3DXBoxBoundProbe(&min, &max, &part->GetPosition(), &D3DXVECTOR3( 1, 0, 0)) ||
+                    D3DXBoxBoundProbe(&min, &max, &part->GetPosition(), &D3DXVECTOR3(-1, 0, 0)) ||
+                    D3DXBoxBoundProbe(&min, &max, &part->GetPosition(), &D3DXVECTOR3( 0, 1, 0)) ||
+                    D3DXBoxBoundProbe(&min, &max, &part->GetPosition(), &D3DXVECTOR3( 0,-1, 0)) ||
+                    D3DXBoxBoundProbe(&min, &max, &part->GetPosition(), &D3DXVECTOR3( 0, 0, 1)) ||
+                    D3DXBoxBoundProbe(&min, &max, &part->GetPosition(), &D3DXVECTOR3( 0, 0,-1))
+                    )
+					{
+						CPhysicsApplyer::ApplyBound(part, tile);
+					}
 				}
 			}
 			
@@ -684,7 +691,7 @@ void CGameScene::UpdateTornado(CTornado * tornado)
 		D3DXVECTOR3 dir(0, 0, 0);
 		if (tornado->Collide(character, &dir))
 		{
-			character->AddForce(dir * tornado->GetPower());
+			character->AddForce(dir * tornado->GetPower() * TimeRevision);
 		}
 	}
 }

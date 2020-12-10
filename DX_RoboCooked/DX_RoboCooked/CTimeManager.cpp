@@ -1,10 +1,11 @@
 ﻿#include "stdafx.h"
 #include "CTimeManager.h"
 
-CTimeManager::CTimeManager(): CSingleton<CTimeManager>(), m_fElapsedTime(0)
-{
-	QueryPerformanceCounter(&m_dwLastUpdateTime);
-}
+CTimeManager::CTimeManager():
+	CSingleton<CTimeManager>(),
+	m_fElapsedTime(0),
+	m_fFPS_Timer(0),
+	m_FPS(0) { QueryPerformanceCounter(&m_dwLastUpdateTime); }
 
 CTimeManager::~CTimeManager()
 {
@@ -25,16 +26,17 @@ void CTimeManager::Update()
 
 	m_fElapsedTime = DeltaTime.QuadPart * 0.000001f;
 
-	//m_fFPS_Timer += m_fElapsedTime;
-	//static int Cnt = 0;
-	//Cnt++;
+	m_fFPS_Timer += m_fElapsedTime;
+	static int Cnt = 0;
+	Cnt++;
 
-	//if (m_fFPS_Timer > 1)
-	//{
-	//	m_fFPS_Timer = 0;
-	//	m_FPS = Cnt;
-	//	Cnt = 0;
-	//}
+	if (m_fFPS_Timer > 1)
+	{
+		m_fFPS_Timer = 0;
+		m_FPS = Cnt;
+		Cnt = 0;
+		cout << "fps : " << m_FPS << endl;
+	}
 
 	m_dwLastUpdateTime = CurTime;
 	ST_TickEvent data;

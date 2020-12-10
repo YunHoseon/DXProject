@@ -14,5 +14,8 @@ public:
 
 	void AddForce(const D3DXVECTOR3& vForce) override {}
 	void AddAcceleration(const D3DXVECTOR3& vAccel) override {}
+
+	void SetPosition(D3DXVECTOR3 vPosition) override;
+	void SetPosition(float x, float y, float z) override;
 };
 
