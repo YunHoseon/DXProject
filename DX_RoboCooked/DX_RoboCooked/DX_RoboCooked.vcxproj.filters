@@ -303,9 +303,6 @@
     <ClInclude Include="CSand.h">
       <Filter>GameScene\Tile</Filter>
     </ClInclude>
-    <ClInclude Include="CSandpile.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="CCCSlowAndStop.h">
       <Filter>GameScene\Monster\CrowdControl</Filter>
     </ClInclude>
@@ -319,6 +316,9 @@
       <Filter>GameScene\Tile</Filter>
     </ClInclude>
     <ClInclude Include="CCactus.h">
+      <Filter>GameScene\Object</Filter>
+    </ClInclude>
+    <ClInclude Include="CSandpile.h">
       <Filter>GameScene\Object</Filter>
     </ClInclude>
   </ItemGroup>
@@ -548,9 +548,6 @@
     <ClCompile Include="CSand.cpp">
       <Filter>GameScene\Tile</Filter>
     </ClCompile>
-    <ClCompile Include="CSandpile.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="CCCSlowAndStop.cpp">
       <Filter>GameScene\Monster\CrowdControl</Filter>
     </ClCompile>
@@ -564,6 +561,9 @@
       <Filter>GameScene\Tile</Filter>
     </ClCompile>
     <ClCompile Include="CCactus.cpp">
+      <Filter>GameScene\Object</Filter>
+    </ClCompile>
+    <ClCompile Include="CSandpile.cpp">
       <Filter>GameScene\Object</Filter>
     </ClCompile>
   </ItemGroup>
