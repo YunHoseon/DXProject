@@ -58,7 +58,7 @@ void CUITexture::RenderTexture(eUIState state)
 			&rc,
 			&D3DXVECTOR3(0, 0, 0),
 			&D3DXVECTOR3(m_vPosition.x, m_vPosition.y, 0),
-			D3DCOLOR_ARGB(150, 255, 255, 255));
+			D3DCOLOR_ARGB(255, 255, 255, 255));
 	}
 	else if (state == eUIState::Active)
 	{
@@ -67,7 +67,7 @@ void CUITexture::RenderTexture(eUIState state)
 			&rc,
 			&D3DXVECTOR3(0, 0, 0),
 			&D3DXVECTOR3(m_vPosition.x, m_vPosition.y, 0),
-			D3DCOLOR_ARGB(150, 255, 255, 255));
+			D3DCOLOR_ARGB(255, 255, 255, 255));
 	}
 	else if (state == eUIState::Hover)
 	{
@@ -76,7 +76,7 @@ void CUITexture::RenderTexture(eUIState state)
 			&rc,
 			&D3DXVECTOR3(0, 0, 0),
 			&D3DXVECTOR3(m_vPosition.x, m_vPosition.y, 0),
-			D3DCOLOR_ARGB(150, 255, 255, 255));
+			D3DCOLOR_ARGB(255, 255, 255, 255));
 	}
 
 	m_Sprite->End();

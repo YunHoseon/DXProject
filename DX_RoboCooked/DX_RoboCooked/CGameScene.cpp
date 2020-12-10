@@ -24,9 +24,6 @@
 #include "CTornado.h"
 #include "CSandpile.h"
 
-#include "CUICloseButton.h"
-#include "CUIBoardButton.h"
-#include "CUIBarButton.h"
 #include "CUIPauseButton.h"
 
 /* ������ */
@@ -183,7 +180,8 @@ void CGameScene::Init()
 	m_vecCharacters.push_back(m_pDebugSphere);
 	m_vecCharacters.push_back(m_pDebugCube);
 
-	m_pDebugPauseUI = new CUIPauseButton(D3DXVECTOR2(100, 100), 27, this);
+
+	m_pDebugPauseUI = new CUIPauseButton(D3DXVECTOR2(150, 10), 27, this);
 
 	CMonster *Medusa = new CMonsterMedusa(this);
 	m_vecMonster.push_back(Medusa);

@@ -28,12 +28,14 @@ void CUIButton::Render()
 	if (!m_isActive)
 		return;
 
+	if (m_pTexture)
+		m_pTexture->RenderTexture(m_eUIState);
+
 	for (const auto c : m_listUIchildren)
 	{
 		c->Render();
 	}
-	if (m_pTexture)
-		m_pTexture->RenderTexture(m_eUIState);
+	
 }
 
 void CUIButton::Add(CUI * component)

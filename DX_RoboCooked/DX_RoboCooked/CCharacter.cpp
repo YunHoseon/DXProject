@@ -55,7 +55,7 @@ void CCharacter::Render()
 	}
 	_DEBUG_COMMENT if (m_pInteractCollision)
 		_DEBUG_COMMENT m_pInteractCollision->Render();
-	if (m_pCollision) // 일부러 주석 달지 않음
+	if (m_pCollision) 
 		m_pCollision->Render();
 }
 

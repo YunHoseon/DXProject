@@ -3,13 +3,13 @@
 
 class CUIButton;
 
-class CUIBoardButton :
+class CUIPauseBoard :
 	public CUIButton
 
 {
 public:
-	CUIBoardButton(D3DXVECTOR2 vPos);
-	~CUIBoardButton();
+	CUIPauseBoard(D3DXVECTOR2 vPos);
+	~CUIPauseBoard();
 
 public:
 	virtual void Setup() override;

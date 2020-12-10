@@ -1,11 +1,11 @@
 #pragma once
 #include "CUIButton.h"
-class CUIBarButton :
+class CUIStartButton :
 	public CUIButton
 {
 public:
-	CUIBarButton(D3DXVECTOR2 vPos);
-	~CUIBarButton();
+	CUIStartButton(D3DXVECTOR2 vPos);
+	~CUIStartButton();
 
 public:
 	virtual void Setup() override;
