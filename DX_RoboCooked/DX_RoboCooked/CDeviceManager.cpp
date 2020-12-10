@@ -26,7 +26,7 @@ CDeviceManager::CDeviceManager() : CSingleton<CDeviceManager>(), m_pD3D(NULL), m
 	d3dpp.Windowed = true;
 	d3dpp.EnableAutoDepthStencil = true;
 	d3dpp.AutoDepthStencilFormat = D3DFMT_D24S8;
-	//d3dpp.PresentationInterval = D3DPRESENT_INTERVAL_IMMEDIATE;
+	d3dpp.PresentationInterval = D3DPRESENT_INTERVAL_IMMEDIATE;
 
 
 	HRESULT hr = m_pD3D->CreateDevice(

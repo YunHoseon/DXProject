@@ -86,6 +86,11 @@ void CActor::AddAcceleration(const D3DXVECTOR3& vAccel)
 	m_vAcceleration += vAccel;
 }
 
+void CActor::SetAcceleration(const D3DXVECTOR3& vAccel)
+{
+	m_vAcceleration = vAccel;
+}
+
 void CActor::AddForce(const D3DXVECTOR3& vForce)
 {
 	m_vAcceleration += vForce / m_fMass;

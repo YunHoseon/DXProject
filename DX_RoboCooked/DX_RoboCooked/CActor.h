@@ -59,6 +59,7 @@ public:
 	const float& GetRotY() { return m_fRotY; }
 
 	virtual void AddAcceleration(const D3DXVECTOR3& vAccel);
+	virtual void SetAcceleration(const D3DXVECTOR3& vAccel);
 	virtual void AddForce(const D3DXVECTOR3& vForce);
 	virtual void SetForce(const D3DXVECTOR3& vForce = D3DXVECTOR3(0, 0, 0));
 
