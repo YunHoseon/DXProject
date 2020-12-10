@@ -4,6 +4,7 @@
 #include "ICollisionArea.h"
 #include "CCrowdControl.h"
 #include "CCCNone.h"
+#include "CSkinnedMesh.h"
 
 CCharacter::CCharacter(int nPlayerNum) :
 	m_ePlayerState(ePlayerState::None),
@@ -15,8 +16,8 @@ CCharacter::CCharacter(int nPlayerNum) :
 	m_arrKeyDown({ false, false, false }),
 	m_isMoveKeyDown(false),
 	m_pInputKey(InputManager->GetInputKey(nPlayerNum)),
-	m_pMesh(nullptr),
-	m_stMtlSphere({}),
+	//m_pMesh(nullptr),
+	//m_stMtlSphere({}),
 	m_fMinThrowPower(0.01f),
 	m_fMaxThrowPower(0.1f),
 	m_fThrowPower(m_fMinThrowPower),
@@ -26,11 +27,11 @@ CCharacter::CCharacter(int nPlayerNum) :
 	m_vDefaultPosition(0, 0, 0)
 {
 	m_fBaseSpeed = 0.02f;
-	
-	ZeroMemory(&m_stMtlSphere, sizeof(D3DMATERIAL9));
+
+	/*ZeroMemory(&m_stMtlSphere, sizeof(D3DMATERIAL9));
 	m_stMtlSphere.Ambient = D3DXCOLOR(0.7f, 0.7f, 0.7f, 1.0f);
 	m_stMtlSphere.Diffuse = D3DXCOLOR(0.7f, 0.7f, 0.7f, 1.0f);
-	m_stMtlSphere.Specular = D3DXCOLOR(0.7f, 0.7f, 0.7f, 1.0f);
+	m_stMtlSphere.Specular = D3DXCOLOR(0.7f, 0.7f, 0.7f, 1.0f);*/
 
 	m_pCC = new CCCNone;
 }
@@ -38,21 +39,15 @@ CCharacter::CCharacter(int nPlayerNum) :
 CCharacter::~CCharacter()
 {
 	SafeDelete(m_pInteractCollision);
-	SafeRelease(m_pMesh);
+	//SafeRelease(m_pMesh);
 	SafeDelete(m_pCC);
 }
 
 void CCharacter::Render()
 {
-	if (m_pMesh)
-	{
-		g_pD3DDevice->SetRenderState(D3DRS_LIGHTING, true);
-		g_pD3DDevice->SetTransform(D3DTS_WORLD, &m_matWorld);
-		g_pD3DDevice->SetTexture(0, NULL);
-		g_pD3DDevice->SetMaterial(&m_stMtlSphere);
-		m_pMesh->DrawSubset(0);
-		g_pD3DDevice->SetRenderState(D3DRS_LIGHTING, false);
-	}
+	g_pD3DDevice->SetTransform(D3DTS_WORLD, &m_matWorld);
+	m_pSkinnedMesh->Render(nullptr);
+
 	_DEBUG_COMMENT if (m_pInteractCollision)
 		_DEBUG_COMMENT m_pInteractCollision->Render();
 	_DEBUG_COMMENT if (m_pCollision)
@@ -66,9 +61,10 @@ void CCharacter::Update()
 	m_vGrabPartsPosition.y = m_vPosition.y + 1.0f;
 	m_vGrabPartsPosition.z = m_vPosition.z;
 
+	m_pSkinnedMesh->Update();
+
 	if (m_pInteractCollision)
 		m_pInteractCollision->Update();
-
 	if (m_pCollision)
 		m_pCollision->Update();
 }
@@ -93,7 +89,6 @@ void CCharacter::OnEvent(eEvent eEvent, void* _value)
 
 void CCharacter::PressKey(void* _value)
 {
-	
 	ST_KeyInputEvent* data = static_cast<ST_KeyInputEvent*>(_value);
 	const float& CurrentTime = g_pTimeManager->GetLastUpdateTime();
 	if (data->wKey == m_pInputKey->moveFowardKey)
@@ -288,7 +283,6 @@ void CCharacter::Move()
 		AddForce(-m_vDirection * m_fBaseSpeed  * m_pCC->MultiplySpeed()) ;
 		m_isMoveKeyDown = false;
 	}
-	
 	
 	m_vVelocity += m_vAcceleration;
 	m_vPosition += m_vVelocity;

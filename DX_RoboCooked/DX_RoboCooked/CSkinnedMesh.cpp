@@ -20,8 +20,8 @@ CSkinnedMesh::CSkinnedMesh():
 
 CSkinnedMesh::~CSkinnedMesh()
 {
-	//CAllocateHierachy ah;
-	//D3DXFrameDestroy(m_pRoot, &ah);
+	CAllocateHierachy ah;
+	D3DXFrameDestroy(m_pRoot, &ah);
 	SafeRelease(m_pAnimController);
 }
 

@@ -5,7 +5,7 @@
 class ICollisionArea;
 class CGameScene;
 class CCrowdControl;
-
+class CSkinnedMesh;
 
 enum class ePlayerState
 {
@@ -16,7 +16,7 @@ enum class ePlayerState
 class CCharacter :public CActor
 {
 protected:
-
+	CSkinnedMesh*		m_pSkinnedMesh;
 	ePlayerState		m_ePlayerState;
 	ICollisionArea*		m_pInteractCollision;
 
@@ -31,8 +31,8 @@ protected:
 	bool				m_isMoveKeyDown;
 	// ¼öÁ¤Áß
 	const ST_PLAYER_INPUTKEY* m_pInputKey;
-	LPD3DXMESH			m_pMesh;
-	D3DMATERIAL9		m_stMtlSphere;
+	//LPD3DXMESH			m_pMesh;
+	//D3DMATERIAL9		m_stMtlSphere;
 	float				m_fMinThrowPower;
 	float				m_fMaxThrowPower;
 	float				m_fThrowPower;
