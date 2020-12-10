@@ -283,7 +283,13 @@ void CGameScene::Update()
 
 	{
 
-		//여기에 토네이도
+		for (CMonster* monster : m_vecMonster)
+		{
+			for (CCharacter *character : m_vecCharacters)
+			{
+				monster->AddForce(character);
+			}
+		}
 
 	}
 
@@ -660,18 +666,6 @@ void CGameScene::CheckSandDummyArea(ICollisionArea* collison)
 		{
 			it->SetDummy(false);
 			it->DeleteCC();
-		}
-	}
-}
-
-void CGameScene::UpdateTornado(CTornado * tornado)
-{
-	for (CCharacter *character : m_vecCharacters)
-	{
-		D3DXVECTOR3 dir(0, 0, 0);
-		if (tornado->Collide(character, &dir))
-		{
-			character->AddForce(dir * tornado->GetPower() * TimeRevision);
 		}
 	}
 }

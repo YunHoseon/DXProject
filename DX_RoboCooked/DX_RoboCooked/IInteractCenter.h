@@ -28,6 +28,4 @@ public:
 	virtual void ElectIndexLot() = 0;
 	virtual bool CheckSpecificArea() = 0;
 	virtual void CheckSandDummyArea(ICollisionArea* collison) = 0;
-	virtual void UpdateTornado(CTornado* tornado) = 0;
-
 };

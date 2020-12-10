@@ -11,6 +11,7 @@ CMonsterHarpy::CMonsterHarpy(IInteractCenter* pInteractCenter):CMonster(pInterac
 	m_sSpecificPartsID = "B03";
 	m_debugName = "ÇÏÇÇ";
 	ChooseSkillCondition();
+	g_EventManager->Attach(eEvent::DeleteTornado, this);
 }
 
 
@@ -25,11 +26,15 @@ void CMonsterHarpy::Render()
 		m_pTornado->Render();
 }
 
-void CMonsterHarpy::MonsterUpdate()
+void CMonsterHarpy::AddForce(CActor * target)
 {
 	if (m_pTornado)
 	{
-		m_pInteractCenter->UpdateTornado(m_pTornado);
+		D3DXVECTOR3 dir(0, 0, 0);
+		if (m_pTornado->Collide(target, &dir))
+		{
+			target->AddForce(dir * m_pTornado->GetPower() * TimeRevision);
+		}
 	}
 }
 
@@ -38,10 +43,13 @@ eSkill CMonsterHarpy::SecondSkill()
 	if (m_vecObjectPosition.empty())
 		return eSkill::None;
 
+	if(m_pTornado)
+		return eSkill::Tornado;
+
 	CRandomNumberGenerator rand;
 	int index = rand.GenInt(0, m_vecObjectPosition.size() - 1);
 	m_pTornado = new CTornado(m_vecObjectPosition[index]);
-	g_EventManager->Attach(eEvent::DeleteTornado, this);
+
 
 	return eSkill::Tornado; 
 }
@@ -49,7 +57,6 @@ eSkill CMonsterHarpy::SecondSkill()
 void CMonsterHarpy::DeleteTornado()
 {
 	SafeDelete(m_pTornado);
-	g_EventManager->Detach(eEvent::DeleteTornado, this);
 }
 
 

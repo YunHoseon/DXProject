@@ -13,7 +13,7 @@ public:
 
 public:
 	void Render() override;
-	void MonsterUpdate() override;
+	void AddForce(CActor* target) override;
 
 	eSkill FirstSkill() override { return eSkill::KeyRevers; }
 	eSkill SecondSkill() override;

@@ -4,6 +4,7 @@
 
 class CCrowdControl;
 class IInteractCenter;
+class CActor;
 
 enum class eSkillCondition
 {
@@ -95,7 +96,7 @@ public:
 	virtual void Render() = 0;
 	virtual void Destroy();
 	virtual void OnEvent(eEvent eEvent, void* _value) override;
-	virtual void MonsterUpdate() {};
+	virtual void AddForce(CActor* target) {};
 	
 	virtual eSkill FirstSkill() { return eSkill::None; };
 	virtual eSkill SecondSkill() { return eSkill::None; };

@@ -76,9 +76,6 @@ void CMonster::Update()
 	{
 		m_pInteractCenter->FinishSkill(m_stSkillUsing.UltimateSkillProperty);
 	}
-
-	MonsterUpdate();
-
 }
 
 void CMonster::Destroy()
