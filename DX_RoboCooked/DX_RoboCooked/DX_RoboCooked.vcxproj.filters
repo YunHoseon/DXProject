@@ -324,6 +324,12 @@
     <ClInclude Include="CUIEndButton.h">
       <Filter>UI\Button</Filter>
     </ClInclude>
+    <ClInclude Include="CUICloseButton.h">
+      <Filter>UI\Button</Filter>
+    </ClInclude>
+    <ClInclude Include="CUIMainButton.h">
+      <Filter>UI\Button</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="stdafx.cpp">
@@ -570,6 +576,12 @@
       <Filter>UI\Button</Filter>
     </ClCompile>
     <ClCompile Include="CUIEndButton.cpp">
+      <Filter>UI\Button</Filter>
+    </ClCompile>
+    <ClCompile Include="CUICloseButton.cpp">
+      <Filter>UI\Button</Filter>
+    </ClCompile>
+    <ClCompile Include="CUIMainButton.cpp">
       <Filter>UI\Button</Filter>
     </ClCompile>
   </ItemGroup>

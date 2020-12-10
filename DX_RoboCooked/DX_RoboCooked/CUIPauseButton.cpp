@@ -4,9 +4,10 @@
 #include "CUIText.h"
 #include "CUITexture.h"
 #include "CUIPauseBoard.h"
-#include "CUIStartButton.h"
 #include "CUIResetButton.h"
 #include "CUIEndButton.h"
+#include "CUIMainButton.h"
+#include "CUICloseButton.h"
 #include "IInteractCenter.h"
 
 
@@ -35,13 +36,16 @@ void CUIPauseButton::Setup()
 	CUI* board = new CUIPauseBoard(D3DXVECTOR2(m_vPosition.x, m_vPosition.y));
 	Add(board);
 
-	CUI* startBtn = new CUIStartButton(D3DXVECTOR2(m_vPosition.x + 400, m_vPosition.y + 50));
-	board->Add(startBtn);
+	CUI* mainBtn = new CUIMainButton(D3DXVECTOR2(m_vPosition.x + 250, m_vPosition.y + 200));
+	board->Add(mainBtn);
 
-	CUI* ResetBtn = new CUIResetButton(D3DXVECTOR2(m_vPosition.x + 400, m_vPosition.y + 180));
+	CUI* closeBtn = new CUICloseButton(D3DXVECTOR2(m_vPosition.x + 550, m_vPosition.y + 200));
+	board->Add(closeBtn);
+
+	CUI* ResetBtn = new CUIResetButton(D3DXVECTOR2(m_vPosition.x + 250, m_vPosition.y + 500));
 	board->Add(ResetBtn);
 
-	CUI* EndBtn = new CUIEndButton(D3DXVECTOR2(m_vPosition.x + 400, m_vPosition.y + 300));
+	CUI* EndBtn = new CUIEndButton(D3DXVECTOR2(m_vPosition.x + 550, m_vPosition.y + 500));
 	board->Add(EndBtn);
 
 

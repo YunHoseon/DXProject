@@ -181,7 +181,7 @@ void CGameScene::Init()
 	m_vecCharacters.push_back(m_pDebugCube);
 
 
-	m_pDebugPauseUI = new CUIPauseButton(D3DXVECTOR2(150, 10), 27, this);
+	m_pDebugPauseUI = new CUIPauseButton(D3DXVECTOR2(465, 10), 27, this);
 
 	CMonster *Medusa = new CMonsterMedusa(this);
 	m_vecMonster.push_back(Medusa);
