@@ -30,8 +30,8 @@
 #include <filesystem>
 #include <fstream>
 
-
 #include "CCactus.h"
+#include "CPharaohCoppin.h"
 #include "CDebugPlayer1.h"
 #include "CDebugPlayer2.h"
 
@@ -167,6 +167,9 @@ void CGameScene::Init()
 	blueprint2->Setup();
 	blueprint2->SetPosition(-3.0f, -0.5f, 0);
 	m_vecBlueprints.push_back(blueprint2);
+
+	CPharaohCoppin *coppin = new CPharaohCoppin(this, D3DXVECTOR3(-6.5f, -0.5f, 1.5f));
+	m_vecObject.push_back(coppin);
 
 	m_pDebugSphere = new CDebugPlayer1(this);
 	if (m_pDebugSphere)
