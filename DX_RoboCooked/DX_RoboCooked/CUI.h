@@ -9,6 +9,12 @@ enum class eUIState
 
 };
 
+enum class eBtnEvent
+{
+	None,
+	PauseExit
+
+};
 class CUI : public CEventListener
 {
 private:
@@ -40,6 +46,7 @@ public:
 	virtual void CheckReleaseIn(POINT pt);
 	virtual void CheckInHover(POINT pt);
 	void InvertActive();
+	virtual void ButtonEvent() {};
 
 	INT GetlistUIchildrenSize() { return m_listUIchildren.size(); }
 
