@@ -149,7 +149,6 @@ void CBlueprint::Setup()
 void CBlueprint::Update()
 {
 	StoreOnBlueprintParts(); // --> 설계도에 부품을 붙인 상황
-	
 }
 
 void CBlueprint::Render()

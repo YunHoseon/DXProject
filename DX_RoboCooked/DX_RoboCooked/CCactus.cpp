@@ -34,5 +34,4 @@ void CCactus::Render()
 
 	_DEBUG_COMMENT if (m_pCollision)
 		_DEBUG_COMMENT	m_pCollision->Render();
-	
 }
