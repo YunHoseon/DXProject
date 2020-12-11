@@ -324,11 +324,8 @@
     <ClInclude Include="CUIEndButton.h">
       <Filter>UI\Button</Filter>
     </ClInclude>
-    <ClInclude Include="CUICloseButton.h">
-      <Filter>UI\Button</Filter>
-    </ClInclude>
-    <ClInclude Include="CUIMainButton.h">
-      <Filter>UI\Button</Filter>
+    <ClInclude Include="PharaohCoppin.h">
+      <Filter>GameScene\Object</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -578,11 +575,8 @@
     <ClCompile Include="CUIEndButton.cpp">
       <Filter>UI\Button</Filter>
     </ClCompile>
-    <ClCompile Include="CUICloseButton.cpp">
-      <Filter>UI\Button</Filter>
-    </ClCompile>
-    <ClCompile Include="CUIMainButton.cpp">
-      <Filter>UI\Button</Filter>
+    <ClCompile Include="PharaohCoppin.cpp">
+      <Filter>GameScene\Object</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
