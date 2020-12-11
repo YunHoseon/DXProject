@@ -3,15 +3,18 @@
 class CMonsterMedusa :
 	public CMonster
 {
+private:
+	D3DXVECTOR3		m_nDestroyPartsPosition;
 public:
 	CMonsterMedusa(IInteractCenter* pInteractCenter);
 	~CMonsterMedusa();
 
 	void Render() override;
+	void UpdateMonster() override;
 
 	eSkill FirstSkill() override { return eSkill::KeyLock; }
 	eSkill SecondSkill() override { return eSkill::SlowMove; }
-	eSkill UltimateSkill() override { return eSkill::DestroyParts; }
+	eSkill UltimateSkill() override;
 
 	FLOAT FirstSkillTime() override { return 3.0f; };
 	FLOAT SecondSkillTime() override { return 5.0f; };

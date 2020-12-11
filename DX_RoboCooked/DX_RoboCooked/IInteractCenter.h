@@ -28,4 +28,6 @@ public:
 	virtual void ElectIndexLot() = 0;
 	virtual bool CheckSpecificArea() = 0;
 	virtual void CheckSandDummyArea(ICollisionArea* collison) = 0;
+	virtual D3DXVECTOR3 GetRandomPartsPosition() = 0;
+	virtual void MedusaUlt(D3DXVECTOR3 pos) = 0;
 };

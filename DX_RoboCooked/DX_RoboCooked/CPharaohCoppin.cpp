@@ -44,17 +44,17 @@ void CPharaohCoppin::Render()
 
 void CPharaohCoppin::Interact(CCharacter * pCharacter)
 {
-	if (pCharacter->GetPlayerState() == ePlayerState::None)
+	/*if (pCharacter->GetPlayerState() == ePlayerState::None)
 	{
-		CParts *parts = MakeParts();
+		CParts *parts = Make();
 		parts->SetGrabPosition(&pCharacter->GetGrabPartsPosition());
 		m_pInteractCenter->AddParts(parts);
 		pCharacter->SetParts(parts);
 		m_isInteractCalled = true;
-	}
+	}*/
 }
 
-CParts* CPharaohCoppin::MakeParts()
+CParts* CPharaohCoppin::Make()
 {
 	CParts *parts = g_pPartsManager->CreateParts(m_sID);
 	return parts;

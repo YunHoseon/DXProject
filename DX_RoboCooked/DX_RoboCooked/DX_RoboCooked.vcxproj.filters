@@ -67,6 +67,9 @@
     <Filter Include="GameScene\Object">
       <UniqueIdentifier>{878916bb-8b8b-4b2d-8a45-6036be2a23f8}</UniqueIdentifier>
     </Filter>
+    <Filter Include="UI\Button\CUITrafficLightBoard">
+      <UniqueIdentifier>{7ac220ae-1aa8-4787-bfbe-c0ac167abf35}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <Text Include="ReadMe.txt" />
@@ -333,6 +336,24 @@
     <ClInclude Include="CUIMainButton.h">
       <Filter>UI\Button</Filter>
     </ClInclude>
+    <ClInclude Include="CUITrafficLightBoard.h">
+      <Filter>UI\Button\CUITrafficLightBoard</Filter>
+    </ClInclude>
+    <ClInclude Include="CUITrafficLightFiveBoard.h">
+      <Filter>UI\Button\CUITrafficLightBoard</Filter>
+    </ClInclude>
+    <ClInclude Include="CUITrafficLightFourBoard.h">
+      <Filter>UI\Button\CUITrafficLightBoard</Filter>
+    </ClInclude>
+    <ClInclude Include="CUITrafficLightOneBoard.h">
+      <Filter>UI\Button\CUITrafficLightBoard</Filter>
+    </ClInclude>
+    <ClInclude Include="CUITrafficLightThreeBoard.h">
+      <Filter>UI\Button\CUITrafficLightBoard</Filter>
+    </ClInclude>
+    <ClInclude Include="CUITrafficLightTwoBoard.h">
+      <Filter>UI\Button\CUITrafficLightBoard</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="stdafx.cpp">
@@ -589,6 +610,24 @@
     </ClCompile>
     <ClCompile Include="CUIMainButton.cpp">
       <Filter>UI\Button</Filter>
+    </ClCompile>
+    <ClCompile Include="CUITrafficLightBoard.cpp">
+      <Filter>UI\Button\CUITrafficLightBoard</Filter>
+    </ClCompile>
+    <ClCompile Include="CUITrafficLightFiveBoard.cpp">
+      <Filter>UI\Button\CUITrafficLightBoard</Filter>
+    </ClCompile>
+    <ClCompile Include="CUITrafficLightFourBoard.cpp">
+      <Filter>UI\Button\CUITrafficLightBoard</Filter>
+    </ClCompile>
+    <ClCompile Include="CUITrafficLightOneBoard.cpp">
+      <Filter>UI\Button\CUITrafficLightBoard</Filter>
+    </ClCompile>
+    <ClCompile Include="CUITrafficLightThreeBoard.cpp">
+      <Filter>UI\Button\CUITrafficLightBoard</Filter>
+    </ClCompile>
+    <ClCompile Include="CUITrafficLightTwoBoard.cpp">
+      <Filter>UI\Button\CUITrafficLightBoard</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

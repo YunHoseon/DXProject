@@ -1,5 +1,7 @@
 #pragma once
 #include "CInteractiveActor.h"
+#include "IPartGenerator.h"
+
 class CPharaohCoppin :
 	public CInteractiveActor, public IPartGenerator
 {
@@ -14,7 +16,7 @@ public:
 	void Render() override;
 	void Interact(CCharacter* pCharacter) override;
 
-	CParts* MakeParts();
+	CParts* Make();
 	void StopMove();
 };
 

@@ -22,7 +22,7 @@ CMonster::CMonster(IInteractCenter* pInteractCenter)
 			, m_nBluePrintChangeCount(0)
 
 {
-	g_EventManager->Attach(eEvent::ChangeCountBluePrint, this);
+	g_EventManager->Attach(eEvent::CompleteBluePrint, this);
 }
 
 CMonster::~CMonster()
@@ -65,17 +65,21 @@ void CMonster::Update()
 	if (CheckDurationTimeFirstSkill())
 	{
 		m_pInteractCenter->FinishSkill(m_stSkillUsing.FirstSkillProperty);
+		m_stSkillUsing.FirstSkillProperty = eSkill::None;
 	}
 
 	if (CheckDurationTimeSecondSkill())
 	{
 		m_pInteractCenter->FinishSkill(m_stSkillUsing.SecondSkillProperty);
+		m_stSkillUsing.SecondSkillProperty = eSkill::None;
 	}
 
 	if (CheckDurationTimeUltimateSkill())
 	{
 		m_pInteractCenter->FinishSkill(m_stSkillUsing.UltimateSkillProperty);
+		m_stSkillUsing.UltimateSkillProperty = eSkill::None;
 	}
+	UpdateMonster();
 }
 
 void CMonster::Destroy()
@@ -111,7 +115,7 @@ void CMonster::OnEvent(eEvent eEvent, void * _value)
 	case eEvent::DeleteTornado:
 		DeleteTornado();
 		break;
-	case eEvent::ChangeCountBluePrint:
+	case eEvent::CompleteBluePrint:
 		AddBluePrintCount();
 		break;
 	}
@@ -177,7 +181,7 @@ bool CMonster::UltimateSkillTriggered()
 	if (m_stSkillUsing.isUltimateBluePrintCheck && m_nBluePrintChangeCount >= 10)
 	{
 		m_stSkillUsing.isUltimateBluePrintCheck = false;
-		g_EventManager->Detach(eEvent::ChangeCountBluePrint, this);
+		g_EventManager->Detach(eEvent::CompleteBluePrint, this);
 		return true;
 	}
 
@@ -315,7 +319,7 @@ bool CMonster::CheckDurationTimeUltimateSkill()
 
 	m_fUltimateSkillElapsedTime += g_pTimeManager->GetElapsedTime();
 
-	if (m_fUltimateSkillElapsedTime >= FirstSkillTime())
+	if (m_fUltimateSkillElapsedTime >= UltimateSkillTime())
 	{
 		m_stSkillUsing.isUltimateSkill = false;
 		m_fUltimateSkillElapsedTime = 0;
