@@ -244,10 +244,15 @@ void CGameScene::Update()
 {
 	if (m_isTimeStop)
 		return;
-	
+
 	if (IsGameClear())
 	{
 		_DEBUG_COMMENT cout << "game clear!" << endl;
+	}
+
+	if (IsGameLose())
+	{
+		_DEBUG_COMMENT cout << "game lose!" << endl;
 	}
 
 	{
@@ -573,9 +578,6 @@ void CGameScene::MonsterSkill(eSkill skill)
 {
 	switch (skill)
 	{
-	case eSkill::DestroyParts:
-		MedusaUlt();
-		break;
 	case eSkill::SandWind:
 		SetWindDirection();
 		break;
@@ -659,6 +661,19 @@ void CGameScene::CheckSandDummyArea(ICollisionArea* collison)
 	}
 }
 
+D3DXVECTOR3 CGameScene::GetRandomPartsPosition()
+{
+	if (m_vecParts.empty())
+	return D3DXVECTOR3(-999,-999,-999);
+
+	CRandomNumberGenerator rand;
+	int index = rand.GenInt(0, m_vecParts.size() - 1);
+
+	D3DXVECTOR3 vec = m_vecParts[index]->GetPosition();
+
+	return vec;
+}
+
 CCrowdControl *CGameScene::ChooseCC(eSkill skill)
 {
 	switch (skill)
@@ -686,17 +701,9 @@ void CGameScene::CC(CCrowdControl *pCC)
 	SafeDelete(pCC);
 }
 
-void CGameScene::MedusaUlt()
+void CGameScene::MedusaUlt(D3DXVECTOR3 pos)
 {
-	if (m_vecParts.empty())
-		return;
-
-	CRandomNumberGenerator rand;
-	int index = rand.GenInt(0, m_vecParts.size() - 1);
-
-	D3DXVECTOR3 vec = m_vecParts[index]->GetPosition();
-
-	CSphereCollision cCollsion(vec, 2.0f);
+	CSphereCollision cCollsion(pos, 2.0f);
 
 	for (int i = 0; i < m_vecParts.size(); i++)
 	{
@@ -707,6 +714,7 @@ void CGameScene::MedusaUlt()
 			--i;
 		}
 	}
+	cCollsion.Render();
 }
 
 void CGameScene::SetWindDirection()

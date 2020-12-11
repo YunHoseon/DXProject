@@ -65,17 +65,21 @@ void CMonster::Update()
 	if (CheckDurationTimeFirstSkill())
 	{
 		m_pInteractCenter->FinishSkill(m_stSkillUsing.FirstSkillProperty);
+		m_stSkillUsing.FirstSkillProperty = eSkill::None;
 	}
 
 	if (CheckDurationTimeSecondSkill())
 	{
 		m_pInteractCenter->FinishSkill(m_stSkillUsing.SecondSkillProperty);
+		m_stSkillUsing.SecondSkillProperty = eSkill::None;
 	}
 
 	if (CheckDurationTimeUltimateSkill())
 	{
 		m_pInteractCenter->FinishSkill(m_stSkillUsing.UltimateSkillProperty);
+		m_stSkillUsing.UltimateSkillProperty = eSkill::None;
 	}
+	UpdateMonster();
 }
 
 void CMonster::Destroy()
@@ -315,7 +319,7 @@ bool CMonster::CheckDurationTimeUltimateSkill()
 
 	m_fUltimateSkillElapsedTime += g_pTimeManager->GetElapsedTime();
 
-	if (m_fUltimateSkillElapsedTime >= FirstSkillTime())
+	if (m_fUltimateSkillElapsedTime >= UltimateSkillTime())
 	{
 		m_stSkillUsing.isUltimateSkill = false;
 		m_fUltimateSkillElapsedTime = 0;
