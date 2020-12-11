@@ -41,9 +41,10 @@ void CMainGame::Setup()
 	
 	CGameScene* scene = new CGameScene;
 
-	thread _t1(&CGameScene::Load, scene, "data/js", "AllTest.json", &CGameScene::Init);
-	_t1.detach();
-		
+	scene->Load("data/js", "AllTest.json", &CGameScene::Init);
+	//thread _t1(&CGameScene::Load, scene, "data/js", "AllTest.json", &CGameScene::Init);
+	//_t1.detach();
+	//	
 	CScene* pBeforeScene = g_SceneManager->SetCurrentScene(scene);
 	if (pBeforeScene)
 	{

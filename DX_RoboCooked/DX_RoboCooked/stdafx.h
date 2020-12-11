@@ -16,7 +16,7 @@
 #include <malloc.h>
 #include <memory.h>
 #include <tchar.h>
-#include <iostream>
+
 #include <cstdlib>
 #include <time.h>
 
@@ -257,20 +257,21 @@ struct ST_PLAYER_INPUTKEY
 
 	#define _DEBUG_COMMENT
 	#define _RELEASE_COMMENT __DOUBLE_SLASH
+	#include <iostream>
 	using std::cout;
 	using std::endl;
 #else
-	#define _DEBUG_COMMENT __DOUBLE_SLASH
-	#define _RELEASE_COMMENT
+	//#define _DEBUG_COMMENT __DOUBLE_SLASH
+	//#define _RELEASE_COMMENT
 
 #ifdef UNICODE
 #pragma comment(linker, "/entry:wWinMainCRTStartup /subsystem:console")
 #else
 #pragma comment(linker, "/entry:WinMainCRTStartup /subsystem:console")
 #endif
-
-//#define _DEBUG_COMMENT
-//#define _RELEASE_COMMENT __DOUBLE_SLASH
+#define _DEBUG_COMMENT
+#define _RELEASE_COMMENT __DOUBLE_SLASH
+#include <iostream>
 using std::cout;
 using std::endl;
 #endif
