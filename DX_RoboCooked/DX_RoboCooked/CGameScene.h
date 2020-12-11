@@ -40,6 +40,7 @@ private:
 	CParts*						m_pDebugParts;
 	CUIButton*					m_pDebugPauseUI;
 
+	static std::mutex			m_cMutex;
 public:
 	CGameScene();
 	virtual ~CGameScene();
@@ -48,7 +49,7 @@ public:
 	virtual void Init();
 	virtual void Render();
 	virtual void Update();
-	void Load(string sFolder, string sFilename);
+	void Load(string sFolder, string sFilename, void (CGameScene::*pCallback)() = nullptr);
 
 	void GetInteractObject(CCharacter* pCharacter) override;
 	void AddParts(CParts* parts) override;
