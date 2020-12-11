@@ -327,6 +327,12 @@
     <ClInclude Include="CPharaohCoppin.h">
       <Filter>GameScene\Object</Filter>
     </ClInclude>
+    <ClInclude Include="CUICloseButton.h">
+      <Filter>UI\Button</Filter>
+    </ClInclude>
+    <ClInclude Include="CUIMainButton.h">
+      <Filter>UI\Button</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="stdafx.cpp">
@@ -577,6 +583,12 @@
     </ClCompile>
     <ClCompile Include="CPharaohCoppin.cpp">
       <Filter>GameScene\Object</Filter>
+    </ClCompile>
+    <ClCompile Include="CUICloseButton.cpp">
+      <Filter>UI\Button</Filter>
+    </ClCompile>
+    <ClCompile Include="CUIMainButton.cpp">
+      <Filter>UI\Button</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
