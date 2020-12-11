@@ -179,8 +179,6 @@ void CGameScene::Init()
 	m_vecCharacters.push_back(m_pDebugSphere);
 	m_vecCharacters.push_back(m_pDebugCube);
 
-	m_pDebugPauseUI = new CUIPauseButton(D3DXVECTOR2(465, 10), 27, this);
-
 	CMonster *Medusa = new CMonsterMedusa(this);
 	m_vecMonster.push_back(Medusa);
 
@@ -197,6 +195,12 @@ void CGameScene::Init()
 	m_vecStaticActor.push_back(new CWater(D3DXVECTOR3(0, -1, -6.5)));
 	m_vecStaticActor.push_back(new CSand(D3DXVECTOR3(0, -1, -7.5)));
 	m_vecStaticActor.push_back(new CCactus(D3DXVECTOR3(-5, 0, 2)));
+
+
+
+
+	m_pDebugPauseUI = new CUIPauseButton(D3DXVECTOR2(465, 10), 27, this);
+
 }
 
 void CGameScene::Render()

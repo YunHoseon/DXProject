@@ -67,6 +67,9 @@
     <Filter Include="GameScene\Object">
       <UniqueIdentifier>{878916bb-8b8b-4b2d-8a45-6036be2a23f8}</UniqueIdentifier>
     </Filter>
+    <Filter Include="UI\Button\CUITrafficLight">
+      <UniqueIdentifier>{7ac220ae-1aa8-4787-bfbe-c0ac167abf35}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <Text Include="ReadMe.txt" />
@@ -333,6 +336,24 @@
     <ClInclude Include="CUIMainButton.h">
       <Filter>UI\Button</Filter>
     </ClInclude>
+    <ClInclude Include="CUITrafficLight.h">
+      <Filter>UI\Button\CUITrafficLight</Filter>
+    </ClInclude>
+    <ClInclude Include="CUITrafficLightOne.h">
+      <Filter>UI\Button\CUITrafficLight</Filter>
+    </ClInclude>
+    <ClInclude Include="CUITrafficLightTwo.h">
+      <Filter>UI\Button\CUITrafficLight</Filter>
+    </ClInclude>
+    <ClInclude Include="CUITrafficLightThree.h">
+      <Filter>UI\Button\CUITrafficLight</Filter>
+    </ClInclude>
+    <ClInclude Include="CUITrafficLightFour.h">
+      <Filter>UI\Button\CUITrafficLight</Filter>
+    </ClInclude>
+    <ClInclude Include="CUITrafficLightFive.h">
+      <Filter>UI\Button\CUITrafficLight</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="stdafx.cpp">
@@ -589,6 +610,24 @@
     </ClCompile>
     <ClCompile Include="CUIMainButton.cpp">
       <Filter>UI\Button</Filter>
+    </ClCompile>
+    <ClCompile Include="CUITrafficLight.cpp">
+      <Filter>UI\Button\CUITrafficLight</Filter>
+    </ClCompile>
+    <ClCompile Include="CUITrafficLightOne.cpp">
+      <Filter>UI\Button\CUITrafficLight</Filter>
+    </ClCompile>
+    <ClCompile Include="CUITrafficLightTwo.cpp">
+      <Filter>UI\Button\CUITrafficLight</Filter>
+    </ClCompile>
+    <ClCompile Include="CUITrafficLightThree.cpp">
+      <Filter>UI\Button\CUITrafficLight</Filter>
+    </ClCompile>
+    <ClCompile Include="CUITrafficLightFour.cpp">
+      <Filter>UI\Button\CUITrafficLight</Filter>
+    </ClCompile>
+    <ClCompile Include="CUITrafficLightFive.cpp">
+      <Filter>UI\Button\CUITrafficLight</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

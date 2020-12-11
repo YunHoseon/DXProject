@@ -193,6 +193,10 @@
     <ClInclude Include="CUIText.h" />
     <ClInclude Include="CUITexture.h" />
     <ClInclude Include="CUITextureManager.h" />
+    <ClInclude Include="CUITrafficLightFive.h" />
+    <ClInclude Include="CUITrafficLightFour.h" />
+    <ClInclude Include="CUITrafficLightOne.h" />
+    <ClInclude Include="CUITrafficLightThree.h" />
     <ClInclude Include="CWall.h" />
     <ClInclude Include="CWater.h" />
     <ClInclude Include="ICollisionArea.h" />
@@ -234,6 +238,8 @@
     <ClInclude Include="CUIPauseBoard.h" />
     <ClInclude Include="CUIStartButton.h" />
     <ClInclude Include="CUIPauseButton.h" />
+    <ClInclude Include="CUITrafficLight.h" />
+    <ClInclude Include="CUITrafficLightTwo.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="CActor.cpp" />
@@ -282,6 +288,10 @@
     <ClCompile Include="CUIText.cpp" />
     <ClCompile Include="CUITexture.cpp" />
     <ClCompile Include="CUITextureManager.cpp" />
+    <ClCompile Include="CUITrafficLightFive.cpp" />
+    <ClCompile Include="CUITrafficLightFour.cpp" />
+    <ClCompile Include="CUITrafficLightOne.cpp" />
+    <ClCompile Include="CUITrafficLightThree.cpp" />
     <ClCompile Include="CWall.cpp" />
     <ClCompile Include="CWater.cpp" />
     <ClCompile Include="ICollisionArea.cpp" />
@@ -326,6 +336,8 @@
     <ClCompile Include="CUIPauseBoard.cpp" />
     <ClCompile Include="CUIStartButton.cpp" />
     <ClCompile Include="CUIPauseButton.cpp" />
+    <ClCompile Include="CUITrafficLight.cpp" />
+    <ClCompile Include="CUITrafficLightTwo.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="DX_RoboCooked.rc" />

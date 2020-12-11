@@ -22,7 +22,7 @@ CMonster::CMonster(IInteractCenter* pInteractCenter)
 			, m_nBluePrintChangeCount(0)
 
 {
-	g_EventManager->Attach(eEvent::ChangeCountBluePrint, this);
+	g_EventManager->Attach(eEvent::CompleteBluePrint, this);
 }
 
 CMonster::~CMonster()
@@ -115,7 +115,7 @@ void CMonster::OnEvent(eEvent eEvent, void * _value)
 	case eEvent::DeleteTornado:
 		DeleteTornado();
 		break;
-	case eEvent::ChangeCountBluePrint:
+	case eEvent::CompleteBluePrint:
 		AddBluePrintCount();
 		break;
 	}
@@ -181,7 +181,7 @@ bool CMonster::UltimateSkillTriggered()
 	if (m_stSkillUsing.isUltimateBluePrintCheck && m_nBluePrintChangeCount >= 10)
 	{
 		m_stSkillUsing.isUltimateBluePrintCheck = false;
-		g_EventManager->Detach(eEvent::ChangeCountBluePrint, this);
+		g_EventManager->Detach(eEvent::CompleteBluePrint, this);
 		return true;
 	}
 
