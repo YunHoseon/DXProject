@@ -3,7 +3,7 @@
 #include "CUITexture.h"
 
 
-CUITrafficLightFive::CUITrafficLightFive()
+CUITrafficLightFiveBoard::CUITrafficLightFiveBoard()
 {
 	Setup();
 	SetPosition();
@@ -12,11 +12,11 @@ CUITrafficLightFive::CUITrafficLightFive()
 }
 
 
-CUITrafficLightFive::~CUITrafficLightFive()
+CUITrafficLightFiveBoard::~CUITrafficLightFiveBoard()
 {
 }
 
-void CUITrafficLightFive::Setup()
+void CUITrafficLightFiveBoard::Setup()
 {
 	m_pTexture = new CUITexture("data/UI/clearChecker_blank_5.png", NULL, NULL, m_vPosition);
 

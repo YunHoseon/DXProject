@@ -1,11 +1,11 @@
 #pragma once
 #include "CUITrafficLightBoard.h"
-class CUITrafficLightTwo :
+class CUITrafficLightTwoBoard :
 	public CUITrafficLightBoard
 {
 public:
-	CUITrafficLightTwo();
-	~CUITrafficLightTwo();
+	CUITrafficLightTwoBoard();
+	~CUITrafficLightTwoBoard();
 	void Setup() override;
 
 };

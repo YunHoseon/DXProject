@@ -240,6 +240,7 @@
     <ClInclude Include="CUIPauseButton.h" />
     <ClInclude Include="CUITrafficLightBoard.h" />
     <ClInclude Include="CUITrafficLightTwoBoard.h" />
+    <ClInclude Include="CUITrafficLight.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="CActor.cpp" />
@@ -338,6 +339,7 @@
     <ClCompile Include="CUIPauseButton.cpp" />
     <ClCompile Include="CUITrafficLightBoard.cpp" />
     <ClCompile Include="CUITrafficLightTwoBoard.cpp" />
+    <ClCompile Include="CUITrafficLight.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="DX_RoboCooked.rc" />

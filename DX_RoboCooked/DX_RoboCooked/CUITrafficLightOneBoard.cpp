@@ -3,7 +3,7 @@
 #include "CUITexture.h"
 
 
-CUITrafficLightOne::CUITrafficLightOne()
+CUITrafficLightOneBoard::CUITrafficLightOneBoard()
 {
 	Setup();
 	SetPosition();
@@ -11,11 +11,11 @@ CUITrafficLightOne::CUITrafficLightOne()
 }
 
 
-CUITrafficLightOne::~CUITrafficLightOne()
+CUITrafficLightOneBoard::~CUITrafficLightOneBoard()
 {
 }
 
-void CUITrafficLightOne::Setup()
+void CUITrafficLightOneBoard::Setup()
 {
 	m_pTexture = new CUITexture("data/UI/clearChecker_blank_1.png", NULL, NULL, m_vPosition);
 

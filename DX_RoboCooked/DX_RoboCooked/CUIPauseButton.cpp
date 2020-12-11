@@ -13,8 +13,8 @@
 
 
 CUIPauseButton::CUIPauseButton(D3DXVECTOR2 vPos, WPARAM wParam, IInteractCenter* pInteractCenter)
+			: m_pInteractCenter(pInteractCenter)
 {
-	m_pInteractCenter = pInteractCenter;
 	m_vPosition = vPos;
 	m_wActiveButton = wParam;
 	Setup();
