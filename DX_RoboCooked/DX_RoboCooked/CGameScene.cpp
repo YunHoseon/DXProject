@@ -371,6 +371,19 @@ void CGameScene::Load(string sFolder, string sFilename, void (CGameScene::* pCal
 			}
 		}
 		{
+			json jSandpile = j["Sandpile"];
+			for (auto&& p : jSandpile)
+			{
+				D3DXVECTOR3 pos(p["Position"][0], p["Position"][1], p["Position"][2]);
+				float rotate = p["Rotate"];
+				D3DXVECTOR3 scale(p["Scale"][0], p["Scale"][1], p["Scale"][2]);
+				CSandpile* sandpile = new CSandpile(this,pos);
+				sandpile->SetRotationY(rotate);
+				sandpile->SetScale(scale);
+				vecStatic.push_back(sandpile);
+			}
+		}
+		{
 			//outlet - vending
 			json jOutlet = j["Outlet"];
 			vector<COutlet*> vecOutlet;

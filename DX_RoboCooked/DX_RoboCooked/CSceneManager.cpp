@@ -69,6 +69,18 @@ CScene* CSceneManager::GetCurrentScene()
 	return m_pCurrentScene;
 }
 
+void CSceneManager::Update()
+{
+	if (m_pCurrentScene)
+		m_pCurrentScene->Update();
+}
+
+void CSceneManager::Render()
+{
+	if (m_pCurrentScene)
+		m_pCurrentScene->Render();
+}
+
 void CSceneManager::Destroy()
 {
 	SafeDelete(m_pCurrentScene);

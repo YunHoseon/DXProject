@@ -47,7 +47,7 @@ void CMainGame::Setup()
 	CScene* pBeforeScene = g_SceneManager->SetCurrentScene(scene);
 	if (pBeforeScene)
 	{
-		thread _t2([&](void) { SafeDelete(pBeforeScene); });
+		thread _t2([&](CScene* p) { SafeDelete(p); }, pBeforeScene);
 		_t2.detach();
 	}
 }
@@ -62,7 +62,7 @@ void CMainGame::Update()
 	if (m_pCamera)
 		m_pCamera->Update();
 
-	g_SceneManager->GetCurrentScene()->Update();
+	g_SceneManager->Update();
 }
 
 void CMainGame::Render()
@@ -80,7 +80,7 @@ void CMainGame::Render()
 
 	//if (m_pScene)
 	//	m_pScene->Render();
-	g_SceneManager->GetCurrentScene()->Render();
+	g_SceneManager->Render();
 
 	/*if (m_pDebugParts)
 		m_pDebugParts->Render();

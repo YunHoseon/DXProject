@@ -18,6 +18,8 @@ public:
 	//void EraseScene(std::string SceneName);
 	CScene* SetCurrentScene(CScene* Scene);
 	CScene* GetCurrentScene();
+	void Update();
+	void Render();
 	
 	void Destroy();
 private:
