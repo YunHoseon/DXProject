@@ -1,10 +1,10 @@
 #include "stdafx.h"
-#include "CPharaohCoppin.h"
+#include "CPharaohCoffin.h"
 #include "ICollisionArea.h"
 #include "CCharacter.h"
 #include "CGameScene.h"
 
-CPharaohCoppin::CPharaohCoppin(IInteractCenter* pInteractCenter, D3DXVECTOR3 vPos)
+CPharaohCoffin::CPharaohCoffin(IInteractCenter* pInteractCenter, D3DXVECTOR3 vPos)
 	: m_pSMesh(nullptr)
 	,m_isInteractCalled(false)
 	, m_fPassedTime(0)
@@ -24,15 +24,15 @@ CPharaohCoppin::CPharaohCoppin(IInteractCenter* pInteractCenter, D3DXVECTOR3 vPo
 }
 
 
-CPharaohCoppin::~CPharaohCoppin()
+CPharaohCoffin::~CPharaohCoffin()
 {
 }
 
-void CPharaohCoppin::Update()
+void CPharaohCoffin::Update()
 {
 }
 
-void CPharaohCoppin::Render()
+void CPharaohCoffin::Render()
 {
 	g_pD3DDevice->SetRenderState(D3DRS_LIGHTING, true);
 	g_pD3DDevice->SetTransform(D3DTS_WORLD, &m_matWorld);
@@ -42,7 +42,7 @@ void CPharaohCoppin::Render()
 		_DEBUG_COMMENT	m_pCollision->Render();
 }
 
-void CPharaohCoppin::Interact(CCharacter * pCharacter)
+void CPharaohCoffin::Interact(CCharacter * pCharacter)
 {
 	/*if (pCharacter->GetPlayerState() == ePlayerState::None)
 	{
@@ -54,13 +54,13 @@ void CPharaohCoppin::Interact(CCharacter * pCharacter)
 	}*/
 }
 
-CParts* CPharaohCoppin::Make()
+CParts* CPharaohCoffin::Make()
 {
 	CParts *parts = g_pPartsManager->CreateParts(m_sID);
 	return parts;
 }
 
-void CPharaohCoppin::StopMove()
+void CPharaohCoffin::StopMove()
 {
 
 }

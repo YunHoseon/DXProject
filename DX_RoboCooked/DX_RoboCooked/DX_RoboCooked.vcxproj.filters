@@ -327,9 +327,6 @@
     <ClInclude Include="CUIEndButton.h">
       <Filter>UI\Button</Filter>
     </ClInclude>
-    <ClInclude Include="CPharaohCoppin.h">
-      <Filter>GameScene\Object</Filter>
-    </ClInclude>
     <ClInclude Include="CUICloseButton.h">
       <Filter>UI\Button</Filter>
     </ClInclude>
@@ -356,6 +353,9 @@
     </ClInclude>
     <ClInclude Include="CUITrafficLight.h">
       <Filter>UI\Button</Filter>
+    </ClInclude>
+    <ClInclude Include="CPharaohCoffin.h">
+      <Filter>GameScene\Object</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -605,9 +605,6 @@
     <ClCompile Include="CUIEndButton.cpp">
       <Filter>UI\Button</Filter>
     </ClCompile>
-    <ClCompile Include="CPharaohCoppin.cpp">
-      <Filter>GameScene\Object</Filter>
-    </ClCompile>
     <ClCompile Include="CUICloseButton.cpp">
       <Filter>UI\Button</Filter>
     </ClCompile>
@@ -634,6 +631,9 @@
     </ClCompile>
     <ClCompile Include="CUITrafficLight.cpp">
       <Filter>UI\Button</Filter>
+    </ClCompile>
+    <ClCompile Include="CPharaohCoffin.cpp">
+      <Filter>GameScene\Object</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

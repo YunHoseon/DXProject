@@ -18,7 +18,7 @@
 #include "CUIButton.h"
 #include "CBlueprint.h"
 #include "CMonster.h"
-#include "CPharaohCoppin.h"
+#include "CPharaohCoffin.h"
 #include "CTile.h"
 #include "CCrowdControl.h"
 
@@ -82,29 +82,29 @@ CGameScene::~CGameScene()
 
 void CGameScene::Init()
 {
-	m_cMutex.lock();
-
-	m_fGameTime = 300.0f;
-
 	CWall *wall = new CWall;
 	wall->Setup();
-	m_vecStaticActor.push_back(wall);
-
 	CMonster *Medusa = new CMonsterMedusa(this);
-	m_vecMonster.push_back(Medusa);
-
 	CMonster *Harpy = new CMonsterHarpy(this);
-	m_vecMonster.push_back(Harpy);
 	Harpy->AddObjectPosition(D3DXVECTOR3(0, 0, 0));
 	Harpy->AddObjectPosition(D3DXVECTOR3(3, 0, 0));
 	Harpy->AddObjectPosition(D3DXVECTOR3(0, 0, 3));
 	Harpy->AddObjectPosition(D3DXVECTOR3(-3, 0, 0));
 	Harpy->AddObjectPosition(D3DXVECTOR3(0, 0, -3));
 
-	//m_pDebugPauseUI = new CUIPauseButton(D3DXVECTOR2(465, 10), 27, this);
+	CUIButton* pPauseButton = new CUIPauseButton(D3DXVECTOR2(465, 10), 27, this);
+	
+	//CPharaohCoffin* coffin = new CPharaohCoffin(this, D3DXVECTOR3(0,0,0));
 
-	/*CPharaohCoppin* coppin = new CPharaohCoppin(this, D3DXVECTOR3(0,0,0));
-	m_vecObject.push_back(coppin);*/
+	m_cMutex.lock();
+
+	m_fGameTime = 300.0f;
+	m_vecStaticActor.push_back(wall);
+	m_vecMonster.push_back(Medusa);
+	m_vecMonster.push_back(Harpy);
+
+	m_pDebugPauseUI = pPauseButton;
+	//m_vecObject.push_back(coffin);
 
 	m_cMutex.unlock();
 }
@@ -323,275 +323,282 @@ void CGameScene::Update()
 	}
 }
 
-void CGameScene::Load(string sFolder, string sFilename, void (CGameScene::*pCallback)(void))
+void CGameScene::Load(string sFolder, string sFilename, void (CGameScene::* pCallback)(void))
 {
+	m_cMutex.lock();
+	m_isTimeStop = true;
+	m_cMutex.unlock();
+
 	string sFullname = sFolder + "/" + sFilename;
 	std::ifstream is(sFullname);
 	assert(is.is_open());
 	json j;
 	is >> j;
 	is.close();
-	vector<CBlueprint *> vecBP;
-	vector<CActor *> vecStatic;
-	vector<CInteractiveActor *> vecInter;
-	vector<CParts *> vecParts;
-	vector<CCharacter *> vecChara;
-	vector<CTile *> vecTile;
+	vector<CBlueprint*> vecBP;
+	vector<CActor*> vecStatic;
+	vector<CInteractiveActor*> vecInter;
+	vector<CParts*> vecParts;
+	vector<CCharacter*> vecChara;
+	vector<CTile*> vecTile;
+	{
+		{
+			// blueprint
+			json jBP = j["Blueprint"];
+			for (auto&& p : jBP)
+			{
+				string id = p["PartsID"];
+				D3DXVECTOR3 pos(p["Position"][0], p["Position"][1], p["Position"][2]);
+				float rotate = p["Rotate"];
+				D3DXVECTOR3 scale(p["Scale"][0], p["Scale"][1], p["Scale"][2]);
+				float partsangle = p["PartsAngle"];
+				CBlueprint* blueprint = new CBlueprint(id, m_vecParts, pos, scale, rotate, partsangle);
+				blueprint->Setup();
+				vecBP.push_back(blueprint);
+			}
+		}
+		{
+			json jCactus = j["Cactus"];
+			for (auto&& p : jCactus)
+			{
+				D3DXVECTOR3 pos(p["Position"][0], p["Position"][1], p["Position"][2]);
+				float rotate = p["Rotate"];
+				D3DXVECTOR3 scale(p["Scale"][0], p["Scale"][1], p["Scale"][2]);
+				CCactus* cactus = new CCactus(pos);
+				cactus->SetRotationY(rotate);
+				cactus->SetScale(scale);
+				vecStatic.push_back(cactus);
+			}
+		}
+		{
+			//outlet - vending
+			json jOutlet = j["Outlet"];
+			vector<COutlet*> vecOutlet;
+			for (auto&& p : jOutlet)
+			{
+				D3DXVECTOR3 pos(p["Position"][0], p["Position"][1], p["Position"][2]);
+				float rotate = p["Rotate"];
+				D3DXVECTOR3 scale(p["Scale"][0], p["Scale"][1], p["Scale"][2]);
+				COutlet* pOutlet = new COutlet(this);
+				pOutlet->SetScale(scale);
+				pOutlet->Setup(rotate, pos);
+				vecInter.push_back(pOutlet);
+				vecOutlet.push_back(pOutlet);
+			}
+			json jvending = j["PartVending"];
+			for (auto&& p : jvending)
+			{
+				string id = p["PartsId"];
+				D3DXVECTOR3 pos(p["Position"][0], p["Position"][1], p["Position"][2]);
+				float rotate = p["Rotate"];
+				D3DXVECTOR3 scale(p["Scale"][0], p["Scale"][1], p["Scale"][2]);
+				CPartVending* vending = new CPartVending(vecOutlet[p["OutletIdx"]], this, id);
+				vending->Setup(rotate, pos);
+				vending->SetScale(scale);
+				vecInter.push_back(vending);
+			}
+		}
+		{
+			// manual - switch
+			json jManual = j["PartManualCombinator"];
+			vector<CPartManualCombinator*> vecManual;
+			for (auto&& p : jManual)
+			{
+				D3DXVECTOR3 pos(p["Position"][0], p["Position"][1], p["Position"][2]);
+				float rotate = p["Rotate"];
+				D3DXVECTOR3 scale(p["Scale"][0], p["Scale"][1], p["Scale"][2]);
+				CPartManualCombinator* manual = new CPartManualCombinator(this, (eCombinatorPartsLevel)p["eCombinatorPartsLevel"], rotate, pos);
+				manual->SetScale(scale);
+				vecInter.push_back(manual);
+				vecManual.push_back(manual);
+			}
+			json jButton = j["CombinatorButton"];
+			for (auto&& p : jButton)
+			{
+				D3DXVECTOR3 pos(p["Position"][0], p["Position"][1], p["Position"][2]);
+				float rotate = p["Rotate"];
+				D3DXVECTOR3 scale(p["Scale"][0], p["Scale"][1], p["Scale"][2]);
+				CCombinatorButton* button = new CCombinatorButton(vecManual[p["PartManualCombinatorIdx"]]);
+				button->Setup(rotate, pos);
+				button->SetScale(scale);
+				vecInter.push_back(button);
+			}
+		}
+		{
+			// auto
+			json jAuto = j["PartAutoCombinator"];
+			for (auto&& p : jAuto)
+			{
+				D3DXVECTOR3 pos(p["Position"][0], p["Position"][1], p["Position"][2]);
+				float rotate = p["Rotate"];
+				D3DXVECTOR3 scale(p["Scale"][0], p["Scale"][1], p["Scale"][2]);
+				CPartAutoCombinator* autoCombinator = new CPartAutoCombinator(this, (eCombinatorPartsLevel)p["eCombinatorPartsLevel"], rotate, pos);
+				autoCombinator->SetScale(scale);
+				vecInter.push_back(autoCombinator);
+			}
+		}
+		{
+			// storage
+			json jStorage = j["PartStorage"];
+			for (auto&& p : jStorage)
+			{
+				string id = p["PartsId"];
+				D3DXVECTOR3 pos(p["Position"][0], p["Position"][1], p["Position"][2]);
+				float rotate = p["Rotate"];
+				D3DXVECTOR3 scale(p["Scale"][0], p["Scale"][1], p["Scale"][2]);
+				CPartStorage* storage = new CPartStorage(this);
+				storage->Setup(rotate, pos, id);
+				storage->SetScale(scale);
+				vecInter.push_back(storage);
+			}
+		}
+		{
+			// parts
+			json jParts = j["Parts"];
+			for (auto&& p : jParts)
+			{
+				string id = p["PartsId"];
+				D3DXVECTOR3 pos(p["Position"][0], p["Position"][1], p["Position"][2]);
+				float rotate = p["Rotate"];
+				D3DXVECTOR3 scale(p["Scale"][0], p["Scale"][1], p["Scale"][2]);
+				CParts* parts = g_pPartsManager->CreateParts(id);
+				parts->SetPosition(pos);
+				parts->SetRotationY(rotate);
+				parts->SetScale(scale);
+				vecParts.push_back(parts);
+			}
+		}
+		{
+			// tile
+			{
+				json jSand = j["Sand"];
+				for (auto&& p : jSand)
+				{
+					D3DXVECTOR3 pos(p["Position"][0], p["Position"][1], p["Position"][2]);
+					float rotate = p["Rotate"];
+					D3DXVECTOR3 scale(p["Scale"][0], p["Scale"][1], p["Scale"][2]);
+					CSand* Tile = new CSand(pos);
+					Tile->SetRotationY(rotate);
+					Tile->SetScale(scale);
+					vecTile.push_back(Tile);
+				}
+			}
+			{
+				json jSoil = j["Soil"];
+				for (auto&& p : jSoil)
+				{
+					D3DXVECTOR3 pos(p["Position"][0], p["Position"][1], p["Position"][2]);
+					float rotate = p["Rotate"];
+					D3DXVECTOR3 scale(p["Scale"][0], p["Scale"][1], p["Scale"][2]);
+					CSoil* Tile = new CSoil(pos);
+					Tile->SetRotationY(rotate);
+					Tile->SetScale(scale);
+					vecTile.push_back(Tile);
+				}
+			}
+			{
+				json jStair = j["Stair"];
+				for (auto&& p : jStair)
+				{
+					D3DXVECTOR3 pos(p["Position"][0], p["Position"][1], p["Position"][2]);
+					float rotate = p["Rotate"];
+					D3DXVECTOR3 scale(p["Scale"][0], p["Scale"][1], p["Scale"][2]);
+					CStair* Tile = new CStair(pos);
+					Tile->SetRotationY(rotate);
+					Tile->SetScale(scale);
+					vecTile.push_back(Tile);
+				}
+			}
+			{
+				json jThickSand = j["ThickSand"];
+				for (auto&& p : jThickSand)
+				{
+					D3DXVECTOR3 pos(p["Position"][0], p["Position"][1], p["Position"][2]);
+					float rotate = p["Rotate"];
+					D3DXVECTOR3 scale(p["Scale"][0], p["Scale"][1], p["Scale"][2]);
+					CThickSand* Tile = new CThickSand(pos);
+					Tile->SetRotationY(rotate);
+					Tile->SetScale(scale);
+					vecTile.push_back(Tile);
+				}
+			}
+			{
+				json jWater = j["Water"];
+				for (auto&& p : jWater)
+				{
+					D3DXVECTOR3 pos(p["Position"][0], p["Position"][1], p["Position"][2]);
+					float rotate = p["Rotate"];
+					D3DXVECTOR3 scale(p["Scale"][0], p["Scale"][1], p["Scale"][2]);
+					CWater* Tile = new CWater(pos);
+					Tile->SetRotationY(rotate);
+					Tile->SetScale(scale);
+					vecTile.push_back(Tile);
+				}
+			}
+			{
+				json jFlowSand = j["FlowSand"];
+				for (auto&& p : jFlowSand)
+				{
+					D3DXVECTOR3 pos(p["Position"][0], p["Position"][1], p["Position"][2]);
+					float rotate = p["Rotate"];
+					D3DXVECTOR3 scale(p["Scale"][0], p["Scale"][1], p["Scale"][2]);
+					CFlowSand* Tile = new CFlowSand(pos);
+					Tile->SetRotationY(rotate);
+					Tile->SetScale(scale);
+					vecTile.push_back(Tile);
+				}
+			}
+		}
+		{
+			// player1
+			if (!j["Player1"].empty())
+			{
+				auto&& p = j["Player1"][0];
+				CDebugPlayer1* player = new CDebugPlayer1(this);
+				D3DXVECTOR3 pos(p["Position"][0], p["Position"][1], p["Position"][2]);
+				float rotate = p["Rotate"];
+				D3DXVECTOR3 scale(p["Scale"][0], p["Scale"][1], p["Scale"][2]);
+				player->SetDefaultPosition(pos);
+				player->SetPosition(pos);
+				player->SetRotationY(rotate);
+				player->SetScale(scale);
+				vecChara.push_back(player);
+			}
+		}
+		{
+			// player2
+			if (!j["Player2"].empty())
+			{
+				auto&& p = j["Player2"][0];
+				CDebugPlayer2* player = new CDebugPlayer2(this);
+				D3DXVECTOR3 pos(p["Position"][0], p["Position"][1], p["Position"][2]);
+				float rotate = p["Rotate"];
+				D3DXVECTOR3 scale(p["Scale"][0], p["Scale"][1], p["Scale"][2]);
+				player->SetDefaultPosition(pos);
+				player->SetPosition(pos);
+				player->SetRotationY(rotate);
+				player->SetScale(scale);
+				vecChara.push_back(player);
+			}
+		}
+	}
+	// 뮤텍스락
+	this->m_cMutex.lock();
+	this->m_vecBlueprints.insert(m_vecBlueprints.end(), vecBP.begin(), vecBP.end());
+	this->m_vecStaticActor.insert(m_vecStaticActor.end(), vecStatic.begin(), vecStatic.end());
+	this->m_vecObject.insert(m_vecObject.end(), vecInter.begin(), vecInter.end());
+	this->m_vecParts.insert(m_vecParts.end(), vecParts.begin(), vecParts.end());
+	this->m_vecCharacters.insert(m_vecCharacters.end(), vecChara.begin(), vecChara.end());
+	this->m_vecTile.insert(m_vecTile.end(), vecTile.begin(), vecTile.end());
+	this->m_cMutex.unlock();
 
-	{
-		// blueprint
-		json jBP = j["Blueprint"];
-		for (auto &&p : jBP)
-		{
-			string id = p["PartsID"];
-			D3DXVECTOR3 pos(p["Position"][0], p["Position"][1], p["Position"][2]);
-			float rotate = p["Rotate"];
-			D3DXVECTOR3 scale(p["Scale"][0], p["Scale"][1], p["Scale"][2]);
-			float partsangle = p["PartsAngle"];
-			CBlueprint *blueprint = new CBlueprint(id, m_vecParts, pos, scale, rotate, partsangle);
-			blueprint->Setup();
-			vecBP.push_back(blueprint);
-		}
-	}
-	{
-		json jCactus = j["Cactus"];
-		for (auto &&p : jCactus)
-		{
-			D3DXVECTOR3 pos(p["Position"][0], p["Position"][1], p["Position"][2]);
-			float rotate = p["Rotate"];
-			D3DXVECTOR3 scale(p["Scale"][0], p["Scale"][1], p["Scale"][2]);
-			CCactus *cactus = new CCactus(pos);
-			cactus->SetRotationY(rotate);
-			cactus->SetScale(scale);
-			vecStatic.push_back(cactus);
-		}
-	}
-	{
-		//outlet - vending
-		json jOutlet = j["Outlet"];
-		vector<COutlet *> vecOutlet;
-		for (auto &&p : jOutlet)
-		{
-			D3DXVECTOR3 pos(p["Position"][0], p["Position"][1], p["Position"][2]);
-			float rotate = p["Rotate"];
-			D3DXVECTOR3 scale(p["Scale"][0], p["Scale"][1], p["Scale"][2]);
-			COutlet *pOutlet = new COutlet(this);
-			pOutlet->SetScale(scale);
-			pOutlet->Setup(rotate, pos);
-			vecInter.push_back(pOutlet);
-			vecOutlet.push_back(pOutlet);
-		}
-		json jvending = j["PartVending"];
-		for (auto &&p : jvending)
-		{
-			string id = p["PartsId"];
-			D3DXVECTOR3 pos(p["Position"][0], p["Position"][1], p["Position"][2]);
-			float rotate = p["Rotate"];
-			D3DXVECTOR3 scale(p["Scale"][0], p["Scale"][1], p["Scale"][2]);
-			CPartVending *vending = new CPartVending(vecOutlet[p["OutletIdx"]], this, id);
-			vending->Setup(rotate, pos);
-			vending->SetScale(scale);
-			vecInter.push_back(vending);
-		}
-	}
-	{
-		// manual - switch
-		json jManual = j["PartManualCombinator"];
-		vector<CPartManualCombinator *> vecManual;
-		for (auto &&p : jManual)
-		{
-			D3DXVECTOR3 pos(p["Position"][0], p["Position"][1], p["Position"][2]);
-			float rotate = p["Rotate"];
-			D3DXVECTOR3 scale(p["Scale"][0], p["Scale"][1], p["Scale"][2]);
-			CPartManualCombinator *manual = new CPartManualCombinator(this, (eCombinatorPartsLevel)p["eCombinatorPartsLevel"], rotate, pos);
-			manual->SetScale(scale);
-			vecInter.push_back(manual);
-			vecManual.push_back(manual);
-		}
-		json jButton = j["CombinatorButton"];
-		for (auto &&p : jButton)
-		{
-			D3DXVECTOR3 pos(p["Position"][0], p["Position"][1], p["Position"][2]);
-			float rotate = p["Rotate"];
-			D3DXVECTOR3 scale(p["Scale"][0], p["Scale"][1], p["Scale"][2]);
-			CCombinatorButton *button = new CCombinatorButton(vecManual[p["PartManualCombinatorIdx"]]);
-			button->Setup(rotate, pos);
-			button->SetScale(scale);
-			vecInter.push_back(button);
-		}
-	}
-	{
-		// auto
-		json jAuto = j["PartAutoCombinator"];
-		for (auto &&p : jAuto)
-		{
-			D3DXVECTOR3 pos(p["Position"][0], p["Position"][1], p["Position"][2]);
-			float rotate = p["Rotate"];
-			D3DXVECTOR3 scale(p["Scale"][0], p["Scale"][1], p["Scale"][2]);
-			CPartAutoCombinator *autoCombinator = new CPartAutoCombinator(this, (eCombinatorPartsLevel)p["eCombinatorPartsLevel"], rotate, pos);
-			autoCombinator->SetScale(scale);
-			vecInter.push_back(autoCombinator);
-		}
-	}
-	{
-		// storage
-		json jStorage = j["PartStorage"];
-		for (auto &&p : jStorage)
-		{
-			string id = p["PartsId"];
-			D3DXVECTOR3 pos(p["Position"][0], p["Position"][1], p["Position"][2]);
-			float rotate = p["Rotate"];
-			D3DXVECTOR3 scale(p["Scale"][0], p["Scale"][1], p["Scale"][2]);
-			CPartStorage *storage = new CPartStorage(this);
-			storage->Setup(rotate, pos, id);
-			storage->SetScale(scale);
-			vecInter.push_back(storage);
-		}
-	}
-	{
-		// parts
-		json jParts = j["Parts"];
-		for (auto &&p : jParts)
-		{
-			string id = p["PartsId"];
-			D3DXVECTOR3 pos(p["Position"][0], p["Position"][1], p["Position"][2]);
-			float rotate = p["Rotate"];
-			D3DXVECTOR3 scale(p["Scale"][0], p["Scale"][1], p["Scale"][2]);
-			CParts *parts = g_pPartsManager->CreateParts(id);
-			parts->SetPosition(pos);
-			parts->SetRotationY(rotate);
-			parts->SetScale(scale);
-			vecParts.push_back(parts);
-		}
-	}
-	{
-		// tile
-		{
-			json jSand = j["Sand"];
-	for (auto &&p : jSand)
-	{
-		D3DXVECTOR3 pos(p["Position"][0], p["Position"][1], p["Position"][2]);
-		float rotate = p["Rotate"];
-		D3DXVECTOR3 scale(p["Scale"][0], p["Scale"][1], p["Scale"][2]);
-		CSand *Tile = new CSand(pos);
-		Tile->SetRotationY(rotate);
-		Tile->SetScale(scale);
-		vecTile.push_back(Tile);
-	}
-}
-{
-	json jSoil = j["Soil"];
-	for (auto &&p : jSoil)
-	{
-		D3DXVECTOR3 pos(p["Position"][0], p["Position"][1], p["Position"][2]);
-		float rotate = p["Rotate"];
-		D3DXVECTOR3 scale(p["Scale"][0], p["Scale"][1], p["Scale"][2]);
-		CSoil *Tile = new CSoil(pos);
-		Tile->SetRotationY(rotate);
-		Tile->SetScale(scale);
-		vecTile.push_back(Tile);
-	}
-}
-{
-	json jStair = j["Stair"];
-	for (auto &&p : jStair)
-	{
-		D3DXVECTOR3 pos(p["Position"][0], p["Position"][1], p["Position"][2]);
-		float rotate = p["Rotate"];
-		D3DXVECTOR3 scale(p["Scale"][0], p["Scale"][1], p["Scale"][2]);
-		CStair *Tile = new CStair(pos);
-		Tile->SetRotationY(rotate);
-		Tile->SetScale(scale);
-		vecTile.push_back(Tile);
-	}
-}
-{
-	json jThickSand = j["ThickSand"];
-	for (auto &&p : jThickSand)
-	{
-		D3DXVECTOR3 pos(p["Position"][0], p["Position"][1], p["Position"][2]);
-		float rotate = p["Rotate"];
-		D3DXVECTOR3 scale(p["Scale"][0], p["Scale"][1], p["Scale"][2]);
-		CThickSand *Tile = new CThickSand(pos);
-		Tile->SetRotationY(rotate);
-		Tile->SetScale(scale);
-		vecTile.push_back(Tile);
-	}
-}
-{
-	json jWater = j["Water"];
-	for (auto &&p : jWater)
-	{
-		D3DXVECTOR3 pos(p["Position"][0], p["Position"][1], p["Position"][2]);
-		float rotate = p["Rotate"];
-		D3DXVECTOR3 scale(p["Scale"][0], p["Scale"][1], p["Scale"][2]);
-		CWater *Tile = new CWater(pos);
-		Tile->SetRotationY(rotate);
-		Tile->SetScale(scale);
-		vecTile.push_back(Tile);
-	}
-}
-{
-	json jFlowSand = j["FlowSand"];
-	for (auto &&p : jFlowSand)
-	{
-		D3DXVECTOR3 pos(p["Position"][0], p["Position"][1], p["Position"][2]);
-		float rotate = p["Rotate"];
-		D3DXVECTOR3 scale(p["Scale"][0], p["Scale"][1], p["Scale"][2]);
-		CFlowSand *Tile = new CFlowSand(pos);
-		Tile->SetRotationY(rotate);
-		Tile->SetScale(scale);
-		vecTile.push_back(Tile);
-	}
-}
-}
-{
-	// player1
-	if (!j["Player1"].empty())
-	{
-		auto &&p = j["Player1"][0];
-		CDebugPlayer1 *player = new CDebugPlayer1(this);
-		D3DXVECTOR3 pos(p["Position"][0], p["Position"][1], p["Position"][2]);
-		float rotate = p["Rotate"];
-		D3DXVECTOR3 scale(p["Scale"][0], p["Scale"][1], p["Scale"][2]);
-		player->SetDefaultPosition(pos);
-		player->SetPosition(pos);
-		player->SetRotationY(rotate);
-		player->SetScale(scale);
-		vecChara.push_back(player);
-	}
-}
-{
-	// player2
-	if (!j["Player2"].empty())
-	{
-		auto &&p = j["Player2"][0];
-		CDebugPlayer2 *player = new CDebugPlayer2(this);
-		D3DXVECTOR3 pos(p["Position"][0], p["Position"][1], p["Position"][2]);
-		float rotate = p["Rotate"];
-		D3DXVECTOR3 scale(p["Scale"][0], p["Scale"][1], p["Scale"][2]);
-		player->SetDefaultPosition(pos);
-		player->SetPosition(pos);
-		player->SetRotationY(rotate);
-		player->SetScale(scale);
-		vecChara.push_back(player);
-	}
-}
+	if (pCallback)
+		(this->*pCallback)();
 
-// 뮤텍스락
-this->m_cMutex.lock();
-this->m_vecBlueprints.insert(m_vecBlueprints.end(), vecBP.begin(), vecBP.end());
-this->m_vecStaticActor.insert(m_vecStaticActor.end(), vecStatic.begin(), vecStatic.end());
-this->m_vecObject.insert(m_vecObject.end(), vecInter.begin(), vecInter.end());
-this->m_vecParts.insert(m_vecParts.end(), vecParts.begin(), vecParts.end());
-this->m_vecCharacters.insert(m_vecCharacters.end(), vecChara.begin(), vecChara.end());
-this->m_vecTile.insert(m_vecTile.end(), vecTile.begin(), vecTile.end());
-this->m_cMutex.unlock();
-
-if (pCallback)
-	(this->*pCallback)();
-
-// 로딩ui 종료하고 게임 시작
+	// 로딩ui 종료하고 게임 시작
+	m_cMutex.lock();
+	m_isTimeStop = false;
+	m_cMutex.unlock();
 }
 
 void CGameScene::ToggleStop()

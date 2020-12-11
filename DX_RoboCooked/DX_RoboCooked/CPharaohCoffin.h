@@ -2,15 +2,15 @@
 #include "CInteractiveActor.h"
 #include "IPartGenerator.h"
 
-class CPharaohCoppin :
+class CPharaohCoffin :
 	public CInteractiveActor, public IPartGenerator
 {
 	CStaticMesh*	m_pSMesh;
 	bool			m_isInteractCalled;
 	float			m_fPassedTime;
 public:
-	CPharaohCoppin(IInteractCenter* pInteractCenter, D3DXVECTOR3 vPos);
-	~CPharaohCoppin();
+	CPharaohCoffin(IInteractCenter* pInteractCenter, D3DXVECTOR3 vPos);
+	~CPharaohCoffin();
 
 	void Update() override;
 	void Render() override;

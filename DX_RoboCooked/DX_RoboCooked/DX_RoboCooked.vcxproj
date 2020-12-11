@@ -228,7 +228,7 @@
     <ClInclude Include="Keyboard.h" />
     <ClInclude Include="Mouse.h" />
     <ClInclude Include="CParts.h" />
-    <ClInclude Include="CPharaohCoppin.h" />
+    <ClInclude Include="CPharaohCoffin.h" />
     <ClInclude Include="Resource.h" />
     <ClInclude Include="CSingleton.h" />
     <ClInclude Include="CStaticMeshManager.h" />
@@ -326,7 +326,7 @@
     <ClCompile Include="Mouse.cpp" />
     <ClCompile Include="CParts.cpp" />
     <ClCompile Include="CStaticMeshManager.cpp" />
-    <ClCompile Include="CPharaohCoppin.cpp" />
+    <ClCompile Include="CPharaohCoffin.cpp" />
     <ClCompile Include="stdafx.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Create</PrecompiledHeader>
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Create</PrecompiledHeader>
