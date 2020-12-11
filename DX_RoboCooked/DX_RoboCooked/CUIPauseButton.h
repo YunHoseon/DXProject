@@ -23,5 +23,6 @@ public:
 	void KeyPressEvent(void* _value);
 	void KeyReleaseEvent(void* _value);
 	void MouseReleaseEvent(void* _value);
+	void ActiveButton();
 };
 

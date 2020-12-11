@@ -4,8 +4,9 @@
 #include "CUIText.h"
 #include "CUITexture.h"
 
-CUIStartButton::CUIStartButton(D3DXVECTOR2 vPos)
+CUIStartButton::CUIStartButton(D3DXVECTOR2 vPos, eBtnEvent btnEvent)
 {
+	m_eBtnEvent = btnEvent;
 	m_vPosition = vPos;
 	Setup();
 }

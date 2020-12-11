@@ -66,11 +66,11 @@ public:
 	void ElectIndexLot() override;
 	bool CheckSpecificArea() override;
 	void CheckSandDummyArea(ICollisionArea* collison) override;
-
+	D3DXVECTOR3 GetRandomPartsPosition() override;
+	void MedusaUlt(D3DXVECTOR3 pos) override;
 
 	CCrowdControl* ChooseCC(eSkill skill);
 	void CC(CCrowdControl* pCC);
-	void MedusaUlt();
 	void SetWindDirection();
 	void DeleteWind();
 	void DeleteTornado();

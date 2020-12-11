@@ -1,14 +1,12 @@
 #pragma once
 #include "CUIButton.h"
-class CUIEndButton :
+class CUICloseButton :
 	public CUIButton
 {
 public:
-	CUIEndButton(D3DXVECTOR2 vPos, eBtnEvent btnEvent);
-	~CUIEndButton();
-
+	CUICloseButton(D3DXVECTOR2 vPos ,eBtnEvent btnEvent);
+	~CUICloseButton();
 public:
 	virtual void Setup() override;
-
 };
 

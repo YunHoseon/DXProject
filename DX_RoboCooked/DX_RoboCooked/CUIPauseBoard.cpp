@@ -5,8 +5,9 @@
 #include "CUITexture.h"
 
 
-CUIPauseBoard::CUIPauseBoard(D3DXVECTOR2 vPos)
+CUIPauseBoard::CUIPauseBoard(D3DXVECTOR2 vPos, eBtnEvent btnEvent)
 {
+	m_eBtnEvent = btnEvent;
 	m_vPosition = vPos;
 	Setup();
 }
@@ -19,7 +20,6 @@ CUIPauseBoard::~CUIPauseBoard()
 void CUIPauseBoard::Setup()
 {
 	m_pTexture = new CUITexture("data/UI/popUp_Pause.png", NULL, NULL, m_vPosition);
-
 
 	D3DXIMAGE_INFO Info = g_pUITextureManager->GetTextureInfo("data/UI/popUp_Pause.png");
 	m_vSize = D3DXVECTOR2(Info.Width, Info.Height);

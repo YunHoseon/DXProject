@@ -173,7 +173,9 @@
     <ClInclude Include="CStaticMesh.h" />
     <ClInclude Include="CTestStair.h" />
     <ClInclude Include="CTornado.h" />
+    <ClInclude Include="CUICloseButton.h" />
     <ClInclude Include="CUIEndButton.h" />
+    <ClInclude Include="CUIMainButton.h" />
     <ClInclude Include="CUIResetButton.h" />
     <ClInclude Include="CUI.h" />
     <ClInclude Include="CCamera.h" />
@@ -191,6 +193,10 @@
     <ClInclude Include="CUIText.h" />
     <ClInclude Include="CUITexture.h" />
     <ClInclude Include="CUITextureManager.h" />
+    <ClInclude Include="CUITrafficLightFiveBoard.h" />
+    <ClInclude Include="CUITrafficLightFourBoard.h" />
+    <ClInclude Include="CUITrafficLightOneBoard.h" />
+    <ClInclude Include="CUITrafficLightThreeBoard.h" />
     <ClInclude Include="CWall.h" />
     <ClInclude Include="CWater.h" />
     <ClInclude Include="ICollisionArea.h" />
@@ -222,6 +228,7 @@
     <ClInclude Include="Keyboard.h" />
     <ClInclude Include="Mouse.h" />
     <ClInclude Include="CParts.h" />
+    <ClInclude Include="CPharaohCoppin.h" />
     <ClInclude Include="Resource.h" />
     <ClInclude Include="CSingleton.h" />
     <ClInclude Include="CStaticMeshManager.h" />
@@ -231,6 +238,8 @@
     <ClInclude Include="CUIPauseBoard.h" />
     <ClInclude Include="CUIStartButton.h" />
     <ClInclude Include="CUIPauseButton.h" />
+    <ClInclude Include="CUITrafficLightBoard.h" />
+    <ClInclude Include="CUITrafficLightTwoBoard.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="CActor.cpp" />
@@ -259,7 +268,9 @@
     <ClCompile Include="CStaticMesh.cpp" />
     <ClCompile Include="CTestStair.cpp" />
     <ClCompile Include="CTornado.cpp" />
+    <ClCompile Include="CUICloseButton.cpp" />
     <ClCompile Include="CUIEndButton.cpp" />
+    <ClCompile Include="CUIMainButton.cpp" />
     <ClCompile Include="CUIResetButton.cpp" />
     <ClCompile Include="CUI.cpp" />
     <ClCompile Include="CCamera.cpp" />
@@ -277,6 +288,10 @@
     <ClCompile Include="CUIText.cpp" />
     <ClCompile Include="CUITexture.cpp" />
     <ClCompile Include="CUITextureManager.cpp" />
+    <ClCompile Include="CUITrafficLightFiveBoard.cpp" />
+    <ClCompile Include="CUITrafficLightFourBoard.cpp" />
+    <ClCompile Include="CUITrafficLightOneBoard.cpp" />
+    <ClCompile Include="CUITrafficLightThreeBoard.cpp" />
     <ClCompile Include="CWall.cpp" />
     <ClCompile Include="CWater.cpp" />
     <ClCompile Include="ICollisionArea.cpp" />
@@ -310,6 +325,7 @@
     <ClCompile Include="Mouse.cpp" />
     <ClCompile Include="CParts.cpp" />
     <ClCompile Include="CStaticMeshManager.cpp" />
+    <ClCompile Include="CPharaohCoppin.cpp" />
     <ClCompile Include="stdafx.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Create</PrecompiledHeader>
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Create</PrecompiledHeader>
@@ -320,6 +336,8 @@
     <ClCompile Include="CUIPauseBoard.cpp" />
     <ClCompile Include="CUIStartButton.cpp" />
     <ClCompile Include="CUIPauseButton.cpp" />
+    <ClCompile Include="CUITrafficLightBoard.cpp" />
+    <ClCompile Include="CUITrafficLightTwoBoard.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="DX_RoboCooked.rc" />

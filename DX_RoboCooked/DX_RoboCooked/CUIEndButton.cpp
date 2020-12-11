@@ -5,8 +5,9 @@
 #include "CUITexture.h"
 
 
-CUIEndButton::CUIEndButton(D3DXVECTOR2 vPos)
+CUIEndButton::CUIEndButton(D3DXVECTOR2 vPos, eBtnEvent btnEvent)
 {
+	m_eBtnEvent = btnEvent;
 	m_vPosition = vPos;
 	Setup();
 }

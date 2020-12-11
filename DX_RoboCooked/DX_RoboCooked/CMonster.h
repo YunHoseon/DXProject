@@ -105,6 +105,7 @@ public:
 	virtual FLOAT FirstSkillTime() = 0;
 	virtual FLOAT SecondSkillTime() = 0;
 	virtual FLOAT UltimateSkillTime() = 0;
+	virtual void UpdateMonster() {};
 
 
 

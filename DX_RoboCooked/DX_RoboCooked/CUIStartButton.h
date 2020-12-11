@@ -4,7 +4,7 @@ class CUIStartButton :
 	public CUIButton
 {
 public:
-	CUIStartButton(D3DXVECTOR2 vPos);
+	CUIStartButton(D3DXVECTOR2 vPos, eBtnEvent btnEvent);
 	~CUIStartButton();
 
 public:
