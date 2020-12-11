@@ -1,5 +1,5 @@
 #include "stdafx.h"
-#include "CUITrafficLightFive.h"
+#include "CUITrafficLightFiveBoard.h"
 #include "CUITexture.h"
 
 
@@ -24,11 +24,11 @@ void CUITrafficLightFive::Setup()
 	m_vSize = D3DXVECTOR2(Info.Width, Info.Height);
 
 	//lightPosition
-	m_vecLightPosition[0] = D3DXVECTOR2(0, 0);
-	m_vecLightPosition[1] = D3DXVECTOR2(0, 0);
-	m_vecLightPosition[2] = D3DXVECTOR2(0, 0);
-	m_vecLightPosition[3] = D3DXVECTOR2(0, 0);
-	m_vecLightPosition[4] = D3DXVECTOR2(0, 0);
+	m_vecLightPosition[0] = D3DXVECTOR2(m_vPosition.x +50, m_vPosition.y+50);
+	m_vecLightPosition[1] = D3DXVECTOR2(m_vPosition.x +150, m_vPosition.y+50);
+	m_vecLightPosition[2] = D3DXVECTOR2(m_vPosition.x +250, m_vPosition.y+50);
+	m_vecLightPosition[3] = D3DXVECTOR2(m_vPosition.x +350, m_vPosition.y+50);
+	m_vecLightPosition[4] = D3DXVECTOR2(m_vPosition.x +450, m_vPosition.y+50);
 
 
 }

@@ -1,14 +1,14 @@
 #pragma once
 #include "CUIButton.h"
 
-class CUITrafficLight :
+class CUITrafficLightBoard :
 	public CUIButton
 {
 protected:
 	vector<D3DXVECTOR2>		m_vecLightPosition;
 public:
-	CUITrafficLight();
-	virtual ~CUITrafficLight();
+	CUITrafficLightBoard();
+	virtual ~CUITrafficLightBoard();
 	virtual void Setup() = 0;
 	void SetPosition();
 };

@@ -1,7 +1,7 @@
 #pragma once
-#include "CUITrafficLight.h"
+#include "CUITrafficLightBoard.h"
 class CUITrafficLightThree :
-	public CUITrafficLight
+	public CUITrafficLightBoard
 {
 public:
 	CUITrafficLightThree();
