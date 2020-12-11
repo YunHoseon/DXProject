@@ -2,11 +2,13 @@
 #include "CFlowSand.h"
 #include "CBoxCollision.h"
 
-CFlowSand::CFlowSand(D3DXVECTOR3 vPosition)
+CFlowSand::CFlowSand(D3DXVECTOR3 vPosition):
+	m_pUpperMesh(nullptr)
 {
 	m_eTileType = eTileType::FlowSand;
 	
 	m_pSMesh = g_pStaticMeshManager->GetStaticMesh("FlowSand");
+	m_pUpperMesh = g_pStaticMeshManager->GetStaticMesh("FlowSand_Upper");
 	m_pCollision = new CBoxCollision(g_vZero, D3DXVECTOR3(100, 100, 100), &m_matWorld);
 	
 	SetScale(0.01f, 0.01f, 0.01f);
@@ -26,6 +28,28 @@ CFlowSand::~CFlowSand()
 {
 }
 
-void CFlowSand::Update()
+void CFlowSand::Render()
 {
+	CTile::Render();
+	if(m_pUpperMesh)
+	{
+		g_pD3DDevice->SetTransform(D3DTS_WORLD, &m_matWorld_Upper);
+		m_pUpperMesh->Render();
+	}
+}
+
+void CFlowSand::SetPosition(D3DXVECTOR3 vPosition)
+{
+	CActor::SetPosition(vPosition);
+	D3DXMATRIXA16 tempT = m_matT;
+	tempT._42 += .5f;
+	m_matWorld_Upper = m_matS * m_matR * tempT;
+}
+
+void CFlowSand::SetPosition(float x, float y, float z)
+{
+	CActor::SetPosition(x, y, z);
+	D3DXMATRIXA16 tempT = m_matT;
+	tempT._42 += .5f;
+	m_matWorld_Upper = m_matS * m_matR * tempT;
 }
