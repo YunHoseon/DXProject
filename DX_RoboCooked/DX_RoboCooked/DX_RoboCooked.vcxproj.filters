@@ -324,7 +324,7 @@
     <ClInclude Include="CUIEndButton.h">
       <Filter>UI\Button</Filter>
     </ClInclude>
-    <ClInclude Include="PharaohCoppin.h">
+    <ClInclude Include="CPharaohCoppin.h">
       <Filter>GameScene\Object</Filter>
     </ClInclude>
   </ItemGroup>
@@ -575,7 +575,7 @@
     <ClCompile Include="CUIEndButton.cpp">
       <Filter>UI\Button</Filter>
     </ClCompile>
-    <ClCompile Include="PharaohCoppin.cpp">
+    <ClCompile Include="CPharaohCoppin.cpp">
       <Filter>GameScene\Object</Filter>
     </ClCompile>
   </ItemGroup>

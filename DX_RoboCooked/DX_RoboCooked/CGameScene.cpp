@@ -92,10 +92,10 @@ void CGameScene::Init()
 	{
 		float fMaxX = (16 / 2.0f) * BLOCK_SIZE;
 		float fMinX = -fMaxX;
-
 		float fMaxZ = (12 / 2.0f) * BLOCK_SIZE;
 		float fMinZ = -fMaxZ;
 		int flip = -1;
+
 		for (float i = fMinZ + (BLOCK_SIZE / 2); i <= fMaxZ; i += BLOCK_SIZE)
 		{
 			++flip;
@@ -121,7 +121,6 @@ void CGameScene::Init()
 					testSand = new CWater(D3DXVECTOR3((float)j, -1, (float)i));
 					break;
 				}
-				
 				m_vecTile.push_back(testSand);
 				//m_vecStaticActor.push_back(testSand);
 			}
@@ -180,7 +179,6 @@ void CGameScene::Init()
 	m_vecCharacters.push_back(m_pDebugSphere);
 	m_vecCharacters.push_back(m_pDebugCube);
 
-
 	m_pDebugPauseUI = new CUIPauseButton(D3DXVECTOR2(465, 10), 27, this);
 
 	CMonster *Medusa = new CMonsterMedusa(this);
@@ -194,13 +192,11 @@ void CGameScene::Init()
 	Harpy->AddObjectPosition(D3DXVECTOR3(-3, 0, 0));
 	Harpy->AddObjectPosition(D3DXVECTOR3(0, 0, -3));
 
-
 	m_vecStaticActor.push_back(new CStair(D3DXVECTOR3(1, 0, -4)));
 	m_vecStaticActor.push_back(new CSandpile(this,D3DXVECTOR3(4, 0, 0)));
 	m_vecStaticActor.push_back(new CWater(D3DXVECTOR3(0, -1, -6.5)));
 	m_vecStaticActor.push_back(new CSand(D3DXVECTOR3(0, -1, -7.5)));
 	m_vecStaticActor.push_back(new CCactus(D3DXVECTOR3(-5, 0, 2)));
-
 }
 
 void CGameScene::Render()
@@ -242,7 +238,6 @@ void CGameScene::Render()
 
 	if (m_pDebugPauseUI)
 		m_pDebugPauseUI->Render();
-
 }
 
 void CGameScene::Update()
@@ -280,7 +275,6 @@ void CGameScene::Update()
 	}
 
 	{
-
 		for (CMonster* monster : m_vecMonster)
 		{
 			for (CCharacter *character : m_vecCharacters)
@@ -288,7 +282,6 @@ void CGameScene::Update()
 				monster->AddForce(character);
 			}
 		}
-
 	}
 
 	// collide -> update
@@ -382,7 +375,6 @@ void CGameScene::Update()
 					}
 				}
 			}
-			
 		}
 	}
 	{ // update
@@ -415,7 +407,6 @@ void CGameScene::Update()
 		{
 			character->Update();
 		}
-
 	}
 }
 
@@ -670,7 +661,6 @@ void CGameScene::CheckSandDummyArea(ICollisionArea* collison)
 
 CCrowdControl *CGameScene::ChooseCC(eSkill skill)
 {
-
 	switch (skill)
 	{
 	case eSkill::KeyLock:
