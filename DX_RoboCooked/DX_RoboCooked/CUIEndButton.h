@@ -4,7 +4,7 @@ class CUIEndButton :
 	public CUIButton
 {
 public:
-	CUIEndButton(D3DXVECTOR2 vPos);
+	CUIEndButton(D3DXVECTOR2 vPos, eBtnEvent btnEvent);
 	~CUIEndButton();
 
 public:

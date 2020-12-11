@@ -4,7 +4,7 @@ class CUIResetButton :
 	public CUIButton
 {
 public:
-	CUIResetButton(D3DXVECTOR2 vPos);
+	CUIResetButton(D3DXVECTOR2 vPos, eBtnEvent btnEvent);
 	~CUIResetButton();
 
 	virtual void Setup() override;

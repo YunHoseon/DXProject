@@ -12,7 +12,10 @@ enum class eUIState
 enum class eBtnEvent
 {
 	None,
-	PauseExit
+	PauseMain,
+	PauseClose,
+	PauseReset,
+	PauseEnd
 
 };
 class CUI : public CEventListener
@@ -24,6 +27,7 @@ public:
 	virtual ~CUI();
 
 protected:
+	eBtnEvent			m_eBtnEvent;
 	eUIState			m_eUIState;
 	CUI*				m_pParent;
 	D3DXVECTOR2			m_vPosition;
@@ -46,7 +50,7 @@ public:
 	virtual void CheckReleaseIn(POINT pt);
 	virtual void CheckInHover(POINT pt);
 	void InvertActive();
-	virtual void ButtonEvent() {};
+	void ButtonEvent(eBtnEvent btnEvent);
 
 	INT GetlistUIchildrenSize() { return m_listUIchildren.size(); }
 

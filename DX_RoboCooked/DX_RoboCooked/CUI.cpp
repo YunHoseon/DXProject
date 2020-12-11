@@ -10,6 +10,7 @@ CUI::CUI()
 	, m_eUIPastState(eUIState::Disabled)
 	, m_isActive(false)
 	, m_isPress(false)
+	, m_eBtnEvent(eBtnEvent::None)
 {
 
 }
@@ -56,7 +57,8 @@ void CUI::CheckReleaseIn(POINT pt)
 				{
 					if (it->GetUIState() == eUIState::Hover)
 					{
-						it->SetUIState(eUIState::Active);
+						//it->SetUIState(eUIState::Active);
+						it->ButtonEvent(it->m_eBtnEvent);
 					}
 					else if (it->GetUIState() == eUIState::Active)
 					{
@@ -104,4 +106,23 @@ void CUI::InvertActive()
 		it->InvertActive();
 	}
 	m_isActive = !m_isActive;
+}
+
+void CUI::ButtonEvent(eBtnEvent btnEvent)
+{
+	switch (btnEvent)
+	{
+	case eBtnEvent::PauseMain:
+		g_EventManager->CallEvent(eEvent::PauseMain, NULL);
+		break;
+	case eBtnEvent::PauseClose:
+		g_EventManager->CallEvent(eEvent::PauseClose, NULL);
+		break;
+	case eBtnEvent::PauseReset:
+		g_EventManager->CallEvent(eEvent::PauseReset, NULL);
+		break;
+	case eBtnEvent::PauseEnd:
+		g_EventManager->CallEvent(eEvent::PauseEnd, NULL);
+		break;
+	}
 }

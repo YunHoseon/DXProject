@@ -5,8 +5,9 @@
 #include "CUITexture.h"
 
 
-CUIResetButton::CUIResetButton(D3DXVECTOR2 vPos)
+CUIResetButton::CUIResetButton(D3DXVECTOR2 vPos, eBtnEvent btnEvent)
 {
+	m_eBtnEvent = btnEvent;
 	m_vPosition = vPos;
 	Setup();
 }

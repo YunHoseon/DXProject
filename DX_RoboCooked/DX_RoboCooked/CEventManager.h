@@ -27,7 +27,11 @@ enum class eEvent
 	SpecificArea,
 	TravelDistance,
 	DeleteTornado,
-	ChangeCountBluePrint
+	ChangeCountBluePrint,
+	PauseMain,
+	PauseClose,
+	PauseReset,
+	PauseEnd
 };
 
 

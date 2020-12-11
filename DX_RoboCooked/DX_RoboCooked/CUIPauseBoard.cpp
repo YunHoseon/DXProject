@@ -5,8 +5,9 @@
 #include "CUITexture.h"
 
 
-CUIPauseBoard::CUIPauseBoard(D3DXVECTOR2 vPos)
+CUIPauseBoard::CUIPauseBoard(D3DXVECTOR2 vPos, eBtnEvent btnEvent)
 {
+	m_eBtnEvent = btnEvent;
 	m_vPosition = vPos;
 	Setup();
 }

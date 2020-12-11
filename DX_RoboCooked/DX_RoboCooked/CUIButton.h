@@ -15,6 +15,7 @@ protected:
 	//CUIText*				  m_pText;
 	std::array<ST_PLAYER_INPUTKEY*, 2>	m_pInputKey;
 	bool					  m_isKeyDown;
+	bool					  m_isMouseDown;
 
 public:
 	CUIButton();

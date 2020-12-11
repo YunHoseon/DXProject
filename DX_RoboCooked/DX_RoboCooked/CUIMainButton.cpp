@@ -5,10 +5,12 @@
 #include "CUITexture.h"
 
 
-CUIMainButton::CUIMainButton(D3DXVECTOR2 vPos)
+CUIMainButton::CUIMainButton(D3DXVECTOR2 vPos, eBtnEvent btnEvent)
 {
+	m_eBtnEvent = btnEvent;
 	m_vPosition = vPos;
 	Setup();
+	
 }
 
 CUIMainButton::~CUIMainButton()

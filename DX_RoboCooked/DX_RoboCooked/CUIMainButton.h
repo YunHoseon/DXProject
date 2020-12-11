@@ -4,7 +4,7 @@ class CUIMainButton :
 	public CUIButton
 {
 public:
-	CUIMainButton(D3DXVECTOR2 vPos);
+	CUIMainButton(D3DXVECTOR2 vPos, eBtnEvent btnEvent);
 	~CUIMainButton();
 public:
 	virtual void Setup() override;
