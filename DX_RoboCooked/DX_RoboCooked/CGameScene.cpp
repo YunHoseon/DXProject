@@ -31,9 +31,14 @@
 #include <fstream>
 
 
+std::mutex CGameScene::m_cMutex;
+
+
 #include "CCactus.h"
 #include "CDebugPlayer1.h"
 #include "CDebugPlayer2.h"
+
+
 
 CGameScene::CGameScene() : m_pField(NULL),
 						   m_pDebugSphere(NULL),
@@ -53,6 +58,7 @@ CGameScene::CGameScene() : m_pField(NULL),
 
 CGameScene::~CGameScene()
 {
+	m_cMutex.lock();
 	for (CActor *it : m_vecStaticActor)
 	{
 		SafeDelete(it);
@@ -74,112 +80,18 @@ CGameScene::~CGameScene()
 	}
 
 	SafeDelete(m_pDebugPauseUI);
+	m_cMutex.unlock();
 }
 
 void CGameScene::Init()
 {
-	//g_SoundManager->PlayBGM();
-	//g_SoundManager->SetBGMSound(0.5f);
+	m_cMutex.lock();
+
 	m_fGameTime = 300.0f;
-
-	//m_pField = new CField;
-	//if (m_pField)
-	//{
-	//	m_pField->Setup(WIDTH, HEIGHT);
-	//	m_vecStaticActor.push_back(m_pField);
-	//}
-
-	{
-		float fMaxX = (16 / 2.0f) * BLOCK_SIZE;
-		float fMinX = -fMaxX;
-
-		float fMaxZ = (12 / 2.0f) * BLOCK_SIZE;
-		float fMinZ = -fMaxZ;
-		int flip = -1;
-		for (float i = fMinZ + (BLOCK_SIZE / 2); i <= fMaxZ; i += BLOCK_SIZE)
-		{
-			++flip;
-			for (float j = fMinX + (BLOCK_SIZE / 2); j <= fMaxX; j += BLOCK_SIZE)
-			{
-				// 타일 생성
-				CTile* testSand;
-				switch (flip % 5)
-				{
-				case 0:
-					testSand = new CFlowSand(D3DXVECTOR3((float)j, -1, (float)i));
-					break;
-				case 1:
-					testSand = new CSand(D3DXVECTOR3((float)j, -1, (float)i));
-					break;
-				case 2:
-					testSand = new CSoil(D3DXVECTOR3((float)j, -1, (float)i));
-					break;
-				case 3:
-					testSand = new CThickSand(D3DXVECTOR3((float)j, -1, (float)i));
-					break;
-				case 4:
-					testSand = new CWater(D3DXVECTOR3((float)j, -1, (float)i));
-					break;
-				}
-				
-				m_vecTile.push_back(testSand);
-				//m_vecStaticActor.push_back(testSand);
-			}
-		}
-	}
-
+	
 	CWall *wall = new CWall;
 	wall->Setup();
 	m_vecStaticActor.push_back(wall);
-
-	CPartStorage *partStorage = new CPartStorage(this);
-	partStorage->Setup(0, D3DXVECTOR3(5, 0, 2), "A00");
-	m_vecObject.push_back(partStorage);
-
-	partStorage = new CPartStorage(this);
-	partStorage->Setup(0, D3DXVECTOR3(5, 0, 3), "A02");
-	m_vecObject.push_back(partStorage);
-
-	CPartCombinator *partManualCombinator = new CPartManualCombinator(this, eCombinatorPartsLevel::TWO, 0, D3DXVECTOR3(-2, 0, 2));
-	m_vecObject.push_back(partManualCombinator);
-
-	CCombinatorButton *combinatorButton = new CCombinatorButton(partManualCombinator);
-	combinatorButton->Setup(0, D3DXVECTOR3(1, 0, -1));
-	m_vecObject.push_back(combinatorButton);
-
-	CPartCombinator *partAutoCombinator = new CPartAutoCombinator(this, eCombinatorPartsLevel::ONE, 0, D3DXVECTOR3(-4, 0, -3));
-	m_vecObject.push_back(partAutoCombinator);
-
-	COutlet *outlet = new COutlet(this);
-	outlet->Setup(0, D3DXVECTOR3(1, 0, 3));
-	m_vecObject.push_back(outlet);
-
-	CPartVending *partVending = new CPartVending(outlet, this, "A01");
-	partVending->Setup(0, D3DXVECTOR3(1, 0, -3));
-	m_vecObject.push_back(partVending);
-
-	CBlueprint *blueprint = new CBlueprint("A00", m_vecParts,
-										   D3DXVECTOR3(5.0f, -0.5f, -3.0f), D3DXVECTOR3(2.0f, 0.1f, 2.8f), 0, 0);
-	blueprint->Setup();
-	m_vecBlueprints.push_back(blueprint);
-
-	CBlueprint *blueprint2 = new CBlueprint("A01", m_vecParts,
-											D3DXVECTOR3(5.0f, -0.5f, 0), D3DXVECTOR3(2.0f, 0.1f, 2.8f), D3DX_PI * 0.5f, D3DX_PI * 0.5f);
-	blueprint2->Setup();
-	blueprint2->SetPosition(-3.0f, -0.5f, 0);
-	m_vecBlueprints.push_back(blueprint2);
-
-	m_pDebugSphere = new CDebugPlayer1(this);
-	if (m_pDebugSphere)
-		m_pDebugSphere->Setup();
-
-	m_pDebugCube = new CDebugPlayer2(this);
-	if (m_pDebugCube)
-		m_pDebugCube->Setup();
-
-	m_vecCharacters.push_back(m_pDebugSphere);
-	m_vecCharacters.push_back(m_pDebugCube);
-
 
 	m_pDebugPauseUI = new CUIPauseButton(D3DXVECTOR2(150, 10), 27, this);
 
@@ -194,12 +106,7 @@ void CGameScene::Init()
 	Harpy->AddObjectPosition(D3DXVECTOR3(-3, 0, 0));
 	Harpy->AddObjectPosition(D3DXVECTOR3(0, 0, -3));
 
-
-	m_vecStaticActor.push_back(new CStair(D3DXVECTOR3(1, 0, -4)));
-	m_vecStaticActor.push_back(new CSandpile(this,D3DXVECTOR3(4, 0, 0)));
-	m_vecStaticActor.push_back(new CWater(D3DXVECTOR3(0, -1, -6.5)));
-	m_vecStaticActor.push_back(new CSand(D3DXVECTOR3(0, -1, -7.5)));
-	m_vecStaticActor.push_back(new CCactus(D3DXVECTOR3(-5, 0, 2)));
+	m_cMutex.unlock();
 
 }
 
@@ -419,16 +326,23 @@ void CGameScene::Update()
 	}
 }
 
-void CGameScene::Load(string sFolder, string sFilename)
+void CGameScene::Load(string sFolder, string sFilename, void(CGameScene:: *pCallback)(void))
 {
 	string sFullname = sFolder + "/" + sFilename;
 	std::ifstream is(sFullname);
 	assert(is.is_open());
 	json j;
 	is >> j;
-
-	// blueprint
+	is.close();
+	vector<CBlueprint*> vecBP;
+	vector<CActor*> vecStatic;
+	vector<CInteractiveActor*> vecInter;
+	vector<CParts*> vecParts;
+	vector<CCharacter*> vecChara;
+	vector<CTile*> vecTile;
+	
 	{
+		// blueprint
 		json jBP = j["Blueprint"];
 		for (auto &&p : jBP)
 		{
@@ -436,9 +350,23 @@ void CGameScene::Load(string sFolder, string sFilename)
 			D3DXVECTOR3 pos(p["Position"][0], p["Position"][1], p["Position"][2]);
 			float rotate = p["Rotate"];
 			D3DXVECTOR3 scale(p["Scale"][0], p["Scale"][1], p["Scale"][2]);
-			CBlueprint *blueprint = new CBlueprint(id, m_vecParts, pos, scale, rotate, rotate);
+			float partsangle = p["PartsAngle"];
+			CBlueprint *blueprint = new CBlueprint(id, m_vecParts, pos, scale, rotate, partsangle);
 			blueprint->Setup();
-			m_vecBlueprints.push_back(blueprint);
+			vecBP.push_back(blueprint);
+		}
+	}
+	{
+		json jCactus = j["Cactus"];
+		for (auto && p : jCactus)
+		{
+			D3DXVECTOR3 pos(p["Position"][0], p["Position"][1], p["Position"][2]);
+			float rotate = p["Rotate"];
+			D3DXVECTOR3 scale(p["Scale"][0], p["Scale"][1], p["Scale"][2]);
+			CCactus* cactus = new CCactus(pos);
+			cactus->SetRotationY(rotate);
+			cactus->SetScale(scale);
+			vecStatic.push_back(cactus);
 		}
 	}
 	{
@@ -453,7 +381,7 @@ void CGameScene::Load(string sFolder, string sFilename)
 			COutlet *pOutlet = new COutlet(this);
 			pOutlet->SetScale(scale);
 			pOutlet->Setup(rotate, pos);
-			m_vecObject.push_back(pOutlet);
+			vecInter.push_back(pOutlet);
 			vecOutlet.push_back(pOutlet);
 		}
 		json jvending = j["PartVending"];
@@ -466,7 +394,7 @@ void CGameScene::Load(string sFolder, string sFilename)
 			CPartVending *vending = new CPartVending(vecOutlet[p["OutletIdx"]], this, id);
 			vending->Setup(rotate, pos);
 			vending->SetScale(scale);
-			m_vecObject.push_back(vending);
+			vecInter.push_back(vending);
 		}
 	}
 	{
@@ -478,9 +406,9 @@ void CGameScene::Load(string sFolder, string sFilename)
 			D3DXVECTOR3 pos(p["Position"][0], p["Position"][1], p["Position"][2]);
 			float rotate = p["Rotate"];
 			D3DXVECTOR3 scale(p["Scale"][0], p["Scale"][1], p["Scale"][2]);
-			CPartManualCombinator *manual = new CPartManualCombinator(this, (eCombinatorPartsLevel)0, rotate, pos);
-			//manual->SetScale(scale);
-			m_vecObject.push_back(manual);
+			CPartManualCombinator *manual = new CPartManualCombinator(this, (eCombinatorPartsLevel)p["eCombinatorPartsLevel"], rotate, pos);
+			manual->SetScale(scale);
+			vecInter.push_back(manual);
 			vecManual.push_back(manual);
 		}
 		json jButton = j["CombinatorButton"];
@@ -491,8 +419,8 @@ void CGameScene::Load(string sFolder, string sFilename)
 			D3DXVECTOR3 scale(p["Scale"][0], p["Scale"][1], p["Scale"][2]);
 			CCombinatorButton *button = new CCombinatorButton(vecManual[p["PartManualCombinatorIdx"]]);
 			button->Setup(rotate, pos);
-			//button->SetScale(scale);
-			m_vecObject.push_back(button);
+			button->SetScale(scale);
+			vecInter.push_back(button);
 		}
 	}
 	{
@@ -503,9 +431,9 @@ void CGameScene::Load(string sFolder, string sFilename)
 			D3DXVECTOR3 pos(p["Position"][0], p["Position"][1], p["Position"][2]);
 			float rotate = p["Rotate"];
 			D3DXVECTOR3 scale(p["Scale"][0], p["Scale"][1], p["Scale"][2]);
-			CPartAutoCombinator *autoCombinator = new CPartAutoCombinator(this, (eCombinatorPartsLevel)0, rotate, pos);
-			//autoCombinator->SetScale(scale);
-			m_vecObject.push_back(autoCombinator);
+			CPartAutoCombinator *autoCombinator = new CPartAutoCombinator(this, (eCombinatorPartsLevel)p["eCombinatorPartsLevel"], rotate, pos);
+			autoCombinator->SetScale(scale);
+			vecInter.push_back(autoCombinator);
 		}
 	}
 	{
@@ -519,8 +447,8 @@ void CGameScene::Load(string sFolder, string sFilename)
 			D3DXVECTOR3 scale(p["Scale"][0], p["Scale"][1], p["Scale"][2]);
 			CPartStorage *storage = new CPartStorage(this);
 			storage->Setup(rotate, pos, id);
-			//storage->SetScale(scale);
-			m_vecObject.push_back(storage);
+			storage->SetScale(scale);
+			vecInter.push_back(storage);
 		}
 	}
 	{
@@ -536,8 +464,90 @@ void CGameScene::Load(string sFolder, string sFilename)
 			parts->SetPosition(pos);
 			parts->SetRotationY(rotate);
 			parts->SetScale(scale);
-			m_vecParts.push_back(parts);
+			vecParts.push_back(parts);
 		}
+	}
+	{
+		// tile
+		{
+			json jSand = j["Sand"];
+			for (auto && p : jSand)
+			{
+				D3DXVECTOR3 pos(p["Position"][0], p["Position"][1], p["Position"][2]);
+				float rotate = p["Rotate"];
+				D3DXVECTOR3 scale(p["Scale"][0], p["Scale"][1], p["Scale"][2]);
+				CSand* Tile = new CSand(pos);
+				Tile->SetRotationY(rotate);
+				Tile->SetScale(scale);
+				vecTile.push_back(Tile);
+			}
+		}
+		{
+			json jSoil = j["Soil"];
+			for (auto&& p : jSoil)
+			{
+				D3DXVECTOR3 pos(p["Position"][0], p["Position"][1], p["Position"][2]);
+				float rotate = p["Rotate"];
+				D3DXVECTOR3 scale(p["Scale"][0], p["Scale"][1], p["Scale"][2]);
+				CSoil* Tile = new CSoil(pos);
+				Tile->SetRotationY(rotate);
+				Tile->SetScale(scale);
+				vecTile.push_back(Tile);
+			}
+		}
+		{
+			json jStair = j["Stair"];
+			for (auto&& p : jStair)
+			{
+				D3DXVECTOR3 pos(p["Position"][0], p["Position"][1], p["Position"][2]);
+				float rotate = p["Rotate"];
+				D3DXVECTOR3 scale(p["Scale"][0], p["Scale"][1], p["Scale"][2]);
+				CStair* Tile = new CStair(pos);
+				Tile->SetRotationY(rotate);
+				Tile->SetScale(scale);
+				vecTile.push_back(Tile);
+			}
+		}
+		{
+			json jThickSand = j["ThickSand"];
+			for (auto&& p : jThickSand)
+			{
+				D3DXVECTOR3 pos(p["Position"][0], p["Position"][1], p["Position"][2]);
+				float rotate = p["Rotate"];
+				D3DXVECTOR3 scale(p["Scale"][0], p["Scale"][1], p["Scale"][2]);
+				CThickSand* Tile = new CThickSand(pos);
+				Tile->SetRotationY(rotate);
+				Tile->SetScale(scale);
+				vecTile.push_back(Tile);
+			}
+		}
+		{
+			json jWater = j["Water"];
+			for (auto&& p : jWater)
+			{
+				D3DXVECTOR3 pos(p["Position"][0], p["Position"][1], p["Position"][2]);
+				float rotate = p["Rotate"];
+				D3DXVECTOR3 scale(p["Scale"][0], p["Scale"][1], p["Scale"][2]);
+				CWater* Tile = new CWater(pos);
+				Tile->SetRotationY(rotate);
+				Tile->SetScale(scale);
+				vecTile.push_back(Tile);
+			}
+		}
+		{
+			json jFlowSand = j["FlowSand"];
+			for (auto&& p : jFlowSand)
+			{
+				D3DXVECTOR3 pos(p["Position"][0], p["Position"][1], p["Position"][2]);
+				float rotate = p["Rotate"];
+				D3DXVECTOR3 scale(p["Scale"][0], p["Scale"][1], p["Scale"][2]);
+				CFlowSand* Tile = new CFlowSand(pos);
+				Tile->SetRotationY(rotate);
+				Tile->SetScale(scale);
+				vecTile.push_back(Tile);
+			}
+		}
+		
 	}
 	{
 		// player1
@@ -552,7 +562,7 @@ void CGameScene::Load(string sFolder, string sFilename)
 			player->SetPosition(pos);
 			player->SetRotationY(rotate);
 			player->SetScale(scale);
-			m_vecCharacters.push_back(player);
+			vecChara.push_back(player);
 		}
 	}
 	{
@@ -568,9 +578,25 @@ void CGameScene::Load(string sFolder, string sFilename)
 			player->SetPosition(pos);
 			player->SetRotationY(rotate);
 			player->SetScale(scale);
-			m_vecCharacters.push_back(player);
+			vecChara.push_back(player);
 		}
 	}
+
+	// 뮤텍스락
+	this->m_cMutex.lock();
+	this->m_vecBlueprints.insert(m_vecBlueprints.end(), vecBP.begin(), vecBP.end());
+	this->m_vecStaticActor.insert(m_vecStaticActor.end(), vecStatic.begin(), vecStatic.end());
+	this->m_vecObject.insert(m_vecObject.end(), vecInter.begin(), vecInter.end());
+	this->m_vecParts.insert(m_vecParts.end(), vecParts.begin(), vecParts.end());
+	this->m_vecCharacters.insert(m_vecCharacters.end(), vecChara.begin(), vecChara.end());
+	this->m_vecTile.insert(m_vecTile.end(), vecTile.begin(), vecTile.end());
+	this->m_cMutex.unlock();
+
+	if (pCallback)
+		(this->*pCallback)();
+
+	// 로딩ui 종료하고 게임 시작
+	
 }
 
 void CGameScene::ToggleStop()
@@ -827,15 +853,6 @@ void CGameScene::DeleteParts(CParts *parts)
 	}
 }
 
-//void CGameScene::ThrowParts(CCharacter* pCharacter,CParts* parts, D3DXVECTOR3 vDir)
-//{
-//	if (parts != nullptr)
-//	{
-//		pCharacter->SetPlayerState(ePlayerState::None);
-//		parts->ThrowParts(vDir);
-//	}
-//}
-
 void CGameScene::CheckAroundCombinator(CPartCombinator *combinator)
 {
 	if (combinator->GetCombinatorLoadState() == eCombinatorLoadState::LoadImpossible)
@@ -861,8 +878,3 @@ void CGameScene::CheckAroundCombinator(CPartCombinator *combinator)
 		it.second->SetCPartCombinator(combinator);
 	}
 }
-
-//void CGameScene::SendPartsToOutlet(CParts * parts, COutlet * outlet)
-//{
-//	outlet->AcceptPartsFromVending(parts);
-//}

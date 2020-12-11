@@ -36,6 +36,10 @@ using std::list;
 using std::unordered_set;
 #include <array>
 using std::array;
+#include <thread>
+using std::thread;
+#include <mutex>
+
 
 #include <d3dx9.h>
 
@@ -57,16 +61,17 @@ extern HWND g_hWnd;
 
 #define WIDTH 16
 #define HEIGHT 12
-const D3DXVECTOR3 g_vZero(0, 0, 0);
+
+const D3DXVECTOR3 g_vZero(0.f,0.f,0.f);
 const D3DXMATRIXA16 g_matIdentity(
-	1,0,0,0,
-	0,1,0,0,
-	0,0,1,0,
-	0,0,0,1
+	1.f, 0.f, 0.f, 0.f,
+	0.f, 1.f, 0.f, 0.f,
+	0.f, 0.f, 1.f, 0.f,
+	0.f, 0.f, 0.f, 1.f
 );
-const float g_fFramerate = 60;
-const float g_fBaseDeltaTime = 1 / g_fFramerate;
-#define TimeRevision g_pTimeManager->GetElapsedTime() * g_fFramerate
+constexpr float g_fFramerate = 60;
+constexpr float g_fBaseDeltaTime = 1 / g_fFramerate;
+#define TimeRevision (g_pTimeManager->GetElapsedTime() * g_fFramerate)
 
 struct ST_PC_VERTEX
 {
