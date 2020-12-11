@@ -101,7 +101,7 @@ void CGameScene::Init()
 	Harpy->AddObjectPosition(D3DXVECTOR3(-3, 0, 0));
 	Harpy->AddObjectPosition(D3DXVECTOR3(0, 0, -3));
 
-	m_pDebugPauseUI = new CUIPauseButton(D3DXVECTOR2(465, 10), 27, this);
+	//m_pDebugPauseUI = new CUIPauseButton(D3DXVECTOR2(465, 10), 27, this);
 
 	/*CPharaohCoppin* coppin = new CPharaohCoppin(this, D3DXVECTOR3(0,0,0));
 	m_vecObject.push_back(coppin);*/
