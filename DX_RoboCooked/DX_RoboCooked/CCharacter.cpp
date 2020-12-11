@@ -106,9 +106,17 @@ void CCharacter::PressKey(void* _value)
 			return;
 		if (m_pParts && m_pCC->StopWithParts())
 			return;
-
-		if (m_fRotY - 0.5f < 0.f)
-			m_fRotY += D3DX_PI * 2.f;
+		if (!m_pCC->ReverseRotate())
+		{
+			if (m_fRotY - 0.5f < 0.f)
+				m_fRotY += D3DX_PI * 2.f;
+		}
+		else
+		{
+			if (m_fRotY + 0.5f > D3DX_PI * 2.f)
+				m_fRotY -= D3DX_PI * 2.f;
+		}
+		
 		Rotate(D3DX_PI * 1.5f );
 	}
 	else if (data->wKey == m_pInputKey->moveBackKey)
@@ -126,9 +134,17 @@ void CCharacter::PressKey(void* _value)
 			return;
 		if (m_pParts && m_pCC->StopWithParts())
 			return;
+		if (!m_pCC->ReverseRotate())
+		{
+			if (m_fRotY + 0.5f > D3DX_PI * 2.f)
+				m_fRotY -= D3DX_PI * 2.f;
+		}
+		else
+		{
+			if (m_fRotY - 0.5f < 0.f)
+				m_fRotY += D3DX_PI * 2.f;
+		}
 
-		if (m_fRotY + 0.5f > D3DX_PI * 2.f)
-			m_fRotY -= D3DX_PI * 2.f;
 		Rotate(D3DX_PI * 0.5f);
 	}
 	else if (data->wKey == m_pInputKey->interactableKey1)
