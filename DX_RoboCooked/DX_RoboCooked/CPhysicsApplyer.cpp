@@ -29,7 +29,7 @@ void CPhysicsApplyer::ApplyBound(CActor* pA, CActor* pB)
 
 		if (power[0] > 0)
 		{
-			vNormalForce[0] = vNormal * power[0] * 1 + vNormal * pB->GetRepulsivePower();  // 1.0 = 탄성계수. 1.0이면 튕기지 않음, RepulsivePower = 반발력
+			vNormalForce[0] = vNormal * power[0] * 1 + vNormal * pB->GetRepulsivePower();  // 1.0 = 탄성계수. 1.0이면 튕기지 않음, RepulsivePower = 반발력. 속도와 무관하게 밀어내는 값
 			vNormalForce[1] = -vNormal * power[0] * 1 + -vNormal * pA->GetRepulsivePower();
 		}
 

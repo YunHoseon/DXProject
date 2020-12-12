@@ -14,7 +14,7 @@ CDebugPlayer1::CDebugPlayer1(IInteractCenter* pInteractCenter)
 	SetPosition(g_vZero);
 
 	m_pSkinnedMesh = new CSkinnedMesh;
-	m_pSkinnedMesh->Load("data/model/character", "chara_1p_run1.X");
+	m_pSkinnedMesh->Load("data/model/character", "chara_1p.X");
 	m_pSkinnedMesh->m_pmatWorldTM = new D3DXMATRIXA16;
 	
 	D3DXVECTOR3 max = m_pSkinnedMesh->GetMax();
