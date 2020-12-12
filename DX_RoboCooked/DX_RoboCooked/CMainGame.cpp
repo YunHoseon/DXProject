@@ -41,13 +41,13 @@ void CMainGame::Setup()
 	
 	CGameScene* scene = new CGameScene;
 
-	scene->Load("data/js", "AllTest.json", &CGameScene::Init);
+	//scene->Load("data/js", "AllTest.json", &CGameScene::Init);
 
 	//std::function<void(CGameScene&, string, string, void(CGameScene::*)(void))> load = &CGameScene::Load;
 	//thread _t1(load, scene, "data/js", "AllTest.json", &CGameScene::Init);
 
-	//thread _t1(&CGameScene::Load, scene, "data/js", "AllTest.json", &CGameScene::Init);
-	//_t1.detach();
+	thread _t1(&CGameScene::Load, scene, "data/js", "AllTest.json", &CGameScene::Init);
+	_t1.detach();
 	
 	CScene* pBeforeScene = g_SceneManager->SetCurrentScene(scene);
 	if (pBeforeScene)

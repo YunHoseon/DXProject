@@ -1,7 +1,7 @@
 #include "stdafx.h"
 #include "CUITextureManager.h"
 
-
+static std::mutex cTextureMutex;
 CUITextureManager::CUITextureManager() : CSingleton<CUITextureManager>()
 {
 }
@@ -16,6 +16,7 @@ LPDIRECT3DTEXTURE9 CUITextureManager::GetTexture(char* szFullPath)
 		return NULL;
 	if (m_mapTexture.find(szFullPath) == m_mapTexture.end())
 	{
+		cTextureMutex.lock();
 		D3DXCreateTextureFromFileExA(
 			g_pD3DDevice,
 			szFullPath,
@@ -32,6 +33,7 @@ LPDIRECT3DTEXTURE9 CUITextureManager::GetTexture(char* szFullPath)
 			NULL,
 			&m_mapTexture[szFullPath]
 		);
+		cTextureMutex.unlock();
 	}
 	return m_mapTexture[szFullPath];
 }
@@ -45,6 +47,7 @@ D3DXIMAGE_INFO CUITextureManager::GetTextureInfo(char* szFullPath)
 {
 	if (m_mapTextureInFo.find(szFullPath) == m_mapTextureInFo.end())
 	{
+		cTextureMutex.lock();
 		D3DXCreateTextureFromFileExA(
 			g_pD3DDevice,
 			szFullPath,
@@ -61,6 +64,7 @@ D3DXIMAGE_INFO CUITextureManager::GetTextureInfo(char* szFullPath)
 			NULL,
 			&m_mapTexture[szFullPath]
 		);
+		cTextureMutex.unlock();
 	}
 	return m_mapTextureInFo[szFullPath];
 }

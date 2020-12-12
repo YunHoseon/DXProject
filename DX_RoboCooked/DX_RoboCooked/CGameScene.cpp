@@ -111,6 +111,7 @@ void CGameScene::Init()
 
 void CGameScene::Render()
 {
+	m_cMutex.lock();
 	for (CActor *it : m_vecStaticActor)
 	{
 		it->Render();
@@ -148,6 +149,7 @@ void CGameScene::Render()
 
 	if (m_pDebugPauseUI)
 		m_pDebugPauseUI->Render();
+	m_cMutex.unlock();
 }
 
 void CGameScene::Update()

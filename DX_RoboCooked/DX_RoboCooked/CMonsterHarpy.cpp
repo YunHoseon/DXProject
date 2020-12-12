@@ -11,6 +11,7 @@ CMonsterHarpy::CMonsterHarpy(IInteractCenter* pInteractCenter):CMonster(pInterac
 	m_sSpecificPartsID = "B03";
 	m_debugName = "ÇÏÇÇ";
 	ChooseSkillCondition();
+	
 	g_EventManager->Attach(eEvent::DeleteTornado, this);
 }
 
