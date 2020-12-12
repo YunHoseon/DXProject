@@ -64,5 +64,8 @@ public:
 			m_eUIPastState = st;
 	}
 
+	void InitUIState();
+	void SetActiveUIState(int n);
+
 };
 

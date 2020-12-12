@@ -26,6 +26,7 @@
 #include "CSandpile.h"
 
 #include "CUIPauseButton.h"
+#include "CUITrafficLight.h"
 
 /* ������ */
 #include <filesystem>
@@ -42,6 +43,7 @@ CGameScene::CGameScene() : m_pField(NULL),
 						   m_pDebugCube(NULL),
 						   m_pDebugParts(NULL),
 						   m_pDebugPauseUI(nullptr),
+						   m_pDebugTrafficLight(nullptr),
 						   m_isTimeStop(false),
 						   m_vWind(0, 0, 0),
 						   m_fGameTime(300.0f),
@@ -77,6 +79,7 @@ CGameScene::~CGameScene()
 	}
 
 	SafeDelete(m_pDebugPauseUI);
+	SafeDelete(m_pDebugTrafficLight);
 	m_cMutex.unlock();
 }
 
@@ -93,6 +96,7 @@ void CGameScene::Init()
 	Harpy->AddObjectPosition(D3DXVECTOR3(0, 0, -3));
 
 	CUIButton* pPauseButton = new CUIPauseButton(D3DXVECTOR2(465, 10), 27, this);
+	CUITrafficLight* pTrafficLight = new CUITrafficLight(this,m_vecBlueprints.size());
 	
 	//CPharaohCoffin* coffin = new CPharaohCoffin(this, D3DXVECTOR3(0,0,0));
 
@@ -103,6 +107,7 @@ void CGameScene::Init()
 	m_vecMonster.push_back(Medusa);
 	m_vecMonster.push_back(Harpy);
 
+	m_pDebugTrafficLight = pTrafficLight;
 	m_pDebugPauseUI = pPauseButton;
 	//m_vecObject.push_back(coffin);
 
@@ -149,6 +154,9 @@ void CGameScene::Render()
 
 	if (m_pDebugPauseUI)
 		m_pDebugPauseUI->Render();
+
+	if (m_pDebugTrafficLight)
+		m_pDebugTrafficLight->Render();
 	m_cMutex.unlock();
 }
 

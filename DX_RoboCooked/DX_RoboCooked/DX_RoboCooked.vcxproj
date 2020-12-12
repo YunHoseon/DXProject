@@ -175,6 +175,7 @@
     <ClInclude Include="CTornado.h" />
     <ClInclude Include="CUICloseButton.h" />
     <ClInclude Include="CUIEndButton.h" />
+    <ClInclude Include="CUILight.h" />
     <ClInclude Include="CUIMainButton.h" />
     <ClInclude Include="CUIResetButton.h" />
     <ClInclude Include="CUI.h" />
@@ -271,6 +272,7 @@
     <ClCompile Include="CTornado.cpp" />
     <ClCompile Include="CUICloseButton.cpp" />
     <ClCompile Include="CUIEndButton.cpp" />
+    <ClCompile Include="CUILight.cpp" />
     <ClCompile Include="CUIMainButton.cpp" />
     <ClCompile Include="CUIResetButton.cpp" />
     <ClCompile Include="CUI.cpp" />

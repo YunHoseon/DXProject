@@ -126,3 +126,25 @@ void CUI::ButtonEvent(eBtnEvent btnEvent)
 		break;
 	}
 }
+
+void CUI::InitUIState()
+{
+	for (CUI* it : m_listUIchildren)
+	{
+		it->m_eUIState = eUIState::Disabled;
+	}
+}
+
+void CUI::SetActiveUIState(int n)
+{
+	InitUIState();
+	int cnt = 0;
+	for (CUI* it : m_listUIchildren)
+	{
+		if (cnt == n)
+			return;
+	
+		it->SetUIState(eUIState::Active);
+		cnt++;
+	}
+}

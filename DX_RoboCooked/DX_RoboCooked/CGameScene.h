@@ -12,6 +12,7 @@ class CUIButton;
 class CBlueprint;
 class CMonster;
 class CTornado;
+class CUITrafficLight;
 
 
 class CDebugPlayer1;
@@ -39,6 +40,7 @@ private:
 	CDebugPlayer2*				m_pDebugCube;
 	CParts*						m_pDebugParts;
 	CUIButton*					m_pDebugPauseUI;
+	CUITrafficLight*			m_pDebugTrafficLight;
 
 	static std::mutex			m_cMutex;
 public:
