@@ -13,6 +13,14 @@ enum class ePlayerState
 	Grab 
 };
 
+enum eAnimState
+{
+	Idle = -1,
+	Run,
+	Spin,
+	Stun
+};
+
 class CCharacter :public CActor
 {
 protected:

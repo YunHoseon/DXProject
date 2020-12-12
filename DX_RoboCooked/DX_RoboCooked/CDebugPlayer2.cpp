@@ -29,7 +29,7 @@ CDebugPlayer2::CDebugPlayer2(IInteractCenter* pInteractCenter): CCharacter(1)
 	g_EventManager->Attach(eEvent::KeyPress, this);
 	g_EventManager->Attach(eEvent::KeyRelease, this);
 	g_EventManager->Attach(eEvent::Player1KeyChange, this);
-
+	m_pSkinnedMesh->SetAnimationIndexBlend(Run);
 	//D3DXCreateSphere(g_pD3DDevice, 0.5f, 10, 10, &m_pMesh, NULL);
 }
 
@@ -41,6 +41,3 @@ CDebugPlayer2::~CDebugPlayer2()
 	//SafeRelease(m_pMesh);
 }
 
-void CDebugPlayer2::Setup()
-{
-}

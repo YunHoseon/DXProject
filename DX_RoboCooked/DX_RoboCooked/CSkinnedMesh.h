@@ -18,7 +18,8 @@ protected:
 	float			m_fAnimTime;
 	bool			m_isInputOn;
 
-	enum AnimSet { ATK01, ATK02, ATK03, RUN, IDLE };
+	//enum AnimSet { ATK01, ATK02, ATK03, RUN, IDLE };
+	int				m_nCurrentAnimIndex;
 public:
 	void Setup(char* szFolder, char* szFile);
 	void Update();
@@ -30,6 +31,7 @@ public:
 	void SetAnimationIndex(int nIndex);
 	void SetAnimationIndexBlend(int nIndex);
 
+	int GetCurrentAnimIndex() const { return m_nCurrentAnimIndex; }
 private:
 	Synthesize(D3DXVECTOR3, m_vMin, Min);
 	Synthesize(D3DXVECTOR3, m_vMax, Max);

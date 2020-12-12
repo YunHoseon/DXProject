@@ -11,7 +11,7 @@ CActor::CActor() :
 	m_vPosition(0, 0, 0),
 	m_fBaseSpeed(0),
 	m_fMass(1),
-	m_fFriction(0), m_fRepulsivePower(1),
+	m_fFriction(0), m_fRepulsivePower(0.00001f),
 	m_vVelocity(0, 0, 0),
 	m_vAcceleration(0, 0, 0),
 	m_vScale(1, 1, 1)

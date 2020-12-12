@@ -6,25 +6,25 @@
 #include "CCCNone.h"
 #include "CSkinnedMesh.h"
 
-CCharacter::CCharacter(int nPlayerNum) :
-	m_ePlayerState(ePlayerState::None),
-	m_pInteractCollision(nullptr),
-	m_vGrabPartsPosition(0, 1, 0),
-	m_pParts(nullptr),
-	m_arrElapsedTime({ 0, 0, 0 }),
-	m_arrCoolDown({ 0, 0, 3 }),
-	m_arrKeyDown({ false, false, false }),
-	m_isMoveKeyDown(false),
-	m_pInputKey(InputManager->GetInputKey(nPlayerNum)),
-	//m_pMesh(nullptr),
-	//m_stMtlSphere({}),
-	m_fMinThrowPower(0.01f),
-	m_fMaxThrowPower(0.1f),
-	m_fThrowPower(m_fMinThrowPower),
-	m_fThrowPowerUpSpeed(0.003f),
-	m_pCC(nullptr),
-	m_isDummy(false),
-	m_vDefaultPosition(0, 0, 0)
+CCharacter::CCharacter(int nPlayerNum) : m_pSkinnedMesh(nullptr),
+                                         m_ePlayerState(ePlayerState::None),
+                                         m_pInteractCollision(nullptr),
+                                         m_vGrabPartsPosition(0, 1, 0),
+                                         m_pParts(nullptr),
+                                         m_arrElapsedTime({0, 0, 0}),
+                                         m_arrCoolDown({0, 0, 3}),
+                                         m_arrKeyDown({false, false, false}),
+                                         m_isMoveKeyDown(false),
+                                         m_pInputKey(InputManager->GetInputKey(nPlayerNum)),
+                                         //m_pMesh(nullptr),
+                                         //m_stMtlSphere({}),
+                                         m_fMinThrowPower(0.01f),
+                                         m_fMaxThrowPower(0.1f),
+                                         m_fThrowPower(m_fMinThrowPower),
+                                         m_fThrowPowerUpSpeed(0.003f),
+                                         m_pCC(nullptr),
+                                         m_isDummy(false),
+                                         m_vDefaultPosition(0, 0, 0)
 {
 	m_fBaseSpeed = 0.02f;
 

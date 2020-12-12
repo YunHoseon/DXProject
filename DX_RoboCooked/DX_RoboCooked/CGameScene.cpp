@@ -208,6 +208,8 @@ void CGameScene::Update()
 			CPhysicsApplyer::ApplyBound(m_vecCharacters[0], m_vecCharacters[1]);
 		}
 
+		
+		
 		for (CParts *part : m_vecParts)
 		{
 			for (CCharacter *character : m_vecCharacters)
@@ -221,6 +223,8 @@ void CGameScene::Update()
 			}
 		}
 
+		
+		
 		for (CInteractiveActor *obj : m_vecObject)
 		{
 			for (CCharacter *character : m_vecCharacters)
@@ -242,14 +246,6 @@ void CGameScene::Update()
 			for (CParts *part : m_vecParts)
 			{
 				CPhysicsApplyer::ApplyBound(part, pStaticActor);
-			}
-		}
-
-		for (CBlueprint *blueprint : m_vecBlueprints)
-		{
-			for (CCharacter *character : m_vecCharacters)
-			{
-				CPhysicsApplyer::ApplyBound(character, blueprint);
 			}
 		}
 
@@ -291,6 +287,16 @@ void CGameScene::Update()
 				}
 			}
 		}
+		
+		for (CBlueprint *blueprint : m_vecBlueprints)
+		{
+			for (CCharacter *character : m_vecCharacters)
+			{
+				CPhysicsApplyer::ApplyBound(character, blueprint);
+			}
+		}
+
+		
 	}
 	{ // update
 		for (CActor *it : m_vecStaticActor)

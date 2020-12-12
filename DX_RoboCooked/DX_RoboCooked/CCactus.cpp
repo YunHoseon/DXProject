@@ -4,8 +4,8 @@
 
 CCactus::CCactus(): m_pSMesh(nullptr)
 {
-	m_fFriction = 0;
-	m_fRepulsivePower = 5.0f;
+	m_fFriction = 0.01;
+	m_fRepulsivePower = 0.5f;
 	m_fMass = 9999.f;
 
 	m_pSMesh = g_pStaticMeshManager->GetStaticMesh("Cactus");
