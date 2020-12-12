@@ -357,6 +357,9 @@
     <ClInclude Include="CPharaohCoffin.h">
       <Filter>GameScene\Object</Filter>
     </ClInclude>
+    <ClInclude Include="CUILight.h">
+      <Filter>UI\Button\CUITrafficLight</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="stdafx.cpp">
@@ -634,6 +637,9 @@
     </ClCompile>
     <ClCompile Include="CPharaohCoffin.cpp">
       <Filter>GameScene\Object</Filter>
+    </ClCompile>
+    <ClCompile Include="CUILight.cpp">
+      <Filter>UI\Button\CUITrafficLight</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
