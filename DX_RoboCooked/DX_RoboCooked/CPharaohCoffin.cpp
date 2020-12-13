@@ -9,6 +9,8 @@ CPharaohCoffin::CPharaohCoffin(IInteractCenter* pInteractCenter, D3DXVECTOR3 vPo
 	,m_isInteractCalled(false)
 	, m_fPassedTime(0)
 {
+	m_arrPartsID[0] = "B00"; m_arrPartsID[1] = "B01"; m_arrPartsID[2] = "B02";
+	m_arrPartsID[3] = "B03"; m_arrPartsID[4] = "B04";
 	m_fMass = 9999.f;
 
 	m_pSMesh = g_pStaticMeshManager->GetStaticMesh("Coffin");
@@ -26,6 +28,7 @@ CPharaohCoffin::CPharaohCoffin(IInteractCenter* pInteractCenter, D3DXVECTOR3 vPo
 
 CPharaohCoffin::~CPharaohCoffin()
 {
+
 }
 
 void CPharaohCoffin::Update()
@@ -44,19 +47,19 @@ void CPharaohCoffin::Render()
 
 void CPharaohCoffin::Interact(CCharacter * pCharacter)
 {
-	/*if (pCharacter->GetPlayerState() == ePlayerState::None)
+	if (pCharacter->GetPlayerState() == ePlayerState::None)
 	{
 		CParts *parts = Make();
 		parts->SetGrabPosition(&pCharacter->GetGrabPartsPosition());
 		m_pInteractCenter->AddParts(parts);
 		pCharacter->SetParts(parts);
 		m_isInteractCalled = true;
-	}*/
+	}
 }
 
 CParts* CPharaohCoffin::Make()
 {
-	CParts *parts = g_pPartsManager->CreateParts(m_sID);
+	CParts *parts = g_pPartsManager->CreateParts("B00");
 	return parts;
 }
 

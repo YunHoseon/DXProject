@@ -2,12 +2,16 @@
 #include "CInteractiveActor.h"
 #include "IPartGenerator.h"
 
+#define PARTS_COUNT 5
+
 class CPharaohCoffin :
 	public CInteractiveActor, public IPartGenerator
 {
 	CStaticMesh*	m_pSMesh;
 	bool			m_isInteractCalled;
 	float			m_fPassedTime;
+
+	string			m_arrPartsID[PARTS_COUNT];	//2단계파츠 ID만
 public:
 	CPharaohCoffin(IInteractCenter* pInteractCenter, D3DXVECTOR3 vPos);
 	~CPharaohCoffin();
