@@ -85,8 +85,7 @@ CGameScene::~CGameScene()
 
 void CGameScene::Init()
 {
-	CWall *wall = new CWall;
-	wall->Setup();
+	CWall *wall = new CWall(this);
 	CMonster *Medusa = new CMonsterMedusa(this);
 	CMonster *Harpy = new CMonsterHarpy(this);
 	Harpy->AddObjectPosition(D3DXVECTOR3(0, 0, 0));

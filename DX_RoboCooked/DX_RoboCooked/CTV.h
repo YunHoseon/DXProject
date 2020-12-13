@@ -1,18 +1,16 @@
 #pragma once
 #include "CActor.h"
+class IInteractCenter;
 class CTV :
 	public CActor
 {
 private:
 	ID3DXMesh*				m_p3DText;
 	CStaticMesh*			m_pSMesh;
-	string					m_sMin;
-	string					m_sSec;
-	INT						m_nMin;
-	INT						m_nSec;
+	std::wstring			m_sTime;
 	FLOAT					m_fTime;
 public:
-	CTV();
+	CTV(IInteractCenter* pIntaract);
 	~CTV();
 
 public:
@@ -21,7 +19,7 @@ public:
 
 	void Create_Font();
 
-	int CalMin(int sec){return sec / 60;}
-	int CalSec(int sec){return sec % 60;}
+	string CalMin(int sec);
+	string CalSec(int sec);
 };
 

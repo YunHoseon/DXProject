@@ -2,11 +2,13 @@
 #include "CWall.h"
 #include "CBoxCollision.h"
 #include "CTV.h"
-CWall::CWall()
+CWall::CWall(IInteractCenter* pIntaract)
 	:n_RotAngleX(0)
 	, m_pTV(nullptr)
 {
+	m_pInteractCenter = pIntaract;
 	g_EventManager->Attach(eEvent::KeyRelease, this);
+	Setup();
 }
 
 
@@ -17,7 +19,7 @@ CWall::~CWall()
 
 void CWall::Setup()
 {
-	m_pTV = new CTV;
+	m_pTV = new CTV(m_pInteractCenter);
 	vector<ST_PNT_VERTEX> vecVertex;
 	ST_PNT_VERTEX v;
 	v.n = D3DXVECTOR3(0, 1, 0);
@@ -137,6 +139,10 @@ void CWall::Update()
 	D3DXMatrixRotationX(&m_matR, D3DXToRadian(n_RotAngleX));
 	D3DXMatrixTranslation(&m_matT, 0, -1.5f, 6);
 	m_matWorld = m_matR * m_matT;
+
+	if (m_pTV)
+		m_pTV->Update();
+
 }
 
 void CWall::Render()

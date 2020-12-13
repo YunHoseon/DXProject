@@ -1,6 +1,7 @@
 #pragma once
 #include "CActor.h"
 class CTV;
+class IInteractCenter;
 
 class CWall :
 	public CActor
@@ -13,7 +14,7 @@ private:
 	D3DMATERIAL9			m_stMtlWall;
 	CTV*					m_pTV;
 public:
-	CWall();
+	CWall(IInteractCenter* pIntaract);
 	~CWall();
 
 	void Setup();

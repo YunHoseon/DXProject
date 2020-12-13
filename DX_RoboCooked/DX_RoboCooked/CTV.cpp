@@ -1,18 +1,19 @@
 #include "stdafx.h"
 #include "CTV.h"
 #include "CBoxCollision.h"
+#include "IInteractCenter.h"
 
 
-CTV::CTV()
+CTV::CTV(IInteractCenter* pIntaract)
 	: m_p3DText(nullptr)
 	, m_pSMesh(nullptr)
-	, m_nMin(0)
-	, m_nSec(0)
 	, m_fTime(0.0f)
+	, m_sTime()
 {
+	AddFontResourceA("./data/Fonts/a컴퓨터C.ttf");
+	m_pInteractCenter = pIntaract;
 	//m_pSMesh = g_pStaticMeshManager->GetStaticMesh("TV");
 	//m_pCollision = new CBoxCollision(m_pSMesh->GetMesh(), &m_matWorld);
-	Create_Font();
 }
 
 
@@ -22,6 +23,12 @@ CTV::~CTV()
 
 void CTV::Update()
 {
+	m_fTime = m_pInteractCenter->GetTime();
+	string sTime = CalMin(m_fTime) +":" + CalSec(m_fTime);
+	m_sTime.assign(sTime.begin(), sTime.end());
+	wprintf(m_sTime.c_str());
+	Create_Font();
+
 }
 
 void CTV::Render()
@@ -46,14 +53,14 @@ void CTV::Create_Font()
 	lf.lfUnderline = false;
 	lf.lfStrikeOut = false;
 	lf.lfCharSet = DEFAULT_CHARSET;
-	wcscpy_s(lf.lfFaceName, L"굴림체");
+	wcscpy_s(lf.lfFaceName, L"a컴퓨터C");
 
 	HFONT hFont;
 	HFONT hFontOld;
 
 	hFont = CreateFontIndirect(&lf);
 	hFontOld = (HFONT)SelectObject(hdc, hFont);
-	D3DXCreateText(g_pD3DDevice, hdc, L"TV TEXT", 0.001f, 0.01f, &m_p3DText, 0, 0);
+	D3DXCreateText(g_pD3DDevice, hdc, m_sTime.c_str(), 0.001f, 0.01f, &m_p3DText, 0, 0);
 
 	SelectObject(hdc, hFontOld);
 	DeleteObject(hFont);
@@ -61,3 +68,31 @@ void CTV::Create_Font()
 
 }
 
+string CTV::CalMin(int sec)
+{
+	int a = sec / 60;
+	if (a >= 10)
+	{
+		return std::to_string(a);
+	}
+	else
+	{
+		return "0" + std::to_string(a);
+	}
+}
+
+string CTV::CalSec(int sec)
+{
+	int a = sec % 60;
+	if (a >= 10)
+	{
+		return std::to_string(a);
+	}
+	else
+	{
+		return "0" + std::to_string(a);
+	}
+}
+
+//{return std::to_string(sec / 60); }
+//{return std::to_string(sec % 60); }
