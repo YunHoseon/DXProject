@@ -4,6 +4,7 @@
 #include "IInteractCenter.h"
 
 
+
 CTV::CTV(IInteractCenter* pIntaract)
 	: m_p3DText(nullptr)
 	, m_pSMesh(nullptr)
@@ -46,21 +47,11 @@ void CTV::Render()
 void CTV::Create_Font()
 {
 	HDC hdc = CreateCompatibleDC(0);
-	LOGFONT lf;
-	ZeroMemory(&lf, sizeof(LOGFONT));
-	lf.lfHeight = 25;
-	lf.lfWidth = 12;
-	lf.lfWeight = 500;
-	lf.lfItalic = false;
-	lf.lfUnderline = false;
-	lf.lfStrikeOut = false;
-	lf.lfCharSet = DEFAULT_CHARSET;
-	wcscpy_s(lf.lfFaceName, L"aÄÄÇ»ÅÍC");
 
 	HFONT hFont;
 	HFONT hFontOld;
 
-	hFont = CreateFontIndirect(&lf);
+	hFont = CreateFontIndirect(&g_pFontManager->Get3dFont(CFontManager::TVTIME));
 	hFontOld = (HFONT)SelectObject(hdc, hFont);
 	SafeRelease(m_p3DText);
 	D3DXCreateText(g_pD3DDevice, hdc, m_sTime.c_str(), 0.001f, 0.01f, &m_p3DText, 0, 0);

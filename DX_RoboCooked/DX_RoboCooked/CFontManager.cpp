@@ -29,7 +29,6 @@ LPD3DXFONT CFontManager::GetFont(eFontType e)
 		fd.OutputPrecision = OUT_DEFAULT_PRECIS;
 		fd.PitchAndFamily = FF_DONTCARE;
 		wcscpy_s(fd.FaceName, L"굴림체");
-		
 	}
 	else if(e == QUEST)
 	{
@@ -47,6 +46,32 @@ LPD3DXFONT CFontManager::GetFont(eFontType e)
 
 	D3DXCreateFontIndirect(g_pD3DDevice, &fd, &m_mapFont[e]);
 	return m_mapFont[e];
+}
+
+LOGFONT CFontManager::Get3dFont(eFontType e)
+{
+	if (m_map3dFont.find(e) != m_map3dFont.end())
+	{
+		return m_map3dFont[e];
+	}
+
+	LOGFONT lf;
+	ZeroMemory(&lf, sizeof(LOGFONT));
+	if (e == TVTIME)
+	{
+		lf.lfHeight = 25;
+		lf.lfWidth = 12;
+		lf.lfWeight = 500;
+		lf.lfItalic = false;
+		lf.lfUnderline = false;
+		lf.lfStrikeOut = false;
+		lf.lfCharSet = DEFAULT_CHARSET;
+		wcscpy_s(lf.lfFaceName, L"a컴퓨터C");
+	}
+
+	m_map3dFont[e] = lf;
+
+	return m_map3dFont[e];
 }
 
 void CFontManager::Destroy()
