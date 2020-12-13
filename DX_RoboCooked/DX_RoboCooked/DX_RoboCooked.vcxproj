@@ -173,6 +173,7 @@
     <ClInclude Include="CStaticMesh.h" />
     <ClInclude Include="CTestStair.h" />
     <ClInclude Include="CTornado.h" />
+    <ClInclude Include="CTV.h" />
     <ClInclude Include="CUICloseButton.h" />
     <ClInclude Include="CUIEndButton.h" />
     <ClInclude Include="CUILight.h" />
@@ -270,6 +271,7 @@
     <ClCompile Include="CStaticMesh.cpp" />
     <ClCompile Include="CTestStair.cpp" />
     <ClCompile Include="CTornado.cpp" />
+    <ClCompile Include="CTV.cpp" />
     <ClCompile Include="CUICloseButton.cpp" />
     <ClCompile Include="CUIEndButton.cpp" />
     <ClCompile Include="CUILight.cpp" />
