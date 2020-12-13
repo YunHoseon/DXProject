@@ -98,7 +98,7 @@ void CGameScene::Init()
 	CUIButton* pPauseButton = new CUIPauseButton(D3DXVECTOR2(465, 10), 27, this);
 	CUITrafficLight* pTrafficLight = new CUITrafficLight(this,m_vecBlueprints.size());
 	
-	//CPharaohCoffin* coffin = new CPharaohCoffin(this, D3DXVECTOR3(0,0,0));
+	CPharaohCoffin* coffin = new CPharaohCoffin(this, D3DXVECTOR3(0,0,0));
 
 	m_cMutex.lock();
 
@@ -109,7 +109,7 @@ void CGameScene::Init()
 
 	m_pDebugTrafficLight = pTrafficLight;
 	m_pDebugPauseUI = pPauseButton;
-	//m_vecObject.push_back(coffin);
+	m_vecObject.push_back(coffin);
 
 	m_cMutex.unlock();
 }

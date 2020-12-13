@@ -3,12 +3,14 @@
 #include "ICollisionArea.h"
 #include "CCharacter.h"
 #include "CGameScene.h"
+#include "CCCStopMove.h"
 
 CPharaohCoffin::CPharaohCoffin(IInteractCenter* pInteractCenter, D3DXVECTOR3 vPos)
 	: m_pSMesh(nullptr)
 	,m_isInteractCalled(false)
 	, m_fPassedTime(0)
 {
+	m_pInteractCenter = pInteractCenter;
 	m_arrPartsID[0] = "B00"; m_arrPartsID[1] = "B01"; m_arrPartsID[2] = "B02";
 	m_arrPartsID[3] = "B03"; m_arrPartsID[4] = "B04";
 	m_fMass = 9999.f;
@@ -33,6 +35,16 @@ CPharaohCoffin::~CPharaohCoffin()
 
 void CPharaohCoffin::Update()
 {
+	if (m_isInteractCalled)
+	{
+		//_DEBUG_COMMENT cout << "쿨타임중" << endl;
+		m_fPassedTime += g_pTimeManager->GetElapsedTime();
+		if (5.0f <= m_fPassedTime)
+		{
+			m_isInteractCalled = false;
+			m_fPassedTime = 0.0f;
+		}
+	}
 }
 
 void CPharaohCoffin::Render()
@@ -47,19 +59,33 @@ void CPharaohCoffin::Render()
 
 void CPharaohCoffin::Interact(CCharacter * pCharacter)
 {
-	if (pCharacter->GetPlayerState() == ePlayerState::None)
+	if (!m_isInteractCalled)
 	{
-		CParts *parts = Make();
-		parts->SetGrabPosition(&pCharacter->GetGrabPartsPosition());
-		m_pInteractCenter->AddParts(parts);
-		pCharacter->SetParts(parts);
-		m_isInteractCalled = true;
+		int MakeOrCC = m_randNumGenerator.GenInt(0, 1);
+
+		if (MakeOrCC)
+		{
+			if (pCharacter->GetPlayerState() == ePlayerState::None)
+			{
+				CParts *parts = Make();
+				parts->SetGrabPosition(&pCharacter->GetGrabPartsPosition());
+				m_pInteractCenter->AddParts(parts);
+				pCharacter->SetParts(parts);
+				m_isInteractCalled = true;
+			}
+		}
+		else
+		{
+			//pCharacter->SetCC(CCCStopMove);
+			StopMove();
+			_DEBUG_COMMENT cout << "이동불능" << endl;
+		}
 	}
 }
 
 CParts* CPharaohCoffin::Make()
 {
-	CParts *parts = g_pPartsManager->CreateParts("B00");
+	CParts *parts = g_pPartsManager->CreateParts(m_arrPartsID[m_randNumGenerator.GenInt(0, 5)]);
 	return parts;
 }
 
