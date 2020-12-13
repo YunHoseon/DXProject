@@ -360,6 +360,9 @@
     <ClInclude Include="CUILight.h">
       <Filter>UI\Button\CUITrafficLight</Filter>
     </ClInclude>
+    <ClInclude Include="CTV.h">
+      <Filter>GameScene\Object</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="stdafx.cpp">
@@ -640,6 +643,9 @@
     </ClCompile>
     <ClCompile Include="CUILight.cpp">
       <Filter>UI\Button\CUITrafficLight</Filter>
+    </ClCompile>
+    <ClCompile Include="CTV.cpp">
+      <Filter>GameScene\Object</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

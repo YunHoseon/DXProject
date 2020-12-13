@@ -1,9 +1,10 @@
 #include "stdafx.h"
 #include "CWall.h"
 #include "CBoxCollision.h"
-
+#include "CTV.h"
 CWall::CWall()
 	:n_RotAngleX(0)
+	, m_pTV(nullptr)
 {
 	g_EventManager->Attach(eEvent::KeyRelease, this);
 }
@@ -11,10 +12,12 @@ CWall::CWall()
 
 CWall::~CWall()
 {
+	SafeDelete(m_pTV);
 }
 
 void CWall::Setup()
 {
+	m_pTV = new CTV;
 	vector<ST_PNT_VERTEX> vecVertex;
 	ST_PNT_VERTEX v;
 	v.n = D3DXVECTOR3(0, 1, 0);
@@ -121,7 +124,7 @@ void CWall::Setup()
 	for (size_t i = 0; i < m_vecVertex.size(); ++i)
 		D3DXVec3TransformCoord(&m_vecVertex[i].p, &m_vecVertex[i].p, &mat);
 
-	Create_Font();
+	//Create_Font();
 
 	ZeroMemory(&m_stMtlWall, sizeof(D3DMATERIAL9));
 	m_stMtlWall.Ambient = D3DXCOLOR(0.7f, 0.7f, 0.7f, 1.0f);
@@ -163,10 +166,13 @@ void CWall::Render()
 	D3DXMatrixIdentity(&matR);
 	D3DXMatrixIdentity(&matT);
 	D3DXMatrixScaling(&matS, 1.0f, 1.0f, 10.0f);
-	D3DXMatrixTranslation(&matT, -2.0f, 3.0f, -0.5f);
+	D3DXMatrixTranslation(&matT, -2.0f, 5.0f, -0.5f);
 	matWorld = matS * matR * matT * m_matWorld;
 	g_pD3DDevice->SetTransform(D3DTS_WORLD, &matWorld);
-	m_p3DText->DrawSubset(0);
+	
+	//m_p3DText->DrawSubset(0);
+	if (m_pTV)
+		m_pTV->Render();
 }
 
 void CWall::OnEvent(eEvent eEvent, void * _value)
@@ -180,32 +186,32 @@ void CWall::OnEvent(eEvent eEvent, void * _value)
 		break;
 	}
 }
-
-void CWall::Create_Font()
-{
-	HDC hdc = CreateCompatibleDC(0);
-	LOGFONT lf;
-	ZeroMemory(&lf, sizeof(LOGFONT));
-	lf.lfHeight = 25;
-	lf.lfWidth = 12;
-	lf.lfWeight = 500;
-	lf.lfItalic = false;
-	lf.lfUnderline = false;
-	lf.lfStrikeOut = false;
-	lf.lfCharSet = DEFAULT_CHARSET;
-	wcscpy_s(lf.lfFaceName, L"±¼¸²Ã¼");
-
-	HFONT hFont;
-	HFONT hFontOld;
-
-	hFont = CreateFontIndirect(&lf);
-	hFontOld = (HFONT)SelectObject(hdc, hFont);
-	D3DXCreateText(g_pD3DDevice, hdc, L"TV TEXT", 0.001f, 0.01f, &m_p3DText, 0, 0);
-
-	SelectObject(hdc, hFontOld);
-	DeleteObject(hFont);
-	DeleteDC(hdc);
-}
+//
+//void CWall::Create_Font()
+//{
+//	HDC hdc = CreateCompatibleDC(0);
+//	LOGFONT lf;
+//	ZeroMemory(&lf, sizeof(LOGFONT));
+//	lf.lfHeight = 25;
+//	lf.lfWidth = 12;
+//	lf.lfWeight = 500;
+//	lf.lfItalic = false;
+//	lf.lfUnderline = false;
+//	lf.lfStrikeOut = false;
+//	lf.lfCharSet = DEFAULT_CHARSET;
+//	wcscpy_s(lf.lfFaceName, L"±¼¸²Ã¼");
+//
+//	HFONT hFont;
+//	HFONT hFontOld;
+//
+//	hFont = CreateFontIndirect(&lf);
+//	hFontOld = (HFONT)SelectObject(hdc, hFont);
+//	D3DXCreateText(g_pD3DDevice, hdc, L"TV TEXT", 0.001f, 0.01f, &m_p3DText, 0, 0);
+//
+//	SelectObject(hdc, hFontOld);
+//	DeleteObject(hFont);
+//	DeleteDC(hdc);
+//}
 
 void CWall::ReleaseKey()
 {
