@@ -35,14 +35,11 @@ private:
 	INT							m_nLotIndex;
 	vector<CTile*>				m_vecTile;
 
-
-	CDebugPlayer1*				m_pDebugSphere;
-	CDebugPlayer2*				m_pDebugCube;
-	CParts*						m_pDebugParts;
 	CUIButton*					m_pDebugPauseUI;
 	CUITrafficLight*			m_pDebugTrafficLight;
 
 	static std::mutex			m_cMutex;
+	string						m_sID;
 public:
 	CGameScene();
 	virtual ~CGameScene();
@@ -79,5 +76,6 @@ public:
 	void DeleteCC();
 	bool IsGameClear();
 	bool IsGameLose();
+	string GetSceneID() override { return m_sID; }
 };
 

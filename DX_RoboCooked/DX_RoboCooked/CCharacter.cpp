@@ -41,6 +41,7 @@ CCharacter::~CCharacter()
 	SafeDelete(m_pInteractCollision);
 	//SafeRelease(m_pMesh);
 	SafeDelete(m_pCC);
+	SafeDelete(m_pSkinnedMesh);
 }
 
 void CCharacter::Render()

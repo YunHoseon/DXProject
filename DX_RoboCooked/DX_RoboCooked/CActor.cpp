@@ -26,7 +26,7 @@ CActor::CActor() :
 
 CActor::~CActor()
 {
-	
+	SafeDelete(m_pCollision);
 }
 
 bool CActor::Collide(CActor* target, D3DXVECTOR3* pNormal)

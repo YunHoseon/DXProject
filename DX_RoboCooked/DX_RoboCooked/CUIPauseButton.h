@@ -24,5 +24,6 @@ public:
 	void KeyReleaseEvent(void* _value);
 	void MouseReleaseEvent(void* _value);
 	void ActiveButton();
+	void ResetGame();
 };
 

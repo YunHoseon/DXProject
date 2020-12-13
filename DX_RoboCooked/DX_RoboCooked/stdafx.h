@@ -49,11 +49,11 @@ using std::thread;
 using nlohmann::json;
 
 extern HWND g_hWnd;
-#define SafeRelease(p) { if(p) p->Release(); p = NULL; }
+#define SafeRelease(p) { if(p) p->Release(); p = nullptr; }
 
-#define SafeDelete(p) { if(p) delete p; p = NULL; }
+#define SafeDelete(p) { if(p) delete p; p = nullptr; }
 
-#define SafeDeleteArray(p) { if(p) delete[] p; p = NULL; }
+#define SafeDeleteArray(p) { if(p) delete[] p; p = nullptr; }
 
 #define EPSILON 0.00001f
 

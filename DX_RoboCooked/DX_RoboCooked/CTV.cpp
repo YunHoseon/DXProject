@@ -19,6 +19,8 @@ CTV::CTV(IInteractCenter* pIntaract)
 
 CTV::~CTV()
 {
+	SafeRelease(m_p3DText);
+	SafeDelete(m_pSMesh);
 }
 
 void CTV::Update()
@@ -60,6 +62,7 @@ void CTV::Create_Font()
 
 	hFont = CreateFontIndirect(&lf);
 	hFontOld = (HFONT)SelectObject(hdc, hFont);
+	SafeRelease(m_p3DText);
 	D3DXCreateText(g_pD3DDevice, hdc, m_sTime.c_str(), 0.001f, 0.01f, &m_p3DText, 0, 0);
 
 	SelectObject(hdc, hFontOld);

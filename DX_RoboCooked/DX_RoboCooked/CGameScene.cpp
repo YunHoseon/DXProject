@@ -39,9 +39,6 @@ std::mutex CGameScene::m_cMutex;
 #include "CDebugPlayer2.h"
 
 CGameScene::CGameScene() : m_pField(NULL),
-						   m_pDebugSphere(NULL),
-						   m_pDebugCube(NULL),
-						   m_pDebugParts(NULL),
 						   m_pDebugPauseUI(nullptr),
 						   m_pDebugTrafficLight(nullptr),
 						   m_isTimeStop(false),
@@ -77,7 +74,20 @@ CGameScene::~CGameScene()
 	{
 		SafeDelete(it);
 	}
+	for (CMonster* it : m_vecMonster)
+	{
+		SafeDelete(it);
+	}
 
+	for (CTile* it : m_vecTile)
+	{
+		SafeDelete(it);
+	}
+
+	for (CBlueprint* it : m_vecBlueprints)
+	{
+		SafeDelete(it);
+	}
 	SafeDelete(m_pDebugPauseUI);
 	SafeDelete(m_pDebugTrafficLight);
 	m_cMutex.unlock();
@@ -618,6 +628,7 @@ void CGameScene::Load(string sFolder, string sFilename, void (CGameScene::* pCal
 	this->m_vecParts.insert(m_vecParts.end(), vecParts.begin(), vecParts.end());
 	this->m_vecCharacters.insert(m_vecCharacters.end(), vecChara.begin(), vecChara.end());
 	this->m_vecTile.insert(m_vecTile.end(), vecTile.begin(), vecTile.end());
+	this->m_sID = sFilename;
 	this->m_cMutex.unlock();
 
 	if (pCallback)

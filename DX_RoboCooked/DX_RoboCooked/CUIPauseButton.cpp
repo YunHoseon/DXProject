@@ -1,5 +1,7 @@
 #include "stdafx.h"
 #include "CUIPauseButton.h"
+
+#include "CGameScene.h"
 #include "CUI.h"
 #include "CUIText.h"
 #include "CUITexture.h"
@@ -86,6 +88,7 @@ void CUIPauseButton::OnEvent(eEvent eEvent, void * _value)
 		ActiveButton();
 		break;
 	case eEvent::PauseReset:
+		ResetGame();
 		break;
 	case eEvent::PauseEnd:
 		break;
@@ -173,5 +176,21 @@ void CUIPauseButton::ActiveButton()
 			//g_EventManager->Detach(eEvent::MouseRelease, this);
 		}
 		m_pInteractCenter->ToggleStop();
+	}
+}
+
+void CUIPauseButton::ResetGame()
+{
+	//return;
+	CGameScene* scene = new CGameScene;
+	
+	thread _t1(&CGameScene::Load, scene, "data/js", m_pInteractCenter->GetSceneID(), &CGameScene::Init);
+	_t1.detach();
+
+	CScene* pBeforeScene = g_SceneManager->SetCurrentScene(scene);
+	if (pBeforeScene)
+	{
+		thread _t2([&](CScene* p) { SafeDelete(p); }, pBeforeScene);
+		_t2.detach();
 	}
 }

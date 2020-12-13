@@ -21,6 +21,7 @@ COutlet::COutlet(IInteractCenter* pInteractCenter)
 
 COutlet::~COutlet()
 {
+	SafeDelete(m_pSkinnedMesh);
 }
 
 void COutlet::Setup(float fAngle, D3DXVECTOR3 vPosition)
