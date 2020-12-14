@@ -7,8 +7,10 @@
 
 CPharaohCoffin::CPharaohCoffin(IInteractCenter* pInteractCenter, D3DXVECTOR3 vPos)
 	: m_pSMesh(nullptr)
-	,m_isInteractCalled(false)
+	, m_isInteractCalled(false)
+	, m_fCoolTime(0)
 	, m_fPassedTime(0)
+	, m_isMoveBlocked(false)
 {
 	m_pInteractCenter = pInteractCenter;
 	m_arrPartsID[0] = "B00"; m_arrPartsID[1] = "B01"; m_arrPartsID[2] = "B02";
@@ -17,6 +19,7 @@ CPharaohCoffin::CPharaohCoffin(IInteractCenter* pInteractCenter, D3DXVECTOR3 vPo
 
 	m_pSMesh = g_pStaticMeshManager->GetStaticMesh("Coffin");
 	m_pCollision = new CBoxCollision(m_pSMesh->GetMesh(), &m_matWorld);
+	m_pCCCollision = new CSphereCollision(g_vZero, 1.5f, &m_matWorld);
 	SetScale(0.01f, 0.01f, 0.01f);
 	SetRotationY(D3DXToRadian(0));
 
@@ -25,6 +28,8 @@ CPharaohCoffin::CPharaohCoffin(IInteractCenter* pInteractCenter, D3DXVECTOR3 vPo
 
 	if (m_pCollision)
 		m_pCollision->Update();
+	if (m_pCCCollision)
+		m_pCCCollision->Update();
 }
 
 
@@ -37,12 +42,31 @@ void CPharaohCoffin::Update()
 {
 	if (m_isInteractCalled)
 	{
-		//_DEBUG_COMMENT cout << "쿨타임중" << endl;
-		m_fPassedTime += g_pTimeManager->GetElapsedTime();
-		if (5.0f <= m_fPassedTime)
+		m_fCoolTime += g_pTimeManager->GetElapsedTime();
+		if (5.0f <= m_fCoolTime)
 		{
 			m_isInteractCalled = false;
+			m_fCoolTime = 0.0f;
+		}
+	}
+
+	if (m_isMoveBlocked)
+	{
+		m_fPassedTime += g_pTimeManager->GetElapsedTime();
+		if (3.0f <= m_fPassedTime)
+		{
+			m_isMoveBlocked = false;
 			m_fPassedTime = 0.0f;
+		}
+	}
+	else
+	{
+		for (CCharacter* it : m_pInteractCenter->GetCharacters())
+		{
+			if (m_pCCCollision->Collide(it->GetCollision()))
+			{
+				it->DeleteCC();
+			}
 		}
 	}
 }
@@ -55,12 +79,15 @@ void CPharaohCoffin::Render()
 
 	_DEBUG_COMMENT if (m_pCollision)
 		_DEBUG_COMMENT	m_pCollision->Render();
+	_DEBUG_COMMENT if (m_pCCCollision)
+		_DEBUG_COMMENT	m_pCCCollision->Render();
 }
 
 void CPharaohCoffin::Interact(CCharacter * pCharacter)
 {
 	if (!m_isInteractCalled)
 	{
+		m_isInteractCalled = true;
 		int MakeOrCC = m_randNumGenerator.GenInt(0, 1);
 
 		if (MakeOrCC)
@@ -71,25 +98,25 @@ void CPharaohCoffin::Interact(CCharacter * pCharacter)
 				parts->SetGrabPosition(&pCharacter->GetGrabPartsPosition());
 				m_pInteractCenter->AddParts(parts);
 				pCharacter->SetParts(parts);
-				m_isInteractCalled = true;
 			}
 		}
 		else
 		{
-			//pCharacter->SetCC(CCCStopMove);
-			StopMove();
-			_DEBUG_COMMENT cout << "이동불능" << endl;
+			m_isMoveBlocked = true;
+			for (CCharacter* it : m_pInteractCenter->GetCharacters())
+			{
+				if (m_pCCCollision->Collide(it->GetCollision()))
+				{
+					it->SetCC(new CCCStopMove);
+				}
+			}
 		}
+			
 	}
 }
 
 CParts* CPharaohCoffin::Make()
 {
-	CParts *parts = g_pPartsManager->CreateParts(m_arrPartsID[m_randNumGenerator.GenInt(0, 5)]);
+	CParts *parts = g_pPartsManager->CreateParts(m_arrPartsID[m_randNumGenerator.GenInt(0, 4)]);
 	return parts;
-}
-
-void CPharaohCoffin::StopMove()
-{
-
 }
