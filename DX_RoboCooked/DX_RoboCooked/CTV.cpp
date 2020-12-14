@@ -11,7 +11,6 @@ CTV::CTV(IInteractCenter* pIntaract)
 	, m_fTime(0.0f)
 	, m_sTime()
 {
-	AddFontResourceA("./data/Fonts/aÄÄÇ»ÅÍC.ttf");
 	m_pInteractCenter = pIntaract;
 	//m_pSMesh = g_pStaticMeshManager->GetStaticMesh("TV");
 	//m_pCollision = new CBoxCollision(m_pSMesh->GetMesh(), &m_matWorld);
@@ -48,16 +47,13 @@ void CTV::Create_Font()
 {
 	HDC hdc = CreateCompatibleDC(0);
 
-	HFONT hFont;
-	HFONT hFontOld;
 
-	hFont = CreateFontIndirect(&g_pFontManager->Get3dFont(CFontManager::TVTIME));
-	hFontOld = (HFONT)SelectObject(hdc, hFont);
+	HFONT hFontOld = (HFONT)SelectObject(hdc, g_pFontManager->Get3dFont(CFontManager::TVTIME));
+
 	SafeRelease(m_p3DText);
 	D3DXCreateText(g_pD3DDevice, hdc, m_sTime.c_str(), 0.001f, 0.01f, &m_p3DText, 0, 0);
 	
 	SelectObject(hdc, hFontOld);
-	DeleteObject(hFont);
 	DeleteDC(hdc);
 
 }

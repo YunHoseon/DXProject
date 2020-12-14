@@ -38,10 +38,11 @@ CCharacter::CCharacter(int nPlayerNum) : m_pSkinnedMesh(nullptr),
 
 CCharacter::~CCharacter()
 {
-	SafeDelete(m_pInteractCollision);
+	//SafeDelete(m_pInteractCollision);
 	//SafeRelease(m_pMesh);
 	SafeDelete(m_pCC);
 	SafeDelete(m_pSkinnedMesh);
+	SafeDelete(m_pInteractCollision);
 }
 
 void CCharacter::Render()
@@ -398,6 +399,9 @@ void CCharacter::Reset()
 
 void CCharacter::SetAnimState()
 {
+	if (!m_pSkinnedMesh)
+		return;
+	
 	switch (m_pSkinnedMesh->GetCurrentAnimIndex())
 	{
 	case Idle:
