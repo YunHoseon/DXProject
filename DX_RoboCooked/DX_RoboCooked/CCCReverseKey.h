@@ -7,10 +7,9 @@ public:
 	CCCReverseKey();
 
 public:
-	string& GetID()
+	string GetID()
 	{
-		string name = "REVERSEKEY";
-		return name;
+		return "REVERSEKEY";
 	};
 
 	virtual void Render(D3DXVECTOR3& vPos) {};

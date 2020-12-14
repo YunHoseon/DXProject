@@ -8,10 +8,9 @@ public:
 
 
 public:
-	string& GetID()
+	string GetID()
 	{
-		string name = "STOPMOVE";
-		return name;
+		return "STOPMOVE";
 	};
 
 	virtual void Render(D3DXVECTOR3& vPos) {};

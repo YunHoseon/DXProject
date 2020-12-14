@@ -58,6 +58,7 @@ void CCharacter::Render()
 void CCharacter::Update()
 {
 	Move();
+	SetAnimState();
 	m_vGrabPartsPosition.x = m_vPosition.x;
 	m_vGrabPartsPosition.y = m_vPosition.y + 1.0f;
 	m_vGrabPartsPosition.z = m_vPosition.z;
@@ -393,4 +394,44 @@ void CCharacter::Reset()
 	SetRotationY(D3DX_PI);
 	m_vVelocity = g_vZero;
 	m_vAcceleration = g_vZero;
+}
+
+void CCharacter::SetAnimState()
+{
+	switch (m_pSkinnedMesh->GetCurrentAnimIndex())
+	{
+	case Idle:
+	{
+		if(m_pCC->GetID() != "NONE")
+			m_pSkinnedMesh->SetAnimationIndexBlend(Stun);
+		else if (D3DXVec3Length(&m_vVelocity) > EPSILON * 10)
+			m_pSkinnedMesh->SetAnimationIndexBlend(Run);
+	}
+		break;
+	case Run:
+	{
+		if (m_pCC->GetID() != "NONE")
+			m_pSkinnedMesh->SetAnimationIndexBlend(Stun);
+		else if (D3DXVec3Length(&m_vVelocity) < EPSILON * 10)
+			m_pSkinnedMesh->SetAnimationIndexBlend(Idle);
+	}
+		break;
+	case Spin:
+	{
+		
+	}
+		break;
+	case Stun:
+	{
+		if (m_pCC->GetID() == "NONE")
+		{
+			if (D3DXVec3Length(&m_vVelocity) < EPSILON * 10)
+				m_pSkinnedMesh->SetAnimationIndexBlend(Idle);
+			else if (D3DXVec3Length(&m_vVelocity) > EPSILON * 10)
+				m_pSkinnedMesh->SetAnimationIndexBlend(Run);
+		}
+	}
+		break;
+	default: break;
+	}
 }
