@@ -40,19 +40,13 @@ void CMainGame::Setup()
 		m_pCamera->Setup(NULL);
 	
 	CGameScene* scene = new CGameScene;
-
-	//scene->Load("data/js", "AllTest.json", &CGameScene::Init);
-
-	//std::function<void(CGameScene&, string, string, void(CGameScene::*)(void))> load = &CGameScene::Load;
-	//thread _t1(load, scene, "data/js", "AllTest.json", &CGameScene::Init);
-
 	thread _t1(&CGameScene::Load, scene, "data/js", "AllTest.json", &CGameScene::Init);
 	_t1.detach();
 	
 	CScene* pBeforeScene = g_SceneManager->SetCurrentScene(scene);
 	if (pBeforeScene)
 	{
-		thread _t2([&](CScene* p) { SafeDelete(p); }, pBeforeScene);
+		thread _t2([pBeforeScene]() { delete pBeforeScene; });
 		_t2.detach();
 	}
 }
