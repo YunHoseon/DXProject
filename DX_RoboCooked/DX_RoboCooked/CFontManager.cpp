@@ -18,7 +18,7 @@ LPD3DXFONT CFontManager::GetFont(eFontType e)
 	}
 
 	D3DXFONT_DESC fd{};
-
+	
 	if(e == DEFAULT)
 	{
 		fd.Height = 30;
@@ -43,7 +43,7 @@ LPD3DXFONT CFontManager::GetFont(eFontType e)
 		AddFontResource(L"data/font/umberto.ttf");
 		wcscpy_s(fd.FaceName, L"Umberto");
 	}
-
+	
 	D3DXCreateFontIndirect(g_pD3DDevice, &fd, &m_mapFont[e]);
 	return m_mapFont[e];
 }

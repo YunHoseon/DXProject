@@ -190,7 +190,7 @@ void CUIPauseButton::ResetGame()
 	CScene* pBeforeScene = g_SceneManager->SetCurrentScene(scene);
 	if (pBeforeScene)
 	{
-		thread _t2([&](CScene* p) { SafeDelete(p); }, pBeforeScene);
+		thread _t2([pBeforeScene]() { delete pBeforeScene; });
 		_t2.detach();
 	}
 }

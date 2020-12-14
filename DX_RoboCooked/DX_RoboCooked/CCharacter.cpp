@@ -72,6 +72,9 @@ void CCharacter::Update()
 
 void CCharacter::OnEvent(eEvent eEvent, void* _value)
 {
+	if (m_pInteractCenter->GetStop())
+		return;
+	
 	switch (eEvent)
 	{
 	case eEvent::KeyPress:

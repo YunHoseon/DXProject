@@ -40,8 +40,8 @@ void CTV::Render()
 
 	/*_DEBUG_COMMENT if (m_pCollision)
 		_DEBUG_COMMENT	m_pCollision->Render();*/
-
-	m_p3DText->DrawSubset(0);
+	if (m_p3DText)
+		m_p3DText->DrawSubset(0);
 }
 
 void CTV::Create_Font()
@@ -55,7 +55,7 @@ void CTV::Create_Font()
 	hFontOld = (HFONT)SelectObject(hdc, hFont);
 	SafeRelease(m_p3DText);
 	D3DXCreateText(g_pD3DDevice, hdc, m_sTime.c_str(), 0.001f, 0.01f, &m_p3DText, 0, 0);
-
+	
 	SelectObject(hdc, hFontOld);
 	DeleteObject(hFont);
 	DeleteDC(hdc);
