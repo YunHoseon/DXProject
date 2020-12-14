@@ -71,6 +71,7 @@ public:
 	CParts* GetParts() { return m_pParts; }
 	void SetDummy(bool b) { m_isDummy = b; }
 	BOOL GetDummy() { return m_isDummy; }
+	CCrowdControl* GetCC() { return m_pCC; }
 
 	void SetCC(CCrowdControl* cc);
 	void DeleteCC();

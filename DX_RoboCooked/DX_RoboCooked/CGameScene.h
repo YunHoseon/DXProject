@@ -48,24 +48,22 @@ public:
 	virtual void Init();
 	virtual void Render();
 	virtual void Update();
-	void Load(string sFolder, string sFilename, void (CGameScene::*pCallback)() = nullptr);
 
-	void GetInteractObject(CCharacter* pCharacter) override;
+	void Load(string sFolder, string sFilename, void (CGameScene::*pCallback)() = nullptr);
 	void AddParts(CParts* parts) override;
 	void DeleteParts(CParts* parts) override;
 	//void ThrowParts(CCharacter* pCharacter,CParts* parts,D3DXVECTOR3 vDir) override;
 	void CheckAroundCombinator(CPartCombinator* combinator) override;
 	//void SendPartsToOutlet(CParts* parts, COutlet* outlet) override;
 	void ToggleStop() override;
-	bool GetStop() override {return m_isTimeStop;}
+
+	void GetInteractObject(CCharacter* pCharacter) override;
 	void MonsterSkill(eSkill skill) override;
 	void FinishSkill(eSkill skill) override;
 	bool CheckSpecificPartsID(string parts) override;
-	float GetTime()override { return m_fGameTime; };
 	void ElectIndexLot() override;
 	bool CheckSpecificArea() override;
 	void CheckSandDummyArea(ICollisionArea* collison) override;
-	D3DXVECTOR3 GetRandomPartsPosition() override;
 	void MedusaUlt(D3DXVECTOR3 pos) override;
 
 	CCrowdControl* ChooseCC(eSkill skill);
@@ -76,6 +74,11 @@ public:
 	void DeleteCC();
 	bool IsGameClear();
 	bool IsGameLose();
+
+	D3DXVECTOR3 GetRandomPartsPosition() override;
 	string GetSceneID() override { return m_sID; }
+	bool GetStop() override { return m_isTimeStop; }
+	float GetTime()override { return m_fGameTime; };
+	vector<CCharacter*> GetCharacters() override { return m_vecCharacters; }
 };
 

@@ -31,4 +31,5 @@ public:
 	virtual D3DXVECTOR3 GetRandomPartsPosition() = 0;
 	virtual void MedusaUlt(D3DXVECTOR3 pos) = 0;
 	virtual string GetSceneID() = 0;
+	virtual vector<CCharacter*> GetCharacters() = 0;
 };
