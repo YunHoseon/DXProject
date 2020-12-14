@@ -363,6 +363,9 @@
     <ClInclude Include="CTV.h">
       <Filter>GameScene\Object</Filter>
     </ClInclude>
+    <ClInclude Include="CUILoading.h">
+      <Filter>UI\Button</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="stdafx.cpp">
@@ -646,6 +649,9 @@
     </ClCompile>
     <ClCompile Include="CTV.cpp">
       <Filter>GameScene\Object</Filter>
+    </ClCompile>
+    <ClCompile Include="CUILoading.cpp">
+      <Filter>UI\Button</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
