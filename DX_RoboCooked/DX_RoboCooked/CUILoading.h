@@ -3,8 +3,13 @@
 class CUILoading :
 	public CUIButton
 {
+private:
+	bool	m_isLoading;
 public:
-	CUILoading();
+	CUILoading(D3DXVECTOR2 vPos);
 	~CUILoading();
+
+	void Setup() override;
+	void Render() override;
 };
 
