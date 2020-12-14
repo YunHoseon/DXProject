@@ -111,7 +111,6 @@ void CPharaohCoffin::Interact(CCharacter * pCharacter)
 				}
 			}
 		}
-			
 	}
 }
 
