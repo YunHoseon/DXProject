@@ -90,10 +90,6 @@ void CParts::Render()
 		_DEBUG_COMMENT m_pCollision->Render();
 }
 
-void CParts::OnEvent(eEvent eEvent, void* _value)
-{
-
-}
 
 void CParts::Interact(CCharacter* pCharacter)
 {

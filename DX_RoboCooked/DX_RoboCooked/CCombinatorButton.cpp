@@ -26,8 +26,9 @@ CCombinatorButton::~CCombinatorButton()
 {
 }
 
-void CCombinatorButton::OnEvent(eEvent eEvent, void *_value)
+bool CCombinatorButton::OnEvent(eEvent eEvent, void *_value)
 {
+	return true;
 }
 
 void CCombinatorButton::Interact(CCharacter *pCharacter)

@@ -67,8 +67,17 @@
     <Filter Include="GameScene\Object">
       <UniqueIdentifier>{878916bb-8b8b-4b2d-8a45-6036be2a23f8}</UniqueIdentifier>
     </Filter>
-    <Filter Include="UI\Button\CUITrafficLight">
+    <Filter Include="UI\Button\MainUI">
+      <UniqueIdentifier>{1d796e0f-bc04-4aad-b9d4-a7f539ba7c84}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="UI\Button\SubUI">
+      <UniqueIdentifier>{ad556b0d-77b7-47ba-9b83-6895e799ba7a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="UI\Button\SubUI\CUITrafficLight">
       <UniqueIdentifier>{7ac220ae-1aa8-4787-bfbe-c0ac167abf35}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="UI\Button\SubUI\CUIStar">
+      <UniqueIdentifier>{166b9dcb-917c-448f-bb56-bf0e98860386}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -126,13 +135,7 @@
     <ClInclude Include="CMainGame.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="CGrid.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="CCamera.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="CPyramid.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="InputManager.h">
@@ -179,9 +182,6 @@
     </ClInclude>
     <ClInclude Include="CPartManualCombinator.h">
       <Filter>GameScene\Combinator</Filter>
-    </ClInclude>
-    <ClInclude Include="CWall.h">
-      <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="CUI.h">
       <Filter>UI</Filter>
@@ -231,9 +231,6 @@
     <ClInclude Include="CUIButton.h">
       <Filter>UI</Filter>
     </ClInclude>
-    <ClInclude Include="CUIPauseButton.h">
-      <Filter>UI\Button</Filter>
-    </ClInclude>
     <ClInclude Include="CPhysicsApplyer.h">
       <Filter>GameScene\Actor\Physics</Filter>
     </ClInclude>
@@ -279,9 +276,6 @@
     <ClInclude Include="CCCReverseKey.h">
       <Filter>GameScene\Monster\CrowdControl</Filter>
     </ClInclude>
-    <ClInclude Include="CTornado.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="CBrick.h">
       <Filter>GameScene\Tile</Filter>
     </ClInclude>
@@ -315,56 +309,104 @@
     <ClInclude Include="CSandpile.h">
       <Filter>GameScene\Object</Filter>
     </ClInclude>
-    <ClInclude Include="CUIStartButton.h">
-      <Filter>UI\Button</Filter>
-    </ClInclude>
-    <ClInclude Include="CUIPauseBoard.h">
-      <Filter>UI\Button</Filter>
-    </ClInclude>
-    <ClInclude Include="CUIResetButton.h">
-      <Filter>UI\Button</Filter>
-    </ClInclude>
-    <ClInclude Include="CUIEndButton.h">
-      <Filter>UI\Button</Filter>
-    </ClInclude>
-    <ClInclude Include="CUICloseButton.h">
-      <Filter>UI\Button</Filter>
-    </ClInclude>
-    <ClInclude Include="CUIMainButton.h">
-      <Filter>UI\Button</Filter>
-    </ClInclude>
     <ClInclude Include="CUITrafficLightBoard.h">
-      <Filter>UI\Button\CUITrafficLight</Filter>
+      <Filter>UI\Button\SubUI\CUITrafficLight</Filter>
     </ClInclude>
     <ClInclude Include="CUITrafficLightFiveBoard.h">
-      <Filter>UI\Button\CUITrafficLight</Filter>
+      <Filter>UI\Button\SubUI\CUITrafficLight</Filter>
     </ClInclude>
     <ClInclude Include="CUITrafficLightFourBoard.h">
-      <Filter>UI\Button\CUITrafficLight</Filter>
+      <Filter>UI\Button\SubUI\CUITrafficLight</Filter>
     </ClInclude>
     <ClInclude Include="CUITrafficLightOneBoard.h">
-      <Filter>UI\Button\CUITrafficLight</Filter>
+      <Filter>UI\Button\SubUI\CUITrafficLight</Filter>
     </ClInclude>
     <ClInclude Include="CUITrafficLightThreeBoard.h">
-      <Filter>UI\Button\CUITrafficLight</Filter>
+      <Filter>UI\Button\SubUI\CUITrafficLight</Filter>
     </ClInclude>
     <ClInclude Include="CUITrafficLightTwoBoard.h">
-      <Filter>UI\Button\CUITrafficLight</Filter>
-    </ClInclude>
-    <ClInclude Include="CUITrafficLight.h">
-      <Filter>UI\Button</Filter>
+      <Filter>UI\Button\SubUI\CUITrafficLight</Filter>
     </ClInclude>
     <ClInclude Include="CPharaohCoffin.h">
       <Filter>GameScene\Object</Filter>
     </ClInclude>
     <ClInclude Include="CUILight.h">
-      <Filter>UI\Button\CUITrafficLight</Filter>
+      <Filter>UI\Button\SubUI\CUITrafficLight</Filter>
     </ClInclude>
     <ClInclude Include="CTV.h">
       <Filter>GameScene\Object</Filter>
     </ClInclude>
+    <ClInclude Include="CTornado.h">
+      <Filter>GameScene\Object</Filter>
+    </ClInclude>
+    <ClInclude Include="CUIClearButton.h">
+      <Filter>UI\Button\MainUI</Filter>
+    </ClInclude>
+    <ClInclude Include="CUIPauseButton.h">
+      <Filter>UI\Button\MainUI</Filter>
+    </ClInclude>
+    <ClInclude Include="CUIClearBoard.h">
+      <Filter>UI\Button\SubUI</Filter>
+    </ClInclude>
+    <ClInclude Include="CUICloseButton.h">
+      <Filter>UI\Button\SubUI</Filter>
+    </ClInclude>
+    <ClInclude Include="CUIEndButton.h">
+      <Filter>UI\Button\SubUI</Filter>
+    </ClInclude>
+    <ClInclude Include="CUIMainButton.h">
+      <Filter>UI\Button\SubUI</Filter>
+    </ClInclude>
+    <ClInclude Include="CUIPauseBoard.h">
+      <Filter>UI\Button\SubUI</Filter>
+    </ClInclude>
+    <ClInclude Include="CUIResetButton.h">
+      <Filter>UI\Button\SubUI</Filter>
+    </ClInclude>
+    <ClInclude Include="CUIStartButton.h">
+      <Filter>UI\Button\SubUI</Filter>
+    </ClInclude>
+    <ClInclude Include="CUIClearTime.h">
+      <Filter>UI\Button\SubUI</Filter>
+    </ClInclude>
+    <ClInclude Include="CUITryAgain.h">
+      <Filter>UI\Button\SubUI</Filter>
+    </ClInclude>
+    <ClInclude Include="CUIStarZero.h">
+      <Filter>UI\Button\SubUI\CUIStar</Filter>
+    </ClInclude>
+    <ClInclude Include="CUIStarTwo.h">
+      <Filter>UI\Button\SubUI\CUIStar</Filter>
+    </ClInclude>
+    <ClInclude Include="CUIStarThree.h">
+      <Filter>UI\Button\SubUI\CUIStar</Filter>
+    </ClInclude>
+    <ClInclude Include="CUIStarOne.h">
+      <Filter>UI\Button\SubUI\CUIStar</Filter>
+    </ClInclude>
+    <ClInclude Include="CUIStar.h">
+      <Filter>UI\Button\SubUI\CUIStar</Filter>
+    </ClInclude>
     <ClInclude Include="CUILoading.h">
-      <Filter>UI\Button</Filter>
+      <Filter>UI\Button\MainUI</Filter>
+    </ClInclude>
+    <ClInclude Include="CUITrafficLight.h">
+      <Filter>UI\Button\MainUI</Filter>
+    </ClInclude>
+    <ClInclude Include="CGrid.h">
+      <Filter>GameScene\Object</Filter>
+    </ClInclude>
+    <ClInclude Include="CPyramid.h">
+      <Filter>GameScene\Object</Filter>
+    </ClInclude>
+    <ClInclude Include="CTornado.h">
+      <Filter>GameScene\Object</Filter>
+    </ClInclude>
+    <ClInclude Include="CWall.h">
+      <Filter>GameScene\Object</Filter>
+    </ClInclude>
+    <ClInclude Include="CPartsDestroyer.h">
+      <Filter>GameScene\Monster</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -416,12 +458,6 @@
     <ClCompile Include="CCamera.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="CGrid.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="CPyramid.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="InputManager.cpp">
       <Filter>Manager\InputManager</Filter>
     </ClCompile>
@@ -466,9 +502,6 @@
     </ClCompile>
     <ClCompile Include="CPartAutoCombinator.cpp">
       <Filter>GameScene\Combinator</Filter>
-    </ClCompile>
-    <ClCompile Include="CWall.cpp">
-      <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="CUI.cpp">
       <Filter>UI</Filter>
@@ -518,9 +551,6 @@
     <ClCompile Include="CUIButton.cpp">
       <Filter>UI</Filter>
     </ClCompile>
-    <ClCompile Include="CUIPauseButton.cpp">
-      <Filter>UI\Button</Filter>
-    </ClCompile>
     <ClCompile Include="CPhysicsApplyer.cpp">
       <Filter>GameScene\Actor\Physics</Filter>
     </ClCompile>
@@ -566,9 +596,6 @@
     <ClCompile Include="CCCStopMove.cpp">
       <Filter>GameScene\Monster\CrowdControl</Filter>
     </ClCompile>
-    <ClCompile Include="CTornado.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="CBrick.cpp">
       <Filter>GameScene\Tile</Filter>
     </ClCompile>
@@ -602,56 +629,104 @@
     <ClCompile Include="CSandpile.cpp">
       <Filter>GameScene\Object</Filter>
     </ClCompile>
-    <ClCompile Include="CUIStartButton.cpp">
-      <Filter>UI\Button</Filter>
-    </ClCompile>
-    <ClCompile Include="CUIPauseBoard.cpp">
-      <Filter>UI\Button</Filter>
-    </ClCompile>
-    <ClCompile Include="CUIResetButton.cpp">
-      <Filter>UI\Button</Filter>
-    </ClCompile>
-    <ClCompile Include="CUIEndButton.cpp">
-      <Filter>UI\Button</Filter>
-    </ClCompile>
-    <ClCompile Include="CUICloseButton.cpp">
-      <Filter>UI\Button</Filter>
-    </ClCompile>
-    <ClCompile Include="CUIMainButton.cpp">
-      <Filter>UI\Button</Filter>
-    </ClCompile>
     <ClCompile Include="CUITrafficLightBoard.cpp">
-      <Filter>UI\Button\CUITrafficLight</Filter>
+      <Filter>UI\Button\SubUI\CUITrafficLight</Filter>
     </ClCompile>
     <ClCompile Include="CUITrafficLightFiveBoard.cpp">
-      <Filter>UI\Button\CUITrafficLight</Filter>
+      <Filter>UI\Button\SubUI\CUITrafficLight</Filter>
     </ClCompile>
     <ClCompile Include="CUITrafficLightFourBoard.cpp">
-      <Filter>UI\Button\CUITrafficLight</Filter>
+      <Filter>UI\Button\SubUI\CUITrafficLight</Filter>
     </ClCompile>
     <ClCompile Include="CUITrafficLightOneBoard.cpp">
-      <Filter>UI\Button\CUITrafficLight</Filter>
+      <Filter>UI\Button\SubUI\CUITrafficLight</Filter>
     </ClCompile>
     <ClCompile Include="CUITrafficLightThreeBoard.cpp">
-      <Filter>UI\Button\CUITrafficLight</Filter>
+      <Filter>UI\Button\SubUI\CUITrafficLight</Filter>
     </ClCompile>
     <ClCompile Include="CUITrafficLightTwoBoard.cpp">
-      <Filter>UI\Button\CUITrafficLight</Filter>
-    </ClCompile>
-    <ClCompile Include="CUITrafficLight.cpp">
-      <Filter>UI\Button</Filter>
+      <Filter>UI\Button\SubUI\CUITrafficLight</Filter>
     </ClCompile>
     <ClCompile Include="CPharaohCoffin.cpp">
       <Filter>GameScene\Object</Filter>
     </ClCompile>
     <ClCompile Include="CUILight.cpp">
-      <Filter>UI\Button\CUITrafficLight</Filter>
+      <Filter>UI\Button\SubUI\CUITrafficLight</Filter>
     </ClCompile>
     <ClCompile Include="CTV.cpp">
       <Filter>GameScene\Object</Filter>
     </ClCompile>
+    <ClCompile Include="CTornado.cpp">
+      <Filter>GameScene\Object</Filter>
+    </ClCompile>
+    <ClCompile Include="CUIClearButton.cpp">
+      <Filter>UI\Button\MainUI</Filter>
+    </ClCompile>
+    <ClCompile Include="CUIPauseButton.cpp">
+      <Filter>UI\Button\MainUI</Filter>
+    </ClCompile>
+    <ClCompile Include="CUIClearBoard.cpp">
+      <Filter>UI\Button\SubUI</Filter>
+    </ClCompile>
+    <ClCompile Include="CUICloseButton.cpp">
+      <Filter>UI\Button\SubUI</Filter>
+    </ClCompile>
+    <ClCompile Include="CUIEndButton.cpp">
+      <Filter>UI\Button\SubUI</Filter>
+    </ClCompile>
+    <ClCompile Include="CUIMainButton.cpp">
+      <Filter>UI\Button\SubUI</Filter>
+    </ClCompile>
+    <ClCompile Include="CUIPauseBoard.cpp">
+      <Filter>UI\Button\SubUI</Filter>
+    </ClCompile>
+    <ClCompile Include="CUIResetButton.cpp">
+      <Filter>UI\Button\SubUI</Filter>
+    </ClCompile>
+    <ClCompile Include="CUIStartButton.cpp">
+      <Filter>UI\Button\SubUI</Filter>
+    </ClCompile>
+    <ClCompile Include="CUIClearTime.cpp">
+      <Filter>UI\Button\SubUI</Filter>
+    </ClCompile>
+    <ClCompile Include="CUITryAgain.cpp">
+      <Filter>UI\Button\SubUI</Filter>
+    </ClCompile>
+    <ClCompile Include="CUIStarZero.cpp">
+      <Filter>UI\Button\SubUI\CUIStar</Filter>
+    </ClCompile>
+    <ClCompile Include="CUIStarTwo.cpp">
+      <Filter>UI\Button\SubUI\CUIStar</Filter>
+    </ClCompile>
+    <ClCompile Include="CUIStarThree.cpp">
+      <Filter>UI\Button\SubUI\CUIStar</Filter>
+    </ClCompile>
+    <ClCompile Include="CUIStarOne.cpp">
+      <Filter>UI\Button\SubUI\CUIStar</Filter>
+    </ClCompile>
+    <ClCompile Include="CUIStar.cpp">
+      <Filter>UI\Button\SubUI\CUIStar</Filter>
+    </ClCompile>
     <ClCompile Include="CUILoading.cpp">
-      <Filter>UI\Button</Filter>
+      <Filter>UI\Button\MainUI</Filter>
+    </ClCompile>
+    <ClCompile Include="CUITrafficLight.cpp">
+      <Filter>UI\Button\MainUI</Filter>
+    </ClCompile>
+    <ClCompile Include="CWall.cpp">
+      <Filter>GameScene\Object</Filter>
+    </ClCompile>
+    <ClCompile Include="CTornado.cpp">
+      <Filter>GameScene\Object</Filter>
+    </ClCompile>
+    <ClCompile Include="CPyramid.cpp">
+      <Filter>GameScene\Object</Filter>
+    </ClCompile>
+    <ClCompile Include="CGrid.cpp">
+      <Filter>GameScene\Object</Filter>
+    </ClCompile>
+    <ClCompile Include="CPartsDestroyer.cpp">
+      <Filter>GameScene\Monster</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

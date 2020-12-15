@@ -19,7 +19,7 @@ public:
 
 public:
 	virtual void Setup() override;
-	void OnEvent(eEvent eEvent, void * _value);
+	bool OnEvent(eEvent eEvent, void * _value);
 	void AddCompleteBluePrintCount() 
 	{
 		m_nCompleteBluePrintCount++; 

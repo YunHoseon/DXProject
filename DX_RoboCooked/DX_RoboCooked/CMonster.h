@@ -95,7 +95,7 @@ public:
 	virtual void Update();
 	virtual void Render() = 0;
 	virtual void Destroy();
-	virtual void OnEvent(eEvent eEvent, void* _value) override;
+	virtual bool OnEvent(eEvent eEvent, void* _value) override;
 	virtual void AddForce(CActor* target) {};
 	
 	virtual eSkill FirstSkill() { return eSkill::None; };

@@ -32,7 +32,10 @@ enum class eEvent
 	PauseMain,
 	PauseClose,
 	PauseReset,
-	PauseEnd
+	PauseEnd,
+	ClearMain,
+	ClearNextStage,
+	ClearSetTime
 };
 
 

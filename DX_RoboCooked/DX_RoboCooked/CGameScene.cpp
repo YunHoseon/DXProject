@@ -15,6 +15,7 @@
 #include "CPartVending.h"
 #include "CPhysicsApplyer.h"
 #include "CWall.h"
+#include "CUIButton.h"
 #include "CBlueprint.h"
 #include "CMonster.h"
 #include "CPharaohCoffin.h"
@@ -24,10 +25,9 @@
 #include "CTornado.h"
 #include "CSandpile.h"
 
-#include "CUIButton.h"
+#include "CUIClearButton.h"
 #include "CUIPauseButton.h"
 #include "CUITrafficLight.h"
-#include "CUILoading.h"
 
 /* ������ */
 #include <filesystem>
@@ -40,14 +40,15 @@ std::mutex CGameScene::m_cMutex;
 #include "CDebugPlayer2.h"
 
 CGameScene::CGameScene() : m_pField(NULL),
+						   m_pDebugClearUI(nullptr),
 						   m_pDebugPauseUI(nullptr),
 						   m_pDebugTrafficLight(nullptr),
-						   m_pDebugLoadingPopup(nullptr),
 						   m_isTimeStop(false),
 						   m_vWind(0, 0, 0),
 						   m_fGameTime(300.0f),
 						   m_nLotIndex(0)
 {
+	g_EventManager->Attach(eEvent::Tick, this);
 	//Sound Add
 	g_SoundManager->AddBGM("data/sound/bgm.mp3");
 	g_SoundManager->AddSFX("data/sound/effBBam.mp3", "BBam");
@@ -91,11 +92,8 @@ CGameScene::~CGameScene()
 	{
 		SafeDelete(it);
 	}
-
 	SafeDelete(m_pDebugPauseUI);
 	SafeDelete(m_pDebugTrafficLight);
-	SafeDelete(m_pDebugLoadingPopup);
-
 	m_cMutex.unlock();
 }
 
@@ -110,6 +108,7 @@ void CGameScene::Init()
 	Harpy->AddObjectPosition(D3DXVECTOR3(-3, 0, 0));
 	Harpy->AddObjectPosition(D3DXVECTOR3(0, 0, -3));
 
+	CUIButton* pClearButton = new CUIClearButton(D3DXVECTOR2(465, 10), this);
 	CUIButton* pPauseButton = new CUIPauseButton(D3DXVECTOR2(465, 10), 27, this);
 	CUITrafficLight* pTrafficLight = new CUITrafficLight(this,m_vecBlueprints.size());
 	
@@ -117,11 +116,12 @@ void CGameScene::Init()
 
 	m_cMutex.lock();
 
-	m_fGameTime = 300.0f;
+	m_fGameTime = 50.0f;
 	m_vecStaticActor.push_back(wall);
 	m_vecMonster.push_back(Medusa);
 	m_vecMonster.push_back(Harpy);
 
+	m_pDebugClearUI = pClearButton;
 	m_pDebugTrafficLight = pTrafficLight;
 	m_pDebugPauseUI = pPauseButton;
 	m_vecObject.push_back(coffin);
@@ -132,6 +132,7 @@ void CGameScene::Init()
 void CGameScene::Render()
 {
 	m_cMutex.lock();
+
 	for (CActor *it : m_vecStaticActor)
 	{
 		it->Render();
@@ -167,29 +168,35 @@ void CGameScene::Render()
 		it->Render();
 	}
 
+	if (m_pDebugTrafficLight)
+		m_pDebugTrafficLight->Render();
+
 	if (m_pDebugPauseUI)
 		m_pDebugPauseUI->Render();
 
-	if (m_pDebugTrafficLight)
-		m_pDebugTrafficLight->Render();
+	
+	if (m_pDebugClearUI)
+		m_pDebugClearUI->Render();
+	
 
 	m_cMutex.unlock();
 }
 
 void CGameScene::Update()
 {
+	//if (IsGameClear())
+	//{
+	//	//승리상태
+	//	_DEBUG_COMMENT cout << "game clear!" << endl;
+	//}
+	//if (IsGameLose())
+	//{
+	//	//패배상태
+	//	_DEBUG_COMMENT cout << "game lose!" << endl;
+	//}
+
 	if (m_isTimeStop)
 		return;
-
-	if (IsGameClear())
-	{
-		_DEBUG_COMMENT cout << "game clear!" << endl;
-	}
-
-	if (IsGameLose())
-	{
-		_DEBUG_COMMENT cout << "game lose!" << endl;
-	}
 
 	{
 		for (CCharacter *character : m_vecCharacters)
@@ -353,6 +360,42 @@ void CGameScene::Update()
 			character->Update();
 		}
 	}
+}
+
+bool CGameScene::OnEvent(eEvent eEvent, void * _value)
+{
+	switch (eEvent)
+	{
+	case eEvent::Tick:
+		return TickUpdate(_value);
+	}
+
+	return true;
+}
+
+bool CGameScene::TickUpdate(void * _value)
+{
+	ST_TickEvent* data = static_cast<ST_TickEvent*>(_value);
+	m_fGameTime -= data->fElapsedTime;
+
+	int check = IsGameClear();
+	if (check == 1)
+	{
+		if(m_pDebugClearUI)
+			m_pDebugClearUI->InvertActive();
+		ST_SetTimeEvent data;
+		data.fTime = m_fGameTime;
+
+		g_EventManager->CallEvent(eEvent::ClearSetTime, (void*)&data);
+		return false;
+	}
+	else if (check == 2)
+	{
+		//패배 ->InvertActive();
+		return false;
+	}
+
+	return true;
 }
 
 void CGameScene::Load(string sFolder, string sFilename, void (CGameScene::* pCallback)(void))
@@ -642,12 +685,7 @@ void CGameScene::Load(string sFolder, string sFilename, void (CGameScene::* pCal
 		(this->*pCallback)();
 
 	// 로딩ui 종료하고 게임 시작
-	CUILoading* pLoadingPopup = new CUILoading();
-	m_pDebugLoadingPopup = pLoadingPopup;
-	m_pDebugLoadingPopup->Setup();
-	if (m_pDebugLoadingPopup)
-		m_pDebugLoadingPopup->Render();
-
+	
 	m_cMutex.lock();
 	m_isTimeStop = false;
 	m_cMutex.unlock();
@@ -832,27 +870,35 @@ void CGameScene::DeleteCC()
 	}
 }
 
-bool CGameScene::IsGameClear()
+int CGameScene::IsGameClear()
 {
+	if (m_fGameTime <= 0)
+	{
+		return 2; //실패
+	}
+	
 	for (CBlueprint *it : m_vecBlueprints)
 	{
 		if (it->GetIsCompleted() == false)
-			return false;
+			return 0;
 	}
-	return true;
+	if(!m_vecBlueprints.empty())
+		return 1;
+
+	return 0;
 }
 
-bool CGameScene::IsGameLose()
-{
-	m_fGameTime -= g_pTimeManager->GetElapsedTime();
-
-	if (m_fGameTime <= 0)
-	{
-		return true;
-	}
-
-	return false;
-}
+//bool CGameScene::IsGameLose()
+//{
+//	m_fGameTime -= g_pTimeManager->GetElapsedTime();
+//
+//	if (m_fGameTime <= 0)
+//	{
+//		return true;
+//	}
+//
+//	return false;
+//}
 
 void CGameScene::GetInteractObject(CCharacter *pCharacter)
 {
@@ -931,5 +977,31 @@ void CGameScene::CheckAroundCombinator(CPartCombinator *combinator)
 	{
 		combinator->PartsInteract(it.second);
 		it.second->SetCPartCombinator(combinator);
+	}
+}
+
+string CGameScene::CalMin(int sec)
+{
+	int a = sec / 60;
+	if (a >= 10)
+	{
+		return std::to_string(a);
+	}
+	else
+	{
+		return "0" + std::to_string(a);
+	}
+}
+
+string CGameScene::CalSec(int sec)
+{
+	int a = sec % 60;
+	if (a >= 10)
+	{
+		return std::to_string(a);
+	}
+	else
+	{
+		return "0" + std::to_string(a);
 	}
 }

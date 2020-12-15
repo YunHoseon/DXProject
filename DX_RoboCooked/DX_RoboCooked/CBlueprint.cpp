@@ -173,8 +173,9 @@ void CBlueprint::Render()
 	}
 }
 
-void CBlueprint::OnEvent(eEvent eEvent, void * _value)
+bool CBlueprint::OnEvent(eEvent eEvent, void * _value)
 {
+	return true;
 }
 
 void CBlueprint::StoreOnBlueprintParts()

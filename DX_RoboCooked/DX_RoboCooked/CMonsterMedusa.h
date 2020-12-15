@@ -1,10 +1,13 @@
 #pragma once
 #include "CMonster.h"
+#include "CPartsDestroyer.h"
+
 class CMonsterMedusa :
 	public CMonster
 {
 private:
 	D3DXVECTOR3		m_nDestroyPartsPosition;
+	CPartsDestroyer m_cPartsDestroyer;
 public:
 	CMonsterMedusa(IInteractCenter* pInteractCenter);
 	~CMonsterMedusa();

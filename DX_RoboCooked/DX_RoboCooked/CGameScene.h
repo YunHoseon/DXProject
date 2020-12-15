@@ -2,6 +2,7 @@
 #include "CActor.h"
 #include "CScene.h"
 #include "IInteractCenter.h"
+#include "CEventListener.h"
 #include "CMonster.h"
 class CTile;
 class CField;
@@ -19,7 +20,7 @@ class CDebugPlayer1;
 class CDebugPlayer2;
 
 class CGameScene :
-	public CScene, public IInteractCenter
+	public CScene, public IInteractCenter, public CEventListener
 {
 private:
 	CField*						m_pField;
@@ -34,7 +35,7 @@ private:
 	BOOL						m_isTimeStop;
 	INT							m_nLotIndex;
 	vector<CTile*>				m_vecTile;
-
+	CUIButton*					m_pDebugClearUI;
 	CUIButton*					m_pDebugPauseUI;
 	CUITrafficLight*			m_pDebugTrafficLight;
 	CUILoading*					m_pDebugLoadingPopup;
@@ -50,11 +51,16 @@ public:
 	virtual void Render();
 	virtual void Update();
 
+	bool OnEvent(eEvent eEvent, void* _value) override;
+	bool TickUpdate(void* _value);
+
 	void Load(string sFolder, string sFilename, void (CGameScene::*pCallback)() = nullptr);
 	void AddParts(CParts* parts) override;
 	void DeleteParts(CParts* parts) override;
 	//void ThrowParts(CCharacter* pCharacter,CParts* parts,D3DXVECTOR3 vDir) override;
 	void CheckAroundCombinator(CPartCombinator* combinator) override;
+	string CalMin(int sec) override;
+	string CalSec(int sec) override;
 	//void SendPartsToOutlet(CParts* parts, COutlet* outlet) override;
 	void ToggleStop() override;
 
@@ -73,13 +79,13 @@ public:
 	void DeleteWind();
 	void DeleteTornado();
 	void DeleteCC();
-	bool IsGameClear();
-	bool IsGameLose();
+	int IsGameClear();
+	//bool IsGameLose();
 
 	D3DXVECTOR3 GetRandomPartsPosition() override;
 	string GetSceneID() override { return m_sID; }
 	bool GetStop() override { return m_isTimeStop; }
 	float GetTime()override { return m_fGameTime; };
-	vector<CCharacter*>& GetCharacters() override { return m_vecCharacters; }
+	const vector<CCharacter*>& GetCharacters() override { return m_vecCharacters; }
 };
 
