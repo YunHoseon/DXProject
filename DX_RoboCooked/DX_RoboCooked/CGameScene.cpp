@@ -168,8 +168,8 @@ void CGameScene::Render()
 	}
 
 
-	if (m_pDebugClearUI)
-		m_pDebugClearUI->Render();
+	//if (m_pDebugClearUI)
+	//	m_pDebugClearUI->Render();
 
 	if (m_pDebugPauseUI)
 		m_pDebugPauseUI->Render();
