@@ -184,9 +184,6 @@ void CGameScene::Render()
 
 void CGameScene::Update()
 {
-	ST_TickEvent data;
-	data.fElapsedTime = g_pTimeManager->GetElapsedTime();
-	g_EventManager->CallEvent(eEvent::Tick, (void*)&data);
 	//if (IsGameClear())
 	//{
 	//	//승리상태
@@ -875,18 +872,20 @@ void CGameScene::DeleteCC()
 
 int CGameScene::IsGameClear()
 {
+	if (m_fGameTime <= 0)
+	{
+		return 2; //실패
+	}
+	
 	for (CBlueprint *it : m_vecBlueprints)
 	{
 		if (it->GetIsCompleted() == false)
-			return 1;
+			return 0;
 	}
+	if(!m_vecBlueprints.empty())
+		return 1;
 
-	if (m_fGameTime <= 0)
-	{
-		return 2;
-	}
-
-	return -1;
+	return 0;
 }
 
 //bool CGameScene::IsGameLose()
