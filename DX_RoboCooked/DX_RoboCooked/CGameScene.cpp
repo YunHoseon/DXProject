@@ -184,18 +184,16 @@ void CGameScene::Render()
 
 void CGameScene::Update()
 {
-
-	
-	if (IsGameClear())
-	{
-		//승리상태
-		_DEBUG_COMMENT cout << "game clear!" << endl;
-	}
-	if (IsGameLose())
-	{
-		//패배상태
-		_DEBUG_COMMENT cout << "game lose!" << endl;
-	}
+	//if (IsGameClear())
+	//{
+	//	//승리상태
+	//	_DEBUG_COMMENT cout << "game clear!" << endl;
+	//}
+	//if (IsGameLose())
+	//{
+	//	//패배상태
+	//	_DEBUG_COMMENT cout << "game lose!" << endl;
+	//}
 
 	if (m_isTimeStop)
 		return;
@@ -362,6 +360,23 @@ void CGameScene::Update()
 			character->Update();
 		}
 	}
+}
+
+bool CGameScene::OnEvent(eEvent eEvent, void * _value)
+{
+	switch (eEvent)
+	{
+	case eEvent::Tick:
+		return TickUpdate();
+	}
+
+	return true;
+}
+
+bool CGameScene::TickUpdate()
+{
+	int check = IsGameClear();
+	return true;
 }
 
 void CGameScene::Load(string sFolder, string sFilename, void (CGameScene::* pCallback)(void))
@@ -836,27 +851,36 @@ void CGameScene::DeleteCC()
 	}
 }
 
-bool CGameScene::IsGameClear()
+int CGameScene::IsGameClear()
 {
 	for (CBlueprint *it : m_vecBlueprints)
 	{
 		if (it->GetIsCompleted() == false)
-			return false;
+			return 1;
 	}
-	return true;
-}
 
-bool CGameScene::IsGameLose()
-{
+
 	m_fGameTime -= g_pTimeManager->GetElapsedTime();
 
 	if (m_fGameTime <= 0)
 	{
-		return true;
+		return 2;
 	}
 
-	return false;
+	return -1;
 }
+
+//bool CGameScene::IsGameLose()
+//{
+//	m_fGameTime -= g_pTimeManager->GetElapsedTime();
+//
+//	if (m_fGameTime <= 0)
+//	{
+//		return true;
+//	}
+//
+//	return false;
+//}
 
 void CGameScene::GetInteractObject(CCharacter *pCharacter)
 {

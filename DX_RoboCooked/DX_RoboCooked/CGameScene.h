@@ -2,6 +2,7 @@
 #include "CActor.h"
 #include "CScene.h"
 #include "IInteractCenter.h"
+#include "CEventListener.h"
 #include "CMonster.h"
 class CTile;
 class CField;
@@ -19,7 +20,7 @@ class CDebugPlayer1;
 class CDebugPlayer2;
 
 class CGameScene :
-	public CScene, public IInteractCenter
+	public CScene, public IInteractCenter, public CEventListener
 {
 private:
 	CField*						m_pField;
@@ -49,6 +50,9 @@ public:
 	virtual void Render();
 	virtual void Update();
 
+	bool OnEvent(eEvent eEvent, void* _value) override;
+	bool TickUpdate();
+
 	void Load(string sFolder, string sFilename, void (CGameScene::*pCallback)() = nullptr);
 	void AddParts(CParts* parts) override;
 	void DeleteParts(CParts* parts) override;
@@ -74,8 +78,8 @@ public:
 	void DeleteWind();
 	void DeleteTornado();
 	void DeleteCC();
-	bool IsGameClear();
-	bool IsGameLose();
+	int IsGameClear();
+	//bool IsGameLose();
 
 	D3DXVECTOR3 GetRandomPartsPosition() override;
 	string GetSceneID() override { return m_sID; }
