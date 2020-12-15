@@ -34,7 +34,7 @@ private:
 	BOOL						m_isTimeStop;
 	INT							m_nLotIndex;
 	vector<CTile*>				m_vecTile;
-
+	CUIButton*					m_pDebugClearUI;
 	CUIButton*					m_pDebugPauseUI;
 	CUITrafficLight*			m_pDebugTrafficLight;
 
@@ -54,6 +54,8 @@ public:
 	void DeleteParts(CParts* parts) override;
 	//void ThrowParts(CCharacter* pCharacter,CParts* parts,D3DXVECTOR3 vDir) override;
 	void CheckAroundCombinator(CPartCombinator* combinator) override;
+	string CalMin(int sec) override;
+	string CalSec(int sec) override;
 	//void SendPartsToOutlet(CParts* parts, COutlet* outlet) override;
 	void ToggleStop() override;
 

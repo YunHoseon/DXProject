@@ -7,7 +7,7 @@
 
 CUIButton::CUIButton()
 	: m_pTexture(nullptr)
-	//, m_pText(nullptr)
+	, m_pText(nullptr)
 	, m_isKeyDown(false)
 	, m_isMouseDown(false)
 {
@@ -28,6 +28,9 @@ void CUIButton::Render()
 {
 	if (!m_isActive)
 		return;
+
+	if (m_pText)
+		m_pText->Render();
 
 	if (m_pTexture)
 		m_pTexture->RenderTexture(m_eUIState);

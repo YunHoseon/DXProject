@@ -8,7 +8,7 @@ public:
 	enum eFontType
 	{
 		DEFAULT,
-		QUEST,
+		CLEARTIME,
 		TVTIME
 	};
 private:

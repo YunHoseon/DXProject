@@ -3,6 +3,7 @@
 
 CFontManager::CFontManager(): CSingleton<CFontManager>()
 {
+	AddFontResourceA("./data/Fonts/a컴퓨터C.ttf");
 }
 
 CFontManager::~CFontManager()
@@ -30,7 +31,7 @@ LPD3DXFONT CFontManager::GetFont(eFontType e)
 		fd.PitchAndFamily = FF_DONTCARE;
 		wcscpy_s(fd.FaceName, L"굴림체");
 	}
-	else if(e == QUEST)
+	else if(e == CLEARTIME)
 	{
 		fd.Height = 50;
 		fd.Width = 25;
