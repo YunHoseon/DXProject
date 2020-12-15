@@ -28,6 +28,7 @@
 #include "CUIClearButton.h"
 #include "CUIPauseButton.h"
 #include "CUITrafficLight.h"
+#include "CUILoading.h"
 
 /* ������ */
 #include <filesystem>
@@ -43,6 +44,7 @@ CGameScene::CGameScene() : m_pField(NULL),
 						   m_pDebugClearUI(nullptr),
 						   m_pDebugPauseUI(nullptr),
 						   m_pDebugTrafficLight(nullptr),
+						   m_pDebugLoadingPopup(nullptr),
 						   m_isTimeStop(false),
 						   m_vWind(0, 0, 0),
 						   m_fGameTime(300.0f),
@@ -111,6 +113,7 @@ void CGameScene::Init()
 	CUIButton* pClearButton = new CUIClearButton(D3DXVECTOR2(465, 10), this);
 	CUIButton* pPauseButton = new CUIPauseButton(D3DXVECTOR2(465, 10), 27, this);
 	CUITrafficLight* pTrafficLight = new CUITrafficLight(this,m_vecBlueprints.size());
+	CUILoading* pLoadingPopup = new CUILoading();
 	
 	CPharaohCoffin* coffin = new CPharaohCoffin(this, D3DXVECTOR3(0,0,0));
 
@@ -126,6 +129,8 @@ void CGameScene::Init()
 	m_pDebugPauseUI = pPauseButton;
 	m_vecObject.push_back(coffin);
 
+	m_pDebugLoadingPopup = pLoadingPopup;
+	m_pDebugLoadingPopup->Setup();
 	m_cMutex.unlock();
 }
 
@@ -174,9 +179,11 @@ void CGameScene::Render()
 	if (m_pDebugPauseUI)
 		m_pDebugPauseUI->Render();
 
-	
 	if (m_pDebugClearUI)
 		m_pDebugClearUI->Render();
+
+	if (m_pDebugLoadingPopup)
+		m_pDebugLoadingPopup->Render();
 	
 
 	m_cMutex.unlock();

@@ -19,7 +19,8 @@ CUILoading::~CUILoading()
 
 void CUILoading::Setup()
 {
-	m_pTexture = new CUITexture("data/UI/roadingScreen.png", "data/UI/roadingScreen.png", "data/UI/roadingScreen.png", m_vPosition);
+	m_pTexture = new CUITexture("data/UI/roadingScreen_1600x900.png", "data/UI/roadingScreen_1600x900.png", 
+								"data/UI/roadingScreen_1600x900.png", m_vPosition);
 
 	D3DVIEWPORT9 vp;
 	g_pD3DDevice->GetViewport(&vp);
@@ -27,7 +28,7 @@ void CUILoading::Setup()
 							, vp.Height / 2 - m_pTexture->GetActiveTextureHeight());
 }
 
-void CUILoading::OnEvent(eEvent eEvent, void* _value)
+bool CUILoading::OnEvent(eEvent eEvent, void* _value)
 {
 	switch (eEvent)
 	{
@@ -44,6 +45,7 @@ void CUILoading::OnEvent(eEvent eEvent, void* _value)
 		MouseReleaseEvent(_value);
 		break;
 	}
+	return false;
 }
 
 void CUILoading::ClickEvent(void* _value)
@@ -56,6 +58,8 @@ void CUILoading::MouseReleaseEvent(void* _value)
 	ST_KeyInputEvent* data = static_cast<ST_KeyInputEvent*>(_value);
 
 	if (!m_isLoading)
+		return;
+	else
 	{
 
 	}
@@ -71,7 +75,9 @@ void CUILoading::KeyReleaseEvent(void* _value)
 	ST_KeyInputEvent* data = static_cast<ST_KeyInputEvent*>(_value);
 
 	if (!m_isLoading)
+		return;
+	else
 	{
-
+		//이미지 꺼지고 
 	}
 }

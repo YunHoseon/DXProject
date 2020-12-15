@@ -10,7 +10,7 @@ public:
 	~CUILoading();
 
 	void Setup() override;
-	void OnEvent(eEvent eEvent, void* _value);
+	bool OnEvent(eEvent eEvent, void* _value);
 
 	void ClickEvent(void* _value);
 	void MouseReleaseEvent(void* _value);
