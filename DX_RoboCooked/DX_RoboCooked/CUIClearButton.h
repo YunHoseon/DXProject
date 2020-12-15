@@ -19,7 +19,7 @@ public:
 public:
 	virtual void Setup() override;
 	void SetTime(float ftime);
-	void OnEvent(eEvent eEvent, void * _value);
+	bool OnEvent(eEvent eEvent, void * _value);
 	void ClickEvent(void* _value);
 	void HoverEvent(void* _value);
 	void KeyPressEvent(void* _value);

@@ -61,9 +61,11 @@ void CUIClearButton::SetTime(float ftime)
 	m_fTime = ftime;
 }
 
-void CUIClearButton::OnEvent(eEvent eEvent, void * _value)
+bool CUIClearButton::OnEvent(eEvent eEvent, void * _value)
 {
+	return true;
 }
+
 
 void CUIClearButton::ClickEvent(void * _value)
 {

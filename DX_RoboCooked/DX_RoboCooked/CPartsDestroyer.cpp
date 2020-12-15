@@ -11,7 +11,7 @@ CPartsDestroyer::CPartsDestroyer():
 	D3DXCreateSphere(g_pD3DDevice, 1, 30, 30, &m_pMesh, nullptr);
 	m_stMtl.Ambient  = D3DXCOLOR(0.43f, 0.67f, 0.27f, 1.0f);
 	m_stMtl.Diffuse  = D3DXCOLOR(0.43f, 0.67f, 0.27f, 1.0f);
-	m_stMtl.Specular = D3DXCOLOR(0.43f, 0.67f, 0.27f, 1.0f);
+	m_stMtl.Specular = D3DXCOLOR(0.3f, 0.3f, 0.3f, 1.0f);
 }
 
 CPartsDestroyer::~CPartsDestroyer()
@@ -27,7 +27,7 @@ bool CPartsDestroyer::OnEvent(eEvent eEvent, void* _value)
 	{
 		ST_TickEvent* data = (ST_TickEvent*)_value;
 		m_fElapseTime  = m_fElapseTime + data->fElapsedTime;
-		_DEBUG_COMMENT cout << m_fElapseTime << endl;
+		//_DEBUG_COMMENT cout << m_fElapseTime << endl;
 		if(m_fElapseTime >= m_fDuration)
 		{
 			m_isRenderable = false;
