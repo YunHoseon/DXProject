@@ -3,8 +3,8 @@
 
 enum class eUIState
 {
-	Disabled,
-	Active,
+	up,
+	down,
 	Hover
 
 };

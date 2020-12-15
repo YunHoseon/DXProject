@@ -87,7 +87,7 @@ void CUI::CheckInHover(POINT pt)
 				if (it->GetUIState() == eUIState::Active)
 					return;
 
-			/*	it->SetUIPastState(it->GetUIState());*/
+				it->SetUIPastState(it->GetUIState());
 				it->SetUIState(eUIState::Hover);
 			}
 			else
