@@ -15,8 +15,6 @@ private:
 	D3DXIMAGE_INFO		m_DisabledInfo;
 	D3DXIMAGE_INFO		m_HoverInfo;
 
-
-
 public:
 	CUITexture(char* DisabledPath , char* ActivePath, char* HoverPath,D3DXVECTOR2 vPos);
 	~CUITexture();
@@ -25,7 +23,7 @@ public:
 	void Render() override;
 	void RenderTexture(eUIState state);
 
-	
-
+	UINT GetActiveTextureWidth() { return m_ActiveInfo.Width; }
+	UINT GetActiveTextureHeight() { return m_ActiveInfo.Height; }
 };
 
