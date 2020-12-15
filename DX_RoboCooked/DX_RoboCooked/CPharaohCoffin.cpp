@@ -22,6 +22,7 @@ CPharaohCoffin::CPharaohCoffin(IInteractCenter* pInteractCenter, D3DXVECTOR3 vPo
 	m_pCCCollision = new CSphereCollision(g_vZero, 1.5f, &m_matWorld);
 	SetScale(0.01f, 0.01f, 0.01f);
 	SetRotationY(D3DXToRadian(0));
+	SetPosition(vPos);
 
 	float y = vPos.y - 0.5f + m_pCollision->GetHeight() * 0.5f + (vPos.y - m_pCollision->GetCenter().y);
 	SetPosition(vPos.x, y, vPos.z);

@@ -110,6 +110,9 @@ CBoxCollision::~CBoxCollision()
 
 void CBoxCollision::Render()
 {
+	_RELEASE_COMMENT m_isCollide = false;
+	_RELEASE_COMMENT return;
+	
 	vector<ST_PC_VERTEX> drawPoint;
 	vector<ST_PC_VERTEX> drawVertex;
 	ST_PC_VERTEX vertex;
