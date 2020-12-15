@@ -1,7 +1,6 @@
 #include "stdafx.h"
 #include "CUIPauseBoard.h"
 #include "CUI.h"
-#include "CUIText.h"
 #include "CUITexture.h"
 
 

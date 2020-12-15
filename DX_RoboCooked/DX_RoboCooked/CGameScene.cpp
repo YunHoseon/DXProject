@@ -25,6 +25,7 @@
 #include "CTornado.h"
 #include "CSandpile.h"
 
+#include "CUIClearButton.h"
 #include "CUIPauseButton.h"
 #include "CUITrafficLight.h"
 
@@ -39,6 +40,7 @@ std::mutex CGameScene::m_cMutex;
 #include "CDebugPlayer2.h"
 
 CGameScene::CGameScene() : m_pField(NULL),
+						   m_pDebugClearUI(nullptr),
 						   m_pDebugPauseUI(nullptr),
 						   m_pDebugTrafficLight(nullptr),
 						   m_isTimeStop(false),
@@ -105,6 +107,7 @@ void CGameScene::Init()
 	Harpy->AddObjectPosition(D3DXVECTOR3(-3, 0, 0));
 	Harpy->AddObjectPosition(D3DXVECTOR3(0, 0, -3));
 
+	CUIButton* pClearButton = new CUIClearButton(D3DXVECTOR2(465, 10), this);
 	CUIButton* pPauseButton = new CUIPauseButton(D3DXVECTOR2(465, 10), 27, this);
 	CUITrafficLight* pTrafficLight = new CUITrafficLight(this,m_vecBlueprints.size());
 	
@@ -117,6 +120,7 @@ void CGameScene::Init()
 	m_vecMonster.push_back(Medusa);
 	m_vecMonster.push_back(Harpy);
 
+	m_pDebugClearUI = pClearButton;
 	m_pDebugTrafficLight = pTrafficLight;
 	m_pDebugPauseUI = pPauseButton;
 	m_vecObject.push_back(coffin);
@@ -127,6 +131,7 @@ void CGameScene::Init()
 void CGameScene::Render()
 {
 	m_cMutex.lock();
+
 	for (CActor *it : m_vecStaticActor)
 	{
 		it->Render();
@@ -162,28 +167,38 @@ void CGameScene::Render()
 		it->Render();
 	}
 
+	if (m_pDebugTrafficLight)
+		m_pDebugTrafficLight->Render();
+
 	if (m_pDebugPauseUI)
 		m_pDebugPauseUI->Render();
 
-	if (m_pDebugTrafficLight)
-		m_pDebugTrafficLight->Render();
+	//
+	//if (m_pDebugClearUI)
+	//	m_pDebugClearUI->Render();
+	
+	
+
 	m_cMutex.unlock();
 }
 
 void CGameScene::Update()
 {
-	if (m_isTimeStop)
-		return;
 
+	
 	if (IsGameClear())
 	{
+		//승리상태
 		_DEBUG_COMMENT cout << "game clear!" << endl;
 	}
-
 	if (IsGameLose())
 	{
+		//패배상태
 		_DEBUG_COMMENT cout << "game lose!" << endl;
 	}
+
+	if (m_isTimeStop)
+		return;
 
 	{
 		for (CCharacter *character : m_vecCharacters)
@@ -920,5 +935,31 @@ void CGameScene::CheckAroundCombinator(CPartCombinator *combinator)
 	{
 		combinator->PartsInteract(it.second);
 		it.second->SetCPartCombinator(combinator);
+	}
+}
+
+string CGameScene::CalMin(int sec)
+{
+	int a = sec / 60;
+	if (a >= 10)
+	{
+		return std::to_string(a);
+	}
+	else
+	{
+		return "0" + std::to_string(a);
+	}
+}
+
+string CGameScene::CalSec(int sec)
+{
+	int a = sec % 60;
+	if (a >= 10)
+	{
+		return std::to_string(a);
+	}
+	else
+	{
+		return "0" + std::to_string(a);
 	}
 }

@@ -175,6 +175,9 @@
     <ClInclude Include="CTestStair.h" />
     <ClInclude Include="CTornado.h" />
     <ClInclude Include="CTV.h" />
+    <ClInclude Include="CUIClearBoard.h" />
+    <ClInclude Include="CUIClearButton.h" />
+    <ClInclude Include="CUIClearTime.h" />
     <ClInclude Include="CUICloseButton.h" />
     <ClInclude Include="CUIEndButton.h" />
     <ClInclude Include="CUILight.h" />
@@ -193,6 +196,11 @@
     <ClInclude Include="CSoundManager.h" />
     <ClInclude Include="CPhysicsApplyer.h" />
     <ClInclude Include="CUIButton.h" />
+    <ClInclude Include="CUIStar.h" />
+    <ClInclude Include="CUIStarOne.h" />
+    <ClInclude Include="CUIStarThree.h" />
+    <ClInclude Include="CUIStarTwo.h" />
+    <ClInclude Include="CUIStarZero.h" />
     <ClInclude Include="CUIText.h" />
     <ClInclude Include="CUITexture.h" />
     <ClInclude Include="CUITextureManager.h" />
@@ -200,6 +208,7 @@
     <ClInclude Include="CUITrafficLightFourBoard.h" />
     <ClInclude Include="CUITrafficLightOneBoard.h" />
     <ClInclude Include="CUITrafficLightThreeBoard.h" />
+    <ClInclude Include="CUITryAgain.h" />
     <ClInclude Include="CWall.h" />
     <ClInclude Include="CWater.h" />
     <ClInclude Include="ICollisionArea.h" />
@@ -275,6 +284,9 @@
     <ClCompile Include="CTestStair.cpp" />
     <ClCompile Include="CTornado.cpp" />
     <ClCompile Include="CTV.cpp" />
+    <ClCompile Include="CUIClearBoard.cpp" />
+    <ClCompile Include="CUIClearButton.cpp" />
+    <ClCompile Include="CUIClearTime.cpp" />
     <ClCompile Include="CUICloseButton.cpp" />
     <ClCompile Include="CUIEndButton.cpp" />
     <ClCompile Include="CUILight.cpp" />
@@ -293,6 +305,11 @@
     <ClCompile Include="CSoundManager.cpp" />
     <ClCompile Include="CPhysicsApplyer.cpp" />
     <ClCompile Include="CUIButton.cpp" />
+    <ClCompile Include="CUIStar.cpp" />
+    <ClCompile Include="CUIStarOne.cpp" />
+    <ClCompile Include="CUIStarThree.cpp" />
+    <ClCompile Include="CUIStarTwo.cpp" />
+    <ClCompile Include="CUIStarZero.cpp" />
     <ClCompile Include="CUIText.cpp" />
     <ClCompile Include="CUITexture.cpp" />
     <ClCompile Include="CUITextureManager.cpp" />
@@ -300,6 +317,7 @@
     <ClCompile Include="CUITrafficLightFourBoard.cpp" />
     <ClCompile Include="CUITrafficLightOneBoard.cpp" />
     <ClCompile Include="CUITrafficLightThreeBoard.cpp" />
+    <ClCompile Include="CUITryAgain.cpp" />
     <ClCompile Include="CWall.cpp" />
     <ClCompile Include="CWater.cpp" />
     <ClCompile Include="ICollisionArea.cpp" />
