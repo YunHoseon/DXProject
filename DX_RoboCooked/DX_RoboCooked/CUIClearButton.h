@@ -10,7 +10,7 @@ class CUIClearButton :
 private:
 	IInteractCenter*	m_pInteractCenter;
 	CUIStar*			m_pUIStar;
-	FLOAT				m_fTime;
+	INT					m_nTime;
 
 public:
 	CUIClearButton(D3DXVECTOR2 vPos, IInteractCenter* pInteractCenter);
@@ -20,11 +20,6 @@ public:
 	virtual void Setup() override;
 
 	bool OnEvent(eEvent eEvent, void * _value);
-	void ClickEvent(void* _value);
-	void HoverEvent(void* _value);
-	void KeyPressEvent(void* _value);
-	void KeyReleaseEvent(void* _value);
-	void MouseReleaseEvent(void* _value);
 	void SetTimeEvent(void * _value);
 };
 

@@ -18,11 +18,11 @@ public:
 public:
 	virtual void Setup() override;
 	bool OnEvent(eEvent eEvent, void * _value);
-	void ClickEvent(void* _value);
-	void HoverEvent(void* _value);
 	void KeyPressEvent(void* _value);
 	void KeyReleaseEvent(void* _value);
-	void MouseReleaseEvent(void* _value);
+	//void ClickEvent(void* _value);
+	//void HoverEvent(void* _value);
+	//void MouseReleaseEvent(void* _value);
 	void ActiveButton();
 	void ResetGame();
 };

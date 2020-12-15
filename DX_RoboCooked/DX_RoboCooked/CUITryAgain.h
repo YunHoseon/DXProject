@@ -4,7 +4,10 @@ class CUITryAgain :
 	public CUIButton
 {
 public:
-	CUITryAgain(D3DXVECTOR2 vPos, eBtnEvent btnEvent);
+	CUITryAgain(D3DXVECTOR2 vPos);
 	~CUITryAgain();
+
+public:
+	void Setup() override;
 };
 

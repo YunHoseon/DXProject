@@ -1,8 +1,6 @@
 #include "stdafx.h"
 #include "CUIPauseButton.h"
-
 #include "CGameScene.h"
-#include "CUI.h"
 #include "CUIText.h"
 #include "CUITexture.h"
 #include "CUIPauseBoard.h"
@@ -41,8 +39,6 @@ CUIPauseButton::~CUIPauseButton()
 
 void CUIPauseButton::Setup()
 {
-	
-
 	CUI* board = new CUIPauseBoard(D3DXVECTOR2(m_vPosition.x, m_vPosition.y),eBtnEvent::None);
 	Add(board);
 
@@ -57,10 +53,6 @@ void CUIPauseButton::Setup()
 
 	CUI* EndBtn = new CUIEndButton(D3DXVECTOR2(m_vPosition.x + 550, m_vPosition.y + 500), eBtnEvent::PauseEnd);
 	board->Add(EndBtn);
-
-
-	
-
 }
 
 bool CUIPauseButton::OnEvent(eEvent eEvent, void * _value)
@@ -68,10 +60,10 @@ bool CUIPauseButton::OnEvent(eEvent eEvent, void * _value)
 	switch (eEvent)
 	{
 	case eEvent::MouseClick:
-		ClickEvent(_value);
+		MouseClickEvent(_value);
 		break;
 	case eEvent::MouseHover:
-		HoverEvent(_value);
+		MouseHoverEvent(_value);
 		break;
 	case eEvent::KeyPress:
 		KeyPressEvent(_value);
@@ -97,17 +89,6 @@ bool CUIPauseButton::OnEvent(eEvent eEvent, void * _value)
 	return true;
 }
 
-
-void CUIPauseButton::HoverEvent(void* _value)
-{
-	ST_MouseEvent *data = static_cast<ST_MouseEvent*>(_value);
-
-	for (auto it : m_listUIchildren)
-	{
-		it->CheckInHover(data->pt);
-	}
-}
-
 void CUIPauseButton::KeyPressEvent(void * _value)
 {
 	ST_KeyInputEvent *data = static_cast<ST_KeyInputEvent*>(_value);
@@ -128,29 +109,40 @@ void CUIPauseButton::KeyReleaseEvent(void * _value)
 		ActiveButton();
 	}
 }
-
-void CUIPauseButton::ClickEvent(void* _value)
-{
-	ST_MouseEvent *data = static_cast<ST_MouseEvent*>(_value);
-
-	
-	for (auto it : m_listUIchildren)
-	{
-		it->CheckPressIn(data->pt);
-	}
-	m_isMouseDown = true;
-}
-
-void CUIPauseButton::MouseReleaseEvent(void * _value)
-{
-	ST_MouseEvent *data = static_cast<ST_MouseEvent*>(_value);
-
-	for (auto it : m_listUIchildren)
-	{
-		it->CheckReleaseIn(data->pt);
-	}
-	m_isMouseDown = false; 
-}
+//
+//void CUIPauseButton::HoverEvent(void* _value)
+//{
+//	ST_MouseEvent *data = static_cast<ST_MouseEvent*>(_value);
+//
+//	for (auto it : m_listUIchildren)
+//	{
+//		it->CheckInHover(data->pt);
+//	}
+//}
+//
+//
+//void CUIPauseButton::ClickEvent(void* _value)
+//{
+//	ST_MouseEvent *data = static_cast<ST_MouseEvent*>(_value);
+//
+//	
+//	for (auto it : m_listUIchildren)
+//	{
+//		it->CheckPressIn(data->pt);
+//	}
+//	m_isMouseDown = true;
+//}
+//
+//void CUIPauseButton::MouseReleaseEvent(void * _value)
+//{
+//	ST_MouseEvent *data = static_cast<ST_MouseEvent*>(_value);
+//
+//	for (auto it : m_listUIchildren)
+//	{
+//		it->CheckReleaseIn(data->pt);
+//	}
+//	m_isMouseDown = false; 
+//}
 
 void CUIPauseButton::ActiveButton()
 {

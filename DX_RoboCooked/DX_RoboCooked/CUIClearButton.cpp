@@ -10,25 +10,18 @@
 #include "CUIMainButton.h"
 #include "CUIStartButton.h"
 
-CUIClearButton::CUIClearButton(D3DXVECTOR2 vPos, IInteractCenter* pInteractCenter):m_pUIStar(nullptr), m_fTime(0)
+CUIClearButton::CUIClearButton(D3DXVECTOR2 vPos, IInteractCenter* pInteractCenter):m_pUIStar(nullptr), m_nTime(0)
 {
 	m_pInteractCenter = pInteractCenter;
 
 	m_vPosition = vPos;
-	D3DXVECTOR2 starPos = vPos;
-	starPos.x += 285;
-	starPos.y += 150;
-
-	if (m_fTime >= 180)		m_pUIStar = new CUIStarThree(starPos);
-	else if (m_fTime >= 120)m_pUIStar = new CUIStarTwo(starPos);
-	else if (m_fTime >= 60)	m_pUIStar = new CUIStarOne(starPos);
-	else					m_pUIStar = new CUIStarZero(starPos);
 
 
-	Setup();
 
-	g_EventManager->Attach(eEvent::KeyPress, this);
-	g_EventManager->Attach(eEvent::KeyRelease, this);
+	//Setup();
+
+	g_EventManager->Attach(eEvent::MouseClick, this);
+	g_EventManager->Attach(eEvent::MouseHover, this);
 	g_EventManager->Attach(eEvent::MouseRelease, this);
 
 	g_EventManager->Attach(eEvent::ClearMain, this);
@@ -42,7 +35,17 @@ CUIClearButton::~CUIClearButton()
 
 void CUIClearButton::Setup()
 {
-	string sTime = m_pInteractCenter->CalMin(m_fTime) + ":" + m_pInteractCenter->CalSec(m_fTime);
+	D3DXVECTOR2 starPos = m_vPosition;
+	starPos.x += 285;
+	starPos.y += 150;
+
+	if (m_nTime >= 180)		m_pUIStar = new CUIStarThree(starPos);
+	else if (m_nTime >= 120)m_pUIStar = new CUIStarTwo(starPos);
+	else if (m_nTime >= 60)	m_pUIStar = new CUIStarOne(starPos);
+	else					m_pUIStar = new CUIStarZero(starPos);
+
+
+	string sTime = m_pInteractCenter->CalMin(m_nTime) + ":" + m_pInteractCenter->CalSec(m_nTime);
 
 	CUI* board = new CUIClearBoard(D3DXVECTOR2(m_vPosition.x, m_vPosition.y), sTime,eBtnEvent::None);
 	Add(board);
@@ -61,8 +64,19 @@ void CUIClearButton::Setup()
 
 bool CUIClearButton::OnEvent(eEvent eEvent, void * _value)
 {
+	if (!m_isActive)
+		return true;
 	switch (eEvent)
 	{
+	case eEvent::MouseClick:
+		MouseClickEvent(_value);
+		break;
+	case eEvent::MouseHover:
+		MouseHoverEvent(_value);
+		break;
+	case eEvent::MouseRelease:
+		MouseReleaseEvent(_value);
+		break;
 	case eEvent::ClearMain:
 		break;
 	case eEvent::ClearNextStage:
@@ -76,28 +90,9 @@ bool CUIClearButton::OnEvent(eEvent eEvent, void * _value)
 }
 
 
-void CUIClearButton::ClickEvent(void * _value)
-{
-}
-
-void CUIClearButton::HoverEvent(void * _value)
-{
-}
-
-void CUIClearButton::KeyPressEvent(void * _value)
-{
-}
-
-void CUIClearButton::KeyReleaseEvent(void * _value)
-{
-}
-
-void CUIClearButton::MouseReleaseEvent(void * _value)
-{
-}
-
 void CUIClearButton::SetTimeEvent(void * _value)
 {
 	ST_SetTimeEvent* data = static_cast<ST_SetTimeEvent*>(_value);
-	m_fTime = data->fTime;
+	m_nTime = data->nTime;
+	Setup();
 }

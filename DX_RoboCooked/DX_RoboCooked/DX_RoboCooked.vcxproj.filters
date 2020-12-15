@@ -408,6 +408,12 @@
     <ClInclude Include="CPartsDestroyer.h">
       <Filter>GameScene\Monster</Filter>
     </ClInclude>
+    <ClInclude Include="CUILoseBoard.h">
+      <Filter>UI\Button\SubUI</Filter>
+    </ClInclude>
+    <ClInclude Include="CUILoseButton.h">
+      <Filter>UI\Button\MainUI</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="stdafx.cpp">
@@ -727,6 +733,12 @@
     </ClCompile>
     <ClCompile Include="CPartsDestroyer.cpp">
       <Filter>GameScene\Monster</Filter>
+    </ClCompile>
+    <ClCompile Include="CUILoseBoard.cpp">
+      <Filter>UI\Button\SubUI</Filter>
+    </ClCompile>
+    <ClCompile Include="CUILoseButton.cpp">
+      <Filter>UI\Button\MainUI</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

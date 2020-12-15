@@ -16,5 +16,5 @@ CUIClearTime::~CUIClearTime()
 
 void CUIClearTime::Setup()
 {
-	m_pTexture = new CUITexture("data/UI/clearTime.png", NULL, NULL, m_vPosition);
+	m_pTexture = new CUITexture("data/UI/clearTime.png", "data/UI/clearTime.png", "data/UI/clearTime.png", m_vPosition);
 }

@@ -35,6 +35,7 @@ private:
 	BOOL						m_isTimeStop;
 	INT							m_nLotIndex;
 	vector<CTile*>				m_vecTile;
+	CUIButton*					m_pDebugLoseUI;
 	CUIButton*					m_pDebugClearUI;
 	CUIButton*					m_pDebugPauseUI;
 	CUITrafficLight*			m_pDebugTrafficLight;

@@ -13,13 +13,20 @@ CUITexture::CUITexture( char* DisabledPath, char* ActivePath, char* HoverPath, D
 	m_DisabledInfo = g_pUITextureManager->GetTextureInfo(DisabledPath);
 
 	if (ActivePath == NULL)
+	{
+		m_ActiveTexture = nullptr;
 		return;
-
+	}
+		
 	m_ActiveTexture		= g_pUITextureManager->GetTexture(ActivePath);
 	m_ActiveInfo		= g_pUITextureManager->GetTextureInfo(ActivePath);
 
 	if (HoverPath == NULL)
+	{
+		m_HoverTexture = nullptr;
 		return;
+	}
+		
 	m_HoverTexture		= g_pUITextureManager->GetTexture(HoverPath);
 	m_HoverInfo			= g_pUITextureManager->GetTextureInfo(HoverPath);
 
@@ -62,6 +69,8 @@ void CUITexture::RenderTexture(eUIState state)
 	}
 	else if (state == eUIState::Active)
 	{
+		if (m_ActiveTexture == nullptr)
+			return;
 		SetRect(&rc, 0, 0, m_ActiveInfo.Width, m_ActiveInfo.Height);
 		m_Sprite->Draw(m_ActiveTexture,
 			&rc,
@@ -71,6 +80,8 @@ void CUITexture::RenderTexture(eUIState state)
 	}
 	else if (state == eUIState::Hover)
 	{
+		if (m_HoverTexture == nullptr)
+			return;
 		SetRect(&rc, 0, 0, m_HoverInfo.Width, m_HoverInfo.Height);
 		m_Sprite->Draw(m_HoverTexture,
 			&rc,

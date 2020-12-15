@@ -17,7 +17,9 @@ enum class eBtnEvent
 	PauseReset,
 	PauseEnd,
 	ClearMain,
-	ClearNextStage
+	ClearNextStage,
+	LoseMain,
+	LoseReset
 
 };
 class CUI : public CEventListener

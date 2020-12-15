@@ -54,4 +54,38 @@ void CUIButton::Remove(CUI * component)
 	component->SetParent(nullptr);
 }
 
+void CUIButton::MouseClickEvent(void * _value)
+{
+	ST_MouseEvent *data = static_cast<ST_MouseEvent*>(_value);
+
+
+	for (auto it : m_listUIchildren)
+	{
+		it->CheckPressIn(data->pt);
+	}
+	m_isMouseDown = true;
+}
+
+void CUIButton::MouseHoverEvent(void * _value)
+{
+	ST_MouseEvent *data = static_cast<ST_MouseEvent*>(_value);
+
+	for (auto it : m_listUIchildren)
+	{
+		it->CheckInHover(data->pt);
+	}
+}
+
+void CUIButton::MouseReleaseEvent(void * _value)
+{
+	ST_MouseEvent *data = static_cast<ST_MouseEvent*>(_value);
+
+	for (auto it : m_listUIchildren)
+	{
+		it->CheckReleaseIn(data->pt);
+	}
+	m_isMouseDown = false;
+}
+
+
 

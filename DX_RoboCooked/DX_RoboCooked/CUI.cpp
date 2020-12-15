@@ -87,7 +87,7 @@ void CUI::CheckInHover(POINT pt)
 				if (it->GetUIState() == eUIState::Active)
 					return;
 
-				it->SetUIPastState(it->GetUIState());
+			/*	it->SetUIPastState(it->GetUIState());*/
 				it->SetUIState(eUIState::Hover);
 			}
 			else
@@ -127,6 +127,18 @@ void CUI::ButtonEvent(eBtnEvent btnEvent)
 		break;
 	case eBtnEvent::PauseEnd:
 		g_EventManager->CallEvent(eEvent::PauseEnd, NULL);
+		break;
+	case eBtnEvent::ClearMain:
+		g_EventManager->CallEvent(eEvent::ClearMain, NULL);
+		break;
+	case eBtnEvent::ClearNextStage:
+		g_EventManager->CallEvent(eEvent::ClearNextStage, NULL);
+		break;
+	case eBtnEvent::LoseMain:
+		g_EventManager->CallEvent(eEvent::LoseMain, NULL);
+		break;
+	case eBtnEvent::LoseReset:
+		g_EventManager->CallEvent(eEvent::LoseReset, NULL);
 		break;
 	}
 }

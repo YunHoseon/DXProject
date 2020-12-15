@@ -27,5 +27,8 @@ public:
 public:
 	virtual void Add(CUI *component) override;
 	virtual void Remove(CUI *component) override;
+	virtual void MouseHoverEvent(void* _value);
+	virtual void MouseClickEvent(void* _value);
+	virtual void MouseReleaseEvent(void* _value);
 
 };

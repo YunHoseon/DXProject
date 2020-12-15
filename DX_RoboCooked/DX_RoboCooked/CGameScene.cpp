@@ -25,6 +25,7 @@
 #include "CTornado.h"
 #include "CSandpile.h"
 
+#include "CUILoseButton.h"
 #include "CUIClearButton.h"
 #include "CUIPauseButton.h"
 #include "CUITrafficLight.h"
@@ -40,6 +41,7 @@ std::mutex CGameScene::m_cMutex;
 #include "CDebugPlayer2.h"
 
 CGameScene::CGameScene() : m_pField(NULL),
+						   m_pDebugLoseUI(nullptr),
 						   m_pDebugClearUI(nullptr),
 						   m_pDebugPauseUI(nullptr),
 						   m_pDebugTrafficLight(nullptr),
@@ -110,20 +112,21 @@ void CGameScene::Init()
 
 	CUIButton* pClearButton = new CUIClearButton(D3DXVECTOR2(465, 10), this);
 	CUIButton* pPauseButton = new CUIPauseButton(D3DXVECTOR2(465, 10), 27, this);
+	CUIButton* pLoseButton = new CUILoseButton(D3DXVECTOR2(465, 10), this);
 	CUITrafficLight* pTrafficLight = new CUITrafficLight(this,m_vecBlueprints.size());
-	
 	CPharaohCoffin* coffin = new CPharaohCoffin(this, D3DXVECTOR3(0,0,0));
 
 	m_cMutex.lock();
 
-	m_fGameTime = 50.0f;
+	m_fGameTime = 300.0f;
 	m_vecStaticActor.push_back(wall);
 	m_vecMonster.push_back(Medusa);
 	m_vecMonster.push_back(Harpy);
 
+	m_pDebugPauseUI = pPauseButton;
+	m_pDebugLoseUI = pLoseButton;
 	m_pDebugClearUI = pClearButton;
 	m_pDebugTrafficLight = pTrafficLight;
-	m_pDebugPauseUI = pPauseButton;
 	m_vecObject.push_back(coffin);
 
 	m_cMutex.unlock();
@@ -171,10 +174,12 @@ void CGameScene::Render()
 	if (m_pDebugTrafficLight)
 		m_pDebugTrafficLight->Render();
 
+	if (m_pDebugLoseUI)
+		m_pDebugLoseUI->Render();
+
 	if (m_pDebugPauseUI)
 		m_pDebugPauseUI->Render();
 
-	
 	if (m_pDebugClearUI)
 		m_pDebugClearUI->Render();
 	
@@ -381,17 +386,25 @@ bool CGameScene::TickUpdate(void * _value)
 	int check = IsGameClear();
 	if (check == 1)
 	{
-		if(m_pDebugClearUI)
-			m_pDebugClearUI->InvertActive();
-		ST_SetTimeEvent data;
-		data.fTime = m_fGameTime;
+		ST_SetTimeEvent timeData;
+		timeData.nTime = m_fGameTime;
 
-		g_EventManager->CallEvent(eEvent::ClearSetTime, (void*)&data);
+		m_isTimeStop = true;
+		SafeDelete(m_pDebugPauseUI);
+		g_EventManager->CallEvent(eEvent::ClearSetTime, (void*)&timeData);
+
+		if (m_pDebugClearUI)
+			m_pDebugClearUI->InvertActive();
+
 		return false;
 	}
 	else if (check == 2)
 	{
-		//패배 ->InvertActive();
+		m_isTimeStop = true;
+		SafeDelete(m_pDebugPauseUI);
+
+		if (m_pDebugLoseUI)
+			m_pDebugLoseUI->InvertActive();
 		return false;
 	}
 

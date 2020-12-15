@@ -63,6 +63,8 @@ void CUITrafficLight::Setup()
 
 bool CUITrafficLight::OnEvent(eEvent eEvent, void* _value)
 {
+	if (!m_isActive)
+		return true;
 	switch (eEvent)
 	{
 	case eEvent::CompleteBluePrint:
