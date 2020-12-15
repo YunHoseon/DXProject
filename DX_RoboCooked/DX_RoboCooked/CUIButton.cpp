@@ -29,11 +29,11 @@ void CUIButton::Render()
 	if (!m_isActive)
 		return;
 
-	if (m_pText)
-		m_pText->Render();
-
 	if (m_pTexture)
 		m_pTexture->RenderTexture(m_eUIState);
+
+	if (m_pText)
+		m_pText->Render();
 
 	for (const auto c : m_listUIchildren)
 	{

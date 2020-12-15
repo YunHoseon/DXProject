@@ -2,7 +2,7 @@
 #include "CUIText.h"
 
 
-CUIText::CUIText(char* ptext, D3DXVECTOR2 vPos)
+CUIText::CUIText(string ptext, D3DXVECTOR2 vPos)
 {
 	m_sText = ptext;
 	SetRect(&m_rcText, vPos.x, vPos.y,500 , 200);
@@ -26,5 +26,5 @@ void CUIText::Render()
 		m_sText.length(),
 		&m_rcText,
 		DT_LEFT | DT_TOP | DT_NOCLIP,
-		D3DCOLOR_XRGB(255, 255, 0));
+		D3DCOLOR_XRGB(0, 0, 0));
 }

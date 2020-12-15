@@ -375,9 +375,6 @@
     <ClInclude Include="CUIStartButton.h">
       <Filter>UI\Button\SubUI</Filter>
     </ClInclude>
-    <ClInclude Include="CUITrafficLight.h">
-      <Filter>UI\Button\SubUI</Filter>
-    </ClInclude>
     <ClInclude Include="CUIClearTime.h">
       <Filter>UI\Button\SubUI</Filter>
     </ClInclude>
@@ -400,6 +397,9 @@
       <Filter>UI\Button\SubUI\CUIStar</Filter>
     </ClInclude>
     <ClInclude Include="CUILoading.h">
+      <Filter>UI\Button\MainUI</Filter>
+    </ClInclude>
+    <ClInclude Include="CUITrafficLight.h">
       <Filter>UI\Button\MainUI</Filter>
     </ClInclude>
   </ItemGroup>
@@ -689,9 +689,6 @@
     <ClCompile Include="CUIStartButton.cpp">
       <Filter>UI\Button\SubUI</Filter>
     </ClCompile>
-    <ClCompile Include="CUITrafficLight.cpp">
-      <Filter>UI\Button\SubUI</Filter>
-    </ClCompile>
     <ClCompile Include="CUIClearTime.cpp">
       <Filter>UI\Button\SubUI</Filter>
     </ClCompile>
@@ -714,6 +711,9 @@
       <Filter>UI\Button\SubUI\CUIStar</Filter>
     </ClCompile>
     <ClCompile Include="CUILoading.cpp">
+      <Filter>UI\Button\MainUI</Filter>
+    </ClCompile>
+    <ClCompile Include="CUITrafficLight.cpp">
       <Filter>UI\Button\MainUI</Filter>
     </ClCompile>
   </ItemGroup>

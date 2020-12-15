@@ -10,16 +10,18 @@
 #include "CUIMainButton.h"
 #include "CUIStartButton.h"
 
-CUIClearButton::CUIClearButton(D3DXVECTOR2 vPos, FLOAT fTime, IInteractCenter* pInteractCenter):m_pUIStar(nullptr)
+CUIClearButton::CUIClearButton(D3DXVECTOR2 vPos, IInteractCenter* pInteractCenter):m_pUIStar(nullptr), m_fTime(0)
 {
+	m_pInteractCenter = pInteractCenter;
+
 	m_vPosition = vPos;
 	D3DXVECTOR2 starPos = vPos;
 	starPos.x += 285;
 	starPos.y += 150;
 
-	if (fTime >= 180)		m_pUIStar = new CUIStarThree(starPos);
-	else if (fTime >= 120)	m_pUIStar = new CUIStarTwo(starPos);
-	else if (fTime >= 60)	m_pUIStar = new CUIStarOne(starPos);
+	if (m_fTime >= 180)		m_pUIStar = new CUIStarThree(starPos);
+	else if (m_fTime >= 120)m_pUIStar = new CUIStarTwo(starPos);
+	else if (m_fTime >= 60)	m_pUIStar = new CUIStarOne(starPos);
 	else					m_pUIStar = new CUIStarZero(starPos);
 
 
@@ -37,7 +39,9 @@ CUIClearButton::~CUIClearButton()
 
 void CUIClearButton::Setup()
 {
-	CUI* board = new CUIClearBoard(D3DXVECTOR2(m_vPosition.x, m_vPosition.y), eBtnEvent::None);
+	string sTime = m_pInteractCenter->CalMin(m_fTime) + ":" + m_pInteractCenter->CalSec(m_fTime);
+
+	CUI* board = new CUIClearBoard(D3DXVECTOR2(m_vPosition.x, m_vPosition.y), sTime,eBtnEvent::None);
 	Add(board);
 
 	board->Add(m_pUIStar);
@@ -50,9 +54,11 @@ void CUIClearButton::Setup()
 
 	CUI* mainBtn = new CUIMainButton(D3DXVECTOR2(m_vPosition.x + 550, m_vPosition.y + 525), eBtnEvent::PauseMain);
 	board->Add(mainBtn);
+}
 
-
-	
+void CUIClearButton::SetTime(float ftime)
+{
+	m_fTime = ftime;
 }
 
 void CUIClearButton::OnEvent(eEvent eEvent, void * _value)

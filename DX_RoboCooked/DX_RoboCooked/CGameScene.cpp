@@ -107,7 +107,7 @@ void CGameScene::Init()
 	Harpy->AddObjectPosition(D3DXVECTOR3(-3, 0, 0));
 	Harpy->AddObjectPosition(D3DXVECTOR3(0, 0, -3));
 
-	CUIButton* pClearButton = new CUIClearButton(D3DXVECTOR2(465, 10), 400, this);
+	CUIButton* pClearButton = new CUIClearButton(D3DXVECTOR2(465, 10), this);
 	CUIButton* pPauseButton = new CUIPauseButton(D3DXVECTOR2(465, 10), 27, this);
 	CUITrafficLight* pTrafficLight = new CUITrafficLight(this,m_vecBlueprints.size());
 	
@@ -167,26 +167,33 @@ void CGameScene::Render()
 		it->Render();
 	}
 
-
-	//if (m_pDebugClearUI)
-	//	m_pDebugClearUI->Render();
+	if (m_pDebugTrafficLight)
+		m_pDebugTrafficLight->Render();
 
 	if (m_pDebugPauseUI)
 		m_pDebugPauseUI->Render();
 
-	if (m_pDebugTrafficLight)
-		m_pDebugTrafficLight->Render();
+	//
+	//if (m_pDebugClearUI)
+	//	m_pDebugClearUI->Render();
+	
+	
+
 	m_cMutex.unlock();
 }
 
 void CGameScene::Update()
 {
+
+	
 	if (IsGameClear())
 	{
+		//승리상태
 		_DEBUG_COMMENT cout << "game clear!" << endl;
 	}
 	if (IsGameLose())
 	{
+		//패배상태
 		_DEBUG_COMMENT cout << "game lose!" << endl;
 	}
 
