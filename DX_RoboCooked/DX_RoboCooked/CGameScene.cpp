@@ -15,7 +15,6 @@
 #include "CPartVending.h"
 #include "CPhysicsApplyer.h"
 #include "CWall.h"
-#include "CUIButton.h"
 #include "CBlueprint.h"
 #include "CMonster.h"
 #include "CPharaohCoffin.h"
@@ -25,8 +24,10 @@
 #include "CTornado.h"
 #include "CSandpile.h"
 
+#include "CUIButton.h"
 #include "CUIPauseButton.h"
 #include "CUITrafficLight.h"
+#include "CUILoading.h"
 
 /* ������ */
 #include <filesystem>
@@ -41,6 +42,7 @@ std::mutex CGameScene::m_cMutex;
 CGameScene::CGameScene() : m_pField(NULL),
 						   m_pDebugPauseUI(nullptr),
 						   m_pDebugTrafficLight(nullptr),
+						   m_pDebugLoadingPopup(nullptr),
 						   m_isTimeStop(false),
 						   m_vWind(0, 0, 0),
 						   m_fGameTime(300.0f),
@@ -89,8 +91,11 @@ CGameScene::~CGameScene()
 	{
 		SafeDelete(it);
 	}
+
 	SafeDelete(m_pDebugPauseUI);
 	SafeDelete(m_pDebugTrafficLight);
+	SafeDelete(m_pDebugLoadingPopup);
+
 	m_cMutex.unlock();
 }
 
@@ -167,6 +172,7 @@ void CGameScene::Render()
 
 	if (m_pDebugTrafficLight)
 		m_pDebugTrafficLight->Render();
+
 	m_cMutex.unlock();
 }
 
@@ -636,7 +642,12 @@ void CGameScene::Load(string sFolder, string sFilename, void (CGameScene::* pCal
 		(this->*pCallback)();
 
 	// 로딩ui 종료하고 게임 시작
-	
+	CUILoading* pLoadingPopup = new CUILoading();
+	m_pDebugLoadingPopup = pLoadingPopup;
+	m_pDebugLoadingPopup->Setup();
+	if (m_pDebugLoadingPopup)
+		m_pDebugLoadingPopup->Render();
+
 	m_cMutex.lock();
 	m_isTimeStop = false;
 	m_cMutex.unlock();

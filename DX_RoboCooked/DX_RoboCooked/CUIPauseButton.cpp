@@ -25,13 +25,10 @@ CUIPauseButton::CUIPauseButton(D3DXVECTOR2 vPos, WPARAM wParam, IInteractCenter*
 	g_EventManager->Attach(eEvent::KeyRelease, this);
 	g_EventManager->Attach(eEvent::MouseRelease, this);
 
-
-
 	g_EventManager->Attach(eEvent::PauseMain, this);
 	g_EventManager->Attach(eEvent::PauseClose, this);
 	g_EventManager->Attach(eEvent::PauseReset, this);
 	g_EventManager->Attach(eEvent::PauseEnd, this);
-
 }
 
 
@@ -41,8 +38,6 @@ CUIPauseButton::~CUIPauseButton()
 
 void CUIPauseButton::Setup()
 {
-	
-
 	CUI* board = new CUIPauseBoard(D3DXVECTOR2(m_vPosition.x, m_vPosition.y),eBtnEvent::None);
 	Add(board);
 
@@ -57,10 +52,6 @@ void CUIPauseButton::Setup()
 
 	CUI* EndBtn = new CUIEndButton(D3DXVECTOR2(m_vPosition.x + 550, m_vPosition.y + 500), eBtnEvent::PauseEnd);
 	board->Add(EndBtn);
-
-
-	
-
 }
 
 void CUIPauseButton::OnEvent(eEvent eEvent, void * _value)
@@ -92,7 +83,6 @@ void CUIPauseButton::OnEvent(eEvent eEvent, void * _value)
 		break;
 	case eEvent::PauseEnd:
 		break;
-
 	}
 }
 
@@ -114,7 +104,6 @@ void CUIPauseButton::KeyPressEvent(void * _value)
 	if (data->wKey == m_wActiveButton)
 	{
 		m_isKeyDown = true;
-		
 	}
 }
 
@@ -132,7 +121,6 @@ void CUIPauseButton::ClickEvent(void* _value)
 {
 	ST_MouseEvent *data = static_cast<ST_MouseEvent*>(_value);
 
-	
 	for (auto it : m_listUIchildren)
 	{
 		it->CheckPressIn(data->pt);
