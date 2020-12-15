@@ -29,6 +29,7 @@
 #include "CUIClearButton.h"
 #include "CUIPauseButton.h"
 #include "CUITrafficLight.h"
+#include "CUILoading.h"
 
 /* ������ */
 #include <filesystem>
@@ -45,6 +46,7 @@ CGameScene::CGameScene() : m_pField(NULL),
 						   m_pDebugClearUI(nullptr),
 						   m_pDebugPauseUI(nullptr),
 						   m_pDebugTrafficLight(nullptr),
+						   m_pDebugLoadingPopup(nullptr),
 						   m_isTimeStop(false),
 						   m_vWind(0, 0, 0),
 						   m_fGameTime(300.0f),
@@ -115,10 +117,12 @@ void CGameScene::Init()
 	CUIButton* pLoseButton = new CUILoseButton(D3DXVECTOR2(465, 10), this);
 	CUITrafficLight* pTrafficLight = new CUITrafficLight(this,m_vecBlueprints.size());
 	CPharaohCoffin* coffin = new CPharaohCoffin(this, D3DXVECTOR3(0,0,0));
+	CUILoading* pLoadingPopup = new CUILoading();
+
+	m_fGameTime = 300.0f;
 
 	m_cMutex.lock();
 
-	m_fGameTime = 300.0f;
 	m_vecStaticActor.push_back(wall);
 	m_vecMonster.push_back(Medusa);
 	m_vecMonster.push_back(Harpy);
@@ -129,6 +133,8 @@ void CGameScene::Init()
 	m_pDebugTrafficLight = pTrafficLight;
 	m_vecObject.push_back(coffin);
 
+	m_pDebugLoadingPopup = pLoadingPopup;
+	m_pDebugLoadingPopup->Setup();
 	m_cMutex.unlock();
 }
 
@@ -182,6 +188,9 @@ void CGameScene::Render()
 
 	if (m_pDebugClearUI)
 		m_pDebugClearUI->Render();
+
+	/*if (m_pDebugLoadingPopup)
+		m_pDebugLoadingPopup->Render();*/
 	
 
 	m_cMutex.unlock();
@@ -189,16 +198,6 @@ void CGameScene::Render()
 
 void CGameScene::Update()
 {
-	//if (IsGameClear())
-	//{
-	//	//승리상태
-	//	_DEBUG_COMMENT cout << "game clear!" << endl;
-	//}
-	//if (IsGameLose())
-	//{
-	//	//패배상태
-	//	_DEBUG_COMMENT cout << "game lose!" << endl;
-	//}
 
 	if (m_isTimeStop)
 		return;
@@ -469,6 +468,19 @@ void CGameScene::Load(string sFolder, string sFilename, void (CGameScene::* pCal
 				sandpile->SetRotationY(rotate);
 				sandpile->SetScale(scale);
 				vecStatic.push_back(sandpile);
+			}
+		}
+		{
+			json jCoffin = j["PharaohCoffin"];
+			for (auto&& p : jCoffin)
+			{
+				D3DXVECTOR3 pos(p["Position"][0], p["Position"][1], p["Position"][2]);
+				float rotate = p["Rotate"];
+				D3DXVECTOR3 scale(p["Scale"][0], p["Scale"][1], p["Scale"][2]);
+				CPharaohCoffin* Coffin = new CPharaohCoffin(this, pos);
+				Coffin->SetRotationY(rotate);
+				Coffin->SetScale(scale);
+				vecStatic.push_back(Coffin);
 			}
 		}
 		{
@@ -839,7 +851,7 @@ void CGameScene::MedusaUlt(D3DXVECTOR3 pos)
 {
 	CSphereCollision cCollsion(pos, 2.0f);
 
-	for (int i = 0; i < m_vecParts.size(); i++)
+	for (int i = 0; i < m_vecParts.size(); ++i)
 	{
 		if (cCollsion.Collide(m_vecParts[i]->GetCollision()))
 		{
@@ -848,7 +860,6 @@ void CGameScene::MedusaUlt(D3DXVECTOR3 pos)
 			--i;
 		}
 	}
-	cCollsion.Render();
 }
 
 void CGameScene::SetWindDirection()
@@ -893,10 +904,10 @@ int CGameScene::IsGameClear()
 	for (CBlueprint *it : m_vecBlueprints)
 	{
 		if (it->GetIsCompleted() == false)
-			return 0;
+			return 0; // 완료되지 않음
 	}
 	if(!m_vecBlueprints.empty())
-		return 1;
+		return 1; // 클리어
 
 	return 0;
 }

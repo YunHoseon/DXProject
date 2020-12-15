@@ -253,31 +253,31 @@ void CMonster::ChooseSkillCondition()
 	m_eSecondSkillEvent = eEvent::SpecificArea;
 	m_pInteractCenter->ElectIndexLot();*/
 
-
-	switch (m_eSkillCondition)
-	{
-	case eSkillCondition::TravelDistance:
-		cout << m_debugName << ":" << "걷기 조건" << endl;
-		break;
-	case eSkillCondition::SpecificArea:
-		cout << m_debugName << ":" << "특정지역 조건" << endl;
-		break;
-	case eSkillCondition::CombinUse:
-		cout << m_debugName << ":" << "조합기사용 조건" << endl;
-		break;
-	case eSkillCondition::VendingUse:
-		cout << m_debugName << ":" << "자판기사용 조건" << endl;
-		break;
-	case eSkillCondition::CrowdControl:
-		cout << m_debugName << ":" << "CC걸린횟수 조건" << endl;
-		break;
-	case eSkillCondition::ThrowParts:
-		cout << m_debugName << ":" << "파츠던지기횟수 조건" << endl;
-		break;
-	case eSkillCondition::SpinParts:
-		cout << m_debugName << ":" << "파츠돌리기횟수 조건" << endl;
-		break;
-	}
+	
+	_DEBUG_COMMENT switch (m_eSkillCondition)
+	_DEBUG_COMMENT {
+	_DEBUG_COMMENT case eSkillCondition::TravelDistance:
+	_DEBUG_COMMENT 	cout << m_debugName << ":" << "걷기 조건" << endl;
+	_DEBUG_COMMENT 	break;
+	_DEBUG_COMMENT case eSkillCondition::SpecificArea:
+	_DEBUG_COMMENT 	cout << m_debugName << ":" << "특정지역 조건" << endl;
+	_DEBUG_COMMENT 	break;
+	_DEBUG_COMMENT case eSkillCondition::CombinUse:
+	_DEBUG_COMMENT 	cout << m_debugName << ":" << "조합기사용 조건" << endl;
+	_DEBUG_COMMENT 	break;
+	_DEBUG_COMMENT case eSkillCondition::VendingUse:
+	_DEBUG_COMMENT 	cout << m_debugName << ":" << "자판기사용 조건" << endl;
+	_DEBUG_COMMENT 	break;
+	_DEBUG_COMMENT case eSkillCondition::CrowdControl:
+	_DEBUG_COMMENT 	cout << m_debugName << ":" << "CC걸린횟수 조건" << endl;
+	_DEBUG_COMMENT 	break;
+	_DEBUG_COMMENT case eSkillCondition::ThrowParts:
+	_DEBUG_COMMENT 	cout << m_debugName << ":" << "파츠던지기횟수 조건" << endl;
+	_DEBUG_COMMENT 	break;
+	_DEBUG_COMMENT case eSkillCondition::SpinParts:
+	_DEBUG_COMMENT 	cout << m_debugName << ":" << "파츠돌리기횟수 조건" << endl;
+	_DEBUG_COMMENT 	break;
+	_DEBUG_COMMENT }
 }
 
 bool CMonster::CheckDurationTimeFirstSkill()

@@ -164,3 +164,13 @@ void CUI::SetActiveUIState(int n)
 		cnt++;
 	}
 }
+
+void CUI::AddPosition(float x, float y)
+{
+	m_vPosition.x += x;
+	m_vPosition.y += y;
+	for (CUI* p : m_listUIchildren)
+	{
+		p->AddPosition(x, y);
+	}
+}

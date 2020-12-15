@@ -29,7 +29,6 @@ CUITexture::CUITexture( char* DisabledPath, char* ActivePath, char* HoverPath, D
 		
 	m_HoverTexture		= g_pUITextureManager->GetTexture(HoverPath);
 	m_HoverInfo			= g_pUITextureManager->GetTextureInfo(HoverPath);
-
 }
 
 
@@ -45,7 +44,7 @@ void CUITexture::Update()
 
 void CUITexture::Render()
 {
-	
+	RenderTexture(m_eUIState);
 }
 
 void CUITexture::RenderTexture(eUIState state)

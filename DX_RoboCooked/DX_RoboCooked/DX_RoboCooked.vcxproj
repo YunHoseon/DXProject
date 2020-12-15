@@ -175,6 +175,7 @@
     <ClInclude Include="CTestStair.h" />
     <ClInclude Include="CTornado.h" />
     <ClInclude Include="CTV.h" />
+    <ClInclude Include="CUIAcidRain.h" />
     <ClInclude Include="CUIClearBoard.h" />
     <ClInclude Include="CUIClearButton.h" />
     <ClInclude Include="CUIClearTime.h" />
@@ -286,6 +287,7 @@
     <ClCompile Include="CTestStair.cpp" />
     <ClCompile Include="CTornado.cpp" />
     <ClCompile Include="CTV.cpp" />
+    <ClCompile Include="CUIAcidRain.cpp" />
     <ClCompile Include="CUIClearBoard.cpp" />
     <ClCompile Include="CUIClearButton.cpp" />
     <ClCompile Include="CUIClearTime.cpp" />

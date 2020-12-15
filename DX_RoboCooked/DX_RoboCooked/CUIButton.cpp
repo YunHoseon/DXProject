@@ -39,7 +39,6 @@ void CUIButton::Render()
 	{
 		c->Render();
 	}
-	
 }
 
 void CUIButton::Add(CUI * component)

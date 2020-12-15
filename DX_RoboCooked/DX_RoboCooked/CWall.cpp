@@ -153,11 +153,11 @@ void CWall::Render()
 	LPD3DXFONT pFont = g_pFontManager->GetFont(CFontManager::eFontType::DEFAULT);
 
 	_DEBUG_COMMENT pFont->DrawTextA(NULL,
-		sWallRotationX.c_str(),
-		sWallRotationX.length(),
-		&rc,
-		DT_LEFT | DT_TOP | DT_NOCLIP,
-		D3DCOLOR_XRGB(255, 255, 255));
+	_DEBUG_COMMENT	sWallRotationX.c_str(),
+	_DEBUG_COMMENT	sWallRotationX.length(),
+	_DEBUG_COMMENT	&rc,
+	_DEBUG_COMMENT	DT_LEFT | DT_TOP | DT_NOCLIP,
+	_DEBUG_COMMENT	D3DCOLOR_XRGB(255, 255, 255));
 
 	g_pD3DDevice->SetTransform(D3DTS_WORLD, &m_matWorld);
 	g_pD3DDevice->SetTexture(0, m_wallTexture);

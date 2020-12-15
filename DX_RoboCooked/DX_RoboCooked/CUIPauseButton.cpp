@@ -23,13 +23,10 @@ CUIPauseButton::CUIPauseButton(D3DXVECTOR2 vPos, WPARAM wParam, IInteractCenter*
 	g_EventManager->Attach(eEvent::KeyRelease, this);
 	g_EventManager->Attach(eEvent::MouseRelease, this);
 
-
-
 	g_EventManager->Attach(eEvent::PauseMain, this);
 	g_EventManager->Attach(eEvent::PauseClose, this);
 	g_EventManager->Attach(eEvent::PauseReset, this);
 	g_EventManager->Attach(eEvent::PauseEnd, this);
-
 }
 
 
@@ -84,7 +81,6 @@ bool CUIPauseButton::OnEvent(eEvent eEvent, void * _value)
 		break;
 	case eEvent::PauseEnd:
 		break;
-
 	}
 	return true;
 }
@@ -96,7 +92,6 @@ void CUIPauseButton::KeyPressEvent(void * _value)
 	if (data->wKey == m_wActiveButton)
 	{
 		m_isKeyDown = true;
-		
 	}
 }
 
@@ -109,40 +104,6 @@ void CUIPauseButton::KeyReleaseEvent(void * _value)
 		ActiveButton();
 	}
 }
-//
-//void CUIPauseButton::HoverEvent(void* _value)
-//{
-//	ST_MouseEvent *data = static_cast<ST_MouseEvent*>(_value);
-//
-//	for (auto it : m_listUIchildren)
-//	{
-//		it->CheckInHover(data->pt);
-//	}
-//}
-//
-//
-//void CUIPauseButton::ClickEvent(void* _value)
-//{
-//	ST_MouseEvent *data = static_cast<ST_MouseEvent*>(_value);
-//
-//	
-//	for (auto it : m_listUIchildren)
-//	{
-//		it->CheckPressIn(data->pt);
-//	}
-//	m_isMouseDown = true;
-//}
-//
-//void CUIPauseButton::MouseReleaseEvent(void * _value)
-//{
-//	ST_MouseEvent *data = static_cast<ST_MouseEvent*>(_value);
-//
-//	for (auto it : m_listUIchildren)
-//	{
-//		it->CheckReleaseIn(data->pt);
-//	}
-//	m_isMouseDown = false; 
-//}
 
 void CUIPauseButton::ActiveButton()
 {

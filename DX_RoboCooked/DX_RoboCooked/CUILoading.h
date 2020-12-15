@@ -6,10 +6,15 @@ class CUILoading :
 private:
 	bool	m_isLoading;
 public:
-	CUILoading(D3DXVECTOR2 vPos);
+	CUILoading();
 	~CUILoading();
 
 	void Setup() override;
-	void Render() override;
+	bool OnEvent(eEvent eEvent, void* _value);
+
+	void ClickEvent(void* _value);
+	void MouseReleaseEvent(void* _value);
+	void KeyPressEvent(void* _value);
+	void KeyReleaseEvent(void* _value);
 };
 
