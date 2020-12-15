@@ -32,7 +32,6 @@ public:
 	void Update() override;
 	void Render() override;
 	
-	void OnEvent(eEvent eEvent, void* _value);
 	void Interact(CCharacter* pCharacter);
 	void AcceptPartsFromVending(CParts* parts);
 

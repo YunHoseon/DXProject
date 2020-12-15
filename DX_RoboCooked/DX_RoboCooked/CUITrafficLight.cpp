@@ -61,7 +61,7 @@ void CUITrafficLight::Setup()
 	}
 }
 
-void CUITrafficLight::OnEvent(eEvent eEvent, void * _value)
+bool CUITrafficLight::OnEvent(eEvent eEvent, void* _value)
 {
 	switch (eEvent)
 	{
@@ -72,8 +72,9 @@ void CUITrafficLight::OnEvent(eEvent eEvent, void * _value)
 		removeCompleteBluePrintCount();
 		break;
 	default:
-		return;
+		return true;
 		break;
 	}
 	m_pLightBoard->SetActiveUIState(m_nCompleteBluePrintCount);
+	return true;
 }

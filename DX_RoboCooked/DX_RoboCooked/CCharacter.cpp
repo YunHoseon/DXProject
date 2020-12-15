@@ -72,10 +72,10 @@ void CCharacter::Update()
 		m_pCollision->Update();
 }
 
-void CCharacter::OnEvent(eEvent eEvent, void* _value)
+bool CCharacter::OnEvent(eEvent eEvent, void* _value)
 {
 	if (m_pInteractCenter->GetStop())
-		return;
+		return true;
 	
 	switch (eEvent)
 	{
@@ -91,6 +91,7 @@ void CCharacter::OnEvent(eEvent eEvent, void* _value)
 	default:
 		break;
 	}
+	return true;
 }
 
 void CCharacter::PressKey(void* _value)

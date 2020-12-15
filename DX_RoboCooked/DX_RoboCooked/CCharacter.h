@@ -53,7 +53,7 @@ public:
 	virtual ~CCharacter();
 	virtual void Render();
 	virtual void Update();
-	virtual void OnEvent(eEvent eEvent, void* _value) override;
+	virtual bool OnEvent(eEvent eEvent, void* _value) override;
 	virtual void PressKey(void* _value);
 	virtual void ReleaseKey(void* _value);
 	virtual void SetKeyChange(void* _value);

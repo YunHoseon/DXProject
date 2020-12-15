@@ -34,7 +34,6 @@ public:
 	void Render() override;
 	CParts* Clone();
 	
-	void OnEvent(eEvent eEvent, void* _value);
 	void Interact(CCharacter* pCharacter) override;
 	
 	void ThrowParts(D3DXVECTOR3 vForce);

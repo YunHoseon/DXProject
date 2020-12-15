@@ -63,7 +63,7 @@ void CUIPauseButton::Setup()
 
 }
 
-void CUIPauseButton::OnEvent(eEvent eEvent, void * _value)
+bool CUIPauseButton::OnEvent(eEvent eEvent, void * _value)
 {
 	switch (eEvent)
 	{
@@ -94,6 +94,7 @@ void CUIPauseButton::OnEvent(eEvent eEvent, void * _value)
 		break;
 
 	}
+	return true;
 }
 
 

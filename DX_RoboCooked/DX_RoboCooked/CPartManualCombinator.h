@@ -14,7 +14,6 @@ public:
 	void Render() override;
 	void Interact(CCharacter* pCharacter) override;
 	void PartsInteract(CParts* pParts) override;
-	void OnEvent(eEvent eEvent, void* _value) override;
 	void CombineParts() override;
 	void DischargeParts() override;
 	void InsertParts(CParts* p) override;

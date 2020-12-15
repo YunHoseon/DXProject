@@ -28,7 +28,7 @@ void CTV::Update()
 	m_fTime = m_pInteractCenter->GetTime();
 	string sTime = CalMin(m_fTime) +":" + CalSec(m_fTime);
 	m_sTime.assign(sTime.begin(), sTime.end());
-	wprintf(m_sTime.c_str());
+	//wprintf(m_sTime.c_str());
 	Create_Font();
 
 }

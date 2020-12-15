@@ -163,6 +163,7 @@
     <ClInclude Include="CMonster.h" />
     <ClInclude Include="CMonsterHarpy.h" />
     <ClInclude Include="CMonsterMedusa.h" />
+    <ClInclude Include="CPartsDestroyer.h" />
     <ClInclude Include="CPartsManager.h" />
     <ClInclude Include="CSand.h" />
     <ClInclude Include="CSandpile.h" />
@@ -262,6 +263,7 @@
     <ClCompile Include="CMonster.cpp" />
     <ClCompile Include="CMonsterHarpy.cpp" />
     <ClCompile Include="CMonsterMedusa.cpp" />
+    <ClCompile Include="CPartsDestroyer.cpp" />
     <ClCompile Include="CPartsManager.cpp" />
     <ClCompile Include="CSand.cpp" />
     <ClCompile Include="CSandpile.cpp" />

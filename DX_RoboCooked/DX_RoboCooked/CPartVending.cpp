@@ -53,9 +53,6 @@ void CPartVending::Render()
 		_DEBUG_COMMENT m_pCollision->Render();
 }
 
-void CPartVending::OnEvent(eEvent eEvent, void *_value)
-{
-}
 
 CParts *CPartVending::Make()
 {

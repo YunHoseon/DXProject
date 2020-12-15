@@ -66,9 +66,6 @@ void COutlet::Render()
 		_DEBUG_COMMENT m_pCollision->Render();
 }
 
-void COutlet::OnEvent(eEvent eEvent, void* _value)
-{
-}
 
 void COutlet::Interact(CCharacter* pCharacter)
 {

@@ -119,7 +119,7 @@ void CKeyboard::ReleaseKey(WPARAM keyID, LPARAM lParam)
 	g_EventManager->CallEvent(eEvent::KeyRelease, (void*)&data);
 }
 
-void CKeyboard::OnEvent(eEvent eEvent, void* _value)
+bool CKeyboard::OnEvent(eEvent eEvent, void* _value)
 {
 	switch (eEvent)
 	{
@@ -130,6 +130,7 @@ void CKeyboard::OnEvent(eEvent eEvent, void* _value)
 		SetKeyChange(2, _value);
 		break;
 	}
+	return true;
 }
 
 void CKeyboard::SetKeyChange(int n, void* _value)

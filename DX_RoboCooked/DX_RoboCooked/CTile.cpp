@@ -21,7 +21,7 @@ void CTile::AddEvent(eEvent eEvent)
 	g_EventManager->Attach(eEvent, this);
 }
 
-void CTile::OnEvent(eEvent eEvent, void* _value)
+bool CTile::OnEvent(eEvent eEvent, void* _value)
 {
 	switch (eEvent)
 	{
@@ -29,6 +29,7 @@ void CTile::OnEvent(eEvent eEvent, void* _value)
 		//D3DXMatrixScaling(&m_matS, 1.0f, 2.0f, 1.0f);
 		break;
 	}
+	return true;
 }
 
 void CTile::Render()

@@ -63,9 +63,6 @@ void CPartStorage::Setup(float fAngle, D3DXVECTOR3 vPosition, string sPartsID)
 		m_pSkinnedMesh->Update();
 }
 
-void CPartStorage::OnEvent(eEvent eEvent, void *_value)
-{
-}
 
 CParts *CPartStorage::Make()
 {

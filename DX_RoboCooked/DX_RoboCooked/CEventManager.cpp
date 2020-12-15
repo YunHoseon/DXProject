@@ -50,16 +50,18 @@ void CEventManager::DetachAll(CEventListener* _observer)
 
 
 void CEventManager::CallEvent(eEvent eEvent, void* value)
-{	
-	std::set<CEventListener *>::iterator it = m_mapEventMap[eEvent].begin();
-
-	while (it != m_mapEventMap[eEvent].end())
+{
+	vector<set<CEventListener*>::iterator> vecDeleteTarget;
+	for (set<CEventListener*>::iterator it = m_mapEventMap[eEvent].begin(); it != m_mapEventMap[eEvent].end(); ++it)
 	{
-		(*it)->OnEvent(eEvent, value);
-
-		++it;
-
-		
+		if(!(*it)->OnEvent(eEvent, value))
+		{
+			vecDeleteTarget.push_back(it);
+		}
+	}
+	for (auto && it : vecDeleteTarget)
+	{
+		m_mapEventMap[eEvent].erase(it);
 	}
 }
 

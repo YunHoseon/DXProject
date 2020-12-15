@@ -87,7 +87,7 @@ void CMonster::Destroy()
 	
 }
 
-void CMonster::OnEvent(eEvent eEvent, void * _value)
+bool CMonster::OnEvent(eEvent eEvent, void * _value)
 {
 	switch (eEvent)
 	{
@@ -119,7 +119,7 @@ void CMonster::OnEvent(eEvent eEvent, void * _value)
 		AddBluePrintCount();
 		break;
 	}
-
+	return true;
 }
 
 bool CMonster::FirstSkillTriggered()

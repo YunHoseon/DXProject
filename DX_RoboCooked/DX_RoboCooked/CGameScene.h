@@ -79,6 +79,6 @@ public:
 	string GetSceneID() override { return m_sID; }
 	bool GetStop() override { return m_isTimeStop; }
 	float GetTime()override { return m_fGameTime; };
-	vector<CCharacter*>& GetCharacters() override { return m_vecCharacters; }
+	const vector<CCharacter*>& GetCharacters() override { return m_vecCharacters; }
 };
 

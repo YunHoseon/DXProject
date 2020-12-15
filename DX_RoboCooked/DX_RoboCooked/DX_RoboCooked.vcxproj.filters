@@ -126,13 +126,7 @@
     <ClInclude Include="CMainGame.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="CGrid.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="CCamera.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="CPyramid.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="InputManager.h">
@@ -179,9 +173,6 @@
     </ClInclude>
     <ClInclude Include="CPartManualCombinator.h">
       <Filter>GameScene\Combinator</Filter>
-    </ClInclude>
-    <ClInclude Include="CWall.h">
-      <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="CUI.h">
       <Filter>UI</Filter>
@@ -279,9 +270,6 @@
     <ClInclude Include="CCCReverseKey.h">
       <Filter>GameScene\Monster\CrowdControl</Filter>
     </ClInclude>
-    <ClInclude Include="CTornado.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="CBrick.h">
       <Filter>GameScene\Tile</Filter>
     </ClInclude>
@@ -366,6 +354,21 @@
     <ClInclude Include="CUILoading.h">
       <Filter>UI\Button</Filter>
     </ClInclude>
+    <ClInclude Include="CGrid.h">
+      <Filter>GameScene\Object</Filter>
+    </ClInclude>
+    <ClInclude Include="CPyramid.h">
+      <Filter>GameScene\Object</Filter>
+    </ClInclude>
+    <ClInclude Include="CTornado.h">
+      <Filter>GameScene\Object</Filter>
+    </ClInclude>
+    <ClInclude Include="CWall.h">
+      <Filter>GameScene\Object</Filter>
+    </ClInclude>
+    <ClInclude Include="CPartsDestroyer.h">
+      <Filter>GameScene\Monster</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="stdafx.cpp">
@@ -416,12 +419,6 @@
     <ClCompile Include="CCamera.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="CGrid.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="CPyramid.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="InputManager.cpp">
       <Filter>Manager\InputManager</Filter>
     </ClCompile>
@@ -466,9 +463,6 @@
     </ClCompile>
     <ClCompile Include="CPartAutoCombinator.cpp">
       <Filter>GameScene\Combinator</Filter>
-    </ClCompile>
-    <ClCompile Include="CWall.cpp">
-      <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="CUI.cpp">
       <Filter>UI</Filter>
@@ -566,9 +560,6 @@
     <ClCompile Include="CCCStopMove.cpp">
       <Filter>GameScene\Monster\CrowdControl</Filter>
     </ClCompile>
-    <ClCompile Include="CTornado.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="CBrick.cpp">
       <Filter>GameScene\Tile</Filter>
     </ClCompile>
@@ -652,6 +643,21 @@
     </ClCompile>
     <ClCompile Include="CUILoading.cpp">
       <Filter>UI\Button</Filter>
+    </ClCompile>
+    <ClCompile Include="CWall.cpp">
+      <Filter>GameScene\Object</Filter>
+    </ClCompile>
+    <ClCompile Include="CTornado.cpp">
+      <Filter>GameScene\Object</Filter>
+    </ClCompile>
+    <ClCompile Include="CPyramid.cpp">
+      <Filter>GameScene\Object</Filter>
+    </ClCompile>
+    <ClCompile Include="CGrid.cpp">
+      <Filter>GameScene\Object</Filter>
+    </ClCompile>
+    <ClCompile Include="CPartsDestroyer.cpp">
+      <Filter>GameScene\Monster</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

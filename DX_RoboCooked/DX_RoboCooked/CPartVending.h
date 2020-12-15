@@ -27,7 +27,6 @@ public:
 	void Render() override;
 
 	CParts * Make() override;
-	void OnEvent(eEvent eEvent, void* _value);
 	void Interact(CCharacter* pCharacter) override;
 
 	void AddAcceleration(const D3DXVECTOR3& vAccel) override {}

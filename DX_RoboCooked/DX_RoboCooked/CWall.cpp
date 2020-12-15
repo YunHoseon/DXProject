@@ -152,7 +152,7 @@ void CWall::Render()
 	SetRect(&rc, 0, 100, 0, 0);
 	LPD3DXFONT pFont = g_pFontManager->GetFont(CFontManager::eFontType::DEFAULT);
 
-	pFont->DrawTextA(NULL,
+	_DEBUG_COMMENT pFont->DrawTextA(NULL,
 		sWallRotationX.c_str(),
 		sWallRotationX.length(),
 		&rc,
@@ -181,7 +181,7 @@ void CWall::Render()
 		m_pTV->Render();
 }
 
-void CWall::OnEvent(eEvent eEvent, void * _value)
+bool CWall::OnEvent(eEvent eEvent, void * _value)
 {
 	switch (eEvent)
 	{
@@ -191,6 +191,7 @@ void CWall::OnEvent(eEvent eEvent, void * _value)
 	default:
 		break;
 	}
+	return true;
 }
 //
 //void CWall::Create_Font()
