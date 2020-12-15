@@ -49,7 +49,7 @@ void CMouse::JudgeLDoubleClick(WPARAM keyID)
 
 	if (currentTime - m_elapsedTime < 200 && keyID == m_dwPrevKey && m_eMouseState == E_RELEASE)
 	{
-		std::cout << "더블 클릭" << std::endl;
+		_DEBUG_COMMENT std::cout << "더블 클릭" << std::endl;
 		m_eMouseState = E_DBLCLK;
 	}
 	m_elapsedTime = GetTickCount();
@@ -66,6 +66,6 @@ void CMouse::HoverMouse(LPARAM lParam)
 
 POINT CMouse::GetMousePoint()
 {
-	std::cout << "x : " << m_mousePoint.x << "  y : " << m_mousePoint.y << std::endl;
+	_DEBUG_COMMENT std::cout << "x : " << m_mousePoint.x << "  y : " << m_mousePoint.y << std::endl;
 	return m_mousePoint;
 }

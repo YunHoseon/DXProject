@@ -115,11 +115,11 @@ void CGameScene::Init()
 	CUITrafficLight* pTrafficLight = new CUITrafficLight(this,m_vecBlueprints.size());
 	CUILoading* pLoadingPopup = new CUILoading();
 	
-	CPharaohCoffin* coffin = new CPharaohCoffin(this, D3DXVECTOR3(0,0,0));
+	//CPharaohCoffin* coffin = new CPharaohCoffin(this, D3DXVECTOR3(0,1,0));
 
 	m_cMutex.lock();
 
-	m_fGameTime = 50.0f;
+	//m_fGameTime = 50.0f;
 	m_vecStaticActor.push_back(wall);
 	m_vecMonster.push_back(Medusa);
 	m_vecMonster.push_back(Harpy);
@@ -127,7 +127,7 @@ void CGameScene::Init()
 	m_pDebugClearUI = pClearButton;
 	m_pDebugTrafficLight = pTrafficLight;
 	m_pDebugPauseUI = pPauseButton;
-	m_vecObject.push_back(coffin);
+	//m_vecObject.push_back(coffin);
 
 	m_pDebugLoadingPopup = pLoadingPopup;
 	m_pDebugLoadingPopup->Setup();
@@ -182,8 +182,8 @@ void CGameScene::Render()
 	if (m_pDebugClearUI)
 		m_pDebugClearUI->Render();
 
-	if (m_pDebugLoadingPopup)
-		m_pDebugLoadingPopup->Render();
+	/*if (m_pDebugLoadingPopup)
+		m_pDebugLoadingPopup->Render();*/
 	
 
 	m_cMutex.unlock();
@@ -463,6 +463,19 @@ void CGameScene::Load(string sFolder, string sFilename, void (CGameScene::* pCal
 				sandpile->SetRotationY(rotate);
 				sandpile->SetScale(scale);
 				vecStatic.push_back(sandpile);
+			}
+		}
+		{
+			json jCoffin = j["PharaohCoffin"];
+			for (auto&& p : jCoffin)
+			{
+				D3DXVECTOR3 pos(p["Position"][0], p["Position"][1], p["Position"][2]);
+				float rotate = p["Rotate"];
+				D3DXVECTOR3 scale(p["Scale"][0], p["Scale"][1], p["Scale"][2]);
+				CPharaohCoffin* Coffin = new CPharaohCoffin(this, pos);
+				Coffin->SetRotationY(rotate);
+				Coffin->SetScale(scale);
+				vecStatic.push_back(Coffin);
 			}
 		}
 		{
@@ -833,7 +846,7 @@ void CGameScene::MedusaUlt(D3DXVECTOR3 pos)
 {
 	CSphereCollision cCollsion(pos, 2.0f);
 
-	for (int i = 0; i < m_vecParts.size(); i++)
+	for (int i = 0; i < m_vecParts.size(); ++i)
 	{
 		if (cCollsion.Collide(m_vecParts[i]->GetCollision()))
 		{
@@ -842,7 +855,6 @@ void CGameScene::MedusaUlt(D3DXVECTOR3 pos)
 			--i;
 		}
 	}
-	cCollsion.Render();
 }
 
 void CGameScene::SetWindDirection()
@@ -887,10 +899,10 @@ int CGameScene::IsGameClear()
 	for (CBlueprint *it : m_vecBlueprints)
 	{
 		if (it->GetIsCompleted() == false)
-			return 0;
+			return 0; // 완료되지 않음
 	}
 	if(!m_vecBlueprints.empty())
-		return 1;
+		return 1; // 클리어
 
 	return 0;
 }

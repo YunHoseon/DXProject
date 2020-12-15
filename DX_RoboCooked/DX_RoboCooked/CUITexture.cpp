@@ -37,7 +37,7 @@ void CUITexture::Update()
 
 void CUITexture::Render()
 {
-	
+	RenderTexture(m_eUIState);
 }
 
 void CUITexture::RenderTexture(eUIState state)

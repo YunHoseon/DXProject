@@ -35,7 +35,7 @@ void CTimeManager::Update()
 		m_fFPS_Timer = 0;
 		m_FPS = Cnt;
 		Cnt = 0;
-		cout << "fps : " << m_FPS << endl;
+		_DEBUG_COMMENT cout << "fps : " << m_FPS << endl;
 	}
 
 	m_dwLastUpdateTime = CurTime;

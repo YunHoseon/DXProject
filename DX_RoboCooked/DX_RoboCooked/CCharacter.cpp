@@ -48,11 +48,13 @@ CCharacter::~CCharacter()
 void CCharacter::Render()
 {
 	g_pD3DDevice->SetTransform(D3DTS_WORLD, &m_matWorld);
+	g_pD3DDevice->SetRenderState(D3DRS_LIGHTING, false);
+	
 	m_pSkinnedMesh->Render(nullptr);
 
 	_DEBUG_COMMENT if (m_pInteractCollision)
 		_DEBUG_COMMENT m_pInteractCollision->Render();
-	if (m_pCollision) 
+	if (m_pCollision)
 		m_pCollision->Render();
 }
 
@@ -178,7 +180,7 @@ void CCharacter::PressKey(void* _value)
 				if (m_fThrowPower > m_fMaxThrowPower)
 					m_fThrowPower = m_fMaxThrowPower;
 			
-				cout << "throw power : " << m_fThrowPower << endl;
+				_DEBUG_COMMENT cout << "throw power : " << m_fThrowPower << endl;
 			}
 			break;
 		default: ;
