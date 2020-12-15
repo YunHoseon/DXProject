@@ -48,6 +48,7 @@ CGameScene::CGameScene() : m_pField(NULL),
 						   m_fGameTime(300.0f),
 						   m_nLotIndex(0)
 {
+	g_EventManager->Attach(eEvent::Tick, this);
 	//Sound Add
 	g_SoundManager->AddBGM("data/sound/bgm.mp3");
 	g_SoundManager->AddSFX("data/sound/effBBam.mp3", "BBam");
@@ -115,7 +116,7 @@ void CGameScene::Init()
 
 	m_cMutex.lock();
 
-	m_fGameTime = 300.0f;
+	m_fGameTime = 50.0f;
 	m_vecStaticActor.push_back(wall);
 	m_vecMonster.push_back(Medusa);
 	m_vecMonster.push_back(Harpy);
@@ -173,10 +174,9 @@ void CGameScene::Render()
 	if (m_pDebugPauseUI)
 		m_pDebugPauseUI->Render();
 
-	//
-	//if (m_pDebugClearUI)
-	//	m_pDebugClearUI->Render();
 	
+	if (m_pDebugClearUI)
+		m_pDebugClearUI->Render();
 	
 
 	m_cMutex.unlock();
@@ -184,6 +184,9 @@ void CGameScene::Render()
 
 void CGameScene::Update()
 {
+	ST_TickEvent data;
+	data.fElapsedTime = g_pTimeManager->GetElapsedTime();
+	g_EventManager->CallEvent(eEvent::Tick, (void*)&data);
 	//if (IsGameClear())
 	//{
 	//	//승리상태
@@ -367,15 +370,34 @@ bool CGameScene::OnEvent(eEvent eEvent, void * _value)
 	switch (eEvent)
 	{
 	case eEvent::Tick:
-		return TickUpdate();
+		return TickUpdate(_value);
 	}
 
 	return true;
 }
 
-bool CGameScene::TickUpdate()
+bool CGameScene::TickUpdate(void * _value)
 {
+	ST_TickEvent* data = static_cast<ST_TickEvent*>(_value);
+	m_fGameTime -= data->fElapsedTime;
+
 	int check = IsGameClear();
+	if (check == 1)
+	{
+		if(m_pDebugClearUI)
+			m_pDebugClearUI->InvertActive();
+		ST_SetTimeEvent data;
+		data.fTime = m_fGameTime;
+
+		g_EventManager->CallEvent(eEvent::ClearSetTime, (void*)&data);
+		return false;
+	}
+	else if (check == 2)
+	{
+		//패배 ->InvertActive();
+		return false;
+	}
+
 	return true;
 }
 
@@ -858,9 +880,6 @@ int CGameScene::IsGameClear()
 		if (it->GetIsCompleted() == false)
 			return 1;
 	}
-
-
-	m_fGameTime -= g_pTimeManager->GetElapsedTime();
 
 	if (m_fGameTime <= 0)
 	{

@@ -30,7 +30,10 @@ CUIClearButton::CUIClearButton(D3DXVECTOR2 vPos, IInteractCenter* pInteractCente
 	g_EventManager->Attach(eEvent::KeyPress, this);
 	g_EventManager->Attach(eEvent::KeyRelease, this);
 	g_EventManager->Attach(eEvent::MouseRelease, this);
-	InvertActive();
+
+	g_EventManager->Attach(eEvent::ClearMain, this);
+	g_EventManager->Attach(eEvent::ClearNextStage, this);
+	g_EventManager->Attach(eEvent::ClearSetTime, this);
 }
 
 CUIClearButton::~CUIClearButton()
@@ -56,13 +59,19 @@ void CUIClearButton::Setup()
 	board->Add(mainBtn);
 }
 
-void CUIClearButton::SetTime(float ftime)
-{
-	m_fTime = ftime;
-}
-
 bool CUIClearButton::OnEvent(eEvent eEvent, void * _value)
 {
+	switch (eEvent)
+	{
+	case eEvent::ClearMain:
+		break;
+	case eEvent::ClearNextStage:
+		break;
+	case eEvent::ClearSetTime:
+		SetTimeEvent(_value);
+		break;
+	}
+
 	return true;
 }
 
@@ -85,4 +94,10 @@ void CUIClearButton::KeyReleaseEvent(void * _value)
 
 void CUIClearButton::MouseReleaseEvent(void * _value)
 {
+}
+
+void CUIClearButton::SetTimeEvent(void * _value)
+{
+	ST_SetTimeEvent* data = static_cast<ST_SetTimeEvent*>(_value);
+	m_fTime = data->fTime;
 }

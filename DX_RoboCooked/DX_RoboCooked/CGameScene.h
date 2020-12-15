@@ -51,7 +51,7 @@ public:
 	virtual void Update();
 
 	bool OnEvent(eEvent eEvent, void* _value) override;
-	bool TickUpdate();
+	bool TickUpdate(void* _value);
 
 	void Load(string sFolder, string sFilename, void (CGameScene::*pCallback)() = nullptr);
 	void AddParts(CParts* parts) override;

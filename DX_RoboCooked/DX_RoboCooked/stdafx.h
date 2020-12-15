@@ -172,6 +172,10 @@ struct ST_TravelDistanceEvent
 {
 	float fDistance;
 };
+struct ST_SetTimeEvent
+{
+	float fTime;
+};
 
 struct ST_TickEvent
 {
