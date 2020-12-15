@@ -13,7 +13,7 @@ public:
 	};
 private:
 	map<eFontType, LPD3DXFONT> m_mapFont;
-	map<eFontType, LOGFONT> m_map3dFont;
+	map<eFontType, HFONT> m_map3dFont;
 
 	friend CSingleton<CFontManager>;
 	CFontManager();
@@ -21,6 +21,6 @@ private:
 public:
 	
 	LPD3DXFONT GetFont(eFontType e);
-	LOGFONT Get3dFont(eFontType e);
+	HFONT Get3dFont(eFontType e);
 	void Destroy();
 };

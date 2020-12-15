@@ -15,7 +15,7 @@ enum class ePlayerState
 
 enum eAnimState
 {
-	Idle = -1,
+	Idle,
 	Run,
 	Spin,
 	Stun
@@ -78,6 +78,7 @@ public:
 
 	virtual void SetDefaultPosition(D3DXVECTOR3 vPos) { m_vDefaultPosition = vPos; }
 	virtual void Reset();
-	
+
+	void SetAnimState();
 };
 

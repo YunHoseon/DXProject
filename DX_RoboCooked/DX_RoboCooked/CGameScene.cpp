@@ -52,6 +52,7 @@ CGameScene::CGameScene() : m_pField(NULL),
 	g_SoundManager->AddBGM("data/sound/bgm.mp3");
 	g_SoundManager->AddSFX("data/sound/effBBam.mp3", "BBam");
 	g_SoundManager->AddSFX("data/sound/effMelem.mp3", "Melem");
+	// 로딩 UI
 }
 
 CGameScene::~CGameScene()
@@ -643,6 +644,7 @@ void CGameScene::Load(string sFolder, string sFilename, void (CGameScene::* pCal
 		(this->*pCallback)();
 
 	// 로딩ui 종료하고 게임 시작
+	
 	m_cMutex.lock();
 	m_isTimeStop = false;
 	m_cMutex.unlock();

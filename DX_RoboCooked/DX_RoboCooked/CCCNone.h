@@ -4,10 +4,9 @@ class CCCNone :
 	public CCrowdControl
 {
 public:
-	string& GetID()
+	string GetID()
 	{ 
-		string name = "NONE";
-		return name;
+		return "NONE";
 	};
 	virtual void Render(D3DXVECTOR3& vPos) {};
 	virtual CCrowdControl* Clone() { return new CCCNone; };
