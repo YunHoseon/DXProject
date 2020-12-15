@@ -27,7 +27,7 @@ void CUILoading::Setup()
 							, vp.Height / 2 - m_pTexture->GetActiveTextureHeight());
 }
 
-void CUILoading::OnEvent(eEvent eEvent, void* _value)
+bool CUILoading::OnEvent(eEvent eEvent, void* _value)
 {
 	switch (eEvent)
 	{
@@ -44,6 +44,7 @@ void CUILoading::OnEvent(eEvent eEvent, void* _value)
 		MouseReleaseEvent(_value);
 		break;
 	}
+	return true;
 }
 
 void CUILoading::ClickEvent(void* _value)

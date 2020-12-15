@@ -35,6 +35,8 @@ bool CPartsDestroyer::OnEvent(eEvent eEvent, void* _value)
 		{
 			m_isRenderable = false;
 			m_fElapseTime = 0;
+			if (m_cRain.GetActive())
+				m_cRain.InvertActive();
 			return false;
 		}
 	}
@@ -56,6 +58,7 @@ void CPartsDestroyer::Render()
 			g_pD3DDevice->SetTransform(D3DTS_WORLD, &m_matWorld);
 			m_pMesh->DrawSubset(0);
 		}
+		m_cRain.Render();
 	}
 }
 
@@ -69,4 +72,7 @@ void CPartsDestroyer::SetActive(D3DXVECTOR3& vPos, float fDuration, float fRadiu
 	g_EventManager->Attach(eEvent::Tick, this);
 	m_fDuration = fDuration;
 	m_isRenderable = true;
+
+	if (!m_cRain.GetActive())
+		m_cRain.InvertActive();
 }

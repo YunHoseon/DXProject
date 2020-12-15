@@ -51,7 +51,8 @@ public:
 	virtual void CheckPressIn(POINT pt);
 	virtual void CheckReleaseIn(POINT pt);
 	virtual void CheckInHover(POINT pt);
-	void InvertActive();
+	virtual void InvertActive();
+	virtual bool GetActive() { return m_isActive; }
 	void ButtonEvent(eBtnEvent btnEvent);
 
 	INT GetlistUIchildrenSize() { return m_listUIchildren.size(); }
@@ -69,5 +70,6 @@ public:
 	void InitUIState();
 	void SetActiveUIState(int n);
 
+	void AddPosition(float x, float y);
 };
 
