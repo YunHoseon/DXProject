@@ -411,13 +411,14 @@
     <ClInclude Include="CPartsDestroyer.h">
       <Filter>GameScene\Monster</Filter>
     </ClInclude>
-    <ClInclude Include="CUILoseBoard.h">
-      <Filter>UI\Button\SubUI</Filter>
+    <ClInclude Include="CUIAcidRain.h">
+      <Filter>UI\Effect</Filter>
     </ClInclude>
     <ClInclude Include="CUILoseButton.h">
       <Filter>UI\Button\MainUI</Filter>
-    <ClInclude Include="CUIAcidRain.h">
-      <Filter>UI\Effect</Filter>
+    </ClInclude>
+    <ClInclude Include="CUILoseBoard.h">
+      <Filter>UI\Button\SubUI</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -739,13 +740,14 @@
     <ClCompile Include="CPartsDestroyer.cpp">
       <Filter>GameScene\Monster</Filter>
     </ClCompile>
-    <ClCompile Include="CUILoseBoard.cpp">
-      <Filter>UI\Button\SubUI</Filter>
+    <ClCompile Include="CUIAcidRain.cpp">
+      <Filter>UI\Effect</Filter>
     </ClCompile>
     <ClCompile Include="CUILoseButton.cpp">
       <Filter>UI\Button\MainUI</Filter>
-    <ClCompile Include="CUIAcidRain.cpp">
-      <Filter>UI\Effect</Filter>
+    </ClCompile>
+    <ClCompile Include="CUILoseBoard.cpp">
+      <Filter>UI\Button\SubUI</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

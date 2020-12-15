@@ -57,7 +57,7 @@ void CUITexture::RenderTexture(eUIState state)
 	D3DXMatrixIdentity(&matWorld);
 	m_Sprite->SetTransform(&matWorld);
 
-	if (state == eUIState::Disabled)
+	if (state == eUIState::up)
 	{
 		SetRect(&rc, 0, 0, m_DisabledInfo.Width, m_DisabledInfo.Height);
 		m_Sprite->Draw(m_DisabledTexture,
@@ -66,7 +66,7 @@ void CUITexture::RenderTexture(eUIState state)
 			&D3DXVECTOR3(m_vPosition.x, m_vPosition.y, 0),
 			D3DCOLOR_ARGB(255, 255, 255, 255));
 	}
-	else if (state == eUIState::Active)
+	else if (state == eUIState::down)
 	{
 		if (m_ActiveTexture == nullptr)
 			return;

@@ -6,8 +6,8 @@ CUI::CUI()
 	: m_pParent(nullptr)
 	, m_vPosition(0,0)
 	, m_vSize(0,0)
-	, m_eUIState(eUIState::Disabled)
-	, m_eUIPastState(eUIState::Disabled)
+	, m_eUIState(eUIState::up)
+	, m_eUIPastState(eUIState::up)
 	, m_isActive(false)
 	, m_isPress(false)
 	, m_eBtnEvent(eBtnEvent::None)
@@ -64,9 +64,9 @@ void CUI::CheckReleaseIn(POINT pt)
 						//it->SetUIState(eUIState::Active);
 						it->ButtonEvent(it->m_eBtnEvent);
 					}
-					else if (it->GetUIState() == eUIState::Active)
+					else if (it->GetUIState() == eUIState::down)
 					{
-						it->SetUIState(eUIState::Disabled);
+						it->SetUIState(eUIState::up);
 					}
 				}
 			}
@@ -84,7 +84,7 @@ void CUI::CheckInHover(POINT pt)
 		{
 			if (it->GetlistUIchildrenSize() == 0)
 			{
-				if (it->GetUIState() == eUIState::Active)
+				if (it->GetUIState() == eUIState::down)
 					return;
 
 				it->SetUIPastState(it->GetUIState());
@@ -147,7 +147,7 @@ void CUI::InitUIState()
 {
 	for (CUI* it : m_listUIchildren)
 	{
-		it->m_eUIState = eUIState::Disabled;
+		it->m_eUIState = eUIState::up;
 	}
 }
 
@@ -160,7 +160,7 @@ void CUI::SetActiveUIState(int n)
 		if (cnt == n)
 			return;
 	
-		it->SetUIState(eUIState::Active);
+		it->SetUIState(eUIState::down);
 		cnt++;
 	}
 }
