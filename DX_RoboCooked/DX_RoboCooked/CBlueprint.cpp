@@ -149,7 +149,6 @@ void CBlueprint::Setup()
 void CBlueprint::Update()
 {
 	StoreOnBlueprintParts(); // --> 설계도에 부품을 붙인 상황
-	
 }
 
 void CBlueprint::Render()
@@ -174,8 +173,9 @@ void CBlueprint::Render()
 	}
 }
 
-void CBlueprint::OnEvent(eEvent eEvent, void * _value)
+bool CBlueprint::OnEvent(eEvent eEvent, void * _value)
 {
+	return true;
 }
 
 void CBlueprint::StoreOnBlueprintParts()
@@ -199,9 +199,6 @@ void CBlueprint::StoreOnBlueprintParts()
 				break;
 			}
 		}
-
-
-		
 	}
 }
 
@@ -211,7 +208,7 @@ void CBlueprint::CheckBluePrintComplete()
 		&& abs(m_fRightPartsAngleY - m_onBlueprintParts->GetRotY()) < EPSILON)
 	{
 		m_isCompleted = true;
-		g_EventManager->CallEvent(eEvent::ChangeCountBluePrint, this);
+		g_EventManager->CallEvent(eEvent::CompleteBluePrint, this);
 	}
 	else
 	{
@@ -233,6 +230,7 @@ void CBlueprint::Interact(CCharacter* pCharacter)
 			m_isCompleted = false;
 			m_pCollision->SetActive(false);
 			m_pInteractCollision->SetActive(true);
+			g_EventManager->CallEvent(eEvent::UnCompleteBluePrint, this);
 		}
 	}
 }

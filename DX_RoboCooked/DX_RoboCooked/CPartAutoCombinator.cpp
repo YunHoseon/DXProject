@@ -87,9 +87,6 @@ void CPartAutoCombinator::PartsInteract(CParts* pParts)
 	g_EventManager->CallEvent(eEvent::CombinUse, NULL);
 }
 
-void CPartAutoCombinator::OnEvent(eEvent eEvent, void* _value)
-{
-}
 
 void CPartAutoCombinator::CombineParts()
 {

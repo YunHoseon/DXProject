@@ -76,8 +76,8 @@ void CSphereCollision::Render()
 		m_pMesh->DrawSubset(0);
 		g_pD3DDevice->SetRenderState(D3DRS_FILLMODE, D3DFILL_SOLID);
 		m_isCollide = false;
+		g_pD3DDevice->SetRenderState(D3DRS_LIGHTING, false);
 	}
-	
 }
 
 void CSphereCollision::Update()

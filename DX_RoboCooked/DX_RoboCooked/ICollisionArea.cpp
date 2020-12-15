@@ -16,10 +16,10 @@ bool ICollisionArea::Collide(ICollisionArea* pTargetCollider, D3DXVECTOR3* pNorm
 		return false;
 	
 	if (pTargetCollider->m_eType == eColideType::Box)
-		return CollideToBox(dynamic_cast<CBoxCollision*>(pTargetCollider), pNormal);
+		return CollideToBox(static_cast<CBoxCollision*>(pTargetCollider), pNormal);
 
 	if (pTargetCollider->m_eType == eColideType::Sphere)
-		return CollideToSphere(dynamic_cast<CSphereCollision*>(pTargetCollider), pNormal);
+		return CollideToSphere(static_cast<CSphereCollision*>(pTargetCollider), pNormal);
 
 	return false;
 }

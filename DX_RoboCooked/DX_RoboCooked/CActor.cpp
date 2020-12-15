@@ -11,7 +11,7 @@ CActor::CActor() :
 	m_vPosition(0, 0, 0),
 	m_fBaseSpeed(0),
 	m_fMass(1),
-	m_fFriction(0), m_fRepulsivePower(1),
+	m_fFriction(0), m_fRepulsivePower(0.00001f),
 	m_vVelocity(0, 0, 0),
 	m_vAcceleration(0, 0, 0),
 	m_vScale(1, 1, 1)
@@ -26,7 +26,7 @@ CActor::CActor() :
 
 CActor::~CActor()
 {
-	
+	SafeDelete(m_pCollision);
 }
 
 bool CActor::Collide(CActor* target, D3DXVECTOR3* pNormal)
@@ -84,6 +84,11 @@ void CActor::SetRotationY(float rot)
 void CActor::AddAcceleration(const D3DXVECTOR3& vAccel)
 {
 	m_vAcceleration += vAccel;
+}
+
+void CActor::SetAcceleration(const D3DXVECTOR3& vAccel)
+{
+	m_vAcceleration = vAccel;
 }
 
 void CActor::AddForce(const D3DXVECTOR3& vForce)

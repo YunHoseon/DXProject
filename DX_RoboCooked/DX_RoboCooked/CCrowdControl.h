@@ -7,7 +7,7 @@ class CCrowdControl
 public:
 	CCrowdControl();
 	virtual ~CCrowdControl();
-	virtual string& GetID() = 0;
+	virtual string GetID() = 0;
 
 	virtual CCrowdControl* Clone() = 0;
 	virtual float ReverseRotate() { return 0; }

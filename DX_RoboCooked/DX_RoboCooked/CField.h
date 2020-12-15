@@ -14,7 +14,6 @@ public:
 	void Setup(int iWidth = 16,int iHeight = 12);
 	void Render() override;
 	void Update() override;
-	void OnEvent(eEvent eEvent, void* _value) {};
 	void AddAcceleration(const D3DXVECTOR3& vAccel) override {}
 	void AddForce(const D3DXVECTOR3& vForce) override {}
 

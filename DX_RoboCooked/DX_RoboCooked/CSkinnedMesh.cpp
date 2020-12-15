@@ -11,7 +11,7 @@ CSkinnedMesh::CSkinnedMesh():
 	m_isAnimBlend(false),
 	m_dAnimPeriod(0),
 	m_fAnimTime(0),
-	m_isInputOn(true),
+	m_isInputOn(true), m_nCurrentAnimIndex(0),
 	m_vMin(g_vZero),
 	m_vMax(g_vZero),
 	m_pmatWorldTM(nullptr)
@@ -20,8 +20,8 @@ CSkinnedMesh::CSkinnedMesh():
 
 CSkinnedMesh::~CSkinnedMesh()
 {
-	//CAllocateHierachy ah;
-	//D3DXFrameDestroy(m_pRoot, &ah);
+	CAllocateHierachy ah;
+	D3DXFrameDestroy(m_pRoot, &ah);
 	SafeRelease(m_pAnimController);
 }
 
@@ -74,7 +74,7 @@ void CSkinnedMesh::Update()
 	if (m_fAnimTime + m_fBlendTime >= m_dAnimPeriod)
 	{
 		//m_isInputOn = true;
-		SetAnimationIndexBlend(IDLE);
+		//SetAnimationIndexBlend(IDLE);
 	}
 }
 
@@ -202,6 +202,7 @@ void CSkinnedMesh::SetAnimationIndex(int nIndex)
 	m_pAnimController->SetTrackAnimationSet(0, pAnimSet);
 	//m_pAnimController->ResetTime();
 	m_pAnimController->GetPriorityBlend();
+	m_nCurrentAnimIndex = nIndex;
 }
 
 void CSkinnedMesh::SetAnimationIndexBlend(int nIndex)
@@ -213,8 +214,8 @@ void CSkinnedMesh::SetAnimationIndexBlend(int nIndex)
 	m_fPassedBlendTime = 0.0f;
 
 	int num = m_pAnimController->GetNumAnimationSets();
-	if (nIndex > num) nIndex = nIndex % num;
-
+	if (nIndex >= num) nIndex = nIndex % num;
+	
 	LPD3DXANIMATIONSET pPrevAnimSet = NULL;
 	LPD3DXANIMATIONSET pNextAnimSet = NULL;
 
@@ -247,7 +248,7 @@ void CSkinnedMesh::SetAnimationIndexBlend(int nIndex)
 	//	m_isInputOn = true;
 	//else
 	//	m_isInputOn = false;
-
+	m_nCurrentAnimIndex = nIndex;
 	SafeRelease(pPrevAnimSet);
 	SafeRelease(pNextAnimSet);
 }

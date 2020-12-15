@@ -5,7 +5,7 @@
 class ICollisionArea;
 class CGameScene;
 class CCrowdControl;
-
+class CSkinnedMesh;
 
 enum class ePlayerState
 {
@@ -13,10 +13,18 @@ enum class ePlayerState
 	Grab 
 };
 
+enum eAnimState
+{
+	Idle,
+	Run,
+	Spin,
+	Stun
+};
+
 class CCharacter :public CActor
 {
 protected:
-
+	CSkinnedMesh*		m_pSkinnedMesh;
 	ePlayerState		m_ePlayerState;
 	ICollisionArea*		m_pInteractCollision;
 
@@ -31,8 +39,8 @@ protected:
 	bool				m_isMoveKeyDown;
 	// ¼öÁ¤Áß
 	const ST_PLAYER_INPUTKEY* m_pInputKey;
-	LPD3DXMESH			m_pMesh;
-	D3DMATERIAL9		m_stMtlSphere;
+	//LPD3DXMESH			m_pMesh;
+	//D3DMATERIAL9		m_stMtlSphere;
 	float				m_fMinThrowPower;
 	float				m_fMaxThrowPower;
 	float				m_fThrowPower;
@@ -45,7 +53,7 @@ public:
 	virtual ~CCharacter();
 	virtual void Render();
 	virtual void Update();
-	virtual void OnEvent(eEvent eEvent, void* _value) override;
+	virtual bool OnEvent(eEvent eEvent, void* _value) override;
 	virtual void PressKey(void* _value);
 	virtual void ReleaseKey(void* _value);
 	virtual void SetKeyChange(void* _value);
@@ -63,12 +71,14 @@ public:
 	CParts* GetParts() { return m_pParts; }
 	void SetDummy(bool b) { m_isDummy = b; }
 	BOOL GetDummy() { return m_isDummy; }
+	CCrowdControl* GetCC() { return m_pCC; }
 
 	void SetCC(CCrowdControl* cc);
 	void DeleteCC();
 
 	virtual void SetDefaultPosition(D3DXVECTOR3 vPos) { m_vDefaultPosition = vPos; }
 	virtual void Reset();
-	
+
+	void SetAnimState();
 };
 

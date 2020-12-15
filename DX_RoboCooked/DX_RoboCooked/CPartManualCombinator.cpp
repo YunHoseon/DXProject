@@ -132,10 +132,6 @@ void CPartManualCombinator::PartsInteract(CParts* pParts)
 	
 }
 
-void CPartManualCombinator::OnEvent(eEvent eEvent, void* _value)
-{
-}
-
 void CPartManualCombinator::CombineParts()
 {
 	m_fElapsedTime += g_pTimeManager->GetElapsedTime();

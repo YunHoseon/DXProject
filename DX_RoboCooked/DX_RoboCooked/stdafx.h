@@ -16,7 +16,7 @@
 #include <malloc.h>
 #include <memory.h>
 #include <tchar.h>
-#include <iostream>
+
 #include <cstdlib>
 #include <time.h>
 
@@ -36,6 +36,10 @@ using std::list;
 using std::unordered_set;
 #include <array>
 using std::array;
+#include <thread>
+using std::thread;
+#include <mutex>
+
 
 #include <d3dx9.h>
 
@@ -45,11 +49,11 @@ using std::array;
 using nlohmann::json;
 
 extern HWND g_hWnd;
-#define SafeRelease(p) { if(p) p->Release(); p = NULL; }
+#define SafeRelease(p) { if(p) p->Release(); p = nullptr; }
 
-#define SafeDelete(p) { if(p) delete p; p = NULL; }
+#define SafeDelete(p) { if(p) delete p; p = nullptr; }
 
-#define SafeDeleteArray(p) { if(p) delete[] p; p = NULL; }
+#define SafeDeleteArray(p) { if(p) delete[] p; p = nullptr; }
 
 #define EPSILON 0.00001f
 
@@ -57,16 +61,17 @@ extern HWND g_hWnd;
 
 #define WIDTH 16
 #define HEIGHT 12
-const D3DXVECTOR3 g_vZero(0, 0, 0);
+
+const D3DXVECTOR3 g_vZero(0.f,0.f,0.f);
 const D3DXMATRIXA16 g_matIdentity(
-	1,0,0,0,
-	0,1,0,0,
-	0,0,1,0,
-	0,0,0,1
+	1.f, 0.f, 0.f, 0.f,
+	0.f, 1.f, 0.f, 0.f,
+	0.f, 0.f, 1.f, 0.f,
+	0.f, 0.f, 0.f, 1.f
 );
-const float g_fFramerate = 60;
-const float g_fBaseDeltaTime = 1 / g_fFramerate;
-const float g_frBaseDeltaTime = 1 / g_fBaseDeltaTime;
+constexpr float g_fFramerate = 60;
+constexpr float g_fBaseDeltaTime = 1 / g_fFramerate;
+#define TimeRevision (g_pTimeManager->GetElapsedTime() * g_fFramerate)
 
 struct ST_PC_VERTEX
 {
@@ -167,6 +172,10 @@ struct ST_TravelDistanceEvent
 {
 	float fDistance;
 };
+struct ST_SetTimeEvent
+{
+	float fTime;
+};
 
 struct ST_TickEvent
 {
@@ -252,6 +261,7 @@ struct ST_PLAYER_INPUTKEY
 
 	#define _DEBUG_COMMENT
 	#define _RELEASE_COMMENT __DOUBLE_SLASH
+	#include <iostream>
 	using std::cout;
 	using std::endl;
 #else
@@ -263,9 +273,9 @@ struct ST_PLAYER_INPUTKEY
 #else
 #pragma comment(linker, "/entry:WinMainCRTStartup /subsystem:console")
 #endif
-
 #define _DEBUG_COMMENT
 #define _RELEASE_COMMENT __DOUBLE_SLASH
+#include <iostream>
 using std::cout;
 using std::endl;
 #endif

@@ -28,7 +28,7 @@ public:
 	void Setup();
 	void Update() override;
 	void Render() override;
-	void OnEvent(eEvent eEvent, void* _value) override;
+	bool OnEvent(eEvent eEvent, void* _value) override;
 
 	void StoreOnBlueprintParts();
 	void CheckBluePrintComplete();

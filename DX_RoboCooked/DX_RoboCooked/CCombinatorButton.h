@@ -16,7 +16,7 @@ public:
 	CCombinatorButton(CPartCombinator* pPartCombinator);
 	~CCombinatorButton();
 public:
-	void OnEvent(eEvent eEvent, void* _value);
+	bool OnEvent(eEvent eEvent, void* _value);
 	void Interact(CCharacter* pCharacter) override;
 	void Update() override;
 	void Render() override;

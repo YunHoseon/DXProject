@@ -3,6 +3,8 @@
 
 class CPartVending;
 class CParts;
+class CSkinnedMesh;
+
 enum class eOutletState
 {
 	None,
@@ -17,9 +19,11 @@ private:
 	vector<ST_PNT_VERTEX>	m_vecVertex;
 	LPDIRECT3DTEXTURE9		m_PartVendingTexture;
 	CParts*					m_pMyParts;
+	CSkinnedMesh*			m_pSkinnedMesh;
 
 	D3DXVECTOR3				m_vOnGrabPosition;
-	
+	bool					m_isInteractCalled;
+	float					m_fPassedTime;
 public:
 	COutlet(IInteractCenter* pInteractCenter);
 	~COutlet();
@@ -28,7 +32,6 @@ public:
 	void Update() override;
 	void Render() override;
 	
-	void OnEvent(eEvent eEvent, void* _value);
 	void Interact(CCharacter* pCharacter);
 	void AcceptPartsFromVending(CParts* parts);
 

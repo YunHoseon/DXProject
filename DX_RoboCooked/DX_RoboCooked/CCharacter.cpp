@@ -4,77 +4,81 @@
 #include "ICollisionArea.h"
 #include "CCrowdControl.h"
 #include "CCCNone.h"
+#include "CSkinnedMesh.h"
 
-CCharacter::CCharacter(int nPlayerNum) :
-	m_ePlayerState(ePlayerState::None),
-	m_pInteractCollision(nullptr),
-	m_vGrabPartsPosition(0, 1, 0),
-	m_pParts(nullptr),
-	m_arrElapsedTime({ 0, 0, 0 }),
-	m_arrCoolDown({ 0, 0, 3 }),
-	m_arrKeyDown({ false, false, false }),
-	m_isMoveKeyDown(false),
-	m_pInputKey(InputManager->GetInputKey(nPlayerNum)),
-	m_pMesh(nullptr),
-	m_stMtlSphere({}),
-	m_fMinThrowPower(0.01f),
-	m_fMaxThrowPower(0.1f),
-	m_fThrowPower(m_fMinThrowPower),
-	m_fThrowPowerUpSpeed(0.003f),
-	m_pCC(nullptr),
-	m_isDummy(false),
-	m_vDefaultPosition(0, 0, 0)
+CCharacter::CCharacter(int nPlayerNum) : m_pSkinnedMesh(nullptr),
+                                         m_ePlayerState(ePlayerState::None),
+                                         m_pInteractCollision(nullptr),
+                                         m_vGrabPartsPosition(0, 1, 0),
+                                         m_pParts(nullptr),
+                                         m_arrElapsedTime({0, 0, 0}),
+                                         m_arrCoolDown({0, 0, 3}),
+                                         m_arrKeyDown({false, false, false}),
+                                         m_isMoveKeyDown(false),
+                                         m_pInputKey(InputManager->GetInputKey(nPlayerNum)),
+                                         //m_pMesh(nullptr),
+                                         //m_stMtlSphere({}),
+                                         m_fMinThrowPower(0.01f),
+                                         m_fMaxThrowPower(0.1f),
+                                         m_fThrowPower(m_fMinThrowPower),
+                                         m_fThrowPowerUpSpeed(0.003f),
+                                         m_pCC(nullptr),
+                                         m_isDummy(false),
+                                         m_vDefaultPosition(0, 0, 0)
 {
 	m_fBaseSpeed = 0.02f;
-	
-	ZeroMemory(&m_stMtlSphere, sizeof(D3DMATERIAL9));
+
+	/*ZeroMemory(&m_stMtlSphere, sizeof(D3DMATERIAL9));
 	m_stMtlSphere.Ambient = D3DXCOLOR(0.7f, 0.7f, 0.7f, 1.0f);
 	m_stMtlSphere.Diffuse = D3DXCOLOR(0.7f, 0.7f, 0.7f, 1.0f);
-	m_stMtlSphere.Specular = D3DXCOLOR(0.7f, 0.7f, 0.7f, 1.0f);
+	m_stMtlSphere.Specular = D3DXCOLOR(0.7f, 0.7f, 0.7f, 1.0f);*/
 
 	m_pCC = new CCCNone;
 }
 
 CCharacter::~CCharacter()
 {
-	SafeDelete(m_pInteractCollision);
-	SafeRelease(m_pMesh);
+	//SafeDelete(m_pInteractCollision);
+	//SafeRelease(m_pMesh);
 	SafeDelete(m_pCC);
+	SafeDelete(m_pSkinnedMesh);
+	SafeDelete(m_pInteractCollision);
 }
 
 void CCharacter::Render()
 {
-	if (m_pMesh)
-	{
-		g_pD3DDevice->SetRenderState(D3DRS_LIGHTING, true);
-		g_pD3DDevice->SetTransform(D3DTS_WORLD, &m_matWorld);
-		g_pD3DDevice->SetTexture(0, NULL);
-		g_pD3DDevice->SetMaterial(&m_stMtlSphere);
-		m_pMesh->DrawSubset(0);
-		g_pD3DDevice->SetRenderState(D3DRS_LIGHTING, false);
-	}
+	g_pD3DDevice->SetTransform(D3DTS_WORLD, &m_matWorld);
+	g_pD3DDevice->SetRenderState(D3DRS_LIGHTING, false);
+	
+	m_pSkinnedMesh->Render(nullptr);
+
 	_DEBUG_COMMENT if (m_pInteractCollision)
 		_DEBUG_COMMENT m_pInteractCollision->Render();
-	_DEBUG_COMMENT if (m_pCollision)
-		_DEBUG_COMMENT m_pCollision->Render();
+	if (m_pCollision)
+		m_pCollision->Render();
 }
 
 void CCharacter::Update()
 {
 	Move();
+	SetAnimState();
 	m_vGrabPartsPosition.x = m_vPosition.x;
 	m_vGrabPartsPosition.y = m_vPosition.y + 1.0f;
 	m_vGrabPartsPosition.z = m_vPosition.z;
 
+	m_pSkinnedMesh->Update();
+
 	if (m_pInteractCollision)
 		m_pInteractCollision->Update();
-
 	if (m_pCollision)
 		m_pCollision->Update();
 }
 
-void CCharacter::OnEvent(eEvent eEvent, void* _value)
+bool CCharacter::OnEvent(eEvent eEvent, void* _value)
 {
+	if (m_pInteractCenter->GetStop())
+		return true;
+	
 	switch (eEvent)
 	{
 	case eEvent::KeyPress:
@@ -89,11 +93,11 @@ void CCharacter::OnEvent(eEvent eEvent, void* _value)
 	default:
 		break;
 	}
+	return true;
 }
 
 void CCharacter::PressKey(void* _value)
 {
-	
 	ST_KeyInputEvent* data = static_cast<ST_KeyInputEvent*>(_value);
 	const float& CurrentTime = g_pTimeManager->GetLastUpdateTime();
 	if (data->wKey == m_pInputKey->moveFowardKey)
@@ -111,9 +115,17 @@ void CCharacter::PressKey(void* _value)
 			return;
 		if (m_pParts && m_pCC->StopWithParts())
 			return;
-
-		if (m_fRotY - 0.5f < 0.f)
-			m_fRotY += D3DX_PI * 2.f;
+		if (!m_pCC->ReverseRotate())
+		{
+			if (m_fRotY - 0.5f < 0.f)
+				m_fRotY += D3DX_PI * 2.f;
+		}
+		else
+		{
+			if (m_fRotY + 0.5f > D3DX_PI * 2.f)
+				m_fRotY -= D3DX_PI * 2.f;
+		}
+		
 		Rotate(D3DX_PI * 1.5f );
 	}
 	else if (data->wKey == m_pInputKey->moveBackKey)
@@ -131,9 +143,17 @@ void CCharacter::PressKey(void* _value)
 			return;
 		if (m_pParts && m_pCC->StopWithParts())
 			return;
+		if (!m_pCC->ReverseRotate())
+		{
+			if (m_fRotY + 0.5f > D3DX_PI * 2.f)
+				m_fRotY -= D3DX_PI * 2.f;
+		}
+		else
+		{
+			if (m_fRotY - 0.5f < 0.f)
+				m_fRotY += D3DX_PI * 2.f;
+		}
 
-		if (m_fRotY + 0.5f > D3DX_PI * 2.f)
-			m_fRotY -= D3DX_PI * 2.f;
 		Rotate(D3DX_PI * 0.5f);
 	}
 	else if (data->wKey == m_pInputKey->interactableKey1)
@@ -156,7 +176,7 @@ void CCharacter::PressKey(void* _value)
 					m_arrKeyDown[0] = true;
 
 				if (m_fThrowPower < m_fMaxThrowPower)
-					m_fThrowPower += m_fThrowPowerUpSpeed;
+					m_fThrowPower += m_fThrowPowerUpSpeed * TimeRevision;
 				if (m_fThrowPower > m_fMaxThrowPower)
 					m_fThrowPower = m_fMaxThrowPower;
 			
@@ -203,7 +223,11 @@ void CCharacter::PressKey(void* _value)
 			if(CurrentTime - m_arrElapsedTime[2] > m_arrCoolDown[2])
 			{
 				//대시 -> 점멸로 수정해야함
-				AddAcceleration(m_vDirection);
+				D3DXVECTOR3 jump = m_vDirection;
+				jump.y += .2f;
+				D3DXVec3Normalize(&jump, &jump);
+				SetPosition(m_vPosition.x, m_vPosition.y + 0.1f, m_vPosition.z);
+				SetAcceleration(jump * 0.4f * TimeRevision);
 				g_SoundManager->PlaySFX("Melem");
 				m_arrElapsedTime[2] = CurrentTime;
 			}
@@ -228,7 +252,7 @@ void CCharacter::ReleaseKey(void* _value)
 			break;
 		case ePlayerState::Grab: 
 			SetPlayerState(ePlayerState::None);
-			m_pParts->ThrowParts(m_vDirection * m_fThrowPower);
+			m_pParts->ThrowParts(m_vDirection * m_fThrowPower * TimeRevision);
 			m_pParts = nullptr;
 			
 			g_SoundManager->PlaySFX("Melem");
@@ -285,10 +309,9 @@ void CCharacter::Move()
 {
 	if (m_pCollision->GetIsCollide() == false && m_isMoveKeyDown)
 	{
-		AddForce(-m_vDirection * m_fBaseSpeed  * m_pCC->MultiplySpeed()) ;
+		AddForce(-m_vDirection * m_fBaseSpeed  * m_pCC->MultiplySpeed() * TimeRevision) ;
 		m_isMoveKeyDown = false;
 	}
-	
 	
 	m_vVelocity += m_vAcceleration;
 	m_vPosition += m_vVelocity;
@@ -323,11 +346,11 @@ void CCharacter::Rotate(float fTargetRot)
 	D3DXVec3TransformNormal(&m_vDirection, &D3DXVECTOR3(0, 0, 1), &m_matR);
 	m_matWorld = m_matS * m_matR * m_matT;
 
-	SetForce(m_vDirection * m_fBaseSpeed * m_pCC->MultiplySpeed());
+	SetForce(m_vDirection * m_fBaseSpeed * m_pCC->MultiplySpeed() * TimeRevision);
 
 	if (m_pCollision)
 		m_pCollision->Update();
-
+	
 	D3DXVECTOR3 dummy;
 	D3DXQuaternionToAxisAngle(&stLerpRot, &dummy, &m_fRotY);
 }
@@ -375,4 +398,47 @@ void CCharacter::Reset()
 	SetRotationY(D3DX_PI);
 	m_vVelocity = g_vZero;
 	m_vAcceleration = g_vZero;
+}
+
+void CCharacter::SetAnimState()
+{
+	if (!m_pSkinnedMesh)
+		return;
+	
+	switch (m_pSkinnedMesh->GetCurrentAnimIndex())
+	{
+	case Idle:
+	{
+		if(m_pCC->GetID() != "NONE")
+			m_pSkinnedMesh->SetAnimationIndexBlend(Stun);
+		else if (D3DXVec3Length(&m_vVelocity) > EPSILON * 10)
+			m_pSkinnedMesh->SetAnimationIndexBlend(Run);
+	}
+		break;
+	case Run:
+	{
+		if (m_pCC->GetID() != "NONE")
+			m_pSkinnedMesh->SetAnimationIndexBlend(Stun);
+		else if (D3DXVec3Length(&m_vVelocity) < EPSILON * 10)
+			m_pSkinnedMesh->SetAnimationIndexBlend(Idle);
+	}
+		break;
+	case Spin:
+	{
+		
+	}
+		break;
+	case Stun:
+	{
+		if (m_pCC->GetID() == "NONE")
+		{
+			if (D3DXVec3Length(&m_vVelocity) < EPSILON * 10)
+				m_pSkinnedMesh->SetAnimationIndexBlend(Idle);
+			else if (D3DXVec3Length(&m_vVelocity) > EPSILON * 10)
+				m_pSkinnedMesh->SetAnimationIndexBlend(Run);
+		}
+	}
+		break;
+	default: break;
+	}
 }

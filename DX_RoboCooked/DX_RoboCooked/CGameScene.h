@@ -2,6 +2,7 @@
 #include "CActor.h"
 #include "CScene.h"
 #include "IInteractCenter.h"
+#include "CEventListener.h"
 #include "CMonster.h"
 class CTile;
 class CField;
@@ -12,13 +13,14 @@ class CUIButton;
 class CBlueprint;
 class CMonster;
 class CTornado;
+class CUITrafficLight;
 
 
 class CDebugPlayer1;
 class CDebugPlayer2;
 
 class CGameScene :
-	public CScene, public IInteractCenter
+	public CScene, public IInteractCenter, public CEventListener
 {
 private:
 	CField*						m_pField;
@@ -33,13 +35,12 @@ private:
 	BOOL						m_isTimeStop;
 	INT							m_nLotIndex;
 	vector<CTile*>				m_vecTile;
-
-
-	CDebugPlayer1*				m_pDebugSphere;
-	CDebugPlayer2*				m_pDebugCube;
-	CParts*						m_pDebugParts;
+	CUIButton*					m_pDebugClearUI;
 	CUIButton*					m_pDebugPauseUI;
+	CUITrafficLight*			m_pDebugTrafficLight;
 
+	static std::mutex			m_cMutex;
+	string						m_sID;
 public:
 	CGameScene();
 	virtual ~CGameScene();
@@ -48,34 +49,42 @@ public:
 	virtual void Init();
 	virtual void Render();
 	virtual void Update();
-	void Load(string sFolder, string sFilename);
 
-	void GetInteractObject(CCharacter* pCharacter) override;
+	bool OnEvent(eEvent eEvent, void* _value) override;
+	bool TickUpdate(void* _value);
+
+	void Load(string sFolder, string sFilename, void (CGameScene::*pCallback)() = nullptr);
 	void AddParts(CParts* parts) override;
 	void DeleteParts(CParts* parts) override;
 	//void ThrowParts(CCharacter* pCharacter,CParts* parts,D3DXVECTOR3 vDir) override;
 	void CheckAroundCombinator(CPartCombinator* combinator) override;
+	string CalMin(int sec) override;
+	string CalSec(int sec) override;
 	//void SendPartsToOutlet(CParts* parts, COutlet* outlet) override;
 	void ToggleStop() override;
-	bool GetStop() override {return m_isTimeStop;}
+
+	void GetInteractObject(CCharacter* pCharacter) override;
 	void MonsterSkill(eSkill skill) override;
 	void FinishSkill(eSkill skill) override;
 	bool CheckSpecificPartsID(string parts) override;
-	float GetTime()override { return m_fGameTime; };
 	void ElectIndexLot() override;
 	bool CheckSpecificArea() override;
 	void CheckSandDummyArea(ICollisionArea* collison) override;
-	void UpdateTornado(CTornado* tornado) override;
-
+	void MedusaUlt(D3DXVECTOR3 pos) override;
 
 	CCrowdControl* ChooseCC(eSkill skill);
 	void CC(CCrowdControl* pCC);
-	void MedusaUlt();
 	void SetWindDirection();
 	void DeleteWind();
 	void DeleteTornado();
 	void DeleteCC();
-	bool IsGameClear();
-	bool IsGameLose();
+	int IsGameClear();
+	//bool IsGameLose();
+
+	D3DXVECTOR3 GetRandomPartsPosition() override;
+	string GetSceneID() override { return m_sID; }
+	bool GetStop() override { return m_isTimeStop; }
+	float GetTime()override { return m_fGameTime; };
+	const vector<CCharacter*>& GetCharacters() override { return m_vecCharacters; }
 };
 

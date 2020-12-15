@@ -6,10 +6,9 @@ class CCCSpeedDown :
 public:
 	CCCSpeedDown();
 public:
-	string& GetID()
+	string GetID()
 	{
-		string name = "SPEEDDOWN";
-		return name;
+		return "SPEEDDOWN";
 	};
 
 	virtual void Render(D3DXVECTOR3& vPos) {};

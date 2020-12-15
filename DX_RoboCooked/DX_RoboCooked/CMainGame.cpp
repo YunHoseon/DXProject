@@ -31,32 +31,37 @@ void CMainGame::Setup()
 	SetLight();
 	InputManager;
 	g_pPartsManager;
-	m_pGrid = new CGrid;
+	_DEBUG_COMMENT m_pGrid = new CGrid;
 	if (m_pGrid)
 		m_pGrid->Setup();
 
 	m_pCamera = new CCamera;
 	if (m_pCamera)
 		m_pCamera->Setup(NULL);
-
-	//m_pScene = new CGameScene;
-	//g_SceneManager->AddScene("GAMESCENE", new CGameScene);
+	
 	CGameScene* scene = new CGameScene;
-	//scene->Load("data/js", "SaveTest_AllActor.json");
-	g_SceneManager->SetCurrentScene(scene);
-	//g_pPartsManager->GetPartsData("data/js/PartsData.json");
+	thread _t1(&CGameScene::Load, scene, "data/js", "AllTest.json", &CGameScene::Init);
+	_t1.detach();
+	
+	CScene* pBeforeScene = g_SceneManager->SetCurrentScene(scene);
+	if (pBeforeScene)
+	{
+		thread _t2([pBeforeScene]() { delete pBeforeScene; });
+		_t2.detach();
+	}
 }
 
 void CMainGame::Update()
 {
 	g_pTimeManager->Update();
 	
+	
 	InputManager->Update();
 	
 	if (m_pCamera)
 		m_pCamera->Update();
 
-	g_SceneManager->GetCurrentScene()->Update();
+	g_SceneManager->Update();
 }
 
 void CMainGame::Render()
@@ -74,7 +79,7 @@ void CMainGame::Render()
 
 	//if (m_pScene)
 	//	m_pScene->Render();
-	g_SceneManager->GetCurrentScene()->Render();
+	g_SceneManager->Render();
 
 	/*if (m_pDebugParts)
 		m_pDebugParts->Render();

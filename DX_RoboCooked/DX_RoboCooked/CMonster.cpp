@@ -22,8 +22,7 @@ CMonster::CMonster(IInteractCenter* pInteractCenter)
 			, m_nBluePrintChangeCount(0)
 
 {
-	g_EventManager->Attach(eEvent::ChangeCountBluePrint, this);
-	ChooseSkillCondition();
+	g_EventManager->Attach(eEvent::CompleteBluePrint, this);
 }
 
 CMonster::~CMonster()
@@ -66,20 +65,21 @@ void CMonster::Update()
 	if (CheckDurationTimeFirstSkill())
 	{
 		m_pInteractCenter->FinishSkill(m_stSkillUsing.FirstSkillProperty);
+		m_stSkillUsing.FirstSkillProperty = eSkill::None;
 	}
 
 	if (CheckDurationTimeSecondSkill())
 	{
 		m_pInteractCenter->FinishSkill(m_stSkillUsing.SecondSkillProperty);
+		m_stSkillUsing.SecondSkillProperty = eSkill::None;
 	}
 
 	if (CheckDurationTimeUltimateSkill())
 	{
 		m_pInteractCenter->FinishSkill(m_stSkillUsing.UltimateSkillProperty);
+		m_stSkillUsing.UltimateSkillProperty = eSkill::None;
 	}
-
-	MonsterUpdate();
-
+	UpdateMonster();
 }
 
 void CMonster::Destroy()
@@ -87,7 +87,7 @@ void CMonster::Destroy()
 	
 }
 
-void CMonster::OnEvent(eEvent eEvent, void * _value)
+bool CMonster::OnEvent(eEvent eEvent, void * _value)
 {
 	switch (eEvent)
 	{
@@ -115,11 +115,11 @@ void CMonster::OnEvent(eEvent eEvent, void * _value)
 	case eEvent::DeleteTornado:
 		DeleteTornado();
 		break;
-	case eEvent::ChangeCountBluePrint:
+	case eEvent::CompleteBluePrint:
 		AddBluePrintCount();
 		break;
 	}
-
+	return true;
 }
 
 bool CMonster::FirstSkillTriggered()
@@ -181,7 +181,7 @@ bool CMonster::UltimateSkillTriggered()
 	if (m_stSkillUsing.isUltimateBluePrintCheck && m_nBluePrintChangeCount >= 10)
 	{
 		m_stSkillUsing.isUltimateBluePrintCheck = false;
-		g_EventManager->Detach(eEvent::ChangeCountBluePrint, this);
+		g_EventManager->Detach(eEvent::CompleteBluePrint, this);
 		return true;
 	}
 
@@ -248,9 +248,36 @@ void CMonster::ChooseSkillCondition()
 
 
 	//테스트용
-	//m_eSkillCondition = eSkillCondition::TravelDistance;
-	//g_EventManager->Attach(eEvent::TravelDistance, this);
-	//m_eSecondSkillEvent = eEvent::TravelDistance;
+	/*m_eSkillCondition = eSkillCondition::SpecificArea;
+	g_EventManager->Attach(eEvent::SpecificArea, this);
+	m_eSecondSkillEvent = eEvent::SpecificArea;
+	m_pInteractCenter->ElectIndexLot();*/
+
+	
+	_DEBUG_COMMENT switch (m_eSkillCondition)
+	_DEBUG_COMMENT {
+	_DEBUG_COMMENT case eSkillCondition::TravelDistance:
+	_DEBUG_COMMENT 	cout << m_debugName << ":" << "걷기 조건" << endl;
+	_DEBUG_COMMENT 	break;
+	_DEBUG_COMMENT case eSkillCondition::SpecificArea:
+	_DEBUG_COMMENT 	cout << m_debugName << ":" << "특정지역 조건" << endl;
+	_DEBUG_COMMENT 	break;
+	_DEBUG_COMMENT case eSkillCondition::CombinUse:
+	_DEBUG_COMMENT 	cout << m_debugName << ":" << "조합기사용 조건" << endl;
+	_DEBUG_COMMENT 	break;
+	_DEBUG_COMMENT case eSkillCondition::VendingUse:
+	_DEBUG_COMMENT 	cout << m_debugName << ":" << "자판기사용 조건" << endl;
+	_DEBUG_COMMENT 	break;
+	_DEBUG_COMMENT case eSkillCondition::CrowdControl:
+	_DEBUG_COMMENT 	cout << m_debugName << ":" << "CC걸린횟수 조건" << endl;
+	_DEBUG_COMMENT 	break;
+	_DEBUG_COMMENT case eSkillCondition::ThrowParts:
+	_DEBUG_COMMENT 	cout << m_debugName << ":" << "파츠던지기횟수 조건" << endl;
+	_DEBUG_COMMENT 	break;
+	_DEBUG_COMMENT case eSkillCondition::SpinParts:
+	_DEBUG_COMMENT 	cout << m_debugName << ":" << "파츠돌리기횟수 조건" << endl;
+	_DEBUG_COMMENT 	break;
+	_DEBUG_COMMENT }
 }
 
 bool CMonster::CheckDurationTimeFirstSkill()
@@ -292,7 +319,7 @@ bool CMonster::CheckDurationTimeUltimateSkill()
 
 	m_fUltimateSkillElapsedTime += g_pTimeManager->GetElapsedTime();
 
-	if (m_fUltimateSkillElapsedTime >= FirstSkillTime())
+	if (m_fUltimateSkillElapsedTime >= UltimateSkillTime())
 	{
 		m_stSkillUsing.isUltimateSkill = false;
 		m_fUltimateSkillElapsedTime = 0;

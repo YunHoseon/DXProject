@@ -163,6 +163,7 @@
     <ClInclude Include="CMonster.h" />
     <ClInclude Include="CMonsterHarpy.h" />
     <ClInclude Include="CMonsterMedusa.h" />
+    <ClInclude Include="CPartsDestroyer.h" />
     <ClInclude Include="CPartsManager.h" />
     <ClInclude Include="CSand.h" />
     <ClInclude Include="CSandpile.h" />
@@ -173,7 +174,15 @@
     <ClInclude Include="CStaticMesh.h" />
     <ClInclude Include="CTestStair.h" />
     <ClInclude Include="CTornado.h" />
+    <ClInclude Include="CTV.h" />
+    <ClInclude Include="CUIClearBoard.h" />
+    <ClInclude Include="CUIClearButton.h" />
+    <ClInclude Include="CUIClearTime.h" />
     <ClInclude Include="CUICloseButton.h" />
+    <ClInclude Include="CUIEndButton.h" />
+    <ClInclude Include="CUILight.h" />
+    <ClInclude Include="CUIMainButton.h" />
+    <ClInclude Include="CUIResetButton.h" />
     <ClInclude Include="CUI.h" />
     <ClInclude Include="CCamera.h" />
     <ClInclude Include="CCharacter.h" />
@@ -187,9 +196,19 @@
     <ClInclude Include="CSoundManager.h" />
     <ClInclude Include="CPhysicsApplyer.h" />
     <ClInclude Include="CUIButton.h" />
+    <ClInclude Include="CUIStar.h" />
+    <ClInclude Include="CUIStarOne.h" />
+    <ClInclude Include="CUIStarThree.h" />
+    <ClInclude Include="CUIStarTwo.h" />
+    <ClInclude Include="CUIStarZero.h" />
     <ClInclude Include="CUIText.h" />
     <ClInclude Include="CUITexture.h" />
     <ClInclude Include="CUITextureManager.h" />
+    <ClInclude Include="CUITrafficLightFiveBoard.h" />
+    <ClInclude Include="CUITrafficLightFourBoard.h" />
+    <ClInclude Include="CUITrafficLightOneBoard.h" />
+    <ClInclude Include="CUITrafficLightThreeBoard.h" />
+    <ClInclude Include="CUITryAgain.h" />
     <ClInclude Include="CWall.h" />
     <ClInclude Include="CWater.h" />
     <ClInclude Include="ICollisionArea.h" />
@@ -221,15 +240,20 @@
     <ClInclude Include="Keyboard.h" />
     <ClInclude Include="Mouse.h" />
     <ClInclude Include="CParts.h" />
+    <ClInclude Include="CPharaohCoffin.h" />
     <ClInclude Include="Resource.h" />
     <ClInclude Include="CSingleton.h" />
     <ClInclude Include="CStaticMeshManager.h" />
     <ClInclude Include="stdafx.h" />
     <ClInclude Include="targetver.h" />
     <ClInclude Include="CTile.h" />
-    <ClInclude Include="CUIBoardButton.h" />
-    <ClInclude Include="CUIBarButton.h" />
+    <ClInclude Include="CUIPauseBoard.h" />
+    <ClInclude Include="CUIStartButton.h" />
     <ClInclude Include="CUIPauseButton.h" />
+    <ClInclude Include="CUITrafficLightBoard.h" />
+    <ClInclude Include="CUITrafficLightTwoBoard.h" />
+    <ClInclude Include="CUITrafficLight.h" />
+    <ClInclude Include="CUILoading.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="CActor.cpp" />
@@ -248,6 +272,7 @@
     <ClCompile Include="CMonster.cpp" />
     <ClCompile Include="CMonsterHarpy.cpp" />
     <ClCompile Include="CMonsterMedusa.cpp" />
+    <ClCompile Include="CPartsDestroyer.cpp" />
     <ClCompile Include="CPartsManager.cpp" />
     <ClCompile Include="CSand.cpp" />
     <ClCompile Include="CSandpile.cpp" />
@@ -258,7 +283,15 @@
     <ClCompile Include="CStaticMesh.cpp" />
     <ClCompile Include="CTestStair.cpp" />
     <ClCompile Include="CTornado.cpp" />
+    <ClCompile Include="CTV.cpp" />
+    <ClCompile Include="CUIClearBoard.cpp" />
+    <ClCompile Include="CUIClearButton.cpp" />
+    <ClCompile Include="CUIClearTime.cpp" />
     <ClCompile Include="CUICloseButton.cpp" />
+    <ClCompile Include="CUIEndButton.cpp" />
+    <ClCompile Include="CUILight.cpp" />
+    <ClCompile Include="CUIMainButton.cpp" />
+    <ClCompile Include="CUIResetButton.cpp" />
     <ClCompile Include="CUI.cpp" />
     <ClCompile Include="CCamera.cpp" />
     <ClCompile Include="CCharacter.cpp" />
@@ -272,9 +305,19 @@
     <ClCompile Include="CSoundManager.cpp" />
     <ClCompile Include="CPhysicsApplyer.cpp" />
     <ClCompile Include="CUIButton.cpp" />
+    <ClCompile Include="CUIStar.cpp" />
+    <ClCompile Include="CUIStarOne.cpp" />
+    <ClCompile Include="CUIStarThree.cpp" />
+    <ClCompile Include="CUIStarTwo.cpp" />
+    <ClCompile Include="CUIStarZero.cpp" />
     <ClCompile Include="CUIText.cpp" />
     <ClCompile Include="CUITexture.cpp" />
     <ClCompile Include="CUITextureManager.cpp" />
+    <ClCompile Include="CUITrafficLightFiveBoard.cpp" />
+    <ClCompile Include="CUITrafficLightFourBoard.cpp" />
+    <ClCompile Include="CUITrafficLightOneBoard.cpp" />
+    <ClCompile Include="CUITrafficLightThreeBoard.cpp" />
+    <ClCompile Include="CUITryAgain.cpp" />
     <ClCompile Include="CWall.cpp" />
     <ClCompile Include="CWater.cpp" />
     <ClCompile Include="ICollisionArea.cpp" />
@@ -308,6 +351,7 @@
     <ClCompile Include="Mouse.cpp" />
     <ClCompile Include="CParts.cpp" />
     <ClCompile Include="CStaticMeshManager.cpp" />
+    <ClCompile Include="CPharaohCoffin.cpp" />
     <ClCompile Include="stdafx.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Create</PrecompiledHeader>
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Create</PrecompiledHeader>
@@ -315,9 +359,13 @@
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Create</PrecompiledHeader>
     </ClCompile>
     <ClCompile Include="CTile.cpp" />
-    <ClCompile Include="CUIBoardButton.cpp" />
-    <ClCompile Include="CUIBarButton.cpp" />
+    <ClCompile Include="CUIPauseBoard.cpp" />
+    <ClCompile Include="CUIStartButton.cpp" />
     <ClCompile Include="CUIPauseButton.cpp" />
+    <ClCompile Include="CUITrafficLightBoard.cpp" />
+    <ClCompile Include="CUITrafficLightTwoBoard.cpp" />
+    <ClCompile Include="CUITrafficLight.cpp" />
+    <ClCompile Include="CUILoading.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="DX_RoboCooked.rc" />

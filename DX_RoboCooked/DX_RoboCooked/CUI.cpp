@@ -10,6 +10,7 @@ CUI::CUI()
 	, m_eUIPastState(eUIState::Disabled)
 	, m_isActive(false)
 	, m_isPress(false)
+	, m_eBtnEvent(eBtnEvent::None)
 {
 
 }
@@ -17,22 +18,16 @@ CUI::CUI()
 
 CUI::~CUI()
 {
+	for (list<CUI*>::value_type p : m_listUIchildren)
+	{
+		SafeDelete(p);
+	}
 }
 
 void CUI::SetParent(CUI * parent)
 {
 	this->m_pParent = parent;
 }
-
-//bool CUI::CheckIn(POINT pt)
-//{
-//	if (m_vPosition.x <= pt.x && m_vPosition.x + m_vSize.x >= pt.x
-//		&& m_vPosition.y <= pt.y && m_vPosition.y + m_vSize.y >= pt.y)
-//		return true;
-//	return false;
-//}
-
-
 
 void CUI::CheckPressIn(POINT pt)
 {
@@ -41,20 +36,13 @@ void CUI::CheckPressIn(POINT pt)
 		if (it->m_vPosition.x <= pt.x && it->m_vPosition.x + it->m_vSize.x >= pt.x
 			&& it->m_vPosition.y <= pt.y && it->m_vPosition.y + it->m_vSize.y >= pt.y)
 		{
-			
 			if (it->GetlistUIchildrenSize() == 0)
 			{
-
 				if (it->m_isPress == false)
 				{
 					it->m_isPress = true;
 				}
-
 			}
-			else
-			{
-				it->CheckPressIn(pt);
-			}	
 		}
 	}
 }
@@ -73,17 +61,14 @@ void CUI::CheckReleaseIn(POINT pt)
 				{
 					if (it->GetUIState() == eUIState::Hover)
 					{
-						it->SetUIState(eUIState::Active);
+						//it->SetUIState(eUIState::Active);
+						it->ButtonEvent(it->m_eBtnEvent);
 					}
 					else if (it->GetUIState() == eUIState::Active)
 					{
 						it->SetUIState(eUIState::Disabled);
 					}
 				}
-			}
-			else
-			{
-				it->CheckReleaseIn(pt);
 			}
 		}
 		it->m_isPress = false;
@@ -125,4 +110,45 @@ void CUI::InvertActive()
 		it->InvertActive();
 	}
 	m_isActive = !m_isActive;
+}
+
+void CUI::ButtonEvent(eBtnEvent btnEvent)
+{
+	switch (btnEvent)
+	{
+	case eBtnEvent::PauseMain:
+		g_EventManager->CallEvent(eEvent::PauseMain, NULL);
+		break;
+	case eBtnEvent::PauseClose:
+		g_EventManager->CallEvent(eEvent::PauseClose, NULL);
+		break;
+	case eBtnEvent::PauseReset:
+		g_EventManager->CallEvent(eEvent::PauseReset, NULL);
+		break;
+	case eBtnEvent::PauseEnd:
+		g_EventManager->CallEvent(eEvent::PauseEnd, NULL);
+		break;
+	}
+}
+
+void CUI::InitUIState()
+{
+	for (CUI* it : m_listUIchildren)
+	{
+		it->m_eUIState = eUIState::Disabled;
+	}
+}
+
+void CUI::SetActiveUIState(int n)
+{
+	InitUIState();
+	int cnt = 0;
+	for (CUI* it : m_listUIchildren)
+	{
+		if (cnt == n)
+			return;
+	
+		it->SetUIState(eUIState::Active);
+		cnt++;
+	}
 }

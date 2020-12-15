@@ -9,6 +9,17 @@ enum class eUIState
 
 };
 
+enum class eBtnEvent
+{
+	None,
+	PauseMain,
+	PauseClose,
+	PauseReset,
+	PauseEnd,
+	ClearMain,
+	ClearNextStage
+
+};
 class CUI : public CEventListener
 {
 private:
@@ -18,6 +29,7 @@ public:
 	virtual ~CUI();
 
 protected:
+	eBtnEvent			m_eBtnEvent;
 	eUIState			m_eUIState;
 	CUI*				m_pParent;
 	D3DXVECTOR2			m_vPosition;
@@ -40,6 +52,7 @@ public:
 	virtual void CheckReleaseIn(POINT pt);
 	virtual void CheckInHover(POINT pt);
 	void InvertActive();
+	void ButtonEvent(eBtnEvent btnEvent);
 
 	INT GetlistUIchildrenSize() { return m_listUIchildren.size(); }
 
@@ -52,6 +65,9 @@ public:
 		if(st != eUIState::Hover)
 			m_eUIPastState = st;
 	}
+
+	void InitUIState();
+	void SetActiveUIState(int n);
 
 };
 

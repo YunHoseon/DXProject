@@ -5,11 +5,14 @@
 #include "CCharacter.h"
 #include "IInteractCenter.h"
 #include "CParts.h"
+#include "CSkinnedMesh.h"
 
-COutlet::COutlet(IInteractCenter* pInteractCenter) :
-	m_eOutletState(eOutletState::None),
-	m_PartVendingTexture(nullptr),
-	m_pMyParts(nullptr)
+COutlet::COutlet(IInteractCenter* pInteractCenter) 
+	: m_eOutletState(eOutletState::None)
+	, m_PartVendingTexture(nullptr)
+	, m_pMyParts(nullptr)
+	, m_isInteractCalled(false)
+	, m_fPassedTime(0)
 {
 	m_pInteractCenter = pInteractCenter;
 	m_fMass = 9999.f;
@@ -18,151 +21,51 @@ COutlet::COutlet(IInteractCenter* pInteractCenter) :
 
 COutlet::~COutlet()
 {
+	SafeDelete(m_pSkinnedMesh);
 }
 
 void COutlet::Setup(float fAngle, D3DXVECTOR3 vPosition)
 {
-	vector<ST_PNT_VERTEX> vecVertex;
-	ST_PNT_VERTEX v;
-	v.n = D3DXVECTOR3(0, 1, 0);
+	m_pSkinnedMesh = new CSkinnedMesh;
+	m_pSkinnedMesh->Load("data/model/object", "MTH_CV.X");
+	m_pCollision = new CBoxCollision(g_vZero, D3DXVECTOR3(1 / 0.015f, 1 / 0.015f, 1 / 0.015f), &m_matWorld);
 
-	{
-		//front
-		v.p = D3DXVECTOR3(-BLOCK_SIZE / (2.0f), -BLOCK_SIZE / (2.0f), -BLOCK_SIZE / (2.0f));	v.t = D3DXVECTOR2(0, 1);
-		vecVertex.push_back(v);
-		v.p = D3DXVECTOR3(-BLOCK_SIZE / (2.0f), BLOCK_SIZE / (2.0f), -BLOCK_SIZE / (2.0f));		v.t = D3DXVECTOR2(0, 0);
-		vecVertex.push_back(v);
-		v.p = D3DXVECTOR3(BLOCK_SIZE / (2.0f), BLOCK_SIZE / (2.0f), -BLOCK_SIZE / (2.0f));		v.t = D3DXVECTOR2(1, 0);
-		vecVertex.push_back(v);
-
-		v.p = D3DXVECTOR3(-BLOCK_SIZE / (2.0f), -BLOCK_SIZE / (2.0f), -BLOCK_SIZE / (2.0f));	v.t = D3DXVECTOR2(0, 1);
-		vecVertex.push_back(v);
-		v.p = D3DXVECTOR3(BLOCK_SIZE / (2.0f), BLOCK_SIZE / (2.0f), -BLOCK_SIZE / (2.0f));		v.t = D3DXVECTOR2(1, 0);
-		vecVertex.push_back(v);
-		v.p = D3DXVECTOR3(BLOCK_SIZE / (2.0f), -BLOCK_SIZE / (2.0f), -BLOCK_SIZE / (2.0f));		v.t = D3DXVECTOR2(1, 1);
-		vecVertex.push_back(v);
-
-		//back
-		v.p = D3DXVECTOR3(-BLOCK_SIZE / (2.0f), -BLOCK_SIZE / (2.0f), BLOCK_SIZE / (2.0f));		v.t = D3DXVECTOR2(0, 1);
-		vecVertex.push_back(v);
-		v.p = D3DXVECTOR3(BLOCK_SIZE / (2.0f), BLOCK_SIZE / (2.0f), BLOCK_SIZE / (2.0f));		v.t = D3DXVECTOR2(1, 0);
-		vecVertex.push_back(v);
-		v.p = D3DXVECTOR3(-BLOCK_SIZE / (2.0f), BLOCK_SIZE / (2.0f), BLOCK_SIZE / (2.0f));		v.t = D3DXVECTOR2(0, 0);
-		vecVertex.push_back(v);
-
-		v.p = D3DXVECTOR3(-BLOCK_SIZE / (2.0f), -BLOCK_SIZE / (2.0f), BLOCK_SIZE / (2.0f));		v.t = D3DXVECTOR2(0, 1);
-		vecVertex.push_back(v);
-		v.p = D3DXVECTOR3(BLOCK_SIZE / (2.0f), -BLOCK_SIZE / (2.0f), BLOCK_SIZE / (2.0f));		v.t = D3DXVECTOR2(1, 1);
-		vecVertex.push_back(v);
-		v.p = D3DXVECTOR3(BLOCK_SIZE / (2.0f), BLOCK_SIZE / (2.0f), BLOCK_SIZE / (2.0f));		v.t = D3DXVECTOR2(1, 0);
-		vecVertex.push_back(v);
-
-		//left
-		v.p = D3DXVECTOR3(-BLOCK_SIZE / (2.0f), -BLOCK_SIZE / (2.0f), BLOCK_SIZE / (2.0f));		v.t = D3DXVECTOR2(0, 1);
-		vecVertex.push_back(v);
-		v.p = D3DXVECTOR3(-BLOCK_SIZE / (2.0f), BLOCK_SIZE / (2.0f), BLOCK_SIZE / (2.0f));	    v.t = D3DXVECTOR2(0, 0);
-		vecVertex.push_back(v);
-		v.p = D3DXVECTOR3(-BLOCK_SIZE / (2.0f), BLOCK_SIZE / (2.0f), -BLOCK_SIZE / (2.0f));	    v.t = D3DXVECTOR2(1, 0);
-		vecVertex.push_back(v);
-
-		v.p = D3DXVECTOR3(-BLOCK_SIZE / (2.0f), -BLOCK_SIZE / (2.0f), BLOCK_SIZE / (2.0f));	    v.t = D3DXVECTOR2(0, 1);
-		vecVertex.push_back(v);
-		v.p = D3DXVECTOR3(-BLOCK_SIZE / (2.0f), BLOCK_SIZE / (2.0f), -BLOCK_SIZE / (2.0f));	    v.t = D3DXVECTOR2(1, 0);
-		vecVertex.push_back(v);
-		v.p = D3DXVECTOR3(-BLOCK_SIZE / (2.0f), -BLOCK_SIZE / (2.0f), -BLOCK_SIZE / (2.0f));	v.t = D3DXVECTOR2(1, 1);
-		vecVertex.push_back(v);
-
-		//right
-		v.p = D3DXVECTOR3(BLOCK_SIZE / (2.0f), -BLOCK_SIZE / (2.0f), -BLOCK_SIZE / (2.0f));		v.t = D3DXVECTOR2(0, 1);
-		vecVertex.push_back(v);
-		v.p = D3DXVECTOR3(BLOCK_SIZE / (2.0f), BLOCK_SIZE / (2.0f), -BLOCK_SIZE / (2.0f));	    v.t = D3DXVECTOR2(0, 0);
-		vecVertex.push_back(v);
-		v.p = D3DXVECTOR3(BLOCK_SIZE / (2.0f), BLOCK_SIZE / (2.0f), BLOCK_SIZE / (2.0f));		v.t = D3DXVECTOR2(1, 0);
-		vecVertex.push_back(v);
-
-		v.p = D3DXVECTOR3(BLOCK_SIZE / (2.0f), -BLOCK_SIZE / (2.0f), -BLOCK_SIZE / (2.0f));	    v.t = D3DXVECTOR2(0, 1);
-		vecVertex.push_back(v);
-		v.p = D3DXVECTOR3(BLOCK_SIZE / (2.0f), BLOCK_SIZE / (2.0f), BLOCK_SIZE / (2.0f));		v.t = D3DXVECTOR2(1, 0);
-		vecVertex.push_back(v);
-		v.p = D3DXVECTOR3(BLOCK_SIZE / (2.0f), -BLOCK_SIZE / (2.0f), BLOCK_SIZE / (2.0f));	    v.t = D3DXVECTOR2(1, 1);
-		vecVertex.push_back(v);
-
-		//top
-		v.p = D3DXVECTOR3(-BLOCK_SIZE / (2.0f), BLOCK_SIZE / (2.0f), -BLOCK_SIZE / (2.0f));		v.t = D3DXVECTOR2(0, 1);
-		vecVertex.push_back(v);
-		v.p = D3DXVECTOR3(-BLOCK_SIZE / (2.0f), BLOCK_SIZE / (2.0f), BLOCK_SIZE / (2.0f));	    v.t = D3DXVECTOR2(0, 0);
-		vecVertex.push_back(v);
-		v.p = D3DXVECTOR3(BLOCK_SIZE / (2.0f), BLOCK_SIZE / (2.0f), BLOCK_SIZE / (2.0f));		v.t = D3DXVECTOR2(1, 0);
-		vecVertex.push_back(v);
-
-		v.p = D3DXVECTOR3(-BLOCK_SIZE / (2.0f), BLOCK_SIZE / (2.0f), -BLOCK_SIZE / (2.0f));	    v.t = D3DXVECTOR2(0, 1);
-		vecVertex.push_back(v);
-		v.p = D3DXVECTOR3(BLOCK_SIZE / (2.0f), BLOCK_SIZE / (2.0f), BLOCK_SIZE / (2.0f));		v.t = D3DXVECTOR2(1, 0);
-		vecVertex.push_back(v);
-		v.p = D3DXVECTOR3(BLOCK_SIZE / (2.0f), BLOCK_SIZE / (2.0f), -BLOCK_SIZE / (2.0f));	    v.t = D3DXVECTOR2(1, 1);
-		vecVertex.push_back(v);
-
-		//bottom
-		v.p = D3DXVECTOR3(-BLOCK_SIZE / (2.0f), -BLOCK_SIZE / (2.0f), BLOCK_SIZE / (2.0f));		v.t = D3DXVECTOR2(0, 1);
-		vecVertex.push_back(v);
-		v.p = D3DXVECTOR3(-BLOCK_SIZE / (2.0f), -BLOCK_SIZE / (2.0f), -BLOCK_SIZE / (2.0f));	v.t = D3DXVECTOR2(0, 0);
-		vecVertex.push_back(v);
-		v.p = D3DXVECTOR3(BLOCK_SIZE / (2.0f), -BLOCK_SIZE / (2.0f), -BLOCK_SIZE / (2.0f));	    v.t = D3DXVECTOR2(1, 0);
-		vecVertex.push_back(v);
-
-		v.p = D3DXVECTOR3(-BLOCK_SIZE / (2.0f), -BLOCK_SIZE / (2.0f), BLOCK_SIZE / (2.0f));	    v.t = D3DXVECTOR2(0, 1);
-		vecVertex.push_back(v);
-		v.p = D3DXVECTOR3(BLOCK_SIZE / (2.0f), -BLOCK_SIZE / (2.0f), -BLOCK_SIZE / (2.0f));	    v.t = D3DXVECTOR2(1, 0);
-		vecVertex.push_back(v);
-		v.p = D3DXVECTOR3(BLOCK_SIZE / (2.0f), -BLOCK_SIZE / (2.0f), BLOCK_SIZE / (2.0f));	    v.t = D3DXVECTOR2(1, 1);
-		vecVertex.push_back(v);
-	}
-
-	m_vPosition = vPosition;
-	m_vecVertex = vecVertex;
-	m_PartVendingTexture = g_pTextureManager->GetTexture(("data/Texture/scifi_07.png"));
 	SetRotationY(fAngle);
 	SetPosition(vPosition);
+	SetScale(0.015, 0.015, 0.015);
 
-	m_pCollision = new CBoxCollision(D3DXVECTOR3(0, 0, 0), D3DXVECTOR3(1.0f, 1.0f, 1.0f), &m_matWorld);
-	m_matWorld = m_matS * m_matR * m_matT;
 	if (m_pCollision)
 		m_pCollision->Update();
+	if (m_pSkinnedMesh)
+		m_pSkinnedMesh->Update();
+
 	m_vOnGrabPosition = vPosition;
 	m_vOnGrabPosition.y += 1.0f;
-	
 }
 
 void COutlet::Update()
 {
-	
+	if (m_isInteractCalled)
+	{
+		m_fPassedTime += g_pTimeManager->GetElapsedTime();
+		if (m_pSkinnedMesh->GetCurrentAnimPeriod() <= m_fPassedTime)
+		{
+			m_isInteractCalled = false;
+			m_fPassedTime = 0.0f;
+		}
+		m_pSkinnedMesh->Update();
+	}
 }
 
 void COutlet::Render()
 {
-	
 	g_pD3DDevice->SetTransform(D3DTS_WORLD, &m_matWorld);
-	g_pD3DDevice->SetTexture(0, m_PartVendingTexture);
-
-	D3DMATERIAL9 mtlStorage;
-	ZeroMemory(&mtlStorage, sizeof(D3DMATERIAL9));
-	mtlStorage.Ambient = D3DXCOLOR(0.7f, 0.7f, 0.7f, 1.0f);
-	mtlStorage.Diffuse = D3DXCOLOR(0.7f, 0.7f, 0.7f, 1.0f);
-	mtlStorage.Specular = D3DXCOLOR(0.7f, 0.7f, 0.7f, 1.0f);
-
-	g_pD3DDevice->SetMaterial(&mtlStorage);
-	g_pD3DDevice->SetFVF(ST_PNT_VERTEX::FVF);
-	g_pD3DDevice->DrawPrimitiveUP(D3DPT_TRIANGLELIST, m_vecVertex.size() / 3, &m_vecVertex[0],
-		sizeof(ST_PNT_VERTEX));
-	g_pD3DDevice->SetTexture(0, 0);
+	m_pSkinnedMesh->Render(nullptr);
 
 	_DEBUG_COMMENT if (m_pCollision)
 		_DEBUG_COMMENT m_pCollision->Render();
 }
 
-void COutlet::OnEvent(eEvent eEvent, void* _value)
-{
-}
 
 void COutlet::Interact(CCharacter* pCharacter)
 {
@@ -184,4 +87,5 @@ void COutlet::AcceptPartsFromVending(CParts * parts)
 	m_pMyParts = parts;
 	//parts->SetPosition(this->GetPosition() + D3DXVECTOR3(0, 1.0f, 0));
 	parts->SetGrabPosition(&m_vOnGrabPosition);
+	m_isInteractCalled = true;
 }

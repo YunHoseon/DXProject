@@ -4,6 +4,7 @@
 
 class CCrowdControl;
 class IInteractCenter;
+class CActor;
 
 enum class eSkillCondition
 {
@@ -84,6 +85,9 @@ protected:
 	string						m_sSpecificPartsID;
 	vector<D3DXVECTOR3>			m_vecObjectPosition;
 
+	//디버그용
+	string						m_debugName;
+
 public:
 	CMonster(IInteractCenter* pInteractCenter);
 	virtual ~CMonster();
@@ -91,8 +95,8 @@ public:
 	virtual void Update();
 	virtual void Render() = 0;
 	virtual void Destroy();
-	virtual void OnEvent(eEvent eEvent, void* _value) override;
-	virtual void MonsterUpdate() {};
+	virtual bool OnEvent(eEvent eEvent, void* _value) override;
+	virtual void AddForce(CActor* target) {};
 	
 	virtual eSkill FirstSkill() { return eSkill::None; };
 	virtual eSkill SecondSkill() { return eSkill::None; };
@@ -101,6 +105,7 @@ public:
 	virtual FLOAT FirstSkillTime() = 0;
 	virtual FLOAT SecondSkillTime() = 0;
 	virtual FLOAT UltimateSkillTime() = 0;
+	virtual void UpdateMonster() {};
 
 
 
@@ -112,7 +117,7 @@ public:
 	void AddObjectPosition(D3DXVECTOR3 pos);
 	void AddBluePrintCount();
 	virtual void DeleteTornado() {};
-
+	void ChooseSkillCondition();
 public:
 	void TravelDistanceSkill(void* _value);
 	void ArriveSkill() { m_isArrive = true; }
@@ -123,7 +128,6 @@ public:
 	void SpinPartsSkill(){ m_nSpinPartsCount++; }
 
 private:
-	void ChooseSkillCondition();
 	void SkillConditionInit();
 	bool UltimateSkillTriggered();
 	bool SecondSkillTriggered();

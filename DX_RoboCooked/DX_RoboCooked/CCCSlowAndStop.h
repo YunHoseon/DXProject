@@ -6,10 +6,9 @@ class CCCSlowAndStop : public CCrowdControl
 public:
 	CCCSlowAndStop() : CCrowdControl() {}
 public:
-	string& GetID()
+	string GetID()
 	{
-		string name = "SLOWANDSTOP";
-		return name;
+		return "SLOWANDSTOP";
 	};
 	virtual void Render(D3DXVECTOR3& vPos) {};
 	virtual float MultiplySpeed() { return 0.3f; }

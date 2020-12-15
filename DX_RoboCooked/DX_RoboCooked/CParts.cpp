@@ -90,10 +90,6 @@ void CParts::Render()
 		_DEBUG_COMMENT m_pCollision->Render();
 }
 
-void CParts::OnEvent(eEvent eEvent, void* _value)
-{
-
-}
 
 void CParts::Interact(CCharacter* pCharacter)
 {
@@ -138,7 +134,7 @@ void CParts::MoveParts()
 		return;
 	}
 	D3DXVec3Normalize(&vDirection, &vDirection);
-	m_vPosition += vDirection * 0.05f;
+	m_vPosition += vDirection * 0.05f * TimeRevision;
 }
 
 void CParts::SetGrabPosition(D3DXVECTOR3* vPosition)
