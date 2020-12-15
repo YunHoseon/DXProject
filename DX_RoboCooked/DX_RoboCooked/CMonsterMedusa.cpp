@@ -12,7 +12,7 @@ CMonsterMedusa::CMonsterMedusa(IInteractCenter* pInteractCenter):CMonster(pInter
 	ChooseSkillCondition();
 
 	//test
-	m_cPartsDestroyer.SetActive(D3DXVECTOR3(0, 0, 0), 5.0f, 2.0f);
+	//m_cPartsDestroyer.SetActive(D3DXVECTOR3(0, 0, 0), 5.0f, 2.0f);
 	
 }
 
