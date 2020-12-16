@@ -11,6 +11,10 @@ enum class eUIState
 enum class eBtnEvent
 {
 	None,
+	MainStart,
+	MainControll,
+	MainMaker,
+	MainEnd,
 	PauseMain,
 	PauseClose,
 	PauseReset,

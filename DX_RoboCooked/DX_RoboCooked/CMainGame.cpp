@@ -3,7 +3,7 @@
 #include "CGrid.h"
 #include "CCamera.h"
 #include "CGameScene.h"
-#include "CParts.h"
+#include "CMainScene.h"
 
 CMainGame::CMainGame()
 	: m_pGrid(NULL)
@@ -39,7 +39,7 @@ void CMainGame::Setup()
 	if (m_pCamera)
 		m_pCamera->Setup(NULL);
 	
-	CGameScene* scene = new CGameScene;
+	/*CGameScene* scene = new CGameScene;
 	thread _t1(&CGameScene::Load, scene, "data/js", "AllTest.json", &CGameScene::Init);
 	_t1.detach();
 	
@@ -48,7 +48,17 @@ void CMainGame::Setup()
 	{
 		thread _t2([pBeforeScene]() { delete pBeforeScene; });
 		_t2.detach();
+	}*/
+
+	CMainScene* scene = new CMainScene;
+
+	CScene* pBeforeScene = g_SceneManager->SetCurrentScene(scene);
+	if (pBeforeScene)
+	{
+		thread _t2([pBeforeScene]() { delete pBeforeScene; });
+		_t2.detach();
 	}
+
 }
 
 void CMainGame::Update()

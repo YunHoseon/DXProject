@@ -82,6 +82,9 @@
     <Filter Include="UI\Effect">
       <UniqueIdentifier>{ed4dce4e-62a7-4b87-a952-99b115684b66}</UniqueIdentifier>
     </Filter>
+    <Filter Include="MainScene">
+      <UniqueIdentifier>{edfe3b96-e223-49b7-a612-0afdbe1d5853}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <Text Include="ReadMe.txt" />
@@ -420,6 +423,27 @@
     <ClInclude Include="CUILoseBoard.h">
       <Filter>UI\Button\SubUI</Filter>
     </ClInclude>
+    <ClInclude Include="CMainScene.h">
+      <Filter>MainScene</Filter>
+    </ClInclude>
+    <ClInclude Include="CUIMainControllButton.h">
+      <Filter>UI\Button\SubUI</Filter>
+    </ClInclude>
+    <ClInclude Include="CUIMainEndButton.h">
+      <Filter>UI\Button\SubUI</Filter>
+    </ClInclude>
+    <ClInclude Include="CUIMainMakerButton.h">
+      <Filter>UI\Button\SubUI</Filter>
+    </ClInclude>
+    <ClInclude Include="CUIMainStartButton.h">
+      <Filter>UI\Button\SubUI</Filter>
+    </ClInclude>
+    <ClInclude Include="CUIMainScreen.h">
+      <Filter>UI\Button\MainUI</Filter>
+    </ClInclude>
+    <ClInclude Include="CUIMainScreenBoard.h">
+      <Filter>UI\Button\SubUI</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="stdafx.cpp">
@@ -749,6 +773,27 @@
     <ClCompile Include="CUILoseBoard.cpp">
       <Filter>UI\Button\SubUI</Filter>
     </ClCompile>
+    <ClCompile Include="CMainScene.cpp">
+      <Filter>MainScene</Filter>
+    </ClCompile>
+    <ClCompile Include="CUIMainControllButton.cpp">
+      <Filter>UI\Button\SubUI</Filter>
+    </ClCompile>
+    <ClCompile Include="CUIMainEndButton.cpp">
+      <Filter>UI\Button\SubUI</Filter>
+    </ClCompile>
+    <ClCompile Include="CUIMainMakerButton.cpp">
+      <Filter>UI\Button\SubUI</Filter>
+    </ClCompile>
+    <ClCompile Include="CUIMainStartButton.cpp">
+      <Filter>UI\Button\SubUI</Filter>
+    </ClCompile>
+    <ClCompile Include="CUIMainScreen.cpp">
+      <Filter>UI\Button\MainUI</Filter>
+    </ClCompile>
+    <ClCompile Include="CUIMainScreenBoard.cpp">
+      <Filter>UI\Button\SubUI</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="DX_RoboCooked.rc">
@@ -766,5 +811,6 @@
   <ItemGroup>
     <None Include="ClassDiagram.cd" />
     <None Include="ClassDiagram1.cd" />
+    <None Include="ClassDiagram11.cd" />
   </ItemGroup>
 </Project>

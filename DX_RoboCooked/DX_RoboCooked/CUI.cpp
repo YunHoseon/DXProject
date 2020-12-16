@@ -137,7 +137,20 @@ void CUI::ButtonEvent(eBtnEvent btnEvent)
 	case eBtnEvent::LoseReset:
 		g_EventManager->CallEvent(eEvent::LoseReset, NULL);
 		break;
+	case eBtnEvent::MainStart:
+		g_EventManager->CallEvent(eEvent::MainStart, NULL);
+		break;
+	case eBtnEvent::MainControll:
+		g_EventManager->CallEvent(eEvent::MainControll, NULL);
+		break;
+	case eBtnEvent::MainMaker:
+		g_EventManager->CallEvent(eEvent::MainMaker, NULL);
+		break;
+	case eBtnEvent::MainEnd:
+		g_EventManager->CallEvent(eEvent::MainEnd, NULL);
+		break;
 	}
+
 }
 
 void CUI::InitUIState()

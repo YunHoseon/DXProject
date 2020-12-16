@@ -16,10 +16,6 @@ CUIClearButton::CUIClearButton(D3DXVECTOR2 vPos, IInteractCenter* pInteractCente
 
 	m_vPosition = vPos;
 
-
-
-	//Setup();
-
 	g_EventManager->Attach(eEvent::MouseClick, this);
 	g_EventManager->Attach(eEvent::MouseHover, this);
 	g_EventManager->Attach(eEvent::MouseRelease, this);
