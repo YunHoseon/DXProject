@@ -23,8 +23,8 @@ void CMainScene::Init()
 {
 	
 	
-	m_pMaker = new CUIMaker();
-	m_pControll = new CUIControll();
+	m_pMaker = new CUIMaker(D3DXVECTOR2(465, 10));
+	m_pControll = new CUIControll(D3DXVECTOR2(465, 10));
 
 	m_pScreen = new CUIMainScreen(m_pMaker, m_pControll);
 }

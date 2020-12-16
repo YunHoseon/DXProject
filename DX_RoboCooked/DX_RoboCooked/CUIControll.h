@@ -4,7 +4,7 @@ class CUIControll :
 	public CUIButton
 {
 public:
-	CUIControll();
+	CUIControll(D3DXVECTOR2 vPos);
 	~CUIControll();
 
 public:

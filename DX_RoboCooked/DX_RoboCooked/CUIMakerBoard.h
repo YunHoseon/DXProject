@@ -4,7 +4,7 @@ class CUIMakerBoard :
 	public CUIButton
 {
 public:
-	CUIMakerBoard();
+	CUIMakerBoard(D3DXVECTOR2 vPos);
 	~CUIMakerBoard();
 public:
 	virtual void Setup() override;

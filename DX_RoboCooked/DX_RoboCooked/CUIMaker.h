@@ -4,7 +4,7 @@ class CUIMaker :
 	public CUIButton
 {
 public:
-	CUIMaker();
+	CUIMaker(D3DXVECTOR2 vPos);
 	~CUIMaker();
 
 public:
