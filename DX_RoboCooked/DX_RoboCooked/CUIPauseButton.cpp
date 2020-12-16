@@ -37,19 +37,19 @@ CUIPauseButton::~CUIPauseButton()
 void CUIPauseButton::Setup()
 {
 	CUI* board = new CUIPauseBoard(D3DXVECTOR2(m_vPosition.x, m_vPosition.y),eBtnEvent::None);
-	Add(board);
+	AddChild(board);
 
 	CUI* mainBtn = new CUIMainButton(D3DXVECTOR2(m_vPosition.x + 250, m_vPosition.y + 200), eBtnEvent::PauseMain);
-	board->Add(mainBtn);
+	board->AddChild(mainBtn);
 
 	CUI* closeBtn = new CUICloseButton(D3DXVECTOR2(m_vPosition.x + 550, m_vPosition.y + 200), eBtnEvent::PauseClose);
-	board->Add(closeBtn);
+	board->AddChild(closeBtn);
 
 	CUI* ResetBtn = new CUIResetButton(D3DXVECTOR2(m_vPosition.x + 250, m_vPosition.y + 500), eBtnEvent::PauseReset);
-	board->Add(ResetBtn);
+	board->AddChild(ResetBtn);
 
 	CUI* EndBtn = new CUIEndButton(D3DXVECTOR2(m_vPosition.x + 550, m_vPosition.y + 500), eBtnEvent::PauseEnd);
-	board->Add(EndBtn);
+	board->AddChild(EndBtn);
 }
 
 bool CUIPauseButton::OnEvent(eEvent eEvent, void * _value)

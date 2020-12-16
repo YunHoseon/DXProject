@@ -44,18 +44,18 @@ void CUIClearButton::Setup()
 	string sTime = m_pInteractCenter->CalMin(m_nTime) + ":" + m_pInteractCenter->CalSec(m_nTime);
 
 	CUI* board = new CUIClearBoard(D3DXVECTOR2(m_vPosition.x, m_vPosition.y), sTime,eBtnEvent::None);
-	Add(board);
+	AddChild(board);
 
-	board->Add(m_pUIStar);
+	board->AddChild(m_pUIStar);
 
 	CUI* clearTextUI = new CUIClearTime(D3DXVECTOR2(m_vPosition.x + 335, m_vPosition.y + 300), eBtnEvent::None);
-	board->Add(clearTextUI);
+	board->AddChild(clearTextUI);
 	
 	CUI* startBtn = new CUIStartButton(D3DXVECTOR2(m_vPosition.x + 250, m_vPosition.y + 525), eBtnEvent::PauseReset);
-	board->Add(startBtn);
+	board->AddChild(startBtn);
 
 	CUI* mainBtn = new CUIMainButton(D3DXVECTOR2(m_vPosition.x + 550, m_vPosition.y + 525), eBtnEvent::PauseMain);
-	board->Add(mainBtn);
+	board->AddChild(mainBtn);
 }
 
 bool CUIClearButton::OnEvent(eEvent eEvent, void * _value)

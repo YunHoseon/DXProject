@@ -40,7 +40,7 @@ protected:
 	// МіСЄСп
 	const ST_PLAYER_INPUTKEY* m_pInputKey;
 	//LPD3DXMESH			m_pMesh;
-	//D3DMATERIAL9		m_stMtlSphere;
+	//D3DMATERIAL9		m_stMtl;
 	float				m_fMinThrowPower;
 	float				m_fMaxThrowPower;
 	float				m_fThrowPower;
