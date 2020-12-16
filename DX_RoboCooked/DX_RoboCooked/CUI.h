@@ -11,6 +11,7 @@ enum class eUIState
 enum class eBtnEvent
 {
 	None,
+	MakerClose,
 	MainStart,
 	MainControll,
 	MainMaker,

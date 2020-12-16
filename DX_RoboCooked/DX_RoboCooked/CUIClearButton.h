@@ -18,7 +18,6 @@ public:
 
 public:
 	virtual void Setup() override;
-
 	bool OnEvent(eEvent eEvent, void * _value);
 	void SetTimeEvent(void * _value);
 };

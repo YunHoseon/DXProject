@@ -444,6 +444,12 @@
     <ClInclude Include="CUIMainScreenBoard.h">
       <Filter>UI\Button\SubUI</Filter>
     </ClInclude>
+    <ClInclude Include="CUIMakerBoard.h">
+      <Filter>UI\Button\SubUI</Filter>
+    </ClInclude>
+    <ClInclude Include="CUIMaker.h">
+      <Filter>UI\Button\MainUI</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="stdafx.cpp">
@@ -793,6 +799,12 @@
     </ClCompile>
     <ClCompile Include="CUIMainScreenBoard.cpp">
       <Filter>UI\Button\SubUI</Filter>
+    </ClCompile>
+    <ClCompile Include="CUIMakerBoard.cpp">
+      <Filter>UI\Button\SubUI</Filter>
+    </ClCompile>
+    <ClCompile Include="CUIMaker.cpp">
+      <Filter>UI\Button\MainUI</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

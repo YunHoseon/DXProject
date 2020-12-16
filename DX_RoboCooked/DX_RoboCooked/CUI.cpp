@@ -152,6 +152,9 @@ void CUI::ButtonEvent(eBtnEvent btnEvent)
 	case eBtnEvent::MainEnd:
 		g_EventManager->CallEvent(eEvent::MainEnd, NULL);
 		break;
+	case eBtnEvent::MakerClose:
+		g_EventManager->CallEvent(eEvent::MakerClose, NULL);
+		break;
 	}
 
 }
