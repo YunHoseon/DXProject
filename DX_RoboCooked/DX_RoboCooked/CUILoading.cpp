@@ -19,8 +19,8 @@ CUILoading::~CUILoading()
 
 void CUILoading::Setup()
 {
-	m_pTexture = new CUITexture("data/UI/roadingScreen_1600x900.png", "data/UI/roadingScreen_1600x900.png", 
-								"data/UI/roadingScreen_1600x900.png", m_vPosition);
+	m_pTexture = new CUITexture("data/UI/roadingScreen.png", "data/UI/roadingScreen.png", 
+								"data/UI/roadingScreen.png", m_vPosition);
 
 	D3DVIEWPORT9 vp;
 	g_pD3DDevice->GetViewport(&vp);

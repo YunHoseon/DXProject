@@ -189,10 +189,9 @@ void CGameScene::Render()
 	if (m_pDebugClearUI)
 		m_pDebugClearUI->Render();
 
-	/*if (m_pDebugLoadingPopup)
-		m_pDebugLoadingPopup->Render();*/
+	if (m_pDebugLoadingPopup)
+		m_pDebugLoadingPopup->Render();
 	
-
 	m_cMutex.unlock();
 }
 
