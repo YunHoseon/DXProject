@@ -1,6 +1,7 @@
 #include "stdafx.h"
 #include "CUIPauseButton.h"
 #include "CGameScene.h"
+#include "CMainScene.h"
 #include "CUIText.h"
 #include "CUITexture.h"
 #include "CUIPauseBoard.h"
@@ -37,19 +38,19 @@ CUIPauseButton::~CUIPauseButton()
 void CUIPauseButton::Setup()
 {
 	CUI* board = new CUIPauseBoard(D3DXVECTOR2(m_vPosition.x, m_vPosition.y),eBtnEvent::None);
-	Add(board);
+	AddChild(board);
 
 	CUI* mainBtn = new CUIMainButton(D3DXVECTOR2(m_vPosition.x + 250, m_vPosition.y + 200), eBtnEvent::PauseMain);
-	board->Add(mainBtn);
+	board->AddChild(mainBtn);
 
 	CUI* closeBtn = new CUICloseButton(D3DXVECTOR2(m_vPosition.x + 550, m_vPosition.y + 200), eBtnEvent::PauseClose);
-	board->Add(closeBtn);
+	board->AddChild(closeBtn);
 
 	CUI* ResetBtn = new CUIResetButton(D3DXVECTOR2(m_vPosition.x + 250, m_vPosition.y + 500), eBtnEvent::PauseReset);
-	board->Add(ResetBtn);
+	board->AddChild(ResetBtn);
 
 	CUI* EndBtn = new CUIEndButton(D3DXVECTOR2(m_vPosition.x + 550, m_vPosition.y + 500), eBtnEvent::PauseEnd);
-	board->Add(EndBtn);
+	board->AddChild(EndBtn);
 }
 
 bool CUIPauseButton::OnEvent(eEvent eEvent, void * _value)
@@ -72,6 +73,7 @@ bool CUIPauseButton::OnEvent(eEvent eEvent, void * _value)
 		MouseReleaseEvent(_value);
 		break;
 	case eEvent::PauseMain:
+		GoToMain();
 		break; 
 	case eEvent::PauseClose:
 		ActiveButton();
@@ -80,6 +82,7 @@ bool CUIPauseButton::OnEvent(eEvent eEvent, void * _value)
 		ResetGame();
 		break;
 	case eEvent::PauseEnd:
+		SendMessage(g_hWnd, WM_CLOSE, 0, 0);
 		break;
 	}
 	return true;
@@ -140,6 +143,18 @@ void CUIPauseButton::ResetGame()
 	
 	thread _t1(&CGameScene::Load, scene, "data/js", m_pInteractCenter->GetSceneID(), &CGameScene::Init);
 	_t1.detach();
+
+	CScene* pBeforeScene = g_SceneManager->SetCurrentScene(scene);
+	if (pBeforeScene)
+	{
+		thread _t2([pBeforeScene]() { delete pBeforeScene; });
+		_t2.detach();
+	}
+}
+
+void CUIPauseButton::GoToMain()
+{
+	CMainScene* scene = new CMainScene;
 
 	CScene* pBeforeScene = g_SceneManager->SetCurrentScene(scene);
 	if (pBeforeScene)

@@ -98,6 +98,9 @@ CGameScene::~CGameScene()
 	}
 	SafeDelete(m_pDebugPauseUI);
 	SafeDelete(m_pDebugTrafficLight);
+	SafeDelete(m_pDebugClearUI);
+	SafeDelete(m_pDebugLoadingPopup);
+	SafeDelete(m_pDebugLoseUI);
 	m_cMutex.unlock();
 }
 
@@ -116,7 +119,7 @@ void CGameScene::Init()
 	CUIButton* pPauseButton = new CUIPauseButton(D3DXVECTOR2(465, 10), 27, this);
 	CUIButton* pLoseButton = new CUILoseButton(D3DXVECTOR2(465, 10), this);
 	CUITrafficLight* pTrafficLight = new CUITrafficLight(this,m_vecBlueprints.size());
-	CPharaohCoffin* coffin = new CPharaohCoffin(this, D3DXVECTOR3(0,0,0));
+	CPharaohCoffin* coffin = new CPharaohCoffin(this, D3DXVECTOR3(0,1,0));
 	CUILoading* pLoadingPopup = new CUILoading();
 
 	m_fGameTime = 300.0f;
@@ -370,6 +373,8 @@ bool CGameScene::OnEvent(eEvent eEvent, void * _value)
 	switch (eEvent)
 	{
 	case eEvent::Tick:
+		if (m_isTimeStop)
+			break;
 		return TickUpdate(_value);
 	}
 
@@ -846,7 +851,7 @@ void CGameScene::CC(CCrowdControl *pCC)
 	SafeDelete(pCC);
 }
 
-void CGameScene::MedusaUlt(D3DXVECTOR3 pos)
+void CGameScene::DestroyPartsOnPosition(D3DXVECTOR3 pos)
 {
 	CSphereCollision cCollsion(pos, 2.0f);
 

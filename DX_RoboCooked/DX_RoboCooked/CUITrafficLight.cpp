@@ -39,7 +39,7 @@ CUITrafficLight::CUITrafficLight(IInteractCenter* pInteractCenter, int nSize)
 		m_pLightBoard = new CUITrafficLightFiveBoard;
 		break;
 	}
-	Add(m_pLightBoard);
+	AddChild(m_pLightBoard);
 
 	Setup();
 	InvertActive();
@@ -57,7 +57,7 @@ void CUITrafficLight::Setup()
 	for (int i = 0; i < m_pLightBoard->GetLightCount(); i++)
 	{
 		light = new CUILight(m_pLightBoard->GetLightPosition(i));
-		m_pLightBoard->Add(light);
+		m_pLightBoard->AddChild(light);
 	}
 }
 

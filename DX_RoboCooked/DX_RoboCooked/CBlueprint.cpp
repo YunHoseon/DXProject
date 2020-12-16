@@ -17,7 +17,7 @@ CBlueprint::CBlueprint(string partsID, vector<CParts*>& vecParts, D3DXVECTOR3 po
 	m_completeBlueprintTexture = g_pTextureManager->GetTexture("data/Texture/CompleteBlueprint.jpg");
 	//파츠 아이디에 따라 m_matS,텍스쳐 다르게
 	m_fFriction = 0.2f;
-	SetPosition(position);
+	SetPosition(position.x, position.y - 0.5f, position.z);
 	SetScale(scale);
 	SetRotationY(angle);
 	m_fRightPartsAngleY = partsAngle;

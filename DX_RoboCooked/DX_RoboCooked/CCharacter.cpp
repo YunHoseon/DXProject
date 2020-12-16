@@ -17,7 +17,7 @@ CCharacter::CCharacter(int nPlayerNum) : m_pSkinnedMesh(nullptr),
                                          m_isMoveKeyDown(false),
                                          m_pInputKey(InputManager->GetInputKey(nPlayerNum)),
                                          //m_pMesh(nullptr),
-                                         //m_stMtlSphere({}),
+                                         //m_stMtl({}),
                                          m_fMinThrowPower(0.01f),
                                          m_fMaxThrowPower(0.1f),
                                          m_fThrowPower(m_fMinThrowPower),
@@ -27,11 +27,6 @@ CCharacter::CCharacter(int nPlayerNum) : m_pSkinnedMesh(nullptr),
                                          m_vDefaultPosition(0, 0, 0)
 {
 	m_fBaseSpeed = 0.02f;
-
-	/*ZeroMemory(&m_stMtlSphere, sizeof(D3DMATERIAL9));
-	m_stMtlSphere.Ambient = D3DXCOLOR(0.7f, 0.7f, 0.7f, 1.0f);
-	m_stMtlSphere.Diffuse = D3DXCOLOR(0.7f, 0.7f, 0.7f, 1.0f);
-	m_stMtlSphere.Specular = D3DXCOLOR(0.7f, 0.7f, 0.7f, 1.0f);*/
 
 	m_pCC = new CCCNone;
 }
@@ -48,8 +43,7 @@ CCharacter::~CCharacter()
 void CCharacter::Render()
 {
 	g_pD3DDevice->SetTransform(D3DTS_WORLD, &m_matWorld);
-	g_pD3DDevice->SetRenderState(D3DRS_LIGHTING, false);
-	
+	g_pD3DDevice->SetRenderState(D3DRS_LIGHTING, true);
 	m_pSkinnedMesh->Render(nullptr);
 
 	_DEBUG_COMMENT if (m_pInteractCollision)

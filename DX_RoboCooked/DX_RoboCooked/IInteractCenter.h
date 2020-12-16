@@ -29,7 +29,7 @@ public:
 	virtual bool CheckSpecificArea() = 0;
 	virtual void CheckSandDummyArea(ICollisionArea* collison) = 0;
 	virtual D3DXVECTOR3 GetRandomPartsPosition() = 0;
-	virtual void MedusaUlt(D3DXVECTOR3 pos) = 0;
+	virtual void DestroyPartsOnPosition(D3DXVECTOR3 pos) = 0;
 	virtual string GetSceneID() = 0;
 	virtual const vector<CCharacter*>& GetCharacters() = 0;
 	virtual string CalMin(int sec) = 0;

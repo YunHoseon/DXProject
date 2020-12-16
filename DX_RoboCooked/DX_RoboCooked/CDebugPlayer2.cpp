@@ -22,6 +22,7 @@ CDebugPlayer2::CDebugPlayer2(IInteractCenter* pInteractCenter): CCharacter(1)
 	D3DXMatrixRotationY(&matR, D3DXToRadian(180));
 	D3DXMatrixTranslation(&matT, 0, -((max.y - min.y) /2 * 0.015f), 0);
 	*(m_pSkinnedMesh->m_pmatWorldTM) = matS * matR * matT;
+	m_pSkinnedMesh->Update();
 
 	m_pCollision = new CSphereCollision(g_vZero, 0.5f, &m_matWorld);
 	m_pInteractCollision = new CBoxCollision(D3DXVECTOR3(0, 0, 0.5f), D3DXVECTOR3(.8f, .8f, .8f), &m_matWorld);
@@ -37,6 +38,7 @@ CDebugPlayer2::~CDebugPlayer2()
 {
 	SafeDelete(m_pInteractCollision);
 	SafeDelete(m_pSkinnedMesh->m_pmatWorldTM);
+	SafeDelete(m_pSkinnedMesh);
 	SafeDelete(m_pCollision);
 	//SafeRelease(m_pMesh);
 }

@@ -38,7 +38,7 @@ void CMainGame::Setup()
 	m_pCamera = new CCamera;
 	if (m_pCamera)
 		m_pCamera->Setup(NULL);
-	
+
 	/*CGameScene* scene = new CGameScene;
 	thread _t1(&CGameScene::Load, scene, "data/js", "AllTest.json", &CGameScene::Init);
 	_t1.detach();

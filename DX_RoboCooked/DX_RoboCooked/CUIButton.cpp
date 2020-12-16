@@ -18,10 +18,10 @@ CUIButton::CUIButton()
 
 CUIButton::~CUIButton()
 {
-	//for (CUI * p : m_listUIchildren)
-	//{
-	//	SafeDelete(p);
-	//}
+	for (CUI * p : m_listUIchildren)
+	{
+		SafeDelete(p);
+	}
 }
 
 void CUIButton::Render()
@@ -41,7 +41,7 @@ void CUIButton::Render()
 	}
 }
 
-void CUIButton::Add(CUI * component)
+void CUIButton::AddChild(CUI * component)
 {
 	this->m_listUIchildren.push_back(component);
 	component->SetParent(this);

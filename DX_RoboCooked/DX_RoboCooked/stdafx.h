@@ -49,6 +49,7 @@ using std::thread;
 using nlohmann::json;
 
 extern HWND g_hWnd;
+
 #define SafeRelease(p) { if(p) p->Release(); p = nullptr; }
 
 #define SafeDelete(p) { if(p) delete p; p = nullptr; }

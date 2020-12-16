@@ -18,10 +18,7 @@ CUI::CUI()
 
 CUI::~CUI()
 {
-	for (list<CUI*>::value_type p : m_listUIchildren)
-	{
-		SafeDelete(p);
-	}
+
 }
 
 void CUI::SetParent(CUI * parent)

@@ -198,7 +198,8 @@ void CMonster::ChooseSkillCondition()
 {
 	SkillConditionInit();
 
-	int random = rand() % 100;
+	CRandomNumberGenerator r;
+	int random = r.GenInt(0, 99);
 	{
 		if (random < 16)
 		{
