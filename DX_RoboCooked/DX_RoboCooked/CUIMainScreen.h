@@ -3,8 +3,11 @@
 class CUIMainScreen :
 	public CUIButton
 {
+private:
+	CUIButton* m_pMaker;
+	CUIButton* m_pControll;
 public:
-	CUIMainScreen();
+	CUIMainScreen(CUIButton* pMaker,CUIButton* pControll);
 	~CUIMainScreen();
 
 public:

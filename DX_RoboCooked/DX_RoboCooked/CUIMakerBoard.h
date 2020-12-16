@@ -1,12 +1,13 @@
 #pragma once
 #include "CUIButton.h"
-class CUILoseBoard :
+class CUIMakerBoard :
 	public CUIButton
 {
 public:
-	CUILoseBoard();
-	~CUILoseBoard();
+	CUIMakerBoard();
+	~CUIMakerBoard();
 public:
 	virtual void Setup() override;
+
 };
 

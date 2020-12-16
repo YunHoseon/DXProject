@@ -42,7 +42,9 @@ enum class eEvent
 	MainControll,
 	MainMaker,
 	MainEnd,
-	LoadingEnd
+	LoadingEnd,
+	MakerClose,
+	ControllClose
 };
 
 

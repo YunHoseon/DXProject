@@ -13,12 +13,11 @@ private:
 	INT					m_nTime;
 
 public:
-	CUIClearButton(D3DXVECTOR2 vPos, IInteractCenter* pInteractCenter);
+	CUIClearButton(IInteractCenter* pInteractCenter);
 	~CUIClearButton();
 
 public:
 	virtual void Setup() override;
-
 	bool OnEvent(eEvent eEvent, void * _value);
 	void SetTimeEvent(void * _value);
 };

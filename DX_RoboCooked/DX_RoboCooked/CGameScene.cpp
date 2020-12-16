@@ -117,9 +117,9 @@ void CGameScene::Init()
 	Harpy->AddObjectPosition(D3DXVECTOR3(-3, 0, 0));
 	Harpy->AddObjectPosition(D3DXVECTOR3(0, 0, -3));
 
-	CUIButton* pClearButton = new CUIClearButton(D3DXVECTOR2(465, 10), this);
-	CUIButton* pPauseButton = new CUIPauseButton(D3DXVECTOR2(465, 10), 27, this);
-	CUIButton* pLoseButton = new CUILoseButton(D3DXVECTOR2(465, 10), this);
+	CUIButton* pClearButton = new CUIClearButton(this);
+	CUIButton* pPauseButton = new CUIPauseButton(27, this);
+	CUIButton* pLoseButton = new CUILoseButton(this);
 	CUITrafficLight* pTrafficLight = new CUITrafficLight(this,m_vecBlueprints.size());
 	CPharaohCoffin* coffin = new CPharaohCoffin(this, D3DXVECTOR3(0,1,0));
 
@@ -394,7 +394,7 @@ bool CGameScene::TickUpdate(void * _value)
 		g_EventManager->CallEvent(eEvent::ClearSetTime, (void*)&timeData);
 
 		if (m_pDebugClearUI)
-			m_pDebugClearUI->InvertActive();
+			m_pDebugClearUI->ActiveUI();
 
 		return false;
 	}
@@ -404,7 +404,7 @@ bool CGameScene::TickUpdate(void * _value)
 		SafeDelete(m_pDebugPauseUI);
 
 		if (m_pDebugLoseUI)
-			m_pDebugLoseUI->InvertActive();
+			m_pDebugLoseUI->ActiveUI();
 		return false;
 	}
 

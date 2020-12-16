@@ -12,7 +12,7 @@ private:
 	IInteractCenter*	m_pInteractCenter;
 
 public:
-	CUIPauseButton(D3DXVECTOR2 vPos,WPARAM wParam, IInteractCenter* pInteractCenter);
+	CUIPauseButton(WPARAM wParam, IInteractCenter* pInteractCenter);
 	~CUIPauseButton();
 
 public:

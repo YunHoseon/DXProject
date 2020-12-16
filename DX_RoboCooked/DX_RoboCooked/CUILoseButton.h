@@ -8,7 +8,7 @@ private:
 	IInteractCenter*	m_pInteractCenter;
 
 public:
-	CUILoseButton(D3DXVECTOR2 vPos,IInteractCenter* pInteractCenter);
+	CUILoseButton(IInteractCenter* pInteractCenter);
 	~CUILoseButton();
 
 public:
