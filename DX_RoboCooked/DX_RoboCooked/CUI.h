@@ -44,6 +44,10 @@ protected:
 	std::list<CUI*>		m_listUIchildren;
 	bool				m_isActive;
 	bool				m_isPress;
+
+	static float		m_fWidthRevision;
+	static float		m_fHeightRevision;
+
 public:
 	virtual void Update() {}
 	virtual void Render() {}
@@ -81,5 +85,10 @@ public:
 	void SetActiveUIState(int n);
 
 	void AddPosition(float x, float y);
+
+	static float GetWidthRevision() { return m_fWidthRevision; }
+	static void SetWidthRevision(float x) { m_fWidthRevision = x; }
+	static float GetHeightRevision() { return m_fHeightRevision; }
+	static void SetHeightRevision(float x) { m_fHeightRevision = x; }
 };
 

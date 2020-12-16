@@ -52,7 +52,7 @@ void CUITexture::RenderTexture(eUIState state)
 	m_Sprite->Begin(D3DXSPRITE_ALPHABLEND | D3DXSPRITE_SORT_TEXTURE);
 	//이미지 출력
 	RECT rc;
-
+	
 	D3DXMATRIXA16 matWorld;
 	D3DXMatrixIdentity(&matWorld);
 	m_Sprite->SetTransform(&matWorld);

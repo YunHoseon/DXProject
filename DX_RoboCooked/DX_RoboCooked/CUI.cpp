@@ -1,6 +1,8 @@
 #include "stdafx.h"
 #include "CUI.h"
 
+float CUI::m_fHeightRevision = 0;
+float CUI::m_fWidthRevision = 0;
 
 CUI::CUI()
 	: m_pParent(nullptr)
