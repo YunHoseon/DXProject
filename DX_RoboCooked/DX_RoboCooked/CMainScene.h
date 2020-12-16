@@ -3,6 +3,7 @@
 
 class CUIMainScreen;
 class CUIMaker;
+class CUIControll;
 
 class CMainScene :
 	public CScene
@@ -10,6 +11,7 @@ class CMainScene :
 private:
 	CUIMainScreen*	m_pScreen;
 	CUIMaker*		m_pMaker;
+	CUIControll*	m_pControll;
 public:
 	CMainScene();
 	~CMainScene();

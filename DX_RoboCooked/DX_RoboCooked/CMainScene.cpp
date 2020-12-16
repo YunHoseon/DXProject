@@ -2,9 +2,10 @@
 #include "CMainScene.h"
 #include "CUIMainScreen.h"
 #include "CUIMaker.h"
+#include "CUIControll.h"
 
 
-CMainScene::CMainScene():m_pScreen(nullptr), m_pMaker(nullptr)
+CMainScene::CMainScene():m_pScreen(nullptr), m_pMaker(nullptr), m_pControll(nullptr)
 {
 	Init();
 }
@@ -18,9 +19,10 @@ CMainScene::~CMainScene()
 
 void CMainScene::Init()
 {
-	m_pScreen = new CUIMainScreen;
 	m_pMaker = new CUIMaker(D3DXVECTOR2(465, 10));
-	m_pMaker->InvertActive();
+	m_pControll = new CUIControll(D3DXVECTOR2(465, 10));
+
+	m_pScreen = new CUIMainScreen(m_pMaker, m_pControll);
 }
 
 void CMainScene::Render()
@@ -31,6 +33,9 @@ void CMainScene::Render()
 
 	if (m_pMaker)
 		m_pMaker->Render();
+
+	if (m_pControll)
+		m_pControll->Render();
 
 
 

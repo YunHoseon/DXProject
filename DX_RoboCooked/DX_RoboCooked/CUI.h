@@ -23,7 +23,8 @@ enum class eBtnEvent
 	ClearMain,
 	ClearNextStage,
 	LoseMain,
-	LoseReset
+	LoseReset,
+	ControllClose
 
 };
 class CUI : public CEventListener
@@ -58,6 +59,8 @@ public:
 	virtual void CheckReleaseIn(POINT pt);
 	virtual void CheckInHover(POINT pt);
 	virtual void InvertActive();
+	virtual void ActiveUI();
+	virtual void CheckActiveEvent();
 	virtual bool GetActive() { return m_isActive; }
 	void ButtonEvent(eBtnEvent btnEvent);
 

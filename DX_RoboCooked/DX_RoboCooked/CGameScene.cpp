@@ -398,7 +398,7 @@ bool CGameScene::TickUpdate(void * _value)
 		g_EventManager->CallEvent(eEvent::ClearSetTime, (void*)&timeData);
 
 		if (m_pDebugClearUI)
-			m_pDebugClearUI->InvertActive();
+			m_pDebugClearUI->ActiveUI();
 
 		return false;
 	}
@@ -408,7 +408,7 @@ bool CGameScene::TickUpdate(void * _value)
 		SafeDelete(m_pDebugPauseUI);
 
 		if (m_pDebugLoseUI)
-			m_pDebugLoseUI->InvertActive();
+			m_pDebugLoseUI->ActiveUI();
 		return false;
 	}
 

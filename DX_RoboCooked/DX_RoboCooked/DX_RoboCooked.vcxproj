@@ -181,6 +181,8 @@
     <ClInclude Include="CUIClearButton.h" />
     <ClInclude Include="CUIClearTime.h" />
     <ClInclude Include="CUICloseButton.h" />
+    <ClInclude Include="CUIControll.h" />
+    <ClInclude Include="CUIControllBoard.h" />
     <ClInclude Include="CUIEndButton.h" />
     <ClInclude Include="CUILight.h" />
     <ClInclude Include="CUILoseBoard.h" />
@@ -302,6 +304,8 @@
     <ClCompile Include="CUIClearButton.cpp" />
     <ClCompile Include="CUIClearTime.cpp" />
     <ClCompile Include="CUICloseButton.cpp" />
+    <ClCompile Include="CUIControll.cpp" />
+    <ClCompile Include="CUIControllBoard.cpp" />
     <ClCompile Include="CUIEndButton.cpp" />
     <ClCompile Include="CUILight.cpp" />
     <ClCompile Include="CUILoseBoard.cpp" />

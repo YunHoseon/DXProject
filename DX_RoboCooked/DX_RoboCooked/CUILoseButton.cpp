@@ -14,10 +14,6 @@ CUILoseButton::CUILoseButton(D3DXVECTOR2 vPos, IInteractCenter* pInteractCenter)
 	m_vPosition = vPos;
 	Setup();
 
-	g_EventManager->Attach(eEvent::MouseClick, this);
-	g_EventManager->Attach(eEvent::MouseHover, this);
-	g_EventManager->Attach(eEvent::MouseRelease, this);
-
 	g_EventManager->Attach(eEvent::LoseMain, this);
 	g_EventManager->Attach(eEvent::LoseReset, this);
 	
@@ -50,8 +46,6 @@ void CUILoseButton::Setup()
 
 bool CUILoseButton::OnEvent(eEvent eEvent, void * _value)
 {
-	if (!m_isActive)
-		return true;
 	switch (eEvent)
 	{
 	case eEvent::MouseClick:
@@ -61,7 +55,10 @@ bool CUILoseButton::OnEvent(eEvent eEvent, void * _value)
 		MouseHoverEvent(_value);
 		break;
 	case eEvent::MouseRelease:
+	{
 		MouseReleaseEvent(_value);
+		return m_isActive;
+	}
 		break;
 	case eEvent::LoseMain:
 		break;

@@ -16,9 +16,9 @@ CUIClearButton::CUIClearButton(D3DXVECTOR2 vPos, IInteractCenter* pInteractCente
 
 	m_vPosition = vPos;
 
-	g_EventManager->Attach(eEvent::MouseClick, this);
-	g_EventManager->Attach(eEvent::MouseHover, this);
-	g_EventManager->Attach(eEvent::MouseRelease, this);
+	//g_EventManager->Attach(eEvent::MouseClick, this);
+	//g_EventManager->Attach(eEvent::MouseHover, this);
+	//g_EventManager->Attach(eEvent::MouseRelease, this);
 
 	g_EventManager->Attach(eEvent::ClearMain, this);
 	g_EventManager->Attach(eEvent::ClearNextStage, this);
@@ -60,8 +60,6 @@ void CUIClearButton::Setup()
 
 bool CUIClearButton::OnEvent(eEvent eEvent, void * _value)
 {
-	if (!m_isActive)
-		return true;
 	switch (eEvent)
 	{
 	case eEvent::MouseClick:
@@ -71,7 +69,10 @@ bool CUIClearButton::OnEvent(eEvent eEvent, void * _value)
 		MouseHoverEvent(_value);
 		break;
 	case eEvent::MouseRelease:
+	{
 		MouseReleaseEvent(_value);
+		return m_isActive;
+	}
 		break;
 	case eEvent::ClearMain:
 		break;
