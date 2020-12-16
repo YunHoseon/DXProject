@@ -81,5 +81,10 @@ public:
 	void SetActiveUIState(int n);
 
 	void AddPosition(float x, float y);
+
+	bool GetIsActive() { return m_isActive; }
+	void SetIsActive(bool isActive) { m_isActive = isActive; }
+
+	D3DXVECTOR2 GetSize() { return m_vSize; }
 };
 

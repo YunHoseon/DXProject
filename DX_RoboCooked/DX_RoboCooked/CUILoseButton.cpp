@@ -38,7 +38,6 @@ void CUILoseButton::Setup()
 
 	CUI* ResetBtn = new CUIResetButton(D3DXVECTOR2(m_vPosition.x + 550, m_vPosition.y + 500), eBtnEvent::LoseReset);
 	board->AddChild(ResetBtn);
-
 }
 
 bool CUILoseButton::OnEvent(eEvent eEvent, void * _value)
@@ -63,7 +62,6 @@ bool CUILoseButton::OnEvent(eEvent eEvent, void * _value)
 		ResetGame();
 		break;
 	}
-
 	return true;
 }
 
@@ -71,7 +69,6 @@ void CUILoseButton::ResetGame()
 {
 	//return;
 	CGameScene* scene = new CGameScene;
-
 
 	thread _t1(&CGameScene::Load, scene, "data/js", m_pInteractCenter->GetSceneID(), &CGameScene::Init);
 	_t1.detach();

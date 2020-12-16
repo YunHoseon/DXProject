@@ -1,15 +1,22 @@
 #include "stdafx.h"
 #include "CUILoading.h"
 #include "CUITexture.h"
+#include "CUILoadingScreen.h"
+#include "CUILoadingMessageLoad.h"
+#include "CUIloadingMessageComplete.h"
+#include "IInteractCenter.h"
 
-CUILoading::CUILoading()
-	: m_isLoading(false)
+CUILoading::CUILoading(IInteractCenter*	pInteractCenter)
+	: m_isLoading(true)
 {
+	m_vPosition = D3DXVECTOR2(0,0);
 	m_isActive = true;
+	m_pInteractCenter = pInteractCenter;
+	Setup();
+
 	g_EventManager->Attach(eEvent::KeyPress, this);
 	g_EventManager->Attach(eEvent::KeyRelease, this);
-	g_EventManager->Attach(eEvent::MouseClick, this);
-	g_EventManager->Attach(eEvent::MouseRelease, this);
+	g_EventManager->Attach(eEvent::LoadingEnd, this);
 }
 
 
@@ -19,65 +26,59 @@ CUILoading::~CUILoading()
 
 void CUILoading::Setup()
 {
-	m_pTexture = new CUITexture("data/UI/roadingScreen.png", "data/UI/roadingScreen.png", 
-								"data/UI/roadingScreen.png", m_vPosition);
-
 	D3DVIEWPORT9 vp;
 	g_pD3DDevice->GetViewport(&vp);
-	m_vPosition = D3DXVECTOR2(vp.Width / 2 - m_pTexture->GetActiveTextureWidth()
-							, vp.Height / 2 - m_pTexture->GetActiveTextureHeight());
+
+	m_pBoard = new CUILoadingScreen();
+	AddChild(m_pBoard);
+
+	m_pLoadingMessage = new CUILoadingMessageLoad(D3DXVECTOR2(vp.Width / 2 - 200, vp.Height / 2 + 300));
+	m_pBoard->AddChild(m_pLoadingMessage);
+
+	m_pCompleteMessage = new CUIloadingMessageComplete(D3DXVECTOR2(vp.Width / 2 - 375, vp.Height / 2 + 300));
+	m_pBoard->AddChild(m_pCompleteMessage);
+	m_pCompleteMessage->SetIsActive(false);
 }
 
 bool CUILoading::OnEvent(eEvent eEvent, void* _value)
 {
 	switch (eEvent)
 	{
-	case eEvent::MouseClick:
-		ClickEvent(_value);
-		break;
 	case eEvent::KeyPress:
 		KeyPressEvent(_value);
 		break;
 	case eEvent::KeyRelease:
 		KeyReleaseEvent(_value);
 		break;
-	case eEvent::MouseRelease:
-		MouseReleaseEvent(_value);
+	case eEvent::LoadingEnd:
+		LoadingEndEvent();
 		break;
 	}
 	return false;
 }
 
-void CUILoading::ClickEvent(void* _value)
+void CUILoading::KeyPressEvent(void * _value)
 {
-	ST_KeyInputEvent* data = static_cast<ST_KeyInputEvent*>(_value);
-}
-
-void CUILoading::MouseReleaseEvent(void* _value)
-{
-	ST_KeyInputEvent* data = static_cast<ST_KeyInputEvent*>(_value);
-
-	if (!m_isLoading)
+	if (m_isLoading)
 		return;
-	else
-	{
-
-	}
-}
-
-void CUILoading::KeyPressEvent(void* _value)
-{
-	ST_KeyInputEvent* data = static_cast<ST_KeyInputEvent*>(_value);
+	m_isActive = false;
 }
 
 void CUILoading::KeyReleaseEvent(void* _value)
 {
 	ST_KeyInputEvent* data = static_cast<ST_KeyInputEvent*>(_value);
 
-	if (!m_isLoading)
+	if (m_isLoading)
 		return;
 	else
 	{
-		//이미지 꺼지고 
+		
 	}
+}
+
+void CUILoading::LoadingEndEvent()
+{
+	m_isLoading = false;
+	m_pCompleteMessage->SetIsActive(true);
+	m_pLoadingMessage->SetIsActive(false);
 }
