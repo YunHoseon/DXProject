@@ -33,6 +33,7 @@ bool CCombinatorButton::OnEvent(eEvent eEvent, void *_value)
 
 void CCombinatorButton::Interact(CCharacter *pCharacter)
 {
+	g_SoundManager->PlaySFX("button");
 	m_pPartCombinator->ReadytoCarryParts();
 }
 

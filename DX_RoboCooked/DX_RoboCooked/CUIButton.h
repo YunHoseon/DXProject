@@ -5,7 +5,6 @@ class CUI;
 class CUITexture;
 class CUIText;
 
-
 class CUIButton :
 	public CUI
 {
@@ -30,5 +29,4 @@ public:
 	virtual void MouseHoverEvent(void* _value);
 	virtual void MouseClickEvent(void* _value);
 	virtual void MouseReleaseEvent(void* _value);
-
 };

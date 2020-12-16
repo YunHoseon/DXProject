@@ -90,5 +90,10 @@ public:
 	static void SetWidthRevision(float x) { m_fWidthRevision = x; }
 	static float GetHeightRevision() { return m_fHeightRevision; }
 	static void SetHeightRevision(float x) { m_fHeightRevision = x; }
+
+	bool GetIsActive() { return m_isActive; }
+	void SetIsActive(bool isActive) { m_isActive = isActive; }
+
+	D3DXVECTOR2 GetSize() { return m_vSize; }
 };
 

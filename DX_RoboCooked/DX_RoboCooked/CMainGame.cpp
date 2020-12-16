@@ -10,6 +10,45 @@ CMainGame::CMainGame()
 	, m_pCamera(NULL)
 	//, m_pScene(NULL)
 {
+	//Sound Add
+	//g_SoundManager->AddBGM("data/sound/bgm.mp3");
+	g_SoundManager->AddSFX("data/sound/effBBam.mp3", "BBam");
+	g_SoundManager->AddSFX("data/sound/effMelem.mp3", "Melem");
+
+	g_SoundManager->AddSFX("data/sound/sfx/click.mp3", "click");
+	g_SoundManager->AddSFX("data/sound/sfx/win.mp3", "win");
+	g_SoundManager->AddSFX("data/sound/sfx/game_over.mp3", "game_over");
+	g_SoundManager->AddSFX("data/sound/sfx/siren.mp3", "siren");
+
+	g_SoundManager->AddSFX("data/sound/player/run_1.mp3", "run_1");
+	g_SoundManager->AddSFX("data/sound/player/dash.mp3", "dash");
+	g_SoundManager->AddSFX("data/sound/player/charge_up.mp3", "charge_up");
+	g_SoundManager->AddSFX("data/sound/player/charge_complete.mp3", "charge_complete");
+	g_SoundManager->AddSFX("data/sound/player/throw.mp3", "throw");
+
+
+
+	g_SoundManager->AddSFX("data/sound/object/character_impact.mp3", "character_impact");
+	g_SoundManager->AddSFX("data/sound/object/part_f.mp3", "part_f");
+	g_SoundManager->AddSFX("data/sound/object/part_impact.mp3", "part_impact");
+	g_SoundManager->AddSFX("data/sound/object/machine_run.mp3", "machine_run");
+	g_SoundManager->AddSFX("data/sound/object/machine_complete.mp3", "machine_complete");
+	g_SoundManager->AddSFX("data/sound/object/box.mp3", "box");
+	g_SoundManager->AddSFX("data/sound/object/button.mp3", "button");
+
+
+	g_SoundManager->AddSFX("data/sound/monster/medusa_snake_01.mp3", "medusa_snake_01");
+	g_SoundManager->AddSFX("data/sound/monster/medusa_stone.mp3", "medusa_stone");
+	g_SoundManager->AddSFX("data/sound/monster/medusa_snake_02.mp3", "medusa_snake_02");
+	g_SoundManager->AddSFX("data/sound/monster/medusa_venom.mp3", "medusa_venom");
+	g_SoundManager->AddSFX("data/sound/monster/medusa_ult.mp3", "medusa_ult");
+	g_SoundManager->AddSFX("data/sound/monster/medusa_ult_acid.mp3", "medusa_ult_acid");
+	g_SoundManager->AddSFX("data/sound/monster/heartbeat.mp3", "heartbeat");
+	g_SoundManager->AddSFX("data/sound/monster/laugh.mp3", "laugh");
+	g_SoundManager->AddSFX("data/sound/monster/wing_flap.mp3", "wing_flap");
+	g_SoundManager->AddSFX("data/sound/monster/wind.mp3", "wind");
+	g_SoundManager->AddSFX("data/sound/monster/tornado.mp3", "tornado");
+
 }
 
 

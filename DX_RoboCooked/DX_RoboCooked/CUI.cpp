@@ -14,7 +14,6 @@ CUI::CUI()
 	, m_isPress(false)
 	, m_eBtnEvent(eBtnEvent::None)
 {
-
 }
 
 
@@ -53,7 +52,6 @@ void CUI::CheckReleaseIn(POINT pt)
 		if (it->m_vPosition.x * m_fWidthRevision <= pt.x && (it->m_vPosition.x + it->m_vSize.x) * m_fWidthRevision >= pt.x
 			&& it->m_vPosition.y * m_fHeightRevision <= pt.y && (it->m_vPosition.y + it->m_vSize.y) * m_fHeightRevision >= pt.y)
 		{
-
 			if (it->GetlistUIchildrenSize() == 0)
 			{
 				if (it->m_isPress)
@@ -135,6 +133,7 @@ void CUI::CheckActiveEvent()
 
 void CUI::ButtonEvent(eBtnEvent btnEvent)
 {
+	g_SoundManager->PlaySFX("click");
 	switch (btnEvent)
 	{
 	case eBtnEvent::PauseMain:
@@ -180,7 +179,6 @@ void CUI::ButtonEvent(eBtnEvent btnEvent)
 		g_EventManager->CallEvent(eEvent::ControllClose, NULL);
 		break;
 	}
-
 }
 
 void CUI::InitUIState()
