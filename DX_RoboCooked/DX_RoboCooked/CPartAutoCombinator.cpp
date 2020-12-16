@@ -91,7 +91,7 @@ void CPartAutoCombinator::PartsInteract(CParts* pParts)
 void CPartAutoCombinator::CombineParts()
 {
 	m_fElapsedTime += g_pTimeManager->GetElapsedTime();
-
+	g_SoundManager->PlaySFX("machine_run");
 	if (m_fElapsedTime >= m_fCombineTime)
 	{
 		m_fElapsedTime = 0;
@@ -128,6 +128,7 @@ void CPartAutoCombinator::InsertParts(CParts* p)
 
 void CPartAutoCombinator::ReadytoCarryParts()
 {
+	g_SoundManager->PlaySFX("machine_complete");
 	m_isCombine = true;
 	CParts* parts = Make();
 

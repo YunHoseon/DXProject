@@ -100,7 +100,6 @@ void CCharacter::PressKey(void* _value)
 			return;
 		if (m_pParts && m_pCC->StopWithParts())
 			return; 
-
 		Rotate(0);
 	}
 	else if (data->wKey == m_pInputKey->moveLeftKey)
@@ -119,7 +118,6 @@ void CCharacter::PressKey(void* _value)
 			if (m_fRotY + 0.5f > D3DX_PI * 2.f)
 				m_fRotY -= D3DX_PI * 2.f;
 		}
-		
 		Rotate(D3DX_PI * 1.5f );
 	}
 	else if (data->wKey == m_pInputKey->moveBackKey)
@@ -128,7 +126,6 @@ void CCharacter::PressKey(void* _value)
 			return;
 		if (m_pParts && m_pCC->StopWithParts())
 			return;
-
 		Rotate(D3DX_PI);
 	}
 	else if (data->wKey == m_pInputKey->moveRightKey)
@@ -147,7 +144,6 @@ void CCharacter::PressKey(void* _value)
 			if (m_fRotY - 0.5f < 0.f)
 				m_fRotY += D3DX_PI * 2.f;
 		}
-
 		Rotate(D3DX_PI * 0.5f);
 	}
 	else if (data->wKey == m_pInputKey->interactableKey1)
@@ -170,9 +166,15 @@ void CCharacter::PressKey(void* _value)
 					m_arrKeyDown[0] = true;
 
 				if (m_fThrowPower < m_fMaxThrowPower)
+				{
 					m_fThrowPower += m_fThrowPowerUpSpeed * TimeRevision;
-				if (m_fThrowPower > m_fMaxThrowPower)
+					g_SoundManager->PlaySFX("charge_up");
+				}
+				if (m_fThrowPower >= m_fMaxThrowPower)
+				{
 					m_fThrowPower = m_fMaxThrowPower;
+					g_SoundManager->PlaySFX("charge_complete");
+				}
 			
 				_DEBUG_COMMENT cout << "throw power : " << m_fThrowPower << endl;
 			}
@@ -222,7 +224,7 @@ void CCharacter::PressKey(void* _value)
 				D3DXVec3Normalize(&jump, &jump);
 				SetPosition(m_vPosition.x, m_vPosition.y + 0.1f, m_vPosition.z);
 				SetAcceleration(jump * 0.4f * TimeRevision);
-				g_SoundManager->PlaySFX("Melem");
+				g_SoundManager->PlaySFX("dash");
 				m_arrElapsedTime[2] = CurrentTime;
 			}
 			//_DEBUG_COMMENT cout << "current time : " << g_pTimeManager->GetElapsedTime() << endl;
@@ -249,7 +251,7 @@ void CCharacter::ReleaseKey(void* _value)
 			m_pParts->ThrowParts(m_vDirection * m_fThrowPower * TimeRevision);
 			m_pParts = nullptr;
 			
-			g_SoundManager->PlaySFX("Melem");
+			g_SoundManager->PlaySFX("throw");
 			m_fThrowPower = m_fMinThrowPower;
 			break;
 		default: ;

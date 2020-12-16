@@ -7,6 +7,8 @@
 
 CMainScene::CMainScene():m_pScreen(nullptr), m_pMaker(nullptr), m_pControll(nullptr)
 {
+	g_SoundManager->AddBGM("data/Sound/bgm/911.mp3");
+	g_SoundManager->PlayBGM();
 	Init();
 }
 
@@ -19,6 +21,8 @@ CMainScene::~CMainScene()
 
 void CMainScene::Init()
 {
+	
+	
 	m_pMaker = new CUIMaker();
 	m_pControll = new CUIControll();
 

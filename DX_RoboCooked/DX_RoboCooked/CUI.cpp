@@ -133,6 +133,7 @@ void CUI::CheckActiveEvent()
 
 void CUI::ButtonEvent(eBtnEvent btnEvent)
 {
+	g_SoundManager->PlaySFX("click");
 	switch (btnEvent)
 	{
 	case eBtnEvent::PauseMain:

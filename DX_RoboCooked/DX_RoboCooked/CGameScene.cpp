@@ -52,11 +52,10 @@ CGameScene::CGameScene() : m_pField(NULL),
 						   m_fGameTime(300.0f),
 						   m_nLotIndex(0)
 {
+	g_SoundManager->AddBGM("data/Sound/bgm/Tribal_Tensions.mp3");
+	g_SoundManager->PlayBGM();
+
 	g_EventManager->Attach(eEvent::Tick, this);
-	//Sound Add
-	g_SoundManager->AddBGM("data/sound/bgm.mp3");
-	g_SoundManager->AddSFX("data/sound/effBBam.mp3", "BBam");
-	g_SoundManager->AddSFX("data/sound/effMelem.mp3", "Melem");
 	// 로딩 UI
 }
 
@@ -390,6 +389,7 @@ bool CGameScene::TickUpdate(void * _value)
 	int check = IsGameClear();
 	if (check == 1)
 	{
+		g_SoundManager->PlaySFX("win");
 		ST_SetTimeEvent timeData;
 		timeData.nTime = m_fGameTime;
 
@@ -404,6 +404,8 @@ bool CGameScene::TickUpdate(void * _value)
 	}
 	else if (check == 2)
 	{
+		g_SoundManager->PlaySFX("game_over");
+
 		m_isTimeStop = true;
 		SafeDelete(m_pDebugPauseUI);
 
