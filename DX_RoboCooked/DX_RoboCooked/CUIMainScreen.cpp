@@ -94,5 +94,5 @@ void CUIMainScreen::StartGame()
 
 void CUIMainScreen::EndGame()
 {
-	exit(-1);
+	SendMessage(g_hWnd, WM_CLOSE, 0, 0);
 }

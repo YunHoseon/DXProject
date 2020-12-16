@@ -102,9 +102,6 @@
     <ClInclude Include="DX_RoboCooked.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="CSkinnedMesh.h">
-      <Filter>Source Files</Filter>
-    </ClInclude>
     <ClInclude Include="CSingleton.h">
       <Filter>Manager</Filter>
     </ClInclude>
@@ -444,17 +441,8 @@
     <ClInclude Include="CUIMainScreenBoard.h">
       <Filter>UI\Button\SubUI</Filter>
     </ClInclude>
-    <ClInclude Include="CUIMakerBoard.h">
-      <Filter>UI\Button\SubUI</Filter>
-    </ClInclude>
-    <ClInclude Include="CUIMaker.h">
-      <Filter>UI\Button\MainUI</Filter>
-    </ClInclude>
-    <ClInclude Include="CUIControllBoard.h">
-      <Filter>UI\Button\SubUI</Filter>
-    </ClInclude>
-    <ClInclude Include="CUIControll.h">
-      <Filter>UI\Button\MainUI</Filter>
+    <ClInclude Include="CSkinnedMesh.h">
+      <Filter>GameScene</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -462,9 +450,6 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="DX_RoboCooked.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="CSkinnedMesh.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="CSingleton.cpp">
@@ -806,17 +791,8 @@
     <ClCompile Include="CUIMainScreenBoard.cpp">
       <Filter>UI\Button\SubUI</Filter>
     </ClCompile>
-    <ClCompile Include="CUIMakerBoard.cpp">
-      <Filter>UI\Button\SubUI</Filter>
-    </ClCompile>
-    <ClCompile Include="CUIMaker.cpp">
-      <Filter>UI\Button\MainUI</Filter>
-    </ClCompile>
-    <ClCompile Include="CUIControllBoard.cpp">
-      <Filter>UI\Button\SubUI</Filter>
-    </ClCompile>
-    <ClCompile Include="CUIControll.cpp">
-      <Filter>UI\Button\MainUI</Filter>
+    <ClCompile Include="CSkinnedMesh.cpp">
+      <Filter>GameScene</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
