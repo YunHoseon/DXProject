@@ -8,7 +8,7 @@ class CUIPauseBoard :
 
 {
 public:
-	CUIPauseBoard(D3DXVECTOR2 vPos, eBtnEvent btnEvent);
+	CUIPauseBoard(eBtnEvent btnEvent);
 	~CUIPauseBoard();
 
 public:

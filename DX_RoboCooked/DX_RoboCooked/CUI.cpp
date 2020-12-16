@@ -109,6 +109,28 @@ void CUI::InvertActive()
 	m_isActive = !m_isActive;
 }
 
+void CUI::ActiveUI()
+{
+	InvertActive();
+	CheckActiveEvent();
+}
+
+void CUI::CheckActiveEvent()
+{
+	if (m_isActive)
+	{
+		g_EventManager->Attach(eEvent::MouseRelease, this);
+		g_EventManager->Attach(eEvent::MouseClick, this);
+		g_EventManager->Attach(eEvent::MouseHover, this);
+	}
+	else
+	{
+		g_EventManager->Detach(eEvent::MouseClick, this);
+		g_EventManager->Detach(eEvent::MouseHover, this);
+
+	}
+}
+
 void CUI::ButtonEvent(eBtnEvent btnEvent)
 {
 	switch (btnEvent)
@@ -148,6 +170,12 @@ void CUI::ButtonEvent(eBtnEvent btnEvent)
 		break;
 	case eBtnEvent::MainEnd:
 		g_EventManager->CallEvent(eEvent::MainEnd, NULL);
+		break;
+	case eBtnEvent::MakerClose:
+		g_EventManager->CallEvent(eEvent::MakerClose, NULL);
+		break;
+	case eBtnEvent::ControllClose:
+		g_EventManager->CallEvent(eEvent::ControllClose, NULL);
 		break;
 	}
 

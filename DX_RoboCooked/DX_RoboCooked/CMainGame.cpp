@@ -58,14 +58,11 @@ void CMainGame::Setup()
 		thread _t2([pBeforeScene]() { delete pBeforeScene; });
 		_t2.detach();
 	}
-
 }
 
 void CMainGame::Update()
 {
 	g_pTimeManager->Update();
-	
-	
 	InputManager->Update();
 	
 	if (m_pCamera)

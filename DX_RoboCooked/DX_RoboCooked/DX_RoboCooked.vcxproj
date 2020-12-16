@@ -181,6 +181,8 @@
     <ClInclude Include="CUIClearButton.h" />
     <ClInclude Include="CUIClearTime.h" />
     <ClInclude Include="CUICloseButton.h" />
+    <ClInclude Include="CUIControll.h" />
+    <ClInclude Include="CUIControllBoard.h" />
     <ClInclude Include="CUIEndButton.h" />
     <ClInclude Include="CUILight.h" />
     <ClInclude Include="CUILoseBoard.h" />
@@ -192,6 +194,8 @@
     <ClInclude Include="CUIMainScreen.h" />
     <ClInclude Include="CUIMainScreenBoard.h" />
     <ClInclude Include="CUIMainStartButton.h" />
+    <ClInclude Include="CUIMaker.h" />
+    <ClInclude Include="CUIMakerBoard.h" />
     <ClInclude Include="CUIResetButton.h" />
     <ClInclude Include="CUI.h" />
     <ClInclude Include="CCamera.h" />
@@ -300,6 +304,8 @@
     <ClCompile Include="CUIClearButton.cpp" />
     <ClCompile Include="CUIClearTime.cpp" />
     <ClCompile Include="CUICloseButton.cpp" />
+    <ClCompile Include="CUIControll.cpp" />
+    <ClCompile Include="CUIControllBoard.cpp" />
     <ClCompile Include="CUIEndButton.cpp" />
     <ClCompile Include="CUILight.cpp" />
     <ClCompile Include="CUILoseBoard.cpp" />
@@ -311,6 +317,8 @@
     <ClCompile Include="CUIMainScreen.cpp" />
     <ClCompile Include="CUIMainScreenBoard.cpp" />
     <ClCompile Include="CUIMainStartButton.cpp" />
+    <ClCompile Include="CUIMaker.cpp" />
+    <ClCompile Include="CUIMakerBoard.cpp" />
     <ClCompile Include="CUIResetButton.cpp" />
     <ClCompile Include="CUI.cpp" />
     <ClCompile Include="CCamera.cpp" />

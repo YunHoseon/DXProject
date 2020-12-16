@@ -444,6 +444,18 @@
     <ClInclude Include="CSkinnedMesh.h">
       <Filter>GameScene</Filter>
     </ClInclude>
+    <ClInclude Include="CUIControllBoard.h">
+      <Filter>UI\Button\SubUI</Filter>
+    </ClInclude>
+    <ClInclude Include="CUIMakerBoard.h">
+      <Filter>UI\Button\SubUI</Filter>
+    </ClInclude>
+    <ClInclude Include="CUIMaker.h">
+      <Filter>UI\Button\MainUI</Filter>
+    </ClInclude>
+    <ClInclude Include="CUIControll.h">
+      <Filter>UI\Button\MainUI</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="stdafx.cpp">
@@ -793,6 +805,18 @@
     </ClCompile>
     <ClCompile Include="CSkinnedMesh.cpp">
       <Filter>GameScene</Filter>
+    </ClCompile>
+    <ClCompile Include="CUIMakerBoard.cpp">
+      <Filter>UI\Button\SubUI</Filter>
+    </ClCompile>
+    <ClCompile Include="CUIControllBoard.cpp">
+      <Filter>UI\Button\SubUI</Filter>
+    </ClCompile>
+    <ClCompile Include="CUIControll.cpp">
+      <Filter>UI\Button\MainUI</Filter>
+    </ClCompile>
+    <ClCompile Include="CUIMaker.cpp">
+      <Filter>UI\Button\MainUI</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

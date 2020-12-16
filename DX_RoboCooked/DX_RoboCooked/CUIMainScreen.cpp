@@ -8,18 +8,13 @@
 #include "CGameScene.h"
 
 
-CUIMainScreen::CUIMainScreen()
+CUIMainScreen::CUIMainScreen(CUIButton* pMaker, CUIButton* pControll):m_pMaker(pMaker),m_pControll(pControll)
 {
 	g_EventManager->Attach(eEvent::MainStart, this);
 	g_EventManager->Attach(eEvent::MainControll, this);
 	g_EventManager->Attach(eEvent::MainEnd, this);
 	g_EventManager->Attach(eEvent::MainMaker, this);
 
-
-
-	g_EventManager->Attach(eEvent::MouseClick, this);
-	g_EventManager->Attach(eEvent::MouseHover, this);
-	g_EventManager->Attach(eEvent::MouseRelease, this);
 	Setup();
 }
 
@@ -48,11 +43,14 @@ void CUIMainScreen::Setup()
 
 	CUI* endUI = new CUIMainEndButton(D3DXVECTOR2(m_vPosition.x, m_vPosition.y+390), eBtnEvent::MainEnd);
 	board->AddChild(endUI);
-	InvertActive();
+	ActiveUI();
 }
 
 bool CUIMainScreen::OnEvent(eEvent eEvent, void * _value)
 {
+	if (m_pMaker->GetActive() || m_pControll->GetActive())
+		return true;
+
 	switch (eEvent)
 	{
 	case eEvent::MouseClick:
@@ -68,8 +66,10 @@ bool CUIMainScreen::OnEvent(eEvent eEvent, void * _value)
 		StartGame();
 		break;
 	case eEvent::MainControll:
+		m_pControll->ActiveUI();
 		break;
 	case eEvent::MainMaker:
+		m_pMaker->ActiveUI();
 		break;
 	case eEvent::MainEnd:
 		EndGame();

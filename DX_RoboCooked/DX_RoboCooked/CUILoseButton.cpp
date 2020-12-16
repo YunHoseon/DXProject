@@ -9,19 +9,11 @@
 #include "IInteractCenter.h"
 
 
-CUILoseButton::CUILoseButton(D3DXVECTOR2 vPos, IInteractCenter* pInteractCenter):m_pInteractCenter(pInteractCenter)
+CUILoseButton::CUILoseButton(IInteractCenter* pInteractCenter):m_pInteractCenter(pInteractCenter)
 {
-	m_vPosition = vPos;
 	Setup();
-
-	g_EventManager->Attach(eEvent::MouseClick, this);
-	g_EventManager->Attach(eEvent::MouseHover, this);
-	g_EventManager->Attach(eEvent::MouseRelease, this);
-
 	g_EventManager->Attach(eEvent::LoseMain, this);
 	g_EventManager->Attach(eEvent::LoseReset, this);
-	
-	
 }
 
 
@@ -31,8 +23,9 @@ CUILoseButton::~CUILoseButton()
 
 void CUILoseButton::Setup()
 {
-	CUI* board = new CUILoseBoard(D3DXVECTOR2(m_vPosition.x, m_vPosition.y));
+	CUI* board = new CUILoseBoard();
 	AddChild(board);
+	m_vPosition = board->GetPosition();
 
 	CUI* starUI = new CUIStarZero(D3DXVECTOR2(m_vPosition.x + 285, m_vPosition.y + 150));
 	board->AddChild(starUI);
@@ -50,8 +43,6 @@ void CUILoseButton::Setup()
 
 bool CUILoseButton::OnEvent(eEvent eEvent, void * _value)
 {
-	if (!m_isActive)
-		return true;
 	switch (eEvent)
 	{
 	case eEvent::MouseClick:
@@ -61,7 +52,10 @@ bool CUILoseButton::OnEvent(eEvent eEvent, void * _value)
 		MouseHoverEvent(_value);
 		break;
 	case eEvent::MouseRelease:
+	{
 		MouseReleaseEvent(_value);
+		return m_isActive;
+	}
 		break;
 	case eEvent::LoseMain:
 		break;
