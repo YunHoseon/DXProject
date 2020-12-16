@@ -31,23 +31,23 @@ CUIMainScreen::~CUIMainScreen()
 void CUIMainScreen::Setup()
 {
 	CUI* board = new CUIMainScreenBoard();
-	Add(board);
+	AddChild(board);
 
 	RECT rc;
 	GetClientRect(g_hWnd, &rc);
 	m_vPosition = D3DXVECTOR2(rc.right / 2, 450);
 
 	CUI* starUI = new CUIMainStartButton(D3DXVECTOR2(m_vPosition.x, m_vPosition.y), eBtnEvent::MainStart);
-	board->Add(starUI);
+	board->AddChild(starUI);
 
 	CUI* controllUI = new CUIMainControllButton(D3DXVECTOR2(m_vPosition.x, m_vPosition.y+130), eBtnEvent::MainControll);
-	board->Add(controllUI);
+	board->AddChild(controllUI);
 
 	CUI* makerUI = new CUIMainMakerButton(D3DXVECTOR2(m_vPosition.x, m_vPosition.y+260), eBtnEvent::MainMaker);
-	board->Add(makerUI);
+	board->AddChild(makerUI);
 
 	CUI* endUI = new CUIMainEndButton(D3DXVECTOR2(m_vPosition.x, m_vPosition.y+390), eBtnEvent::MainEnd);
-	board->Add(endUI);
+	board->AddChild(endUI);
 	InvertActive();
 }
 

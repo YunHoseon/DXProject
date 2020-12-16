@@ -374,6 +374,8 @@ bool CGameScene::OnEvent(eEvent eEvent, void * _value)
 	switch (eEvent)
 	{
 	case eEvent::Tick:
+		if (m_isTimeStop)
+			break;
 		return TickUpdate(_value);
 	}
 
