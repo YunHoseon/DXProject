@@ -123,12 +123,12 @@ BOOL InitInstance(HINSTANCE hInstance, int nCmdShow)
 {
    hInst = hInstance; // Store instance handle in our global variable
 
-   //g_hWnd = CreateWindowW(szWindowClass, szTitle, WS_OVERLAPPEDWINDOW,
-   //   CW_USEDEFAULT, 0, 1920, 1080, nullptr, nullptr, hInstance, nullptr);
+   g_hWnd = CreateWindowW(szWindowClass, szTitle, WS_EX_TOPMOST | WS_POPUP,
+      0, 0, GetSystemMetrics(SM_CXSCREEN), GetSystemMetrics(SM_CYSCREEN), nullptr, nullptr, hInstance, nullptr);
 
-   g_hWnd = CreateWindowW(szWindowClass, NULL, WS_POPUP,
-	   0, 0, GetSystemMetrics(SM_CXSCREEN), GetSystemMetrics(SM_CYSCREEN),
-	   NULL, NULL, hInstance, NULL);
+   //g_hWnd = CreateWindowW(szWindowClass, NULL, WS_EX_TOPMOST | WS_POPUP,
+	  // 0, 0, 1920, 1080,
+	  // NULL, NULL, hInstance, NULL);
 
 	//g_hWnd = CreateWindowExW(WS_EX_APPWINDOW, szWindowClass, szTitle, WS_POPUP,
  //       0, 0, GetSystemMetrics(SM_CXSCREEN), GetSystemMetrics(SM_CYSCREEN), nullptr, nullptr, hInstance, nullptr);
@@ -144,8 +144,8 @@ BOOL InitInstance(HINSTANCE hInstance, int nCmdShow)
 
    RECT rc;
    GetClientRect(g_hWnd, &rc);
-   CUI::SetWidthRevision((rc.right - rc.left) / 1920);
-   CUI::SetHeightRevision((rc.bottom - rc.top) / 1080);
+   CUI::SetWidthRevision((float)(rc.right - rc.left) / 1920);
+   CUI::SetHeightRevision((float)(rc.bottom - rc.top) / 1080);
 	
    return TRUE;
 }

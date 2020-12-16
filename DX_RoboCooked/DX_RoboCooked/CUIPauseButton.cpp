@@ -13,9 +13,10 @@
 
 
 
-CUIPauseButton::CUIPauseButton(WPARAM wParam, IInteractCenter* pInteractCenter)
+CUIPauseButton::CUIPauseButton(D3DXVECTOR2 vPos, WPARAM wParam, IInteractCenter* pInteractCenter)
 			: m_pInteractCenter(pInteractCenter)
 {
+	m_vPosition = vPos;
 	m_wActiveButton = wParam;
 	Setup();
 
@@ -36,9 +37,9 @@ CUIPauseButton::~CUIPauseButton()
 
 void CUIPauseButton::Setup()
 {
-	CUI* board = new CUIPauseBoard(eBtnEvent::None);
+	CUI* board = new CUIPauseBoard(m_vPosition, eBtnEvent::None);
 	AddChild(board);
-	m_vPosition = board->GetPosition();
+	//m_vPosition = board->GetPosition();
 
 	CUI* mainBtn = new CUIMainButton(D3DXVECTOR2(m_vPosition.x + 250, m_vPosition.y + 200), eBtnEvent::PauseMain);
 	board->AddChild(mainBtn);

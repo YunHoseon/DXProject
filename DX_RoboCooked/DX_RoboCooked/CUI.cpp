@@ -32,8 +32,8 @@ void CUI::CheckPressIn(POINT pt)
 {
 	for (auto it : m_listUIchildren)
 	{
-		if (it->m_vPosition.x <= pt.x && it->m_vPosition.x + it->m_vSize.x >= pt.x
-			&& it->m_vPosition.y <= pt.y && it->m_vPosition.y + it->m_vSize.y >= pt.y)
+		if (it->m_vPosition.x * m_fWidthRevision <= pt.x && (it->m_vPosition.x + it->m_vSize.x) * m_fWidthRevision >= pt.x
+			&& it->m_vPosition.y * m_fHeightRevision <= pt.y && (it->m_vPosition.y + it->m_vSize.y) * m_fHeightRevision >= pt.y)
 		{
 			if (it->GetlistUIchildrenSize() == 0)
 			{
@@ -50,8 +50,8 @@ void CUI::CheckReleaseIn(POINT pt)
 {
 	for (auto it : m_listUIchildren)
 	{
-		if (it->m_vPosition.x <= pt.x && it->m_vPosition.x + it->m_vSize.x >= pt.x
-			&& it->m_vPosition.y <= pt.y && it->m_vPosition.y + it->m_vSize.y >= pt.y)
+		if (it->m_vPosition.x * m_fWidthRevision <= pt.x && (it->m_vPosition.x + it->m_vSize.x) * m_fWidthRevision >= pt.x
+			&& it->m_vPosition.y * m_fHeightRevision <= pt.y && (it->m_vPosition.y + it->m_vSize.y) * m_fHeightRevision >= pt.y)
 		{
 
 			if (it->GetlistUIchildrenSize() == 0)
@@ -78,8 +78,8 @@ void CUI::CheckInHover(POINT pt)
 {
 	for (auto it : m_listUIchildren)
 	{
-		if (it->m_vPosition.x <= pt.x && it->m_vPosition.x + it->m_vSize.x >= pt.x
-			&& it->m_vPosition.y <= pt.y && it->m_vPosition.y + it->m_vSize.y >= pt.y)
+		if (it->m_vPosition.x * m_fWidthRevision <= pt.x && (it->m_vPosition.x + it->m_vSize.x) * m_fWidthRevision >= pt.x
+			&& it->m_vPosition.y * m_fHeightRevision <= pt.y && (it->m_vPosition.y + it->m_vSize.y) * m_fHeightRevision >= pt.y)
 		{
 			if (it->GetlistUIchildrenSize() == 0)
 			{

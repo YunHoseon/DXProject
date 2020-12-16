@@ -23,7 +23,7 @@ CDeviceManager::CDeviceManager() : CSingleton<CDeviceManager>(), m_pD3D(NULL), m
 	d3dpp.BackBufferCount = 1;
 	d3dpp.hDeviceWindow = g_hWnd;
 	d3dpp.SwapEffect = D3DSWAPEFFECT_DISCARD;
-	d3dpp.Windowed = FALSE;
+	d3dpp.Windowed = true;
 	d3dpp.EnableAutoDepthStencil = true;
 	d3dpp.AutoDepthStencilFormat = D3DFMT_D24S8;
 	d3dpp.PresentationInterval = D3DPRESENT_INTERVAL_IMMEDIATE;
