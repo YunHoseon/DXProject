@@ -10,5 +10,6 @@ public:
 	};
 	virtual void Render(D3DXVECTOR3& vPos) {};
 	virtual CCrowdControl* Clone() { return new CCCNone; };
+	virtual bool IsEnd() { return false; }
 };
 

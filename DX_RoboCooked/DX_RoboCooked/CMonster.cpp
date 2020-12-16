@@ -36,7 +36,7 @@ void CMonster::Update()
 	{
 		m_stSkillUsing.FirstSkillProperty = FirstSkill();
 		m_stSkillUsing.isFirstSkill = true;
-		m_pInteractCenter->MonsterSkill(FirstSkill());
+		m_pInteractCenter->MonsterSkill(FirstSkill(), FirstSkillTime());
 	}
 
 	if (SecondSkillTriggered())
@@ -44,7 +44,7 @@ void CMonster::Update()
 		m_stSkillUsing.SecondSkillProperty = SecondSkill();
 		m_stSkillUsing.isSecondSkill = true;
 		ChooseSkillCondition();
-		m_pInteractCenter->MonsterSkill(SecondSkill());
+		m_pInteractCenter->MonsterSkill(SecondSkill(), SecondSkillTime());
 	}
 
 	if (m_eSecondSkillEvent == eEvent::SpecificArea)
@@ -59,7 +59,7 @@ void CMonster::Update()
 	{
 		m_stSkillUsing.UltimateSkillProperty = UltimateSkill();
 		m_stSkillUsing.isUltimateSkill = true;
-		m_pInteractCenter->MonsterSkill(UltimateSkill());
+		m_pInteractCenter->MonsterSkill(UltimateSkill(), UltimateSkillTime());
 	}
 
 	if (CheckDurationTimeFirstSkill())

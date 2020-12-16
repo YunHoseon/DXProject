@@ -23,7 +23,7 @@ enum class eSkill
 	KeyLock,
 	SlowMove,
 	DestroyParts,
-	KeyRevers,
+	KeyReverse,
 	SandWind,
 	Tornado
 };

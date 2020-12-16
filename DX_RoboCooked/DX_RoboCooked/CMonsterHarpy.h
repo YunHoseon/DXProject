@@ -2,11 +2,14 @@
 #include "CMonster.h"
 class CTornado;
 
+class CSkinnedMesh;
 class CMonsterHarpy :
 	public CMonster
 {
 private:
 	CTornado*		m_pTornado;
+
+	CSkinnedMesh*	m_pSkillAnim_2;
 public:
 	CMonsterHarpy(IInteractCenter* pInteractCenter);
 	~CMonsterHarpy();
@@ -15,7 +18,7 @@ public:
 	void Render() override;
 	void AddForce(CActor* target) override;
 
-	eSkill FirstSkill() override { return eSkill::KeyRevers; }
+	eSkill FirstSkill() override { return eSkill::KeyReverse; }
 	eSkill SecondSkill() override;
 	eSkill UltimateSkill() override { return eSkill::SandWind; }
 
@@ -25,5 +28,7 @@ public:
 
 	void DeleteTornado() override;
 
+	void Update() override;
+	void UpdateMonster() override;
 };
 

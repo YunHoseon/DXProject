@@ -325,7 +325,8 @@ void CSkinnedMesh::Update(ST_BONE* pCurrent, D3DXMATRIXA16* pmatParent)
 
 void CSkinnedMesh::SetRandomTrackPosition()
 {
-	m_pAnimController->SetTrackPosition(0, (rand() % 100) / 10.0f);
+	CRandomNumberGenerator r;
+	m_pAnimController->SetTrackPosition(0, r.GenInt(0,99) / 10.0f);
 }
 
 void CSkinnedMesh::SetTransform(D3DXMATRIXA16* pmat)

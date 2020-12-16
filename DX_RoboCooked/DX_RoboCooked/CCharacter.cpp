@@ -62,6 +62,9 @@ void CCharacter::Update()
 
 	m_pSkinnedMesh->Update();
 
+	if (m_pCC->IsEnd())
+		DeleteCC();
+	
 	if (m_pInteractCollision)
 		m_pInteractCollision->Update();
 	if (m_pCollision)

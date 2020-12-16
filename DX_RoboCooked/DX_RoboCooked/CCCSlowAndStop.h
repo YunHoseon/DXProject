@@ -5,6 +5,7 @@ class CCCSlowAndStop : public CCrowdControl
 {
 public:
 	CCCSlowAndStop() : CCrowdControl() {}
+	CCCSlowAndStop(CCCSlowAndStop* clone) : CCrowdControl(clone) {}
 public:
 	string GetID()
 	{
@@ -13,5 +14,5 @@ public:
 	virtual void Render(D3DXVECTOR3& vPos) {};
 	virtual float MultiplySpeed() { return 0.3f; }
 	virtual bool StopWithParts() { return true; }
-	virtual CCrowdControl* Clone() { return new CCCSlowAndStop; };
+	virtual CCrowdControl* Clone() { return new CCCSlowAndStop(this); };
 };

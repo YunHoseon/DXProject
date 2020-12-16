@@ -66,7 +66,7 @@ public:
 	void ToggleStop() override;
 
 	void GetInteractObject(CCharacter* pCharacter) override;
-	void MonsterSkill(eSkill skill) override;
+	void MonsterSkill(eSkill skill, float fDuration = 0) override;
 	void FinishSkill(eSkill skill) override;
 	bool CheckSpecificPartsID(string parts) override;
 	void ElectIndexLot() override;
@@ -75,7 +75,7 @@ public:
 	void DestroyPartsOnPosition(D3DXVECTOR3 pos) override;
 
 	CCrowdControl* ChooseCC(eSkill skill);
-	void CC(CCrowdControl* pCC);
+	void SetCCToRandomCharacter(eSkill skill, float fDuration);
 	void SetWindDirection();
 	void DeleteWind();
 	void DeleteTornado();

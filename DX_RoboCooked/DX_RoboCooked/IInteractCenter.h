@@ -22,7 +22,7 @@ public:
 	virtual void ToggleStop() = 0;
 	virtual bool GetStop() = 0;
 	virtual float GetTime() = 0;
-	virtual void MonsterSkill(eSkill skill) = 0;
+	virtual void MonsterSkill(eSkill skill, float fDuration = 0) = 0;
 	virtual void FinishSkill(eSkill skill) = 0;
 	virtual bool CheckSpecificPartsID(string partsID) = 0;
 	virtual void ElectIndexLot() = 0;

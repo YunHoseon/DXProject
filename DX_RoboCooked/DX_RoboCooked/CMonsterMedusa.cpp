@@ -5,7 +5,7 @@
 #include "CSphereCollision.h"
 
 
-CMonsterMedusa::CMonsterMedusa(IInteractCenter* pInteractCenter):CMonster(pInteractCenter), m_nDestroyPartsPosition(0,0,0)
+CMonsterMedusa::CMonsterMedusa(IInteractCenter* pInteractCenter):CMonster(pInteractCenter), m_nDestroyPartsPosition(0,0,0), m_pSkillAnim_1(nullptr)
 {
 	m_fFirstSkillConditionTime = 40.0f;
 	m_fUltimateSkillConditionTime = 280.0f;
@@ -110,7 +110,7 @@ void CMonsterMedusa::Update()
 	{
 		m_stSkillUsing.FirstSkillProperty = FirstSkill();
 		m_stSkillUsing.isFirstSkill = true;
-		m_pInteractCenter->MonsterSkill(FirstSkill());
+		m_pInteractCenter->MonsterSkill(FirstSkill(), FirstSkillTime());
 
 		m_pSkillAnim_1->SetAnimationIndexBlend(0);
 	}
@@ -120,7 +120,7 @@ void CMonsterMedusa::Update()
 		m_stSkillUsing.SecondSkillProperty = SecondSkill();
 		m_stSkillUsing.isSecondSkill = true;
 		ChooseSkillCondition();
-		m_pInteractCenter->MonsterSkill(SecondSkill());
+		m_pInteractCenter->MonsterSkill(SecondSkill(), SecondSkillTime());
 
 		for (int i = 0; i < 4; ++i)
 		{
@@ -140,7 +140,7 @@ void CMonsterMedusa::Update()
 	{
 		m_stSkillUsing.UltimateSkillProperty = UltimateSkill();
 		m_stSkillUsing.isUltimateSkill = true;
-		m_pInteractCenter->MonsterSkill(UltimateSkill());
+		m_pInteractCenter->MonsterSkill(UltimateSkill(), UltimateSkillTime());
 		
 		m_cPartsDestroyer.SetActive(m_nDestroyPartsPosition, 5.0f, 2.0f);
 	}

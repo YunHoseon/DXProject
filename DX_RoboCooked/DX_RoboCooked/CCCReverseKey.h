@@ -5,7 +5,7 @@ class CCCReverseKey :
 {
 public:
 	CCCReverseKey();
-
+	CCCReverseKey(CCCReverseKey* clone) : CCrowdControl(clone) {}
 public:
 	string GetID()
 	{
@@ -14,6 +14,6 @@ public:
 
 	virtual void Render(D3DXVECTOR3& vPos) {};
 	virtual float ReverseRotate() { return D3DX_PI; }
-	virtual CCrowdControl* Clone() { return new CCCReverseKey; };
+	virtual CCrowdControl* Clone() { return new CCCReverseKey(this); };
 };
 

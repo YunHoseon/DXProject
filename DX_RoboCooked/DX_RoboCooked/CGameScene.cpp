@@ -726,31 +726,27 @@ void CGameScene::ToggleStop()
 	m_isTimeStop = !m_isTimeStop;
 }
 
-void CGameScene::MonsterSkill(eSkill skill)
+void CGameScene::MonsterSkill(eSkill skill, float fDuration)
 {
 	switch (skill)
 	{
 	case eSkill::SandWind:
 		SetWindDirection();
 		break;
+	case eSkill::None:
+	case eSkill::KeyLock:
+	case eSkill::SlowMove:
+	case eSkill::KeyReverse:
+		SetCCToRandomCharacter(skill, fDuration);
+		break;
 	}
 
-	CC(ChooseCC(skill));
 }
 
 void CGameScene::FinishSkill(eSkill skill)
 {
 	switch (skill)
 	{
-	case eSkill::KeyLock:
-		DeleteCC();
-		break;
-	case eSkill::SlowMove:
-		DeleteCC();
-		break;
-	case eSkill::KeyRevers:
-		DeleteCC();
-		break;
 	case eSkill::SandWind:
 		DeleteWind();
 		break;
@@ -833,23 +829,21 @@ CCrowdControl *CGameScene::ChooseCC(eSkill skill)
 		return new CCCStopMove;
 	case eSkill::SlowMove:
 		return new CCCSpeedDown;
-	case eSkill::KeyRevers:
+	case eSkill::KeyReverse:
 		return new CCCReverseKey;
 	}
 
 	return new CCCNone;
 }
 
-void CGameScene::CC(CCrowdControl *pCC)
+void CGameScene::SetCCToRandomCharacter(eSkill skill, float fDuration)
 {
 	g_EventManager->CallEvent(eEvent::CrowdControl, NULL);
+	CCrowdControl* pCC = ChooseCC(skill);
+	pCC->SetDuration(fDuration);
 
-	for (CCharacter *it : m_vecCharacters)
-	{
-		it->SetCC(pCC->Clone());
-	}
-
-	SafeDelete(pCC);
+	CRandomNumberGenerator r;
+	m_vecCharacters[r.GenInt(0, 1)]->SetCC(pCC);
 }
 
 void CGameScene::DestroyPartsOnPosition(D3DXVECTOR3 pos)
@@ -869,7 +863,9 @@ void CGameScene::DestroyPartsOnPosition(D3DXVECTOR3 pos)
 
 void CGameScene::SetWindDirection()
 {
-	int windDirection = rand() % 2;
+	CRandomNumberGenerator r;
+	int windDirection = r.GenInt(0,1);
+
 
 	if (windDirection == 1)
 	{
@@ -883,7 +879,7 @@ void CGameScene::SetWindDirection()
 
 void CGameScene::DeleteWind()
 {
-	m_vWind = D3DXVECTOR3(0, 0, 0);
+	m_vWind = g_vZero;
 }
 
 void CGameScene::DeleteTornado()
