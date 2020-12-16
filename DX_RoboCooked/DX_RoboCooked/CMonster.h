@@ -127,7 +127,7 @@ public:
 	void ThrowPartsSkill() { m_nThrowPartsCount++; }
 	void SpinPartsSkill(){ m_nSpinPartsCount++; }
 
-private:
+protected:
 	void SkillConditionInit();
 	bool UltimateSkillTriggered();
 	bool SecondSkillTriggered();

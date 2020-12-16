@@ -41,6 +41,7 @@ STDMETHODIMP CAllocateHierachy::CreateMeshContainer(THIS_
 	for (DWORD i = 0; i < NumMaterials; ++i)
 	{
 		pBoneMesh->vecMtl.push_back(pMaterials[i].MatD3D);
+		pBoneMesh->vecMtl[i].Ambient = pBoneMesh->vecMtl[i].Diffuse;
 		string sFullPath = m_sFolder;
 		sFullPath = sFullPath + string("/") + string(pMaterials[i].pTextureFilename);
 

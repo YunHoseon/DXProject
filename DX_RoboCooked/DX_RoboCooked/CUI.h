@@ -46,7 +46,7 @@ public:
 	{
 		return this->m_pParent;
 	}
-	virtual void Add(CUI *component) {}
+	virtual void AddChild(CUI *component) {}
 	virtual void Remove(CUI *component) {}
 	virtual void Setup() {}
 	virtual void CheckPressIn(POINT pt);

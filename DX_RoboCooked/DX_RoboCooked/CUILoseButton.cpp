@@ -32,19 +32,19 @@ CUILoseButton::~CUILoseButton()
 void CUILoseButton::Setup()
 {
 	CUI* board = new CUILoseBoard(D3DXVECTOR2(m_vPosition.x, m_vPosition.y));
-	Add(board);
+	AddChild(board);
 
 	CUI* starUI = new CUIStarZero(D3DXVECTOR2(m_vPosition.x + 285, m_vPosition.y + 150));
-	board->Add(starUI);
+	board->AddChild(starUI);
 
 	CUI* tryAgainUI = new CUITryAgain(D3DXVECTOR2(m_vPosition.x + 320, m_vPosition.y + 350));
-	board->Add(tryAgainUI);
+	board->AddChild(tryAgainUI);
 
 	CUI* mainBtn = new CUIMainButton(D3DXVECTOR2(m_vPosition.x + 250, m_vPosition.y + 500), eBtnEvent::LoseMain);
-	board->Add(mainBtn);
+	board->AddChild(mainBtn);
 
 	CUI* ResetBtn = new CUIResetButton(D3DXVECTOR2(m_vPosition.x + 550, m_vPosition.y + 500), eBtnEvent::LoseReset);
-	board->Add(ResetBtn);
+	board->AddChild(ResetBtn);
 
 }
 
@@ -66,7 +66,7 @@ bool CUILoseButton::OnEvent(eEvent eEvent, void * _value)
 	case eEvent::LoseMain:
 		break;
 	case eEvent::LoseReset:
-		//ResetGame();
+		ResetGame();
 		break;
 	}
 
