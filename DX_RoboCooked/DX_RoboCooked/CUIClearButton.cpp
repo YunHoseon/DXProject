@@ -10,16 +10,9 @@
 #include "CUIMainButton.h"
 #include "CUIStartButton.h"
 
-CUIClearButton::CUIClearButton(D3DXVECTOR2 vPos, IInteractCenter* pInteractCenter):m_pUIStar(nullptr), m_nTime(0)
+CUIClearButton::CUIClearButton(IInteractCenter* pInteractCenter):m_pUIStar(nullptr), m_nTime(0)
 {
 	m_pInteractCenter = pInteractCenter;
-
-	m_vPosition = vPos;
-
-	//g_EventManager->Attach(eEvent::MouseClick, this);
-	//g_EventManager->Attach(eEvent::MouseHover, this);
-	//g_EventManager->Attach(eEvent::MouseRelease, this);
-
 	g_EventManager->Attach(eEvent::ClearMain, this);
 	g_EventManager->Attach(eEvent::ClearNextStage, this);
 	g_EventManager->Attach(eEvent::ClearSetTime, this);
@@ -31,6 +24,14 @@ CUIClearButton::~CUIClearButton()
 
 void CUIClearButton::Setup()
 {
+	string sTime = m_pInteractCenter->CalMin(m_nTime) + ":" + m_pInteractCenter->CalSec(m_nTime);
+
+	CUI* board = new CUIClearBoard(sTime, eBtnEvent::None);
+	AddChild(board);
+
+	m_vPosition = board->GetPosition();
+
+
 	D3DXVECTOR2 starPos = m_vPosition;
 	starPos.x += 285;
 	starPos.y += 150;
@@ -41,11 +42,7 @@ void CUIClearButton::Setup()
 	else					m_pUIStar = new CUIStarZero(starPos);
 
 
-	string sTime = m_pInteractCenter->CalMin(m_nTime) + ":" + m_pInteractCenter->CalSec(m_nTime);
-
-	CUI* board = new CUIClearBoard(D3DXVECTOR2(m_vPosition.x, m_vPosition.y), sTime,eBtnEvent::None);
-	AddChild(board);
-
+	
 	board->AddChild(m_pUIStar);
 
 	CUI* clearTextUI = new CUIClearTime(D3DXVECTOR2(m_vPosition.x + 335, m_vPosition.y + 300), eBtnEvent::None);

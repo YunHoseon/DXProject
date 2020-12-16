@@ -13,7 +13,7 @@ private:
 	INT					m_nTime;
 
 public:
-	CUIClearButton(D3DXVECTOR2 vPos, IInteractCenter* pInteractCenter);
+	CUIClearButton(IInteractCenter* pInteractCenter);
 	~CUIClearButton();
 
 public:

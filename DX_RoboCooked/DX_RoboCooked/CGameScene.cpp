@@ -115,12 +115,12 @@ void CGameScene::Init()
 	Harpy->AddObjectPosition(D3DXVECTOR3(-3, 0, 0));
 	Harpy->AddObjectPosition(D3DXVECTOR3(0, 0, -3));
 
-	CUIButton* pClearButton = new CUIClearButton(D3DXVECTOR2(465, 10), this);
-	CUIButton* pPauseButton = new CUIPauseButton(D3DXVECTOR2(465, 10), 27, this);
-	CUIButton* pLoseButton = new CUILoseButton(D3DXVECTOR2(465, 10), this);
+	CUIButton* pClearButton = new CUIClearButton(this);
+	CUIButton* pPauseButton = new CUIPauseButton(27, this);
+	CUIButton* pLoseButton = new CUILoseButton(this);
 	CUITrafficLight* pTrafficLight = new CUITrafficLight(this,m_vecBlueprints.size());
 	CPharaohCoffin* coffin = new CPharaohCoffin(this, D3DXVECTOR3(0,1,0));
-	CUILoading* pLoadingPopup = new CUILoading();
+	//CUILoading* pLoadingPopup = new CUILoading();
 
 	m_fGameTime = 300.0f;
 
@@ -136,8 +136,9 @@ void CGameScene::Init()
 	m_pDebugTrafficLight = pTrafficLight;
 	m_vecObject.push_back(coffin);
 
-	m_pDebugLoadingPopup = pLoadingPopup;
-	m_pDebugLoadingPopup->Setup();
+	//m_pDebugLoadingPopup = pLoadingPopup;
+	if(m_pDebugLoadingPopup)
+		m_pDebugLoadingPopup->Setup();
 	m_cMutex.unlock();
 }
 

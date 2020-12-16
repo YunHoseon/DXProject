@@ -4,9 +4,8 @@
 #include "CUICloseButton.h"
 
 
-CUIControll::CUIControll(D3DXVECTOR2 vPos)
+CUIControll::CUIControll()
 {
-	m_vPosition = vPos;
 	Setup();
 
 	g_EventManager->Attach(eEvent::ControllClose, this);
@@ -20,8 +19,9 @@ CUIControll::~CUIControll()
 
 void CUIControll::Setup()
 {
-	CUIButton* board = new CUIControllBoard(m_vPosition);
+	CUIButton* board = new CUIControllBoard();
 	AddChild(board);
+	m_vPosition = board->GetPosition();
 
 	CUIButton* closeUI = new CUICloseButton(D3DXVECTOR2(m_vPosition.x + 450 , m_vPosition.y + 650), eBtnEvent::ControllClose);
 	board->AddChild(closeUI);

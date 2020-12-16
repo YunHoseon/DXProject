@@ -4,7 +4,7 @@ class CUILoseBoard :
 	public CUIButton
 {
 public:
-	CUILoseBoard(D3DXVECTOR2 vPos);
+	CUILoseBoard();
 	~CUILoseBoard();
 public:
 	virtual void Setup() override;
