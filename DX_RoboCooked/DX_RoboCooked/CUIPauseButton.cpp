@@ -12,7 +12,6 @@
 #include "IInteractCenter.h"
 
 
-
 CUIPauseButton::CUIPauseButton(D3DXVECTOR2 vPos, WPARAM wParam, IInteractCenter* pInteractCenter)
 			: m_pInteractCenter(pInteractCenter)
 {
@@ -29,7 +28,6 @@ CUIPauseButton::CUIPauseButton(D3DXVECTOR2 vPos, WPARAM wParam, IInteractCenter*
 	g_EventManager->Attach(eEvent::PauseReset, this);
 	g_EventManager->Attach(eEvent::PauseEnd, this);
 }
-
 
 CUIPauseButton::~CUIPauseButton()
 {

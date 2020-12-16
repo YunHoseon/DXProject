@@ -12,7 +12,6 @@ CUI::CUI()
 	, m_isPress(false)
 	, m_eBtnEvent(eBtnEvent::None)
 {
-
 }
 
 
@@ -51,7 +50,6 @@ void CUI::CheckReleaseIn(POINT pt)
 		if (it->m_vPosition.x <= pt.x && it->m_vPosition.x + it->m_vSize.x >= pt.x
 			&& it->m_vPosition.y <= pt.y && it->m_vPosition.y + it->m_vSize.y >= pt.y)
 		{
-
 			if (it->GetlistUIchildrenSize() == 0)
 			{
 				if (it->m_isPress)
@@ -150,7 +148,6 @@ void CUI::ButtonEvent(eBtnEvent btnEvent)
 		g_EventManager->CallEvent(eEvent::MainEnd, NULL);
 		break;
 	}
-
 }
 
 void CUI::InitUIState()

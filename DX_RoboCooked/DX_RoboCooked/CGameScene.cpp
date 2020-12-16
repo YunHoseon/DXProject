@@ -58,6 +58,8 @@ CGameScene::CGameScene() : m_pField(NULL),
 	g_SoundManager->AddSFX("data/sound/effBBam.mp3", "BBam");
 	g_SoundManager->AddSFX("data/sound/effMelem.mp3", "Melem");
 	// 로딩 UI
+	CUILoading* pLoadingPopup = new CUILoading(this);
+	m_pDebugLoadingPopup = pLoadingPopup;
 }
 
 CGameScene::~CGameScene()
@@ -120,7 +122,6 @@ void CGameScene::Init()
 	CUIButton* pLoseButton = new CUILoseButton(D3DXVECTOR2(465, 10), this);
 	CUITrafficLight* pTrafficLight = new CUITrafficLight(this,m_vecBlueprints.size());
 	CPharaohCoffin* coffin = new CPharaohCoffin(this, D3DXVECTOR3(0,1,0));
-	CUILoading* pLoadingPopup = new CUILoading();
 
 	m_fGameTime = 300.0f;
 
@@ -136,8 +137,6 @@ void CGameScene::Init()
 	m_pDebugTrafficLight = pTrafficLight;
 	m_vecObject.push_back(coffin);
 
-	m_pDebugLoadingPopup = pLoadingPopup;
-	m_pDebugLoadingPopup->Setup();
 	m_cMutex.unlock();
 }
 
@@ -200,7 +199,6 @@ void CGameScene::Render()
 
 void CGameScene::Update()
 {
-
 	if (m_isTimeStop)
 		return;
 
@@ -377,7 +375,6 @@ bool CGameScene::OnEvent(eEvent eEvent, void * _value)
 			break;
 		return TickUpdate(_value);
 	}
-
 	return true;
 }
 
@@ -714,7 +711,12 @@ void CGameScene::Load(string sFolder, string sFilename, void (CGameScene::* pCal
 		(this->*pCallback)();
 
 	// 로딩ui 종료하고 게임 시작
-	
+	g_EventManager->CallEvent(eEvent::LoadingEnd, NULL);
+	while (m_pDebugLoadingPopup->GetActive())
+	{
+		Sleep(1);
+	}
+
 	m_cMutex.lock();
 	m_isTimeStop = false;
 	m_cMutex.unlock();

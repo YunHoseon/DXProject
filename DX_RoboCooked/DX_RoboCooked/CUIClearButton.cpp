@@ -85,7 +85,6 @@ bool CUIClearButton::OnEvent(eEvent eEvent, void * _value)
 	return true;
 }
 
-
 void CUIClearButton::SetTimeEvent(void * _value)
 {
 	ST_SetTimeEvent* data = static_cast<ST_SetTimeEvent*>(_value);

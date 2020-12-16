@@ -22,8 +22,5 @@ public:
 	void Update() override;
 	void Render() override;
 	void RenderTexture(eUIState state);
-
-	UINT GetActiveTextureWidth() { return m_ActiveInfo.Width; }
-	UINT GetActiveTextureHeight() { return m_ActiveInfo.Height; }
 };
 

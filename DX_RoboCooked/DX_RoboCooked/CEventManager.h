@@ -41,7 +41,8 @@ enum class eEvent
 	MainStart,
 	MainControll,
 	MainMaker,
-	MainEnd
+	MainEnd,
+	LoadingEnd
 };
 
 

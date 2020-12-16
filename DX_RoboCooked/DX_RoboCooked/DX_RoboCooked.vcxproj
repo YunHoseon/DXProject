@@ -183,6 +183,8 @@
     <ClInclude Include="CUICloseButton.h" />
     <ClInclude Include="CUIEndButton.h" />
     <ClInclude Include="CUILight.h" />
+    <ClInclude Include="CUIloadingMessageComplete.h" />
+    <ClInclude Include="CUILoadingMessageLoad.h" />
     <ClInclude Include="CUILoseBoard.h" />
     <ClInclude Include="CUILoseButton.h" />
     <ClInclude Include="CUIMainButton.h" />
@@ -264,6 +266,7 @@
     <ClInclude Include="CUITrafficLightTwoBoard.h" />
     <ClInclude Include="CUITrafficLight.h" />
     <ClInclude Include="CUILoading.h" />
+    <ClInclude Include="CUILoadingScreen.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="CActor.cpp" />
@@ -302,6 +305,8 @@
     <ClCompile Include="CUICloseButton.cpp" />
     <ClCompile Include="CUIEndButton.cpp" />
     <ClCompile Include="CUILight.cpp" />
+    <ClCompile Include="CUIloadingMessageComplete.cpp" />
+    <ClCompile Include="CUILoadingMessageLoad.cpp" />
     <ClCompile Include="CUILoseBoard.cpp" />
     <ClCompile Include="CUILoseButton.cpp" />
     <ClCompile Include="CUIMainButton.cpp" />
@@ -386,6 +391,7 @@
     <ClCompile Include="CUITrafficLightTwoBoard.cpp" />
     <ClCompile Include="CUITrafficLight.cpp" />
     <ClCompile Include="CUILoading.cpp" />
+    <ClCompile Include="CUILoadingScreen.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="DX_RoboCooked.rc" />
