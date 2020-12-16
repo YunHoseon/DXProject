@@ -37,7 +37,11 @@ enum class eEvent
 	ClearNextStage,
 	ClearSetTime,
 	LoseMain,
-	LoseReset
+	LoseReset,
+	MainStart,
+	MainControll,
+	MainMaker,
+	MainEnd
 };
 
 

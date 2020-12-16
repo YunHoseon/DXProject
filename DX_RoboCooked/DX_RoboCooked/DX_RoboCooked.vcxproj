@@ -159,6 +159,7 @@
     <ClInclude Include="CCCSpeedDown.h" />
     <ClInclude Include="CCCStopMove.h" />
     <ClInclude Include="CCrowdControl.h" />
+    <ClInclude Include="CMainScene.h" />
     <ClInclude Include="CMeshLoader.h" />
     <ClInclude Include="CMonster.h" />
     <ClInclude Include="CMonsterHarpy.h" />
@@ -185,6 +186,12 @@
     <ClInclude Include="CUILoseBoard.h" />
     <ClInclude Include="CUILoseButton.h" />
     <ClInclude Include="CUIMainButton.h" />
+    <ClInclude Include="CUIMainControllButton.h" />
+    <ClInclude Include="CUIMainEndButton.h" />
+    <ClInclude Include="CUIMainMakerButton.h" />
+    <ClInclude Include="CUIMainScreen.h" />
+    <ClInclude Include="CUIMainScreenBoard.h" />
+    <ClInclude Include="CUIMainStartButton.h" />
     <ClInclude Include="CUIResetButton.h" />
     <ClInclude Include="CUI.h" />
     <ClInclude Include="CCamera.h" />
@@ -271,6 +278,7 @@
     <ClCompile Include="CCCSpeedDown.cpp" />
     <ClCompile Include="CCCStopMove.cpp" />
     <ClCompile Include="CCrowdControl.cpp" />
+    <ClCompile Include="CMainScene.cpp" />
     <ClCompile Include="CMeshLoader.cpp" />
     <ClCompile Include="CMonster.cpp" />
     <ClCompile Include="CMonsterHarpy.cpp" />
@@ -297,6 +305,12 @@
     <ClCompile Include="CUILoseBoard.cpp" />
     <ClCompile Include="CUILoseButton.cpp" />
     <ClCompile Include="CUIMainButton.cpp" />
+    <ClCompile Include="CUIMainControllButton.cpp" />
+    <ClCompile Include="CUIMainEndButton.cpp" />
+    <ClCompile Include="CUIMainMakerButton.cpp" />
+    <ClCompile Include="CUIMainScreen.cpp" />
+    <ClCompile Include="CUIMainScreenBoard.cpp" />
+    <ClCompile Include="CUIMainStartButton.cpp" />
     <ClCompile Include="CUIResetButton.cpp" />
     <ClCompile Include="CUI.cpp" />
     <ClCompile Include="CCamera.cpp" />
@@ -383,6 +397,7 @@
   <ItemGroup>
     <None Include="ClassDiagram.cd" />
     <None Include="ClassDiagram1.cd" />
+    <None Include="ClassDiagram11.cd" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
