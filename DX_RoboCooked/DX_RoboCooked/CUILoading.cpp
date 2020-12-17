@@ -22,7 +22,7 @@ CUILoading::CUILoading(IInteractCenter*	pInteractCenter)
 
 CUILoading::~CUILoading()
 {
-	SafeDelete(m_pBoard);
+
 }
 
 void CUILoading::Setup()
@@ -57,7 +57,7 @@ bool CUILoading::KeyReleaseEvent(void* _value)
 {
 	if (m_isLoading)
 		return true;
-	m_isActive = false;
+	SetIsActive(false);
 	if (m_pInteractCenter->GetStop())
 		m_pInteractCenter->ToggleStop();
 	return false;
