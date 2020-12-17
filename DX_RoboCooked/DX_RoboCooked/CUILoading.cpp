@@ -6,10 +6,10 @@
 #include "CUIloadingMessageComplete.h"
 #include "IInteractCenter.h"
 
-CUILoading::CUILoading(IInteractCenter*	pInteractCenter)
+CUILoading::CUILoading(IInteractCenter *pInteractCenter)
 	: m_isLoading(true)
 {
-	m_vPosition = D3DXVECTOR2(0,0);
+	m_vPosition = D3DXVECTOR2(0, 0);
 	m_isActive = true;
 	m_pInteractCenter = pInteractCenter;
 	Setup();
@@ -19,17 +19,15 @@ CUILoading::CUILoading(IInteractCenter*	pInteractCenter)
 	g_EventManager->Attach(eEvent::LoadingEnd, this);
 }
 
-
 CUILoading::~CUILoading()
 {
-	
 }
 
 void CUILoading::Setup()
 {
 	D3DVIEWPORT9 vp;
 	g_pD3DDevice->GetViewport(&vp);
-	
+
 	m_pBoard = new CUILoadingScreen();
 	AddChild(m_pBoard);
 
@@ -41,7 +39,7 @@ void CUILoading::Setup()
 	m_pCompleteMessage->SetIsActive(false);
 }
 
-bool CUILoading::OnEvent(eEvent eEvent, void* _value)
+bool CUILoading::OnEvent(eEvent eEvent, void *_value)
 {
 	switch (eEvent)
 	{
@@ -53,11 +51,11 @@ bool CUILoading::OnEvent(eEvent eEvent, void* _value)
 	return true;
 }
 
-bool CUILoading::KeyReleaseEvent(void* _value)
+bool CUILoading::KeyReleaseEvent(void *_value)
 {
 	if (m_isLoading)
 		return true;
-	m_isActive = false;
+	SetIsActive(false);
 	if (m_pInteractCenter->GetStop())
 		m_pInteractCenter->ToggleStop();
 	return false;
