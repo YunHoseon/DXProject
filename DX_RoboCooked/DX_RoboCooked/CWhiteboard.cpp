@@ -1,12 +1,14 @@
 #include "stdafx.h"
 #include "CWhiteboard.h"
 #include "ICollisionArea.h"
+#include "CUIWhiteboard.h"
 
 CWhiteboard::CWhiteboard(D3DXVECTOR3 vPos)
 	:m_pSMesh(nullptr)
 {
 	m_pSMesh = g_pStaticMeshManager->GetStaticMesh("Whiteboard");
 	m_pCollision = new CBoxCollision(m_pSMesh->GetMesh(), &m_matWorld);
+	m_pUIWhiteboard = new CUIWhiteboard();
 
 	SetScale(0.025f, 0.025f, 0.025f);
 	SetRotationY(D3DXToRadian(0));
@@ -40,4 +42,5 @@ void CWhiteboard::Render()
 
 void CWhiteboard::Interact(CCharacter * pCharacter)
 {
+
 }

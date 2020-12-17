@@ -339,9 +339,15 @@ void CGameScene::Update()
 			it->Update();
 		}
 
-		for (CParts *it : m_vecParts)
+		for (int i = 0; i < m_vecParts.size(); ++i)
 		{
-			it->Update();
+			m_vecParts[i]->Update();
+
+			if (m_vecParts[i]->GetPosition().y < -150)
+			{
+				DeleteParts(m_vecParts[i]);
+				--i;
+			}
 		}
 
 		for (CInteractiveActor *it : m_vecObject)

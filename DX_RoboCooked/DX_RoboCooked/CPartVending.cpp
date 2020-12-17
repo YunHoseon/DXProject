@@ -64,6 +64,7 @@ void CPartVending::Interact(CCharacter *pCharacter)
 {
 	if (m_ePartVendingState == ePartVendingState::Usable && m_pOutlet->GetState() == eOutletState::None && pCharacter->GetPlayerState() == ePlayerState::None)
 	{
+		g_SoundManager->PlaySFX("box");
 		CParts *parts = Make();
 		parts->SetPosition(m_pOutlet->GetPosition() + D3DXVECTOR3(0, 1.0f, 0));
 		m_pInteractCenter->AddParts(parts);

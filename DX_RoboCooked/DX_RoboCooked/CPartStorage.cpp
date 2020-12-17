@@ -74,6 +74,8 @@ void CPartStorage::Interact(CCharacter *pCharacter)
 {
 	if (pCharacter->GetPlayerState() == ePlayerState::None)
 	{
+		g_SoundManager->PlaySFX("box");
+
 		CParts *parts = Make();
 		parts->SetGrabPosition(&pCharacter->GetGrabPartsPosition());
 		m_pInteractCenter->AddParts(parts);

@@ -16,8 +16,6 @@ CUILoseButton::CUILoseButton(D3DXVECTOR2 vPos, IInteractCenter* pInteractCenter)
 
 	g_EventManager->Attach(eEvent::LoseMain, this);
 	g_EventManager->Attach(eEvent::LoseReset, this);
-
-
 }
 
 
@@ -66,7 +64,6 @@ bool CUILoseButton::OnEvent(eEvent eEvent, void * _value)
 		ResetGame();
 		break;
 	}
-
 	return true;
 }
 
@@ -74,7 +71,6 @@ void CUILoseButton::ResetGame()
 {
 	//return;
 	CGameScene* scene = new CGameScene;
-
 
 	thread _t1(&CGameScene::Load, scene, "data/js", m_pInteractCenter->GetSceneID(), &CGameScene::Init);
 	_t1.detach();
