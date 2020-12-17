@@ -51,25 +51,25 @@ void CPharaohCoffin::Update()
 		}
 	}
 
-	if (m_isMoveBlocked)
-	{
-		m_fPassedTime += g_pTimeManager->GetElapsedTime();
-		if (3.0f <= m_fPassedTime)
-		{
-			m_isMoveBlocked = false;
-			m_fPassedTime = 0.0f;
-		}
-	}
-	else
-	{
-		for (CCharacter* it : m_pInteractCenter->GetCharacters())
-		{
-			if (m_pCCCollision->Collide(it->GetCollision()))
-			{
-				it->DeleteCC();
-			}
-		}
-	}
+	//if (m_isMoveBlocked)
+	//{
+	//	m_fPassedTime += g_pTimeManager->GetElapsedTime();
+	//	if (3.0f <= m_fPassedTime)
+	//	{
+	//		m_isMoveBlocked = false;
+	//		m_fPassedTime = 0.0f;
+	//	}
+	//}
+	//else
+	//{
+	//	for (CCharacter* it : m_pInteractCenter->GetCharacters())
+	//	{
+	//		if (m_pCCCollision->Collide(it->GetCollision()))
+	//		{
+	//			it->DeleteCC();
+	//		}
+	//	}
+	//}
 }
 
 void CPharaohCoffin::Render()
@@ -108,7 +108,9 @@ void CPharaohCoffin::Interact(CCharacter * pCharacter)
 			{
 				if (m_pCCCollision->Collide(it->GetCollision()))
 				{
-					it->SetCC(new CCCStopMove);
+					CCCStopMove* stop = new CCCStopMove;
+					stop->SetDuration(3.0f);
+					it->SetCC(stop);
 				}
 			}
 		}

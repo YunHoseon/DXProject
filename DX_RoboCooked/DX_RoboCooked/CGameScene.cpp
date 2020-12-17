@@ -714,14 +714,14 @@ void CGameScene::Load(string sFolder, string sFilename, void (CGameScene::* pCal
 
 	// 로딩ui 종료하고 게임 시작
 	g_EventManager->CallEvent(eEvent::LoadingEnd, NULL);
-	while (m_pDebugLoadingPopup->GetActive())
-	{
-		Sleep(1);
-	}
+	//while (m_pDebugLoadingPopup->GetActive())
+	//{
+	//	Sleep(1);
+	//}
 
-	m_cMutex.lock();
-	m_isTimeStop = false;
-	m_cMutex.unlock();
+	//m_cMutex.lock();
+	//m_isTimeStop = false;
+	//m_cMutex.unlock();
 }
 
 void CGameScene::ToggleStop()

@@ -14,7 +14,7 @@ CUILoading::CUILoading(IInteractCenter*	pInteractCenter)
 	m_pInteractCenter = pInteractCenter;
 	Setup();
 
-	g_EventManager->Attach(eEvent::KeyPress, this);
+	//g_EventManager->Attach(eEvent::KeyPress, this);
 	g_EventManager->Attach(eEvent::KeyRelease, this);
 	g_EventManager->Attach(eEvent::LoadingEnd, this);
 }
@@ -22,13 +22,14 @@ CUILoading::CUILoading(IInteractCenter*	pInteractCenter)
 
 CUILoading::~CUILoading()
 {
+	SafeDelete(m_pBoard);
 }
 
 void CUILoading::Setup()
 {
 	D3DVIEWPORT9 vp;
 	g_pD3DDevice->GetViewport(&vp);
-
+	
 	m_pBoard = new CUILoadingScreen();
 	AddChild(m_pBoard);
 
@@ -44,41 +45,28 @@ bool CUILoading::OnEvent(eEvent eEvent, void* _value)
 {
 	switch (eEvent)
 	{
-	case eEvent::KeyPress:
-		KeyPressEvent(_value);
-		break;
 	case eEvent::KeyRelease:
-		KeyReleaseEvent(_value);
-		break;
+		return KeyReleaseEvent(_value);
 	case eEvent::LoadingEnd:
-		LoadingEndEvent();
-		break;
+		return LoadingEndEvent();
 	}
+	return true;
+}
+
+bool CUILoading::KeyReleaseEvent(void* _value)
+{
+	if (m_isLoading)
+		return true;
+	m_isActive = false;
+	if (m_pInteractCenter->GetStop())
+		m_pInteractCenter->ToggleStop();
 	return false;
 }
 
-void CUILoading::KeyPressEvent(void * _value)
-{
-	if (m_isLoading)
-		return;
-	m_isActive = false;
-}
-
-void CUILoading::KeyReleaseEvent(void* _value)
-{
-	ST_KeyInputEvent* data = static_cast<ST_KeyInputEvent*>(_value);
-
-	if (m_isLoading)
-		return;
-	else
-	{
-		
-	}
-}
-
-void CUILoading::LoadingEndEvent()
+bool CUILoading::LoadingEndEvent()
 {
 	m_isLoading = false;
 	m_pCompleteMessage->SetIsActive(true);
 	m_pLoadingMessage->SetIsActive(false);
+	return false;
 }
