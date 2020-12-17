@@ -43,6 +43,10 @@ void CStaticMeshManager::Load()
 	vecData.push_back(data);
 	data.fileName = "Coffin.X"; data.objectName = "Coffin"; data.filePath = "data/model/object";
 	vecData.push_back(data);
+	data.fileName = "TV.X"; data.objectName = "TV"; data.filePath = "data/model/object";
+	vecData.push_back(data);
+	data.fileName = "Whiteboard.X"; data.objectName = "Whiteboard"; data.filePath = "data/model/object";
+	vecData.push_back(data);
 
 	data.fileName = "sand.X"; data.objectName = "Sand"; data.filePath = "data/model/tile";
 	vecData.push_back(data);
@@ -60,8 +64,6 @@ void CStaticMeshManager::Load()
 	vecData.push_back(data);
 	data.fileName = "stair.X"; data.objectName = "Stair"; data.filePath = "data/model/tile";
 	vecData.push_back(data);
-	
-	
 	
 	for (ST_StaticMesh_Data datas : vecData)
 	{

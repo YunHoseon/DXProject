@@ -4,11 +4,16 @@
 #include "IInteractCenter.h"
 
 CTV::CTV(IInteractCenter *pIntaract)
-	: m_p3DText(nullptr), m_pSMesh(nullptr), m_fTime(0.0f), m_sTime()
+	: m_p3DText(nullptr)
+	, m_pSMesh(nullptr)
+	, m_fTime(0.0f), m_sTime()
 {
 	m_pInteractCenter = pIntaract;
-	//m_pSMesh = g_pStaticMeshManager->GetStaticMesh("TV");
-	//m_pCollision = new CBoxCollision(m_pSMesh->GetMesh(), &m_matWorld);
+
+	m_pSMesh = g_pStaticMeshManager->GetStaticMesh("TV");
+	SetScale(0.01f, 0.01f, 0.01f);
+	SetRotationY(D3DXToRadian(0));
+	m_vPosition = D3DXVECTOR3(0.0f, 5.0f, 3.0f);
 }
 
 CTV::~CTV()
@@ -27,10 +32,10 @@ void CTV::Update()
 
 void CTV::Render()
 {
-	//m_pSMesh->Render();
+	g_pD3DDevice->SetRenderState(D3DRS_LIGHTING, true);
+	g_pD3DDevice->SetTransform(D3DTS_WORLD, &m_matWorld);
+	m_pSMesh->Render();
 
-	/*_DEBUG_COMMENT if (m_pCollision)
-		_DEBUG_COMMENT	m_pCollision->Render();*/
 	if (m_p3DText)
 		m_p3DText->DrawSubset(0);
 }
