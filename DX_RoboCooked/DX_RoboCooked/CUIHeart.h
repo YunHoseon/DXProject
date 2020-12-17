@@ -10,7 +10,7 @@ public:
 	CUIHeart();
 	virtual ~CUIHeart();
 
-
+	void SetAnimation() { m_fRot = 0, m_fElapsedTime = 0; }
 	void Update() override;
 	void Render() override;
 };

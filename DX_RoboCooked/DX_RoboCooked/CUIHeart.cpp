@@ -24,7 +24,7 @@ CUIHeart::~CUIHeart()
 void CUIHeart::Update()
 {
 	m_fElapsedTime += g_pTimeManager->GetElapsedTime();
-	//if(m_fElapsedTime <= m_fDuration)
+	if(m_fElapsedTime <= m_fDuration)
 	{
 		int i = round(m_fElapsedTime);
 		m_fRot += D3DX_PI * 0.25f * g_pTimeManager->GetElapsedTime() * (i % 2 ? -1 : 1);
@@ -34,6 +34,9 @@ void CUIHeart::Update()
 
 void CUIHeart::Render()
 {
+	if (m_fElapsedTime > m_fDuration)
+		return;
+	
 	m_Sprite->Begin(D3DXSPRITE_ALPHABLEND | D3DXSPRITE_SORT_TEXTURE);
 	//이미지 출력
 	RECT rc;

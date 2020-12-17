@@ -92,6 +92,7 @@ void CMonsterHarpy::Update()
 		m_stSkillUsing.isFirstSkill = true;
 		m_pInteractCenter->MonsterSkill(FirstSkill(), FirstSkillTime());
 
+		m_cSkillAnim_1.SetAnimation();
 	}
 
 	if (SecondSkillTriggered())
