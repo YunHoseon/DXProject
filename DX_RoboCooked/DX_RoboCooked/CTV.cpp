@@ -19,7 +19,6 @@ CTV::CTV(IInteractCenter *pIntaract)
 CTV::~CTV()
 {
 	SafeRelease(m_p3DText);
-	SafeDelete(m_pSMesh);
 }
 
 void CTV::Update()
