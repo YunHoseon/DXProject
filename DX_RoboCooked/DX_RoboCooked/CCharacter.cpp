@@ -103,6 +103,7 @@ void CCharacter::PressKey(void* _value)
 			return;
 		if (m_pParts && m_pCC->StopWithParts())
 			return; 
+		//g_SoundManager->PlaySFX("run_1");
 		Rotate(0);
 	}
 	else if (data->wKey == m_pInputKey->moveLeftKey)
@@ -121,6 +122,7 @@ void CCharacter::PressKey(void* _value)
 			if (m_fRotY + 0.5f > D3DX_PI * 2.f)
 				m_fRotY -= D3DX_PI * 2.f;
 		}
+		//g_SoundManager->PlaySFX("run_1");
 		Rotate(D3DX_PI * 1.5f );
 	}
 	else if (data->wKey == m_pInputKey->moveBackKey)
@@ -129,6 +131,7 @@ void CCharacter::PressKey(void* _value)
 			return;
 		if (m_pParts && m_pCC->StopWithParts())
 			return;
+		//g_SoundManager->PlaySFX("run_1");
 		Rotate(D3DX_PI);
 	}
 	else if (data->wKey == m_pInputKey->moveRightKey)
@@ -147,6 +150,7 @@ void CCharacter::PressKey(void* _value)
 			if (m_fRotY - 0.5f < 0.f)
 				m_fRotY += D3DX_PI * 2.f;
 		}
+		//g_SoundManager->PlaySFX("run_1");
 		Rotate(D3DX_PI * 0.5f);
 	}
 	else if (data->wKey == m_pInputKey->interactableKey1)
@@ -159,7 +163,6 @@ void CCharacter::PressKey(void* _value)
 				{
 					m_arrKeyDown[0] = true;
 					m_pInteractCenter->GetInteractObject(this);
-					g_SoundManager->PlaySFX("Melem");	
 				}
 			}
 			break;
@@ -205,7 +208,7 @@ void CCharacter::PressKey(void* _value)
 				if (m_pParts)
 				{
 					m_pParts->PartsRotate();
-					g_SoundManager->PlaySFX("Melem");
+					//g_SoundManager->PlaySFX("Melem");
 				}
 			}
 		}

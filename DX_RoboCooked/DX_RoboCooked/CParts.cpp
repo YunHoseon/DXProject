@@ -146,7 +146,7 @@ void CParts::SetGrabPosition(D3DXVECTOR3* vPosition)
 
 void CParts::AddForce(const D3DXVECTOR3& vForce)
 {
-	if (m_isMoveParts || m_vGrabPosition)
+	if (m_isMoveParts || m_vGrabPosition || m_pCollision->GetActive() == false)
 		return;
 	CActor::AddForce(vForce);
 
@@ -154,7 +154,7 @@ void CParts::AddForce(const D3DXVECTOR3& vForce)
 
 void CParts::AddAcceleration(const D3DXVECTOR3& vAccel)
 {
-	if (m_isMoveParts || m_vGrabPosition)
+	if (m_isMoveParts || m_vGrabPosition || m_pCollision->GetActive() == false)
 		return;
 	CActor::AddAcceleration(vAccel);
 }
