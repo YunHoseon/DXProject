@@ -4,11 +4,16 @@
 #include "IInteractCenter.h"
 
 CTV::CTV(IInteractCenter *pIntaract)
-	: m_p3DText(nullptr), m_pSMesh(nullptr), m_fTime(0.0f), m_sTime()
+	: m_p3DText(nullptr)
+	, m_pSMesh(nullptr)
+	, m_fTime(0.0f), m_sTime()
 {
 	m_pInteractCenter = pIntaract;
-	//m_pSMesh = g_pStaticMeshManager->GetStaticMesh("TV");
-	//m_pCollision = new CBoxCollision(m_pSMesh->GetMesh(), &m_matWorld);
+
+	m_pSMesh = g_pStaticMeshManager->GetStaticMesh("TV");
+	SetScale(0.15f, 0.15f, 0.15f);
+	SetRotationY(D3DXToRadian(0));
+	SetPosition(D3DXVECTOR3(0.0f, 2.25f, 5.0f));
 }
 
 CTV::~CTV()
@@ -27,18 +32,26 @@ void CTV::Update()
 
 void CTV::Render()
 {
-	//m_pSMesh->Render();
+	g_pD3DDevice->SetRenderState(D3DRS_LIGHTING, true);
+	g_pD3DDevice->SetTransform(D3DTS_WORLD, &m_matWorld);
+	m_pSMesh->Render();
 
-	/*_DEBUG_COMMENT if (m_pCollision)
-		_DEBUG_COMMENT	m_pCollision->Render();*/
 	if (m_p3DText)
+	{
+		D3DXMATRIXA16 matTextWorld, matS, matT;
+		D3DXMatrixScaling(&matS, 5.5f, 5.5f, 5.5f);
+		D3DXMatrixTranslation(&matT, -6.5f, 5.5f, 0);
+		matTextWorld = matS * matT * m_matWorld;
+
+		g_pD3DDevice->SetTransform(D3DTS_WORLD, &matTextWorld);
 		m_p3DText->DrawSubset(0);
+	}
+		
 }
 
 void CTV::Create_Font()
 {
 	HDC hdc = CreateCompatibleDC(0);
-
 	HFONT hFontOld = (HFONT)SelectObject(hdc, g_pFontManager->Get3dFont(CFontManager::TVTIME));
 
 	SafeRelease(m_p3DText);

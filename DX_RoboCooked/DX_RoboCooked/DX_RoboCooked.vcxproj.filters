@@ -465,6 +465,9 @@
     <ClInclude Include="CUIControll.h">
       <Filter>UI\Button\MainUI</Filter>
     </ClInclude>
+    <ClInclude Include="CWhiteboard.h">
+      <Filter>GameScene\Object</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="stdafx.cpp">
@@ -835,6 +838,9 @@
     </ClCompile>
     <ClCompile Include="CUIMaker.cpp">
       <Filter>UI\Button\MainUI</Filter>
+    </ClCompile>
+    <ClCompile Include="CWhiteboard.cpp">
+      <Filter>GameScene\Object</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

@@ -7,8 +7,8 @@ class CBlueprint :
 {
 private:
 	//int				m_nRotAngleY;			//설계도의 Y축 회전
-	bool			m_isCompleted;			
-	string			m_sRightPartsID;		//설계도와 부합하는 파츠 ID
+	bool				m_isCompleted;			
+	string				m_sRightPartsID;		//설계도와 부합하는 파츠 ID
 	//int				m_nRightPartsAngleY;	//설계도와 부합하는 파츠 회전값
 	float				m_fRightPartsAngleY;
 	vector<ST_PNT_VERTEX>	m_vecVertex;
@@ -16,7 +16,7 @@ private:
 	vector<CParts*>*		m_pVecParts;
 
 	//D3DXMATRIXA16		m_matInteractCollision;
-	ICollisionArea*		m_pInteractCollision;
+	ICollisionArea*			m_pInteractCollision;
 
 	LPDIRECT3DTEXTURE9		m_blueprintTexture;
 	LPDIRECT3DTEXTURE9		m_completeBlueprintTexture;

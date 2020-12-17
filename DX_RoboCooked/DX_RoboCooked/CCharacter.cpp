@@ -408,17 +408,17 @@ void CCharacter::SetAnimState()
 	{
 	case Idle:
 	{
-		if(m_pCC->GetID() != "NONE")
+		if (!m_pCC->IsMovable() || (m_pParts && m_pCC->StopWithParts()))
 			m_pSkinnedMesh->SetAnimationIndexBlend(Stun);
-		else if (D3DXVec3Length(&m_vVelocity) > EPSILON * 10)
+		else if (m_isMoveKeyDown && D3DXVec3Length(&m_vVelocity) > EPSILON * 10)
 			m_pSkinnedMesh->SetAnimationIndexBlend(Run);
 	}
 		break;
 	case Run:
 	{
-		if (m_pCC->GetID() != "NONE")
+		if (!m_pCC->IsMovable() || (m_pParts && m_pCC->StopWithParts()))
 			m_pSkinnedMesh->SetAnimationIndexBlend(Stun);
-		else if (D3DXVec3Length(&m_vVelocity) < EPSILON * 10)
+		else if (!m_isMoveKeyDown || D3DXVec3Length(&m_vVelocity) < EPSILON * 10)
 			m_pSkinnedMesh->SetAnimationIndexBlend(Idle);
 	}
 		break;
@@ -429,11 +429,11 @@ void CCharacter::SetAnimState()
 		break;
 	case Stun:
 	{
-		if (m_pCC->GetID() == "NONE")
+		if (!(!m_pCC->IsMovable() || (m_pParts && m_pCC->StopWithParts())))
 		{
-			if (D3DXVec3Length(&m_vVelocity) < EPSILON * 10)
+			if (!m_isMoveKeyDown || D3DXVec3Length(&m_vVelocity) < EPSILON * 10)
 				m_pSkinnedMesh->SetAnimationIndexBlend(Idle);
-			else if (D3DXVec3Length(&m_vVelocity) > EPSILON * 10)
+			else if (m_isMoveKeyDown && D3DXVec3Length(&m_vVelocity) > EPSILON * 10)
 				m_pSkinnedMesh->SetAnimationIndexBlend(Run);
 		}
 	}

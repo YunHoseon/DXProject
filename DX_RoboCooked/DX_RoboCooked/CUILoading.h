@@ -21,8 +21,7 @@ public:
 	void Setup() override;
 	bool OnEvent(eEvent eEvent, void* _value);
 
-	void KeyPressEvent(void* _value);
-	void KeyReleaseEvent(void* _value);
-	void LoadingEndEvent();
+	bool KeyReleaseEvent(void* _value);
+	bool LoadingEndEvent();
 };
 
