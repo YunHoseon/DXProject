@@ -14,7 +14,6 @@ CUILoading::CUILoading(IInteractCenter *pInteractCenter)
 	m_pInteractCenter = pInteractCenter;
 	Setup();
 
-	//g_EventManager->Attach(eEvent::KeyPress, this);
 	g_EventManager->Attach(eEvent::KeyRelease, this);
 	g_EventManager->Attach(eEvent::LoadingEnd, this);
 }
