@@ -227,6 +227,7 @@
     <ClInclude Include="CUITryAgain.h" />
     <ClInclude Include="CWall.h" />
     <ClInclude Include="CWater.h" />
+    <ClInclude Include="CWhiteboard.h" />
     <ClInclude Include="ICollisionArea.h" />
     <ClInclude Include="CDeviceManager.h" />
     <ClInclude Include="CEventManager.h" />
@@ -353,6 +354,7 @@
     <ClCompile Include="CUITryAgain.cpp" />
     <ClCompile Include="CWall.cpp" />
     <ClCompile Include="CWater.cpp" />
+    <ClCompile Include="CWhiteboard.cpp" />
     <ClCompile Include="ICollisionArea.cpp" />
     <ClCompile Include="CDeviceManager.cpp" />
     <ClCompile Include="CEventManager.cpp" />

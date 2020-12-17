@@ -64,7 +64,7 @@ void CStaticMeshManager::Load()
 	vecData.push_back(data);
 	data.fileName = "stair.X"; data.objectName = "Stair"; data.filePath = "data/model/tile";
 	vecData.push_back(data);
-	
+
 	for (ST_StaticMesh_Data datas : vecData)
 	{
 		CStaticMesh* staticMesh = new CStaticMesh;

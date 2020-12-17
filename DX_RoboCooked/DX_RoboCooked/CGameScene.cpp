@@ -19,6 +19,8 @@
 #include "CBlueprint.h"
 #include "CMonster.h"
 #include "CPharaohCoffin.h"
+#include "CTV.h"
+#include "CWhiteboard.h"
 #include "CTile.h"
 #include "CCrowdControl.h"
 
@@ -46,7 +48,7 @@ CGameScene::CGameScene() : m_pField(NULL),
 						   m_pDebugClearUI(nullptr),
 						   m_pDebugPauseUI(nullptr),
 						   m_pDebugTrafficLight(nullptr),
-						   m_pDebugLoadingPopup(nullptr),
+						   m_pLoadingPopup(nullptr),
 						   m_isTimeStop(false),
 						   m_vWind(0, 0, 0),
 						   m_fGameTime(300.0f),
@@ -58,7 +60,7 @@ CGameScene::CGameScene() : m_pField(NULL),
 	g_EventManager->Attach(eEvent::Tick, this);
 	// 로딩 UI
 	CUILoading* pLoadingPopup = new CUILoading(this);
-	m_pDebugLoadingPopup = pLoadingPopup;
+	m_pLoadingPopup = pLoadingPopup;
 }
 
 CGameScene::~CGameScene()
@@ -100,7 +102,7 @@ CGameScene::~CGameScene()
 	SafeDelete(m_pDebugPauseUI);
 	SafeDelete(m_pDebugTrafficLight);
 	SafeDelete(m_pDebugClearUI);
-	SafeDelete(m_pDebugLoadingPopup);
+	SafeDelete(m_pLoadingPopup);
 	SafeDelete(m_pDebugLoseUI);
 	m_cMutex.unlock();
 }
@@ -121,6 +123,8 @@ void CGameScene::Init()
 	CUIButton* pLoseButton = new CUILoseButton(D3DXVECTOR2(465, 10), this);
 	CUITrafficLight* pTrafficLight = new CUITrafficLight(this,m_vecBlueprints.size());
 	CPharaohCoffin* coffin = new CPharaohCoffin(this, D3DXVECTOR3(0,1,0));
+	CTV* tv = new CTV(this);
+	CWhiteboard* whiteboard = new CWhiteboard(D3DXVECTOR3(5, 2, 4));
 
 	m_fGameTime = 300.0f;
 
@@ -135,6 +139,8 @@ void CGameScene::Init()
 	m_pDebugClearUI = pClearButton;
 	m_pDebugTrafficLight = pTrafficLight;
 	m_vecObject.push_back(coffin);
+	m_vecStaticActor.push_back(tv);
+	m_vecObject.push_back(whiteboard);
 
 	m_cMutex.unlock();
 }
@@ -190,8 +196,8 @@ void CGameScene::Render()
 	if (m_pDebugClearUI)
 		m_pDebugClearUI->Render();
 
-	if (m_pDebugLoadingPopup)
-		m_pDebugLoadingPopup->Render();
+	if (m_pLoadingPopup)
+		m_pLoadingPopup->Render();
 	
 	m_cMutex.unlock();
 }
@@ -242,8 +248,6 @@ void CGameScene::Update()
 			CPhysicsApplyer::ApplyBound(m_vecCharacters[0], m_vecCharacters[1]);
 		}
 
-		
-		
 		for (CParts *part : m_vecParts)
 		{
 			for (CCharacter *character : m_vecCharacters)
@@ -257,8 +261,6 @@ void CGameScene::Update()
 			}
 		}
 
-		
-		
 		for (CInteractiveActor *obj : m_vecObject)
 		{
 			for (CCharacter *character : m_vecCharacters)
@@ -304,6 +306,7 @@ void CGameScene::Update()
 					}
 				}
 			}
+
 			for (CParts *part : m_vecParts)
 			{
 				if (D3DXVec3LengthSq(&(tile->GetPosition() - tile->GetPosition())) < 5.f)
@@ -329,7 +332,6 @@ void CGameScene::Update()
 				CPhysicsApplyer::ApplyBound(character, blueprint);
 			}
 		}
-
 		
 	}
 	{ // update
@@ -714,7 +716,7 @@ void CGameScene::Load(string sFolder, string sFilename, void (CGameScene::* pCal
 
 	// 로딩ui 종료하고 게임 시작
 	g_EventManager->CallEvent(eEvent::LoadingEnd, NULL);
-	while (m_pDebugLoadingPopup->GetActive())
+	while (m_pLoadingPopup->GetActive())
 	{
 		Sleep(1);
 	}
@@ -743,7 +745,6 @@ void CGameScene::MonsterSkill(eSkill skill, float fDuration)
 		SetCCToRandomCharacter(skill, fDuration);
 		break;
 	}
-
 }
 
 void CGameScene::FinishSkill(eSkill skill)
@@ -766,7 +767,6 @@ bool CGameScene::CheckSpecificPartsID(string partsID)
 		if (it->GetPartsID() == partsID)
 			return true;
 	}
-
 	return false;
 }
 
@@ -789,7 +789,6 @@ bool CGameScene::CheckSpecificArea()
 		if (cCollsion.Collide(it->GetCollision()))
 			return true;
 	}
-
 	return false;
 }
 
@@ -820,7 +819,6 @@ D3DXVECTOR3 CGameScene::GetRandomPartsPosition()
 	int index = rand.GenInt(0, m_vecParts.size() - 1);
 
 	D3DXVECTOR3 vec = m_vecParts[index]->GetPosition();
-
 	return vec;
 }
 
@@ -835,7 +833,6 @@ CCrowdControl *CGameScene::ChooseCC(eSkill skill)
 	case eSkill::KeyReverse:
 		return new CCCReverseKey;
 	}
-
 	return new CCCNone;
 }
 
@@ -868,7 +865,6 @@ void CGameScene::SetWindDirection()
 {
 	CRandomNumberGenerator r;
 	int windDirection = r.GenInt(0,1);
-
 
 	if (windDirection == 1)
 	{

@@ -11,9 +11,9 @@ CTV::CTV(IInteractCenter *pIntaract)
 	m_pInteractCenter = pIntaract;
 
 	m_pSMesh = g_pStaticMeshManager->GetStaticMesh("TV");
-	SetScale(0.01f, 0.01f, 0.01f);
+	SetScale(0.15f, 0.15f, 0.15f);
 	SetRotationY(D3DXToRadian(0));
-	m_vPosition = D3DXVECTOR3(0.0f, 5.0f, 3.0f);
+	SetPosition(D3DXVECTOR3(0.0f, 2.25f, 5.0f));
 }
 
 CTV::~CTV()
@@ -37,13 +37,21 @@ void CTV::Render()
 	m_pSMesh->Render();
 
 	if (m_p3DText)
+	{
+		D3DXMATRIXA16 matTextWorld, matS, matT;
+		D3DXMatrixScaling(&matS, 5.5f, 5.5f, 5.5f);
+		D3DXMatrixTranslation(&matT, -6.5f, 5.5f, 0);
+		matTextWorld = matS * matT * m_matWorld;
+
+		g_pD3DDevice->SetTransform(D3DTS_WORLD, &matTextWorld);
 		m_p3DText->DrawSubset(0);
+	}
+		
 }
 
 void CTV::Create_Font()
 {
 	HDC hdc = CreateCompatibleDC(0);
-
 	HFONT hFontOld = (HFONT)SelectObject(hdc, g_pFontManager->Get3dFont(CFontManager::TVTIME));
 
 	SafeRelease(m_p3DText);
