@@ -1,38 +1,51 @@
 #include "stdafx.h"
 #include "CMonsterHarpy.h"
 
-#include "CSkinnedMesh.h"
+#include "CHarpyWing.h"
 #include "IInteractCenter.h"
 #include "CTornado.h"
 
 
-CMonsterHarpy::CMonsterHarpy(IInteractCenter* pInteractCenter) :CMonster(pInteractCenter), m_pTornado(nullptr), m_pSkillAnim_2(nullptr)
+CMonsterHarpy::CMonsterHarpy(IInteractCenter* pInteractCenter) :CMonster(pInteractCenter), m_pTornado(nullptr)
 {
 	m_fFirstSkillConditionTime = 30.0f;
 	m_fUltimateSkillConditionTime = 120.0f;
 	m_sSpecificPartsID = "B03";
 	m_debugName = "ÇÏÇÇ";
 	ChooseSkillCondition();
-	
+	m_vecSkillAnim_2.resize(2);
 	g_EventManager->Attach(eEvent::DeleteTornado, this);
-
-	//m_pSkillAnim_2 = new CSkinnedMesh;
-	//m_pSkillAnim_2->Load("data/model/monster", "harpy_skill_2.x");
+	m_vecSkillAnim_2[0] = new CHarpyWing_L;
+	m_vecSkillAnim_2[1] = new CHarpyWing_R;
 }
 
 
 CMonsterHarpy::~CMonsterHarpy()
 {
 	SafeDelete(m_pTornado);
+	for (vector<CHarpyWing*>::value_type p : m_vecSkillAnim_2)
+	{
+		SafeDelete(p);
+	}
 }
 
 void CMonsterHarpy::Render()
 {
 	if(m_pTornado)
 		m_pTornado->Render();
+	if (m_stSkillUsing.isFirstSkill)
+	{
+		m_cSkillAnim_1.Render();
+	}
+	if (m_stSkillUsing.isSecondSkill)
+	{
+		m_vecSkillAnim_2[0]->Render();
+		m_vecSkillAnim_2[1]->Render();
+	}
+	if (m_stSkillUsing.isUltimateSkill)
+	{
 
-	if (m_pSkillAnim_2)
-		m_pSkillAnim_2->Render(nullptr);
+	}
 }
 
 void CMonsterHarpy::AddForce(CActor * target)
@@ -88,6 +101,8 @@ void CMonsterHarpy::Update()
 		ChooseSkillCondition();
 		m_pInteractCenter->MonsterSkill(SecondSkill(), SecondSkillTime());
 
+		m_vecSkillAnim_2[0]->SetAnimation();
+		m_vecSkillAnim_2[1]->SetAnimation();
 	}
 
 	if (m_eSecondSkillEvent == eEvent::SpecificArea)
@@ -129,8 +144,19 @@ void CMonsterHarpy::Update()
 
 void CMonsterHarpy::UpdateMonster()
 {
-	if (m_pSkillAnim_2)
-		m_pSkillAnim_2->Update();
+	if(m_stSkillUsing.isFirstSkill)
+	{
+		m_cSkillAnim_1.Update();
+	}
+	if (m_stSkillUsing.isSecondSkill)
+	{
+		m_vecSkillAnim_2[0]->Update();
+		m_vecSkillAnim_2[1]->Update();
+	}
+	if (m_stSkillUsing.isUltimateSkill)
+	{
+
+	}
 }
 
 

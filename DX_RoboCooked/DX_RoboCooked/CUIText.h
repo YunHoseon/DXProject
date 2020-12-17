@@ -4,7 +4,7 @@
 class CUIText :
 	public CUI
 {
-private:
+protected:
 	string		m_sText;
 	RECT		m_rcText;
 public:

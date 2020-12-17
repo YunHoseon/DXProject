@@ -85,6 +85,9 @@
     <Filter Include="MainScene">
       <UniqueIdentifier>{edfe3b96-e223-49b7-a612-0afdbe1d5853}</UniqueIdentifier>
     </Filter>
+    <Filter Include="GameScene\Monster\Effect">
+      <UniqueIdentifier>{96c70846-d7a5-4bbf-910a-6a77d98d434b}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <Text Include="ReadMe.txt" />
@@ -411,9 +414,6 @@
     <ClInclude Include="CWall.h">
       <Filter>GameScene\Object</Filter>
     </ClInclude>
-    <ClInclude Include="CPartsDestroyer.h">
-      <Filter>GameScene\Monster</Filter>
-    </ClInclude>
     <ClInclude Include="CUIAcidRain.h">
       <Filter>UI\Effect</Filter>
     </ClInclude>
@@ -467,6 +467,21 @@
     </ClInclude>
     <ClInclude Include="CWhiteboard.h">
       <Filter>GameScene\Object</Filter>
+    </ClInclude>
+    <ClInclude Include="CHarpyWing_R.h">
+      <Filter>GameScene\Monster\Effect</Filter>
+    </ClInclude>
+    <ClInclude Include="CHarpyWing.h">
+      <Filter>GameScene\Monster\Effect</Filter>
+    </ClInclude>
+    <ClInclude Include="CHarpyWing_L.h">
+      <Filter>GameScene\Monster\Effect</Filter>
+    </ClInclude>
+    <ClInclude Include="CPartsDestroyer.h">
+      <Filter>GameScene\Monster\Effect</Filter>
+    </ClInclude>
+    <ClInclude Include="CUIHeart.h">
+      <Filter>UI\Effect</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -785,9 +800,6 @@
     <ClCompile Include="CGrid.cpp">
       <Filter>GameScene\Object</Filter>
     </ClCompile>
-    <ClCompile Include="CPartsDestroyer.cpp">
-      <Filter>GameScene\Monster</Filter>
-    </ClCompile>
     <ClCompile Include="CUIAcidRain.cpp">
       <Filter>UI\Effect</Filter>
     </ClCompile>
@@ -841,6 +853,21 @@
     </ClCompile>
     <ClCompile Include="CWhiteboard.cpp">
       <Filter>GameScene\Object</Filter>
+    </ClCompile>
+    <ClCompile Include="CHarpyWing.cpp">
+      <Filter>GameScene\Monster\Effect</Filter>
+    </ClCompile>
+    <ClCompile Include="CHarpyWing_L.cpp">
+      <Filter>GameScene\Monster\Effect</Filter>
+    </ClCompile>
+    <ClCompile Include="CHarpyWing_R.cpp">
+      <Filter>GameScene\Monster\Effect</Filter>
+    </ClCompile>
+    <ClCompile Include="CPartsDestroyer.cpp">
+      <Filter>GameScene\Monster\Effect</Filter>
+    </ClCompile>
+    <ClCompile Include="CUIHeart.cpp">
+      <Filter>UI\Effect</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

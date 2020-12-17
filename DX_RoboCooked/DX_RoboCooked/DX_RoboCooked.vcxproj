@@ -159,6 +159,9 @@
     <ClInclude Include="CCCSpeedDown.h" />
     <ClInclude Include="CCCStopMove.h" />
     <ClInclude Include="CCrowdControl.h" />
+    <ClInclude Include="CHarpyWing.h" />
+    <ClInclude Include="CHarpyWing_L.h" />
+    <ClInclude Include="CHarpyWing_R.h" />
     <ClInclude Include="CMainScene.h" />
     <ClInclude Include="CMeshLoader.h" />
     <ClInclude Include="CMonster.h" />
@@ -184,6 +187,7 @@
     <ClInclude Include="CUIControll.h" />
     <ClInclude Include="CUIControllBoard.h" />
     <ClInclude Include="CUIEndButton.h" />
+    <ClInclude Include="CUIHeart.h" />
     <ClInclude Include="CUILight.h" />
     <ClInclude Include="CUIloadingMessageComplete.h" />
     <ClInclude Include="CUILoadingMessageLoad.h" />
@@ -286,6 +290,9 @@
     <ClCompile Include="CCCSpeedDown.cpp" />
     <ClCompile Include="CCCStopMove.cpp" />
     <ClCompile Include="CCrowdControl.cpp" />
+    <ClCompile Include="CHarpyWing.cpp" />
+    <ClCompile Include="CHarpyWing_L.cpp" />
+    <ClCompile Include="CHarpyWing_R.cpp" />
     <ClCompile Include="CMainScene.cpp" />
     <ClCompile Include="CMeshLoader.cpp" />
     <ClCompile Include="CMonster.cpp" />
@@ -311,6 +318,7 @@
     <ClCompile Include="CUIControll.cpp" />
     <ClCompile Include="CUIControllBoard.cpp" />
     <ClCompile Include="CUIEndButton.cpp" />
+    <ClCompile Include="CUIHeart.cpp" />
     <ClCompile Include="CUILight.cpp" />
     <ClCompile Include="CUIloadingMessageComplete.cpp" />
     <ClCompile Include="CUILoadingMessageLoad.cpp" />

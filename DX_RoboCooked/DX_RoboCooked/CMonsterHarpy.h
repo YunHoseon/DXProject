@@ -1,15 +1,18 @@
 #pragma once
 #include "CMonster.h"
+#include "CUIHeart.h"
+class CHarpyWing;
 class CTornado;
 
-class CSkinnedMesh;
+
 class CMonsterHarpy :
 	public CMonster
 {
 private:
 	CTornado*		m_pTornado;
 
-	CSkinnedMesh*	m_pSkillAnim_2;
+	vector<CHarpyWing*>	m_vecSkillAnim_2;
+	CUIHeart			m_cSkillAnim_1;
 public:
 	CMonsterHarpy(IInteractCenter* pInteractCenter);
 	~CMonsterHarpy();

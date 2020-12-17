@@ -4,7 +4,7 @@
 class CUITexture :
 	public CUI
 {
-private:
+protected:
 	LPD3DXSPRITE		m_Sprite;
 
 	LPDIRECT3DTEXTURE9	m_ActiveTexture;

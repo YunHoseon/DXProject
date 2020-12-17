@@ -65,6 +65,11 @@ void CStaticMeshManager::Load()
 	data.fileName = "stair.X"; data.objectName = "Stair"; data.filePath = "data/model/tile";
 	vecData.push_back(data);
 
+	data.fileName = "harpy_skill_2_1.X"; data.objectName = "Harpy_Wing_L"; data.filePath = "data/model/monster";
+	vecData.push_back(data);
+	data.fileName = "harpy_skill_2_2.X"; data.objectName = "Harpy_Wing_R"; data.filePath = "data/model/monster";
+	vecData.push_back(data);
+	
 	for (ST_StaticMesh_Data datas : vecData)
 	{
 		CStaticMesh* staticMesh = new CStaticMesh;

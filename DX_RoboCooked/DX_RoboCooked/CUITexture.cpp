@@ -53,11 +53,9 @@ void CUITexture::RenderTexture(eUIState state)
 	//이미지 출력
 	RECT rc;
 	
-	D3DXMATRIXA16 matWorld;
-	D3DXMatrixIdentity(&matWorld);
-	m_Sprite->SetTransform(&matWorld);
+	m_Sprite->SetTransform(&g_matIdentity);
 
-	if (state == eUIState::up)
+	if (state == eUIState::Up)
 	{
 		SetRect(&rc, 0, 0, m_DisabledInfo.Width, m_DisabledInfo.Height);
 		m_Sprite->Draw(m_DisabledTexture,
@@ -66,7 +64,7 @@ void CUITexture::RenderTexture(eUIState state)
 			&D3DXVECTOR3(m_vPosition.x, m_vPosition.y, 0),
 			D3DCOLOR_ARGB(255, 255, 255, 255));
 	}
-	else if (state == eUIState::down)
+	else if (state == eUIState::Down)
 	{
 		if (m_ActiveTexture == nullptr)
 			return;
