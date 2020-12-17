@@ -22,7 +22,7 @@ CUILoading::CUILoading(IInteractCenter*	pInteractCenter)
 
 CUILoading::~CUILoading()
 {
-	SafeDelete(m_pBoard);
+	
 }
 
 void CUILoading::Setup()
