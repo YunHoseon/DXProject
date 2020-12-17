@@ -28,9 +28,7 @@ void CUIMainScreen::Setup()
 	CUI* board = new CUIMainScreenBoard();
 	AddChild(board);
 
-	RECT rc;
-	GetClientRect(g_hWnd, &rc);
-	m_vPosition = D3DXVECTOR2(rc.right / 2, 450);
+	m_vPosition = D3DXVECTOR2(1000, 450);
 
 	CUI* starUI = new CUIMainStartButton(D3DXVECTOR2(m_vPosition.x, m_vPosition.y), eBtnEvent::MainStart);
 	board->AddChild(starUI);

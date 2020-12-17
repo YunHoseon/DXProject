@@ -188,6 +188,7 @@ void CMonsterMedusa::UpdateMonster()
 
 eSkill CMonsterMedusa::UltimateSkill()
 {
+	g_SoundManager->PlaySFX("medusa_ult");
 	m_nDestroyPartsPosition = m_pInteractCenter->GetRandomPartsPosition();
 	return eSkill::DestroyParts;
 }

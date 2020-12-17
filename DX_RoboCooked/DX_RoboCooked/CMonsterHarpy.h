@@ -18,9 +18,17 @@ public:
 	void Render() override;
 	void AddForce(CActor* target) override;
 
-	eSkill FirstSkill() override { return eSkill::KeyReverse; }
+	eSkill FirstSkill() override
+	{
+		g_SoundManager->PlaySFX("heartbeat");
+		return eSkill::KeyReverse;
+	}
 	eSkill SecondSkill() override;
-	eSkill UltimateSkill() override { return eSkill::SandWind; }
+	eSkill UltimateSkill() override
+	{ 
+		g_SoundManager->PlaySFX("tornado");
+		return eSkill::SandWind; 
+	}
 
 	FLOAT FirstSkillTime() override { return 5.0f; };
 	FLOAT SecondSkillTime() override { return 7.0f; };
