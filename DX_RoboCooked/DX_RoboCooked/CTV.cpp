@@ -4,9 +4,7 @@
 #include "IInteractCenter.h"
 
 CTV::CTV(IInteractCenter *pIntaract)
-	: m_p3DText(nullptr)
-	, m_pSMesh(nullptr)
-	, m_fTime(0.0f), m_sTime()
+	: m_p3DText(nullptr), m_pSMesh(nullptr), m_fTime(0.0f), m_sTime()
 {
 	m_pInteractCenter = pIntaract;
 
@@ -19,7 +17,6 @@ CTV::CTV(IInteractCenter *pIntaract)
 CTV::~CTV()
 {
 	SafeRelease(m_p3DText);
-	
 }
 
 void CTV::Update()
@@ -46,7 +43,6 @@ void CTV::Render()
 		g_pD3DDevice->SetTransform(D3DTS_WORLD, &matTextWorld);
 		m_p3DText->DrawSubset(0);
 	}
-		
 }
 
 void CTV::Create_Font()

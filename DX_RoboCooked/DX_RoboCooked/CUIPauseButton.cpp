@@ -111,6 +111,9 @@ void CUIPauseButton::KeyReleaseEvent(void * _value)
 
 void CUIPauseButton::ActiveButton()
 {
+	if (m_pInteractCenter->GetStop() == true && m_isActive == false)
+		return;
+	
 	if (m_isKeyDown == true || m_isMouseDown == true)
 	{
 		m_isKeyDown = false;

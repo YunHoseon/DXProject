@@ -55,6 +55,8 @@ eSkill CMonsterHarpy::SecondSkill()
 	if(m_pTornado)
 		return eSkill::Tornado;
 
+	g_SoundManager->PlaySFX("wind");
+
 	CRandomNumberGenerator rand;
 	int index = rand.GenInt(0, m_vecObjectPosition.size() - 1);
 	m_pTornado = new CTornado(m_vecObjectPosition[index]);

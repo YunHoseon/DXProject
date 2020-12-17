@@ -38,14 +38,10 @@ CMainGame::CMainGame()
 
 
 	g_SoundManager->AddSFX("data/sound/monster/medusa_snake_01.mp3", "medusa_snake_01");
-	g_SoundManager->AddSFX("data/sound/monster/medusa_stone.mp3", "medusa_stone");
 	g_SoundManager->AddSFX("data/sound/monster/medusa_snake_02.mp3", "medusa_snake_02");
-	g_SoundManager->AddSFX("data/sound/monster/medusa_venom.mp3", "medusa_venom");
 	g_SoundManager->AddSFX("data/sound/monster/medusa_ult.mp3", "medusa_ult");
-	g_SoundManager->AddSFX("data/sound/monster/medusa_ult_acid.mp3", "medusa_ult_acid");
+
 	g_SoundManager->AddSFX("data/sound/monster/heartbeat.mp3", "heartbeat");
-	g_SoundManager->AddSFX("data/sound/monster/laugh.mp3", "laugh");
-	g_SoundManager->AddSFX("data/sound/monster/wing_flap.mp3", "wing_flap");
 	g_SoundManager->AddSFX("data/sound/monster/wind.mp3", "wind");
 	g_SoundManager->AddSFX("data/sound/monster/tornado.mp3", "tornado");
 
