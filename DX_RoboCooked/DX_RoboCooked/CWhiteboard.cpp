@@ -63,18 +63,21 @@ bool CWhiteboard::OnEvent(eEvent eEvent, void* _value)
 	case eEvent::KeyRelease:
 		return ClosePopup(_value);
 	}
+	return true;
 }
 
 bool CWhiteboard::ClosePopup(void* _value)
 {
 	WPARAM* data = static_cast<WPARAM*>(_value);
 
-	if (m_pCharacter /*&& *data == m_pCharacter->GetInputKey().interactableKey1*/)
+	if (m_pCharacter && *data == m_pCharacter->GetInputKey().interactableKey1)
 	{
 		m_pUIWhiteboard->SetIsActive(false);
 		g_EventManager->Attach(eEvent::KeyRelease, m_pCharacter);
+		m_pCharacter->ReleaseKey(data);
 		m_pCharacter = nullptr;
+		return false;
 	}
-	return false;
+	return true;
 }
 
