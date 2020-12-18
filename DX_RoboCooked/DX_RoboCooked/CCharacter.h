@@ -6,6 +6,7 @@ class ICollisionArea;
 class CGameScene;
 class CCrowdControl;
 class CSkinnedMesh;
+class CUICharge;
 
 enum class ePlayerState
 {
@@ -48,6 +49,9 @@ protected:
 	// 상태이상 관련 멤버 추가 필요
 	CCrowdControl*		m_pCC;
 	BOOL				m_isDummy;
+
+	CUICharge*			m_pCharge;
+
 public:
 	CCharacter(int nPlayerNum);
 	virtual ~CCharacter();
