@@ -52,7 +52,7 @@ CGameScene::CGameScene() : m_pField(NULL),
 						   m_isTimeStop(false),
 						   m_vWind(0, 0, 0),
 						   m_fGameTime(300.0f),
-						   m_nLotIndex(0)
+						   m_nSelectedObjectIndex(0)
 {
 	g_SoundManager->AddBGM("data/Sound/bgm/Tribal_Tensions.mp3");
 	g_SoundManager->PlayBGM();
@@ -174,12 +174,12 @@ void CGameScene::Render()
 		it->Render();
 	}
 
-	for (CMonster *it : m_vecMonster)
+	for (CTile *it : m_vecTile)
 	{
 		it->Render();
 	}
 
-	for (CTile *it : m_vecTile)
+	for (CMonster *it : m_vecMonster)
 	{
 		it->Render();
 	}
@@ -733,7 +733,7 @@ void CGameScene::MonsterSkill(eSkill skill, float fDuration)
 	switch (skill)
 	{
 	case eSkill::SandWind:
-		SetWindDirection();
+		SetWindDirection(fDuration);
 		break;
 	case eSkill::None:
 	case eSkill::KeyLock:
@@ -767,15 +767,15 @@ bool CGameScene::CheckSpecificPartsID(string partsID)
 	return false;
 }
 
-void CGameScene::ElectIndexLot()
+void CGameScene::SelectRandomObject()
 {
 	CRandomNumberGenerator rand;
-	m_nLotIndex = rand.GenInt(0, m_vecObject.size() - 1);
+	m_nSelectedObjectIndex = rand.GenInt(0, m_vecObject.size() - 1);
 }
 
-bool CGameScene::CheckSpecificArea()
+bool CGameScene::CheckDistanceToSelectedObject()
 {
-	D3DXVECTOR3 pos = m_vecObject[m_nLotIndex]->GetPosition();
+	D3DXVECTOR3 pos = m_vecObject[m_nSelectedObjectIndex]->GetPosition();
 	D3DXVECTOR3 size(1.5f, 100.0f, 1.5f);
 	CBoxCollision cCollsion(pos, size);
 
@@ -858,19 +858,9 @@ void CGameScene::DestroyPartsOnPosition(D3DXVECTOR3 pos)
 	}
 }
 
-void CGameScene::SetWindDirection()
+void CGameScene::SetWindDirection(float nDir)
 {
-	CRandomNumberGenerator r;
-	int windDirection = r.GenInt(0, 1);
-
-	if (windDirection == 1)
-	{
-		m_vWind = D3DXVECTOR3(0.01f, 0, 0);
-	}
-	else
-	{
-		m_vWind = D3DXVECTOR3(-0.01f, 0, 0);
-	}
+	m_vWind = D3DXVECTOR3(0.01f * nDir, 0, 0);
 }
 
 void CGameScene::DeleteWind()

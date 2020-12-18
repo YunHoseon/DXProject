@@ -22,6 +22,7 @@ public:
 	
 	virtual void Setup() = 0;
 	virtual void Render();
+	virtual void SetPosition(float x, float y) override;
 
 public:
 	virtual void AddChild(CUI *component) override;

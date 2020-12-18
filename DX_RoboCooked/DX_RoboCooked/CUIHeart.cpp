@@ -48,9 +48,7 @@ void CUIHeart::Render()
 	SetRect(&rc, 0, 0, m_DisabledInfo.Width, m_DisabledInfo.Height);
 	m_Sprite->Draw(m_DisabledTexture,
 		&rc,
-		//&D3DXVECTOR3(m_DisabledInfo.Width * 0.5f, m_DisabledInfo.Height * 0.5f, 0),
 		&g_vZero,
-		//&D3DXVECTOR3(m_vPosition.x, m_vPosition.y, 0),
 		&g_vZero,
 		D3DCOLOR_ARGB(255, 255, 255, 255));
 

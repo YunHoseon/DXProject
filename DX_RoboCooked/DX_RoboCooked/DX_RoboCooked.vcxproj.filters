@@ -483,6 +483,9 @@
     <ClInclude Include="CUIHeart.h">
       <Filter>UI\Effect</Filter>
     </ClInclude>
+    <ClInclude Include="CUIWind.h">
+      <Filter>UI\Effect</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="stdafx.cpp">
@@ -867,6 +870,9 @@
       <Filter>GameScene\Monster\Effect</Filter>
     </ClCompile>
     <ClCompile Include="CUIHeart.cpp">
+      <Filter>UI\Effect</Filter>
+    </ClCompile>
+    <ClCompile Include="CUIWind.cpp">
       <Filter>UI\Effect</Filter>
     </ClCompile>
   </ItemGroup>

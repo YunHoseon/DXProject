@@ -21,5 +21,8 @@ public:
 
 	string CalMin(int sec);
 	string CalSec(int sec);
+
+	void AddForce(const D3DXVECTOR3& vForce) override {}
+	void AddAcceleration(const D3DXVECTOR3& vAccel) override {}
 };
 

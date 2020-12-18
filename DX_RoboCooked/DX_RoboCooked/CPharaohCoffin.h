@@ -27,5 +27,8 @@ public:
 	void Interact(CCharacter* pCharacter) override;
 
 	CParts* Make();
+
+	void AddAcceleration(const D3DXVECTOR3& vAccel) {}
+	void AddForce(const D3DXVECTOR3& vForce) {}
 };
 

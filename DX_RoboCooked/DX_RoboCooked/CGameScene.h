@@ -33,7 +33,7 @@ private:
 	D3DXVECTOR3					m_vWind;
 	FLOAT						m_fGameTime;	
 	BOOL						m_isTimeStop;
-	INT							m_nLotIndex;
+	INT							m_nSelectedObjectIndex;
 	vector<CTile*>				m_vecTile;
 	CUIButton*					m_pDebugLoseUI;
 	CUIButton*					m_pDebugClearUI;
@@ -69,14 +69,14 @@ public:
 	void MonsterSkill(eSkill skill, float fDuration = 0) override;
 	void FinishSkill(eSkill skill) override;
 	bool CheckSpecificPartsID(string parts) override;
-	void ElectIndexLot() override;
-	bool CheckSpecificArea() override;
+	void SelectRandomObject() override;
+	bool CheckDistanceToSelectedObject() override;
 	void CheckSandDummyArea(ICollisionArea* collison) override;
 	void DestroyPartsOnPosition(D3DXVECTOR3 pos) override;
 
 	CCrowdControl* ChooseCC(eSkill skill);
 	void SetCCToRandomCharacter(eSkill skill, float fDuration);
-	void SetWindDirection();
+	void SetWindDirection(float nDir);
 	void DeleteWind();
 	void DeleteTornado();
 	void DeleteCC();

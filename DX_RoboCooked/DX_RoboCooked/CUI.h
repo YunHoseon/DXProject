@@ -67,6 +67,7 @@ public:
 	virtual void CheckActiveEvent();
 	virtual bool GetActive() { return m_isActive; }
 	D3DXVECTOR2 GetPosition() { return m_vPosition; }
+	virtual void SetPosition(float x, float y) { m_vPosition.x = x, m_vPosition.y = y; }
 	void ButtonEvent(eBtnEvent btnEvent);
 
 	INT GetlistUIchildrenSize() { return m_listUIchildren.size(); }

@@ -1,6 +1,7 @@
 #pragma once
 #include "CMonster.h"
 #include "CUIHeart.h"
+#include "CUIWind.h"
 class CHarpyWing;
 class CTornado;
 
@@ -13,6 +14,9 @@ private:
 
 	vector<CHarpyWing*>	m_vecSkillAnim_2;
 	CUIHeart			m_cSkillAnim_1;
+	CUIWind				m_cSkillAnim_Ultimate;
+
+	int				m_nWindDir;
 public:
 	CMonsterHarpy(IInteractCenter* pInteractCenter);
 	~CMonsterHarpy();

@@ -41,6 +41,16 @@ void CUIButton::Render()
 	}
 }
 
+void CUIButton::SetPosition(float x, float y)
+{
+	D3DXVECTOR2 dir = D3DXVECTOR2(x, y) - m_vPosition;
+	m_vPosition += dir;
+	for (list<CUI*>::value_type p : m_listUIchildren)
+	{
+		AddPosition(dir.x, dir.y);
+	}
+}
+
 void CUIButton::AddChild(CUI * component)
 {
 	this->m_listUIchildren.push_back(component);

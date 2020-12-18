@@ -6,7 +6,7 @@
 #include "CTornado.h"
 
 
-CMonsterHarpy::CMonsterHarpy(IInteractCenter* pInteractCenter) :CMonster(pInteractCenter), m_pTornado(nullptr)
+CMonsterHarpy::CMonsterHarpy(IInteractCenter* pInteractCenter) :CMonster(pInteractCenter), m_pTornado(nullptr), m_nWindDir(1)
 {
 	m_fFirstSkillConditionTime = 30.0f;
 	m_fUltimateSkillConditionTime = 120.0f;
@@ -33,6 +33,7 @@ void CMonsterHarpy::Render()
 {
 	if(m_pTornado)
 		m_pTornado->Render();
+	m_cSkillAnim_Ultimate.Render();
 	if (m_stSkillUsing.isFirstSkill)
 	{
 		m_cSkillAnim_1.Render();
@@ -108,7 +109,7 @@ void CMonsterHarpy::Update()
 
 	if (m_eSecondSkillEvent == eEvent::SpecificArea)
 	{
-		if (m_pInteractCenter->CheckSpecificArea())
+		if (m_pInteractCenter->CheckDistanceToSelectedObject())
 		{
 			m_isArrive = true;
 		}
@@ -116,10 +117,13 @@ void CMonsterHarpy::Update()
 
 	if (UltimateSkillTriggered())
 	{
+		CRandomNumberGenerator r;
+		m_nWindDir = r.GenInt(0, 1) ? -1 : 1;
 		m_stSkillUsing.UltimateSkillProperty = UltimateSkill();
 		m_stSkillUsing.isUltimateSkill = true;
-		m_pInteractCenter->MonsterSkill(UltimateSkill(), UltimateSkillTime());
+		m_pInteractCenter->MonsterSkill(UltimateSkill(), m_nWindDir);
 
+		m_cSkillAnim_Ultimate.SetAnimation(m_nWindDir);
 	}
 
 	if (CheckDurationTimeFirstSkill())
@@ -145,6 +149,7 @@ void CMonsterHarpy::Update()
 
 void CMonsterHarpy::UpdateMonster()
 {
+	m_cSkillAnim_Ultimate.Update();
 	if(m_stSkillUsing.isFirstSkill)
 	{
 		m_cSkillAnim_1.Update();

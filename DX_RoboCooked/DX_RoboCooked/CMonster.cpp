@@ -49,7 +49,7 @@ void CMonster::Update()
 
 	if (m_eSecondSkillEvent == eEvent::SpecificArea)
 	{
-		if (m_pInteractCenter->CheckSpecificArea())
+		if (m_pInteractCenter->CheckDistanceToSelectedObject())
 		{
 			m_isArrive = true;
 		}
@@ -212,7 +212,7 @@ void CMonster::ChooseSkillCondition()
 			m_eSkillCondition = eSkillCondition::SpecificArea;
 			g_EventManager->Attach(eEvent::SpecificArea, this);
 			m_eSecondSkillEvent = eEvent::SpecificArea;
-			m_pInteractCenter->ElectIndexLot();
+			m_pInteractCenter->SelectRandomObject();
 		}
 		else if (random < 48)
 		{
@@ -252,7 +252,7 @@ void CMonster::ChooseSkillCondition()
 	/*m_eSkillCondition = eSkillCondition::SpecificArea;
 	g_EventManager->Attach(eEvent::SpecificArea, this);
 	m_eSecondSkillEvent = eEvent::SpecificArea;
-	m_pInteractCenter->ElectIndexLot();*/
+	m_pInteractCenter->SelectRandomObject();*/
 
 	
 	_DEBUG_COMMENT switch (m_eSkillCondition)
