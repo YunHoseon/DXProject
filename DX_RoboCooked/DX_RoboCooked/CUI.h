@@ -36,6 +36,8 @@ public:
 	virtual ~CUI();
 
 protected:
+	D3DXMATRIXA16		m_matWorld;
+	D3DXVECTOR3*		m_pPosition;
 	eBtnEvent			m_eBtnEvent;
 	eUIState			m_eUIState;
 	CUI*				m_pParent;

@@ -13,6 +13,8 @@ CUI::CUI()
 	, m_isActive(false)
 	, m_isPress(false)
 	, m_eBtnEvent(eBtnEvent::None)
+	, m_matWorld(g_matIdentity)
+	, m_pPosition(nullptr)
 {
 }
 
