@@ -63,6 +63,7 @@ public:
 	virtual void SetForce(const D3DXVECTOR3& vForce = g_vZero) override;
 	virtual float GetMass() override;
 	
+	ST_PLAYER_INPUTKEY GetInputKey() { return *m_pInputKey; }
 	D3DXVECTOR3& GetGrabPartsPosition() { return m_vGrabPartsPosition; }
 	ICollisionArea* GetInteractCollsion() { return m_pInteractCollision; }
 	ePlayerState GetPlayerState() { return m_ePlayerState; }

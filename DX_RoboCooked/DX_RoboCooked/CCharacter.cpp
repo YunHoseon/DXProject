@@ -444,3 +444,4 @@ void CCharacter::SetAnimState()
 	default: break;
 	}
 }
+

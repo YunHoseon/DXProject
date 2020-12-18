@@ -7,9 +7,6 @@ CUIWhiteboard::CUIWhiteboard()
 	m_isActive = false;
 	m_vPosition = D3DXVECTOR2(0, 0);
 	Setup();
-
-	g_EventManager->Attach(eEvent::KeyPress, this);
-	g_EventManager->Attach(eEvent::KeyRelease, this);
 }
 
 
