@@ -55,8 +55,9 @@ bool CUILoading::KeyReleaseEvent(void *_value)
 	if (m_isLoading)
 		return true;
 	SetIsActive(false);
-	if (m_pInteractCenter->GetStop())
-		m_pInteractCenter->ToggleStop();
+	g_EventManager->CallEvent(eEvent::ReadyBoard, NULL);
+	//if (m_pInteractCenter->GetStop())
+	//	m_pInteractCenter->ToggleStop();
 	return false;
 }
 
