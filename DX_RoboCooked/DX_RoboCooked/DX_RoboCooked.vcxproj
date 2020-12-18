@@ -210,6 +210,8 @@
     <ClInclude Include="CUIMainStartButton.h" />
     <ClInclude Include="CUIMaker.h" />
     <ClInclude Include="CUIMakerBoard.h" />
+    <ClInclude Include="CUIReady.h" />
+    <ClInclude Include="CUIReadyBoard.h" />
     <ClInclude Include="CUIResetButton.h" />
     <ClInclude Include="CUI.h" />
     <ClInclude Include="CCamera.h" />
@@ -352,6 +354,8 @@
     <ClCompile Include="CUIMainStartButton.cpp" />
     <ClCompile Include="CUIMaker.cpp" />
     <ClCompile Include="CUIMakerBoard.cpp" />
+    <ClCompile Include="CUIReady.cpp" />
+    <ClCompile Include="CUIReadyBoard.cpp" />
     <ClCompile Include="CUIResetButton.cpp" />
     <ClCompile Include="CUI.cpp" />
     <ClCompile Include="CCamera.cpp" />

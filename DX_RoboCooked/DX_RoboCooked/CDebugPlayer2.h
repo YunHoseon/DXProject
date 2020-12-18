@@ -6,11 +6,9 @@
 class CDebugPlayer2 :public CCharacter
 {
 private:
-
 	
 public:
 	CDebugPlayer2(IInteractCenter* pInteractCenter = nullptr);
 	virtual ~CDebugPlayer2();
-
 };
 

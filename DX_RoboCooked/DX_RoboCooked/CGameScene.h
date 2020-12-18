@@ -15,6 +15,7 @@ class CMonster;
 class CTornado;
 class CUITrafficLight;
 class CUILoading;
+class CUIReady;
 
 class CDebugPlayer1;
 class CDebugPlayer2;
@@ -40,6 +41,7 @@ private:
 	CUIButton*					m_pDebugPauseUI;
 	CUITrafficLight*			m_pDebugTrafficLight;
 	CUILoading*					m_pLoadingPopup;
+	CUIButton*					m_pReady;
 
 	static std::mutex			m_cMutex;
 	string						m_sID;

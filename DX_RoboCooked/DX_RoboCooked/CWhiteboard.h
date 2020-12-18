@@ -8,6 +8,7 @@ class CWhiteboard :
 {
 	CStaticMesh*	m_pSMesh;
 	CUIWhiteboard*	m_pUIWhiteboard;
+	CCharacter*		m_pCharacter;
 public:
 	CWhiteboard(D3DXVECTOR3 vPos);
 	~CWhiteboard();
@@ -18,5 +19,7 @@ public:
 
 	void AddAcceleration(const D3DXVECTOR3& vAccel) override {}
 	void AddForce(const D3DXVECTOR3& vForce) override {}
+	bool OnEvent(eEvent eEvent, void* _value);
+	bool ClosePopup(void* _value);
 };
 

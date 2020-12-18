@@ -45,5 +45,4 @@ CDebugPlayer1::~CDebugPlayer1()
 	//SafeRelease(m_pMesh);
 	SafeDelete(m_pSkinnedMesh->m_pmatWorldTM);
 	SafeDelete(m_pSkinnedMesh);
-	
 }
