@@ -5,7 +5,7 @@
 
 CUIWind::CUIWind():
 	m_fDirect(1),
-	m_fSpeed(10),
+	m_fSpeed(100),
 	m_fMargin(2158 - 1920)
 {
 	m_vPosition.x = 0;
@@ -15,6 +15,8 @@ CUIWind::CUIWind():
 	CUITexture* wind_r = new CUITexture("data/ui/SandWind_Right.png", nullptr, nullptr, D3DXVECTOR2(-m_fMargin, 0));
 	AddChild(wind_l);
 	AddChild(wind_r);
+	wind_l->SetIsActive(false);
+	wind_r->SetIsActive(true);
 }
 
 CUIWind::~CUIWind()
@@ -23,6 +25,7 @@ CUIWind::~CUIWind()
 
 void CUIWind::ResetPosition()
 {
+	m_vPosition.x = 0;
 	m_listUIchildren.front()->SetPosition(0, 0);
 	m_listUIchildren.back()->SetPosition(1920 - 2158, 0);
 }
@@ -31,6 +34,16 @@ void CUIWind::SetAnimation(float fDirect)
 {
 	m_fDirect = fDirect;
 	ResetPosition();
+	if (fDirect == -1)
+	{
+		m_listUIchildren.front()->SetIsActive(true);
+		m_listUIchildren.back()->SetIsActive(false);
+	}
+	else
+	{
+		m_listUIchildren.front()->SetIsActive(false);
+		m_listUIchildren.back()->SetIsActive(true);
+	}
 }
 
 void CUIWind::Update()

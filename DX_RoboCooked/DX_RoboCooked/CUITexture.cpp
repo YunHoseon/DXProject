@@ -44,7 +44,8 @@ void CUITexture::Update()
 
 void CUITexture::Render()
 {
-	RenderTexture(m_eUIState);
+	if (m_isActive)
+		RenderTexture(m_eUIState);
 }
 
 void CUITexture::RenderTexture(eUIState state)

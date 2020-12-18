@@ -33,7 +33,6 @@ void CMonsterHarpy::Render()
 {
 	if(m_pTornado)
 		m_pTornado->Render();
-	m_cSkillAnim_Ultimate.Render();
 	if (m_stSkillUsing.isFirstSkill)
 	{
 		m_cSkillAnim_1.Render();
@@ -45,7 +44,7 @@ void CMonsterHarpy::Render()
 	}
 	if (m_stSkillUsing.isUltimateSkill)
 	{
-
+		m_cSkillAnim_Ultimate.Render();
 	}
 }
 
@@ -149,7 +148,6 @@ void CMonsterHarpy::Update()
 
 void CMonsterHarpy::UpdateMonster()
 {
-	m_cSkillAnim_Ultimate.Update();
 	if(m_stSkillUsing.isFirstSkill)
 	{
 		m_cSkillAnim_1.Update();
@@ -161,7 +159,7 @@ void CMonsterHarpy::UpdateMonster()
 	}
 	if (m_stSkillUsing.isUltimateSkill)
 	{
-
+		m_cSkillAnim_Ultimate.Update();
 	}
 }
 
