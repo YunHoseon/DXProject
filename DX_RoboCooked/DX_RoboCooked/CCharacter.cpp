@@ -5,6 +5,7 @@
 #include "CCrowdControl.h"
 #include "CCCNone.h"
 #include "CSkinnedMesh.h"
+#include "CUICharge.h"
 
 CCharacter::CCharacter(int nPlayerNum) : m_pSkinnedMesh(nullptr),
                                          m_ePlayerState(ePlayerState::None),
@@ -24,11 +25,13 @@ CCharacter::CCharacter(int nPlayerNum) : m_pSkinnedMesh(nullptr),
                                          m_fThrowPowerUpSpeed(0.003f),
                                          m_pCC(nullptr),
                                          m_isDummy(false),
-                                         m_vDefaultPosition(0, 0, 0)
+                                         m_vDefaultPosition(0, 0, 0),
+										 m_pCharge(nullptr)
 {
 	m_fBaseSpeed = 0.02f;
 
 	m_pCC = new CCCNone;
+	//m_pCharge = new CUICharge(&m_vPosition,&m_fThrowPower,m_fMaxThrowPower);
 }
 
 CCharacter::~CCharacter()
@@ -50,6 +53,9 @@ void CCharacter::Render()
 		_DEBUG_COMMENT m_pInteractCollision->Render();
 	if (m_pCollision)
 		m_pCollision->Render();
+
+	if (m_pCharge)
+		m_pCharge->Render();
 }
 
 void CCharacter::Update()
