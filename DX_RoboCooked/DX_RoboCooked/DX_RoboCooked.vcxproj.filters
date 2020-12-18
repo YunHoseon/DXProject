@@ -486,6 +486,12 @@
     <ClInclude Include="CUIWind.h">
       <Filter>UI\Effect</Filter>
     </ClInclude>
+    <ClInclude Include="CUIWhiteboard.h">
+      <Filter>UI\Button\MainUI</Filter>
+    </ClInclude>
+    <ClInclude Include="CUISubWhiteboard.h">
+      <Filter>UI\Button\SubUI</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="stdafx.cpp">
@@ -874,6 +880,12 @@
     </ClCompile>
     <ClCompile Include="CUIWind.cpp">
       <Filter>UI\Effect</Filter>
+    </ClCompile>
+    <ClCompile Include="CUIWhiteboard.cpp">
+      <Filter>UI\Button\MainUI</Filter>
+    </ClCompile>
+    <ClCompile Include="CUISubWhiteboard.cpp">
+      <Filter>UI\Button\SubUI</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
