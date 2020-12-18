@@ -2,9 +2,12 @@
 #include "CWhiteboard.h"
 #include "ICollisionArea.h"
 #include "CUIWhiteboard.h"
+#include "CCharacter.h"
 
 CWhiteboard::CWhiteboard(D3DXVECTOR3 vPos)
-	:m_pSMesh(nullptr)
+	: m_pSMesh(nullptr)
+	, m_pCharacter(nullptr)
+	, m_pUIWhiteboard(nullptr)
 {
 	m_pSMesh = g_pStaticMeshManager->GetStaticMesh("Whiteboard");
 	m_pCollision = new CBoxCollision(m_pSMesh->GetMesh(), &m_matWorld);
@@ -35,12 +38,43 @@ void CWhiteboard::Render()
 	g_pD3DDevice->SetRenderState(D3DRS_LIGHTING, true);
 	g_pD3DDevice->SetTransform(D3DTS_WORLD, &m_matWorld);
 	m_pSMesh->Render();
+	m_pUIWhiteboard->Render();
 
 	_DEBUG_COMMENT if (m_pCollision)
 		_DEBUG_COMMENT	m_pCollision->Render();
 }
 
-void CWhiteboard::Interact(CCharacter * pCharacter)
-{
+void CWhiteboard::Interact(CCharacter* pCharacter)
+{	
+	g_EventManager->Attach(eEvent::KeyRelease, this);
+	m_pUIWhiteboard->SetIsActive(true);
 
+	if (m_pCharacter == nullptr)
+	{
+		m_pCharacter = pCharacter;
+		g_EventManager->Detach(eEvent::KeyRelease, m_pCharacter);
+	}
 }
+
+bool CWhiteboard::OnEvent(eEvent eEvent, void* _value)
+{
+	switch (eEvent)
+	{
+	case eEvent::KeyRelease:
+		return ClosePopup(_value);
+	}
+}
+
+bool CWhiteboard::ClosePopup(void* _value)
+{
+	WPARAM* data = static_cast<WPARAM*>(_value);
+
+	if (m_pCharacter /*&& *data == m_pCharacter->GetInputKey().interactableKey1*/)
+	{
+		m_pUIWhiteboard->SetIsActive(false);
+		g_EventManager->Attach(eEvent::KeyRelease, m_pCharacter);
+		m_pCharacter = nullptr;
+	}
+	return false;
+}
+
