@@ -85,6 +85,7 @@ public:
 
 	void InitUIState();
 	void SetActiveUIState(int n);
+	void SetActiveUIState();
 
 	void AddPosition(float x, float y);
 

@@ -32,6 +32,7 @@
 #include "CUIPauseButton.h"
 #include "CUITrafficLight.h"
 #include "CUILoading.h"
+#include "CUIReady.h"
 
 /* ������ */
 #include <filesystem>
@@ -52,7 +53,8 @@ CGameScene::CGameScene() : m_pField(NULL),
 						   m_isTimeStop(false),
 						   m_vWind(0, 0, 0),
 						   m_fGameTime(300.0f),
-						   m_nLotIndex(0)
+						   m_nLotIndex(0),
+						   m_pReady(nullptr)
 {
 	g_SoundManager->AddBGM("data/Sound/bgm/Tribal_Tensions.mp3");
 	g_SoundManager->PlayBGM();
@@ -104,6 +106,7 @@ CGameScene::~CGameScene()
 	SafeDelete(m_pDebugClearUI);
 	SafeDelete(m_pLoadingPopup);
 	SafeDelete(m_pDebugLoseUI);
+	SafeDelete(m_pReady);
 	m_cMutex.unlock();
 }
 
@@ -125,7 +128,7 @@ void CGameScene::Init()
 	CPharaohCoffin *coffin = new CPharaohCoffin(this, D3DXVECTOR3(0, 1, 0));
 	CTV *tv = new CTV(this);
 	CWhiteboard *whiteboard = new CWhiteboard(D3DXVECTOR3(5, 2, 4));
-
+	CUIButton *pReady = new CUIReady(D3DXVECTOR2(675, 450), this);
 	m_fGameTime = 300.0f;
 
 	m_cMutex.lock();
@@ -134,6 +137,7 @@ void CGameScene::Init()
 	m_vecMonster.push_back(Medusa);
 	m_vecMonster.push_back(Harpy);
 
+	m_pReady = pReady;
 	m_pDebugPauseUI = pPauseButton;
 	m_pDebugLoseUI = pLoseButton;
 	m_pDebugClearUI = pClearButton;
@@ -198,6 +202,9 @@ void CGameScene::Render()
 
 	if (m_pLoadingPopup)
 		m_pLoadingPopup->Render();
+
+	if (m_pReady)
+		m_pReady->Render();
 
 	m_cMutex.unlock();
 }
