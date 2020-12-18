@@ -17,7 +17,8 @@ protected:
 
 public:
 	CUITexture(char* DisabledPath , char* ActivePath, char* HoverPath,D3DXVECTOR2 vPos);
-	CUITexture(char * DisabledPath, char * ActivePath, char * HoverPath, D3DXVECTOR3* pPosition);
+	CUITexture(char * DisabledPath, char * ActivePath, char * HoverPath, D3DXMATRIXA16* pWorld = nullptr);
+	CUITexture(char* DisabledPath, char* ActivePath, char* HoverPath, D3DXVECTOR3* pPos);
 	~CUITexture();
 	void Setup(char* DisabledPath, char* ActivePath, char* HoverPath);
 	void Update() override;

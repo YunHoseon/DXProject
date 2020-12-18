@@ -37,7 +37,8 @@ public:
 
 protected:
 	D3DXMATRIXA16		m_matWorld;
-	D3DXVECTOR3*		m_pPosition;
+	D3DXVECTOR3*		m_pTargetPosition;
+	D3DXMATRIXA16*		m_pTargetWorldTM;
 	eBtnEvent			m_eBtnEvent;
 	eUIState			m_eUIState;
 	CUI*				m_pParent;
@@ -98,5 +99,7 @@ public:
 	void SetIsActive(bool isActive) { m_isActive = isActive; }
 
 	D3DXVECTOR2 GetSize() { return m_vSize; }
+	virtual void SetTargetPosition(D3DXVECTOR3* pPos) { m_pTargetPosition = pPos; }
+	virtual void SetTargetWorldTM(D3DXMATRIXA16* pWorld) { m_pTargetWorldTM = pWorld; }
 };
 

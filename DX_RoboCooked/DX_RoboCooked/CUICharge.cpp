@@ -22,7 +22,7 @@ CUICharge::CUICharge(D3DXVECTOR3* pPos, float* pfThrowPower, float fMaxThrowPowe
 	, m_pChargeOne(nullptr)
 	, m_pChargeZero(nullptr)
 {
-	m_pPosition = pPos;
+	m_pTargetPosition = pPos;
 	Setup();
 	
 }
@@ -40,9 +40,9 @@ CUICharge::~CUICharge()
 
 void CUICharge::Setup()
 {
-	m_pChargeZero = new CUIChargeZero(m_pPosition);
+	m_pChargeZero = new CUIChargeZero(m_pTargetPosition);
 
-	m_pChargingBoard = new CUIChargeOne(m_pPosition);;
+	m_pChargingBoard = new CUIChargeOne(m_pTargetPosition);;
 
 	AddChild(m_pChargingBoard);
 	InvertActive();
@@ -63,7 +63,7 @@ void CUICharge::UpdateCharging()
 			m_pChargingBoard = m_pChargeOne;
 		else
 		{
-			m_pChargeOne = new CUIChargeOne(m_pPosition);
+			m_pChargeOne = new CUIChargeOne(m_pTargetPosition);
 			m_pChargingBoard = m_pChargeOne;
 
 		}
@@ -75,7 +75,7 @@ void CUICharge::UpdateCharging()
 			m_pChargingBoard = m_pChargeTwo;
 		else
 		{
-			m_pChargeTwo = new CUIChargeTwo(m_pPosition);
+			m_pChargeTwo = new CUIChargeTwo(m_pTargetPosition);
 			m_pChargingBoard = m_pChargeTwo;
 		}
 	}
@@ -85,7 +85,7 @@ void CUICharge::UpdateCharging()
 			m_pChargingBoard = m_pChargeThree;
 		else
 		{
-			m_pChargeThree = new CUIChargeThree(m_pPosition);
+			m_pChargeThree = new CUIChargeThree(m_pTargetPosition);
 			m_pChargingBoard = m_pChargeThree;
 		}
 	}
@@ -95,7 +95,7 @@ void CUICharge::UpdateCharging()
 			m_pChargingBoard = m_pChargeFour;
 		else
 		{
-			m_pChargeFour = new CUIChargeFour(m_pPosition);
+			m_pChargeFour = new CUIChargeFour(m_pTargetPosition);
 			m_pChargingBoard = m_pChargeFour;
 		}
 	}
@@ -105,7 +105,7 @@ void CUICharge::UpdateCharging()
 			m_pChargingBoard = m_pChargeFive;
 		else
 		{
-			m_pChargeFive = new CUIChargeFive(m_pPosition);
+			m_pChargeFive = new CUIChargeFive(m_pTargetPosition);
 			m_pChargingBoard = m_pChargeFive;
 		}
 	}

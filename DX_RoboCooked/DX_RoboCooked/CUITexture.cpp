@@ -8,9 +8,17 @@ CUITexture::CUITexture( char* DisabledPath, char* ActivePath, char* HoverPath, D
 	Setup(DisabledPath, ActivePath, HoverPath);
 }
 
-CUITexture::CUITexture(char * DisabledPath, char * ActivePath, char * HoverPath,D3DXVECTOR3* pPosition)
+CUITexture::CUITexture(char * DisabledPath, char * ActivePath, char * HoverPath,D3DXMATRIXA16* pWorld)
 {
-	m_pPosition = pPosition;
+	m_vPosition.x = 0;
+	m_vPosition.y = 0;
+	m_pTargetWorldTM = pWorld;
+	Setup(DisabledPath, ActivePath, HoverPath);
+}
+
+CUITexture::CUITexture(char* DisabledPath, char* ActivePath, char* HoverPath, D3DXVECTOR3* pPos)
+{
+	m_pTargetPosition = pPos;
 	Setup(DisabledPath, ActivePath, HoverPath);
 }
 
@@ -61,25 +69,25 @@ void CUITexture::Render()
 
 void CUITexture::RenderTexture(eUIState state)
 {
+	if (m_pTargetWorldTM)
+	{
+		D3DVIEWPORT9 vp;
+
+		D3DXMATRIXA16 matView, matProj, matWorld;
+		g_pD3DDevice->GetTransform(D3DTS_PROJECTION, &matProj);
+		g_pD3DDevice->GetTransform(D3DTS_VIEW, &matView);
+		g_pD3DDevice->GetViewport(&vp);
+
+		D3DXVECTOR3 pos;
+		D3DXVec3Project(&pos,&g_vZero, &vp,&matProj,&matView,m_pTargetWorldTM);
+		m_vPosition.x = pos.x;
+		m_vPosition.y = pos.y;
+	}
+
 	m_Sprite->Begin(D3DXSPRITE_ALPHABLEND | D3DXSPRITE_SORT_TEXTURE);
 	
-	//if (m_pPosition)
-	//{
-	//	m_matWorld = g_matIdentity;
-	//	D3DVIEWPORT9 vp;
-	//	D3DXMATRIXA16 matView, matProj;
-	//	g_pD3DDevice->GetTransform(D3DTS_VIEW, &matView);
-	//	g_pD3DDevice->GetTransform(D3DTS_PROJECTION, &matProj);
-	//	g_pD3DDevice->GetViewport(&vp);
-
-	//	D3DXVECTOR3 pos;
-	//	D3DXVec3Project(&pos,m_pPosition, &vp,&matProj,&matView,nullptr); 
-	//	m_vPosition.x = pos.x;
-	//	m_vPosition.y = pos.y;
-	//}
-
 	RECT rc;
-	m_Sprite->SetTransform(&m_matWorld);
+	m_Sprite->SetTransform(&g_matIdentity);
 
 	if (state == eUIState::Up)
 	{

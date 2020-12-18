@@ -13,7 +13,7 @@ public:
 		return "STOPMOVE";
 	};
 
-	virtual void Render(D3DXVECTOR3& vPos) {};
+	virtual void Render() {};
 	virtual bool IsMovable() { return false; }
 	virtual CCrowdControl* Clone() { return new CCCStopMove(this); };
 };

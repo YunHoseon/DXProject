@@ -12,7 +12,7 @@ public:
 		return "SPEEDDOWN";
 	};
 
-	virtual void Render(D3DXVECTOR3& vPos) {};
+	virtual void Render() {};
 	virtual float MultiplySpeed() { return 0.3f; }
 	virtual CCrowdControl* Clone() { return new CCCSpeedDown(this); };
 };

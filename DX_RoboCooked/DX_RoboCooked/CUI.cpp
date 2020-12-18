@@ -4,17 +4,18 @@
 float CUI::m_fHeightRevision = 0;
 float CUI::m_fWidthRevision = 0;
 
-CUI::CUI()
-	: m_pParent(nullptr)
-	, m_vPosition(0,0)
-	, m_vSize(0,0)
-	, m_eUIState(eUIState::Up)
-	, m_eUIPastState(eUIState::Up)
-	, m_isActive(false)
-	, m_isPress(false)
-	, m_eBtnEvent(eBtnEvent::None)
-	, m_matWorld(g_matIdentity)
-	, m_pPosition(nullptr)
+CUI::CUI() :
+	m_pParent(nullptr),
+	m_vPosition(0, 0),
+	m_vSize(0, 0),
+	m_eUIState(eUIState::Up),
+	m_eUIPastState(eUIState::Up),
+	m_isActive(false),
+	m_isPress(false),
+	m_eBtnEvent(eBtnEvent::None),
+	m_matWorld(g_matIdentity),
+	m_pTargetPosition(nullptr),
+	m_pTargetWorldTM(nullptr)
 {
 }
 

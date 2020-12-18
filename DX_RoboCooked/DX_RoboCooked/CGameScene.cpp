@@ -125,11 +125,11 @@ void CGameScene::Init()
 	CPharaohCoffin *coffin = new CPharaohCoffin(this, D3DXVECTOR3(0, 1, 0));
 	CTV *tv = new CTV(this);
 	CWhiteboard *whiteboard = new CWhiteboard(D3DXVECTOR3(5, 2, 4));
-
-	m_fGameTime = 300.0f;
+	
 
 	m_cMutex.lock();
 
+	m_fGameTime = 300.0f;
 	m_vecStaticActor.push_back(wall);
 	//m_vecMonster.push_back(Medusa);
 	//m_vecMonster.push_back(Harpy);
@@ -705,29 +705,6 @@ void CGameScene::Load(string sFolder, string sFilename, void (CGameScene::*pCall
 				vecChara.push_back(player);
 			}
 		}
-		{
-			json jMonster = j["Monster"];
-			for (UINT i = 0; i < jMonster.size(); i++)
-			{
-				if (jMonster[i]["Type"] == "Medusa")
-				{
-					CMonsterMedusa* pTempMedusa = new CMonsterMedusa(this);
-					vecMonster.push_back(pTempMedusa);
-				}
-				else if (jMonster[i]["Type"] == "Harpy")
-				{
-					CMonsterHarpy* pTempHarpy = new CMonsterHarpy(this);
-					vecMonster.push_back(pTempHarpy);
-
-					json jTempSkObj = jMonster[i]["SkillObject"];
-					for (UINT j = 0; j < jTempSkObj.size(); j++)
-					{
-						D3DXVECTOR3 vTempPos = D3DXVECTOR3(jTempSkObj[j][0], jTempSkObj[j][1], jTempSkObj[j][2]);
-						pTempHarpy->AddObjectPosition(vTempPos);
-					}
-				}
-			}
-		}
 	}
 	// 뮤텍스락
 	this->m_cMutex.lock();
@@ -737,10 +714,36 @@ void CGameScene::Load(string sFolder, string sFilename, void (CGameScene::*pCall
 	this->m_vecParts.insert(m_vecParts.end(), vecParts.begin(), vecParts.end());
 	this->m_vecCharacters.insert(m_vecCharacters.end(), vecChara.begin(), vecChara.end());
 	this->m_vecTile.insert(m_vecTile.end(), vecTile.begin(), vecTile.end());
-	this->m_vecMonster.insert(m_vecMonster.end(), vecMonster.begin(), vecMonster.end());
 	this->m_sID = sFilename;
 	this->m_cMutex.unlock();
 
+	{
+		json jMonster = j["Monster"];
+		for (UINT i = 0; i < jMonster.size(); i++)
+		{
+			if (jMonster[i]["Type"] == "Medusa")
+			{
+				CMonsterMedusa* pTempMedusa = new CMonsterMedusa(this);
+				vecMonster.push_back(pTempMedusa);
+			}
+			else if (jMonster[i]["Type"] == "Harpy")
+			{
+				CMonsterHarpy* pTempHarpy = new CMonsterHarpy(this);
+				vecMonster.push_back(pTempHarpy);
+
+				json jTempSkObj = jMonster[i]["SkillObject"];
+				for (UINT j = 0; j < jTempSkObj.size(); j++)
+				{
+					D3DXVECTOR3 vTempPos = D3DXVECTOR3(jTempSkObj[j][0], jTempSkObj[j][1], jTempSkObj[j][2]);
+					pTempHarpy->AddObjectPosition(vTempPos);
+				}
+			}
+		}
+	}
+	
+	this->m_cMutex.lock();
+	this->m_vecMonster.insert(m_vecMonster.end(), vecMonster.begin(), vecMonster.end());
+	this->m_cMutex.unlock();
 	if (pCallback)
 		(this->*pCallback)();
 

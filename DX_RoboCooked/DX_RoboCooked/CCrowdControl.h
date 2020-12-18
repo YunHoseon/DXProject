@@ -1,5 +1,6 @@
 ﻿#pragma once
 #include "CEventListener.h"
+class CActor;
 class CEventListener;
 
 class CCrowdControl
@@ -16,7 +17,7 @@ public:
 	virtual CCrowdControl* Clone() = 0;
 	virtual float ReverseRotate() { return 0; }
 	virtual float MultiplySpeed() { return 1.0f; }
-	virtual void Render(D3DXVECTOR3& vPos) = 0;
+	virtual void Render() = 0;
 	virtual bool IsOverlapable() { return false; }
 	virtual bool IsMovable() { return true; }
 	virtual bool IsProtected() { return false; }
@@ -33,6 +34,7 @@ public:
 		return false;
 	}
 	virtual void SetDuration(float duration) { m_fDuration = duration; }
+	virtual void SetTarget(D3DXMATRIXA16* target) {}
 };
 
 #include "CCCSpeedDown.h"
