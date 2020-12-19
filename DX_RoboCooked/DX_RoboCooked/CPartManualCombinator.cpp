@@ -126,8 +126,8 @@ void CPartManualCombinator::PartsInteract(CParts* pParts)
 
 	pParts->GetCollision()->SetActive(false);
 	pParts->SetCombinatorPosition(m_vPosition);
-	pParts->SetMoveParts(true);
-
+	//pParts->SetMoveParts(true);
+	pParts->SetMoveParts(true, m_vecOnCombinatorPosition[m_nPartsCount - 1]);
 	g_EventManager->CallEvent(eEvent::CombinUse, NULL);
 	
 }
@@ -162,7 +162,8 @@ void CPartManualCombinator::DischargeParts()
 	}
 	m_pParts = *m_vecDischargeParts.begin();
 	//m_pParts->SetPosition(m_vOnCombinatorPosition);
-	m_pParts->SetGrabPosition(&m_vOnCombinatorPosition);
+	//m_pParts->SetGrabPosition(&m_vOnCombinatorPosition);
+	m_pParts->SetGrabPosition(&m_vecOnCombinatorPosition[1]);
 	m_vecDischargeParts.erase(m_vecDischargeParts.begin());
 }
 
