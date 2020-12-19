@@ -5,7 +5,8 @@ enum class eUIState
 {
 	Up,
 	Down,
-	Hover
+	Hover,
+	invisible
 };
 
 enum class eBtnEvent
@@ -67,6 +68,7 @@ public:
 	virtual void InvertActive();
 	virtual void ActiveUI();
 	virtual void CheckActiveEvent();
+	virtual void SetActive(bool is);
 	virtual bool GetActive() { return m_isActive; }
 	D3DXVECTOR2 GetPosition() { return m_vPosition; }
 	void ButtonEvent(eBtnEvent btnEvent);

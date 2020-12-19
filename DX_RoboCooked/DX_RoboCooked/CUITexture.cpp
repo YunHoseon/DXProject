@@ -14,6 +14,13 @@ CUITexture::CUITexture(char * DisabledPath, char * ActivePath, char * HoverPath,
 	Setup(DisabledPath, ActivePath, HoverPath);
 }
 
+CUITexture::CUITexture(char* DisabledPath, char* ActivePath, char* HoverPath, D3DXVECTOR2 vPos, eUIState state)
+{
+	m_vPosition = vPos;
+	Setup(DisabledPath, ActivePath, HoverPath);
+	SetUIState(state);
+}
+
 
 CUITexture::~CUITexture()
 {
@@ -30,19 +37,15 @@ void CUITexture::Setup(char * DisabledPath, char * ActivePath, char * HoverPath)
 	m_DisabledInfo = g_pUITextureManager->GetTextureInfo(DisabledPath);
 
 	if (ActivePath == NULL)
-	{
-		m_ActiveTexture = nullptr;
 		return;
-	}
+	
 
 	m_ActiveTexture = g_pUITextureManager->GetTexture(ActivePath);
 	m_ActiveInfo = g_pUITextureManager->GetTextureInfo(ActivePath);
 
 	if (HoverPath == NULL)
-	{
-		m_HoverTexture = nullptr;
 		return;
-	}
+
 
 	m_HoverTexture = g_pUITextureManager->GetTexture(HoverPath);
 	m_HoverInfo = g_pUITextureManager->GetTextureInfo(HoverPath);
@@ -91,8 +94,6 @@ void CUITexture::RenderTexture(eUIState state)
 	}
 	else if (state == eUIState::Down)
 	{
-		if (m_ActiveTexture == nullptr)
-			return;
 		SetRect(&rc, 0, 0, m_ActiveInfo.Width, m_ActiveInfo.Height);
 		m_Sprite->Draw(m_ActiveTexture,
 			&rc,
@@ -102,14 +103,21 @@ void CUITexture::RenderTexture(eUIState state)
 	}
 	else if (state == eUIState::Hover)
 	{
-		if (m_HoverTexture == nullptr)
-			return;
 		SetRect(&rc, 0, 0, m_HoverInfo.Width, m_HoverInfo.Height);
 		m_Sprite->Draw(m_HoverTexture,
 			&rc,
 			&D3DXVECTOR3(0, 0, 0),
 			&D3DXVECTOR3(m_vPosition.x, m_vPosition.y, 0),
 			D3DCOLOR_ARGB(255, 255, 255, 255));
+	}
+	else if (state == eUIState::invisible)
+	{
+		SetRect(&rc, 0, 0, m_DisabledInfo.Width, m_DisabledInfo.Height);
+		m_Sprite->Draw(m_DisabledTexture,
+			&rc,
+			&D3DXVECTOR3(0, 0, 0),
+			&D3DXVECTOR3(m_vPosition.x, m_vPosition.y, 0),
+			D3DCOLOR_ARGB(100, 255, 255, 255));
 	}
 
 	m_Sprite->End();

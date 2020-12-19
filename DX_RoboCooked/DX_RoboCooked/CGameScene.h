@@ -42,6 +42,7 @@ private:
 	CUITrafficLight*			m_pDebugTrafficLight;
 	CUILoading*					m_pLoadingPopup;
 	CUIButton*					m_pReady;
+	CUIButton*					m_pWarnning;
 
 	static std::mutex			m_cMutex;
 	string						m_sID;

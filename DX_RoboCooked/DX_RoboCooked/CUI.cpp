@@ -135,6 +135,15 @@ void CUI::CheckActiveEvent()
 	}
 }
 
+void CUI::SetActive(bool is)
+{
+	for (auto it : m_listUIchildren)
+	{
+		it->SetActive(is);
+	}
+	m_isActive = is;
+}
+
 void CUI::ButtonEvent(eBtnEvent btnEvent)
 {
 	g_SoundManager->PlaySFX("click");
