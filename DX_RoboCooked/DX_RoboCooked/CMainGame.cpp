@@ -26,8 +26,6 @@ CMainGame::CMainGame()
 	g_SoundManager->AddSFX("data/sound/player/charge_complete.mp3", "charge_complete");
 	g_SoundManager->AddSFX("data/sound/player/throw.mp3", "throw");
 
-
-
 	g_SoundManager->AddSFX("data/sound/object/character_impact.mp3", "character_impact");
 	g_SoundManager->AddSFX("data/sound/object/part_f.mp3", "part_f");
 	g_SoundManager->AddSFX("data/sound/object/part_impact.mp3", "part_impact");
@@ -36,7 +34,6 @@ CMainGame::CMainGame()
 	g_SoundManager->AddSFX("data/sound/object/box.mp3", "box");
 	g_SoundManager->AddSFX("data/sound/object/button.mp3", "button");
 
-
 	g_SoundManager->AddSFX("data/sound/monster/medusa_snake_01.mp3", "medusa_snake_01");
 	g_SoundManager->AddSFX("data/sound/monster/medusa_snake_02.mp3", "medusa_snake_02");
 	g_SoundManager->AddSFX("data/sound/monster/medusa_ult.mp3", "medusa_ult");
@@ -44,7 +41,6 @@ CMainGame::CMainGame()
 	g_SoundManager->AddSFX("data/sound/monster/heartbeat.mp3", "heartbeat");
 	g_SoundManager->AddSFX("data/sound/monster/wind.mp3", "wind");
 	g_SoundManager->AddSFX("data/sound/monster/tornado.mp3", "tornado");
-
 }
 
 
