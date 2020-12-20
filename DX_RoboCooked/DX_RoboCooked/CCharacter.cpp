@@ -31,7 +31,7 @@ CCharacter::CCharacter(int nPlayerNum) : m_pSkinnedMesh(nullptr),
 	m_fBaseSpeed = 0.02f;
 
 	m_pCC = new CCCNone;
-	//m_pCharge = new CUICharge(&m_vPosition,&m_fThrowPower,m_fMaxThrowPower);
+	m_pCharge = new CUICharge(&m_vPosition,&m_fThrowPower,m_fMaxThrowPower);
 }
 
 CCharacter::~CCharacter()
@@ -187,7 +187,9 @@ void CCharacter::PressKey(void* _value)
 					m_fThrowPower = m_fMaxThrowPower;
 					g_SoundManager->PlaySFX("charge_complete");
 				}
-			
+				if (m_pCharge)
+					m_pCharge->UpdateCharging(m_fThrowPower, m_fMaxThrowPower);
+
 				_DEBUG_COMMENT cout << "throw power : " << m_fThrowPower << endl;
 			}
 			break;
@@ -265,6 +267,8 @@ void CCharacter::ReleaseKey(void* _value)
 			
 			g_SoundManager->PlaySFX("throw");
 			m_fThrowPower = m_fMinThrowPower;
+			if (m_pCharge)
+				m_pCharge->SetChildActive(false);
 			break;
 		default: ;
 		}

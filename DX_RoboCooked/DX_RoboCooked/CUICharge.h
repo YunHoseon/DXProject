@@ -13,16 +13,14 @@ class CUICharge :
 	public CUIButton
 {
 private:
-	float*				m_pfThrowPower;
-	float				m_fMaxThrowPower;
-	CUIChargeBoard*		m_pChargingBoard;
+	CUIChargeBoard*		m_pChargeFive;
+	CUIChargeBoard*		m_pChargeFour;
+	CUIChargeBoard*		m_pChargeThree;
+	CUIChargeBoard*		m_pChargeTwo;
+	CUIChargeBoard*		m_pChargeOne;
+	CUIChargeBoard*		m_pChargeZero;
 
-	CUIChargeFive*		m_pChargeFive;
-	CUIChargeFour*		m_pChargeFour;
-	CUIChargeThree*		m_pChargeThree;
-	CUIChargeTwo*		m_pChargeTwo;
-	CUIChargeOne*		m_pChargeOne;
-	CUIChargeZero*		m_pChargeZero;
+	D3DXVECTOR3			m_vChargeUIPosition;
 
 
 
@@ -32,6 +30,6 @@ public:
 
 public:
 	void Setup() override;
-	void UpdateCharging();
+	void UpdateCharging(float fThrowPower, float fMaxThrowPower);
 };
 
