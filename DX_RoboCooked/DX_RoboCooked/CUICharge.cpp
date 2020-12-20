@@ -33,12 +33,12 @@ CUICharge::~CUICharge()
 
 void CUICharge::Setup()
 {
-	m_pChargeZero = new CUIChargeZero(m_pPosition);
-	m_pChargeOne = new CUIChargeOne(m_pPosition);
-	m_pChargeTwo = new CUIChargeTwo(m_pPosition);
-	m_pChargeThree = new CUIChargeThree(m_pPosition);
-	m_pChargeFour = new CUIChargeFour(m_pPosition);
-	m_pChargeFive = new CUIChargeFive(m_pPosition);
+	m_pChargeZero = new CUIChargeZero(&m_vChargeUIPosition);
+	m_pChargeOne = new CUIChargeOne(&m_vChargeUIPosition);
+	m_pChargeTwo = new CUIChargeTwo(&m_vChargeUIPosition);
+	m_pChargeThree = new CUIChargeThree(&m_vChargeUIPosition);
+	m_pChargeFour = new CUIChargeFour(&m_vChargeUIPosition);
+	m_pChargeFive = new CUIChargeFive(&m_vChargeUIPosition);
 
 	AddChild(m_pChargeZero);
 	AddChild(m_pChargeOne);
@@ -56,6 +56,8 @@ void CUICharge::Setup()
 
 void CUICharge::UpdateCharging(float fThrowPower , float fMaxThrowPower)
 {
+	m_vChargeUIPosition = D3DXVECTOR3(m_pPosition->x-0.6f, m_pPosition->y + 3.4f, m_pPosition->z);
+
 	SetChildActive(false);
 
 	float temp = fMaxThrowPower / 5.0f;
