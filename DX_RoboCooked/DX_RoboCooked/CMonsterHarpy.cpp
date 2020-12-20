@@ -108,7 +108,7 @@ void CMonsterHarpy::Update()
 
 	if (m_eSecondSkillEvent == eEvent::SpecificArea)
 	{
-		if (m_pInteractCenter->CheckSpecificArea())
+		if (m_pInteractCenter->CheckSpecificArea(m_vSpecificAreaPosition))
 		{
 			m_isArrive = true;
 		}

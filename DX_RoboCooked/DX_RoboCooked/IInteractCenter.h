@@ -25,8 +25,8 @@ public:
 	virtual void MonsterSkill(eSkill skill, float fDuration = 0) = 0;
 	virtual void FinishSkill(eSkill skill) = 0;
 	virtual bool CheckSpecificPartsID(string partsID) = 0;
-	virtual void ElectIndexLot() = 0;
-	virtual bool CheckSpecificArea() = 0;
+	virtual D3DXVECTOR3 ElectIndexLot() = 0;
+	virtual bool CheckSpecificArea(D3DXVECTOR3 pos) = 0;
 	virtual void CheckSandDummyArea(ICollisionArea* collison) = 0;
 	virtual D3DXVECTOR3 GetRandomPartsPosition() = 0;
 	virtual void DestroyPartsOnPosition(D3DXVECTOR3 pos) = 0;

@@ -34,7 +34,6 @@ private:
 	D3DXVECTOR3					m_vWind;
 	FLOAT						m_fGameTime;	
 	BOOL						m_isTimeStop;
-	INT							m_nLotIndex;
 	vector<CTile*>				m_vecTile;
 	CUIButton*					m_pDebugLoseUI;
 	CUIButton*					m_pDebugClearUI;
@@ -72,8 +71,8 @@ public:
 	void MonsterSkill(eSkill skill, float fDuration = 0) override;
 	void FinishSkill(eSkill skill) override;
 	bool CheckSpecificPartsID(string parts) override;
-	void ElectIndexLot() override;
-	bool CheckSpecificArea() override;
+	D3DXVECTOR3 ElectIndexLot() override;
+	bool CheckSpecificArea(D3DXVECTOR3 pos) override;
 	void CheckSandDummyArea(ICollisionArea* collison) override;
 	void DestroyPartsOnPosition(D3DXVECTOR3 pos) override;
 

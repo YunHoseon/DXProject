@@ -54,7 +54,6 @@ CGameScene::CGameScene() : m_pField(NULL),
 						   m_isTimeStop(false),
 						   m_vWind(0, 0, 0),
 						   m_fGameTime(300.0f),
-						   m_nLotIndex(0),
 						   m_pReady(nullptr),
 						   m_pWarnning(nullptr)
 {
@@ -783,19 +782,18 @@ bool CGameScene::CheckSpecificPartsID(string partsID)
 	return false;
 }
 
-void CGameScene::ElectIndexLot()
+D3DXVECTOR3 CGameScene::ElectIndexLot()
 {
 	CRandomNumberGenerator rand;
-	m_nLotIndex = rand.GenInt(0, m_vecObject.size() - 1);
+	int index = rand.GenInt(0, m_vecObject.size() - 1);
+
+	return m_vecObject[index]->GetPosition();
 }
 
-bool CGameScene::CheckSpecificArea()
+bool CGameScene::CheckSpecificArea(D3DXVECTOR3 pos)
 {
-	D3DXVECTOR3 pos = m_vecObject[m_nLotIndex]->GetPosition();
 	D3DXVECTOR3 size(1.5f, 100.0f, 1.5f);
 	CBoxCollision cCollsion(pos, size);
-
-	cCollsion.Render();
 
 	for (auto it : m_vecCharacters)
 	{

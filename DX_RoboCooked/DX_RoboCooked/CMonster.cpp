@@ -20,6 +20,7 @@ CMonster::CMonster(IInteractCenter* pInteractCenter)
 			, m_fUltimateSkillElapsedTime(0.0f)
 			, m_fUltimateSkillConditionTime(999.0f)
 			, m_nBluePrintChangeCount(0)
+			, m_vSpecificAreaPosition(0,0,0)
 
 {
 	g_EventManager->Attach(eEvent::CompleteBluePrint, this);
@@ -49,7 +50,7 @@ void CMonster::Update()
 
 	if (m_eSecondSkillEvent == eEvent::SpecificArea)
 	{
-		if (m_pInteractCenter->CheckSpecificArea())
+		if (m_pInteractCenter->CheckSpecificArea(m_vSpecificAreaPosition))
 		{
 			m_isArrive = true;
 		}
@@ -212,7 +213,7 @@ void CMonster::ChooseSkillCondition()
 			m_eSkillCondition = eSkillCondition::SpecificArea;
 			g_EventManager->Attach(eEvent::SpecificArea, this);
 			m_eSecondSkillEvent = eEvent::SpecificArea;
-			m_pInteractCenter->ElectIndexLot();
+			m_vSpecificAreaPosition = m_pInteractCenter->ElectIndexLot();
 		}
 		else if (random < 48)
 		{
