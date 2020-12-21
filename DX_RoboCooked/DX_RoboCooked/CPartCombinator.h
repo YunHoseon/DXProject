@@ -38,7 +38,7 @@ protected:
 	std::multimap<string, CParts*>	m_multimapParts;
 	std::vector<CParts*>			m_vecDischargeParts;
 	ICollisionArea*					m_pPartsInteractCollision;
-	//D3DXVECTOR3						m_vOnCombinatorPosition;
+	//D3DXVECTOR3					m_vOnCombinatorPosition;
 	vector<D3DXVECTOR3>				m_vecOnCombinatorPosition;
 	CParts*							m_pParts;
 	bool							m_isCombine;

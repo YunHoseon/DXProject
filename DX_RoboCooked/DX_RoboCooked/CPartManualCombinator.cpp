@@ -170,7 +170,6 @@ void CPartManualCombinator::DischargeParts()
 void CPartManualCombinator::InsertParts(CParts* p)
 {
 	m_multimapParts.insert(std::make_pair(p->GetPartsID(), p));
-
 }
 
 void CPartManualCombinator::ReadytoCarryParts()
@@ -190,6 +189,12 @@ void CPartManualCombinator::ReadytoCarryParts()
 void CPartManualCombinator::CheckCombineisFull()
 {
 	if (m_eCombinatorLoadState == eCombinatorLoadState::LoadImpossible)
+	{
+		for (auto it : m_multimapParts)
+		{
+			it.second->UsingCombinator();
+		}
+		
 		m_isTimeCheck = true;
-	
+	}
 }

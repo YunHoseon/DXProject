@@ -137,11 +137,23 @@ void CParts::MoveParts()
 	m_vPosition += vDirection * 0.05f * TimeRevision;
 }
 
+void CParts::UsingCombinator()
+{
+	m_vPosition = D3DXVECTOR3(0, -100, 0);
+}
+
 void CParts::SetGrabPosition(D3DXVECTOR3* vPosition)
 {
 	m_vGrabPosition = vPosition;
 	if (vPosition)
 		m_vVelocity = g_vZero;
+}
+
+void CParts::SetMoveParts(bool b, D3DXVECTOR3 pos)
+{
+	 m_isMoveParts = b;
+	 m_vOnCombinatorPosition = pos; 
+
 }
 
 void CParts::AddForce(const D3DXVECTOR3& vForce)
