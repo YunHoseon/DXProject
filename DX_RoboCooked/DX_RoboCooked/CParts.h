@@ -40,6 +40,7 @@ public:
 	void ThrowParts(D3DXVECTOR3 vForce);
 	void PartsRotate();
 	void MoveParts();
+	void UsingCombinator();
 	void SetCombinatorPosition(D3DXVECTOR3 vPosition){ m_vCombinatorPosition = vPosition; }
 
 	CStaticMesh* GetStaticMesh() { return &m_cMesh; }
@@ -58,7 +59,7 @@ public:
 	void SetGrabPosition(D3DXVECTOR3* vPosition);
 
 	bool GetMoveParts() { return m_isMoveParts; }
-	void SetMoveParts(bool b, D3DXVECTOR3 pos) { m_isMoveParts = b; m_vOnCombinatorPosition = pos; }
+	void SetMoveParts(bool b, D3DXVECTOR3 pos);
 
 	eCombinatorPartsLevel GetCombinePartsLevel() const { return m_eLevel; }
 

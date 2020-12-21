@@ -76,8 +76,9 @@ void CPartAutoCombinator::PartsInteract(CParts* pParts)
 		return;
 	}
 
-	if(m_nPartsCount == m_nMaxPartsCount)
+	if (m_nPartsCount == m_nMaxPartsCount)
 		m_eCombinatorLoadState = eCombinatorLoadState::LoadImpossible;
+	
 
 
 	pParts->GetCollision()->SetActive(false);
@@ -126,6 +127,13 @@ void CPartAutoCombinator::DischargeParts()
 void CPartAutoCombinator::InsertParts(CParts* p)
 {
 	m_multimapParts.insert(std::make_pair(p->GetPartsID(), p));
+	if (m_eCombinatorLoadState == eCombinatorLoadState::LoadImpossible)
+	{
+		for (auto it : m_multimapParts)
+		{
+			it.second->UsingCombinator();
+		}
+	}
 }
 
 void CPartAutoCombinator::ReadytoCarryParts()
