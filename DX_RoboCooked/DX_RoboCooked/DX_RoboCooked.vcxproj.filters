@@ -528,6 +528,9 @@
     <ClInclude Include="CUIWarningBoard.h">
       <Filter>UI\Button\SubUI</Filter>
     </ClInclude>
+    <ClInclude Include="CUICC.h">
+      <Filter>UI\Effect</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="stdafx.cpp">
@@ -958,6 +961,9 @@
     </ClCompile>
     <ClCompile Include="CUIWarningBoard.cpp">
       <Filter>UI\Button\SubUI</Filter>
+    </ClCompile>
+    <ClCompile Include="CUICC.cpp">
+      <Filter>UI\Effect</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

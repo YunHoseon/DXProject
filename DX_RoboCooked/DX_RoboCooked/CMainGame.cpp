@@ -61,7 +61,7 @@ void CMainGame::Setup()
 {
 	SetLight();
 	InputManager;
-	g_pPartsManager;
+	
 	_DEBUG_COMMENT m_pGrid = new CGrid;
 	if (m_pGrid)
 		m_pGrid->Setup();

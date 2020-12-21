@@ -34,7 +34,7 @@ public:
 		return false;
 	}
 	virtual void SetDuration(float duration) { m_fDuration = duration; }
-	virtual void SetTarget(D3DXMATRIXA16* target) {}
+	virtual void SetTarget(D3DXVECTOR3* target) {}
 };
 
 #include "CCCSpeedDown.h"

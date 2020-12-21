@@ -132,6 +132,10 @@ void CWall::Setup()
 	m_stMtlWall.Ambient = D3DXCOLOR(0.7f, 0.7f, 0.7f, 1.0f);
 	m_stMtlWall.Diffuse = D3DXCOLOR(0.7f, 0.7f, 0.7f, 1.0f);
 	m_stMtlWall.Specular = D3DXCOLOR(0.7f, 0.7f, 0.7f, 1.0f);
+
+	D3DXMatrixRotationX(&m_matR, D3DXToRadian(n_RotAngleX));
+	D3DXMatrixTranslation(&m_matT, 0, -1.5f, 6);
+	m_matWorld = m_matR * m_matT;
 }
 
 void CWall::Update()

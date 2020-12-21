@@ -97,6 +97,7 @@
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
       <AdditionalLibraryDirectories>%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <LargeAddressAware>true</LargeAddressAware>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
@@ -125,6 +126,7 @@
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
       <OptimizeReferences>true</OptimizeReferences>
       <GenerateDebugInformation>true</GenerateDebugInformation>
+      <LargeAddressAware>true</LargeAddressAware>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
@@ -180,6 +182,7 @@
     <ClInclude Include="CTornado.h" />
     <ClInclude Include="CTV.h" />
     <ClInclude Include="CUIAcidRain.h" />
+    <ClInclude Include="CUICC.h" />
     <ClInclude Include="CUICharge.h" />
     <ClInclude Include="CUIChargeBoard.h" />
     <ClInclude Include="CUIChargeFive.h" />
@@ -326,6 +329,7 @@
     <ClCompile Include="CTornado.cpp" />
     <ClCompile Include="CTV.cpp" />
     <ClCompile Include="CUIAcidRain.cpp" />
+    <ClCompile Include="CUICC.cpp" />
     <ClCompile Include="CUICharge.cpp" />
     <ClCompile Include="CUIChargeBoard.cpp" />
     <ClCompile Include="CUIChargeFive.cpp" />

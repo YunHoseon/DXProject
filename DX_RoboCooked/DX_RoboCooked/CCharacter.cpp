@@ -31,7 +31,6 @@ CCharacter::CCharacter(int nPlayerNum) : m_pSkinnedMesh(nullptr),
 	m_fBaseSpeed = 0.02f;
 
 	m_pCC = new CCCNone;
-	m_pCC->SetTarget(&m_matWorld);
 	m_pCharge = new CUICharge(&m_vPosition, &m_fThrowPower, m_fMaxThrowPower);
 }
 
@@ -400,6 +399,7 @@ void CCharacter::SetCC(CCrowdControl *cc)
 {
 	SafeDelete(m_pCC);
 	m_pCC = cc;
+	m_pCC->SetTarget(&m_vGrabPartsPosition);
 }
 
 void CCharacter::DeleteCC()

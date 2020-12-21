@@ -84,7 +84,7 @@ void CUITexture::RenderTexture(eUIState state)
 		SetRect(&rc, 0, 0, m_DisabledInfo.Width, m_DisabledInfo.Height);
 		m_Sprite->Draw(m_DisabledTexture,
 					   &rc,
-					   &D3DXVECTOR3(0, 0, 0),
+					   &g_vZero,
 					   &D3DXVECTOR3(m_vPosition.x, m_vPosition.y, 0),
 					   D3DCOLOR_ARGB(255, 255, 255, 255));
 	}
@@ -93,7 +93,7 @@ void CUITexture::RenderTexture(eUIState state)
 		SetRect(&rc, 0, 0, m_ActiveInfo.Width, m_ActiveInfo.Height);
 		m_Sprite->Draw(m_ActiveTexture,
 					   &rc,
-					   &D3DXVECTOR3(0, 0, 0),
+					   &g_vZero,
 					   &D3DXVECTOR3(m_vPosition.x, m_vPosition.y, 0),
 					   D3DCOLOR_ARGB(255, 255, 255, 255));
 	}
@@ -102,7 +102,7 @@ void CUITexture::RenderTexture(eUIState state)
 		SetRect(&rc, 0, 0, m_HoverInfo.Width, m_HoverInfo.Height);
 		m_Sprite->Draw(m_HoverTexture,
 					   &rc,
-					   &D3DXVECTOR3(0, 0, 0),
+					   &g_vZero,
 					   &D3DXVECTOR3(m_vPosition.x, m_vPosition.y, 0),
 					   D3DCOLOR_ARGB(255, 255, 255, 255));
 	}
@@ -111,7 +111,7 @@ void CUITexture::RenderTexture(eUIState state)
 		SetRect(&rc, 0, 0, m_DisabledInfo.Width, m_DisabledInfo.Height);
 		m_Sprite->Draw(m_DisabledTexture,
 					   &rc,
-					   &D3DXVECTOR3(0, 0, 0),
+					   &g_vZero,
 					   &D3DXVECTOR3(m_vPosition.x, m_vPosition.y, 0),
 					   D3DCOLOR_ARGB(100, 255, 255, 255));
 	}

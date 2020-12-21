@@ -23,6 +23,7 @@ void CPartsManager::Load()
 	std::ifstream is("data/js/PartsData.json");
 	json j;
 	is >> j;
+	is.close();
 
 	// 1. 조합식으로만 검색
 	// 2. ID로만 검색
@@ -43,7 +44,6 @@ void CPartsManager::Load()
 			m_mapFormula.emplace(j[i]["Formula"], j[i]["ID"]);
 		}
 	}
-	is.close();
 }
 
 CParts* CPartsManager::CreateParts(string sID)
