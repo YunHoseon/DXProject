@@ -10,7 +10,7 @@ CMonsterMedusa::CMonsterMedusa(IInteractCenter* pInteractCenter):CMonster(pInter
 	m_fFirstSkillConditionTime = 40.0f;
 	m_fUltimateSkillConditionTime = 280.0f;
 	m_sSpecificPartsID = "B04";
-	m_debugName = "�޵λ�";
+	m_debugName = "메두사";
 	ChooseSkillCondition();
 
 
