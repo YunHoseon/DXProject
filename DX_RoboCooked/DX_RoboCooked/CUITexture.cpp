@@ -7,14 +7,6 @@ CUITexture::CUITexture(char *DisabledPath, char *ActivePath, char *HoverPath, D3
 	Setup(DisabledPath, ActivePath, HoverPath);
 }
 
-CUITexture::CUITexture(char *DisabledPath, char *ActivePath, char *HoverPath, D3DXMATRIXA16 *pWorld)
-{
-	m_vPosition.x = 0;
-	m_vPosition.y = 0;
-	m_pTargetWorldTM = pWorld;
-	Setup(DisabledPath, ActivePath, HoverPath);
-}
-
 CUITexture::CUITexture(char *DisabledPath, char *ActivePath, char *HoverPath, D3DXVECTOR3 *pPos)
 {
 	m_pTargetPosition = pPos;
@@ -67,7 +59,7 @@ void CUITexture::Render()
 
 void CUITexture::RenderTexture(eUIState state)
 {
-	if (m_pPosition)
+	if (m_pTargetPosition)
 	{
 		m_matWorld = g_matIdentity;
 		D3DVIEWPORT9 vp;
@@ -77,7 +69,7 @@ void CUITexture::RenderTexture(eUIState state)
 		g_pD3DDevice->GetViewport(&vp);
 
 		D3DXVECTOR3 pos;
-		D3DXVec3Project(&pos, m_pPosition, &vp, &matProj, &matView, nullptr);
+		D3DXVec3Project(&pos, m_pTargetPosition, &vp, &matProj, &matView, nullptr);
 		m_vPosition.x = pos.x;
 		m_vPosition.y = pos.y;
 	}

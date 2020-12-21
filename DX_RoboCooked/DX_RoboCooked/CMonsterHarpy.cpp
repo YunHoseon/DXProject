@@ -10,7 +10,7 @@ CMonsterHarpy::CMonsterHarpy(IInteractCenter *pInteractCenter) : CMonster(pInter
 	m_fFirstSkillConditionTime = 30.0f;
 	m_fUltimateSkillConditionTime = 120.0f;
 	m_sSpecificPartsID = "B03";
-	m_debugName = "����";
+	m_debugName = "harpy";
 	ChooseSkillCondition();
 	m_vecSkillAnim_2.resize(2);
 	g_EventManager->Attach(eEvent::DeleteTornado, this);

@@ -12,7 +12,7 @@ CUICharge::CUICharge(D3DXVECTOR3 *pPos, float *pfThrowPower, float fMaxThrowPowe
 	: m_pChargeFive(nullptr), m_pChargeFour(nullptr), m_pChargeThree(nullptr), m_pChargeTwo(nullptr), m_pChargeOne(nullptr), m_pChargeZero(nullptr), m_vChargeUIPosition(0, 0, 0)
 {
 	m_isActive = true;
-	m_pPosition = pPos;
+	m_pTargetPosition = pPos;
 	Setup();
 }
 
@@ -41,7 +41,7 @@ void CUICharge::Setup()
 
 void CUICharge::UpdateCharging(float fThrowPower, float fMaxThrowPower)
 {
-	m_vChargeUIPosition = D3DXVECTOR3(m_pPosition->x - 0.6f, m_pPosition->y + 3.4f, m_pPosition->z);
+	m_vChargeUIPosition = D3DXVECTOR3(m_pTargetPosition->x - 0.6f, m_pTargetPosition->y + 3.4f, m_pTargetPosition->z);
 
 	SetChildActive(false);
 

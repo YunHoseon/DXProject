@@ -54,7 +54,6 @@ CGameScene::CGameScene() : m_pField(NULL),
 						   m_isTimeStop(false),
 						   m_vWind(0, 0, 0),
 						   m_fGameTime(300.0f),
-						   m_nSelectedObjectIndex(0),
 						   m_pReady(nullptr),
 						   m_pWarnning(nullptr)
 {
