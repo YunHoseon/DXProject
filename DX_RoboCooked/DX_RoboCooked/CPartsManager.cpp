@@ -5,9 +5,12 @@
 #include "CMeshLoader.h"
 #include "CParts.h"
 
-CPartsManager::CPartsManager()
+static std::mutex cMutex;
+
+CPartsManager::CPartsManager() : m_isLoaded(false)
 {
 	Load();
+	m_isLoaded = true;
 }
 
 CPartsManager::~CPartsManager()
@@ -39,9 +42,10 @@ void CPartsManager::Load()
 			CMeshLoader::LoadMesh(filename, "data/model/parts", part->GetStaticMesh());
 			part->Setup(D3DXVECTOR3(j[i]["Size"][0], j[i]["Size"][1], j[i]["Size"][2]));
 			//part->Setup(D3DXVECTOR3(0.5, 0.5, 0.5));
-
+			cMutex.lock();
 			m_mapParts.emplace(id, part);
 			m_mapFormula.emplace(j[i]["Formula"], j[i]["ID"]);
+			cMutex.unlock();
 		}
 	}
 }

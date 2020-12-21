@@ -164,6 +164,7 @@ void CPartManualCombinator::DischargeParts()
 	//m_pParts->SetPosition(m_vOnCombinatorPosition);
 	//m_pParts->SetGrabPosition(&m_vOnCombinatorPosition);
 	m_pParts->SetGrabPosition(&m_vecOnCombinatorPosition[1]);
+	m_pParts->Unsmallize();
 	m_vecDischargeParts.erase(m_vecDischargeParts.begin());
 }
 

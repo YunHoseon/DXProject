@@ -30,9 +30,6 @@ void CCamera::Setup(D3DXVECTOR3* pvTarget)
 
 void CCamera::Update()
 {
-	RECT rc;
-	GetClientRect(g_hWnd, &rc);
-
 	D3DXMATRIXA16 matR, matRX, matRY;
 	D3DXMatrixRotationX(&matRX, m_vCamRotAngle.x);
 	D3DXMatrixRotationY(&matRY, m_vCamRotAngle.y);

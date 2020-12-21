@@ -3,15 +3,21 @@
 #include "CBoxCollision.h"
 #include "IInteractCenter.h"
 
-CTV::CTV(IInteractCenter *pIntaract)
-	: m_p3DText(nullptr), m_pSMesh(nullptr), m_fTime(0.0f), m_sTime()
+CTV::CTV(IInteractCenter *pIntaract, D3DXMATRIXA16* pParentWorld)
+	: m_p3DText(nullptr), m_pSMesh(nullptr), m_fTime(0.0f), m_sTime(), m_pParentWorld(pParentWorld)
 {
 	m_pInteractCenter = pIntaract;
 
 	m_pSMesh = g_pStaticMeshManager->GetStaticMesh("TV");
 	SetScale(0.15f, 0.15f, 0.15f);
 	SetRotationY(D3DXToRadian(0));
-	SetPosition(D3DXVECTOR3(0.0f, 2.25f, 5.0f));
+	SetPosition(0.0f, 3.25f, -.9f);
+
+
+	D3DXMATRIXA16  matS, matT;
+	D3DXMatrixScaling(&matS, 5.5f, 5.5f, 5.5f);
+	D3DXMatrixTranslation(&matT, -6.5f, 5.5f, 0);
+	m_matTextLocal = matS * matT;
 }
 
 CTV::~CTV()
@@ -24,28 +30,26 @@ void CTV::Update()
 	m_fTime = m_pInteractCenter->GetTime();
 	string sTime = m_pInteractCenter->CalMin(m_fTime) + ":" + m_pInteractCenter->CalSec(m_fTime);
 	m_sTime.assign(sTime.begin(), sTime.end());
-	Create_Font();
+	CreateFont();
 }
 
 void CTV::Render()
 {
+	D3DXMATRIXA16 matWorld = m_matWorld * *m_pParentWorld;
 	g_pD3DDevice->SetRenderState(D3DRS_LIGHTING, true);
-	g_pD3DDevice->SetTransform(D3DTS_WORLD, &m_matWorld);
+	g_pD3DDevice->SetTransform(D3DTS_WORLD, &matWorld);
 	m_pSMesh->Render();
 
 	if (m_p3DText)
 	{
-		D3DXMATRIXA16 matTextWorld, matS, matT;
-		D3DXMatrixScaling(&matS, 5.5f, 5.5f, 5.5f);
-		D3DXMatrixTranslation(&matT, -6.5f, 5.5f, 0);
-		matTextWorld = matS * matT * m_matWorld;
-
-		g_pD3DDevice->SetTransform(D3DTS_WORLD, &matTextWorld);
+		matWorld = m_matTextLocal * matWorld;
+		
+		g_pD3DDevice->SetTransform(D3DTS_WORLD, &matWorld);
 		m_p3DText->DrawSubset(0);
 	}
 }
 
-void CTV::Create_Font()
+void CTV::CreateFont()
 {
 	HDC hdc = CreateCompatibleDC(0);
 	HFONT hFontOld = (HFONT)SelectObject(hdc, g_pFontManager->Get3dFont(CFontManager::TVTIME));

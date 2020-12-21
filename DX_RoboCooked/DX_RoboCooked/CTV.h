@@ -9,15 +9,18 @@ private:
 	CStaticMesh*			m_pSMesh;
 	std::wstring			m_sTime;
 	FLOAT					m_fTime;
+
+	D3DXMATRIXA16*			m_pParentWorld;
+	D3DXMATRIXA16			m_matTextLocal;
 public:
-	CTV(IInteractCenter* pIntaract);
+	CTV(IInteractCenter* pIntaract, D3DXMATRIXA16* pParentWorld = nullptr);
 	~CTV();
 
 public:
 	void Update() override;
 	void Render() override;
 
-	void Create_Font();
+	void CreateFont();
 
 	string CalMin(int sec);
 	string CalSec(int sec);
