@@ -33,6 +33,7 @@
 #include "CUITrafficLight.h"
 #include "CUILoading.h"
 #include "CUIReady.h"
+#include "CUIWarning.h"
 
 /* ������ */
 #include <filesystem>
@@ -54,7 +55,8 @@ CGameScene::CGameScene() : m_pField(NULL),
 						   m_vWind(0, 0, 0),
 						   m_fGameTime(300.0f),
 						   m_nSelectedObjectIndex(0),
-						   m_pReady(nullptr)
+						   m_pReady(nullptr),
+						   m_pWarnning(nullptr)
 {
 	g_SoundManager->AddBGM("data/Sound/bgm/Tribal_Tensions.mp3");
 	g_SoundManager->PlayBGM();
@@ -107,6 +109,7 @@ CGameScene::~CGameScene()
 	SafeDelete(m_pLoadingPopup);
 	SafeDelete(m_pDebugLoseUI);
 	SafeDelete(m_pReady);
+	SafeDelete(m_pWarnning);
 	m_cMutex.unlock();
 }
 
@@ -129,6 +132,7 @@ void CGameScene::Init()
 	CTV *tv = new CTV(this);
 	CWhiteboard *whiteboard = new CWhiteboard(D3DXVECTOR3(5, 2, 4));
 	CUIButton *pReady = new CUIReady(D3DXVECTOR2(675, 450), this);
+	CUIButton *pWarrning = new CUIWarning();
 
 	m_cMutex.lock();
 
@@ -137,6 +141,7 @@ void CGameScene::Init()
 	//m_vecMonster.push_back(Medusa);
 	//m_vecMonster.push_back(Harpy);
 
+	m_pWarnning = pWarrning;
 	m_pReady = pReady;
 	m_pDebugPauseUI = pPauseButton;
 	m_pDebugLoseUI = pLoseButton;
@@ -205,6 +210,9 @@ void CGameScene::Render()
 
 	if (m_pReady)
 		m_pReady->Render();
+
+	if (m_pWarnning)
+		m_pWarnning->Render();
 
 	m_cMutex.unlock();
 }
@@ -802,19 +810,18 @@ bool CGameScene::CheckSpecificPartsID(string partsID)
 	return false;
 }
 
-void CGameScene::SelectRandomObject()
+D3DXVECTOR3 CGameScene::SelectRandomObject()
 {
 	CRandomNumberGenerator rand;
-	m_nSelectedObjectIndex = rand.GenInt(0, m_vecObject.size() - 1);
+	int index = rand.GenInt(0, m_vecObject.size() - 1);
+
+	return m_vecObject[index]->GetPosition();
 }
 
-bool CGameScene::CheckDistanceToSelectedObject()
+bool CGameScene::CheckDistanceToSelectedObject(D3DXVECTOR3 pos)
 {
-	D3DXVECTOR3 pos = m_vecObject[m_nSelectedObjectIndex]->GetPosition();
 	D3DXVECTOR3 size(1.5f, 100.0f, 1.5f);
 	CBoxCollision cCollsion(pos, size);
-
-	cCollsion.Render();
 
 	for (auto it : m_vecCharacters)
 	{

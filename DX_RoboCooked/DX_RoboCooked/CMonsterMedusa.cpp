@@ -4,8 +4,7 @@
 #include "CSkinnedMesh.h"
 #include "CSphereCollision.h"
 
-
-CMonsterMedusa::CMonsterMedusa(IInteractCenter* pInteractCenter):CMonster(pInteractCenter), m_nDestroyPartsPosition(0,0,0), m_pSkillAnim_1(nullptr)
+CMonsterMedusa::CMonsterMedusa(IInteractCenter *pInteractCenter) : CMonster(pInteractCenter), m_nDestroyPartsPosition(0, 0, 0), m_pSkillAnim_1(nullptr)
 {
 	m_fFirstSkillConditionTime = 40.0f;
 	m_fUltimateSkillConditionTime = 280.0f;
@@ -13,17 +12,15 @@ CMonsterMedusa::CMonsterMedusa(IInteractCenter* pInteractCenter):CMonster(pInter
 	m_debugName = "메두사";
 	ChooseSkillCondition();
 
-
-
 	vector<D3DXVECTOR3> vecProjVertex, vecTrans;
 	vecProjVertex.push_back(D3DXVECTOR3(-0.7, -0.7, 0.5));
-	vecProjVertex.push_back(D3DXVECTOR3(-0.7,  0.2, 0.5));
-	vecProjVertex.push_back(D3DXVECTOR3( 0.7,  0.2, 0.5));
-	vecProjVertex.push_back(D3DXVECTOR3( 0.7, -0.7, 0.5));
+	vecProjVertex.push_back(D3DXVECTOR3(-0.7, 0.2, 0.5));
+	vecProjVertex.push_back(D3DXVECTOR3(0.7, 0.2, 0.5));
+	vecProjVertex.push_back(D3DXVECTOR3(0.7, -0.7, 0.5));
 	vecTrans.resize(4);
 
 	D3DXVECTOR3 vTrans;
-	
+
 	D3DXMATRIXA16 matView, matProj;
 	g_pD3DDevice->GetTransform(D3DTS_PROJECTION, &matProj);
 	g_pD3DDevice->GetTransform(D3DTS_VIEW, &matView);
@@ -32,18 +29,18 @@ CMonsterMedusa::CMonsterMedusa(IInteractCenter* pInteractCenter):CMonster(pInter
 	for (int i = 0; i < vecProjVertex.size(); ++i)
 	{
 		D3DXVec3Unproject(&vecTrans[i], &vecProjVertex[i], nullptr, &matProj, &matView, nullptr);
-		CSkinnedMesh* p = new CSkinnedMesh;
+		CSkinnedMesh *p = new CSkinnedMesh;
 		sTemp = skillname + std::to_string(i + 1) + ".x";
-		p->Load("data/model/monster", const_cast<char*> (sTemp.c_str()));
+		p->Load("data/model/monster", const_cast<char *>(sTemp.c_str()));
 		m_vecSkillAnim_2.push_back(p);
 	}
-	D3DXVec3Unproject(&vTrans, &D3DXVECTOR3(0,-0.2,0.5f), nullptr, &matProj, &matView, nullptr);
+	D3DXVec3Unproject(&vTrans, &D3DXVECTOR3(0, -0.2, 0.5f), nullptr, &matProj, &matView, nullptr);
 
 	m_pSkillAnim_1 = new CSkinnedMesh;
 	m_pSkillAnim_1->Load("data/model/monster", "medusa_skill_1.x");
 
 	D3DXVECTOR3 vLookAt(matView._21, matView._22, matView._23);
-	
+
 	float rot = -D3DXVec3Dot(&vLookAt, &D3DXVECTOR3(0, 0, 1));
 	D3DXMATRIXA16 matScale, matTrans, matX, matY;
 	D3DXMatrixScaling(&matScale, 0.01, 0.01, 0.01);
@@ -70,11 +67,10 @@ CMonsterMedusa::CMonsterMedusa(IInteractCenter* pInteractCenter):CMonster(pInter
 	}
 }
 
-
 CMonsterMedusa::~CMonsterMedusa()
 {
 	SafeDelete(m_pSkillAnim_1);
-	for (vector<CSkinnedMesh*>::value_type p : m_vecSkillAnim_2)
+	for (vector<CSkinnedMesh *>::value_type p : m_vecSkillAnim_2)
 	{
 		SafeDelete(p);
 	}
@@ -82,13 +78,13 @@ CMonsterMedusa::~CMonsterMedusa()
 
 void CMonsterMedusa::Render()
 {
-	if(m_stSkillUsing.isFirstSkill)
+	if (m_stSkillUsing.isFirstSkill)
 	{
 		g_pD3DDevice->SetTransform(D3DTS_WORLD, &m_matSkillAnim_1);
 		g_pD3DDevice->SetRenderState(D3DRS_LIGHTING, true);
 		m_pSkillAnim_1->Render(nullptr);
 	}
-	if(m_stSkillUsing.isSecondSkill)
+	if (m_stSkillUsing.isSecondSkill)
 	{
 		g_pD3DDevice->SetRenderState(D3DRS_LIGHTING, true);
 		for (int i = 0; i < 4; ++i)
@@ -97,7 +93,7 @@ void CMonsterMedusa::Render()
 			m_vecSkillAnim_2[i]->Render(nullptr);
 		}
 	}
-	if(m_stSkillUsing.isUltimateSkill)
+	if (m_stSkillUsing.isUltimateSkill)
 	{
 		m_cPartsDestroyer.Render();
 	}
@@ -105,7 +101,7 @@ void CMonsterMedusa::Render()
 
 void CMonsterMedusa::Update()
 {
-	
+
 	if (FirstSkillTriggered())
 	{
 		m_stSkillUsing.FirstSkillProperty = FirstSkill();
@@ -130,7 +126,7 @@ void CMonsterMedusa::Update()
 
 	if (m_eSecondSkillEvent == eEvent::SpecificArea)
 	{
-		if (m_pInteractCenter->CheckDistanceToSelectedObject())
+		if (m_pInteractCenter->CheckDistanceToSelectedObject(m_vSpecificAreaPosition))
 		{
 			m_isArrive = true;
 		}
@@ -141,7 +137,7 @@ void CMonsterMedusa::Update()
 		m_stSkillUsing.UltimateSkillProperty = UltimateSkill();
 		m_stSkillUsing.isUltimateSkill = true;
 		m_pInteractCenter->MonsterSkill(UltimateSkill(), UltimateSkillTime());
-		
+
 		m_cPartsDestroyer.SetActive(m_nDestroyPartsPosition, 5.0f, 2.0f);
 	}
 
@@ -163,7 +159,6 @@ void CMonsterMedusa::Update()
 		m_stSkillUsing.UltimateSkillProperty = eSkill::None;
 	}
 	UpdateMonster();
-
 }
 
 void CMonsterMedusa::UpdateMonster()
@@ -183,7 +178,6 @@ void CMonsterMedusa::UpdateMonster()
 	{
 		m_pInteractCenter->DestroyPartsOnPosition(m_nDestroyPartsPosition);
 	}
-	
 }
 
 eSkill CMonsterMedusa::UltimateSkill()
@@ -192,6 +186,3 @@ eSkill CMonsterMedusa::UltimateSkill()
 	m_nDestroyPartsPosition = m_pInteractCenter->GetRandomPartsPosition();
 	return eSkill::DestroyParts;
 }
-
-
-

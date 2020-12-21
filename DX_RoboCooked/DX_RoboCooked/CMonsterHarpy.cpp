@@ -5,13 +5,12 @@
 #include "IInteractCenter.h"
 #include "CTornado.h"
 
-
-CMonsterHarpy::CMonsterHarpy(IInteractCenter* pInteractCenter) :CMonster(pInteractCenter), m_pTornado(nullptr), m_nWindDir(1)
+CMonsterHarpy::CMonsterHarpy(IInteractCenter *pInteractCenter) : CMonster(pInteractCenter), m_pTornado(nullptr), m_nWindDir(1)
 {
 	m_fFirstSkillConditionTime = 30.0f;
 	m_fUltimateSkillConditionTime = 120.0f;
 	m_sSpecificPartsID = "B03";
-	m_debugName = "ÇÏÇÇ";
+	m_debugName = "ï¿½ï¿½ï¿½ï¿½";
 	ChooseSkillCondition();
 	m_vecSkillAnim_2.resize(2);
 	g_EventManager->Attach(eEvent::DeleteTornado, this);
@@ -19,11 +18,10 @@ CMonsterHarpy::CMonsterHarpy(IInteractCenter* pInteractCenter) :CMonster(pIntera
 	m_vecSkillAnim_2[1] = new CHarpyWing_R;
 }
 
-
 CMonsterHarpy::~CMonsterHarpy()
 {
 	SafeDelete(m_pTornado);
-	for (vector<CHarpyWing*>::value_type p : m_vecSkillAnim_2)
+	for (vector<CHarpyWing *>::value_type p : m_vecSkillAnim_2)
 	{
 		SafeDelete(p);
 	}
@@ -31,7 +29,7 @@ CMonsterHarpy::~CMonsterHarpy()
 
 void CMonsterHarpy::Render()
 {
-	if(m_pTornado)
+	if (m_pTornado)
 		m_pTornado->Render();
 	if (m_stSkillUsing.isFirstSkill)
 	{
@@ -48,7 +46,7 @@ void CMonsterHarpy::Render()
 	}
 }
 
-void CMonsterHarpy::AddForce(CActor * target)
+void CMonsterHarpy::AddForce(CActor *target)
 {
 	if (m_pTornado)
 	{
@@ -65,7 +63,7 @@ eSkill CMonsterHarpy::SecondSkill()
 	if (m_vecObjectPosition.empty())
 		return eSkill::None;
 
-	if(m_pTornado)
+	if (m_pTornado)
 		return eSkill::Tornado;
 
 	g_SoundManager->PlaySFX("wind");
@@ -74,8 +72,7 @@ eSkill CMonsterHarpy::SecondSkill()
 	int index = rand.GenInt(0, m_vecObjectPosition.size() - 1);
 	m_pTornado = new CTornado(m_vecObjectPosition[index]);
 
-
-	return eSkill::Tornado; 
+	return eSkill::Tornado;
 }
 
 void CMonsterHarpy::DeleteTornado()
@@ -108,7 +105,7 @@ void CMonsterHarpy::Update()
 
 	if (m_eSecondSkillEvent == eEvent::SpecificArea)
 	{
-		if (m_pInteractCenter->CheckDistanceToSelectedObject())
+		if (m_pInteractCenter->CheckDistanceToSelectedObject(m_vSpecificAreaPosition))
 		{
 			m_isArrive = true;
 		}
@@ -143,12 +140,11 @@ void CMonsterHarpy::Update()
 		m_stSkillUsing.UltimateSkillProperty = eSkill::None;
 	}
 	UpdateMonster();
-
 }
 
 void CMonsterHarpy::UpdateMonster()
 {
-	if(m_stSkillUsing.isFirstSkill)
+	if (m_stSkillUsing.isFirstSkill)
 	{
 		m_cSkillAnim_1.Update();
 	}
@@ -162,6 +158,3 @@ void CMonsterHarpy::UpdateMonster()
 		m_cSkillAnim_Ultimate.Update();
 	}
 }
-
-
-

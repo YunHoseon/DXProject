@@ -84,6 +84,7 @@ protected:
 	INT							m_nBluePrintChangeCount;
 	string						m_sSpecificPartsID;
 	vector<D3DXVECTOR3>			m_vecObjectPosition;
+	D3DXVECTOR3					m_vSpecificAreaPosition;
 
 	//디버그용
 	string						m_debugName;

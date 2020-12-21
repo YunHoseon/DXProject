@@ -45,7 +45,8 @@ enum class eEvent
 	LoadingEnd,
 	MakerClose,
 	ControllClose,
-	ReadyBoard
+	ReadyBoard,
+	CallWarning
 };
 
 

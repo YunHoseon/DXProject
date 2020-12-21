@@ -1,25 +1,8 @@
 ﻿#include "stdafx.h"
 #include "CMonster.h"
 
-CMonster::CMonster(IInteractCenter* pInteractCenter) 
-			: m_pInteractCenter(pInteractCenter)
-			, m_eSkillCondition()
-			, m_eSecondSkillEvent(eEvent::None)
-			, m_fFirstSkillConditionTime(0.0f)
-			, m_fFirstSkillConditionElapsedTime(0.0f)
-			, m_isArrive(false)
-			, m_fTravelDistance(0.0f)
-			, m_nCombinUseCount(0)
-			, m_nVendingUseCount(0)
-			, m_nCrowdControlCount(0)
-			, m_nThrowPartsCount(0)
-			, m_nSpinPartsCount(0)
-			, m_sSpecificPartsID("")
-			, m_fFirstSkillElapsedTime(0.0f)
-			, m_fSecondSkillElapsedTime(0.0f)
-			, m_fUltimateSkillElapsedTime(0.0f)
-			, m_fUltimateSkillConditionTime(999.0f)
-			, m_nBluePrintChangeCount(0)
+CMonster::CMonster(IInteractCenter *pInteractCenter)
+	: m_pInteractCenter(pInteractCenter), m_eSkillCondition(), m_eSecondSkillEvent(eEvent::None), m_fFirstSkillConditionTime(0.0f), m_fFirstSkillConditionElapsedTime(0.0f), m_isArrive(false), m_fTravelDistance(0.0f), m_nCombinUseCount(0), m_nVendingUseCount(0), m_nCrowdControlCount(0), m_nThrowPartsCount(0), m_nSpinPartsCount(0), m_sSpecificPartsID(""), m_fFirstSkillElapsedTime(0.0f), m_fSecondSkillElapsedTime(0.0f), m_fUltimateSkillElapsedTime(0.0f), m_fUltimateSkillConditionTime(999.0f), m_nBluePrintChangeCount(0), m_vSpecificAreaPosition(0, 0, 0)
 
 {
 	g_EventManager->Attach(eEvent::CompleteBluePrint, this);
@@ -49,7 +32,7 @@ void CMonster::Update()
 
 	if (m_eSecondSkillEvent == eEvent::SpecificArea)
 	{
-		if (m_pInteractCenter->CheckDistanceToSelectedObject())
+		if (m_pInteractCenter->CheckDistanceToSelectedObject(m_vSpecificAreaPosition))
 		{
 			m_isArrive = true;
 		}
@@ -84,10 +67,9 @@ void CMonster::Update()
 
 void CMonster::Destroy()
 {
-	
 }
 
-bool CMonster::OnEvent(eEvent eEvent, void * _value)
+bool CMonster::OnEvent(eEvent eEvent, void *_value)
 {
 	switch (eEvent)
 	{
@@ -212,7 +194,7 @@ void CMonster::ChooseSkillCondition()
 			m_eSkillCondition = eSkillCondition::SpecificArea;
 			g_EventManager->Attach(eEvent::SpecificArea, this);
 			m_eSecondSkillEvent = eEvent::SpecificArea;
-			m_pInteractCenter->SelectRandomObject();
+			m_vSpecificAreaPosition = m_pInteractCenter->SelectRandomObject();
 		}
 		else if (random < 48)
 		{
@@ -246,39 +228,45 @@ void CMonster::ChooseSkillCondition()
 		}
 	}
 
-
-
 	//테스트용
 	/*m_eSkillCondition = eSkillCondition::SpecificArea;
 	g_EventManager->Attach(eEvent::SpecificArea, this);
 	m_eSecondSkillEvent = eEvent::SpecificArea;
 	m_pInteractCenter->SelectRandomObject();*/
 
-	
 	_DEBUG_COMMENT switch (m_eSkillCondition)
-	_DEBUG_COMMENT {
-	_DEBUG_COMMENT case eSkillCondition::TravelDistance:
-	_DEBUG_COMMENT 	cout << m_debugName << ":" << "걷기 조건" << endl;
-	_DEBUG_COMMENT 	break;
-	_DEBUG_COMMENT case eSkillCondition::SpecificArea:
-	_DEBUG_COMMENT 	cout << m_debugName << ":" << "특정지역 조건" << endl;
-	_DEBUG_COMMENT 	break;
-	_DEBUG_COMMENT case eSkillCondition::CombinUse:
-	_DEBUG_COMMENT 	cout << m_debugName << ":" << "조합기사용 조건" << endl;
-	_DEBUG_COMMENT 	break;
-	_DEBUG_COMMENT case eSkillCondition::VendingUse:
-	_DEBUG_COMMENT 	cout << m_debugName << ":" << "자판기사용 조건" << endl;
-	_DEBUG_COMMENT 	break;
-	_DEBUG_COMMENT case eSkillCondition::CrowdControl:
-	_DEBUG_COMMENT 	cout << m_debugName << ":" << "CC걸린횟수 조건" << endl;
-	_DEBUG_COMMENT 	break;
-	_DEBUG_COMMENT case eSkillCondition::ThrowParts:
-	_DEBUG_COMMENT 	cout << m_debugName << ":" << "파츠던지기횟수 조건" << endl;
-	_DEBUG_COMMENT 	break;
-	_DEBUG_COMMENT case eSkillCondition::SpinParts:
-	_DEBUG_COMMENT 	cout << m_debugName << ":" << "파츠돌리기횟수 조건" << endl;
-	_DEBUG_COMMENT 	break;
-	_DEBUG_COMMENT }
+		_DEBUG_COMMENT
+	{
+		_DEBUG_COMMENT case eSkillCondition::TravelDistance : _DEBUG_COMMENT cout << m_debugName << ":"
+																				  << "걷기 조건"
+																				  << endl;
+		_DEBUG_COMMENT break;
+		_DEBUG_COMMENT case eSkillCondition::SpecificArea : _DEBUG_COMMENT cout << m_debugName << ":"
+																				<< "특정지역 조건"
+																				<< endl;
+		_DEBUG_COMMENT break;
+		_DEBUG_COMMENT case eSkillCondition::CombinUse : _DEBUG_COMMENT cout << m_debugName << ":"
+																			 << "조합기사용 조건"
+																			 << endl;
+		_DEBUG_COMMENT break;
+		_DEBUG_COMMENT case eSkillCondition::VendingUse : _DEBUG_COMMENT cout << m_debugName << ":"
+																			  << "자판기사용 조건"
+																			  << endl;
+		_DEBUG_COMMENT break;
+		_DEBUG_COMMENT case eSkillCondition::CrowdControl : _DEBUG_COMMENT cout << m_debugName << ":"
+																				<< "CC걸린횟수 조건"
+																				<< endl;
+		_DEBUG_COMMENT break;
+		_DEBUG_COMMENT case eSkillCondition::ThrowParts : _DEBUG_COMMENT cout << m_debugName << ":"
+																			  << "파츠던지기횟수 조건"
+																			  << endl;
+		_DEBUG_COMMENT break;
+		_DEBUG_COMMENT case eSkillCondition::SpinParts : _DEBUG_COMMENT cout << m_debugName << ":"
+																			 << "파츠돌리기횟수 조건"
+																			 << endl;
+		_DEBUG_COMMENT break;
+		_DEBUG_COMMENT
+	}
 }
 
 bool CMonster::CheckDurationTimeFirstSkill()
@@ -344,9 +332,9 @@ void CMonster::AddBluePrintCount()
 	m_nBluePrintChangeCount++;
 }
 
-void CMonster::TravelDistanceSkill(void * _value)
+void CMonster::TravelDistanceSkill(void *_value)
 {
-	ST_TravelDistanceEvent* data = static_cast<ST_TravelDistanceEvent*>(_value);
+	ST_TravelDistanceEvent *data = static_cast<ST_TravelDistanceEvent *>(_value);
 
 	m_fTravelDistance += data->fDistance;
 }
@@ -382,4 +370,3 @@ void CMonster::SkillConditionInit()
 		break;
 	}
 }
-

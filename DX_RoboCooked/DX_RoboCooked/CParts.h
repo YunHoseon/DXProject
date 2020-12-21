@@ -8,6 +8,7 @@ class CParts :
 {
 private:
 	D3DXVECTOR3						m_vCombinatorPosition;
+	D3DXVECTOR3						m_vOnCombinatorPosition;
 	D3DXVECTOR3*					m_vGrabPosition;
 
 	//ST_SPHERE						m_sphere;
@@ -18,7 +19,7 @@ private:
 
 	bool							m_isMoveParts;
 	string							m_sPartsID;
-	//int								m_nRotAngleY;
+	//int							m_nRotAngleY;
 	eCombinatorPartsLevel			m_eLevel;
 	string							m_sFormula;
 	CPartCombinator*				m_pPartsCombinator;
@@ -57,7 +58,7 @@ public:
 	void SetGrabPosition(D3DXVECTOR3* vPosition);
 
 	bool GetMoveParts() { return m_isMoveParts; }
-	void SetMoveParts(bool b) { m_isMoveParts = b; }
+	void SetMoveParts(bool b, D3DXVECTOR3 pos) { m_isMoveParts = b; m_vOnCombinatorPosition = pos; }
 
 	eCombinatorPartsLevel GetCombinePartsLevel() const { return m_eLevel; }
 

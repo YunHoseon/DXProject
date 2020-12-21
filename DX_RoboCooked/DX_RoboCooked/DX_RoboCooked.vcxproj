@@ -241,6 +241,8 @@
     <ClInclude Include="CUITrafficLightThreeBoard.h" />
     <ClInclude Include="CUITryAgain.h" />
     <ClInclude Include="CUIWind.h" />
+    <ClInclude Include="CUIWarning.h" />
+    <ClInclude Include="CUIWarningBoard.h" />
     <ClInclude Include="CUIWhiteboard.h" />
     <ClInclude Include="CWall.h" />
     <ClInclude Include="CWater.h" />
@@ -385,6 +387,8 @@
     <ClCompile Include="CUITrafficLightThreeBoard.cpp" />
     <ClCompile Include="CUITryAgain.cpp" />
     <ClCompile Include="CUIWind.cpp" />
+    <ClCompile Include="CUIWarning.cpp" />
+    <ClCompile Include="CUIWarningBoard.cpp" />
     <ClCompile Include="CUIWhiteboard.cpp" />
     <ClCompile Include="CWall.cpp" />
     <ClCompile Include="CWater.cpp" />

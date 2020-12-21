@@ -9,7 +9,7 @@ CPartCombinator::CPartCombinator(IInteractCenter* pInteractCenter, eCombinatorPa
 	m_eCombinatorLoadState(eCombinatorLoadState::LoadPossible),
 	m_CombinatorTexture(nullptr),
 	m_pPartsInteractCollision(NULL),
-	m_vOnCombinatorPosition(vPosition.x, vPosition.y + 2.5f, vPosition.z),
+	//m_vOnCombinatorPosition(vPosition.x, vPosition.y + 2.5f, vPosition.z),
 	m_pParts(NULL),
 	m_isCombine(false),
 	m_fElapsedTime(0),
@@ -19,6 +19,10 @@ CPartCombinator::CPartCombinator(IInteractCenter* pInteractCenter, eCombinatorPa
 	m_nMaxPartsCount(0),
 	m_pSMesh(nullptr)
 {
+	m_vecOnCombinatorPosition.push_back(D3DXVECTOR3(vPosition.x - 0.5f, vPosition.y + 2.5f, vPosition.z));
+	m_vecOnCombinatorPosition.push_back(D3DXVECTOR3(vPosition.x, vPosition.y + 2.5f, vPosition.z));
+	m_vecOnCombinatorPosition.push_back(D3DXVECTOR3(vPosition.x + 0.5f, vPosition.y + 2.5f, vPosition.z));
+
 	m_pInteractCenter = pInteractCenter;
 	m_vPosition = vPosition;
 	m_fMass = 9999.f;

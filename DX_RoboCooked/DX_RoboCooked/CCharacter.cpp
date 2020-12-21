@@ -8,31 +8,31 @@
 #include "CUICharge.h"
 
 CCharacter::CCharacter(int nPlayerNum) : m_pSkinnedMesh(nullptr),
-                                         m_ePlayerState(ePlayerState::None),
-                                         m_pInteractCollision(nullptr),
-                                         m_vGrabPartsPosition(0, 1, 0),
-                                         m_pParts(nullptr),
-                                         m_arrElapsedTime({0, 0, 0}),
-                                         m_arrCoolDown({0, 0, 3}),
-                                         m_arrKeyDown({false, false, false}),
-                                         m_isMoveKeyDown(false),
-                                         m_pInputKey(InputManager->GetInputKey(nPlayerNum)),
-                                         //m_pMesh(nullptr),
-                                         //m_stMtl({}),
-                                         m_fMinThrowPower(0.01f),
-                                         m_fMaxThrowPower(0.1f),
-                                         m_fThrowPower(m_fMinThrowPower),
-                                         m_fThrowPowerUpSpeed(0.003f),
-                                         m_pCC(nullptr),
-                                         m_isDummy(false),
-                                         m_vDefaultPosition(0, 0, 0),
+										 m_ePlayerState(ePlayerState::None),
+										 m_pInteractCollision(nullptr),
+										 m_vGrabPartsPosition(0, 1, 0),
+										 m_pParts(nullptr),
+										 m_arrElapsedTime({0, 0, 0}),
+										 m_arrCoolDown({0, 0, 3}),
+										 m_arrKeyDown({false, false, false}),
+										 m_isMoveKeyDown(false),
+										 m_pInputKey(InputManager->GetInputKey(nPlayerNum)),
+										 //m_pMesh(nullptr),
+										 //m_stMtl({}),
+										 m_fMinThrowPower(0.01f),
+										 m_fMaxThrowPower(0.1f),
+										 m_fThrowPower(m_fMinThrowPower),
+										 m_fThrowPowerUpSpeed(0.003f),
+										 m_pCC(nullptr),
+										 m_isDummy(false),
+										 m_vDefaultPosition(0, 0, 0),
 										 m_pCharge(nullptr)
 {
 	m_fBaseSpeed = 0.02f;
 
 	m_pCC = new CCCNone;
 	m_pCC->SetTarget(&m_matWorld);
-	//m_pCharge = new CUICharge(&m_vPosition,&m_fThrowPower,m_fMaxThrowPower);
+	m_pCharge = new CUICharge(&m_vPosition, &m_fThrowPower, m_fMaxThrowPower);
 }
 
 CCharacter::~CCharacter()
@@ -74,18 +74,18 @@ void CCharacter::Update()
 
 	if (m_pCC->IsEnd())
 		DeleteCC();
-	
+
 	if (m_pInteractCollision)
 		m_pInteractCollision->Update();
 	if (m_pCollision)
 		m_pCollision->Update();
 }
 
-bool CCharacter::OnEvent(eEvent eEvent, void* _value)
+bool CCharacter::OnEvent(eEvent eEvent, void *_value)
 {
 	if (m_pInteractCenter->GetStop())
 		return true;
-	
+
 	switch (eEvent)
 	{
 	case eEvent::KeyPress:
@@ -103,16 +103,16 @@ bool CCharacter::OnEvent(eEvent eEvent, void* _value)
 	return true;
 }
 
-void CCharacter::PressKey(void* _value)
+void CCharacter::PressKey(void *_value)
 {
-	ST_KeyInputEvent* data = static_cast<ST_KeyInputEvent*>(_value);
-	const float& CurrentTime = g_pTimeManager->GetLastUpdateTime();
+	ST_KeyInputEvent *data = static_cast<ST_KeyInputEvent *>(_value);
+	const float &CurrentTime = g_pTimeManager->GetLastUpdateTime();
 	if (data->wKey == m_pInputKey->moveFowardKey)
 	{
 		if (m_pCC->IsMovable() == false)
 			return;
 		if (m_pParts && m_pCC->StopWithParts())
-			return; 
+			return;
 		//g_SoundManager->PlaySFX("run_1");
 		Rotate(0);
 	}
@@ -133,7 +133,7 @@ void CCharacter::PressKey(void* _value)
 				m_fRotY -= D3DX_PI * 2.f;
 		}
 		//g_SoundManager->PlaySFX("run_1");
-		Rotate(D3DX_PI * 1.5f );
+		Rotate(D3DX_PI * 1.5f);
 	}
 	else if (data->wKey == m_pInputKey->moveBackKey)
 	{
@@ -168,34 +168,36 @@ void CCharacter::PressKey(void* _value)
 		switch (m_ePlayerState)
 		{
 		case ePlayerState::None:
+		{
+			if (m_arrKeyDown[0] == false)
 			{
-				if(m_arrKeyDown[0] == false)
-				{
-					m_arrKeyDown[0] = true;
-					m_pInteractCenter->GetInteractObject(this);
-				}
+				m_arrKeyDown[0] = true;
+				m_pInteractCenter->GetInteractObject(this);
 			}
-			break;
+		}
+		break;
 		case ePlayerState::Grab:
-			{
-				if (m_arrKeyDown[0] == false)
-					m_arrKeyDown[0] = true;
+		{
+			if (m_arrKeyDown[0] == false)
+				m_arrKeyDown[0] = true;
 
-				if (m_fThrowPower < m_fMaxThrowPower)
-				{
-					m_fThrowPower += m_fThrowPowerUpSpeed * TimeRevision;
-					g_SoundManager->PlaySFX("charge_up");
-				}
-				if (m_fThrowPower >= m_fMaxThrowPower)
-				{
-					m_fThrowPower = m_fMaxThrowPower;
-					g_SoundManager->PlaySFX("charge_complete");
-				}
-			
-				_DEBUG_COMMENT cout << "throw power : " << m_fThrowPower << endl;
+			if (m_fThrowPower < m_fMaxThrowPower)
+			{
+				m_fThrowPower += m_fThrowPowerUpSpeed * TimeRevision;
+				g_SoundManager->PlaySFX("charge_up");
 			}
-			break;
-		default: ;
+			if (m_fThrowPower >= m_fMaxThrowPower)
+			{
+				m_fThrowPower = m_fMaxThrowPower;
+				g_SoundManager->PlaySFX("charge_complete");
+			}
+			if (m_pCharge)
+				m_pCharge->UpdateCharging(m_fThrowPower, m_fMaxThrowPower);
+
+			_DEBUG_COMMENT cout << "throw power : " << m_fThrowPower << endl;
+		}
+		break;
+		default:;
 		}
 	}
 	else if (data->wKey == m_pInputKey->interactableKey2)
@@ -225,16 +227,15 @@ void CCharacter::PressKey(void* _value)
 		break;
 		default:;
 		}
-
 	}
 	else if (data->wKey == m_pInputKey->interactableKey3)
 	{
-		if(m_arrKeyDown[2] == false)
+		if (m_arrKeyDown[2] == false)
 		{
 			m_arrKeyDown[2] = true;
-			if(CurrentTime - m_arrElapsedTime[2] > m_arrCoolDown[2])
+			if (CurrentTime - m_arrElapsedTime[2] > m_arrCoolDown[2])
 			{
-				//´ë½Ã -> Á¡¸ê·Î ¼öÁ¤ÇØ¾ßÇÔ
+				//ï¿½ï¿½ï¿½ -> ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Ø¾ï¿½ï¿½ï¿½
 				D3DXVECTOR3 jump = m_vDirection;
 				jump.y += .2f;
 				D3DXVec3Normalize(&jump, &jump);
@@ -244,33 +245,34 @@ void CCharacter::PressKey(void* _value)
 				m_arrElapsedTime[2] = CurrentTime;
 			}
 			//_DEBUG_COMMENT cout << "current time : " << g_pTimeManager->GetElapsedTime() << endl;
-			_DEBUG_COMMENT cout << "cool down : " << CurrentTime - m_arrElapsedTime[2] <<endl;
+			_DEBUG_COMMENT cout << "cool down : " << CurrentTime - m_arrElapsedTime[2] << endl;
 		}
 	}
-
 }
 
-void CCharacter::ReleaseKey(void* _value)
+void CCharacter::ReleaseKey(void *_value)
 {
-	ST_KeyInputEvent* data = static_cast<ST_KeyInputEvent*>(_value);
-	const float& CurrentTime = g_pTimeManager->GetLastUpdateTime();
+	ST_KeyInputEvent *data = static_cast<ST_KeyInputEvent *>(_value);
+	const float &CurrentTime = g_pTimeManager->GetLastUpdateTime();
 	if (data->wKey == m_pInputKey->interactableKey1)
 	{
 		switch (m_ePlayerState)
 		{
-		case ePlayerState::None: 
+		case ePlayerState::None:
 			if (m_pParts)
 				SetPlayerState(ePlayerState::Grab);
 			break;
-		case ePlayerState::Grab: 
+		case ePlayerState::Grab:
 			SetPlayerState(ePlayerState::None);
 			m_pParts->ThrowParts(m_vDirection * m_fThrowPower * TimeRevision);
 			m_pParts = nullptr;
-			
+
 			g_SoundManager->PlaySFX("throw");
 			m_fThrowPower = m_fMinThrowPower;
+			if (m_pCharge)
+				m_pCharge->SetChildActive(false);
 			break;
-		default: ;
+		default:;
 		}
 		m_arrKeyDown[0] = false;
 	}
@@ -278,11 +280,11 @@ void CCharacter::ReleaseKey(void* _value)
 	{
 		switch (m_ePlayerState)
 		{
-		case ePlayerState::None: 
+		case ePlayerState::None:
 			break;
 		case ePlayerState::Grab:
 			break;
-		default: ;
+		default:;
 		}
 		m_arrKeyDown[1] = false;
 	}
@@ -298,22 +300,26 @@ void CCharacter::ReleaseKey(void* _value)
 		}
 		m_arrKeyDown[2] = false;
 	}
-	
+
 	_DEBUG_COMMENT else if (data->wKey == 'K')
-	_DEBUG_COMMENT {
-	_DEBUG_COMMENT 	m_fBaseSpeed += 0.01f;
-	_DEBUG_COMMENT	cout << "chara speed : " << m_fBaseSpeed << endl;
-	_DEBUG_COMMENT }
+		_DEBUG_COMMENT
+	{
+		_DEBUG_COMMENT m_fBaseSpeed += 0.01f;
+		_DEBUG_COMMENT cout << "chara speed : " << m_fBaseSpeed << endl;
+		_DEBUG_COMMENT
+	}
 	_DEBUG_COMMENT else if (data->wKey == 'L')
-	_DEBUG_COMMENT {
-	_DEBUG_COMMENT 	m_fBaseSpeed -= 0.01f;
-	_DEBUG_COMMENT	cout << "chara speed : " << m_fBaseSpeed << endl;
-	_DEBUG_COMMENT }
+		_DEBUG_COMMENT
+	{
+		_DEBUG_COMMENT m_fBaseSpeed -= 0.01f;
+		_DEBUG_COMMENT cout << "chara speed : " << m_fBaseSpeed << endl;
+		_DEBUG_COMMENT
+	}
 }
 
-void CCharacter::SetKeyChange(void* _value)
+void CCharacter::SetKeyChange(void *_value)
 {
-	ST_PLAYER_INPUTKEY* data = static_cast<ST_PLAYER_INPUTKEY*>(_value);
+	ST_PLAYER_INPUTKEY *data = static_cast<ST_PLAYER_INPUTKEY *>(_value);
 	m_pInputKey = data;
 }
 
@@ -321,26 +327,25 @@ void CCharacter::Move()
 {
 	if (m_pCollision->GetIsCollide() == false && m_isMoveKeyDown)
 	{
-		AddForce(-m_vDirection * m_fBaseSpeed  * m_pCC->MultiplySpeed() * TimeRevision) ;
+		AddForce(-m_vDirection * m_fBaseSpeed * m_pCC->MultiplySpeed() * TimeRevision);
 		m_isMoveKeyDown = false;
 	}
-	
+
 	m_vVelocity += m_vAcceleration;
 	m_vPosition += m_vVelocity;
 
 	ST_TravelDistanceEvent data;
 	data.fDistance = D3DXVec3Length(&m_vVelocity);
-	g_EventManager->CallEvent(eEvent::TravelDistance, (void*)&data);
+	g_EventManager->CallEvent(eEvent::TravelDistance, (void *)&data);
 
 	if (m_vPosition.y < -100)
 		Reset();
-	
+
 	D3DXMatrixTranslation(&m_matT, m_vPosition.x, m_vPosition.y, m_vPosition.z);
 	m_matWorld = m_matS * m_matR * m_matT;
 	if (m_pCollision)
 		m_pCollision->Update();
 	SetForce();
-	
 }
 
 void CCharacter::Rotate(float fTargetRot)
@@ -362,12 +367,12 @@ void CCharacter::Rotate(float fTargetRot)
 
 	if (m_pCollision)
 		m_pCollision->Update();
-	
+
 	D3DXVECTOR3 dummy;
 	D3DXQuaternionToAxisAngle(&stLerpRot, &dummy, &m_fRotY);
 }
 
-void CCharacter::AddForce(const D3DXVECTOR3& vForce)
+void CCharacter::AddForce(const D3DXVECTOR3 &vForce)
 {
 	if (m_pParts)
 		m_vAcceleration += vForce / (m_fMass + m_pParts->GetMass());
@@ -375,7 +380,7 @@ void CCharacter::AddForce(const D3DXVECTOR3& vForce)
 		m_vAcceleration += vForce / m_fMass;
 }
 
-void CCharacter::SetForce(const D3DXVECTOR3& vForce)
+void CCharacter::SetForce(const D3DXVECTOR3 &vForce)
 {
 	if (m_pParts)
 		m_vAcceleration = vForce / (m_fMass + m_pParts->GetMass());
@@ -391,11 +396,10 @@ float CCharacter::GetMass()
 		return m_fMass;
 }
 
-void CCharacter::SetCC(CCrowdControl * cc)
+void CCharacter::SetCC(CCrowdControl *cc)
 {
 	SafeDelete(m_pCC);
 	m_pCC = cc;
-	
 }
 
 void CCharacter::DeleteCC()
@@ -416,7 +420,7 @@ void CCharacter::SetAnimState()
 {
 	if (!m_pSkinnedMesh)
 		return;
-	
+
 	switch (m_pSkinnedMesh->GetCurrentAnimIndex())
 	{
 	case Idle:
@@ -426,7 +430,7 @@ void CCharacter::SetAnimState()
 		else if (m_isMoveKeyDown && D3DXVec3Length(&m_vVelocity) > EPSILON * 10)
 			m_pSkinnedMesh->SetAnimationIndexBlend(Run);
 	}
-		break;
+	break;
 	case Run:
 	{
 		if (!m_pCC->IsMovable() || (m_pParts && m_pCC->StopWithParts()))
@@ -434,12 +438,11 @@ void CCharacter::SetAnimState()
 		else if (!m_isMoveKeyDown || D3DXVec3Length(&m_vVelocity) < EPSILON * 10)
 			m_pSkinnedMesh->SetAnimationIndexBlend(Idle);
 	}
-		break;
+	break;
 	case Spin:
 	{
-		
 	}
-		break;
+	break;
 	case Stun:
 	{
 		if (!(!m_pCC->IsMovable() || (m_pParts && m_pCC->StopWithParts())))
@@ -450,8 +453,8 @@ void CCharacter::SetAnimState()
 				m_pSkinnedMesh->SetAnimationIndexBlend(Run);
 		}
 	}
+	break;
+	default:
 		break;
-	default: break;
 	}
 }
-

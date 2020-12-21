@@ -522,6 +522,12 @@
     <ClInclude Include="CUIReadyBoard.h">
       <Filter>UI\Button\SubUI</Filter>
     </ClInclude>
+    <ClInclude Include="CUIWarning.h">
+      <Filter>UI\Button\MainUI</Filter>
+    </ClInclude>
+    <ClInclude Include="CUIWarningBoard.h">
+      <Filter>UI\Button\SubUI</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="stdafx.cpp">
@@ -945,6 +951,12 @@
       <Filter>UI\Button\MainUI</Filter>
     </ClCompile>
     <ClCompile Include="CUIReadyBoard.cpp">
+      <Filter>UI\Button\SubUI</Filter>
+    </ClCompile>
+    <ClCompile Include="CUIWarning.cpp">
+      <Filter>UI\Button\MainUI</Filter>
+    </ClCompile>
+    <ClCompile Include="CUIWarningBoard.cpp">
       <Filter>UI\Button\SubUI</Filter>
     </ClCompile>
   </ItemGroup>
