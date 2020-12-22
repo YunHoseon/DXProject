@@ -280,5 +280,3 @@ struct ST_PLAYER_INPUTKEY
 using std::cout;
 using std::endl;
 #endif
-
-LPD3DXEFFECT LoadShader(const char* filename);

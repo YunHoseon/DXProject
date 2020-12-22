@@ -126,7 +126,6 @@ void CGameScene::Init()
 	
 	m_cMutex.lock();
 
-	SetLight();
 	m_fGameTime = 300.0f;
 	m_vecStaticActor.push_back(wall);
 	m_vecStaticActor.push_back(pField);
@@ -1062,20 +1061,4 @@ string CGameScene::CalSec(int sec)
 	{
 		return "0" + std::to_string(a);
 	}
-}
-
-void CGameScene::SetLight()
-{
-	D3DLIGHT9 stLight;
-	ZeroMemory(&stLight, sizeof(D3DLIGHT9));
-	stLight.Type = D3DLIGHT_DIRECTIONAL;
-	stLight.Ambient = D3DXCOLOR(0.8f, 0.8f, 0.8f, 1.0f);
-	stLight.Diffuse = D3DXCOLOR(0.8f, 0.8f, 0.8f, 1.0f);
-	stLight.Specular = D3DXCOLOR(0.8f, 0.8f, 0.8f, 1.0f);
-
-	D3DXVECTOR3 vDir = D3DXVECTOR3(1.0f, -1.0f, 1.0f);
-	D3DXVec3Normalize(&vDir, &vDir);
-	stLight.Direction = vDir;
-	g_pD3DDevice->SetLight(0, &stLight);
-	g_pD3DDevice->LightEnable(0, true);
 }

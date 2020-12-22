@@ -77,6 +77,8 @@ HFONT CFontManager::Get3dFont(eFontType e)
 		wcscpy_s(lf.lfFaceName, L"a컴퓨터C");
 		AddFontResourceA("./data/Fonts/a컴퓨터C.ttf");
 	}
+
+	
 	m_map3dFont[e] = CreateFontIndirect(&lf);
 
 	return m_map3dFont[e];

@@ -37,7 +37,6 @@ void CPartStorage::Update()
 
 void CPartStorage::Render()
 {
-	g_pD3DDevice->SetRenderState(D3DRS_LIGHTING, true);
 	g_pD3DDevice->SetTransform(D3DTS_WORLD, &m_matWorld);
 	m_pSkinnedMesh->Render(nullptr);
 
