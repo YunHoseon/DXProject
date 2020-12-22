@@ -929,7 +929,7 @@ void CGameScene::DeleteCC()
 
 int CGameScene::IsGameClear()
 {
-	if (m_fGameTime <= 290)
+	if (m_fGameTime <= 0)
 	{
 		return 1; //실패
 	}
