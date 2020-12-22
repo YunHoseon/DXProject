@@ -1,5 +1,7 @@
 #include "stdafx.h"
 #include "CUI.h"
+//юс╫ц
+#include "CGameScene.h"
 
 float CUI::m_fHeightRevision = 0;
 float CUI::m_fWidthRevision = 0;
@@ -7,6 +9,7 @@ float CUI::m_fWidthRevision = 0;
 CUI::CUI() :
 	m_pParent(nullptr),
 	m_vPosition(0, 0),
+	m_vTextPosition(0,0),
 	m_vSize(0, 0),
 	m_eUIState(eUIState::Up),
 	m_eUIPastState(eUIState::Up),
@@ -15,7 +18,8 @@ CUI::CUI() :
 	m_eBtnEvent(eBtnEvent::None),
 	m_matWorld(g_matIdentity),
 	m_pTargetPosition(nullptr),
-	m_pTargetWorldTM(nullptr)
+	m_pTargetWorldTM(nullptr),
+	m_isMouseDown(false)
 {
 }
 
@@ -32,77 +36,151 @@ void CUI::SetParent(CUI * parent)
 
 void CUI::CheckPressIn(POINT pt)
 {
-	for (auto it : m_listUIchildren)
+	//for (auto it : m_listUIchildren)
+	//{
+	//	if (it->m_vPosition.x * m_fWidthRevision <= pt.x && (it->m_vPosition.x + it->m_vSize.x) * m_fWidthRevision >= pt.x
+	//		&& it->m_vPosition.y * m_fHeightRevision <= pt.y && (it->m_vPosition.y + it->m_vSize.y) * m_fHeightRevision >= pt.y)
+	//	{
+	//		if (it->GetlistUIchildrenSize() == 0)
+	//		{
+	//			if (it->m_isPress == false)
+	//			{
+	//				it->m_isPress = true;
+	//			}
+	//		}
+	//	}
+	//}
+	if (m_vPosition.x * m_fWidthRevision <= pt.x && (m_vPosition.x + m_vSize.x) * m_fWidthRevision >= pt.x
+		&&m_vPosition.y * m_fHeightRevision <= pt.y && (m_vPosition.y + m_vSize.y) * m_fHeightRevision >= pt.y)
 	{
-		if (it->m_vPosition.x * m_fWidthRevision <= pt.x && (it->m_vPosition.x + it->m_vSize.x) * m_fWidthRevision >= pt.x
-			&& it->m_vPosition.y * m_fHeightRevision <= pt.y && (it->m_vPosition.y + it->m_vSize.y) * m_fHeightRevision >= pt.y)
+		if (GetlistUIchildrenSize() == 0)
 		{
-			if (it->GetlistUIchildrenSize() == 0)
+			if (m_isPress == false)
 			{
-				if (it->m_isPress == false)
-				{
-					it->m_isPress = true;
-				}
+				m_isPress = true;
+			}
+		}
+		else
+		{
+			for (auto it : m_listUIchildren)
+			{
+				it->CheckPressIn(pt);
 			}
 		}
 	}
+
+	
 }
 
 void CUI::CheckReleaseIn(POINT pt)
 {
-	for (auto it : m_listUIchildren)
+	//for (auto it : m_listUIchildren)
+	//{
+	//	if (it->m_vPosition.x * m_fWidthRevision <= pt.x && (it->m_vPosition.x + it->m_vSize.x) * m_fWidthRevision >= pt.x
+	//		&& it->m_vPosition.y * m_fHeightRevision <= pt.y && (it->m_vPosition.y + it->m_vSize.y) * m_fHeightRevision >= pt.y)
+	//	{
+	//		if (it->GetlistUIchildrenSize() == 0)
+	//		{
+	//			if (it->m_isPress)
+	//			{
+	//				if (it->GetUIState() == eUIState::Hover)
+	//				{
+	//					//it->SetUIState(eUIState::Active);
+	//					it->ButtonEvent(it->m_eBtnEvent);
+	//				}
+	//				else if (it->GetUIState() == eUIState::Down)
+	//				{
+	//					it->SetUIState(eUIState::Up);
+	//				}
+	//			}
+	//		}
+	//	}
+	//	it->m_isPress = false;
+	//}
+
+	
+	if (m_vPosition.x * m_fWidthRevision <= pt.x && (m_vPosition.x + m_vSize.x) * m_fWidthRevision >= pt.x
+		&& m_vPosition.y * m_fHeightRevision <= pt.y && (m_vPosition.y + m_vSize.y) * m_fHeightRevision >= pt.y)
 	{
-		if (it->m_vPosition.x * m_fWidthRevision <= pt.x && (it->m_vPosition.x + it->m_vSize.x) * m_fWidthRevision >= pt.x
-			&& it->m_vPosition.y * m_fHeightRevision <= pt.y && (it->m_vPosition.y + it->m_vSize.y) * m_fHeightRevision >= pt.y)
+		if (GetlistUIchildrenSize() == 0)
 		{
-			if (it->GetlistUIchildrenSize() == 0)
+			if (m_isPress)
 			{
-				if (it->m_isPress)
+				if (GetUIState() == eUIState::Hover)
 				{
-					if (it->GetUIState() == eUIState::Hover)
-					{
-						//it->SetUIState(eUIState::Active);
-						it->ButtonEvent(it->m_eBtnEvent);
-					}
-					else if (it->GetUIState() == eUIState::Down)
-					{
-						it->SetUIState(eUIState::Up);
-					}
+					//SetUIState(eUIState::Active);
+					ButtonEvent(m_eBtnEvent);
+				}
+				else if (GetUIState() == eUIState::Down)
+				{
+					SetUIState(eUIState::Up);
 				}
 			}
 		}
-		it->m_isPress = false;
+		else
+		{
+			for (auto it : m_listUIchildren)
+			{
+				it->CheckReleaseIn(pt);
+			}
+		}
 	}
+	m_isPress = false;
 }
 
 void CUI::CheckInHover(POINT pt)
 {
 	if (m_isActive == false)
 		return;
-	for (auto it : m_listUIchildren)
-	{
-		if (it->m_vPosition.x * m_fWidthRevision <= pt.x && (it->m_vPosition.x + it->m_vSize.x) * m_fWidthRevision >= pt.x
-			&& it->m_vPosition.y * m_fHeightRevision <= pt.y && (it->m_vPosition.y + it->m_vSize.y) * m_fHeightRevision >= pt.y)
-		{
-			if (it->GetlistUIchildrenSize() == 0)
-			{
-				if (it->GetUIState() == eUIState::Down)
-					return;
 
-				it->SetUIPastState(it->GetUIState());
-				it->SetUIState(eUIState::Hover);
-			}
-			else
+	//for (auto it : m_listUIchildren)
+	//{
+	//	if (it->m_vPosition.x * m_fWidthRevision <= pt.x && (it->m_vPosition.x + it->m_vSize.x) * m_fWidthRevision >= pt.x
+	//		&& it->m_vPosition.y * m_fHeightRevision <= pt.y && (it->m_vPosition.y + it->m_vSize.y) * m_fHeightRevision >= pt.y)
+	//	{
+	//		if (it->GetlistUIchildrenSize() == 0)
+	//		{
+	//			if (it->GetUIState() == eUIState::Down)
+	//				return;
+
+	//			it->SetUIPastState(it->GetUIState());
+	//			it->SetUIState(eUIState::Hover);
+	//		}
+	//		else
+	//		{
+	//			it->CheckInHover(pt);
+	//		}
+	//	}
+	//	else if (it->GetUIState() == eUIState::Hover)
+	//	{
+	//		it->SetUIState(it->GetUIPastState());
+	//	}	
+	//}
+
+	
+	if (m_vPosition.x * m_fWidthRevision <= pt.x && (m_vPosition.x + m_vSize.x) * m_fWidthRevision >= pt.x
+		&& m_vPosition.y * m_fHeightRevision <= pt.y && (m_vPosition.y + m_vSize.y) * m_fHeightRevision >= pt.y)
+	{
+		if (GetlistUIchildrenSize() == 0)
+		{
+			if (GetUIState() == eUIState::Down)
+				return;
+
+			SetUIPastState(GetUIState());
+			SetUIState(eUIState::Hover);
+		}
+		else
+		{
+			for (auto it : m_listUIchildren)
 			{
 				it->CheckInHover(pt);
 			}
 		}
-		else if (it->GetUIState() == eUIState::Hover)
-		{
-			it->SetUIState(it->GetUIPastState());
-		}	
 	}
-	return;
+	else if (GetUIState() == eUIState::Hover)
+	{
+		SetUIState(GetUIPastState());
+	}
 }
 
 void CUI::InvertActive()
@@ -122,6 +200,11 @@ void CUI::ActiveUI()
 
 void CUI::CheckActiveEvent()
 {
+	for (auto it : m_listUIchildren)
+	{
+		it->CheckActiveEvent();
+	}
+
 	if (m_isActive)
 	{
 		g_EventManager->Attach(eEvent::MouseRelease, this);
@@ -132,7 +215,6 @@ void CUI::CheckActiveEvent()
 	{
 		g_EventManager->Detach(eEvent::MouseClick, this);
 		g_EventManager->Detach(eEvent::MouseHover, this);
-
 	}
 }
 
@@ -199,6 +281,23 @@ void CUI::ButtonEvent(eBtnEvent btnEvent)
 		break;
 	case eBtnEvent::ControllClose:
 		g_EventManager->CallEvent(eEvent::ControllClose, NULL);
+		break;
+	case eBtnEvent::StageClose:
+		g_EventManager->CallEvent(eEvent::StageClose, NULL);
+		break;
+	case eBtnEvent::STAGE1_1:
+	{
+			CGameScene* scene = new CGameScene;
+			thread _t1(&CGameScene::Load, scene, "data/js", "AllTest.json", &CGameScene::Init);
+			_t1.detach();
+		
+			CScene* pBeforeScene = g_SceneManager->SetCurrentScene(scene);
+			if (pBeforeScene)
+			{
+				thread _t2([pBeforeScene]() { delete pBeforeScene; });
+				_t2.detach();
+			}
+	}
 		break;
 	}
 }

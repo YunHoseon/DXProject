@@ -4,14 +4,16 @@
 class CUIMainScreen;
 class CUIMaker;
 class CUIControll;
+class CUIStageSelect;
 
 class CMainScene :
 	public CScene
 {
 private:
 	CUIMainScreen*	m_pScreen;
-	CUIMaker*		m_pMaker;
-	CUIControll*	m_pControll;
+	CUIMaker*		m_pUIMaker;
+	CUIControll*	m_pUIControll;
+	CUIStageSelect* m_pUIStageSelect;
 public:
 	CMainScene();
 	~CMainScene();

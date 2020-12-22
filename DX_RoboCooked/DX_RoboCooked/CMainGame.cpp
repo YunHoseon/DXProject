@@ -83,7 +83,6 @@ void CMainGame::Setup()
 
 	thread _t1([]() { g_pPartsManager; }); _t1.detach();
 	thread _t2([]() { g_pStaticMeshManager; }); _t2.detach();
-	
 	CMainScene* scene = new CMainScene;
 
 	CScene* pBeforeScene = g_SceneManager->SetCurrentScene(scene);

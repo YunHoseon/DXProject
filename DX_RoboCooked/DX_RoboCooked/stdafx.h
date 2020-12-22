@@ -141,6 +141,12 @@ struct ST_ROT_SAMPLE
 		D3DXQuaternionIdentity(&q);
 	}
 };
+struct ST_GameData
+{
+	char*		chStageID;
+	char*		chGameTime;
+	int			nStarCount;
+};
 
 struct ST_SPHERE
 {

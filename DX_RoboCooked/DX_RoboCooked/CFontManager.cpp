@@ -51,6 +51,32 @@ LPD3DXFONT CFontManager::GetFont(eFontType e)
 		AddFontResource(L"data/font/umberto.ttf");
 		wcscpy_s(fd.FaceName, L"Umberto");
 	}
+	else if (e == SELECT)
+	{
+		fd.Height = 46;
+		fd.Width = 23;
+		fd.Weight = FW_MEDIUM;
+		fd.Italic = false;
+		fd.CharSet = DEFAULT_CHARSET;
+		fd.OutputPrecision = OUT_DEFAULT_PRECIS;
+		fd.PitchAndFamily = FF_DONTCARE;
+
+		AddFontResource(L"data/Fonts/a컴퓨터C.ttf");
+		wcscpy_s(fd.FaceName, L"a컴퓨터C");
+	}
+	else if (e == UPDATE)
+	{
+		fd.Height = 80;
+		fd.Width = 40;
+		fd.Weight = FW_MEDIUM;
+		fd.Italic = false;
+		fd.CharSet = DEFAULT_CHARSET;
+		fd.OutputPrecision = OUT_DEFAULT_PRECIS;
+		fd.PitchAndFamily = FF_DONTCARE;
+
+		AddFontResource(L"data/Fonts/a컴퓨터C.ttf");
+		wcscpy_s(fd.FaceName, L"a컴퓨터C");
+	}
 	
 	D3DXCreateFontIndirect(g_pD3DDevice, &fd, &m_mapFont[e]);
 	return m_mapFont[e];

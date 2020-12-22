@@ -25,13 +25,17 @@ enum class eBtnEvent
 	ClearNextStage,
 	LoseMain,
 	LoseReset,
-	ControllClose
-
+	ControllClose,
+	StageClose,
+	STAGE1_1
 };
 class CUI : public CEventListener
 {
+protected:
+	bool				m_isMouseDown;
 private:
 	eUIState			m_eUIPastState;
+	
 public:
 	CUI();
 	virtual ~CUI();
@@ -43,7 +47,9 @@ protected:
 	eBtnEvent			m_eBtnEvent;
 	eUIState			m_eUIState;
 	CUI*				m_pParent;
+	string				m_sText;
 	D3DXVECTOR2			m_vPosition;
+	D3DXVECTOR2			m_vTextPosition;
 	D3DXVECTOR2			m_vSize;
 	std::list<CUI*>		m_listUIchildren;
 	bool				m_isActive;
@@ -75,6 +81,9 @@ public:
 	D3DXVECTOR2 GetPosition() { return m_vPosition; }
 	virtual void SetPosition(float x, float y) { m_vPosition.x = x, m_vPosition.y = y; }
 	void ButtonEvent(eBtnEvent btnEvent);
+	//virtual void MouseHoverEvent(void* _value);
+	//virtual void MouseClickEvent(void* _value);
+	//virtual void MouseReleaseEvent(void* _value);
 
 	INT GetlistUIchildrenSize() { return m_listUIchildren.size(); }
 

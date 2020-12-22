@@ -45,7 +45,9 @@ bool CUIControll::OnEvent(eEvent eEvent, void * _value)
 	break;
 	case eEvent::ControllClose:
 		ActiveUI();
+		g_EventManager->CallEvent(eEvent::MainEvent, NULL);
 		break;
 	}
 	return true;
 }
+

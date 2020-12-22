@@ -10,6 +10,7 @@
 #include "CUIMainButton.h"
 #include "CUICloseButton.h"
 #include "IInteractCenter.h"
+#include "CUI.h"
 
 
 
