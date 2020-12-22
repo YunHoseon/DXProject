@@ -736,7 +736,7 @@ void CGameScene::Load(string sFolder, string sFilename, void (CGameScene::*pCall
 	this->m_sID = sFilename;
 	this->m_cMutex.unlock();
 
-	/*{
+	{
 		json jMonster = j["Monster"];
 		for (UINT i = 0; i < jMonster.size(); i++)
 		{
@@ -758,7 +758,7 @@ void CGameScene::Load(string sFolder, string sFilename, void (CGameScene::*pCall
 				}
 			}
 		}
-	}*/
+	}
 
 	this->m_cMutex.lock();
 	this->m_vecMonster.insert(m_vecMonster.end(), vecMonster.begin(), vecMonster.end());
