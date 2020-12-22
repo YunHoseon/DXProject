@@ -45,7 +45,7 @@ std::mutex CGameScene::m_cMutex;
 #include "CDebugPlayer1.h"
 #include "CDebugPlayer2.h"
 
-CGameScene::CGameScene() : m_pField(NULL),
+CGameScene::CGameScene() : 
 						   m_pDebugLoseUI(nullptr),
 						   m_pDebugClearUI(nullptr),
 						   m_pDebugPauseUI(nullptr),
@@ -114,34 +114,29 @@ CGameScene::~CGameScene()
 
 void CGameScene::Init()
 {
-	CWall *wall = new CWall(this);
+	CWall *wall = new CWall(this, true);
 
 	CUIButton *pClearButton = new CUIClearButton(D3DXVECTOR2(465, 10), this);
 	CUIButton *pPauseButton = new CUIPauseButton(D3DXVECTOR2(465, 10), 27, this);
 	CUIButton *pLoseButton = new CUILoseButton(D3DXVECTOR2(465, 10), this);
 	CUITrafficLight *pTrafficLight = new CUITrafficLight(this, m_vecBlueprints.size());
-	//CPharaohCoffin *coffin = new CPharaohCoffin(this, D3DXVECTOR3(0, 1, 0));
-
-	CWhiteboard *whiteboard = new CWhiteboard(D3DXVECTOR3(5, 2, 4));
 	CUIButton *pReady = new CUIReady(D3DXVECTOR2(675, 450), this);
 	CUIButton *pWarrning = new CUIWarning();
-
+	CField* pField = new CField(eTileType::FlowSand);
+	
 	m_cMutex.lock();
 
 	m_fGameTime = 300.0f;
 	m_vecStaticActor.push_back(wall);
-	//m_vecMonster.push_back(Medusa);
-	//m_vecMonster.push_back(Harpy);
-
+	m_vecStaticActor.push_back(pField);
+	
 	m_pWarnning = pWarrning;
 	m_pReady = pReady;
 	m_pDebugPauseUI = pPauseButton;
 	m_pDebugLoseUI = pLoseButton;
 	m_pDebugClearUI = pClearButton;
 	m_pDebugTrafficLight = pTrafficLight;
-	//m_vecObject.push_back(coffin);
-	m_vecObject.push_back(whiteboard);
-
+	
 	m_cMutex.unlock();
 }
 
@@ -271,11 +266,11 @@ void CGameScene::Update()
 		{
 			for (CCharacter *character : m_vecCharacters)
 			{
-				CPhysicsApplyer::ApplyBound(character, obj);
+				CPhysicsApplyer::ApplyBound(obj, character);
 			}
 			for (CParts *part : m_vecParts)
 			{
-				CPhysicsApplyer::ApplyBound(part, obj);
+				CPhysicsApplyer::ApplyBound(obj, part);
 			}
 		}
 
@@ -283,11 +278,11 @@ void CGameScene::Update()
 		{
 			for (CCharacter *character : m_vecCharacters)
 			{
-				CPhysicsApplyer::ApplyBound(character, pStaticActor);
+				CPhysicsApplyer::ApplyBound(pStaticActor, character);
 			}
 			for (CParts *part : m_vecParts)
 			{
-				CPhysicsApplyer::ApplyBound(part, pStaticActor);
+				CPhysicsApplyer::ApplyBound(pStaticActor, part);
 			}
 		}
 
@@ -308,7 +303,7 @@ void CGameScene::Update()
 						D3DXBoxBoundProbe(&min, &max, &character->GetPosition(), &D3DXVECTOR3(0, 0, 1)) ||
 						D3DXBoxBoundProbe(&min, &max, &character->GetPosition(), &D3DXVECTOR3(0, 0, -1)))
 					{
-						CPhysicsApplyer::ApplyBound(character, tile);
+						CPhysicsApplyer::ApplyBound(tile, character);
 					}
 				}
 			}
@@ -325,7 +320,7 @@ void CGameScene::Update()
 						D3DXBoxBoundProbe(&min, &max, &part->GetPosition(), &D3DXVECTOR3(0, 0, 1)) ||
 						D3DXBoxBoundProbe(&min, &max, &part->GetPosition(), &D3DXVECTOR3(0, 0, -1)))
 					{
-						CPhysicsApplyer::ApplyBound(part, tile);
+						CPhysicsApplyer::ApplyBound(tile, part);
 					}
 				}
 			}
@@ -586,6 +581,20 @@ void CGameScene::Load(string sFolder, string sFilename, void (CGameScene::*pCall
 			}
 		}
 		{
+			json jWhiteboard = j["Whiteboard"];
+			for (auto&& p : jWhiteboard)
+			{
+				D3DXVECTOR3 pos(p["Position"][0], p["Position"][1], p["Position"][2]);
+				float rotate = p["Rotate"];
+				D3DXVECTOR3 scale(p["Scale"][0], p["Scale"][1], p["Scale"][2]);
+				CWhiteboard* Whiteboard = new CWhiteboard(pos);
+				Whiteboard->SetRotationY(rotate);
+				Whiteboard->SetScale(scale);
+				vecStatic.push_back(Whiteboard);
+			}
+		}
+		{
+			while (!g_pPartsManager->IsLoaded()) {}
 			// parts
 			json jParts = j["Parts"];
 			for (auto&& p : jParts)
