@@ -7,8 +7,8 @@ class CWall :
 	public CActor
 {
 private:
-	int						n_RotAngleX;
-	vector<ST_PNT_VERTEX>	m_vecVertex;
+	int						m_nRotAngleX;
+	LPD3DXMESH				m_pMesh;
 	LPDIRECT3DTEXTURE9		m_wallTexture;
 	//ID3DXMesh*				m_p3DText;
 	D3DMATERIAL9			m_stMtlWall;
@@ -22,7 +22,7 @@ public:
 	void Render() override;
 	bool OnEvent(eEvent eEvent, void* _value) override;
 
-	//void Create_Font();
+	//void CreateFont();
 	void ReleaseKey();
 
 	void AddAcceleration(const D3DXVECTOR3& vAccel) override {}

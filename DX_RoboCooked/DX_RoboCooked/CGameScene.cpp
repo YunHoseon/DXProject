@@ -428,7 +428,6 @@ bool CGameScene::TickUpdate(void *_value)
 
 void CGameScene::Load(string sFolder, string sFilename, void (CGameScene::*pCallback)(void))
 {
-	g_pPartsManager;
 	m_cMutex.lock();
 	m_isTimeStop = true;
 	m_cMutex.unlock();
@@ -446,6 +445,9 @@ void CGameScene::Load(string sFolder, string sFilename, void (CGameScene::*pCall
 	vector<CCharacter *> vecChara;
 	vector<CTile *> vecTile;
 	vector<CMonster *> vecMonster;
+
+	while(!g_pStaticMeshManager->IsLoaded()){} // 메시 로딩이 끝날때까지 busylock
+	
 	{
 		{
 			// blueprint

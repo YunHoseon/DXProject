@@ -81,13 +81,16 @@ void CMainGame::Setup()
 		_t2.detach();
 	}*/
 
+	thread _t1([]() { g_pPartsManager; }); _t1.detach();
+	thread _t2([]() { g_pStaticMeshManager; }); _t2.detach();
+	
 	CMainScene* scene = new CMainScene;
 
 	CScene* pBeforeScene = g_SceneManager->SetCurrentScene(scene);
 	if (pBeforeScene)
 	{
-		thread _t2([pBeforeScene]() { delete pBeforeScene; });
-		_t2.detach();
+		thread _t3([pBeforeScene]() { delete pBeforeScene; });
+		_t3.detach();
 	}
 }
 

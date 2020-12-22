@@ -40,6 +40,8 @@ public:
 	virtual const D3DXVECTOR3& GetScale() { return m_vScale; }
 	virtual void SetScale(const D3DXVECTOR3& vScale);
 	virtual void SetScale(float x, float y, float z);
+	virtual void Smallize();
+	virtual void Unsmallize();
 
 	virtual const D3DXVECTOR3& GetPosition() { return m_vPosition; }
 	virtual void SetPosition(D3DXVECTOR3 vPosition);

@@ -131,6 +131,7 @@ void CParts::MoveParts()
 		m_pPartsCombinator = NULL;
 		m_vPosition = m_vOnCombinatorPosition;
 		m_isMoveParts = false;
+		Smallize();
 		return;
 	}
 	D3DXVec3Normalize(&vDirection, &vDirection);

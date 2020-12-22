@@ -2,9 +2,11 @@
 #include "CStaticMeshManager.h"
 #include "CMeshLoader.h"
 
-CStaticMeshManager::CStaticMeshManager()
+static std::mutex cMutex;
+CStaticMeshManager::CStaticMeshManager() : m_isLoaded(false)
 {
 	Load();
+	m_isLoaded = true;
 }
 
 
@@ -74,6 +76,8 @@ void CStaticMeshManager::Load()
 	{
 		CStaticMesh* staticMesh = new CStaticMesh;
 		CMeshLoader::LoadMesh(datas.fileName, datas.filePath, staticMesh);
+		cMutex.lock();
 		m_mapStaticMesh.emplace(datas.objectName, staticMesh);
+		cMutex.unlock();
 	}
 }
