@@ -39,6 +39,8 @@
 #include <filesystem>
 #include <fstream>
 
+#include "CBoundaryWall.h"
+
 std::mutex CGameScene::m_cMutex;
 
 #include "CCactus.h"
@@ -115,7 +117,7 @@ CGameScene::~CGameScene()
 void CGameScene::Init()
 {
 	CWall *wall = new CWall(this, true);
-
+	CBoundaryWall* pBwall = new CBoundaryWall;
 	CUIButton *pClearButton = new CUIClearButton(D3DXVECTOR2(465, 10), this);
 	CUIButton *pPauseButton = new CUIPauseButton(D3DXVECTOR2(465, 10), 27, this);
 	CUIButton *pLoseButton = new CUILoseButton(D3DXVECTOR2(465, 10), this);
@@ -128,6 +130,7 @@ void CGameScene::Init()
 	m_fGameTime = 300.0f;
 	m_vecStaticActor.push_back(wall);
 	m_vecStaticActor.push_back(pField);
+	m_vecStaticActor.push_back(pBwall);
 	m_pWarnning = pWarrning;
 	m_pReady = pReady;
 	m_pDebugPauseUI = pPauseButton;
@@ -929,7 +932,7 @@ int CGameScene::IsGameClear()
 {
 	if (m_fGameTime <= 0)
 	{
-		return 1; //실패
+		return 2; //실패
 	}
 
 	for (CBlueprint *it : m_vecBlueprints)

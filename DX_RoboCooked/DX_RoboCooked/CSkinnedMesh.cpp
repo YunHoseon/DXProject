@@ -76,6 +76,7 @@ void CSkinnedMesh::Update()
 		//m_isInputOn = true;
 		//SetAnimationIndexBlend(IDLE);
 	}
+	 
 }
 
 void CSkinnedMesh::Update(LPD3DXFRAME pFrame, LPD3DXFRAME pParent)

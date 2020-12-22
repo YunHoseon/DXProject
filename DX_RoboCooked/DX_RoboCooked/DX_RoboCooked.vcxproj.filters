@@ -606,6 +606,9 @@
     <ClInclude Include="CUISelectMainButton.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="CBoundaryWall.h">
+      <Filter>GameScene\Object</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="stdafx.cpp">
@@ -1105,6 +1108,9 @@
     </ClCompile>
     <ClCompile Include="CUISelectMainButton.cpp">
       <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="CBoundaryWall.cpp">
+      <Filter>GameScene\Object</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

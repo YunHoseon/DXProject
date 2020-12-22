@@ -51,6 +51,8 @@ void CCamera::Update()
 
 void CCamera::Render()
 {
+	_RELEASE_COMMENT return;
+	
 	string sCameraDistance = string("카메라 거리 :") + std::to_string(m_fCameraDistance);
 	RECT rc;
 	SetRect(&rc, 0, 0, 0, 0);
@@ -94,6 +96,7 @@ void CCamera::WndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam)
 		break;
 		
 	case WM_MOUSEMOVE:
+		_RELEASE_COMMENT break;
 		if (m_isMouseButtonDown)
 		{
 			POINT ptCurMouse;
@@ -116,6 +119,7 @@ void CCamera::WndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam)
 		break;
 		
 	case WM_MOUSEWHEEL:
+		_RELEASE_COMMENT break;
 		m_fCameraDistance -= (GET_WHEEL_DELTA_WPARAM(wParam)) / 1000.0f;
 		if (m_fCameraDistance < 0.0001f)
 			m_fCameraDistance = 0.0001f;

@@ -8,9 +8,11 @@ CWall::CWall(IInteractCenter* pIntaract, bool hasTV, float fWidth, float fHeight
 	, m_pSMesh(nullptr)
 {
 	m_pInteractCenter = pIntaract;
-	g_EventManager->Attach(eEvent::KeyRelease, this);
 	if (hasTV)
+	{
 		m_pTV = new CTV(m_pInteractCenter, &m_matWorld);
+		g_EventManager->Attach(eEvent::KeyRelease, this);
+	}
 	m_pSMesh = g_pStaticMeshManager->GetStaticMesh("Brick");
 	Setup(fWidth, fHeight);
 	
@@ -115,7 +117,6 @@ void CWall::ReleaseKey()
 	}
 
 	D3DXMatrixRotationX(&m_matR, D3DXToRadian(m_nRotAngleX));
-	D3DXMatrixTranslation(&m_matT, 0, -1.5f, 6);
 	m_matWorld = m_matR * m_matT;
 	if (m_pCollision)
 		m_pCollision->Update();

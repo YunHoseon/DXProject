@@ -152,6 +152,7 @@
     <ClInclude Include="CActor.h" />
     <ClInclude Include="CAllocateHierachy.h" />
     <ClInclude Include="CBlueprint.h" />
+    <ClInclude Include="CBoundaryWall.h" />
     <ClInclude Include="CBoxCollision.h" />
     <ClInclude Include="CBrick.h" />
     <ClInclude Include="CCactus.h" />
@@ -321,6 +322,7 @@
     <ClCompile Include="CActor.cpp" />
     <ClCompile Include="CAllocateHierachy.cpp" />
     <ClCompile Include="CBlueprint.cpp" />
+    <ClCompile Include="CBoundaryWall.cpp" />
     <ClCompile Include="CBoxCollision.cpp" />
     <ClCompile Include="CBrick.cpp" />
     <ClCompile Include="CCactus.cpp" />
