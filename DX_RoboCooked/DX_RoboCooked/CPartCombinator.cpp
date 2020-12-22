@@ -17,7 +17,8 @@ CPartCombinator::CPartCombinator(IInteractCenter* pInteractCenter, eCombinatorPa
 	m_nPartsCount(0),
 	m_eCombinatorActionState(eCombinatorActionState::Usable),
 	m_nMaxPartsCount(0),
-	m_pSMesh(nullptr)
+	m_pSMesh(nullptr),
+	m_pUICombinatorGauge(nullptr)
 {
 	m_vecOnCombinatorPosition.push_back(D3DXVECTOR3(vPosition.x - 0.5f, vPosition.y + 2.5f, vPosition.z));
 	m_vecOnCombinatorPosition.push_back(D3DXVECTOR3(vPosition.x, vPosition.y + 2.5f, vPosition.z));

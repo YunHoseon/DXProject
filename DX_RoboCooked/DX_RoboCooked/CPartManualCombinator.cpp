@@ -6,6 +6,7 @@
 #include "CParts.h"
 #include "CSphereCollision.h"
 #include "IInteractCenter.h"
+#include "CUICombinatorGauge.h"
 
 
 CPartManualCombinator::CPartManualCombinator(IInteractCenter* pInteractCenter, eCombinatorPartsLevel eType, float fAngle, D3DXVECTOR3 vPosition):
@@ -43,6 +44,8 @@ void CPartManualCombinator::Setup(float fAngle, D3DXVECTOR3 vPosition)
 	SetScale(0.01f, 0.01f, 0.01f);
 	SetPosition(vPosition);
 
+	m_pUICombinatorGauge = new CUICombinatorGauge(&m_vPosition);
+
 	// 메시 크기에 따라 y값 보정
 	float y = vPosition.y - 0.5f + m_pCollision->GetHeight() * 0.5f + (vPosition.y - m_pCollision->GetCenter().y);
 	SetPosition(vPosition.x, y, vPosition.z);
@@ -73,6 +76,9 @@ void CPartManualCombinator::Render()
 {
 	g_pD3DDevice->SetTransform(D3DTS_WORLD, &m_matWorld);
 	m_pSMesh->Render();
+
+	if (m_pUICombinatorGauge)
+		m_pUICombinatorGauge->Render();
 
 	_DEBUG_COMMENT if (m_pCollision)
 		_DEBUG_COMMENT m_pCollision->Render();
@@ -135,6 +141,9 @@ void CPartManualCombinator::PartsInteract(CParts* pParts)
 void CPartManualCombinator::CombineParts()
 {
 	m_fElapsedTime += g_pTimeManager->GetElapsedTime();
+	g_SoundManager->PlaySFX("machine_run");
+	if(m_pUICombinatorGauge)
+		m_pUICombinatorGauge->UpdateCombinator(m_fElapsedTime, m_fCombineTime);
 
 	if(m_fElapsedTime >= m_fCombineTime)
 	{
@@ -143,7 +152,8 @@ void CPartManualCombinator::CombineParts()
 		m_fElapsedTime = 0;
 		
 		CParts* parts = Make();
-
+		if(m_pUICombinatorGauge)
+			m_pUICombinatorGauge->SetChildActive(false);
 		m_vecDischargeParts.push_back(parts);
 		m_pInteractCenter->AddParts(parts);
 

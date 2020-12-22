@@ -31,7 +31,7 @@ CCharacter::CCharacter(int nPlayerNum) : m_pSkinnedMesh(nullptr),
 	m_fBaseSpeed = 0.02f;
 
 	m_pCC = new CCCNone;
-	m_pCharge = new CUICharge(&m_vPosition, &m_fThrowPower, m_fMaxThrowPower);
+	m_pCharge = new CUICharge(&m_vPosition);
 }
 
 CCharacter::~CCharacter()

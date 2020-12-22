@@ -23,9 +23,8 @@ private:
 	D3DXVECTOR3			m_vChargeUIPosition;
 
 
-
 public:
-	CUICharge(D3DXVECTOR3* pPos,float* pfThrowPower , float fMaxThrowPower);
+	CUICharge(D3DXVECTOR3* pPos);
 	~CUICharge();
 
 public:
