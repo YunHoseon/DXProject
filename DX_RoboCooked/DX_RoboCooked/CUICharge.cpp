@@ -8,7 +8,7 @@
 #include "CUIChargeOne.h"
 #include "CUIChargeZero.h"
 
-CUICharge::CUICharge(D3DXVECTOR3 *pPos, float *pfThrowPower, float fMaxThrowPower)
+CUICharge::CUICharge(D3DXVECTOR3 *pPos)
 	: m_pChargeFive(nullptr), m_pChargeFour(nullptr), m_pChargeThree(nullptr), m_pChargeTwo(nullptr), m_pChargeOne(nullptr), m_pChargeZero(nullptr), m_vChargeUIPosition(0, 0, 0)
 {
 	m_isActive = true;
@@ -36,12 +36,11 @@ void CUICharge::Setup()
 	AddChild(m_pChargeFour);
 	AddChild(m_pChargeFive);
 
-	//InvertActive();
 }
 
 void CUICharge::UpdateCharging(float fThrowPower, float fMaxThrowPower)
 {
-	m_vChargeUIPosition = D3DXVECTOR3(m_pTargetPosition->x - 0.6f, m_pTargetPosition->y + 3.4f, m_pTargetPosition->z);
+	m_vChargeUIPosition = D3DXVECTOR3(m_pTargetPosition->x - 1.3f, m_pTargetPosition->y + 3.4f, m_pTargetPosition->z);
 
 	SetChildActive(false);
 

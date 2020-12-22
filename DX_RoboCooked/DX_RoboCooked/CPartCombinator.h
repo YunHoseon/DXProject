@@ -3,6 +3,7 @@
 #include "IPartGenerator.h"
 
 class IPartGenerator;
+class CUICombinatorGauge;
 
 
 enum class eCombinatorPartsLevel
@@ -47,7 +48,7 @@ protected:
 	INT								m_nPartsCount;
 	INT								m_nMaxPartsCount;
 	CStaticMesh*					m_pSMesh;
-
+	CUICombinatorGauge*				m_pUICombinatorGauge;
 
 public:
 	CPartCombinator(IInteractCenter* pInteractCenter, eCombinatorPartsLevel eType, float fAngle, D3DXVECTOR3 vPosition) ;

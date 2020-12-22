@@ -88,6 +88,12 @@
       <UniqueIdentifier>{4FC737F1-C7A5-4376-A066-2A32D752A2FF}</UniqueIdentifier>
       <Extensions>cpp;c;cc;cxx;def;odl;idl;hpj;bat;asm;asmx</Extensions>
     </Filter>
+    <Filter Include="UI\Button\SubUI\CUICombinatorGauge">
+      <UniqueIdentifier>{10a25cf6-904d-4921-93a9-495e2bbb16c2}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="UI\Button\SubUI\CUICharge">
+      <UniqueIdentifier>{7e1eea6b-46fc-4649-9fd5-a332f3696c38}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <Text Include="ReadMe.txt" />
@@ -495,27 +501,6 @@
     <ClInclude Include="CUICharge.h">
       <Filter>UI\Button\MainUI</Filter>
     </ClInclude>
-    <ClInclude Include="CUIChargeZero.h">
-      <Filter>UI\Button\SubUI</Filter>
-    </ClInclude>
-    <ClInclude Include="CUIChargeTwo.h">
-      <Filter>UI\Button\SubUI</Filter>
-    </ClInclude>
-    <ClInclude Include="CUIChargeThree.h">
-      <Filter>UI\Button\SubUI</Filter>
-    </ClInclude>
-    <ClInclude Include="CUIChargeOne.h">
-      <Filter>UI\Button\SubUI</Filter>
-    </ClInclude>
-    <ClInclude Include="CUIChargeFour.h">
-      <Filter>UI\Button\SubUI</Filter>
-    </ClInclude>
-    <ClInclude Include="CUIChargeFive.h">
-      <Filter>UI\Button\SubUI</Filter>
-    </ClInclude>
-    <ClInclude Include="CUIChargeBoard.h">
-      <Filter>UI\Button\SubUI</Filter>
-    </ClInclude>
     <ClInclude Include="CUIReady.h">
       <Filter>UI\Button\MainUI</Filter>
     </ClInclude>
@@ -530,6 +515,51 @@
     </ClInclude>
     <ClInclude Include="CUICC.h">
       <Filter>UI\Effect</Filter>
+    </ClInclude>
+    <ClInclude Include="CUICombinatorGauge.h">
+      <Filter>UI\Button\MainUI</Filter>
+    </ClInclude>
+    <ClInclude Include="CUIChargeFive.h">
+      <Filter>UI\Button\SubUI\CUICharge</Filter>
+    </ClInclude>
+    <ClInclude Include="CUIChargeFour.h">
+      <Filter>UI\Button\SubUI\CUICharge</Filter>
+    </ClInclude>
+    <ClInclude Include="CUIChargeOne.h">
+      <Filter>UI\Button\SubUI\CUICharge</Filter>
+    </ClInclude>
+    <ClInclude Include="CUIChargeThree.h">
+      <Filter>UI\Button\SubUI\CUICharge</Filter>
+    </ClInclude>
+    <ClInclude Include="CUIChargeTwo.h">
+      <Filter>UI\Button\SubUI\CUICharge</Filter>
+    </ClInclude>
+    <ClInclude Include="CUIChargeZero.h">
+      <Filter>UI\Button\SubUI\CUICharge</Filter>
+    </ClInclude>
+    <ClInclude Include="CUIChargeBoard.h">
+      <Filter>UI\Button\SubUI\CUICharge</Filter>
+    </ClInclude>
+    <ClInclude Include="CUICombinatorGaugeFive.h">
+      <Filter>UI\Button\SubUI\CUICombinatorGauge</Filter>
+    </ClInclude>
+    <ClInclude Include="CUICombinatorGaugeFour.h">
+      <Filter>UI\Button\SubUI\CUICombinatorGauge</Filter>
+    </ClInclude>
+    <ClInclude Include="CUICombinatorGaugeOne.h">
+      <Filter>UI\Button\SubUI\CUICombinatorGauge</Filter>
+    </ClInclude>
+    <ClInclude Include="CUICombinatorGaugeThree.h">
+      <Filter>UI\Button\SubUI\CUICombinatorGauge</Filter>
+    </ClInclude>
+    <ClInclude Include="CUICombinatorGaugeTwo.h">
+      <Filter>UI\Button\SubUI\CUICombinatorGauge</Filter>
+    </ClInclude>
+    <ClInclude Include="CUICombinatorGaugeZero.h">
+      <Filter>UI\Button\SubUI\CUICombinatorGauge</Filter>
+    </ClInclude>
+    <ClInclude Include="CUICombinatorGaugeBoard.h">
+      <Filter>UI\Button\SubUI\CUICombinatorGauge</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -929,27 +959,6 @@
     <ClCompile Include="CUICharge.cpp">
       <Filter>UI\Button\MainUI</Filter>
     </ClCompile>
-    <ClCompile Include="CUIChargeZero.cpp">
-      <Filter>UI\Button\SubUI</Filter>
-    </ClCompile>
-    <ClCompile Include="CUIChargeTwo.cpp">
-      <Filter>UI\Button\SubUI</Filter>
-    </ClCompile>
-    <ClCompile Include="CUIChargeThree.cpp">
-      <Filter>UI\Button\SubUI</Filter>
-    </ClCompile>
-    <ClCompile Include="CUIChargeOne.cpp">
-      <Filter>UI\Button\SubUI</Filter>
-    </ClCompile>
-    <ClCompile Include="CUIChargeFour.cpp">
-      <Filter>UI\Button\SubUI</Filter>
-    </ClCompile>
-    <ClCompile Include="CUIChargeFive.cpp">
-      <Filter>UI\Button\SubUI</Filter>
-    </ClCompile>
-    <ClCompile Include="CUIChargeBoard.cpp">
-      <Filter>UI\Button\SubUI</Filter>
-    </ClCompile>
     <ClCompile Include="CUIReady.cpp">
       <Filter>UI\Button\MainUI</Filter>
     </ClCompile>
@@ -964,6 +973,51 @@
     </ClCompile>
     <ClCompile Include="CUICC.cpp">
       <Filter>UI\Effect</Filter>
+    </ClCompile>
+    <ClCompile Include="CUICombinatorGauge.cpp">
+      <Filter>UI\Button\MainUI</Filter>
+    </ClCompile>
+    <ClCompile Include="CUIChargeFive.cpp">
+      <Filter>UI\Button\SubUI\CUICharge</Filter>
+    </ClCompile>
+    <ClCompile Include="CUIChargeFour.cpp">
+      <Filter>UI\Button\SubUI\CUICharge</Filter>
+    </ClCompile>
+    <ClCompile Include="CUIChargeOne.cpp">
+      <Filter>UI\Button\SubUI\CUICharge</Filter>
+    </ClCompile>
+    <ClCompile Include="CUIChargeThree.cpp">
+      <Filter>UI\Button\SubUI\CUICharge</Filter>
+    </ClCompile>
+    <ClCompile Include="CUIChargeTwo.cpp">
+      <Filter>UI\Button\SubUI\CUICharge</Filter>
+    </ClCompile>
+    <ClCompile Include="CUIChargeZero.cpp">
+      <Filter>UI\Button\SubUI\CUICharge</Filter>
+    </ClCompile>
+    <ClCompile Include="CUIChargeBoard.cpp">
+      <Filter>UI\Button\SubUI\CUICharge</Filter>
+    </ClCompile>
+    <ClCompile Include="CUICombinatorGaugeFive.cpp">
+      <Filter>UI\Button\SubUI\CUICombinatorGauge</Filter>
+    </ClCompile>
+    <ClCompile Include="CUICombinatorGaugeFour.cpp">
+      <Filter>UI\Button\SubUI\CUICombinatorGauge</Filter>
+    </ClCompile>
+    <ClCompile Include="CUICombinatorGaugeOne.cpp">
+      <Filter>UI\Button\SubUI\CUICombinatorGauge</Filter>
+    </ClCompile>
+    <ClCompile Include="CUICombinatorGaugeThree.cpp">
+      <Filter>UI\Button\SubUI\CUICombinatorGauge</Filter>
+    </ClCompile>
+    <ClCompile Include="CUICombinatorGaugeZero.cpp">
+      <Filter>UI\Button\SubUI\CUICombinatorGauge</Filter>
+    </ClCompile>
+    <ClCompile Include="CUICombinatorGaugeTwo.cpp">
+      <Filter>UI\Button\SubUI\CUICombinatorGauge</Filter>
+    </ClCompile>
+    <ClCompile Include="CUICombinatorGaugeBoard.cpp">
+      <Filter>UI\Button\SubUI\CUICombinatorGauge</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
