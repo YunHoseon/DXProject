@@ -5,6 +5,7 @@
 #include "CParts.h"
 #include "IInteractCenter.h"
 #include "CCharacter.h"
+#include "CUICombinatorGauge.h"
 
 CPartAutoCombinator::CPartAutoCombinator(IInteractCenter* pInteractCenter, eCombinatorPartsLevel eType, float fAngle, D3DXVECTOR3 vPosition):
 	CPartCombinator(pInteractCenter, eType, fAngle, vPosition)
@@ -94,8 +95,13 @@ void CPartAutoCombinator::CombineParts()
 {
 	m_fElapsedTime += g_pTimeManager->GetElapsedTime();
 	g_SoundManager->PlaySFX("machine_run");
+	if (m_pUICombinatorGauge)
+		m_pUICombinatorGauge->UpdateCombinator(m_fElapsedTime, m_fCombineTime);
+
 	if (m_fElapsedTime >= m_fCombineTime)
 	{
+		if (m_pUICombinatorGauge)
+			m_pUICombinatorGauge->SetChildActive(false);
 		m_fElapsedTime = 0;
 		ReadytoCarryParts();
 	}
@@ -169,6 +175,9 @@ void CPartAutoCombinator::Setup(float fAngle, D3DXVECTOR3 vPosition)
 
 	SetScale(0.01f, 0.01f, 0.01f);
 	SetPosition(vPosition);
+
+	m_pUICombinatorGauge = new CUICombinatorGauge(&m_vPosition);
+
 
 	// 메시 크기에 따라 y값 보정
 	float y = vPosition.y - 0.5f + m_pCollision->GetHeight() * 0.5f + (vPosition.y - m_pCollision->GetCenter().y);

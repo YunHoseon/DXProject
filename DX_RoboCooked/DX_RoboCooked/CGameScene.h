@@ -23,7 +23,6 @@ class CDebugPlayer2;
 class CGameScene : public CScene, public IInteractCenter, public CEventListener
 {
 private:
-	CField *m_pField;
 	vector<CActor *> m_vecStaticActor;
 	vector<CInteractiveActor *> m_vecObject;
 	vector<CParts *> m_vecParts;
