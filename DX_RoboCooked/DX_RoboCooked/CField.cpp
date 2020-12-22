@@ -78,7 +78,8 @@ void CField::Setup(int iWidth, int iHeight)
 	m_pCollision = new CBoxCollision(D3DXVECTOR3(0, Y, 0), D3DXVECTOR3(BLOCK_SIZE * (m_fMaxX - m_fMinX), BLOCK_SIZE, BLOCK_SIZE * (m_fMaxZ - m_fMinZ)), &m_matWorld);
 	m_fFriction = m_vecTile[0]->GetFriction();
 	m_fRepulsivePower = m_vecTile[0]->GetRepulsivePower();
-	
+	m_fFlexibility = m_vecTile[0]->GetFlexibiltiy();
+	m_fMass = m_vecTile[0]->GetMass();
 	m_pCollision->Update();
 }
 
@@ -104,6 +105,13 @@ bool CField::Collide(CActor* target, D3DXVECTOR3* pNormal)
 	if (pos.y > Y + 1.5f)
 		return false;
 
+	if(m_eTileType == eTileType::Water)
+	{
+		bool b = CActor::Collide(target, pNormal);
+		if (b)
+			target->GetCollision()->SetIsCollide(false);
+		return b;
+	}
 
 	return CActor::Collide(target, pNormal);
 }

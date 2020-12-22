@@ -14,8 +14,10 @@ CWater::CWater(D3DXVECTOR3 vPosition)
 
 	float y = vPosition.y - 0.5f + m_pCollision->GetHeight() * 0.5f + (vPosition.y - m_pCollision->GetCenter().y);
 	SetPosition(vPosition.x, y, vPosition.z);
-	m_fFriction = 0;
-	m_fRepulsivePower = -.7f;
+	m_fFriction = 0.0;
+	m_fRepulsivePower = 0.f;
+	m_fFlexibility = .5f;
+	m_fMass = 0.01f;
 	if (m_pCollision)
 		m_pCollision->Update();
 }

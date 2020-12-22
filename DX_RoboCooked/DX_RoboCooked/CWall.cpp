@@ -2,17 +2,17 @@
 #include "CWall.h"
 #include "CBoxCollision.h"
 #include "CTV.h"
-CWall::CWall(IInteractCenter* pIntaract, bool b)
+CWall::CWall(IInteractCenter* pIntaract, bool hasTV, float fWidth, float fHeight)
 	:m_nRotAngleX(0)
 	, m_pTV(nullptr)
 	, m_pSMesh(nullptr)
 {
 	m_pInteractCenter = pIntaract;
 	g_EventManager->Attach(eEvent::KeyRelease, this);
-	if (b)
+	if (hasTV)
 		m_pTV = new CTV(m_pInteractCenter, &m_matWorld);
 	m_pSMesh = g_pStaticMeshManager->GetStaticMesh("Brick");
-	Setup();
+	Setup(fWidth, fHeight);
 	
 }
 
@@ -22,14 +22,10 @@ CWall::~CWall()
 	SafeDelete(m_pTV);
 }
 
-void CWall::Setup()
+void CWall::Setup(float fWidth, float fHeight)
 {
-	
-
 	D3DXMATRIXA16 matS, matT;
 
-	float fWidth = 30;
-	float fHeight = 6;
 	float fStartX = fWidth * -0.5f * BLOCK_SIZE + BLOCK_SIZE * 0.5f;
 	float fStartY = BLOCK_SIZE * 0.5f;
 	D3DXMatrixScaling(&matS, 0.01f, 0.01f, 0.01f);
@@ -43,11 +39,13 @@ void CWall::Setup()
 			}
 		}
 	}
-
+	D3DXVECTOR3 vMin(fWidth * -0.5f * BLOCK_SIZE, 0, -0.5f);
+	D3DXVECTOR3 vMax(fWidth * 0.5f * BLOCK_SIZE, fHeight * BLOCK_SIZE, 0.5f);
+	m_pCollision = new CBoxCollision((vMax + vMin) * 0.5f, (vMax - vMin)*1.5f, &m_matWorld);
 	m_nRotAngleX = 12;
 	D3DXMatrixRotationX(&m_matR, D3DXToRadian(m_nRotAngleX));
-	D3DXMatrixTranslation(&m_matT, 0, -1.5f, 6);
-	m_matWorld = m_matR * m_matT;
+	SetPosition(0, -1.5f, 6);
+	m_pCollision->Update();
 }
 
 void CWall::Update()
@@ -56,6 +54,7 @@ void CWall::Update()
 
 	if (m_pTV)
 		m_pTV->Update();
+
 
 }
 
@@ -83,6 +82,8 @@ void CWall::Render()
 
 	if (m_pTV)
 		m_pTV->Render();
+	if (m_pCollision)
+		m_pCollision->Render();
 }
 
 bool CWall::OnEvent(eEvent eEvent, void * _value)
@@ -116,4 +117,6 @@ void CWall::ReleaseKey()
 	D3DXMatrixRotationX(&m_matR, D3DXToRadian(m_nRotAngleX));
 	D3DXMatrixTranslation(&m_matT, 0, -1.5f, 6);
 	m_matWorld = m_matR * m_matT;
+	if (m_pCollision)
+		m_pCollision->Update();
 }

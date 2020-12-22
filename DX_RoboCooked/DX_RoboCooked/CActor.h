@@ -30,6 +30,7 @@ protected:
 	float				m_fMass;
 	float				m_fFriction;
 	float				m_fRepulsivePower;
+	float				m_fFlexibility;
 	
 public:
 
@@ -71,5 +72,6 @@ public:
 	
 	virtual float GetFriction(D3DXVECTOR3 vPosition = g_vZero) { return m_fFriction; }
 	virtual float GetRepulsivePower() { return m_fRepulsivePower; }
+	virtual float GetFlexibiltiy() { return m_fFlexibility; }
 };
 

@@ -122,14 +122,12 @@ void CGameScene::Init()
 	CUITrafficLight *pTrafficLight = new CUITrafficLight(this, m_vecBlueprints.size());
 	CUIButton *pReady = new CUIReady(D3DXVECTOR2(675, 450), this);
 	CUIButton *pWarrning = new CUIWarning();
-	CField* pField = new CField(eTileType::FlowSand);
-	
+	CField* pField = new CField(eTileType::Water);
 	m_cMutex.lock();
 
 	m_fGameTime = 300.0f;
 	m_vecStaticActor.push_back(wall);
 	m_vecStaticActor.push_back(pField);
-	
 	m_pWarnning = pWarrning;
 	m_pReady = pReady;
 	m_pDebugPauseUI = pPauseButton;
@@ -495,7 +493,7 @@ void CGameScene::Load(string sFolder, string sFilename, void (CGameScene::*pCall
 				CPharaohCoffin* Coffin = new CPharaohCoffin(this, pos);
 				Coffin->SetRotationY(rotate);
 				Coffin->SetScale(scale);
-				vecStatic.push_back(Coffin);
+				vecInter.push_back(Coffin);
 			}
 		}
 		{
@@ -590,7 +588,7 @@ void CGameScene::Load(string sFolder, string sFilename, void (CGameScene::*pCall
 				CWhiteboard* Whiteboard = new CWhiteboard(pos);
 				Whiteboard->SetRotationY(rotate);
 				Whiteboard->SetScale(scale);
-				vecStatic.push_back(Whiteboard);
+				vecInter.push_back(Whiteboard);
 			}
 		}
 		{
@@ -612,6 +610,19 @@ void CGameScene::Load(string sFolder, string sFilename, void (CGameScene::*pCall
 		}
 		{
 			// tile
+			{
+				json jWater = j["Water"];
+				for (auto&& p : jWater)
+				{
+					D3DXVECTOR3 pos(p["Position"][0], p["Position"][1], p["Position"][2]);
+					float rotate = p["Rotate"];
+					D3DXVECTOR3 scale(p["Scale"][0], p["Scale"][1], p["Scale"][2]);
+					CWater* Tile = new CWater(pos);
+					Tile->SetRotationY(rotate);
+					Tile->SetScale(scale);
+					vecTile.push_back(Tile);
+				}
+			}
 			{
 				json jSand = j["Sand"];
 				for (auto&& p : jSand)
@@ -659,19 +670,6 @@ void CGameScene::Load(string sFolder, string sFilename, void (CGameScene::*pCall
 					float rotate = p["Rotate"];
 					D3DXVECTOR3 scale(p["Scale"][0], p["Scale"][1], p["Scale"][2]);
 					CThickSand* Tile = new CThickSand(pos);
-					Tile->SetRotationY(rotate);
-					Tile->SetScale(scale);
-					vecTile.push_back(Tile);
-				}
-			}
-			{
-				json jWater = j["Water"];
-				for (auto&& p : jWater)
-				{
-					D3DXVECTOR3 pos(p["Position"][0], p["Position"][1], p["Position"][2]);
-					float rotate = p["Rotate"];
-					D3DXVECTOR3 scale(p["Scale"][0], p["Scale"][1], p["Scale"][2]);
-					CWater* Tile = new CWater(pos);
 					Tile->SetRotationY(rotate);
 					Tile->SetScale(scale);
 					vecTile.push_back(Tile);

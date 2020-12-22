@@ -4,7 +4,7 @@
 
 CCactus::CCactus(): m_pSMesh(nullptr)
 {
-	m_fFriction = 0.01;
+	m_fFriction = 0.5;
 	m_fRepulsivePower = 0.5f;
 	m_fMass = 9999.f;
 
