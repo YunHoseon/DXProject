@@ -8,13 +8,13 @@ class CWall :
 {
 private:
 	int						m_nRotAngleX;
-	LPD3DXMESH				m_pMesh;
-	LPDIRECT3DTEXTURE9		m_wallTexture;
 	//ID3DXMesh*				m_p3DText;
-	D3DMATERIAL9			m_stMtlWall;
 	CTV*					m_pTV;
+	CStaticMesh*			m_pSMesh;
+	vector<D3DXMATRIXA16>	m_vecMeshLocalMatrix;
+	
 public:
-	CWall(IInteractCenter* pIntaract);
+	CWall(IInteractCenter* pIntaract, bool b);
 	~CWall();
 
 	void Setup();

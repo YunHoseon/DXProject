@@ -6,12 +6,12 @@
 
 CCCReverseKey::CCCReverseKey() : CCrowdControl()
 {
-	m_pImage = new CUICC("bubble_cc_reverseMove.png", nullptr, nullptr);
+	m_pImage = new CUICC("data/ui/bubble_cc_reverseMove.png", nullptr, nullptr);
 }
 
 CCCReverseKey::CCCReverseKey(CCCReverseKey* clone) : CCrowdControl(clone)
 {
-	m_pImage = new CUICC("bubble_cc_reverseMove.png", nullptr, nullptr);
+	m_pImage = new CUICC("data/ui/bubble_cc_reverseMove.png", nullptr, nullptr);
 }
 
 CCCReverseKey::~CCCReverseKey()

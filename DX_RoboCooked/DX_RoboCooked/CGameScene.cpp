@@ -45,7 +45,7 @@ std::mutex CGameScene::m_cMutex;
 #include "CDebugPlayer1.h"
 #include "CDebugPlayer2.h"
 
-CGameScene::CGameScene() : m_pField(NULL),
+CGameScene::CGameScene() : 
 						   m_pDebugLoseUI(nullptr),
 						   m_pDebugClearUI(nullptr),
 						   m_pDebugPauseUI(nullptr),
@@ -114,7 +114,7 @@ CGameScene::~CGameScene()
 
 void CGameScene::Init()
 {
-	CWall *wall = new CWall(this);
+	CWall *wall = new CWall(this, true);
 
 	CUIButton *pClearButton = new CUIClearButton(D3DXVECTOR2(465, 10), this);
 	CUIButton *pPauseButton = new CUIPauseButton(D3DXVECTOR2(465, 10), 27, this);
@@ -122,7 +122,7 @@ void CGameScene::Init()
 	CUITrafficLight *pTrafficLight = new CUITrafficLight(this, m_vecBlueprints.size());
 	CUIButton *pReady = new CUIReady(D3DXVECTOR2(675, 450), this);
 	CUIButton *pWarrning = new CUIWarning();
-	CField* pField = new CField(eTileType::Water);
+	CField* pField = new CField(eTileType::FlowSand);
 	
 	m_cMutex.lock();
 
@@ -266,11 +266,11 @@ void CGameScene::Update()
 		{
 			for (CCharacter *character : m_vecCharacters)
 			{
-				CPhysicsApplyer::ApplyBound(character, obj);
+				CPhysicsApplyer::ApplyBound(obj, character);
 			}
 			for (CParts *part : m_vecParts)
 			{
-				CPhysicsApplyer::ApplyBound(part, obj);
+				CPhysicsApplyer::ApplyBound(obj, part);
 			}
 		}
 
@@ -278,11 +278,11 @@ void CGameScene::Update()
 		{
 			for (CCharacter *character : m_vecCharacters)
 			{
-				CPhysicsApplyer::ApplyBound(character, pStaticActor);
+				CPhysicsApplyer::ApplyBound(pStaticActor, character);
 			}
 			for (CParts *part : m_vecParts)
 			{
-				CPhysicsApplyer::ApplyBound(part, pStaticActor);
+				CPhysicsApplyer::ApplyBound(pStaticActor, part);
 			}
 		}
 
@@ -303,7 +303,7 @@ void CGameScene::Update()
 						D3DXBoxBoundProbe(&min, &max, &character->GetPosition(), &D3DXVECTOR3(0, 0, 1)) ||
 						D3DXBoxBoundProbe(&min, &max, &character->GetPosition(), &D3DXVECTOR3(0, 0, -1)))
 					{
-						CPhysicsApplyer::ApplyBound(character, tile);
+						CPhysicsApplyer::ApplyBound(tile, character);
 					}
 				}
 			}
@@ -320,7 +320,7 @@ void CGameScene::Update()
 						D3DXBoxBoundProbe(&min, &max, &part->GetPosition(), &D3DXVECTOR3(0, 0, 1)) ||
 						D3DXBoxBoundProbe(&min, &max, &part->GetPosition(), &D3DXVECTOR3(0, 0, -1)))
 					{
-						CPhysicsApplyer::ApplyBound(part, tile);
+						CPhysicsApplyer::ApplyBound(tile, part);
 					}
 				}
 			}

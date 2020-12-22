@@ -15,7 +15,7 @@ CField::CField(eTileType type):
 	m_fVoidMaxX(16 * 0.5f * BLOCK_SIZE),
 	m_fVoidMaxZ(12 * 0.5f * BLOCK_SIZE),
 	m_fVoidMinX(-m_fVoidMaxX),
-	m_fVoidMinZ(-m_fVoidMinZ)
+	m_fVoidMinZ(-m_fVoidMaxZ)
 {
 	Setup();
 }
@@ -42,7 +42,7 @@ void CField::Setup(int iWidth, int iHeight)
 	{
 		for (float j = 0; j < iHeight; ++j)
 		{
-			if (i > 6 && i < 23 && j > 0 && j < 12)
+			if (i > 6 && i < 23 && j > 0 && j < 13)
 				continue;
 			
 			// 타일 생성
