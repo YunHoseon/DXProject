@@ -84,6 +84,7 @@ public:
 	void DeleteCC();
 	int IsGameClear();
 	//bool IsGameLose();
+	void SetLight();
 
 	D3DXVECTOR3 GetRandomPartsPosition() override;
 	string GetSceneID() override { return m_sID; }

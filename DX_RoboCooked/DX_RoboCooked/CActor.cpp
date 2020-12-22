@@ -14,13 +14,22 @@ CActor::CActor() :
 	m_fFriction(0), m_fRepulsivePower(0.00001f),
 	m_vVelocity(0, 0, 0),
 	m_vAcceleration(0, 0, 0),
-	m_vScale(1, 1, 1)
+	m_vScale(1, 1, 1),
+	m_pShader(nullptr),
+	m_pDiffuseMap(nullptr),
+	m_pSpecularMap(nullptr)
 {
 	D3DXMatrixIdentity(&m_matS);
 	D3DXMatrixRotationY(&m_matR, m_fRotY);
 	//D3DXMatrixIdentity(&m_matR);
 	D3DXMatrixIdentity(&m_matT);
 	m_matWorld = m_matS * m_matR * m_matT;
+
+	ZeroMemory(&m_material, sizeof(D3DMATERIAL9));
+	m_material.Diffuse = D3DXCOLOR(0.8f, 0.8f, 0.8f, 1.0f);
+	m_material.Ambient = D3DXCOLOR(0.8f, 0.8f, 0.8f, 1.0f);
+	m_material.Specular = D3DXCOLOR(0.8f, 0.8f, 0.8f, 1.0f);
+	//m_pShader = LoadShader("data/Shader/SpecularMapping.fx");
 }
 
 

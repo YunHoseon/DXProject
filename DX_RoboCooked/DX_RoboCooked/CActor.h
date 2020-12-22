@@ -19,6 +19,10 @@ protected:
 	D3DXMATRIXA16		m_matWorld;
 	float				m_fRotY;
 
+	LPD3DXEFFECT		m_pShader;
+	LPDIRECT3DTEXTURE9	m_pDiffuseMap;
+	LPDIRECT3DTEXTURE9	m_pSpecularMap;
+	D3DMATERIAL9		m_material;
 	
 	// for physics
 	ICollisionArea*		m_pCollision;
