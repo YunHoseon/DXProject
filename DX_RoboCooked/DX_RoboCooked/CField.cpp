@@ -5,10 +5,19 @@
 #include "CBoxCollision.h"
 
 const float Y = -1.0f;
-CField::CField(): m_stMtlTile({})
+CField::CField(eTileType type):
+	m_stMtlTile({}),
+	m_eTileType(type),
+	m_fMinX(0),
+	m_fMaxX(0),
+	m_fMinZ(0),
+	m_fMaxZ(0),
+	m_fVoidMaxX(16 * 0.5f * BLOCK_SIZE),
+	m_fVoidMaxZ(12 * 0.5f * BLOCK_SIZE),
+	m_fVoidMinX(-m_fVoidMaxX),
+	m_fVoidMinZ(-m_fVoidMinZ)
 {
-	m_fFriction = 0.2f; // test
-	m_fMass = 9999.f;
+	Setup();
 }
 
 
@@ -20,22 +29,55 @@ CField::~CField()
 
 void CField::Setup(int iWidth, int iHeight)
 {
-	float fMaxX = (iWidth / 2.0f) * BLOCK_SIZE;
-	float fMinX = -fMaxX;
-
-	float fMaxZ = (iHeight / 2.0f) * BLOCK_SIZE;
-	float fMinZ = -fMaxZ;
+	m_fMaxX = (iWidth / 2.0f) * BLOCK_SIZE;
+	m_fMinX = -m_fMaxX;
 	
-	for (float i = fMinZ + (BLOCK_SIZE/2); i <= fMaxZ; i+=BLOCK_SIZE)
+	float fStartX = m_fMinX + BLOCK_SIZE * 0.5f;
+
+	m_fMaxZ = (iHeight / 2.0f) * BLOCK_SIZE;
+	m_fMinZ = -m_fMaxZ;
+	float fStartZ = m_fMaxZ - BLOCK_SIZE * 0.5f;
+	CTile* test;
+	for (float i = 0; i < iWidth; ++i )
 	{
-		for (float j = fMinX + (BLOCK_SIZE / 2); j <= fMaxX; j += BLOCK_SIZE)
+		for (float j = 0; j < iHeight; ++j)
 		{
+			if (i > 6 && i < 23 && j > 0 && j < 12)
+				continue;
+			
 			// 타일 생성
-			CTile* testSand = new CSand(D3DXVECTOR3((float)j, Y, (float)i));
-			m_vecTile.push_back(testSand);
+			switch (m_eTileType)
+			{
+			case eTileType::FlowSand:
+				test = new CFlowSand(D3DXVECTOR3(fStartX + BLOCK_SIZE * i, Y, fStartZ - BLOCK_SIZE * j));
+				break;
+			case eTileType::Stair:
+				test = new CStair(D3DXVECTOR3(fStartX + BLOCK_SIZE * i, Y, fStartZ - BLOCK_SIZE * j));
+				break;
+			case eTileType::Water:
+				test = new CWater(D3DXVECTOR3(fStartX + BLOCK_SIZE * i, Y, fStartZ - BLOCK_SIZE * j));
+				break;
+			case eTileType::Brick:
+				test = new CBrick(D3DXVECTOR3(fStartX + BLOCK_SIZE * i, Y, fStartZ - BLOCK_SIZE * j));
+				break;
+			case eTileType::Sand:
+				test = new CSand(D3DXVECTOR3(fStartX + BLOCK_SIZE * i, Y, fStartZ - BLOCK_SIZE * j));
+				break;
+			case eTileType::Soil:
+				test = new CSoil(D3DXVECTOR3(fStartX + BLOCK_SIZE * i, Y, fStartZ - BLOCK_SIZE * j));
+				break;
+			case eTileType::ThickSand:
+				test = new CThickSand(D3DXVECTOR3(fStartX + BLOCK_SIZE * i, Y, fStartZ - BLOCK_SIZE * j));
+				break;
+			default: ;
+			}
+			
+			m_vecTile.push_back(test);
 		}
 	}
-	m_pCollision = new CBoxCollision(D3DXVECTOR3(0, Y, 0), D3DXVECTOR3(BLOCK_SIZE * (fMaxX - fMinX), BLOCK_SIZE, BLOCK_SIZE * (fMaxZ - fMinZ)), &m_matWorld);
+	m_pCollision = new CBoxCollision(D3DXVECTOR3(0, Y, 0), D3DXVECTOR3(BLOCK_SIZE * (m_fMaxX - m_fMinX), BLOCK_SIZE, BLOCK_SIZE * (m_fMaxZ - m_fMinZ)), &m_matWorld);
+	m_fFriction = m_vecTile[0]->GetFriction();
+	m_fRepulsivePower = m_vecTile[0]->GetRepulsivePower();
 	
 	m_pCollision->Update();
 }
@@ -54,7 +96,14 @@ void CField::Render()
 		_DEBUG_COMMENT m_pCollision->Render();
 }
 
-void CField::Update()
+bool CField::Collide(CActor* target, D3DXVECTOR3* pNormal)
 {
-	
+	D3DXVECTOR3 pos = target->GetPosition();
+	if (pos.x < m_fVoidMaxX && pos.x > m_fVoidMinX && pos.z < m_fVoidMaxZ && pos.z > m_fVoidMinZ)
+		return false;
+	if (pos.y > Y + 1.5f)
+		return false;
+
+
+	return CActor::Collide(target, pNormal);
 }

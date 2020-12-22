@@ -120,28 +120,23 @@ void CGameScene::Init()
 	CUIButton *pPauseButton = new CUIPauseButton(D3DXVECTOR2(465, 10), 27, this);
 	CUIButton *pLoseButton = new CUILoseButton(D3DXVECTOR2(465, 10), this);
 	CUITrafficLight *pTrafficLight = new CUITrafficLight(this, m_vecBlueprints.size());
-	//CPharaohCoffin *coffin = new CPharaohCoffin(this, D3DXVECTOR3(0, 1, 0));
-
-	CWhiteboard *whiteboard = new CWhiteboard(D3DXVECTOR3(5, 2, 4));
 	CUIButton *pReady = new CUIReady(D3DXVECTOR2(675, 450), this);
 	CUIButton *pWarrning = new CUIWarning();
-
+	CField* pField = new CField(eTileType::Water);
+	
 	m_cMutex.lock();
 
 	m_fGameTime = 300.0f;
 	m_vecStaticActor.push_back(wall);
-	//m_vecMonster.push_back(Medusa);
-	//m_vecMonster.push_back(Harpy);
-
+	m_vecStaticActor.push_back(pField);
+	
 	m_pWarnning = pWarrning;
 	m_pReady = pReady;
 	m_pDebugPauseUI = pPauseButton;
 	m_pDebugLoseUI = pLoseButton;
 	m_pDebugClearUI = pClearButton;
 	m_pDebugTrafficLight = pTrafficLight;
-	//m_vecObject.push_back(coffin);
-	m_vecObject.push_back(whiteboard);
-
+	
 	m_cMutex.unlock();
 }
 
@@ -586,6 +581,20 @@ void CGameScene::Load(string sFolder, string sFilename, void (CGameScene::*pCall
 			}
 		}
 		{
+			json jWhiteboard = j["Whiteboard"];
+			for (auto&& p : jWhiteboard)
+			{
+				D3DXVECTOR3 pos(p["Position"][0], p["Position"][1], p["Position"][2]);
+				float rotate = p["Rotate"];
+				D3DXVECTOR3 scale(p["Scale"][0], p["Scale"][1], p["Scale"][2]);
+				CWhiteboard* Whiteboard = new CWhiteboard(pos);
+				Whiteboard->SetRotationY(rotate);
+				Whiteboard->SetScale(scale);
+				vecStatic.push_back(Whiteboard);
+			}
+		}
+		{
+			while (!g_pPartsManager->IsLoaded()) {}
 			// parts
 			json jParts = j["Parts"];
 			for (auto&& p : jParts)

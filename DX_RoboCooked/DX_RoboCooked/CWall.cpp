@@ -126,7 +126,7 @@ void CWall::Setup()
 
 	m_wallTexture = g_pTextureManager->GetTexture(("data/Texture/box.jpg"));
 	D3DXMATRIXA16 matS, matT, mat;
-	D3DXMatrixScaling(&matS, 16.0f, 12.0f, 1.0f);
+	D3DXMatrixScaling(&matS, 30.0f, 12.0f, 1.0f);
 	D3DXMatrixTranslation(&matT, 0.0f, 6.0f, 0.0f);
 	mat = matS * matT;
 
