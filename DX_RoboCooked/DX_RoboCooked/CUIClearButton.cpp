@@ -1,4 +1,5 @@
 #include "stdafx.h"
+#include "CUIText.h"
 #include "CUIClearButton.h"
 #include "CUIClearBoard.h"
 #include "CUIStar.h"
@@ -43,12 +44,12 @@ void CUIClearButton::Setup()
 
 	string sTime = m_pInteractCenter->CalMin(m_nTime) + ":" + m_pInteractCenter->CalSec(m_nTime);
 
-	CUI* board = new CUIClearBoard(D3DXVECTOR2(m_vPosition.x, m_vPosition.y), sTime, eBtnEvent::None);
+	CUI* board = new CUIClearBoard(D3DXVECTOR2(m_vPosition.x, m_vPosition.y));
 	AddChild(board);
 
 	board->AddChild(m_pUIStar);
 
-	CUI* clearTextUI = new CUIClearTime(D3DXVECTOR2(m_vPosition.x + 335, m_vPosition.y + 300), eBtnEvent::None);
+	CUI* clearTextUI = new CUIClearTime(D3DXVECTOR2(m_vPosition.x + 335, m_vPosition.y + 300) , D3DXVECTOR2(m_vPosition.x + 350, m_vPosition.y + 400) , sTime, eTextType::ClearText);
 	board->AddChild(clearTextUI);
 
 	CUI* startBtn = new CUIStartButton(D3DXVECTOR2(m_vPosition.x + 250, m_vPosition.y + 525), eBtnEvent::PauseReset);

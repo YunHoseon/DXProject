@@ -9,7 +9,9 @@ public:
 	{
 		DEFAULT,
 		CLEARTIME,
-		TVTIME
+		TVTIME,
+		SELECT,
+		UPDATE
 	};
 private:
 	map<eFontType, LPD3DXFONT> m_mapFont;

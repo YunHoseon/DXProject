@@ -44,6 +44,7 @@ bool CUIMaker::OnEvent(eEvent eEvent, void * _value)
 	break;
 	case eEvent::MakerClose:
 		ActiveUI();
+		g_EventManager->CallEvent(eEvent::MainEvent, NULL);
 		break;
 	}
 	return true;

@@ -94,6 +94,9 @@
     <Filter Include="UI\Button\SubUI\CUICharge">
       <UniqueIdentifier>{7e1eea6b-46fc-4649-9fd5-a332f3696c38}</UniqueIdentifier>
     </Filter>
+    <Filter Include="UI\Button\SubUI\CUISelect">
+      <UniqueIdentifier>{6ca06a80-943d-474d-99a5-7cc32e5e2ec4}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <Text Include="ReadMe.txt" />
@@ -561,6 +564,48 @@
     <ClInclude Include="CUICombinatorGaugeBoard.h">
       <Filter>UI\Button\SubUI\CUICombinatorGauge</Filter>
     </ClInclude>
+    <ClInclude Include="CUIStageSelect.h">
+      <Filter>UI\Button\MainUI</Filter>
+    </ClInclude>
+    <ClInclude Include="CUIStageSelectPopUpBoard.h">
+      <Filter>UI\Button\SubUI</Filter>
+    </ClInclude>
+    <ClInclude Include="CUISelectNone.h">
+      <Filter>UI\Button\SubUI\CUISelect</Filter>
+    </ClInclude>
+    <ClInclude Include="CUISelectSolved.h">
+      <Filter>UI\Button\SubUI\CUISelect</Filter>
+    </ClInclude>
+    <ClInclude Include="CUISelectUnsolved.h">
+      <Filter>UI\Button\SubUI\CUISelect</Filter>
+    </ClInclude>
+    <ClInclude Include="CUISelect.h">
+      <Filter>UI\Button\SubUI\CUISelect</Filter>
+    </ClInclude>
+    <ClInclude Include="CUISelectBoard.h">
+      <Filter>UI\Button\SubUI\CUISelect</Filter>
+    </ClInclude>
+    <ClInclude Include="CUISelectStarOne.h">
+      <Filter>UI\Button\SubUI\CUISelect</Filter>
+    </ClInclude>
+    <ClInclude Include="CUISelectStarThree.h">
+      <Filter>UI\Button\SubUI\CUISelect</Filter>
+    </ClInclude>
+    <ClInclude Include="CUISelectStarZero.h">
+      <Filter>UI\Button\SubUI\CUISelect</Filter>
+    </ClInclude>
+    <ClInclude Include="CUISelectStarTwo.h">
+      <Filter>UI\Button\SubUI\CUISelect</Filter>
+    </ClInclude>
+    <ClInclude Include="CUISelectStartButton.h">
+      <Filter>UI\Button\SubUI\CUISelect</Filter>
+    </ClInclude>
+    <ClInclude Include="CUIUpdateText.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="CUISelectMainButton.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="stdafx.cpp">
@@ -1018,6 +1063,48 @@
     </ClCompile>
     <ClCompile Include="CUICombinatorGaugeBoard.cpp">
       <Filter>UI\Button\SubUI\CUICombinatorGauge</Filter>
+    </ClCompile>
+    <ClCompile Include="CUIStageSelect.cpp">
+      <Filter>UI\Button\MainUI</Filter>
+    </ClCompile>
+    <ClCompile Include="CUIStageSelectPopUpBoard.cpp">
+      <Filter>UI\Button\SubUI</Filter>
+    </ClCompile>
+    <ClCompile Include="CUISelectNone.cpp">
+      <Filter>UI\Button\SubUI\CUISelect</Filter>
+    </ClCompile>
+    <ClCompile Include="CUISelectSolved.cpp">
+      <Filter>UI\Button\SubUI\CUISelect</Filter>
+    </ClCompile>
+    <ClCompile Include="CUISelectUnsolved.cpp">
+      <Filter>UI\Button\SubUI\CUISelect</Filter>
+    </ClCompile>
+    <ClCompile Include="CUISelect.cpp">
+      <Filter>UI\Button\SubUI\CUISelect</Filter>
+    </ClCompile>
+    <ClCompile Include="CUISelectBoard.cpp">
+      <Filter>UI\Button\SubUI\CUISelect</Filter>
+    </ClCompile>
+    <ClCompile Include="CUISelectStarOne.cpp">
+      <Filter>UI\Button\SubUI\CUISelect</Filter>
+    </ClCompile>
+    <ClCompile Include="CUISelectStarThree.cpp">
+      <Filter>UI\Button\SubUI\CUISelect</Filter>
+    </ClCompile>
+    <ClCompile Include="CUISelectStarZero.cpp">
+      <Filter>UI\Button\SubUI\CUISelect</Filter>
+    </ClCompile>
+    <ClCompile Include="CUISelectStarTwo.cpp">
+      <Filter>UI\Button\SubUI\CUISelect</Filter>
+    </ClCompile>
+    <ClCompile Include="CUISelectStartButton.cpp">
+      <Filter>UI\Button\SubUI\CUISelect</Filter>
+    </ClCompile>
+    <ClCompile Include="CUIUpdateText.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="CUISelectMainButton.cpp">
+      <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

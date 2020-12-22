@@ -8,8 +8,12 @@
 #include "CGameScene.h"
 
 
-CUIMainScreen::CUIMainScreen(CUIButton* pMaker, CUIButton* pControll):m_pMaker(pMaker),m_pControll(pControll)
+CUIMainScreen::CUIMainScreen(CUIButton* pStage, CUIButton* pMaker, CUIButton* pControll)
+	:m_pMaker(pMaker),
+	m_pControll(pControll),
+	m_pStage(pStage)
 {
+	g_EventManager->Attach(eEvent::MainEvent, this);
 	g_EventManager->Attach(eEvent::MainStart, this);
 	g_EventManager->Attach(eEvent::MainControll, this);
 	g_EventManager->Attach(eEvent::MainEnd, this);
@@ -61,13 +65,16 @@ bool CUIMainScreen::OnEvent(eEvent eEvent, void * _value)
 		MouseReleaseEvent(_value);
 		break;
 	case eEvent::MainStart:
-		StartGame();
+		ShowUI(m_pStage);
 		break;
 	case eEvent::MainControll:
-		m_pControll->ActiveUI();
+		ShowUI(m_pControll);
 		break;
 	case eEvent::MainMaker:
-		m_pMaker->ActiveUI();
+		ShowUI(m_pMaker);
+		break;
+	case eEvent::MainEvent:
+		CheckActiveEvent();
 		break;
 	case eEvent::MainEnd:
 		EndGame();
@@ -76,18 +83,25 @@ bool CUIMainScreen::OnEvent(eEvent eEvent, void * _value)
 	return true;
 }
 
-void CUIMainScreen::StartGame()
-{
-	CGameScene* scene = new CGameScene;
-	thread _t1(&CGameScene::Load, scene, "data/js", "AllTest.json", &CGameScene::Init);
-	_t1.detach();
+//void CUIMainScreen::StartGame()
+//{
+//	CGameScene* scene = new CGameScene;
+//	thread _t1(&CGameScene::Load, scene, "data/js", "AllTest.json", &CGameScene::Init);
+//	_t1.detach();
+//
+//	CScene* pBeforeScene = g_SceneManager->SetCurrentScene(scene);
+//	if (pBeforeScene)
+//	{
+//		thread _t2([pBeforeScene]() { delete pBeforeScene; });
+//		_t2.detach();
+//	}
+//}
 
-	CScene* pBeforeScene = g_SceneManager->SetCurrentScene(scene);
-	if (pBeforeScene)
-	{
-		thread _t2([pBeforeScene]() { delete pBeforeScene; });
-		_t2.detach();
-	}
+void CUIMainScreen::ShowUI(CUIButton *pBtn)
+{
+	pBtn->ActiveUI();
+	g_EventManager->Detach(eEvent::MouseClick, this);
+	g_EventManager->Detach(eEvent::MouseHover, this);
 }
 
 void CUIMainScreen::EndGame()
