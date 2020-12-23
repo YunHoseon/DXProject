@@ -4,9 +4,6 @@ class IInteractCenter;
 class CUILoseButton :
 	public CUIButton
 {
-private:
-	IInteractCenter*	m_pInteractCenter;
-
 public:
 	CUILoseButton(D3DXVECTOR2 vPos, IInteractCenter* pInteractCenter);
 	~CUILoseButton();
@@ -14,6 +11,6 @@ public:
 public:
 	virtual void Setup() override;
 	bool OnEvent(eEvent eEvent, void * _value);
-	void ResetGame();
+	//void ResetGame();
 };
 

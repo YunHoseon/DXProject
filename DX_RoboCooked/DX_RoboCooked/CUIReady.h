@@ -5,7 +5,6 @@ class CUIReady :
 	public CUIButton
 {
 private:
-	IInteractCenter*	m_pInteractCenter;
 	float				m_fElapsedTime;
 
 public:

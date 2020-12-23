@@ -19,6 +19,7 @@ CBoundaryWall::CBoundaryWall()
 	D3DXVECTOR3 vOrigin((vMax + vMin) * 0.5f);
 	vOrigin.z = -6.5f;
 	m_pCollision = new CBoxCollision(vOrigin, (vMax - vMin) * 1.5f, &m_matWorld);
+	m_fMass = 9999.f;
 }
 
 CBoundaryWall::~CBoundaryWall()

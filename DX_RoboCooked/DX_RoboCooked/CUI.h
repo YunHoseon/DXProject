@@ -81,9 +81,6 @@ public:
 	D3DXVECTOR2 GetPosition() { return m_vPosition; }
 	virtual void SetPosition(float x, float y) { m_vPosition.x = x, m_vPosition.y = y; }
 	void ButtonEvent(eBtnEvent btnEvent);
-	//virtual void MouseHoverEvent(void* _value);
-	//virtual void MouseClickEvent(void* _value);
-	//virtual void MouseReleaseEvent(void* _value);
 
 	INT GetlistUIchildrenSize() { return m_listUIchildren.size(); }
 

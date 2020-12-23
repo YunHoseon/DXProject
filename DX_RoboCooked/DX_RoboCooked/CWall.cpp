@@ -15,7 +15,7 @@ CWall::CWall(IInteractCenter* pIntaract, bool hasTV, float fWidth, float fHeight
 	}
 	m_pSMesh = g_pStaticMeshManager->GetStaticMesh("Brick");
 	Setup(fWidth, fHeight);
-	
+	m_fMass = 9999.f;
 }
 
 
