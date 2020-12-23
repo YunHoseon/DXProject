@@ -609,6 +609,9 @@
     <ClInclude Include="CBoundaryWall.h">
       <Filter>GameScene\Object</Filter>
     </ClInclude>
+    <ClInclude Include="CThreadManager.h">
+      <Filter>Manager</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="stdafx.cpp">
@@ -1111,6 +1114,9 @@
     </ClCompile>
     <ClCompile Include="CBoundaryWall.cpp">
       <Filter>GameScene\Object</Filter>
+    </ClCompile>
+    <ClCompile Include="CThreadManager.cpp">
+      <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

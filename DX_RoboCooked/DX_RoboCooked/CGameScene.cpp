@@ -443,7 +443,7 @@ void CGameScene::Load(string sFolder, string sFilename, void (CGameScene::*pCall
 	vector<CMonster *> vecMonster;
 
 	while(!g_pStaticMeshManager->IsLoaded()){} // 메시 로딩이 끝날때까지 busylock
-	
+	if (g_pThreadManager->GetStopMessage()) return;
 	{
 		{
 			// blueprint
@@ -596,6 +596,7 @@ void CGameScene::Load(string sFolder, string sFilename, void (CGameScene::*pCall
 		}
 		{
 			while (!g_pPartsManager->IsLoaded()) {}
+			if (g_pThreadManager->GetStopMessage()) return;
 			// parts
 			json jParts = j["Parts"];
 			for (auto&& p : jParts)

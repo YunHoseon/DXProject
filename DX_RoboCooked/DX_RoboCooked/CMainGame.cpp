@@ -46,6 +46,7 @@ CMainGame::CMainGame()
 
 CMainGame::~CMainGame()
 {
+	g_pThreadManager->JoinAllThread();
 	SafeDelete(m_pCamera);
 	SafeDelete(m_pGrid);
 
@@ -81,15 +82,15 @@ void CMainGame::Setup()
 		_t2.detach();
 	}*/
 
-	thread _t1([]() { g_pPartsManager; }); _t1.detach();
-	thread _t2([]() { g_pStaticMeshManager; }); _t2.detach();
+	
+	g_pThreadManager->AddThread(thread([]() { g_pPartsManager; }));
+	g_pThreadManager->AddThread(thread([]() { g_pStaticMeshManager; }));
 	CMainScene* scene = new CMainScene;
 
 	CScene* pBeforeScene = g_SceneManager->SetCurrentScene(scene);
 	if (pBeforeScene)
 	{
-		thread _t3([pBeforeScene]() { delete pBeforeScene; });
-		_t3.detach();
+		g_pThreadManager->AddThread(thread([pBeforeScene]() { delete pBeforeScene; }));
 	}
 }
 

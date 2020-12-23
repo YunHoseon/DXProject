@@ -84,8 +84,8 @@ void CWall::Render()
 
 	if (m_pTV)
 		m_pTV->Render();
-	if (m_pCollision)
-		m_pCollision->Render();
+	_DEBUG_COMMENT if (m_pCollision)
+	_DEBUG_COMMENT 	m_pCollision->Render();
 }
 
 bool CWall::OnEvent(eEvent eEvent, void * _value)
@@ -93,7 +93,7 @@ bool CWall::OnEvent(eEvent eEvent, void * _value)
 	switch (eEvent)
 	{
 	case eEvent::KeyRelease:
-		ReleaseKey();
+		ReleaseKey(_value);
 		break;
 	default:
 		break;
@@ -101,22 +101,25 @@ bool CWall::OnEvent(eEvent eEvent, void * _value)
 	return true;
 }
 
-void CWall::ReleaseKey()
+void CWall::ReleaseKey(void* _value)
 {
-	if (GetAsyncKeyState('O') & 0x0001)
+	ST_KeyInputEvent* data = static_cast<ST_KeyInputEvent*>(_value);
+	if (data->wKey == 'O')
 	{
 		m_nRotAngleX -= 2;
 		if (m_nRotAngleX <= 0)
 			m_nRotAngleX = 0;
+		D3DXMatrixRotationX(&m_matR, D3DXToRadian(m_nRotAngleX));
 	}
-	else if (GetAsyncKeyState('P') & 0x0001)
+	else if (data->wKey == 'P')
 	{
 		m_nRotAngleX += 2;
 		if (m_nRotAngleX >= 90)
 			m_nRotAngleX = 90;
+		D3DXMatrixRotationX(&m_matR, D3DXToRadian(m_nRotAngleX));
 	}
 
-	D3DXMatrixRotationX(&m_matR, D3DXToRadian(m_nRotAngleX));
+	
 	m_matWorld = m_matR * m_matT;
 	if (m_pCollision)
 		m_pCollision->Update();

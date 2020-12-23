@@ -23,7 +23,7 @@ public:
 	bool OnEvent(eEvent eEvent, void* _value) override;
 
 	//void CreateFont();
-	void ReleaseKey();
+	void ReleaseKey(void* _value);
 
 	void AddAcceleration(const D3DXVECTOR3& vAccel) override {}
 	void AddForce(const D3DXVECTOR3& vForce) override {}

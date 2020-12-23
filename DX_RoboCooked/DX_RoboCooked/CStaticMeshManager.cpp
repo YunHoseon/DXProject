@@ -76,6 +76,7 @@ void CStaticMeshManager::Load()
 	
 	for (ST_StaticMesh_Data datas : vecData)
 	{
+		if (g_pThreadManager->GetStopMessage()) return;
 		CStaticMesh* staticMesh = new CStaticMesh;
 		CMeshLoader::LoadMesh(datas.fileName, datas.filePath, staticMesh);
 		cMutex.lock();

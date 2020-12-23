@@ -34,6 +34,7 @@ void CPartsManager::Load()
 	{
 		for (int i = 0; i < j.size(); ++i)
 		{
+			if (g_pThreadManager->GetStopMessage()) return;
 			string id = j[i]["ID"];
 			string filename = j[i]["Filename"];
 			float fMass = j[i]["Mass"];

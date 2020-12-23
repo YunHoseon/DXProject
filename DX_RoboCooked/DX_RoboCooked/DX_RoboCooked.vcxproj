@@ -180,6 +180,7 @@
     <ClInclude Include="CStair.h" />
     <ClInclude Include="CStaticMesh.h" />
     <ClInclude Include="CTestStair.h" />
+    <ClInclude Include="CThreadManager.h" />
     <ClInclude Include="CTornado.h" />
     <ClInclude Include="CTV.h" />
     <ClInclude Include="CUIAcidRain.h" />
@@ -350,6 +351,7 @@
     <ClCompile Include="CStair.cpp" />
     <ClCompile Include="CStaticMesh.cpp" />
     <ClCompile Include="CTestStair.cpp" />
+    <ClCompile Include="CThreadManager.cpp" />
     <ClCompile Include="CTornado.cpp" />
     <ClCompile Include="CTV.cpp" />
     <ClCompile Include="CUIAcidRain.cpp" />

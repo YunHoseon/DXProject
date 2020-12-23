@@ -253,6 +253,7 @@ struct ST_PLAYER_INPUTKEY
 #include "CPartsManager.h"
 #include "CUITextureManager.h"
 #include "CStaticMeshManager.h"
+#include "CThreadManager.h"
 
 #include "CRandomNumberGenerator.h"
 
