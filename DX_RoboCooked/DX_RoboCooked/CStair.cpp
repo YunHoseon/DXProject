@@ -1,7 +1,7 @@
 #include "stdafx.h"
 #include "CStair.h"
 #include "CBoxCollision.h"
-
+#include "CPhysicsApplyer.h"
 CStair::CStair(D3DXVECTOR3 vPosition)
 {
 	m_eTileType = eTileType::Stair;
@@ -19,7 +19,7 @@ CStair::CStair(D3DXVECTOR3 vPosition)
 
 	//float y = vPosition.y - 0.5f + m_pCollision->GetHeight() * 0.5f + (vPosition.y - m_pCollision->GetCenter().y);
 	//SetPosition(vPosition.x, y, vPosition.z);
-
+	m_fFriction = 0.3f;
 	if (m_pCollision)
 		m_pCollision->Update();
 }
@@ -34,5 +34,13 @@ void CStair::Render()
 	CTile::Render();
 	_DEBUG_COMMENT if (m_pCollision)
 		_DEBUG_COMMENT 	m_pCollision->Render();
+}
+
+bool CStair::Collide(CActor* target, D3DXVECTOR3* pNormal)
+{
+	bool b = CActor::Collide(target, pNormal);
+	if (b)
+		target->AddAcceleration(-CPhysicsApplyer::GetGravity());
+	return b;
 }
 

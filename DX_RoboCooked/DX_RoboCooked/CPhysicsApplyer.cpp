@@ -2,10 +2,10 @@
 #include "CPhysicsApplyer.h"
 #include "CActor.h"
 
+D3DXVECTOR3 CPhysicsApplyer::vGravity(0, -0.01f, 0);
 void CPhysicsApplyer::ApplyGravity(CActor* pA)
 {
-	static D3DXVECTOR3 gravity(0, -0.01f, 0);
-	pA->AddAcceleration(gravity * TimeRevision);
+	pA->AddAcceleration(vGravity * TimeRevision);
 }
 
 void CPhysicsApplyer::ApplyBound(CActor* pA, CActor* pB)
