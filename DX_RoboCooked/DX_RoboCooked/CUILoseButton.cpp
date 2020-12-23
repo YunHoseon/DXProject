@@ -9,7 +9,7 @@
 #include "IInteractCenter.h"
 
 
-CUILoseButton::CUILoseButton(D3DXVECTOR2 vPos, IInteractCenter* pInteractCenter) :m_pInteractCenter(pInteractCenter)
+CUILoseButton::CUILoseButton(D3DXVECTOR2 vPos, IInteractCenter* pInteractCenter) :CUIButton(pInteractCenter)
 {
 	m_vPosition = vPos;
 	Setup();
@@ -59,6 +59,7 @@ bool CUILoseButton::OnEvent(eEvent eEvent, void * _value)
 	}
 	break;
 	case eEvent::LoseMain:
+		GoToMain();
 		break;
 	case eEvent::LoseReset:
 		ResetGame();
@@ -67,16 +68,16 @@ bool CUILoseButton::OnEvent(eEvent eEvent, void * _value)
 	return true;
 }
 
-void CUILoseButton::ResetGame()
-{
-	//return;
-	CGameScene* scene = new CGameScene;
-
-	g_pThreadManager->AddThread(thread(&CGameScene::Load, scene, "data/js", m_pInteractCenter->GetSceneID(), &CGameScene::Init));
-
-	CScene* pBeforeScene = g_SceneManager->SetCurrentScene(scene);
-	if (pBeforeScene)
-	{
-		g_pThreadManager->AddThread(thread([pBeforeScene]() { delete pBeforeScene; }));
-	}
-}
+//void CUILoseButton::ResetGame()
+//{
+//	//return;
+//	CGameScene* scene = new CGameScene;
+//
+//	g_pThreadManager->AddThread(thread(&CGameScene::Load, scene, "data/js", m_pInteractCenter->GetSceneID(), &CGameScene::Init));
+//
+//	CScene* pBeforeScene = g_SceneManager->SetCurrentScene(scene);
+//	if (pBeforeScene)
+//	{
+//		g_pThreadManager->AddThread(thread([pBeforeScene]() { delete pBeforeScene; }));
+//	}
+//}

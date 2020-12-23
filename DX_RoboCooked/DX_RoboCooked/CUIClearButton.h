@@ -8,7 +8,6 @@ class CUIClearButton :
 	public CUIButton
 {
 private:
-	IInteractCenter*	m_pInteractCenter;
 	CUIStar*			m_pUIStar;
 	INT					m_nTime;
 

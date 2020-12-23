@@ -7,11 +7,12 @@
 #include "IInteractCenter.h"
 
 CUILoading::CUILoading(IInteractCenter *pInteractCenter)
-	: m_isLoading(true)
+	:CUIButton(pInteractCenter)
+	, m_isLoading(true)
+	
 {
 	m_vPosition = D3DXVECTOR2(0, 0);
 	m_isActive = true;
-	m_pInteractCenter = pInteractCenter;
 	Setup();
 
 	g_EventManager->Attach(eEvent::KeyRelease, this);

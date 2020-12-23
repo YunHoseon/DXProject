@@ -10,7 +10,7 @@
 
 
 CUITrafficLight::CUITrafficLight(IInteractCenter* pInteractCenter, int nSize)
-			: m_pInteractCenter(pInteractCenter)
+			: CUIButton(pInteractCenter)
 			, m_nCompleteBluePrintCount(0)
 			, m_pLightBoard(nullptr)
 {

@@ -7,7 +7,7 @@ class CUILoading :
 	public CUIButton
 {
 private:
-	IInteractCenter*	m_pInteractCenter;
+	//IInteractCenter*	m_pInteractCenter;
 	bool				m_isLoading;
 
 	CUI*				m_pBoard;
