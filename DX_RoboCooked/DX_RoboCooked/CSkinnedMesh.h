@@ -20,6 +20,7 @@ protected:
 
 	//enum AnimSet { ATK01, ATK02, ATK03, RUN, IDLE };
 	int				m_nCurrentAnimIndex;
+	D3DXMATRIXA16 * m_pmatWorldTM;
 public:
 	void Setup(char* szFolder, char* szFile);
 	void Update();
@@ -44,8 +45,9 @@ public:
 	void Update(ST_BONE* pCurrent, D3DXMATRIXA16* pmatParent);
 	void SetRandomTrackPosition();
 
-	D3DXMATRIXA16 * m_pmatWorldTM;
 	void SetTransform(D3DXMATRIXA16 * pmat);
+	D3DXMATRIXA16* GetTransform() { return m_pmatWorldTM; }
+	void DeleteTransform() { SafeDelete(m_pmatWorldTM); }
 	double GetCurrentAnimPeriod();
 	LPD3DXANIMATIONCONTROLLER GetAnimController() { return m_pAnimController; }
 	

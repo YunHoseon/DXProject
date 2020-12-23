@@ -15,7 +15,7 @@ CDebugPlayer1::CDebugPlayer1(IInteractCenter* pInteractCenter)
 
 	m_pSkinnedMesh = new CSkinnedMesh;
 	m_pSkinnedMesh->Load("data/model/character", "chara_1p.X");
-	m_pSkinnedMesh->m_pmatWorldTM = new D3DXMATRIXA16;
+	D3DXMATRIXA16* pmat = new D3DXMATRIXA16;
 	
 	D3DXVECTOR3 max = m_pSkinnedMesh->GetMax();
 	D3DXVECTOR3 min = m_pSkinnedMesh->GetMin();
@@ -24,7 +24,8 @@ CDebugPlayer1::CDebugPlayer1(IInteractCenter* pInteractCenter)
 	D3DXMatrixScaling(&matS, 0.015f, 0.015f, 0.015f);
 	D3DXMatrixRotationY(&matR, D3DXToRadian(180));
 	D3DXMatrixTranslation(&matT, 0, -((max.y - min.y) / 2 * 0.015f), 0);
-	*(m_pSkinnedMesh->m_pmatWorldTM) = matS * matR * matT;
+	*pmat = matS * matR * matT;
+	m_pSkinnedMesh->SetTransform(pmat);
 	m_pSkinnedMesh->Update();
 
 	m_pCollision = new CSphereCollision(g_vZero, 0.5f, &m_matWorld);
@@ -43,6 +44,6 @@ CDebugPlayer1::~CDebugPlayer1()
 	SafeDelete(m_pInteractCollision);
 	SafeDelete(m_pCollision);
 	//SafeRelease(m_pMesh);
-	SafeDelete(m_pSkinnedMesh->m_pmatWorldTM);
+	m_pSkinnedMesh->DeleteTransform();
 	SafeDelete(m_pSkinnedMesh);
 }

@@ -10,19 +10,19 @@ CBlueprint::CBlueprint(string partsID, vector<CParts*>& vecParts, D3DXVECTOR3 po
 	: m_isCompleted(false)
 	, m_onBlueprintParts(NULL)
 	, m_pInteractCollision(nullptr)
+	, m_blueprintTexture(nullptr)
+	, m_completeBlueprintTexture(nullptr)
 {
 	m_sRightPartsID = partsID;
 	m_pVecParts = &vecParts;
-	m_blueprintTexture = g_pTextureManager->GetTexture("data/Texture/Blueprint.jpg");
-	m_completeBlueprintTexture = g_pTextureManager->GetTexture("data/Texture/CompleteBlueprint.jpg");
-	//파츠 아이디에 따라 m_matS,텍스쳐 다르게
 	m_fFriction = 0.2f;
 	SetPosition(position.x, position.y - 0.5f, position.z);
 	SetScale(scale);
 	SetRotationY(angle);
 	m_fRightPartsAngleY = partsAngle;
 	m_fMass = 9999.f;
-	//D3DXMatrixIdentity(&m_matInteractCollision);
+
+	SetupTexture(partsID);
 }
 
 
@@ -232,6 +232,65 @@ void CBlueprint::Interact(CCharacter* pCharacter)
 			m_pInteractCollision->SetActive(true);
 			g_EventManager->CallEvent(eEvent::UnCompleteBluePrint, this);
 		}
+	}
+}
+
+void CBlueprint::SetupTexture(string partsID)
+{
+	if (partsID == "C00")
+	{
+		m_blueprintTexture = g_pTextureManager->GetTexture("data/Texture/blueprint/blueprint_body_hyper.png");
+		m_completeBlueprintTexture = g_pTextureManager->GetTexture("data/Texture/blueprint/blueprint_body_hyper_.png");
+	}
+	else if (partsID == "C01")
+	{
+		m_blueprintTexture = g_pTextureManager->GetTexture("data/Texture/blueprint/blueprint_body_boost.png");
+		m_completeBlueprintTexture = g_pTextureManager->GetTexture("data/Texture/blueprint/blueprint_body_boost_.png");
+	}
+	else if (partsID == "C02")
+	{
+		m_blueprintTexture = g_pTextureManager->GetTexture("data/Texture/blueprint/blueprint_arm.png");
+		m_completeBlueprintTexture = g_pTextureManager->GetTexture("data/Texture/blueprint/blueprint_arm_.png");
+	}
+	else if (partsID == "C03")
+	{
+		m_blueprintTexture = g_pTextureManager->GetTexture("data/Texture/blueprint/blueprint_hand_gravity.png");
+		m_completeBlueprintTexture = g_pTextureManager->GetTexture("data/Texture/blueprint/blueprint_hand_gravity_.png");
+	}
+	else if (partsID == "C04")
+	{
+		m_blueprintTexture = g_pTextureManager->GetTexture("data/Texture/blueprint/blueprint_hand_rolling.png");
+		m_completeBlueprintTexture = g_pTextureManager->GetTexture("data/Texture/blueprint/blueprint_hand_rolling_.png");
+	}
+	else if (partsID == "C05")
+	{
+		m_blueprintTexture = g_pTextureManager->GetTexture("data/Texture/blueprint/blueprint_leg.png");
+		m_completeBlueprintTexture = g_pTextureManager->GetTexture("data/Texture/blueprint/blueprint_leg_.png");
+	}
+	else if (partsID == "C06")
+	{
+		m_blueprintTexture = g_pTextureManager->GetTexture("data/Texture/blueprint/blueprint_foot_trust.png");
+		m_completeBlueprintTexture = g_pTextureManager->GetTexture("data/Texture/blueprint/blueprint_foot_trust_.png");
+	}
+	else if (partsID == "C07")
+	{
+		m_blueprintTexture = g_pTextureManager->GetTexture("data/Texture/blueprint/blueprint_foot_infinity.png");
+		m_completeBlueprintTexture = g_pTextureManager->GetTexture("data/Texture/blueprint/blueprint_foot_infinity_.png");
+	}
+	else if (partsID == "C08")
+	{
+		m_blueprintTexture = g_pTextureManager->GetTexture("data/Texture/blueprint/blueprint_head_hero.png");
+		m_completeBlueprintTexture = g_pTextureManager->GetTexture("data/Texture/blueprint/blueprint_head_hero_.png");
+	}
+	else if (partsID == "C09")
+	{
+		m_blueprintTexture = g_pTextureManager->GetTexture("data/Texture/blueprint/blueprint_head_final.png");
+		m_completeBlueprintTexture = g_pTextureManager->GetTexture("data/Texture/blueprint/blueprint_head_final_.png");
+	}
+	else
+	{
+		m_blueprintTexture = g_pTextureManager->GetTexture("data/Texture/Blueprint.jpg");
+		m_completeBlueprintTexture = g_pTextureManager->GetTexture("data/Texture/CompleteBlueprint.jpg");
 	}
 }
 
