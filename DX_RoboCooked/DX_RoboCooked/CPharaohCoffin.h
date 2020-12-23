@@ -2,7 +2,7 @@
 #include "CInteractiveActor.h"
 #include "IPartGenerator.h"
 
-#define PARTS_COUNT 5
+#define PARTSLEVEL2_COUNT 5
 class CRandomNumberGenerator;
 class CCharacter;
 
@@ -16,7 +16,7 @@ class CPharaohCoffin :
 	float				m_fPassedTime;
 	ICollisionArea*		m_pCCCollision;
 
-	string			m_arrPartsID[PARTS_COUNT];	//2´Ü°èÆÄÃ÷ ID
+	string			m_arrPartsID[PARTSLEVEL2_COUNT];	//2´Ü°èÆÄÃ÷ ID
 	CRandomNumberGenerator	m_randNumGenerator;
 public:
 	CPharaohCoffin(IInteractCenter* pInteractCenter, D3DXVECTOR3 vPos);
