@@ -145,11 +145,6 @@ void CGameScene::Render()
 {
 	m_cMutex.lock();
 
-	for (CActor *it : m_vecStaticActor)
-	{
-		it->Render();
-	}
-
 	for (CParts *it : m_vecParts)
 	{
 		it->Render();
@@ -180,6 +175,11 @@ void CGameScene::Render()
 		it->Render();
 	}
 
+	for (CActor* it : m_vecStaticActor)
+	{
+		it->Render();
+	}
+	
 	if (m_pDebugTrafficLight)
 		m_pDebugTrafficLight->Render();
 

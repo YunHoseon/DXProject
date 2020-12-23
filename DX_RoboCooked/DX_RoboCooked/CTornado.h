@@ -3,6 +3,8 @@
 class CTornado :
 	public CActor
 {
+private:
+	CStaticMesh* m_pSMesh;
 public:
 	CTornado(D3DXVECTOR3 pos);
 	~CTornado();
