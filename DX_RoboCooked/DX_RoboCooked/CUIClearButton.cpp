@@ -40,7 +40,7 @@ void CUIClearButton::Setup()
 	else					m_pUIStar = new CUIStarZero(starPos);
 
 
-	string sTime = m_pInteractCenter->CalMin(m_nTime) + ":" + m_pInteractCenter->CalSec(m_nTime);
+	string sTime = CalMin(m_nTime) + ":" + CalSec(m_nTime);
 
 	CUI* board = new CUIClearBoard(D3DXVECTOR2(m_vPosition.x, m_vPosition.y));
 	AddChild(board);

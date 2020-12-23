@@ -13,9 +13,10 @@
 
 
 
-CUISelectSolved::CUISelectSolved(D3DXVECTOR2 vPos ,ST_GameData data, eBtnEvent eEvent) :CUISelect(vPos,data)
+CUISelectSolved::CUISelectSolved(D3DXVECTOR2 vPos, string chStageID, float fTime, int nPage, eBtnEvent eEvent) :CUISelect(vPos, chStageID, fTime)
 {
 	m_eBtnEvent = eEvent;
+	m_nUIPage = nPage;
 	Setup();
 }
 
@@ -26,31 +27,25 @@ CUISelectSolved::~CUISelectSolved()
 
 void CUISelectSolved::Setup()
 {
-	CUI* board = new CUISelectBoard(m_vPosition, m_stData.chStageID);
+	CUI* board = new CUISelectBoard(m_vPosition, m_sStageID);
 	AddChild(board);
 
 	CUI* star = nullptr;
 	D3DXVECTOR2 starPos = D3DXVECTOR2(m_vPosition.x + 75, m_vPosition.y +65);
-	switch (m_stData.nStarCount)
-	{
-	case 0:
-		star = new CUISelectStarZero(starPos);
-		break;
-	case 1:
-		star = new CUISelectStarOne(starPos);
-		break;
-	case 2:
-		star = new CUISelectStarTwo(starPos);
-		break;
-	case 3:
-		star = new CUISelectStarThree(starPos);
-		break;
-	}
+
+	if (m_fGameTime >= 180)		star = new CUISelectStarThree(starPos);
+	else if (m_fGameTime >= 120)star = new CUISelectStarTwo(starPos);
+	else if (m_fGameTime >= 60)	star = new CUISelectStarOne(starPos);
+	else						star = new CUISelectStarZero(starPos);
+
+	string sTime = CalMin(m_fGameTime) + ":" + CalSec(m_fGameTime);
+
+	star = new CUISelectStarZero(starPos);
 	board->AddChild(star);
 	D3DXVECTOR2 clearUIPos = D3DXVECTOR2(m_vPosition.x , m_vPosition.y + 150);
 	D3DXVECTOR2 TimeTextPos = D3DXVECTOR2(m_vPosition.x + 285, m_vPosition.y + 190);
 
-	CUI* clearTimeUI = new CUIClearTime(clearUIPos, TimeTextPos, m_stData.chGameTime, eTextType::SelectText);
+	CUI* clearTimeUI = new CUIClearTime(clearUIPos, TimeTextPos, sTime, eTextType::SelectText);
 	board->AddChild(clearTimeUI);
 
 	D3DXVECTOR2 startBtnPos = D3DXVECTOR2(m_vPosition.x + 160, m_vPosition.y + 250);

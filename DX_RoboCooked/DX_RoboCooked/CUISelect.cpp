@@ -2,10 +2,12 @@
 #include "CUISelect.h"
 
 
-CUISelect::CUISelect(D3DXVECTOR2 vPos, ST_GameData data)
+CUISelect::CUISelect(D3DXVECTOR2 vPos, string chStageID, float fTime)
+	:m_fGameTime(fTime),
+	m_sStageID(chStageID)
 {
 	m_vPosition = vPos;
-	m_stData = data;
+
 }
 
 

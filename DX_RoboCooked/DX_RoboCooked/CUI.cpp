@@ -19,7 +19,8 @@ CUI::CUI() :
 	m_matWorld(g_matIdentity),
 	m_pTargetPosition(nullptr),
 	m_pTargetWorldTM(nullptr),
-	m_isMouseDown(false)
+	m_isMouseDown(false),
+	m_nUIPage(-1)
 {
 }
 
@@ -183,6 +184,37 @@ void CUI::CheckInHover(POINT pt)
 	}
 }
 
+void CUI::ActivePage(int nPage)
+{
+	for (auto it : m_listUIchildren)
+	{
+		it->ActivePage(nPage);
+	}
+
+	if (m_nUIPage == -1)
+		return;
+	if (m_nUIPage == nPage)
+	{
+		m_isActive = true;
+	}
+	else
+	{
+		m_isActive = false;
+	}	
+
+	if (m_isActive)
+	{
+		g_EventManager->Attach(eEvent::MouseRelease, this);
+		g_EventManager->Attach(eEvent::MouseClick, this);
+		g_EventManager->Attach(eEvent::MouseHover, this);
+	}
+	else
+	{
+		g_EventManager->Detach(eEvent::MouseClick, this);
+		g_EventManager->Detach(eEvent::MouseHover, this);
+	}
+}
+
 void CUI::InvertActive()
 {
 	for (auto it : m_listUIchildren)
@@ -285,18 +317,31 @@ void CUI::ButtonEvent(eBtnEvent btnEvent)
 	case eBtnEvent::StageClose:
 		g_EventManager->CallEvent(eEvent::StageClose, NULL);
 		break;
-	case eBtnEvent::STAGE1_1:
-	{
-			CGameScene* scene = new CGameScene;
-			g_pThreadManager->AddThread(thread(&CGameScene::Load, scene, "data/js", "AllTest.json", &CGameScene::Init));
-		
-			CScene* pBeforeScene = g_SceneManager->SetCurrentScene(scene);
-			if (pBeforeScene)
-			{
-				g_pThreadManager->AddThread(thread([pBeforeScene]() { delete pBeforeScene; }));
-			}
-	}
+	case eBtnEvent::SelectButton1:
+		g_EventManager->CallEvent(eEvent::SelectButton1, NULL);
 		break;
+	case eBtnEvent::SelectButton2:
+		g_EventManager->CallEvent(eEvent::SelectButton2, NULL);
+		break;
+	case eBtnEvent::SelectButton3:
+		g_EventManager->CallEvent(eEvent::SelectButton3, NULL);
+		break;
+	case eBtnEvent::SelectButton4:
+		g_EventManager->CallEvent(eEvent::SelectButton4, NULL);
+		break;
+	case eBtnEvent::SelectButton5:
+		g_EventManager->CallEvent(eEvent::SelectButton5, NULL);
+		break;
+	case eBtnEvent::SelectButton6:
+		g_EventManager->CallEvent(eEvent::SelectButton6, NULL);
+		break;
+	case eBtnEvent::SelectLeft:
+		g_EventManager->CallEvent(eEvent::SelectLeft, NULL);
+		break;
+	case eBtnEvent::SelectRight:
+		g_EventManager->CallEvent(eEvent::SelectRight, NULL);
+		break;
+
 	}
 }
 

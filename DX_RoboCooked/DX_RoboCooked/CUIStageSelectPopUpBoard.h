@@ -6,6 +6,10 @@ class CUIStageSelectPopUpBoard :
 private:
 	vector<D3DXVECTOR2>		m_vecSelectPosition;
 	D3DXVECTOR2				m_vMainPosition;
+
+	D3DXVECTOR2				m_vLeftPosition;
+	D3DXVECTOR2				m_vRightPosition;
+
 public:
 	CUIStageSelectPopUpBoard(D3DXVECTOR2 vPos);
 	~CUIStageSelectPopUpBoard();
@@ -22,5 +26,9 @@ public:
 	}
 
 	D3DXVECTOR2 GetMainPosition() { return m_vMainPosition; }
+
+	D3DXVECTOR2 GetLeftPosition() { return m_vLeftPosition; }
+
+	D3DXVECTOR2 GetRightPosition() { return m_vRightPosition; }
 };
 

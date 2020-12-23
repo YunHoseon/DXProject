@@ -6,9 +6,10 @@ class CUISelect :
 	public CUIButton
 {
 protected:
-	ST_GameData		m_stData;
+	string		m_sStageID;
+	float		m_fGameTime;
 public:
-	CUISelect(D3DXVECTOR2 vPos ,ST_GameData data);
+	CUISelect(D3DXVECTOR2 vPos ,string chStageID,float fTime);
 	~CUISelect();
 
 public:
