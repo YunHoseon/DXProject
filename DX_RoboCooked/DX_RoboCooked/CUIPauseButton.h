@@ -8,8 +8,8 @@ class CUIPauseButton :
 	public CUIButton
 {
 
-private:
-	IInteractCenter*	m_pInteractCenter;
+//private:
+//	IInteractCenter*	m_pInteractCenter;
 
 public:
 	CUIPauseButton(D3DXVECTOR2 vPos, WPARAM wParam, IInteractCenter* pInteractCenter);
@@ -24,7 +24,7 @@ public:
 	//void HoverEvent(void* _value);
 	//void MouseReleaseEvent(void* _value);
 	void ActiveButton();
-	void ResetGame();
-	void GoToMain();
+	//void ResetGame();
+	//void GoToMain();
 };
 

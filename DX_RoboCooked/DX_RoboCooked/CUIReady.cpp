@@ -3,7 +3,7 @@
 #include "CUIReadyBoard.h"
 #include "IInteractCenter.h"
 
-CUIReady::CUIReady(D3DXVECTOR2 vPos,IInteractCenter* pIntractCenter):m_pInteractCenter(pIntractCenter), m_fElapsedTime(0.0f)
+CUIReady::CUIReady(D3DXVECTOR2 vPos,IInteractCenter* pIntractCenter):CUIButton(pIntractCenter), m_fElapsedTime(0.0f)
 {
 	m_vPosition = vPos;
 	Setup();

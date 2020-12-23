@@ -2,13 +2,16 @@
 #include "CUIButton.h"
 #include "CUITexture.h"
 #include "CUIText.h"
+#include "CMainScene.h"
+#include "CGameScene.h"
 
 
 
-CUIButton::CUIButton()
+CUIButton::CUIButton(IInteractCenter* pInteractCenter)
 	: m_pTexture(nullptr)
 	, m_pText(nullptr)
 	, m_isKeyDown(false)
+	, m_pInteractCenter(pInteractCenter)
 	//, m_isMouseDown(false)
 {
 	m_pInputKey[0] = InputManager->GetInputKey(0);
@@ -48,6 +51,35 @@ void CUIButton::SetPosition(float x, float y)
 	for (list<CUI*>::value_type p : m_listUIchildren)
 	{
 		AddPosition(dir.x, dir.y);
+	}
+}
+
+void CUIButton::ResetGame()
+{
+
+	if (m_pInteractCenter == nullptr)
+		return;
+
+	//return;
+	CGameScene* scene = new CGameScene;
+
+	g_pThreadManager->AddThread(thread(&CGameScene::Load, scene, "data/js", m_pInteractCenter->GetSceneID(), &CGameScene::Init));
+
+	CScene* pBeforeScene = g_SceneManager->SetCurrentScene(scene);
+	if (pBeforeScene)
+	{
+		g_pThreadManager->AddThread(thread([pBeforeScene]() { delete pBeforeScene; }));
+	}
+}
+
+void CUIButton::GoToMain()
+{
+	CMainScene* scene = new CMainScene;
+
+	CScene* pBeforeScene = g_SceneManager->SetCurrentScene(scene);
+	if (pBeforeScene)
+	{
+		g_pThreadManager->AddThread(thread([pBeforeScene]() { delete pBeforeScene; }));
 	}
 }
 
