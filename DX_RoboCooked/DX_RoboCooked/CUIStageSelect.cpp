@@ -10,7 +10,7 @@
 #include <fstream>
 
 
-CUIStageSelect::CUIStageSelect(D3DXVECTOR2 vPos):m_nPage(0), m_nMaxPage(0), board(nullptr)
+CUIStageSelect::CUIStageSelect(D3DXVECTOR2 vPos):m_nPage(0), m_nMaxPage(0)
 {
 	m_vPosition = vPos;
 	Setup();
@@ -36,7 +36,7 @@ CUIStageSelect::~CUIStageSelect()
 
 void CUIStageSelect::Setup()
 {
-	board = new CUIStageSelectPopUpBoard(m_vPosition);
+	
 	Load();
 }
 
@@ -46,10 +46,10 @@ void CUIStageSelect::Load()
 	std::ifstream is("data/js/SaveData.json");
 	is >> m_jSaveData;
 	is.close();
-
+	CUIStageSelectPopUpBoard* board = new CUIStageSelectPopUpBoard(m_vPosition);
 	{
 		AddChild(board);
-
+		
 		CUI* Select = nullptr;
 		for (int i = 0 , iBtnNumber = 0; i < m_jSaveData.size(); ++i , ++iBtnNumber)
 		{
@@ -58,10 +58,18 @@ void CUIStageSelect::Load()
 				iBtnNumber = 0;
 				m_nMaxPage++;
 			}
-
 			string stageID = m_jSaveData[i]["StageID"];
 			float fTime  = m_jSaveData[i]["ClearTime"];
-			int isClear = m_jSaveData[i]["isClear"];
+			int isClear;
+			if (i == 0)
+			{
+				isClear = true;
+			}
+			else
+			{
+				isClear = m_jSaveData[i-1]["isClear"];
+			}
+			
 
 
 			D3DXVECTOR2 vPos = board->GetSelectPosition(iBtnNumber);
@@ -95,7 +103,7 @@ void CUIStageSelect::Load()
 			}
 			else
 			{
-				Select = new CUISelectUnsolved(vPos, stageID, fTime, m_nMaxPage,ebtn);
+				Select = new CUISelectUnsolved(vPos, stageID, fTime, m_nMaxPage);
 			}
 
 

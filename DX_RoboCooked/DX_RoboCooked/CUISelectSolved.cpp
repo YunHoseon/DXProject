@@ -39,8 +39,6 @@ void CUISelectSolved::Setup()
 	else						star = new CUISelectStarZero(starPos);
 
 	string sTime = CalMin(m_fGameTime) + ":" + CalSec(m_fGameTime);
-
-	star = new CUISelectStarZero(starPos);
 	board->AddChild(star);
 	D3DXVECTOR2 clearUIPos = D3DXVECTOR2(m_vPosition.x , m_vPosition.y + 150);
 	D3DXVECTOR2 TimeTextPos = D3DXVECTOR2(m_vPosition.x + 285, m_vPosition.y + 190);

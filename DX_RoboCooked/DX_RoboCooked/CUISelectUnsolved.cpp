@@ -11,9 +11,9 @@
 #include "CUISelectStartButton.h"
 
 
-CUISelectUnsolved::CUISelectUnsolved(D3DXVECTOR2 vPos, string chStageID, float fTime, int nPage, eBtnEvent eEvent):CUISelect(vPos,chStageID,fTime)
+CUISelectUnsolved::CUISelectUnsolved(D3DXVECTOR2 vPos, string chStageID, float fTime, int nPage):CUISelect(vPos,chStageID,fTime)
 {
-	m_eBtnEvent = eEvent;
+
 	m_nUIPage = nPage;
 	Setup();
 }
@@ -38,9 +38,9 @@ void CUISelectUnsolved::Setup()
 	CUI* clearTimeUI = new CUIClearTime(clearUIPos, TimeTextPos, "00:00", eTextType::SelectText);
 	board->AddChild(clearTimeUI);
 
-	D3DXVECTOR2 startBtnPos = D3DXVECTOR2(m_vPosition.x + 160, m_vPosition.y + 250);
-	CUI* startbtn = new CUISelectStartButton(startBtnPos, m_eBtnEvent);
-	board->AddChild(startbtn);
+	//D3DXVECTOR2 startBtnPos = D3DXVECTOR2(m_vPosition.x + 160, m_vPosition.y + 250);
+	//CUI* startbtn = new CUISelectStartButton(startBtnPos, m_eBtnEvent);
+	//board->AddChild(startbtn);
 
 
 }
