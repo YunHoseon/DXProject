@@ -1,9 +1,12 @@
 ﻿#include "stdafx.h"
 #include "CSaveLoadManager.h"
+#include <fstream>
 
 CSaveLoadManager::CSaveLoadManager()
 {
-	// SaveData의 로드
+	std::ifstream is("data/js/SaveData.json");
+	is >> m_jSaveData;
+	is.close();
 }
 
 CSaveLoadManager::~CSaveLoadManager()
@@ -13,8 +16,11 @@ CSaveLoadManager::~CSaveLoadManager()
 
 void CSaveLoadManager::Save()
 {
-	// SaveData를 스레드매니저를 이용해 저장
-	
+	g_pThreadManager->AddThread(thread([this]() 
+	{ 
+		std::ofstream o("data/js/SaveData.json");o << m_jSaveData; o.close(); 
+	}
+	));
 }
 
 string CSaveLoadManager::GetKeyByIndex(int nIndex)
@@ -53,4 +59,9 @@ json& CSaveLoadManager::GetSaveData()
 int CSaveLoadManager::GetMaxIndex()
 {
 	return m_jSaveData["StageIndex"].size() - 1;
+}
+
+int CSaveLoadManager::GetDataSize()
+{
+	return m_jSaveData["StageIndex"].size();
 }

@@ -49,6 +49,7 @@ protected:
 	INT								m_nMaxPartsCount;
 	CStaticMesh*					m_pSMesh;
 	CUICombinatorGauge*				m_pUICombinatorGauge;
+	float							m_DestroyTrashCountTime;
 
 public:
 	CPartCombinator(IInteractCenter* pInteractCenter, eCombinatorPartsLevel eType, float fAngle, D3DXVECTOR3 vPosition) ;

@@ -253,7 +253,7 @@ extern string CalSec(int sec);
 #include "CUITextureManager.h"
 #include "CStaticMeshManager.h"
 #include "CThreadManager.h"
-
+#include "CSaveLoadManager.h"
 #include "CRandomNumberGenerator.h"
 
 #define __SLASH(x) /##x

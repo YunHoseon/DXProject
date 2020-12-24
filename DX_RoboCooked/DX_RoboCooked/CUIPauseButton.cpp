@@ -141,27 +141,3 @@ void CUIPauseButton::ActiveButton()
 	}
 }
 
-//void CUIPauseButton::ResetGame()
-//{
-//	//return;
-//	CGameScene* scene = new CGameScene;
-//	
-//	g_pThreadManager->AddThread(thread(&CGameScene::Load, scene, "data/js", m_pInteractCenter->GetSceneID(), &CGameScene::Init));
-//
-//	CScene* pBeforeScene = g_SceneManager->SetCurrentScene(scene);
-//	if (pBeforeScene)
-//	{
-//		g_pThreadManager->AddThread(thread([pBeforeScene]() { delete pBeforeScene; }));
-//	}
-//}
-//
-//void CUIPauseButton::GoToMain()
-//{
-//	CMainScene* scene = new CMainScene;
-//
-//	CScene* pBeforeScene = g_SceneManager->SetCurrentScene(scene);
-//	if (pBeforeScene)
-//	{
-//		g_pThreadManager->AddThread(thread([pBeforeScene]() { delete pBeforeScene; }));
-//	}
-//}

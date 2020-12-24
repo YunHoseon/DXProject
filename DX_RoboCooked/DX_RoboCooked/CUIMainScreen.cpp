@@ -83,19 +83,6 @@ bool CUIMainScreen::OnEvent(eEvent eEvent, void * _value)
 	return true;
 }
 
-//void CUIMainScreen::StartGame()
-//{
-//	CGameScene* scene = new CGameScene;
-//	thread _t1(&CGameScene::Load, scene, "data/js", "AllTest.json", &CGameScene::Init);
-//	_t1.detach();
-//
-//	CScene* pBeforeScene = g_SceneManager->SetCurrentScene(scene);
-//	if (pBeforeScene)
-//	{
-//		thread _t2([pBeforeScene]() { delete pBeforeScene; });
-//		_t2.detach();
-//	}
-//}
 
 void CUIMainScreen::ShowUI(CUIButton *pBtn)
 {

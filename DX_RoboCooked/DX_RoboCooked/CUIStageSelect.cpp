@@ -7,7 +7,7 @@
 #include "CUISelectLeft.h"
 #include "CUISelectRight.h"
 #include "CGameScene.h"
-#include <fstream>
+
 
 
 CUIStageSelect::CUIStageSelect(D3DXVECTOR2 vPos):m_nPage(0), m_nMaxPage(0)
@@ -36,30 +36,22 @@ CUIStageSelect::~CUIStageSelect()
 
 void CUIStageSelect::Setup()
 {
-	
-	Load();
-}
-
-void CUIStageSelect::Load()
-{
-
-	std::ifstream is("data/js/SaveData.json");
-	is >> m_jSaveData;
-	is.close();
 	CUIStageSelectPopUpBoard* board = new CUIStageSelectPopUpBoard(m_vPosition);
 	{
 		AddChild(board);
-		
+
 		CUI* Select = nullptr;
-		for (int i = 0 , iBtnNumber = 0; i < m_jSaveData.size(); ++i , ++iBtnNumber)
+		for (int i = 0, iBtnNumber = 0 ; i < g_SaveLoadManager->GetDataSize(); i++ , iBtnNumber++)
 		{
 			if (iBtnNumber == 6)
 			{
 				iBtnNumber = 0;
 				m_nMaxPage++;
 			}
-			string stageID = m_jSaveData[i]["StageID"];
-			float fTime  = m_jSaveData[i]["ClearTime"];
+			
+			json jData = g_SaveLoadManager->GetStageData(i);
+			string stageID = jData["StageID"];
+			float fTime = jData["ClearTime"];
 			int isClear;
 			if (i == 0)
 			{
@@ -67,10 +59,9 @@ void CUIStageSelect::Load()
 			}
 			else
 			{
-				isClear = m_jSaveData[i-1]["isClear"];
+				json j = g_SaveLoadManager->GetStageData(i-1);
+				isClear = j["isClear"];
 			}
-			
-
 
 			D3DXVECTOR2 vPos = board->GetSelectPosition(iBtnNumber);
 			eBtnEvent ebtn;
@@ -99,16 +90,13 @@ void CUIStageSelect::Load()
 
 			if (isClear)
 			{
-				Select = new CUISelectSolved(vPos, stageID, fTime, m_nMaxPage,ebtn);
+				Select = new CUISelectSolved(vPos, stageID, fTime, m_nMaxPage, ebtn);
 			}
 			else
 			{
 				Select = new CUISelectUnsolved(vPos, stageID, fTime, m_nMaxPage);
 			}
-
-
 			board->AddChild(Select);
-			
 		}
 
 		CUI* left = new CUISelectLeft(board->GetLeftPosition(), eBtnEvent::SelectLeft);
@@ -184,11 +172,13 @@ bool CUIStageSelect::OnEvent(eEvent eEvent, void * _value)
 
 void CUIStageSelect::SelectEvent(int i)
 {
-	if (m_jSaveData[i + m_nPage]["FileName"] == "X")
+	json jData = g_SaveLoadManager->GetStageData(i + m_nPage);
+
+	if (jData["FileName"] == "X")
 		return;
 
 	CGameScene* scene = new CGameScene;
-	g_pThreadManager->AddThread(thread(&CGameScene::Load, scene, "data/js", m_jSaveData[i + m_nPage]["FileName"], &CGameScene::Init));
+	g_pThreadManager->AddThread(thread(&CGameScene::Load, scene, "data/js", jData["StageID"], &CGameScene::Init));
 
 	CScene* pBeforeScene = g_SceneManager->SetCurrentScene(scene);
 	if (pBeforeScene)
