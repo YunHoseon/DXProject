@@ -4,12 +4,12 @@
 
 CCCSlowAndStop::CCCSlowAndStop() : CCrowdControl()
 {
-	m_pImage = new CUICC("data/ui/bubble_cc_slow.png", nullptr, nullptr);
+	m_pImage = new CUICC("data/ui/bubble_cc_heavy.png", nullptr, nullptr);
 }
 
 CCCSlowAndStop::CCCSlowAndStop(CCCSlowAndStop * clone) : CCrowdControl()
 {
-	m_pImage = new CUICC("data/ui/bubble_cc_slow.png", nullptr, nullptr);
+	m_pImage = new CUICC("data/ui/bubble_cc_heavy.png", nullptr, nullptr);
 }
 
 CCCSlowAndStop::~CCCSlowAndStop()
