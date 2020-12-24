@@ -21,6 +21,7 @@ COutlet::COutlet(IInteractCenter* pInteractCenter)
 
 COutlet::~COutlet()
 {
+	m_pSkinnedMesh->DeleteTransform();
 	SafeDelete(m_pSkinnedMesh);
 }
 
@@ -28,6 +29,9 @@ void COutlet::Setup(float fAngle, D3DXVECTOR3 vPosition)
 {
 	m_pSkinnedMesh = new CSkinnedMesh;
 	m_pSkinnedMesh->Load("data/model/object", "MTH_CV.X");
+	D3DXMATRIXA16* localmat = new D3DXMATRIXA16;
+	D3DXMatrixTranslation(localmat, 0, -0.35f / 0.015, 0);
+	m_pSkinnedMesh->SetTransform(localmat);
 	m_pCollision = new CBoxCollision(g_vZero, D3DXVECTOR3(1 / 0.015f, 1 / 0.015f, 1 / 0.015f), &m_matWorld);
 
 	SetRotationY(fAngle);

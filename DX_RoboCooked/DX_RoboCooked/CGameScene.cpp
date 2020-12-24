@@ -124,7 +124,16 @@ void CGameScene::Init()
 	CUITrafficLight *pTrafficLight = new CUITrafficLight(this, m_vecBlueprints.size());
 	CUIButton *pReady = new CUIReady(D3DXVECTOR2(675, 450), this);
 	CUIButton *pWarrning = new CUIWarning();
-	CField* pField = new CField(eTileType::Water);
+	CField* pField = new CField(eTileType::Sand);
+
+	//CParts* parts1 = g_pPartsManager->CreateParts("C01");
+	//parts1->SetPosition(0, 2, 0);
+	//CParts* parts2 = g_pPartsManager->CreateParts("C05");
+	//parts2->SetPosition(0, 2, 0);
+	//CParts* parts3 = g_pPartsManager->CreateParts("C07");
+	//parts3->SetPosition(0, 2, 0);
+	//CParts* parts4 = g_pPartsManager->CreateParts("C08");
+	//parts4->SetPosition(0, 2, 0);
 	m_cMutex.lock();
 
 	m_fGameTime = 300.0f;
@@ -137,7 +146,10 @@ void CGameScene::Init()
 	m_pDebugLoseUI = pLoseButton;
 	m_pDebugClearUI = pClearButton;
 	m_pDebugTrafficLight = pTrafficLight;
-	
+	//m_vecParts.push_back(parts1);
+	//m_vecParts.push_back(parts2);
+	//m_vecParts.push_back(parts3);
+	//m_vecParts.push_back(parts4);
 	m_cMutex.unlock();
 }
 
@@ -170,12 +182,13 @@ void CGameScene::Render()
 		it->Render();
 	}
 
-	for (CMonster *it : m_vecMonster)
+	for (CActor* it : m_vecStaticActor)
 	{
 		it->Render();
 	}
+	
 
-	for (CActor* it : m_vecStaticActor)
+	for (CMonster *it : m_vecMonster)
 	{
 		it->Render();
 	}
@@ -286,7 +299,7 @@ void CGameScene::Update()
 				CPhysicsApplyer::ApplyBound(pStaticActor, part);
 			}
 		}
-
+		
 		for (CTile *tile : m_vecTile)
 		{
 			D3DXVECTOR3 min, max;
@@ -429,6 +442,7 @@ void CGameScene::Load(string sFolder, string sFilename, void (CGameScene::*pCall
 	m_cMutex.unlock();
 
 	string sFullname = sFolder + "/" + sFilename;
+	
 	std::ifstream is(sFullname);
 	assert(is.is_open());
 	json j;

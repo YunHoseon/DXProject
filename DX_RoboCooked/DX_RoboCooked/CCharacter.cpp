@@ -70,7 +70,7 @@ void CCharacter::Update()
 	m_vGrabPartsPosition.z = m_vPosition.z;
 
 	m_pSkinnedMesh->Update();
-
+	m_isMoveKeyDown = false;
 	if (m_pCC->IsEnd())
 		DeleteCC();
 
@@ -327,8 +327,8 @@ void CCharacter::Move()
 	if (m_pCollision->GetIsCollide() == false && m_isMoveKeyDown)
 	{
 		AddForce(-m_vDirection * m_fBaseSpeed * m_pCC->MultiplySpeed() * TimeRevision);
-		m_isMoveKeyDown = false;
 	}
+	
 
 	m_vVelocity += m_vAcceleration;
 	m_vPosition += m_vVelocity;
@@ -351,24 +351,24 @@ void CCharacter::Rotate(float fTargetRot)
 {
 	fTargetRot += m_pCC->ReverseRotate();
 	fTargetRot = fTargetRot < D3DX_PI * 2 ? fTargetRot : fTargetRot - D3DX_PI * 2;
-	m_isMoveKeyDown = true;
 	D3DXQUATERNION stLerpRot, stCurrentRot, stTargetRot;
 	D3DXQuaternionRotationAxis(&stCurrentRot, &D3DXVECTOR3(0, 1, 0), m_fRotY);
 	D3DXQuaternionRotationAxis(&stTargetRot, &D3DXVECTOR3(0, 1, 0), fTargetRot);
 
 	D3DXQuaternionSlerp(&stLerpRot, &stCurrentRot, &stTargetRot, 0.3f);
 	D3DXMatrixRotationQuaternion(&m_matR, &stLerpRot);
-
+	
 	D3DXVec3TransformNormal(&m_vDirection, &D3DXVECTOR3(0, 0, 1), &m_matR);
 	m_matWorld = m_matS * m_matR * m_matT;
+	m_isMoveKeyDown = true;
 
 	SetForce(m_vDirection * m_fBaseSpeed * m_pCC->MultiplySpeed() * TimeRevision);
 
 	if (m_pCollision)
 		m_pCollision->Update();
 
-	D3DXVECTOR3 dummy;
-	D3DXQuaternionToAxisAngle(&stLerpRot, &dummy, &m_fRotY);
+	D3DXVECTOR3 vDummy;
+	D3DXQuaternionToAxisAngle(&stLerpRot, &vDummy, &m_fRotY); // m_fRotY를 변경시켜주는 부분
 }
 
 void CCharacter::AddForce(const D3DXVECTOR3 &vForce)

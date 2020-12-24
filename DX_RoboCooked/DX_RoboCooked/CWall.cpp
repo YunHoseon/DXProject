@@ -124,3 +124,11 @@ void CWall::ReleaseKey(void* _value)
 	if (m_pCollision)
 		m_pCollision->Update();
 }
+
+bool CWall::Collide(CActor* target, D3DXVECTOR3* pNormal)
+{
+	bool b = target->Collide(this, pNormal);
+	if (pNormal)
+		*pNormal *= -1;
+	return b;
+}

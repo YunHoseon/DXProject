@@ -27,5 +27,7 @@ public:
 
 	void AddAcceleration(const D3DXVECTOR3& vAccel) override {}
 	void AddForce(const D3DXVECTOR3& vForce) override {}
+
+	bool Collide(CActor* target, D3DXVECTOR3* pNormal) override;
 };
 
