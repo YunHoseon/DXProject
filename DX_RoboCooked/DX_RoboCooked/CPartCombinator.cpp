@@ -4,7 +4,7 @@
 #include "IInteractCenter.h"
 
 
-CPartCombinator::CPartCombinator(IInteractCenter* pInteractCenter, eCombinatorPartsLevel eType , float fAngle, D3DXVECTOR3 vPosition) :
+CPartCombinator::CPartCombinator(IInteractCenter* pInteractCenter, eCombinatorPartsLevel eType, float fAngle, D3DXVECTOR3 vPosition) :
 	m_eLevel(eType),
 	m_eCombinatorLoadState(eCombinatorLoadState::LoadPossible),
 	m_CombinatorTexture(nullptr),
@@ -18,7 +18,8 @@ CPartCombinator::CPartCombinator(IInteractCenter* pInteractCenter, eCombinatorPa
 	m_eCombinatorActionState(eCombinatorActionState::Usable),
 	m_nMaxPartsCount(0),
 	m_pSMesh(nullptr),
-	m_pUICombinatorGauge(nullptr)
+	m_pUICombinatorGauge(nullptr),
+	m_DestroyTrashCountTime(0)
 {
 	m_vecOnCombinatorPosition.push_back(D3DXVECTOR3(vPosition.x - 0.5f, vPosition.y + 2.5f, vPosition.z));
 	m_vecOnCombinatorPosition.push_back(D3DXVECTOR3(vPosition.x, vPosition.y + 2.5f, vPosition.z));

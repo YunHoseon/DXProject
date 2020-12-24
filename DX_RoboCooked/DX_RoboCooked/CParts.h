@@ -11,19 +11,14 @@ private:
 	D3DXVECTOR3						m_vOnCombinatorPosition;
 	D3DXVECTOR3*					m_vGrabPosition;
 
-	//ST_SPHERE						m_sphere;
-	//LPD3DXMESH						m_pMeshSphere;
-	//D3DMATERIAL9					m_stMtlParts;
-
 	CStaticMesh						m_cMesh;
 
 	bool							m_isMoveParts;
 	string							m_sPartsID;
-	//int							m_nRotAngleY;
 	eCombinatorPartsLevel			m_eLevel;
 	string							m_sFormula;
 	CPartCombinator*				m_pPartsCombinator;
-
+	float							m_DestroyTrashTime;
 
 public:
 	CParts(string sPartsID, string sFormula, float fMass);
@@ -49,8 +44,6 @@ public:
 	
 	string GetPartsID() { return m_sPartsID; }
 	void SetPartsID(string	ID) { m_sPartsID = ID; }
-
-	//int GetPartsAngle() { return m_nRotAngleY; }
 	
 	string GetFormula() { return m_sFormula; }
 	void SetFormula(string sFormula) { m_sFormula = sFormula; }
@@ -64,6 +57,8 @@ public:
 	eCombinatorPartsLevel GetCombinePartsLevel() const { return m_eLevel; }
 
 	void SetCPartCombinator(CPartCombinator* p) { m_pPartsCombinator = p; }
+
+	float GetDestroyTrashTime() { return m_DestroyTrashTime; }
 
 	void AddForce(const D3DXVECTOR3& vForce) override;
 	void AddAcceleration(const D3DXVECTOR3& vAccel) override;

@@ -42,6 +42,18 @@ void CPartAutoCombinator::Update()
 
 	if (m_eCombinatorLoadState == eCombinatorLoadState::LoadPossible && m_pParts == nullptr)
 		m_pInteractCenter->CheckAroundCombinator(this);
+
+	if (m_pParts != nullptr && m_pParts->GetPartsID() == "D00")
+	{
+		m_DestroyTrashCountTime += g_pTimeManager->GetElapsedTime();
+		if (m_pParts->GetDestroyTrashTime() <= m_DestroyTrashCountTime)
+		{
+			m_pInteractCenter->DeleteParts(m_pParts);
+			m_pParts = nullptr;
+			m_eCombinatorActionState = eCombinatorActionState::Usable;
+			m_DestroyTrashCountTime = 0;
+		}
+	}
 }
 
 void CPartAutoCombinator::Render()
@@ -59,13 +71,14 @@ void CPartAutoCombinator::Render()
 
 void CPartAutoCombinator::Interact(CCharacter* pCharacter)
 {
-	if (m_pParts == nullptr || pCharacter->GetPlayerState() != ePlayerState::None)
+	if (m_pParts == nullptr || pCharacter->GetPlayerState() != ePlayerState::None || 
+		m_eCombinatorActionState == eCombinatorActionState::Unusable)
 		return;
+
 	pCharacter->SetParts(m_pParts);
 	m_pParts->SetGrabPosition(&pCharacter->GetGrabPartsPosition());
 	m_pParts->GetCollision()->SetActive(true);
 	m_pParts = nullptr;
-	m_eCombinatorActionState = eCombinatorActionState::Usable;
 }
 
 void CPartAutoCombinator::PartsInteract(CParts* pParts)
@@ -73,15 +86,11 @@ void CPartAutoCombinator::PartsInteract(CParts* pParts)
 	m_nPartsCount++;
 	
 	if (m_nPartsCount > m_nMaxPartsCount)
-	{
 		return;
-	}
 
 	if (m_nPartsCount == m_nMaxPartsCount)
 		m_eCombinatorLoadState = eCombinatorLoadState::LoadImpossible;
 	
-
-
 	pParts->GetCollision()->SetActive(false);
 	pParts->SetCombinatorPosition(m_vPosition);
 	//pParts->SetMoveParts(true);
@@ -147,7 +156,6 @@ void CPartAutoCombinator::ReadytoCarryParts()
 	g_SoundManager->PlaySFX("machine_complete");
 	m_isCombine = true;
 	CParts* parts = Make();
-
 	m_vecDischargeParts.push_back(parts);
 	m_pInteractCenter->AddParts(parts);
 }
@@ -163,7 +171,6 @@ CParts* CPartAutoCombinator::Make()
 	m_multimapParts.clear();
 
 	CParts* Parts = g_pPartsManager->CreateParts(g_pPartsManager->GetIDFromFormula(strResult));
-	
 	return Parts;
 }
 
@@ -177,7 +184,6 @@ void CPartAutoCombinator::Setup(float fAngle, D3DXVECTOR3 vPosition)
 	SetPosition(vPosition);
 
 	m_pUICombinatorGauge = new CUICombinatorGauge(&m_vPosition);
-
 
 	// 메시 크기에 따라 y값 보정
 	float y = vPosition.y - 0.5f + m_pCollision->GetHeight() * 0.5f + (vPosition.y - m_pCollision->GetCenter().y);

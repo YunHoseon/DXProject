@@ -70,6 +70,19 @@ void CPartManualCombinator::Update()
 
 	if (m_eCombinatorLoadState == eCombinatorLoadState::LoadPossible)
 		m_pInteractCenter->CheckAroundCombinator(this);
+
+	if (m_pParts != nullptr && m_pParts->GetPartsID() == "D00")
+	{
+		m_eCombinatorActionState = eCombinatorActionState::Unusable;
+		m_DestroyTrashCountTime += g_pTimeManager->GetElapsedTime();
+		if (m_pParts->GetDestroyTrashTime() <= m_DestroyTrashCountTime)
+		{
+			m_pInteractCenter->DeleteParts(m_pParts);
+			m_pParts = nullptr;
+			m_eCombinatorActionState = eCombinatorActionState::Usable;
+			m_DestroyTrashCountTime = 0;
+		}
+	}
 }
 
 void CPartManualCombinator::Render()
@@ -107,7 +120,8 @@ CParts* CPartManualCombinator::Make()
 
 void CPartManualCombinator::Interact(CCharacter* pCharacter)
 {
-	if (m_pParts == nullptr ||  pCharacter->GetPlayerState() != ePlayerState::None)
+	if (m_pParts == nullptr || pCharacter->GetPlayerState() != ePlayerState::None ||
+		m_eCombinatorActionState == eCombinatorActionState::Unusable)
 		return;
 
 	//pCharacter->SetPlayerState(ePlayerState::Grab);
