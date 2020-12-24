@@ -42,7 +42,7 @@ private:
 	CUIButton *m_pWarnning;
 
 	static std::mutex m_cMutex;
-	string m_sID;
+	string m_sStageKey;
 
 public:
 	CGameScene();
@@ -56,7 +56,7 @@ public:
 	bool OnEvent(eEvent eEvent, void *_value) override;
 	bool TickUpdate(void *_value);
 
-	void Load(string sFolder, string sFilename, void (CGameScene::*pCallback)() = nullptr);
+	void Load(string sFolder, string sStageKey, void (CGameScene::*pCallback)() = nullptr);
 	void AddParts(CParts *parts) override;
 	void DeleteParts(CParts *parts) override;
 	//void ThrowParts(CCharacter* pCharacter,CParts* parts,D3DXVECTOR3 vDir) override;
@@ -83,7 +83,7 @@ public:
 	//bool IsGameLose();
 
 	D3DXVECTOR3 GetRandomPartsPosition() override;
-	string GetSceneID() override { return m_sID; }
+	string GetSceneID() override { return m_sStageKey; }
 	bool GetStop() override { return m_isTimeStop; }
 	float GetTime() override { return m_fGameTime; };
 	const vector<CCharacter *> &GetCharacters() override { return m_vecCharacters; }

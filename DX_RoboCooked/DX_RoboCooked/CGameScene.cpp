@@ -414,7 +414,16 @@ bool CGameScene::TickUpdate(void *_value)
 		m_isTimeStop = true;
 		SafeDelete(m_pDebugPauseUI);
 		g_EventManager->CallEvent(eEvent::ClearSetTime, (void *)&timeData);
+		//g_SaveLoadManager->Save(m_sStageKey, true, m_fGameTime);
 
+		json& jData = g_SaveLoadManager->GetStageData(m_sStageKey);
+		jData["isClear"] = true;
+		jData["ClearTime"] = m_fGameTime;
+		g_SaveLoadManager->Save();
+		
+
+
+		//세이브 체크중
 		if (m_pDebugClearUI)
 			m_pDebugClearUI->ActiveUI();
 
@@ -431,17 +440,20 @@ bool CGameScene::TickUpdate(void *_value)
 			m_pDebugLoseUI->ActiveUI();
 		return false;
 	}
-
+	
 	return true;
 }
 
-void CGameScene::Load(string sFolder, string sFilename, void (CGameScene::*pCallback)(void))
+void CGameScene::Load(string sFolder, string sStageKey, void (CGameScene::*pCallback)(void))
 {
 	m_cMutex.lock();
 	m_isTimeStop = true;
 	m_cMutex.unlock();
 
-	string sFullname = sFolder + "/" + sFilename;
+	m_sStageKey = sStageKey;
+	json jData = g_SaveLoadManager->GetStageData(sStageKey);
+	string FileName = jData["FileName"];
+	string sFullname = sFolder + "/" + FileName;
 	
 	std::ifstream is(sFullname);
 	assert(is.is_open());
@@ -748,7 +760,7 @@ void CGameScene::Load(string sFolder, string sFilename, void (CGameScene::*pCall
 	this->m_vecParts.insert(m_vecParts.end(), vecParts.begin(), vecParts.end());
 	this->m_vecCharacters.insert(m_vecCharacters.end(), vecChara.begin(), vecChara.end());
 	this->m_vecTile.insert(m_vecTile.end(), vecTile.begin(), vecTile.end());
-	this->m_sID = sFilename;
+	this->m_sStageKey = m_sStageKey;
 	this->m_cMutex.unlock();
 
 	{
@@ -945,9 +957,9 @@ void CGameScene::DeleteCC()
 
 int CGameScene::IsGameClear()
 {
-	if (m_fGameTime <= 0)
+	if (m_fGameTime <= 280)
 	{
-		return 2; //실패
+		return 1; //실패
 	}
 
 	for (CBlueprint *it : m_vecBlueprints)
