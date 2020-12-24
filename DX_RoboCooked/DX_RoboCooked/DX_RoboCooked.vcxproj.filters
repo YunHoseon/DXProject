@@ -561,9 +561,6 @@
     <ClInclude Include="CUICombinatorGaugeZero.h">
       <Filter>UI\Button\SubUI\CUICombinatorGauge</Filter>
     </ClInclude>
-    <ClInclude Include="CUICombinatorGaugeBoard.h">
-      <Filter>UI\Button\SubUI\CUICombinatorGauge</Filter>
-    </ClInclude>
     <ClInclude Include="CUIStageSelect.h">
       <Filter>UI\Button\MainUI</Filter>
     </ClInclude>
@@ -1074,9 +1071,6 @@
       <Filter>UI\Button\SubUI\CUICombinatorGauge</Filter>
     </ClCompile>
     <ClCompile Include="CUICombinatorGaugeTwo.cpp">
-      <Filter>UI\Button\SubUI\CUICombinatorGauge</Filter>
-    </ClCompile>
-    <ClCompile Include="CUICombinatorGaugeBoard.cpp">
       <Filter>UI\Button\SubUI\CUICombinatorGauge</Filter>
     </ClCompile>
     <ClCompile Include="CUIStageSelect.cpp">

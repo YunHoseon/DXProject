@@ -2,7 +2,7 @@
 #include "CUICombinatorGaugeZero.h"
 #include "CUITexture.h"
 
-CUICombinatorGaugeZero::CUICombinatorGaugeZero(D3DXVECTOR3* pPos) :CUICombinatorGaugeBoard(pPos)
+CUICombinatorGaugeZero::CUICombinatorGaugeZero(D3DXVECTOR3* pPos) :CUIChargeBoard(pPos)
 {
 	Setup();
 }

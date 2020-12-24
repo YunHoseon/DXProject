@@ -61,6 +61,9 @@ void CPartAutoCombinator::Render()
 	g_pD3DDevice->SetTransform(D3DTS_WORLD, &m_matWorld);
 	m_pSMesh->Render();
 
+	if (m_pUICombinatorGauge)
+		m_pUICombinatorGauge->Render();
+
 	_DEBUG_COMMENT if (m_pCollision)
 		_DEBUG_COMMENT m_pCollision->Render();
 
