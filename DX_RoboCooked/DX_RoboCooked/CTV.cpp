@@ -3,6 +3,8 @@
 #include "CBoxCollision.h"
 #include "IInteractCenter.h"
 
+
+
 CTV::CTV(IInteractCenter *pIntaract, D3DXMATRIXA16* pParentWorld)
 	: m_p3DText(nullptr), m_pSMesh(nullptr), m_fTime(0.0f), m_sTime(), m_pParentWorld(pParentWorld)
 {
@@ -28,7 +30,7 @@ CTV::~CTV()
 void CTV::Update()
 {
 	m_fTime = m_pInteractCenter->GetTime();
-	string sTime = m_pInteractCenter->CalMin(m_fTime) + ":" + m_pInteractCenter->CalSec(m_fTime);
+	string sTime = CalMin(m_fTime) + ":" + CalSec(m_fTime);
 	m_sTime.assign(sTime.begin(), sTime.end());
 	CreateFont();
 }

@@ -63,6 +63,8 @@ extern HWND g_hWnd;
 #define WIDTH 16
 #define HEIGHT 12
 
+
+
 const D3DXVECTOR3 g_vZero(0.f,0.f,0.f);
 const D3DXMATRIXA16 g_matIdentity(
 	1.f, 0.f, 0.f, 0.f,
@@ -141,12 +143,6 @@ struct ST_ROT_SAMPLE
 		D3DXQuaternionIdentity(&q);
 	}
 };
-struct ST_GameData
-{
-	char*		chStageID;
-	char*		chGameTime;
-	int			nStarCount;
-};
 
 struct ST_SPHERE
 {
@@ -212,6 +208,9 @@ struct ST_PLAYER_INPUTKEY
 		return *this;
 	}
 };
+
+extern string CalMin(int sec);
+extern string CalSec(int sec);
 
 
 #define Synthesize(varType, varName, funName)\

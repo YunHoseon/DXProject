@@ -4,7 +4,7 @@ class CUISelectSolved :
 	public CUISelect
 {
 public:
-	CUISelectSolved(D3DXVECTOR2 vPos ,ST_GameData data , eBtnEvent eEvent);
+	CUISelectSolved(D3DXVECTOR2 vPos ,string chStageID,float fTime ,int nPage, eBtnEvent eEvent);
 	~CUISelectSolved();
 
 public:

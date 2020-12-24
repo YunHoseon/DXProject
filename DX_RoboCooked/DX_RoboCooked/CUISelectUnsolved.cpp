@@ -11,8 +11,10 @@
 #include "CUISelectStartButton.h"
 
 
-CUISelectUnsolved::CUISelectUnsolved(D3DXVECTOR2 vPos, ST_GameData data):CUISelect(vPos,data)
+CUISelectUnsolved::CUISelectUnsolved(D3DXVECTOR2 vPos, string chStageID, float fTime, int nPage, eBtnEvent eEvent):CUISelect(vPos,chStageID,fTime)
 {
+	m_eBtnEvent = eEvent;
+	m_nUIPage = nPage;
 	Setup();
 }
 
@@ -23,7 +25,7 @@ CUISelectUnsolved::~CUISelectUnsolved()
 
 void CUISelectUnsolved::Setup()
 {
-	CUI* board = new CUISelectBoard(m_vPosition, m_stData.chStageID);
+	CUI* board = new CUISelectBoard(m_vPosition, m_sStageID);
 	AddChild(board);
 
 	D3DXVECTOR2 starPos = D3DXVECTOR2(m_vPosition.x + 75, m_vPosition.y + 65);
@@ -37,7 +39,7 @@ void CUISelectUnsolved::Setup()
 	board->AddChild(clearTimeUI);
 
 	D3DXVECTOR2 startBtnPos = D3DXVECTOR2(m_vPosition.x + 160, m_vPosition.y + 250);
-	CUI* startbtn = new CUISelectStartButton(startBtnPos, eBtnEvent::None);
+	CUI* startbtn = new CUISelectStartButton(startBtnPos, m_eBtnEvent);
 	board->AddChild(startbtn);
 
 

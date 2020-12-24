@@ -48,7 +48,15 @@ enum class eEvent
 	MakerClose,
 	ControllClose,
 	ReadyBoard,
-	CallWarning
+	CallWarning,
+	SelectButton1,
+	SelectButton2,
+	SelectButton3,
+	SelectButton4,
+	SelectButton5,
+	SelectButton6,
+	SelectLeft,
+	SelectRight
 };
 
 

@@ -27,7 +27,15 @@ enum class eBtnEvent
 	LoseReset,
 	ControllClose,
 	StageClose,
-	STAGE1_1
+	SelectButton1,
+	SelectButton2,
+	SelectButton3,
+	SelectButton4,
+	SelectButton5,
+	SelectButton6,
+	SelectLeft,
+	SelectRight
+
 };
 class CUI : public CEventListener
 {
@@ -54,6 +62,7 @@ protected:
 	std::list<CUI*>		m_listUIchildren;
 	bool				m_isActive;
 	bool				m_isPress;
+	int					m_nUIPage;
 
 	static float		m_fWidthRevision;
 	static float		m_fHeightRevision;
@@ -72,6 +81,7 @@ public:
 	virtual void CheckPressIn(POINT pt);
 	virtual void CheckReleaseIn(POINT pt);
 	virtual void CheckInHover(POINT pt);
+	virtual void ActivePage(int nPage);
 	virtual void InvertActive();
 	virtual void ActiveUI();
 	virtual void CheckActiveEvent();
