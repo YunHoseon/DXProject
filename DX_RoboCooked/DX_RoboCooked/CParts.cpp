@@ -8,7 +8,7 @@
 CParts::CParts(string sPartsID, string sFormula, float fMass)
 	: m_vGrabPosition(nullptr), m_isMoveParts(false),
 	  m_eLevel(eCombinatorPartsLevel::ONE), m_vCombinatorPosition(0, 0, 0) , m_pPartsCombinator(NULL),
-	m_sPartsID(sPartsID), m_sFormula(sFormula) , m_vOnCombinatorPosition(0,0,0)
+	m_sPartsID(sPartsID), m_sFormula(sFormula) , m_vOnCombinatorPosition(0,0,0), m_fMaxSpeed(0.2f)
 {
 	m_fMass = fMass;
 	switch (m_sPartsID[0])
@@ -67,6 +67,13 @@ void CParts::Update()
 		if (m_pCollision->GetActive())
 		{
 			m_vVelocity += m_vAcceleration;
+
+			if (D3DXVec3Length(&m_vVelocity) > m_fMaxSpeed)
+			{
+				D3DXVec3Normalize(&m_vVelocity, &m_vVelocity);
+				m_vVelocity *= m_fMaxSpeed;
+			}
+			
 			m_vPosition += m_vVelocity;
 		}
 		SetForce();
@@ -145,7 +152,11 @@ void CParts::UsingCombinator()
 
 void CParts::SetGrabPosition(D3DXVECTOR3* vPosition)
 {
+	if (!vPosition)
+		return;
+	
 	m_vGrabPosition = vPosition;
+	SetPosition(*vPosition);
 	if (vPosition)
 		m_vVelocity = g_vZero;
 }

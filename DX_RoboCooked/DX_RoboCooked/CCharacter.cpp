@@ -7,26 +7,28 @@
 #include "CSkinnedMesh.h"
 #include "CUICharge.h"
 
-CCharacter::CCharacter(int nPlayerNum) : m_pSkinnedMesh(nullptr),
-										 m_ePlayerState(ePlayerState::None),
-										 m_pInteractCollision(nullptr),
-										 m_vGrabPartsPosition(0, 1, 0),
-										 m_pParts(nullptr),
-										 m_arrElapsedTime({0, 0, 0}),
-										 m_arrCoolDown({0, 0, 3}),
-										 m_arrKeyDown({false, false, false}),
-										 m_isMoveKeyDown(false),
-										 m_pInputKey(InputManager->GetInputKey(nPlayerNum)),
-										 //m_pMesh(nullptr),
-										 //m_stMtl({}),
-										 m_fMinThrowPower(0.01f),
-										 m_fMaxThrowPower(0.1f),
-										 m_fThrowPower(m_fMinThrowPower),
-										 m_fThrowPowerUpSpeed(0.003f),
-										 m_pCC(nullptr),
-										 m_isDummy(false),
-										 m_vDefaultPosition(0, 0, 0),
-										 m_pCharge(nullptr)
+CCharacter::CCharacter(int nPlayerNum) :
+	m_pSkinnedMesh(nullptr),
+	m_ePlayerState(ePlayerState::None),
+	m_pInteractCollision(nullptr),
+	m_vGrabPartsPosition(0, 1, 0),
+	m_pParts(nullptr),
+	m_arrElapsedTime({0, 0, 0}),
+	m_arrCoolDown({0, 0, 3}),
+	m_arrKeyDown({false, false, false}),
+	m_isMoveKeyDown(false),
+	m_pInputKey(InputManager->GetInputKey(nPlayerNum)),
+	//m_pMesh(nullptr),
+	//m_stMtl({}),
+	m_fMinThrowPower(0.01f),
+	m_fMaxThrowPower(0.1f),
+	m_fThrowPower(m_fMinThrowPower),
+	m_fThrowPowerUpSpeed(0.003f),
+	m_fMaxSpeed(0.2f),
+	m_pCC(nullptr),
+	m_isDummy(false),
+	m_vDefaultPosition(0, 0, 0),
+	m_pCharge(nullptr)
 {
 	m_fBaseSpeed = 0.02f;
 
@@ -41,6 +43,7 @@ CCharacter::~CCharacter()
 	SafeDelete(m_pCC);
 	SafeDelete(m_pSkinnedMesh);
 	SafeDelete(m_pInteractCollision);
+	SafeDelete(m_pCharge);
 }
 
 void CCharacter::Render()
@@ -331,6 +334,13 @@ void CCharacter::Move()
 	
 
 	m_vVelocity += m_vAcceleration;
+	
+	if(D3DXVec3Length(&m_vVelocity) > m_fMaxSpeed)
+	{
+		D3DXVec3Normalize(&m_vVelocity, &m_vVelocity);
+		m_vVelocity *= m_fMaxSpeed;
+	}
+	
 	m_vPosition += m_vVelocity;
 
 	ST_TravelDistanceEvent data;

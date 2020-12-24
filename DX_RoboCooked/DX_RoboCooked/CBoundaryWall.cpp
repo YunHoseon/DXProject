@@ -18,7 +18,7 @@ CBoundaryWall::CBoundaryWall()
 	D3DXVECTOR3 vMax(12 * 0.5f * BLOCK_SIZE, 5 * BLOCK_SIZE, 0.5f);
 	D3DXVECTOR3 vOrigin((vMax + vMin) * 0.5f);
 	vOrigin.z = -6.5f;
-	m_pCollision = new CBoxCollision(vOrigin, (vMax - vMin) * 1.5f, &m_matWorld);
+	m_pCollision = new CBoxCollision(vOrigin, (vMax - vMin) * 1.1f, &m_matWorld);
 	m_fMass = 9999.f;
 }
 
@@ -51,5 +51,9 @@ bool CBoundaryWall::Collide(CActor* target, D3DXVECTOR3* pNormal)
 
 	if (pNormal)
 		*pNormal = normal1 + normal2 + -normal3;
+	
+	if (b)
+		target->GetCollision()->SetIsCollide(false);
+	
 	return b;
 }

@@ -19,7 +19,7 @@ private:
 
 	bool							m_isMoveParts;
 	string							m_sPartsID;
-	//int							m_nRotAngleY;
+	float							m_fMaxSpeed;
 	eCombinatorPartsLevel			m_eLevel;
 	string							m_sFormula;
 	CPartCombinator*				m_pPartsCombinator;

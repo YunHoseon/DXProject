@@ -156,10 +156,13 @@ void CBlueprint::Interact(CCharacter* pCharacter)
 			m_onBlueprintParts->SetGrabPosition(&pCharacter->GetGrabPartsPosition());
 			pCharacter->SetParts(m_onBlueprintParts);
 			m_onBlueprintParts = nullptr;
-			m_isCompleted = false;
 			m_pCollision->SetActive(false);
 			m_pInteractCollision->SetActive(true);
-			g_EventManager->CallEvent(eEvent::UnCompleteBluePrint, this);
+			if(m_isCompleted)
+			{
+				m_isCompleted = false;
+				g_EventManager->CallEvent(eEvent::UnCompleteBluePrint, this);
+			}
 		}
 	}
 }

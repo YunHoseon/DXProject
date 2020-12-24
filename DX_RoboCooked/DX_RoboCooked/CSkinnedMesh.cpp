@@ -196,7 +196,7 @@ void CSkinnedMesh::UpdateSkinnedMesh(LPD3DXFRAME pFrame)
 void CSkinnedMesh::SetAnimationIndex(int nIndex)
 {
 	int num = m_pAnimController->GetNumAnimationSets();
-	if (nIndex > num) nIndex = nIndex % num;
+	if (nIndex >= num) nIndex = nIndex % num;
 	
 	LPD3DXANIMATIONSET pAnimSet = NULL;
 	m_pAnimController->GetAnimationSet(nIndex, &pAnimSet);
@@ -204,6 +204,7 @@ void CSkinnedMesh::SetAnimationIndex(int nIndex)
 	//m_pAnimController->ResetTime();
 	m_pAnimController->GetPriorityBlend();
 	m_nCurrentAnimIndex = nIndex;
+	m_dAnimPeriod = pAnimSet->GetPeriod();
 }
 
 void CSkinnedMesh::SetAnimationIndexBlend(int nIndex)

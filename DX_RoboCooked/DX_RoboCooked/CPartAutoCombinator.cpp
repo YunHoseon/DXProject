@@ -147,7 +147,7 @@ void CPartAutoCombinator::ReadytoCarryParts()
 	g_SoundManager->PlaySFX("machine_complete");
 	m_isCombine = true;
 	CParts* parts = Make();
-
+	parts->GetCollision()->SetActive(false);
 	m_vecDischargeParts.push_back(parts);
 	m_pInteractCenter->AddParts(parts);
 }

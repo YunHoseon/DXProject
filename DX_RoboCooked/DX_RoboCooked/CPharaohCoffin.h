@@ -15,7 +15,8 @@ class CPharaohCoffin :
 	float				m_fCoolTime;
 	float				m_fPassedTime;
 	ICollisionArea*		m_pCCCollision;
-
+	float				m_fBasePositionY;
+	
 	string			m_arrPartsID[PARTSLEVEL2_COUNT];	//2´Ü°èÆÄÃ÷ ID
 	CRandomNumberGenerator	m_randNumGenerator;
 public:
@@ -25,6 +26,8 @@ public:
 	void Update() override;
 	void Render() override;
 	void Interact(CCharacter* pCharacter) override;
+	void SetScale(const D3DXVECTOR3& vScale) override;
+	void SetScale(float x, float y, float z) override;
 
 	CParts* Make();
 
