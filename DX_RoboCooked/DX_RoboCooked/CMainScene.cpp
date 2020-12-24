@@ -21,6 +21,7 @@ CMainScene::CMainScene()
 CMainScene::~CMainScene()
 {
 	SafeDelete(m_pScreen);
+	SafeDelete(m_pUIControll);
 	SafeDelete(m_pUIMaker);
 	SafeDelete(m_pUIStageSelect)
 }

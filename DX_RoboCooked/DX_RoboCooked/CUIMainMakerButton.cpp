@@ -21,7 +21,5 @@ void CUIMainMakerButton::Setup()
 	m_vSize = D3DXVECTOR2(Info.Width, Info.Height);
 	m_vPosition.x -= (m_vSize.x / 2);
 
-
 	m_pTexture = new CUITexture("data/UI/Main/mainBtn_maker.png", "data/UI/Main/mainBtn_maker_dark.png", "data/UI/Main/mainBtn_maker_light.png", m_vPosition);
-
 }
