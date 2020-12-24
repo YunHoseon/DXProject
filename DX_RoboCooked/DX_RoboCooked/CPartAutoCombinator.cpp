@@ -156,6 +156,7 @@ void CPartAutoCombinator::ReadytoCarryParts()
 	g_SoundManager->PlaySFX("machine_complete");
 	m_isCombine = true;
 	CParts* parts = Make();
+	parts->GetCollision()->SetActive(false);
 	m_vecDischargeParts.push_back(parts);
 	m_pInteractCenter->AddParts(parts);
 }
@@ -185,7 +186,7 @@ void CPartAutoCombinator::Setup(float fAngle, D3DXVECTOR3 vPosition)
 
 	m_pUICombinatorGauge = new CUICombinatorGauge(&m_vPosition);
 
-	// ¸Þ½Ã Å©±â¿¡ µû¶ó y°ª º¸Á¤
+	// ï¿½Þ½ï¿½ Å©ï¿½â¿¡ ï¿½ï¿½ï¿½ï¿½ yï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
 	float y = vPosition.y - 0.5f + m_pCollision->GetHeight() * 0.5f + (vPosition.y - m_pCollision->GetCenter().y);
 	SetPosition(vPosition.x, y, vPosition.z);
 	if (!m_pPartsInteractCollision)

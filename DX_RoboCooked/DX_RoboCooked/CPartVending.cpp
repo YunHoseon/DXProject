@@ -15,6 +15,7 @@ CPartVending::CPartVending(COutlet *outlet, IInteractCenter *pInteractCenter, st
 	m_sID = sPartsID;
 	m_fMass = 9999.f;
 	m_fFriction = 0.2f;
+	m_pOutlet->SetPartsId(m_sID);
 }
 
 CPartVending::~CPartVending()

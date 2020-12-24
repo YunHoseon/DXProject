@@ -46,7 +46,9 @@ protected:
 	float				m_fMaxThrowPower;
 	float				m_fThrowPower;
 	float				m_fThrowPowerUpSpeed;
-	// 상태이상 관련 멤버 추가 필요
+
+	float				m_fMaxSpeed;
+	
 	CCrowdControl*		m_pCC;
 	BOOL				m_isDummy;
 

@@ -166,6 +166,7 @@ void CPartManualCombinator::CombineParts()
 		m_fElapsedTime = 0;
 		
 		CParts* parts = Make();
+		parts->GetCollision()->SetActive(false);
 		if(m_pUICombinatorGauge)
 			m_pUICombinatorGauge->SetChildActive(false);
 		m_vecDischargeParts.push_back(parts);
