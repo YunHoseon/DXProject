@@ -20,7 +20,6 @@ public:
 	virtual void Render();
 	virtual float ReverseRotate() { return D3DX_PI; }
 	virtual CCrowdControl* Clone() { return new CCCReverseKey(this); }
-	void SetTarget(D3DXVECTOR3* target) override;;
-	
+	void SetTarget(D3DXVECTOR3* target) override;
 };
 
