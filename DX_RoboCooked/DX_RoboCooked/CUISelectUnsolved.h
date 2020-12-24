@@ -4,7 +4,7 @@ class CUISelectUnsolved :
 	public CUISelect
 {
 public:
-	CUISelectUnsolved(D3DXVECTOR2 vPos, ST_GameData data);
+	CUISelectUnsolved(D3DXVECTOR2 vPos, string chStageID, float fTime, int nPage);
 	~CUISelectUnsolved();
 
 public:

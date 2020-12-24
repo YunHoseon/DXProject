@@ -600,12 +600,6 @@
     <ClInclude Include="CUISelectStartButton.h">
       <Filter>UI\Button\SubUI\CUISelect</Filter>
     </ClInclude>
-    <ClInclude Include="CUIUpdateText.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="CUISelectMainButton.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="CBoundaryWall.h">
       <Filter>GameScene\Object</Filter>
     </ClInclude>
@@ -614,6 +608,18 @@
     </ClInclude>
     <ClInclude Include="CSaveLoadManager.h">
       <Filter>Manager</Filter>
+    </ClInclude>
+    <ClInclude Include="CUISelectLeft.h">
+      <Filter>UI\Button\SubUI</Filter>
+    </ClInclude>
+    <ClInclude Include="CUISelectMainButton.h">
+      <Filter>UI\Button\SubUI</Filter>
+    </ClInclude>
+    <ClInclude Include="CUIUpdateText.h">
+      <Filter>UI\Button\SubUI</Filter>
+    </ClInclude>
+    <ClInclude Include="CUISelectRight.h">
+      <Filter>UI\Button\SubUI</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -1109,12 +1115,6 @@
     <ClCompile Include="CUISelectStartButton.cpp">
       <Filter>UI\Button\SubUI\CUISelect</Filter>
     </ClCompile>
-    <ClCompile Include="CUIUpdateText.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="CUISelectMainButton.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="CBoundaryWall.cpp">
       <Filter>GameScene\Object</Filter>
     </ClCompile>
@@ -1123,6 +1123,18 @@
     </ClCompile>
     <ClCompile Include="CSaveLoadManager.cpp">
       <Filter>Manager</Filter>
+    </ClCompile>
+    <ClCompile Include="CUISelectLeft.cpp">
+      <Filter>UI\Button\SubUI</Filter>
+    </ClCompile>
+    <ClCompile Include="CUISelectRight.cpp">
+      <Filter>UI\Button\SubUI</Filter>
+    </ClCompile>
+    <ClCompile Include="CUISelectMainButton.cpp">
+      <Filter>UI\Button\SubUI</Filter>
+    </ClCompile>
+    <ClCompile Include="CUIUpdateText.cpp">
+      <Filter>UI\Button\SubUI</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

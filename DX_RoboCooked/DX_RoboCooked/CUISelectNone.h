@@ -4,7 +4,7 @@ class CUISelectNone :
 	public CUISelect
 {
 public:
-	CUISelectNone(D3DXVECTOR2 vPos , ST_GameData data);
+	CUISelectNone(D3DXVECTOR2 vPos, string chStageID, float fTime);
 	~CUISelectNone();
 
 public: 

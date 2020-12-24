@@ -1052,29 +1052,3 @@ void CGameScene::CheckAroundCombinator(CPartCombinator *combinator)
 		it.second->SetCPartCombinator(combinator);
 	}
 }
-
-string CGameScene::CalMin(int sec)
-{
-	int a = sec / 60;
-	if (a >= 10)
-	{
-		return std::to_string(a);
-	}
-	else
-	{
-		return "0" + std::to_string(a);
-	}
-}
-
-string CGameScene::CalSec(int sec)
-{
-	int a = sec % 60;
-	if (a >= 10)
-	{
-		return std::to_string(a);
-	}
-	else
-	{
-		return "0" + std::to_string(a);
-	}
-}

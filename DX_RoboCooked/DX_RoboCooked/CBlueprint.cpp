@@ -23,6 +23,7 @@ CBlueprint::CBlueprint(string partsID, vector<CParts*>& vecParts, D3DXVECTOR3 po
 	m_fMass = 9999.f;
 
 	SetupTexture(partsID);
+	m_completeBlueprintTexture = g_pTextureManager->GetTexture("data/Texture/blueprint/blueprint_base.png");
 }
 
 
@@ -166,60 +167,27 @@ void CBlueprint::Interact(CCharacter* pCharacter)
 void CBlueprint::SetupTexture(string partsID)
 {
 	if (partsID == "C00")
-	{
 		m_blueprintTexture = g_pTextureManager->GetTexture("data/Texture/blueprint/blueprint_body_hyper.png");
-		m_completeBlueprintTexture = g_pTextureManager->GetTexture("data/Texture/blueprint/blueprint_body_hyper_.png");
-	}
 	else if (partsID == "C01")
-	{
 		m_blueprintTexture = g_pTextureManager->GetTexture("data/Texture/blueprint/blueprint_body_boost.png");
-		m_completeBlueprintTexture = g_pTextureManager->GetTexture("data/Texture/blueprint/blueprint_body_boost_.png");
-	}
 	else if (partsID == "C02")
-	{
 		m_blueprintTexture = g_pTextureManager->GetTexture("data/Texture/blueprint/blueprint_arm.png");
-		m_completeBlueprintTexture = g_pTextureManager->GetTexture("data/Texture/blueprint/blueprint_arm_.png");
-	}
 	else if (partsID == "C03")
-	{
 		m_blueprintTexture = g_pTextureManager->GetTexture("data/Texture/blueprint/blueprint_hand_gravity.png");
-		m_completeBlueprintTexture = g_pTextureManager->GetTexture("data/Texture/blueprint/blueprint_hand_gravity_.png");
-	}
 	else if (partsID == "C04")
-	{
 		m_blueprintTexture = g_pTextureManager->GetTexture("data/Texture/blueprint/blueprint_hand_rolling.png");
-		m_completeBlueprintTexture = g_pTextureManager->GetTexture("data/Texture/blueprint/blueprint_hand_rolling_.png");
-	}
 	else if (partsID == "C05")
-	{
 		m_blueprintTexture = g_pTextureManager->GetTexture("data/Texture/blueprint/blueprint_leg.png");
-		m_completeBlueprintTexture = g_pTextureManager->GetTexture("data/Texture/blueprint/blueprint_leg_.png");
-	}
 	else if (partsID == "C06")
-	{
 		m_blueprintTexture = g_pTextureManager->GetTexture("data/Texture/blueprint/blueprint_foot_trust.png");
-		m_completeBlueprintTexture = g_pTextureManager->GetTexture("data/Texture/blueprint/blueprint_foot_trust_.png");
-	}
 	else if (partsID == "C07")
-	{
 		m_blueprintTexture = g_pTextureManager->GetTexture("data/Texture/blueprint/blueprint_foot_infinity.png");
-		m_completeBlueprintTexture = g_pTextureManager->GetTexture("data/Texture/blueprint/blueprint_foot_infinity_.png");
-	}
 	else if (partsID == "C08")
-	{
 		m_blueprintTexture = g_pTextureManager->GetTexture("data/Texture/blueprint/blueprint_head_hero.png");
-		m_completeBlueprintTexture = g_pTextureManager->GetTexture("data/Texture/blueprint/blueprint_head_hero_.png");
-	}
 	else if (partsID == "C09")
-	{
 		m_blueprintTexture = g_pTextureManager->GetTexture("data/Texture/blueprint/blueprint_head_final.png");
-		m_completeBlueprintTexture = g_pTextureManager->GetTexture("data/Texture/blueprint/blueprint_head_final_.png");
-	}
 	else
-	{
 		m_blueprintTexture = g_pTextureManager->GetTexture("data/Texture/Blueprint.jpg");
-		m_completeBlueprintTexture = g_pTextureManager->GetTexture("data/Texture/CompleteBlueprint.jpg");
-	}
 }
 
 void CBlueprint::MultiTexture_Render()

@@ -242,8 +242,10 @@
     <ClInclude Include="CUIButton.h" />
     <ClInclude Include="CUISelect.h" />
     <ClInclude Include="CUISelectBoard.h" />
+    <ClInclude Include="CUISelectLeft.h" />
     <ClInclude Include="CUISelectMainButton.h" />
     <ClInclude Include="CUISelectNone.h" />
+    <ClInclude Include="CUISelectRight.h" />
     <ClInclude Include="CUISelectSolved.h" />
     <ClInclude Include="CUISelectStarOne.h" />
     <ClInclude Include="CUISelectStartButton.h" />
@@ -414,8 +416,10 @@
     <ClCompile Include="CUIButton.cpp" />
     <ClCompile Include="CUISelect.cpp" />
     <ClCompile Include="CUISelectBoard.cpp" />
+    <ClCompile Include="CUISelectLeft.cpp" />
     <ClCompile Include="CUISelectMainButton.cpp" />
     <ClCompile Include="CUISelectNone.cpp" />
+    <ClCompile Include="CUISelectRight.cpp" />
     <ClCompile Include="CUISelectSolved.cpp" />
     <ClCompile Include="CUISelectStarOne.cpp" />
     <ClCompile Include="CUISelectStartButton.cpp" />
