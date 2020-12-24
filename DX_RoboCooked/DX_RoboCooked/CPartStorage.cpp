@@ -52,7 +52,7 @@ void CPartStorage::Setup(float fAngle, D3DXVECTOR3 vPosition, string sPartsID)
 	m_pSkinnedMesh = new CSkinnedMesh;
 	m_pSkinnedMesh->Load("data/model/object", "MTA_CV.X");
 	D3DXMATRIXA16* localmat = new D3DXMATRIXA16;
-	D3DXMatrixTranslation(localmat, 0, -0.5f, 0);
+	D3DXMatrixTranslation(localmat, 0, -0.35f / 0.015, 0);
 	m_pSkinnedMesh->SetTransform(localmat);
 	//m_pCollision = new CBoxCollision((m_pSkinnedMesh->GetMax() + m_pSkinnedMesh->GetMin()) * 0.5f, m_pSkinnedMesh->GetMax() - m_pSkinnedMesh->GetMin(), &m_matWorld);
 	m_pCollision = new CBoxCollision(g_vZero, D3DXVECTOR3(1 / 0.015f, 1 / 0.015f, 1 / 0.015f), &m_matWorld);

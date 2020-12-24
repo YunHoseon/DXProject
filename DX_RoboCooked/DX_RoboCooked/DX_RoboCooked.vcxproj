@@ -174,6 +174,7 @@
     <ClInclude Include="CPartsManager.h" />
     <ClInclude Include="CSand.h" />
     <ClInclude Include="CSandpile.h" />
+    <ClInclude Include="CSaveLoadManager.h" />
     <ClInclude Include="CThickSand.h" />
     <ClInclude Include="CFlowSand.h" />
     <ClInclude Include="CSoil.h" />
@@ -345,6 +346,7 @@
     <ClCompile Include="CPartsManager.cpp" />
     <ClCompile Include="CSand.cpp" />
     <ClCompile Include="CSandpile.cpp" />
+    <ClCompile Include="CSaveLoadManager.cpp" />
     <ClCompile Include="CThickSand.cpp" />
     <ClCompile Include="CFlowSand.cpp" />
     <ClCompile Include="CSoil.cpp" />

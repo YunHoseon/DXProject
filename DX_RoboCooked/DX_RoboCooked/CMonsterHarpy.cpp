@@ -9,6 +9,7 @@ CMonsterHarpy::CMonsterHarpy(IInteractCenter *pInteractCenter) : CMonster(pInter
 {
 	m_fFirstSkillConditionTime = 30.0f;
 	m_fUltimateSkillConditionTime = 120.0f;
+	//m_fUltimateSkillConditionTime = 290.0f;
 	m_sSpecificPartsID = "B03";
 	m_debugName = "harpy";
 	ChooseSkillCondition();

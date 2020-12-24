@@ -104,14 +104,16 @@ bool CField::Collide(CActor* target, D3DXVECTOR3* pNormal)
 		return false;
 	if (pos.y > Y + 1.5f)
 		return false;
-
+	bool b = target->Collide(this, pNormal);
+	if (pNormal)
+		*pNormal *= -1;
+	
 	if(m_eTileType == eTileType::Water)
 	{
-		bool b = CActor::Collide(target, pNormal);
 		if (b)
 			target->GetCollision()->SetIsCollide(false);
 		return b;
 	}
 
-	return CActor::Collide(target, pNormal);
+	return b;
 }

@@ -612,6 +612,9 @@
     <ClInclude Include="CThreadManager.h">
       <Filter>Manager</Filter>
     </ClInclude>
+    <ClInclude Include="CSaveLoadManager.h">
+      <Filter>Manager</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="stdafx.cpp">
@@ -1117,6 +1120,9 @@
     </ClCompile>
     <ClCompile Include="CThreadManager.cpp">
       <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="CSaveLoadManager.cpp">
+      <Filter>Manager</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

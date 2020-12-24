@@ -47,9 +47,9 @@ bool CBoundaryWall::Collide(CActor* target, D3DXVECTOR3* pNormal)
 	b += m_vecWall[0]->Collide(target, &normal1);
 	b += m_vecWall[1]->Collide(target, &normal2);
 	if (m_pCollision)
-		b += m_pCollision->Collide(target->GetCollision(), &normal3);
+		b += target->GetCollision()->Collide(m_pCollision, &normal3);
 
 	if (pNormal)
-		*pNormal = normal1 + normal2 + normal3;
+		*pNormal = normal1 + normal2 + -normal3;
 	return b;
 }
