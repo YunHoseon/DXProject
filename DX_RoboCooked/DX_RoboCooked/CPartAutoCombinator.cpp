@@ -50,8 +50,8 @@ void CPartAutoCombinator::Update()
 		{
 			m_pInteractCenter->DeleteParts(m_pParts);
 			m_pParts = nullptr;
-			m_eCombinatorActionState = eCombinatorActionState::Usable;
 			m_DestroyTrashCountTime = 0;
+			m_eCombinatorActionState = eCombinatorActionState::Usable;
 		}
 	}
 }
@@ -71,14 +71,16 @@ void CPartAutoCombinator::Render()
 
 void CPartAutoCombinator::Interact(CCharacter* pCharacter)
 {
-	if (m_pParts == nullptr || pCharacter->GetPlayerState() != ePlayerState::None || 
-		m_eCombinatorActionState == eCombinatorActionState::Unusable)
+	if (m_pParts == nullptr || pCharacter->GetPlayerState() != ePlayerState::None)
 		return;
-
+	if (m_pParts->GetPartsID() == "D00")
+		return;
+	
 	pCharacter->SetParts(m_pParts);
 	m_pParts->SetGrabPosition(&pCharacter->GetGrabPartsPosition());
 	m_pParts->GetCollision()->SetActive(true);
 	m_pParts = nullptr;
+	m_eCombinatorActionState = eCombinatorActionState::Usable;
 }
 
 void CPartAutoCombinator::PartsInteract(CParts* pParts)
