@@ -1,7 +1,7 @@
 #pragma once
-#include "CUICombinatorGaugeBoard.h"
+#include "CUIChargeBoard.h"
 class CUICombinatorGaugeTwo :
-	public CUICombinatorGaugeBoard
+	public CUIChargeBoard
 {
 public:
 	CUICombinatorGaugeTwo(D3DXVECTOR3* pPos);
