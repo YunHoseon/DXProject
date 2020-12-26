@@ -189,15 +189,16 @@ void CCharacter::PressKey(void *_value)
 			if (m_fThrowPower < m_fMaxThrowPower)
 			{
 				m_fThrowPower += m_fThrowPowerUpSpeed * TimeRevision;
-				
 			}
 			if (m_fThrowPower > m_fMaxThrowPower)
 			{
 				m_fThrowPower = m_fMaxThrowPower;
+				g_SoundManager->StopSFX("charge_up");
 				g_SoundManager->PlaySFX("charge_complete");
 			}
 			if (m_pCharge)
 				m_pCharge->UpdateCharging(m_fThrowPower, m_fMaxThrowPower);
+			
 
 			_DEBUG_COMMENT cout << "throw power : " << m_fThrowPower << endl;
 		}
@@ -271,7 +272,7 @@ void CCharacter::ReleaseKey(void *_value)
 			SetPlayerState(ePlayerState::None);
 			m_pParts->ThrowParts(m_vDirection * m_fThrowPower * TimeRevision);
 			m_pParts = nullptr;
-
+			g_SoundManager->StopSFX("charge_complete");
 			g_SoundManager->PlaySFX("throw");
 			m_fThrowPower = m_fMinThrowPower;
 			if (m_pCharge)

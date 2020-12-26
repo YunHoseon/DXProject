@@ -24,13 +24,6 @@ void SoundManager::Destroy()
 
 void SoundManager::init()
 {
-	m_sfxCount = 0;
-	for (int i = 0; i < 5; i++)
-	{
-		Channel* sfx;
-		m_sfxChannel.push_back(sfx);
-	}
-
 	System_Create(&m_fmodSystem);
 	m_fmodSystem->init(10, FMOD_INIT_NORMAL, NULL);
 }
@@ -56,26 +49,34 @@ void SoundManager::PlaySFX(string soundName)
 {
 	if (m_soundHash[soundName] != NULL)
 	{		
-		m_fmodSystem->playSound(FMOD_CHANNEL_REUSE, m_soundHash[soundName], false, &m_sfxChannel[m_sfxCount]);
-
-		if (m_sfxChannel.size() - 1 == m_sfxCount)
-		{
-			m_sfxCount = 0;
-		}
-		else
-		{
-			m_sfxCount++;
-		}
-
+		m_fmodSystem->playSound(FMOD_CHANNEL_REUSE, m_soundHash[soundName], false, &m_sfxChannel[soundName]);
 	}
 }
 
-void SoundManager::Stop()
+void SoundManager::StopSFX(string soundName)
+{
+	if (m_sfxChannel[soundName] != NULL)
+	{
+		m_sfxChannel[soundName]->stop();
+	}
+}
+
+bool SoundManager::IsPlayingSFX(string soundName)
+{
+	bool b = false;
+	if (m_sfxChannel[soundName] != nullptr)
+	{
+		m_sfxChannel[soundName]->isPlaying(&b);
+	}
+	return b;
+}
+
+void SoundManager::StopBGM()
 {
 	m_bgmChannel->stop();
 }
 
-void SoundManager::SetBGMSound(float fVoulum)
+void SoundManager::SetBGMSound(float fVolume)
 {
-	m_bgmChannel->setVolume(fVoulum);
+	m_bgmChannel->setVolume(fVolume);
 }
