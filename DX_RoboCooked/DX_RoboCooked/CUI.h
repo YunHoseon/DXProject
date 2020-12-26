@@ -6,7 +6,8 @@ enum class eUIState
 	Up,
 	Down,
 	Hover,
-	invisible
+	invisible,
+	Target
 };
 
 enum class eBtnEvent
