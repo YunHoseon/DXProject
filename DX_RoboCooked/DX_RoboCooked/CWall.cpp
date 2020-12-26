@@ -43,7 +43,7 @@ void CWall::Setup(float fWidth, float fHeight)
 	}
 	D3DXVECTOR3 vMin(fWidth * -0.5f * BLOCK_SIZE, 0, -0.5f);
 	D3DXVECTOR3 vMax(fWidth * 0.5f * BLOCK_SIZE, fHeight * BLOCK_SIZE, 0.5f);
-	m_pCollision = new CBoxCollision((vMax + vMin) * 0.5f, (vMax - vMin)*1.5f, &m_matWorld);
+	m_pCollision = new CBoxCollision((vMax + vMin) * 0.5f, (vMax - vMin)*1.1f, &m_matWorld);
 	m_nRotAngleX = 12;
 	D3DXMatrixRotationX(&m_matR, D3DXToRadian(m_nRotAngleX));
 	SetPosition(0, -1.5f, 6);
@@ -130,5 +130,9 @@ bool CWall::Collide(CActor* target, D3DXVECTOR3* pNormal)
 	bool b = target->Collide(this, pNormal);
 	if (pNormal)
 		*pNormal *= -1;
+
+	if (b)
+		target->GetCollision()->SetIsCollide(false);
+	
 	return b;
 }

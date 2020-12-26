@@ -117,14 +117,14 @@ CGameScene::~CGameScene()
 void CGameScene::Init()
 {
 	CWall *wall = new CWall(this, true);
-	CBoundaryWall* pBwall = new CBoundaryWall;
+	//CBoundaryWall* pBwall = new CBoundaryWall;
 	CUIButton *pClearButton = new CUIClearButton(D3DXVECTOR2(465, 10), this);
 	CUIButton *pPauseButton = new CUIPauseButton(D3DXVECTOR2(465, 10), 27, this);
 	CUIButton *pLoseButton = new CUILoseButton(D3DXVECTOR2(465, 10), this);
 	CUITrafficLight *pTrafficLight = new CUITrafficLight(this, m_vecBlueprints.size());
 	CUIButton *pReady = new CUIReady(D3DXVECTOR2(675, 450), this);
 	CUIButton *pWarrning = new CUIWarning();
-	CField* pField = new CField(eTileType::Sand);
+	//CField* pField = new CField(eTileType::Sand);
 
 	//CParts* parts1 = g_pPartsManager->CreateParts("C01");
 	//parts1->SetPosition(0, 2, 0);
@@ -138,8 +138,8 @@ void CGameScene::Init()
 
 	m_fGameTime = 300.0f;
 	m_vecStaticActor.push_back(wall);
-	m_vecStaticActor.push_back(pField);
-	m_vecStaticActor.push_back(pBwall);
+	//m_vecStaticActor.push_back(pField);
+	//m_vecStaticActor.push_back(pBwall);
 	m_pWarnning = pWarrning;
 	m_pReady = pReady;
 	m_pDebugPauseUI = pPauseButton;
@@ -414,7 +414,16 @@ bool CGameScene::TickUpdate(void *_value)
 		m_isTimeStop = true;
 		SafeDelete(m_pDebugPauseUI);
 		g_EventManager->CallEvent(eEvent::ClearSetTime, (void *)&timeData);
+		//g_SaveLoadManager->Save(m_sStageKey, true, m_fGameTime);
 
+		json& jData = g_SaveLoadManager->GetStageData(m_sStageKey);
+		jData["isClear"] = true;
+		jData["ClearTime"] = m_fGameTime;
+		g_SaveLoadManager->Save();
+		
+
+
+		//세이브 체크중
 		if (m_pDebugClearUI)
 			m_pDebugClearUI->ActiveUI();
 
@@ -431,17 +440,20 @@ bool CGameScene::TickUpdate(void *_value)
 			m_pDebugLoseUI->ActiveUI();
 		return false;
 	}
-
+	
 	return true;
 }
 
-void CGameScene::Load(string sFolder, string sFilename, void (CGameScene::*pCallback)(void))
+void CGameScene::Load(string sFolder, string sStageKey, void (CGameScene::*pCallback)(void))
 {
 	m_cMutex.lock();
 	m_isTimeStop = true;
 	m_cMutex.unlock();
 
-	string sFullname = sFolder + "/" + sFilename;
+	m_sStageKey = sStageKey;
+	json jData = g_SaveLoadManager->GetStageData(sStageKey);
+	string FileName = jData["FileName"];
+	string sFullname = sFolder + "/" + FileName;
 	
 	std::ifstream is(sFullname);
 	assert(is.is_open());
@@ -596,16 +608,20 @@ void CGameScene::Load(string sFolder, string sFilename, void (CGameScene::*pCall
 			}
 		}
 		{
-			json jWhiteboard = j["Whiteboard"];
-			for (auto&& p : jWhiteboard)
+			json jField = j["Field"];
+			for (int i = 0; i < jField.size(); ++i)
 			{
-				D3DXVECTOR3 pos(p["Position"][0], p["Position"][1], p["Position"][2]);
-				float rotate = p["Rotate"];
-				D3DXVECTOR3 scale(p["Scale"][0], p["Scale"][1], p["Scale"][2]);
-				CWhiteboard* Whiteboard = new CWhiteboard(pos);
-				Whiteboard->SetRotationY(rotate);
-				Whiteboard->SetScale(scale);
-				vecInter.push_back(Whiteboard);
+				eTileType eFieldTileType = static_cast<eTileType>(jField[i]["TileType"]);
+				CField* field = new CField(eFieldTileType);
+				vecStatic.push_back(field);
+			}
+		}
+		{
+			json jBoundaryWall = j["BoundaryWall"];
+			for (int i = 0; i < jBoundaryWall.size(); ++i)
+			{
+				CBoundaryWall* bwall = new CBoundaryWall;
+				vecStatic.push_back(bwall);
 			}
 		}
 		{
@@ -748,7 +764,7 @@ void CGameScene::Load(string sFolder, string sFilename, void (CGameScene::*pCall
 	this->m_vecParts.insert(m_vecParts.end(), vecParts.begin(), vecParts.end());
 	this->m_vecCharacters.insert(m_vecCharacters.end(), vecChara.begin(), vecChara.end());
 	this->m_vecTile.insert(m_vecTile.end(), vecTile.begin(), vecTile.end());
-	this->m_sID = sFilename;
+	this->m_sStageKey = m_sStageKey;
 	this->m_cMutex.unlock();
 
 	{
@@ -774,9 +790,25 @@ void CGameScene::Load(string sFolder, string sFilename, void (CGameScene::*pCall
 			}
 		}
 	}
+	vector<CInteractiveActor*> vecWhiteboard;
+	{
+		json jWhiteboard = j["Whiteboard"];
+		for (auto&& p : jWhiteboard)
+		{
+			D3DXVECTOR3 pos(p["Position"][0], p["Position"][1], p["Position"][2]);
+			float rotate = p["Rotate"];
+			D3DXVECTOR3 scale(p["Scale"][0], p["Scale"][1], p["Scale"][2]);
+			CWhiteboard* Whiteboard = new CWhiteboard(pos);
+			Whiteboard->SetRotationY(rotate);
+			Whiteboard->SetScale(scale);
+			vecWhiteboard.push_back(Whiteboard);
+		}
+	}
+	
 
 	this->m_cMutex.lock();
 	this->m_vecMonster.insert(m_vecMonster.end(), vecMonster.begin(), vecMonster.end());
+	this->m_vecObject.insert(m_vecObject.end(), vecWhiteboard.begin(), vecWhiteboard.end());
 	this->m_cMutex.unlock();
 	
 	if (pCallback)

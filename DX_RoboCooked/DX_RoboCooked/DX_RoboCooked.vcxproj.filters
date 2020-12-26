@@ -561,9 +561,6 @@
     <ClInclude Include="CUICombinatorGaugeZero.h">
       <Filter>UI\Button\SubUI\CUICombinatorGauge</Filter>
     </ClInclude>
-    <ClInclude Include="CUICombinatorGaugeBoard.h">
-      <Filter>UI\Button\SubUI\CUICombinatorGauge</Filter>
-    </ClInclude>
     <ClInclude Include="CUIStageSelect.h">
       <Filter>UI\Button\MainUI</Filter>
     </ClInclude>
@@ -620,6 +617,9 @@
     </ClInclude>
     <ClInclude Include="CUISelectRight.h">
       <Filter>UI\Button\SubUI</Filter>
+    </ClInclude>
+    <ClInclude Include="CShaderManager.h">
+      <Filter>Manager</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -1076,9 +1076,6 @@
     <ClCompile Include="CUICombinatorGaugeTwo.cpp">
       <Filter>UI\Button\SubUI\CUICombinatorGauge</Filter>
     </ClCompile>
-    <ClCompile Include="CUICombinatorGaugeBoard.cpp">
-      <Filter>UI\Button\SubUI\CUICombinatorGauge</Filter>
-    </ClCompile>
     <ClCompile Include="CUIStageSelect.cpp">
       <Filter>UI\Button\MainUI</Filter>
     </ClCompile>
@@ -1135,6 +1132,9 @@
     </ClCompile>
     <ClCompile Include="CUIUpdateText.cpp">
       <Filter>UI\Button\SubUI</Filter>
+    </ClCompile>
+    <ClCompile Include="CShaderManager.cpp">
+      <Filter>Manager</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

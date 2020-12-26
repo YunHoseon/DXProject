@@ -1,12 +1,12 @@
 #include "stdafx.h"
 #include "CUICombinatorGauge.h"
 #include "CUIChargeBoard.h"
-#include "CUIChargeFive.h"
-#include "CUIChargeFour.h"
-#include "CUIChargeThree.h"
-#include "CUIChargeTwo.h"
-#include "CUIChargeOne.h"
-#include "CUIChargeZero.h"
+#include "CUICombinatorGaugeFive.h"
+#include "CUICombinatorGaugeFour.h"
+#include "CUICombinatorGaugeThree.h"
+#include "CUICombinatorGaugeTwo.h"
+#include "CUICombinatorGaugeOne.h"
+#include "CUICombinatorGaugeZero.h"
 
 
 CUICombinatorGauge::CUICombinatorGauge(D3DXVECTOR3 *pPos)
@@ -26,12 +26,12 @@ void CUICombinatorGauge::Setup()
 	m_vCombinatorUIPosition = D3DXVECTOR3(m_pTargetPosition->x - 1.3f, m_pTargetPosition->y + 3.4f, m_pTargetPosition->z);
 
 
-	m_pGaugeZero =  new CUIChargeZero(&m_vCombinatorUIPosition);
-	m_pGaugeOne =   new CUIChargeOne(&m_vCombinatorUIPosition);
-	m_pGaugeTwo =   new CUIChargeTwo(&m_vCombinatorUIPosition);
-	m_pGaugeThree = new CUIChargeThree(&m_vCombinatorUIPosition);
-	m_pGaugeFour =  new CUIChargeFour(&m_vCombinatorUIPosition);
-	m_pGaugeFive =  new CUIChargeFive(&m_vCombinatorUIPosition);
+	m_pGaugeZero =  new CUICombinatorGaugeZero(&m_vCombinatorUIPosition);
+	m_pGaugeOne =   new CUICombinatorGaugeOne(&m_vCombinatorUIPosition);
+	m_pGaugeTwo =   new CUICombinatorGaugeTwo(&m_vCombinatorUIPosition);
+	m_pGaugeThree = new CUICombinatorGaugeThree(&m_vCombinatorUIPosition);
+	m_pGaugeFour =  new CUICombinatorGaugeFour(&m_vCombinatorUIPosition);
+	m_pGaugeFive =  new CUICombinatorGaugeFive(&m_vCombinatorUIPosition);
 
 	AddChild(m_pGaugeZero);
 	AddChild(m_pGaugeOne);

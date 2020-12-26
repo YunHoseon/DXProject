@@ -11,6 +11,7 @@ CUITexture::CUITexture(char *DisabledPath, char *ActivePath, char *HoverPath, D3
 {
 	m_pTargetPosition = pPos;
 	Setup(DisabledPath, ActivePath, HoverPath);
+	SetUIState(eUIState::Target);
 }
 
 CUITexture::CUITexture(char *DisabledPath, char *ActivePath, char *HoverPath, D3DXVECTOR2 vPos, eUIState state)
@@ -70,6 +71,7 @@ void CUITexture::RenderTexture(eUIState state)
 
 		D3DXVECTOR3 pos;
 		D3DXVec3Project(&pos, m_pTargetPosition, &vp, &matProj, &matView, nullptr);
+
 		m_vPosition.x = pos.x;
 		m_vPosition.y = pos.y;
 	}
@@ -114,6 +116,15 @@ void CUITexture::RenderTexture(eUIState state)
 					   &g_vZero,
 					   &D3DXVECTOR3(m_vPosition.x, m_vPosition.y, 0),
 					   D3DCOLOR_ARGB(100, 255, 255, 255));
+	}
+	else if (state == eUIState::Target)
+	{
+		SetRect(&rc, 0, 0, m_DisabledInfo.Width, m_DisabledInfo.Height);
+		m_Sprite->Draw(m_DisabledTexture,
+			&rc,
+			&D3DXVECTOR3(m_DisabledInfo.Width * 0.5f, m_DisabledInfo.Height * 0.5f, 0),
+			&D3DXVECTOR3(m_vPosition.x, m_vPosition.y - 100.0f, 0),
+			D3DCOLOR_ARGB(100, 255, 255, 255));
 	}
 
 	m_Sprite->End();

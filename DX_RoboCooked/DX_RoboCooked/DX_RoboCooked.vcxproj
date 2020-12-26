@@ -175,6 +175,7 @@
     <ClInclude Include="CSand.h" />
     <ClInclude Include="CSandpile.h" />
     <ClInclude Include="CSaveLoadManager.h" />
+    <ClInclude Include="CShaderManager.h" />
     <ClInclude Include="CThickSand.h" />
     <ClInclude Include="CFlowSand.h" />
     <ClInclude Include="CSoil.h" />
@@ -199,7 +200,6 @@
     <ClInclude Include="CUIClearTime.h" />
     <ClInclude Include="CUICloseButton.h" />
     <ClInclude Include="CUICombinatorGauge.h" />
-    <ClInclude Include="CUICombinatorGaugeBoard.h" />
     <ClInclude Include="CUICombinatorGaugeFive.h" />
     <ClInclude Include="CUICombinatorGaugeFour.h" />
     <ClInclude Include="CUICombinatorGaugeOne.h" />
@@ -349,6 +349,7 @@
     <ClCompile Include="CSand.cpp" />
     <ClCompile Include="CSandpile.cpp" />
     <ClCompile Include="CSaveLoadManager.cpp" />
+    <ClCompile Include="CShaderManager.cpp" />
     <ClCompile Include="CThickSand.cpp" />
     <ClCompile Include="CFlowSand.cpp" />
     <ClCompile Include="CSoil.cpp" />
@@ -373,7 +374,6 @@
     <ClCompile Include="CUIClearTime.cpp" />
     <ClCompile Include="CUICloseButton.cpp" />
     <ClCompile Include="CUICombinatorGauge.cpp" />
-    <ClCompile Include="CUICombinatorGaugeBoard.cpp" />
     <ClCompile Include="CUICombinatorGaugeFive.cpp" />
     <ClCompile Include="CUICombinatorGaugeFour.cpp" />
     <ClCompile Include="CUICombinatorGaugeOne.cpp" />

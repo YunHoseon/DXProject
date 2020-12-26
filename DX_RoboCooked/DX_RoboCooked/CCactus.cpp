@@ -35,3 +35,21 @@ void CCactus::Render()
 	_DEBUG_COMMENT if (m_pCollision)
 		_DEBUG_COMMENT	m_pCollision->Render();
 }
+
+void CCactus::SetScale(float x, float y, float z)
+{
+	m_vScale = D3DXVECTOR3(x, y, z);
+	D3DXMatrixScaling(&m_matS, x, y, z);
+	m_matWorld = m_matS * m_matR * m_matT;
+	if (m_pCollision)
+		m_pCollision->SetScale(x * 0.5, y * 0.5, z * 0.5);
+}
+
+void CCactus::SetScale(const D3DXVECTOR3& vScale)
+{
+	m_vScale = vScale;
+	D3DXMatrixScaling(&m_matS, vScale.x, vScale.y, vScale.z);
+	m_matWorld = m_matS * m_matR * m_matT;
+	if (m_pCollision)
+		m_pCollision->SetScale(vScale.x * 0.5, vScale.y * 0.5, vScale.z * 0.5);
+}

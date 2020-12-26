@@ -15,6 +15,7 @@ private:
 
 	bool							m_isMoveParts;
 	string							m_sPartsID;
+	float							m_fMaxSpeed;
 	eCombinatorPartsLevel			m_eLevel;
 	string							m_sFormula;
 	CPartCombinator*				m_pPartsCombinator;

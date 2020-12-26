@@ -37,20 +37,6 @@ void CUI::SetParent(CUI * parent)
 
 void CUI::CheckPressIn(POINT pt)
 {
-	//for (auto it : m_listUIchildren)
-	//{
-	//	if (it->m_vPosition.x * m_fWidthRevision <= pt.x && (it->m_vPosition.x + it->m_vSize.x) * m_fWidthRevision >= pt.x
-	//		&& it->m_vPosition.y * m_fHeightRevision <= pt.y && (it->m_vPosition.y + it->m_vSize.y) * m_fHeightRevision >= pt.y)
-	//	{
-	//		if (it->GetlistUIchildrenSize() == 0)
-	//		{
-	//			if (it->m_isPress == false)
-	//			{
-	//				it->m_isPress = true;
-	//			}
-	//		}
-	//	}
-	//}
 	if (m_vPosition.x * m_fWidthRevision <= pt.x && (m_vPosition.x + m_vSize.x) * m_fWidthRevision >= pt.x
 		&&m_vPosition.y * m_fHeightRevision <= pt.y && (m_vPosition.y + m_vSize.y) * m_fHeightRevision >= pt.y)
 	{
@@ -75,31 +61,6 @@ void CUI::CheckPressIn(POINT pt)
 
 void CUI::CheckReleaseIn(POINT pt)
 {
-	//for (auto it : m_listUIchildren)
-	//{
-	//	if (it->m_vPosition.x * m_fWidthRevision <= pt.x && (it->m_vPosition.x + it->m_vSize.x) * m_fWidthRevision >= pt.x
-	//		&& it->m_vPosition.y * m_fHeightRevision <= pt.y && (it->m_vPosition.y + it->m_vSize.y) * m_fHeightRevision >= pt.y)
-	//	{
-	//		if (it->GetlistUIchildrenSize() == 0)
-	//		{
-	//			if (it->m_isPress)
-	//			{
-	//				if (it->GetUIState() == eUIState::Hover)
-	//				{
-	//					//it->SetUIState(eUIState::Active);
-	//					it->ButtonEvent(it->m_eBtnEvent);
-	//				}
-	//				else if (it->GetUIState() == eUIState::Down)
-	//				{
-	//					it->SetUIState(eUIState::Up);
-	//				}
-	//			}
-	//		}
-	//	}
-	//	it->m_isPress = false;
-	//}
-
-	
 	if (m_vPosition.x * m_fWidthRevision <= pt.x && (m_vPosition.x + m_vSize.x) * m_fWidthRevision >= pt.x
 		&& m_vPosition.y * m_fHeightRevision <= pt.y && (m_vPosition.y + m_vSize.y) * m_fHeightRevision >= pt.y)
 	{
@@ -133,32 +94,6 @@ void CUI::CheckInHover(POINT pt)
 {
 	if (m_isActive == false)
 		return;
-
-	//for (auto it : m_listUIchildren)
-	//{
-	//	if (it->m_vPosition.x * m_fWidthRevision <= pt.x && (it->m_vPosition.x + it->m_vSize.x) * m_fWidthRevision >= pt.x
-	//		&& it->m_vPosition.y * m_fHeightRevision <= pt.y && (it->m_vPosition.y + it->m_vSize.y) * m_fHeightRevision >= pt.y)
-	//	{
-	//		if (it->GetlistUIchildrenSize() == 0)
-	//		{
-	//			if (it->GetUIState() == eUIState::Down)
-	//				return;
-
-	//			it->SetUIPastState(it->GetUIState());
-	//			it->SetUIState(eUIState::Hover);
-	//		}
-	//		else
-	//		{
-	//			it->CheckInHover(pt);
-	//		}
-	//	}
-	//	else if (it->GetUIState() == eUIState::Hover)
-	//	{
-	//		it->SetUIState(it->GetUIPastState());
-	//	}	
-	//}
-
-	
 	if (m_vPosition.x * m_fWidthRevision <= pt.x && (m_vPosition.x + m_vSize.x) * m_fWidthRevision >= pt.x
 		&& m_vPosition.y * m_fHeightRevision <= pt.y && (m_vPosition.y + m_vSize.y) * m_fHeightRevision >= pt.y)
 	{
@@ -222,6 +157,7 @@ void CUI::InvertActive()
 		it->InvertActive();
 	}
 	m_isActive = !m_isActive;
+
 }
 
 void CUI::ActiveUI()
@@ -342,6 +278,15 @@ void CUI::ButtonEvent(eBtnEvent btnEvent)
 		g_EventManager->CallEvent(eEvent::SelectRight, NULL);
 		break;
 
+	}
+}
+
+void CUI::SetUIState(eUIState st)
+{
+	m_eUIState = st;
+	for (CUI* it : m_listUIchildren)
+	{
+		it->SetUIState(st);
 	}
 }
 

@@ -67,17 +67,3 @@ bool CUILoseButton::OnEvent(eEvent eEvent, void * _value)
 	}
 	return true;
 }
-
-//void CUILoseButton::ResetGame()
-//{
-//	//return;
-//	CGameScene* scene = new CGameScene;
-//
-//	g_pThreadManager->AddThread(thread(&CGameScene::Load, scene, "data/js", m_pInteractCenter->GetSceneID(), &CGameScene::Init));
-//
-//	CScene* pBeforeScene = g_SceneManager->SetCurrentScene(scene);
-//	if (pBeforeScene)
-//	{
-//		g_pThreadManager->AddThread(thread([pBeforeScene]() { delete pBeforeScene; }));
-//	}
-//}

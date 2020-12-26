@@ -153,6 +153,8 @@ void CMonsterHarpy::UpdateMonster()
 	{
 		m_vecSkillAnim_2[0]->Update();
 		m_vecSkillAnim_2[1]->Update();
+		if (m_pTornado)
+			m_pTornado->Update();
 	}
 	if (m_stSkillUsing.isUltimateSkill)
 	{

@@ -22,12 +22,12 @@ CUICharge::~CUICharge()
 
 void CUICharge::Setup()
 {
-	m_pChargeZero = new CUIChargeZero(&m_vChargeUIPosition);
-	m_pChargeOne = new CUIChargeOne(&m_vChargeUIPosition);
-	m_pChargeTwo = new CUIChargeTwo(&m_vChargeUIPosition);
-	m_pChargeThree = new CUIChargeThree(&m_vChargeUIPosition);
-	m_pChargeFour = new CUIChargeFour(&m_vChargeUIPosition);
-	m_pChargeFive = new CUIChargeFive(&m_vChargeUIPosition);
+	m_pChargeZero = new CUIChargeZero(m_pTargetPosition);
+	m_pChargeOne = new CUIChargeOne(m_pTargetPosition);
+	m_pChargeTwo = new CUIChargeTwo(m_pTargetPosition);
+	m_pChargeThree = new CUIChargeThree(m_pTargetPosition);
+	m_pChargeFour = new CUIChargeFour(m_pTargetPosition);
+	m_pChargeFive = new CUIChargeFive(m_pTargetPosition);
 
 	AddChild(m_pChargeZero);
 	AddChild(m_pChargeOne);
@@ -35,16 +35,14 @@ void CUICharge::Setup()
 	AddChild(m_pChargeThree);
 	AddChild(m_pChargeFour);
 	AddChild(m_pChargeFive);
-
+	SetUIState(eUIState::Target);
 }
 
 void CUICharge::UpdateCharging(float fThrowPower, float fMaxThrowPower)
 {
-	m_vChargeUIPosition = D3DXVECTOR3(m_pTargetPosition->x - 1.3f, m_pTargetPosition->y + 3.4f, m_pTargetPosition->z);
-
 	SetChildActive(false);
 
-	float temp = fMaxThrowPower / 5.0f;
+	float temp = fMaxThrowPower * 0.2f;
 
 	if (temp * 1 > fThrowPower)
 	{

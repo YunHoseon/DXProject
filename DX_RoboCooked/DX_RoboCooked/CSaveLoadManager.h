@@ -1,5 +1,7 @@
 ﻿#pragma once
 
+#define g_SaveLoadManager CSaveLoadManager::GetInstance()
+
 class CSaveLoadManager : public CSingleton<CSaveLoadManager>
 {
 private:
@@ -17,4 +19,5 @@ public:
 	json& GetSaveData();
 
 	int GetMaxIndex();
+	int GetDataSize();
 };

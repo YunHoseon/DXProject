@@ -20,11 +20,10 @@ CPharaohCoffin::CPharaohCoffin(IInteractCenter* pInteractCenter, D3DXVECTOR3 vPo
 	m_pSMesh = g_pStaticMeshManager->GetStaticMesh("Coffin");
 	m_pCollision = new CBoxCollision(m_pSMesh->GetMesh(), &m_matWorld);
 	m_pCCCollision = new CSphereCollision(g_vZero, 1.5f, &m_matWorld);
-	SetScale(0.01f, 0.01f, 0.01f);
+	CActor::SetScale(0.01f, 0.01f, 0.01f);
 	SetRotationY(D3DXToRadian(0));
-	SetPosition(vPos);
-
-	float y = vPos.y - 0.5f + m_pCollision->GetHeight() * 0.5f + (vPos.y - m_pCollision->GetCenter().y);
+	m_fBasePositionY = vPos.y;
+	float y = m_fBasePositionY - 0.5f + m_pCollision->GetHeight() * 0.5f;
 	SetPosition(vPos.x, y, vPos.z);
 
 	if (m_pCollision)
@@ -115,6 +114,20 @@ void CPharaohCoffin::Interact(CCharacter * pCharacter)
 			}
 		}
 	}
+}
+
+void CPharaohCoffin::SetScale(const D3DXVECTOR3& vScale)
+{
+	CActor::SetScale(vScale);
+	float y = m_fBasePositionY - 0.5f + m_pCollision->GetHeight() * 0.5f;
+	SetPosition(m_vPosition.x, y, m_vPosition.z);
+}
+
+void CPharaohCoffin::SetScale(float x, float y, float z)
+{
+	CActor::SetScale(x, y, z);
+	float _y = m_fBasePositionY - 0.5f + m_pCollision->GetHeight() * 0.5f;
+	SetPosition(m_vPosition.x, _y, m_vPosition.z);
 }
 
 CParts* CPharaohCoffin::Make()

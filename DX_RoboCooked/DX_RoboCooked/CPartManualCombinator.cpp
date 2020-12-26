@@ -120,8 +120,9 @@ CParts* CPartManualCombinator::Make()
 
 void CPartManualCombinator::Interact(CCharacter* pCharacter)
 {
-	if (m_pParts == nullptr || pCharacter->GetPlayerState() != ePlayerState::None ||
-		m_eCombinatorActionState == eCombinatorActionState::Unusable)
+	if (m_pParts == nullptr || pCharacter->GetPlayerState() != ePlayerState::None)
+		return;
+	if (m_pParts->GetPartsID() == "D00")
 		return;
 
 	//pCharacter->SetPlayerState(ePlayerState::Grab);
@@ -129,7 +130,7 @@ void CPartManualCombinator::Interact(CCharacter* pCharacter)
 	m_pParts->SetGrabPosition(&pCharacter->GetGrabPartsPosition());
 	m_pParts->GetCollision()->SetActive(true);
 	m_pParts = nullptr;
-
+	m_eCombinatorActionState = eCombinatorActionState::Usable;
 }
 
 void CPartManualCombinator::PartsInteract(CParts* pParts)
@@ -155,7 +156,8 @@ void CPartManualCombinator::PartsInteract(CParts* pParts)
 void CPartManualCombinator::CombineParts()
 {
 	m_fElapsedTime += g_pTimeManager->GetElapsedTime();
-	g_SoundManager->PlaySFX("machine_run");
+	if (!g_SoundManager->IsPlayingSFX("machine_run"))
+		g_SoundManager->PlaySFX("machine_run");
 	if(m_pUICombinatorGauge)
 		m_pUICombinatorGauge->UpdateCombinator(m_fElapsedTime, m_fCombineTime);
 
@@ -166,6 +168,7 @@ void CPartManualCombinator::CombineParts()
 		m_fElapsedTime = 0;
 		
 		CParts* parts = Make();
+		parts->GetCollision()->SetActive(false);
 		if(m_pUICombinatorGauge)
 			m_pUICombinatorGauge->SetChildActive(false);
 		m_vecDischargeParts.push_back(parts);
