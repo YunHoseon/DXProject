@@ -32,4 +32,5 @@ public:
 	virtual void DestroyPartsOnPosition(D3DXVECTOR3 pos) = 0;
 	virtual string GetSceneID() = 0;
 	virtual const vector<CCharacter *> &GetCharacters() = 0;
+	virtual bool CheckWarning() = 0;
 };
