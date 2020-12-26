@@ -181,14 +181,17 @@ void CCharacter::PressKey(void *_value)
 		case ePlayerState::Grab:
 		{
 			if (m_arrKeyDown[0] == false)
+			{
 				m_arrKeyDown[0] = true;
+				g_SoundManager->PlaySFX("charge_up");
+			}
 
 			if (m_fThrowPower < m_fMaxThrowPower)
 			{
 				m_fThrowPower += m_fThrowPowerUpSpeed * TimeRevision;
-				g_SoundManager->PlaySFX("charge_up");
+				
 			}
-			if (m_fThrowPower >= m_fMaxThrowPower)
+			if (m_fThrowPower > m_fMaxThrowPower)
 			{
 				m_fThrowPower = m_fMaxThrowPower;
 				g_SoundManager->PlaySFX("charge_complete");
