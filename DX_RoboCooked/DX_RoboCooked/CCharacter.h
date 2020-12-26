@@ -34,12 +34,12 @@ protected:
 	CParts*				m_pParts;
 
 	D3DXVECTOR3			m_vDefaultPosition;
-	// Å°´Ù¿î °ü·Ã.
+	// Å°ï¿½Ù¿ï¿½ ï¿½ï¿½ï¿½ï¿½.
 	array<float, 3>		m_arrElapsedTime;
 	array<float, 3>		m_arrCoolDown;
 	array<bool, 3>		m_arrKeyDown;
 	bool				m_isMoveKeyDown;
-	// ¼öÁ¤Áß
+	// ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 	const ST_PLAYER_INPUTKEY* m_pInputKey;
 	//LPD3DXMESH			m_pMesh;
 	//D3DMATERIAL9		m_stMtl;
@@ -47,12 +47,11 @@ protected:
 	float				m_fMaxThrowPower;
 	float				m_fThrowPower;
 	float				m_fThrowPowerUpSpeed;
-
 	float				m_fMaxSpeed;
 	
-	CCrowdControl*		m_pCC;
-	BOOL				m_isDummy;
+	bool				m_isSandpile;
 
+	CCrowdControl*		m_pCC;
 	CUICharge*			m_pCharge;
 
 	CDashShadow*		m_pDashShadow;
@@ -70,24 +69,28 @@ public:
 	virtual void AddForce(const D3DXVECTOR3& vForce) override;
 	virtual void SetForce(const D3DXVECTOR3& vForce = g_vZero) override;
 	virtual float GetMass() override;
+	virtual void Reset();
 	
+	void DeleteCC();
+	void SetAnimState();
+	
+	/*getter setter*/
 	ST_PLAYER_INPUTKEY GetInputKey() { return *m_pInputKey; }
 	D3DXVECTOR3& GetGrabPartsPosition() { return m_vGrabPartsPosition; }
 	ICollisionArea* GetInteractCollsion() { return m_pInteractCollision; }
+	
 	ePlayerState GetPlayerState() { return m_ePlayerState; }
 	void SetPlayerState(ePlayerState state) { m_ePlayerState = state; }
-	void SetParts(CParts* pParts) { m_pParts = pParts; }
+	
 	CParts* GetParts() { return m_pParts; }
-	void SetDummy(bool b) { m_isDummy = b; }
-	BOOL GetDummy() { return m_isDummy; }
-	CCrowdControl* GetCC() { return m_pCC; }
+	void SetParts(CParts* pParts) { m_pParts = pParts; }
 
+	BOOL GetIsSandpile() { return m_isSandpile; }
+	void SetIsSandpile(bool b) { m_isSandpile = b; }
+
+	CCrowdControl* GetCC() { return m_pCC; }
 	void SetCC(CCrowdControl* cc);
-	void DeleteCC();
 
 	virtual void SetDefaultPosition(D3DXVECTOR3 vPos) { m_vDefaultPosition = vPos; }
-	virtual void Reset();
-
-	void SetAnimState();
 };
 

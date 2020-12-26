@@ -3,7 +3,7 @@
 #include "CUIWarningBoard.h"
 
 
-CUIWarning::CUIWarning() :m_fElapsedTime(0.0f), m_nRepeatCount(4),m_nBlinkCount(0), m_isBlink(false)
+CUIWarning::CUIWarning() :m_fElapsedTime(0.0f), m_nRepeatCount(4),m_nBlinkCount(0), m_isBlink(false), m_isCheckFirst(false), m_isEnd(false)
 {
 	g_EventManager->Attach(eEvent::CallWarning, this);
 	Setup();
@@ -29,6 +29,7 @@ bool CUIWarning::OnEvent(eEvent eEvent, void * _value)
 		break;
 	case eEvent::CallWarning:
 	{
+		m_isCheckFirst = true;
 		g_SoundManager->PlaySFX("siren");
 		g_EventManager->Attach(eEvent::Tick, this);
 	}
@@ -52,6 +53,7 @@ bool CUIWarning::TickUpdate(void * _value)
 		m_nBlinkCount++;
 		if (m_nBlinkCount == m_nRepeatCount)
 		{
+			m_isEnd = true;
 			SetActive(false);
 			return false;
 		}

@@ -47,7 +47,7 @@ bool CUIReady::TickUpdate(void * _value)
 		if (m_pInteractCenter->GetStop())
 			m_pInteractCenter->ToggleStop();
 
-		g_EventManager->CallEvent(eEvent::CallWarning, NULL);
+		//g_EventManager->CallEvent(eEvent::CallWarning, NULL);
 		return false;
 	}
 	else if (m_fElapsedTime >= 1.5f)

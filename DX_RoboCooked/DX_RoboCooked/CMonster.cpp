@@ -15,14 +15,14 @@ CMonster::~CMonster()
 
 void CMonster::Update()
 {
-	if (FirstSkillTriggered())
+	if (FirstSkillTriggered() && m_pInteractCenter->CheckWarning())
 	{
 		m_stSkillUsing.FirstSkillProperty = FirstSkill();
 		m_stSkillUsing.isFirstSkill = true;
 		m_pInteractCenter->MonsterSkill(FirstSkill(), FirstSkillTime());
 	}
 
-	if (SecondSkillTriggered())
+	if (SecondSkillTriggered() && m_pInteractCenter->CheckWarning())
 	{
 		m_stSkillUsing.SecondSkillProperty = SecondSkill();
 		m_stSkillUsing.isSecondSkill = true;
@@ -38,7 +38,7 @@ void CMonster::Update()
 		}
 	}
 
-	if (UltimateSkillTriggered())
+	if (UltimateSkillTriggered() && m_pInteractCenter->CheckWarning())
 	{
 		m_stSkillUsing.UltimateSkillProperty = UltimateSkill();
 		m_stSkillUsing.isUltimateSkill = true;

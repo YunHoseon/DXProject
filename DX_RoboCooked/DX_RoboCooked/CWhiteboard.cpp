@@ -4,6 +4,8 @@
 #include "CUIWhiteboard.h"
 #include "CCharacter.h"
 
+
+
 CWhiteboard::CWhiteboard(D3DXVECTOR3 vPos)
 	: m_pSMesh(nullptr)
 	, m_pCharacter(nullptr)
@@ -11,7 +13,8 @@ CWhiteboard::CWhiteboard(D3DXVECTOR3 vPos)
 {
 	m_pSMesh = g_pStaticMeshManager->GetStaticMesh("Whiteboard");
 	m_pCollision = new CBoxCollision(m_pSMesh->GetMesh(), &m_matWorld);
-	m_pUIWhiteboard = new CUIWhiteboard();
+
+	m_pUIWhiteboard = new CUIWhiteboard(D3DXVECTOR2(530,160));
 
 	SetScale(0.025f, 0.025f, 0.025f);
 	SetRotationY(D3DXToRadian(0));
@@ -47,7 +50,7 @@ void CWhiteboard::Render()
 void CWhiteboard::Interact(CCharacter* pCharacter)
 {	
 	g_EventManager->Attach(eEvent::KeyRelease, this);
-	m_pUIWhiteboard->SetIsActive(true);
+	m_pUIWhiteboard->SetActive(true);
 
 	if (m_pCharacter == nullptr)
 	{
@@ -72,12 +75,18 @@ bool CWhiteboard::ClosePopup(void* _value)
 
 	if (m_pCharacter && *data == m_pCharacter->GetInputKey().interactableKey1)
 	{
-		m_pUIWhiteboard->SetIsActive(false);
+		m_pUIWhiteboard->SetActive(false);
 		g_EventManager->Attach(eEvent::KeyRelease, m_pCharacter);
 		m_pCharacter->ReleaseKey(data);
 		m_pCharacter = nullptr;
 		return false;
 	}
 	return true;
+}
+
+void CWhiteboard::SetFormula(vector<CBlueprint*>& vBp)
+{
+	int a = vBp.size();
+	 m_pUIWhiteboard->SetFormula(vBp); 
 }
 

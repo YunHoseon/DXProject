@@ -186,6 +186,10 @@
     <ClInclude Include="CThreadManager.h" />
     <ClInclude Include="CTornado.h" />
     <ClInclude Include="CTV.h" />
+    <ClInclude Include="CUI1LevelCombination.h" />
+    <ClInclude Include="CUI1LevelCombinatorImage.h" />
+    <ClInclude Include="CUI2LevelCombination.h" />
+    <ClInclude Include="CUI2LevelCombinatorImage.h" />
     <ClInclude Include="CUIAcidRain.h" />
     <ClInclude Include="CUICC.h" />
     <ClInclude Include="CUICharge.h" />
@@ -210,6 +214,7 @@
     <ClInclude Include="CUIControll.h" />
     <ClInclude Include="CUIControllBoard.h" />
     <ClInclude Include="CUIEndButton.h" />
+    <ClInclude Include="CUIEsc.h" />
     <ClInclude Include="CUIHeart.h" />
     <ClInclude Include="CUILight.h" />
     <ClInclude Include="CUIloadingMessageComplete.h" />
@@ -261,7 +266,6 @@
     <ClInclude Include="CUIStarThree.h" />
     <ClInclude Include="CUIStarTwo.h" />
     <ClInclude Include="CUIStarZero.h" />
-    <ClInclude Include="CUISubWhiteboard.h" />
     <ClInclude Include="CUIText.h" />
     <ClInclude Include="CUITexture.h" />
     <ClInclude Include="CUITextureManager.h" />
@@ -361,6 +365,10 @@
     <ClCompile Include="CThreadManager.cpp" />
     <ClCompile Include="CTornado.cpp" />
     <ClCompile Include="CTV.cpp" />
+    <ClCompile Include="CUI1LevelCombination.cpp" />
+    <ClCompile Include="CUI1LevelCombinatorImage.cpp" />
+    <ClCompile Include="CUI2LevelCombination.cpp" />
+    <ClCompile Include="CUI2LevelCombinatorImage.cpp" />
     <ClCompile Include="CUIAcidRain.cpp" />
     <ClCompile Include="CUICC.cpp" />
     <ClCompile Include="CUICharge.cpp" />
@@ -385,6 +393,7 @@
     <ClCompile Include="CUIControll.cpp" />
     <ClCompile Include="CUIControllBoard.cpp" />
     <ClCompile Include="CUIEndButton.cpp" />
+    <ClCompile Include="CUIEsc.cpp" />
     <ClCompile Include="CUIHeart.cpp" />
     <ClCompile Include="CUILight.cpp" />
     <ClCompile Include="CUIloadingMessageComplete.cpp" />
@@ -436,7 +445,6 @@
     <ClCompile Include="CUIStarThree.cpp" />
     <ClCompile Include="CUIStarTwo.cpp" />
     <ClCompile Include="CUIStarZero.cpp" />
-    <ClCompile Include="CUISubWhiteboard.cpp" />
     <ClCompile Include="CUIText.cpp" />
     <ClCompile Include="CUITexture.cpp" />
     <ClCompile Include="CUITextureManager.cpp" />
@@ -510,8 +518,6 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="ClassDiagram.cd" />
-    <None Include="ClassDiagram1.cd" />
-    <None Include="ClassDiagram11.cd" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

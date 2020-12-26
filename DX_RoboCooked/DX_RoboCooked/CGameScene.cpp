@@ -34,6 +34,7 @@
 #include "CUILoading.h"
 #include "CUIReady.h"
 #include "CUIWarning.h"
+#include "CUIEsc.h"
 
 /* ������ */
 #include <filesystem>
@@ -57,7 +58,8 @@ CGameScene::CGameScene() :
 						   m_vWind(0, 0, 0),
 						   m_fGameTime(300.0f),
 						   m_pReady(nullptr),
-						   m_pWarnning(nullptr)
+						   m_pWarnning(nullptr),
+						   m_pEscUI(nullptr)
 {
 	g_SoundManager->AddBGM("data/Sound/bgm/Tribal_Tensions.mp3");
 	g_SoundManager->PlayBGM();
@@ -111,6 +113,7 @@ CGameScene::~CGameScene()
 	SafeDelete(m_pDebugLoseUI);
 	SafeDelete(m_pReady);
 	SafeDelete(m_pWarnning);
+	SafeDelete(m_pEscUI);
 	m_cMutex.unlock();
 }
 
@@ -123,7 +126,9 @@ void CGameScene::Init()
 	CUIButton *pLoseButton = new CUILoseButton(D3DXVECTOR2(465, 10), this);
 	CUITrafficLight *pTrafficLight = new CUITrafficLight(this, m_vecBlueprints.size());
 	CUIButton *pReady = new CUIReady(D3DXVECTOR2(675, 450), this);
-	CUIButton *pWarrning = new CUIWarning();
+	CUIButton *pEsc = new CUIEsc;
+	CUIWarning *pWarrning = new CUIWarning;
+
 	//CField* pField = new CField(eTileType::Sand);
 
 	//CParts* parts1 = g_pPartsManager->CreateParts("C01");
@@ -140,6 +145,7 @@ void CGameScene::Init()
 	m_vecStaticActor.push_back(wall);
 	//m_vecStaticActor.push_back(pField);
 	//m_vecStaticActor.push_back(pBwall);
+	m_pEscUI = pEsc;
 	m_pWarnning = pWarrning;
 	m_pReady = pReady;
 	m_pDebugPauseUI = pPauseButton;
@@ -187,7 +193,6 @@ void CGameScene::Render()
 		it->Render();
 	}
 	
-
 	for (CMonster *it : m_vecMonster)
 	{
 		it->Render();
@@ -205,6 +210,9 @@ void CGameScene::Render()
 	if (m_pDebugClearUI)
 		m_pDebugClearUI->Render();
 
+	if (m_pEscUI)
+		m_pEscUI->Render();
+
 	if (m_pLoadingPopup)
 		m_pLoadingPopup->Render();
 
@@ -213,6 +221,8 @@ void CGameScene::Render()
 
 	if (m_pWarnning)
 		m_pWarnning->Render();
+
+	
 
 	m_cMutex.unlock();
 }
@@ -801,6 +811,7 @@ void CGameScene::Load(string sFolder, string sStageKey, void (CGameScene::*pCall
 			CWhiteboard* Whiteboard = new CWhiteboard(pos);
 			Whiteboard->SetRotationY(rotate);
 			Whiteboard->SetScale(scale);
+			Whiteboard->SetFormula(m_vecBlueprints);
 			vecWhiteboard.push_back(Whiteboard);
 		}
 	}
@@ -887,15 +898,15 @@ void CGameScene::CheckSandDummyArea(ICollisionArea *collison)
 {
 	for (auto it : m_vecCharacters)
 	{
-		if (it->GetDummy() == false && collison->Collide(it->GetCollision())) //더미 밖에서 안으로 들어올때 들어오는곳
+		if (it->GetIsSandpile() == false && collison->Collide(it->GetCollision())) //더미 밖에서 안으로 들어올때 들어오는곳
 		{
-			it->SetDummy(true);
+			it->SetIsSandpile(true);
 
 			it->SetCC(new CCCSlowAndStop);
 		}
-		else if (it->GetDummy() && collison->Collide(it->GetCollision()) == false) // 더미밖에서 들어오는곳
+		else if (it->GetIsSandpile() && collison->Collide(it->GetCollision()) == false) // 더미밖에서 들어오는곳
 		{
-			it->SetDummy(false);
+			it->SetIsSandpile(false);
 			it->DeleteCC();
 		}
 	}
@@ -952,6 +963,22 @@ void CGameScene::DestroyPartsOnPosition(D3DXVECTOR3 pos)
 	}
 }
 
+bool CGameScene::CheckWarning()
+{
+	if (m_pWarnning == nullptr)
+		return true;
+
+	if (m_pWarnning->GetCheckFirst())
+	{
+		return m_pWarnning->GetCheckEnd();
+	}
+	else
+	{
+		g_EventManager->CallEvent(eEvent::CallWarning, NULL);
+	}
+	return false;
+}
+
 void CGameScene::SetWindDirection(float nDir)
 {
 	m_vWind = D3DXVECTOR3(0.01f * nDir, 0, 0);
@@ -992,18 +1019,6 @@ int CGameScene::IsGameClear()
 
 	return 0;
 }
-
-//bool CGameScene::IsGameLose()
-//{
-//	m_fGameTime -= g_pTimeManager->GetElapsedTime();
-//
-//	if (m_fGameTime <= 0)
-//	{
-//		return true;
-//	}
-//
-//	return false;
-//}
 
 void CGameScene::GetInteractObject(CCharacter *pCharacter)
 {
