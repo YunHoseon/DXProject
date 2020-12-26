@@ -26,7 +26,7 @@ CCharacter::CCharacter(int nPlayerNum) :
 	m_fThrowPowerUpSpeed(0.003f),
 	m_fMaxSpeed(0.2f),
 	m_pCC(nullptr),
-	m_isDummy(false),
+	m_isSandpile(false),
 	m_vDefaultPosition(0, 0, 0),
 	m_pCharge(nullptr)
 {
