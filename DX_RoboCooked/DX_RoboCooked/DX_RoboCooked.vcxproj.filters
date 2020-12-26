@@ -621,6 +621,9 @@
     <ClInclude Include="CShaderManager.h">
       <Filter>Manager</Filter>
     </ClInclude>
+    <ClInclude Include="CUIEsc.h">
+      <Filter>UI\Button\MainUI</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="stdafx.cpp">
@@ -1135,6 +1138,9 @@
     </ClCompile>
     <ClCompile Include="CShaderManager.cpp">
       <Filter>Manager</Filter>
+    </ClCompile>
+    <ClCompile Include="CUIEsc.cpp">
+      <Filter>UI\Button\MainUI</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

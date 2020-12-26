@@ -37,6 +37,7 @@ private:
 	CUIButton *m_pDebugLoseUI;
 	CUIButton *m_pDebugClearUI;
 	CUIButton *m_pDebugPauseUI;
+	CUIButton *m_pEscUI;
 	CUITrafficLight *m_pDebugTrafficLight;
 	CUILoading *m_pLoadingPopup;
 	CUIButton *m_pReady;

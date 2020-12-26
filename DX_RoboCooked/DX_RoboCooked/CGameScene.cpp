@@ -34,6 +34,7 @@
 #include "CUILoading.h"
 #include "CUIReady.h"
 #include "CUIWarning.h"
+#include "CUIEsc.h"
 
 /* ������ */
 #include <filesystem>
@@ -57,7 +58,8 @@ CGameScene::CGameScene() :
 						   m_vWind(0, 0, 0),
 						   m_fGameTime(300.0f),
 						   m_pReady(nullptr),
-						   m_pWarnning(nullptr)
+						   m_pWarnning(nullptr),
+						   m_pEscUI(nullptr)
 {
 	g_SoundManager->AddBGM("data/Sound/bgm/Tribal_Tensions.mp3");
 	g_SoundManager->PlayBGM();
@@ -111,6 +113,7 @@ CGameScene::~CGameScene()
 	SafeDelete(m_pDebugLoseUI);
 	SafeDelete(m_pReady);
 	SafeDelete(m_pWarnning);
+	SafeDelete(m_pEscUI);
 	m_cMutex.unlock();
 }
 
@@ -123,6 +126,7 @@ void CGameScene::Init()
 	CUIButton *pLoseButton = new CUILoseButton(D3DXVECTOR2(465, 10), this);
 	CUITrafficLight *pTrafficLight = new CUITrafficLight(this, m_vecBlueprints.size());
 	CUIButton *pReady = new CUIReady(D3DXVECTOR2(675, 450), this);
+	CUIButton *pEsc = new CUIEsc;
 	CUIWarning *pWarrning = new CUIWarning;
 
 	//CField* pField = new CField(eTileType::Sand);
@@ -141,7 +145,7 @@ void CGameScene::Init()
 	m_vecStaticActor.push_back(wall);
 	//m_vecStaticActor.push_back(pField);
 	//m_vecStaticActor.push_back(pBwall);
-	//m_pWarnning = pWarrning;
+	m_pEscUI = pEsc;
 	m_pWarnning = pWarrning;
 	m_pReady = pReady;
 	m_pDebugPauseUI = pPauseButton;
@@ -215,6 +219,9 @@ void CGameScene::Render()
 
 	if (m_pWarnning)
 		m_pWarnning->Render();
+
+	if (m_pEscUI)
+		m_pEscUI->Render();
 
 	m_cMutex.unlock();
 }

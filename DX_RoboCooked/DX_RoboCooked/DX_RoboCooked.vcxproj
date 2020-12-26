@@ -209,6 +209,7 @@
     <ClInclude Include="CUIControll.h" />
     <ClInclude Include="CUIControllBoard.h" />
     <ClInclude Include="CUIEndButton.h" />
+    <ClInclude Include="CUIEsc.h" />
     <ClInclude Include="CUIHeart.h" />
     <ClInclude Include="CUILight.h" />
     <ClInclude Include="CUIloadingMessageComplete.h" />
@@ -383,6 +384,7 @@
     <ClCompile Include="CUIControll.cpp" />
     <ClCompile Include="CUIControllBoard.cpp" />
     <ClCompile Include="CUIEndButton.cpp" />
+    <ClCompile Include="CUIEsc.cpp" />
     <ClCompile Include="CUIHeart.cpp" />
     <ClCompile Include="CUILight.cpp" />
     <ClCompile Include="CUIloadingMessageComplete.cpp" />
