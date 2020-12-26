@@ -138,7 +138,7 @@ void CMonsterMedusa::Update()
 		m_stSkillUsing.isUltimateSkill = true;
 		m_pInteractCenter->MonsterSkill(UltimateSkill(), UltimateSkillTime());
 
-		m_cPartsDestroyer.SetActive(m_nDestroyPartsPosition, 5.0f, 2.0f);
+		m_cPartsDestroyer.SetActive(m_nDestroyPartsPosition, 5.0f, 0.05f);
 	}
 
 	if (CheckDurationTimeFirstSkill())

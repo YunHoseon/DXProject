@@ -17,7 +17,6 @@ CPartsDestroyer::CPartsDestroyer():
 	//m_stMtl.Specular = D3DXCOLOR(0.3f, 0.3f, 0.3f, 1.0f);
 	
 	m_pSMesh = g_pStaticMeshManager->GetStaticMesh("Medusa_MagicCircle");
-	//SetScale(0.01f, 0.01f, 0.01f);
 }
 
 CPartsDestroyer::~CPartsDestroyer()
@@ -73,10 +72,15 @@ void CPartsDestroyer::Render()
 
 void CPartsDestroyer::SetActive(D3DXVECTOR3& vPos, float fDuration, float fRadius)
 {
-	D3DXMATRIXA16 matScale, matTrans;
-	D3DXMatrixScaling(&matScale, fRadius, fRadius, fRadius);
-	D3DXMatrixTranslation(&matTrans, vPos.x, vPos.y, vPos.z);
-	m_matWorld = matScale * matTrans;
+	D3DXMATRIXA16 matS, matR, matT;
+	D3DXMatrixIdentity(&matS);
+	D3DXMatrixIdentity(&matR);
+	D3DXMatrixIdentity(&matT);
+
+	D3DXMatrixRotationX(&matR, 0);
+	D3DXMatrixTranslation(&matT, vPos.x, vPos.y + 1.0f, vPos.z);
+	D3DXMatrixScaling(&matS, fRadius, fRadius, fRadius);
+	m_matWorld = matS * matR * matT;
 
 	g_EventManager->Attach(eEvent::Tick, this);
 	m_fDuration = fDuration;
