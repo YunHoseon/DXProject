@@ -18,7 +18,6 @@ protected:
 	D3DXMATRIXA16		m_matT;
 	D3DXMATRIXA16		m_matWorld;
 	float				m_fRotY;
-	float				m_fRotX;
 	
 	// for physics
 	ICollisionArea*		m_pCollision;
@@ -47,8 +46,6 @@ public:
 	virtual const D3DXVECTOR3& GetPosition() { return m_vPosition; }
 	virtual void SetPosition(D3DXVECTOR3 vPosition);
 	virtual void SetPosition(float x, float y, float z);
-
-	virtual void SetRotationX(float rot);
 	virtual void SetRotationY(float rot);
 
 	// for physics
