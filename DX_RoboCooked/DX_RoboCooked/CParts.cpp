@@ -8,7 +8,7 @@
 CParts::CParts(string sPartsID, string sFormula, float fMass)
 	: m_vGrabPosition(nullptr), m_isMoveParts(false),
 	  m_eLevel(eCombinatorPartsLevel::ONE), m_vCombinatorPosition(0, 0, 0), m_pPartsCombinator(NULL),
-	  m_sPartsID(sPartsID), m_sFormula(sFormula), m_vOnCombinatorPosition(0, 0, 0), m_fMaxSpeed(0.2f), m_DestroyTrashTime(2.5f)
+	  m_sPartsID(sPartsID), m_sFormula(sFormula), m_vOnCombinatorPosition(0, 0, 0), m_fMaxSpeed(0.4f), m_DestroyTrashTime(2.5f)
 {
 	m_fMass = fMass;
 	switch (m_sPartsID[0])

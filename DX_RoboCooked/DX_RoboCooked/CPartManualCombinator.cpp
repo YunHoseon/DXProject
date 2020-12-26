@@ -120,8 +120,9 @@ CParts* CPartManualCombinator::Make()
 
 void CPartManualCombinator::Interact(CCharacter* pCharacter)
 {
-	if (m_pParts == nullptr || pCharacter->GetPlayerState() != ePlayerState::None ||
-		m_eCombinatorActionState == eCombinatorActionState::Unusable)
+	if (m_pParts == nullptr || pCharacter->GetPlayerState() != ePlayerState::None)
+		return;
+	if (m_pParts->GetPartsID() == "D00")
 		return;
 
 	//pCharacter->SetPlayerState(ePlayerState::Grab);
@@ -129,7 +130,7 @@ void CPartManualCombinator::Interact(CCharacter* pCharacter)
 	m_pParts->SetGrabPosition(&pCharacter->GetGrabPartsPosition());
 	m_pParts->GetCollision()->SetActive(true);
 	m_pParts = nullptr;
-
+	m_eCombinatorActionState = eCombinatorActionState::Usable;
 }
 
 void CPartManualCombinator::PartsInteract(CParts* pParts)
