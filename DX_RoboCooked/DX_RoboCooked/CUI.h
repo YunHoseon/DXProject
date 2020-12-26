@@ -96,7 +96,7 @@ public:
 	INT GetlistUIchildrenSize() { return m_listUIchildren.size(); }
 
 	eUIState GetUIState() { return m_eUIState; }
-	void SetUIState(eUIState st) { m_eUIState = st; }
+	void SetUIState(eUIState st);
 
 	eUIState GetUIPastState() { return m_eUIPastState; }
 	void SetUIPastState(eUIState st) 

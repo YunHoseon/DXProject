@@ -281,6 +281,15 @@ void CUI::ButtonEvent(eBtnEvent btnEvent)
 	}
 }
 
+void CUI::SetUIState(eUIState st)
+{
+	m_eUIState = st;
+	for (CUI* it : m_listUIchildren)
+	{
+		it->SetUIState(st);
+	}
+}
+
 void CUI::InitUIState()
 {
 	for (CUI* it : m_listUIchildren)

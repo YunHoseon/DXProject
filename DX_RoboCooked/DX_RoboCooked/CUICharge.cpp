@@ -35,12 +35,12 @@ void CUICharge::Setup()
 	AddChild(m_pChargeThree);
 	AddChild(m_pChargeFour);
 	AddChild(m_pChargeFive);
-
+	SetUIState(eUIState::Target);
 }
 
 void CUICharge::UpdateCharging(float fThrowPower, float fMaxThrowPower)
 {
-	m_vChargeUIPosition = D3DXVECTOR3(m_pTargetPosition->x, m_pTargetPosition->y + 2.4f, m_pTargetPosition->z);
+	m_vChargeUIPosition = *m_pTargetPosition;
 
 	SetChildActive(false);
 

@@ -123,7 +123,7 @@ void CUITexture::RenderTexture(eUIState state)
 		m_Sprite->Draw(m_DisabledTexture,
 			&rc,
 			&D3DXVECTOR3(m_DisabledInfo.Width * 0.5f, m_DisabledInfo.Height * 0.5f, 0),
-			&D3DXVECTOR3(m_vPosition.x, m_vPosition.y, 0),
+			&D3DXVECTOR3(m_vPosition.x, m_vPosition.y - 100.0f, 0),
 			D3DCOLOR_ARGB(100, 255, 255, 255));
 	}
 
