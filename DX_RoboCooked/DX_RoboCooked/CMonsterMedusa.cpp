@@ -102,7 +102,7 @@ void CMonsterMedusa::Render()
 void CMonsterMedusa::Update()
 {
 
-	if (FirstSkillTriggered())
+	if (FirstSkillTriggered() && m_pInteractCenter->CheckWarning())
 	{
 		m_stSkillUsing.FirstSkillProperty = FirstSkill();
 		m_stSkillUsing.isFirstSkill = true;
@@ -111,7 +111,7 @@ void CMonsterMedusa::Update()
 		m_pSkillAnim_1->SetAnimationIndexBlend(0);
 	}
 
-	if (SecondSkillTriggered())
+	if (SecondSkillTriggered() && m_pInteractCenter->CheckWarning())
 	{
 		m_stSkillUsing.SecondSkillProperty = SecondSkill();
 		m_stSkillUsing.isSecondSkill = true;
@@ -132,7 +132,7 @@ void CMonsterMedusa::Update()
 		}
 	}
 
-	if (UltimateSkillTriggered())
+	if (UltimateSkillTriggered() && m_pInteractCenter->CheckWarning())
 	{
 		m_stSkillUsing.UltimateSkillProperty = UltimateSkill();
 		m_stSkillUsing.isUltimateSkill = true;

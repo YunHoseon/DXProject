@@ -123,7 +123,8 @@ void CGameScene::Init()
 	CUIButton *pLoseButton = new CUILoseButton(D3DXVECTOR2(465, 10), this);
 	CUITrafficLight *pTrafficLight = new CUITrafficLight(this, m_vecBlueprints.size());
 	CUIButton *pReady = new CUIReady(D3DXVECTOR2(675, 450), this);
-	CUIButton *pWarrning = new CUIWarning();
+	CUIWarning *pWarrning = new CUIWarning;
+
 	//CField* pField = new CField(eTileType::Sand);
 
 	//CParts* parts1 = g_pPartsManager->CreateParts("C01");
@@ -140,6 +141,7 @@ void CGameScene::Init()
 	m_vecStaticActor.push_back(wall);
 	//m_vecStaticActor.push_back(pField);
 	//m_vecStaticActor.push_back(pBwall);
+	//m_pWarnning = pWarrning;
 	m_pWarnning = pWarrning;
 	m_pReady = pReady;
 	m_pDebugPauseUI = pPauseButton;
@@ -952,6 +954,22 @@ void CGameScene::DestroyPartsOnPosition(D3DXVECTOR3 pos)
 	}
 }
 
+bool CGameScene::CheckWarning()
+{
+	if (m_pWarnning == nullptr)
+		return true;
+
+	if (m_pWarnning->GetCheckFirst())
+	{
+		return m_pWarnning->GetCheckEnd();
+	}
+	else
+	{
+		g_EventManager->CallEvent(eEvent::CallWarning, NULL);
+	}
+	return false;
+}
+
 void CGameScene::SetWindDirection(float nDir)
 {
 	m_vWind = D3DXVECTOR3(0.01f * nDir, 0, 0);
@@ -992,18 +1010,6 @@ int CGameScene::IsGameClear()
 
 	return 0;
 }
-
-//bool CGameScene::IsGameLose()
-//{
-//	m_fGameTime -= g_pTimeManager->GetElapsedTime();
-//
-//	if (m_fGameTime <= 0)
-//	{
-//		return true;
-//	}
-//
-//	return false;
-//}
 
 void CGameScene::GetInteractObject(CCharacter *pCharacter)
 {

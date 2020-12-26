@@ -10,6 +10,7 @@ class CInteractiveActor;
 class CParts;
 class CCharacter;
 class CUIButton;
+class CUIWarning;
 class CBlueprint;
 class CMonster;
 class CTornado;
@@ -39,7 +40,7 @@ private:
 	CUITrafficLight *m_pDebugTrafficLight;
 	CUILoading *m_pLoadingPopup;
 	CUIButton *m_pReady;
-	CUIButton *m_pWarnning;
+	CUIWarning *m_pWarnning;
 
 	static std::mutex m_cMutex;
 	string m_sStageKey;
@@ -72,6 +73,7 @@ public:
 	bool CheckDistanceToSelectedObject(D3DXVECTOR3 pos) override;
 	void CheckSandDummyArea(ICollisionArea *collison) override;
 	void DestroyPartsOnPosition(D3DXVECTOR3 pos) override;
+	bool CheckWarning() override;
 
 	CCrowdControl *ChooseCC(eSkill skill);
 	void SetCCToRandomCharacter(eSkill skill, float fDuration);

@@ -84,7 +84,7 @@ void CMonsterHarpy::DeleteTornado()
 void CMonsterHarpy::Update()
 {
 
-	if (FirstSkillTriggered())
+	if (FirstSkillTriggered() && m_pInteractCenter->CheckWarning() )
 	{
 		m_stSkillUsing.FirstSkillProperty = FirstSkill();
 		m_stSkillUsing.isFirstSkill = true;
@@ -93,7 +93,7 @@ void CMonsterHarpy::Update()
 		m_cSkillAnim_1.SetAnimation();
 	}
 
-	if (SecondSkillTriggered())
+	if (SecondSkillTriggered() && m_pInteractCenter->CheckWarning())
 	{
 		m_stSkillUsing.SecondSkillProperty = SecondSkill();
 		m_stSkillUsing.isSecondSkill = true;
@@ -112,7 +112,7 @@ void CMonsterHarpy::Update()
 		}
 	}
 
-	if (UltimateSkillTriggered())
+	if (UltimateSkillTriggered() && m_pInteractCenter->CheckWarning())
 	{
 		CRandomNumberGenerator r;
 		m_nWindDir = r.GenInt(0, 1) ? -1 : 1;
