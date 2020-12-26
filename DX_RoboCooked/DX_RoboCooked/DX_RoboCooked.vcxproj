@@ -162,6 +162,7 @@
     <ClInclude Include="CCCSpeedDown.h" />
     <ClInclude Include="CCCStopMove.h" />
     <ClInclude Include="CCrowdControl.h" />
+    <ClInclude Include="CDashShadow.h" />
     <ClInclude Include="CHarpyWing.h" />
     <ClInclude Include="CHarpyWing_L.h" />
     <ClInclude Include="CHarpyWing_R.h" />
@@ -336,6 +337,7 @@
     <ClCompile Include="CCCSpeedDown.cpp" />
     <ClCompile Include="CCCStopMove.cpp" />
     <ClCompile Include="CCrowdControl.cpp" />
+    <ClCompile Include="CDashShadow.cpp" />
     <ClCompile Include="CHarpyWing.cpp" />
     <ClCompile Include="CHarpyWing_L.cpp" />
     <ClCompile Include="CHarpyWing_R.cpp" />

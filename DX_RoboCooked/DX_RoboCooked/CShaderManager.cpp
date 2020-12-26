@@ -24,7 +24,7 @@ LPD3DXEFFECT CShaderManager::GetShader(char * szFullPath)
 		D3DXCreateEffectFromFileA(g_pD3DDevice, szFullPath,
 			NULL, NULL, dwShaderFlags, NULL, &m_mapShader[szFullPath], NULL);
 	}
-	m_mapShader[szFullPath]->AddRef();
+	//m_mapShader[szFullPath]->AddRef();
 	return m_mapShader[szFullPath];
 }
 

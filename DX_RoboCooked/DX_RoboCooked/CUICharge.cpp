@@ -44,27 +44,27 @@ void CUICharge::UpdateCharging(float fThrowPower, float fMaxThrowPower)
 
 	float temp = fMaxThrowPower * 0.2f;
 
-	if (temp * 1 > fThrowPower)
+	if (fThrowPower < temp * 1)
 	{
 		m_pChargeZero->SetActive(true);
 	}
-	else if (temp * 2 > fThrowPower)
+	else if (fThrowPower < temp * 2)
 	{
 		m_pChargeOne->SetActive(true);
 	}
-	else if (temp * 3 > fThrowPower)
+	else if (fThrowPower < temp * 3)
 	{
 		m_pChargeTwo->SetActive(true);
 	}
-	else if (temp * 4 > fThrowPower)
+	else if (fThrowPower < temp * 4)
 	{
 		m_pChargeThree->SetActive(true);
 	}
-	else if (temp * 5 > fThrowPower)
+	else if (fThrowPower < temp * 5 - EPSILON)
 	{
 		m_pChargeFour->SetActive(true);
 	}
-	else if (temp * 6 > fThrowPower)
+	else
 	{
 		m_pChargeFive->SetActive(true);
 	}

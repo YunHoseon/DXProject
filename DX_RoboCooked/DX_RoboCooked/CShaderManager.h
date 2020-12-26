@@ -13,7 +13,7 @@ public:
 	~CShaderManager();
 
 	LPD3DXEFFECT GetShader(char* szFullPath);
-	LPD3DXEFFECT GetShader(string &sFullPath);
+	//LPD3DXEFFECT GetShader(string &sFullPath);
 	void Destroy();
 };
 

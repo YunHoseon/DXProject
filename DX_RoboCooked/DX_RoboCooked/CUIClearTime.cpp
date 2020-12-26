@@ -25,7 +25,7 @@ void CUIClearTime::Setup()
 
 	if (m_sText.empty())
 		return;
-	m_pText = new CUIText(m_sText, m_vTextPosition, m_eType);
+	m_pText = new CUIText(m_sText, m_vTextPosition, 500, 200, m_eType);
 
 
 }

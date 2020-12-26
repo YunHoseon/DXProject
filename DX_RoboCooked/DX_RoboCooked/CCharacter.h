@@ -2,6 +2,7 @@
 #include "CParts.h"
 
 
+class CDashShadow;
 class ICollisionArea;
 class CGameScene;
 class CCrowdControl;
@@ -54,6 +55,7 @@ protected:
 
 	CUICharge*			m_pCharge;
 
+	CDashShadow*		m_pDashShadow;
 public:
 	CCharacter(int nPlayerNum);
 	virtual ~CCharacter();
