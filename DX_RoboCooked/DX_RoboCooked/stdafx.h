@@ -254,6 +254,7 @@ extern string CalSec(int sec);
 #include "CStaticMeshManager.h"
 #include "CThreadManager.h"
 #include "CSaveLoadManager.h"
+#include "CShaderManager.h"
 #include "CRandomNumberGenerator.h"
 
 #define __SLASH(x) /##x
