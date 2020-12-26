@@ -8,12 +8,14 @@ public:
 	CPartsDestroyer();
 	virtual ~CPartsDestroyer();
 private:
-	LPD3DXMESH		m_pMesh;
-	D3DMATERIAL9	m_stMtl;
+	CStaticMesh*	m_pSMesh;
+	//LPD3DXMESH		m_pMesh;
+	//D3DMATERIAL9	m_stMtl;
 	LPDIRECT3DTEXTURE9 m_pTexture;
 	float			m_fDuration;
 	float			m_fElapseTime;
 	bool			m_isRenderable;
+
 	D3DXMATRIXA16	m_matWorld;
 
 	CUIAcidRain		m_cRain;

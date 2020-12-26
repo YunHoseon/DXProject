@@ -73,6 +73,8 @@ void CStaticMeshManager::Load()
 	vecData.push_back(data);
 	data.fileName = "harpy_skill_2_2.X"; data.objectName = "Harpy_Wing_R"; data.filePath = "data/model/monster";
 	vecData.push_back(data);
+	data.fileName = "medusa_skill_ult.X"; data.objectName = "Medusa_MagicCircle"; data.filePath = "data/model/monster";
+	vecData.push_back(data);
 	
 	for (ST_StaticMesh_Data datas : vecData)
 	{

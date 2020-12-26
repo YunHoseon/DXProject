@@ -156,7 +156,8 @@ void CPartManualCombinator::PartsInteract(CParts* pParts)
 void CPartManualCombinator::CombineParts()
 {
 	m_fElapsedTime += g_pTimeManager->GetElapsedTime();
-	g_SoundManager->PlaySFX("machine_run");
+	if (!g_SoundManager->IsPlayingSFX("machine_run"))
+		g_SoundManager->PlaySFX("machine_run");
 	if(m_pUICombinatorGauge)
 		m_pUICombinatorGauge->UpdateCombinator(m_fElapsedTime, m_fCombineTime);
 
