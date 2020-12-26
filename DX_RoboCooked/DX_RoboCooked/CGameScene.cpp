@@ -193,7 +193,6 @@ void CGameScene::Render()
 		it->Render();
 	}
 	
-
 	for (CMonster *it : m_vecMonster)
 	{
 		it->Render();
@@ -899,15 +898,15 @@ void CGameScene::CheckSandDummyArea(ICollisionArea *collison)
 {
 	for (auto it : m_vecCharacters)
 	{
-		if (it->GetDummy() == false && collison->Collide(it->GetCollision())) //더미 밖에서 안으로 들어올때 들어오는곳
+		if (it->GetIsSandpile() == false && collison->Collide(it->GetCollision())) //더미 밖에서 안으로 들어올때 들어오는곳
 		{
-			it->SetDummy(true);
+			it->SetIsSandpile(true);
 
 			it->SetCC(new CCCSlowAndStop);
 		}
-		else if (it->GetDummy() && collison->Collide(it->GetCollision()) == false) // 더미밖에서 들어오는곳
+		else if (it->GetIsSandpile() && collison->Collide(it->GetCollision()) == false) // 더미밖에서 들어오는곳
 		{
-			it->SetDummy(false);
+			it->SetIsSandpile(false);
 			it->DeleteCC();
 		}
 	}
