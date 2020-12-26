@@ -39,8 +39,8 @@ public:
 
 	/*getter setter*/
 	bool GetIsCompleted() { return m_isCompleted; }
-
 	void SetPosition(D3DXVECTOR3 vPosition) override;
 	void SetPosition(float x, float y, float z) override;
+	string GetRightPartsID() { return m_sRightPartsID; }
 };
 

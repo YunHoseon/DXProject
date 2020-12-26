@@ -495,12 +495,6 @@
     <ClInclude Include="CUIWind.h">
       <Filter>UI\Effect</Filter>
     </ClInclude>
-    <ClInclude Include="CUIWhiteboard.h">
-      <Filter>UI\Button\MainUI</Filter>
-    </ClInclude>
-    <ClInclude Include="CUISubWhiteboard.h">
-      <Filter>UI\Button\SubUI</Filter>
-    </ClInclude>
     <ClInclude Include="CUICharge.h">
       <Filter>UI\Button\MainUI</Filter>
     </ClInclude>
@@ -623,6 +617,21 @@
     </ClInclude>
     <ClInclude Include="CUIEsc.h">
       <Filter>UI\Button\MainUI</Filter>
+    </ClInclude>
+    <ClInclude Include="CUI2LevelCombinatorImage.h">
+      <Filter>UI\Button\SubUI</Filter>
+    </ClInclude>
+    <ClInclude Include="CUI1LevelCombinatorImage.h">
+      <Filter>UI\Button\SubUI</Filter>
+    </ClInclude>
+    <ClInclude Include="CUI1LevelCombination.h">
+      <Filter>UI\Button\SubUI</Filter>
+    </ClInclude>
+    <ClInclude Include="CUIWhiteboard.h">
+      <Filter>UI\Button\SubUI</Filter>
+    </ClInclude>
+    <ClInclude Include="CUI2LevelCombination.h">
+      <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -1013,12 +1022,6 @@
     <ClCompile Include="CUIWind.cpp">
       <Filter>UI\Effect</Filter>
     </ClCompile>
-    <ClCompile Include="CUIWhiteboard.cpp">
-      <Filter>UI\Button\MainUI</Filter>
-    </ClCompile>
-    <ClCompile Include="CUISubWhiteboard.cpp">
-      <Filter>UI\Button\SubUI</Filter>
-    </ClCompile>
     <ClCompile Include="CUICharge.cpp">
       <Filter>UI\Button\MainUI</Filter>
     </ClCompile>
@@ -1141,6 +1144,21 @@
     </ClCompile>
     <ClCompile Include="CUIEsc.cpp">
       <Filter>UI\Button\MainUI</Filter>
+    </ClCompile>
+    <ClCompile Include="CUI1LevelCombination.cpp">
+      <Filter>UI\Button\SubUI</Filter>
+    </ClCompile>
+    <ClCompile Include="CUI1LevelCombinatorImage.cpp">
+      <Filter>UI\Button\SubUI</Filter>
+    </ClCompile>
+    <ClCompile Include="CUI2LevelCombinatorImage.cpp">
+      <Filter>UI\Button\SubUI</Filter>
+    </ClCompile>
+    <ClCompile Include="CUIWhiteboard.cpp">
+      <Filter>UI\Button\SubUI</Filter>
+    </ClCompile>
+    <ClCompile Include="CUI2LevelCombination.cpp">
+      <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

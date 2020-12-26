@@ -211,6 +211,9 @@ void CGameScene::Render()
 	if (m_pDebugClearUI)
 		m_pDebugClearUI->Render();
 
+	if (m_pEscUI)
+		m_pEscUI->Render();
+
 	if (m_pLoadingPopup)
 		m_pLoadingPopup->Render();
 
@@ -220,8 +223,7 @@ void CGameScene::Render()
 	if (m_pWarnning)
 		m_pWarnning->Render();
 
-	if (m_pEscUI)
-		m_pEscUI->Render();
+	
 
 	m_cMutex.unlock();
 }
@@ -810,6 +812,7 @@ void CGameScene::Load(string sFolder, string sStageKey, void (CGameScene::*pCall
 			CWhiteboard* Whiteboard = new CWhiteboard(pos);
 			Whiteboard->SetRotationY(rotate);
 			Whiteboard->SetScale(scale);
+			Whiteboard->SetFormula(m_vecBlueprints);
 			vecWhiteboard.push_back(Whiteboard);
 		}
 	}
