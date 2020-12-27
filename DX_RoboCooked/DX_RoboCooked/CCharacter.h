@@ -1,6 +1,8 @@
 #pragma once
 #include "CParts.h"
 
+
+class CDashShadow;
 class ICollisionArea;
 class CGameScene;
 class CCrowdControl;
@@ -32,12 +34,12 @@ protected:
 	CParts*				m_pParts;
 
 	D3DXVECTOR3			m_vDefaultPosition;
-	// Å°´Ù¿î °ü·Ã.
+	// Å°ï¿½Ù¿ï¿½ ï¿½ï¿½ï¿½ï¿½.
 	array<float, 3>		m_arrElapsedTime;
 	array<float, 3>		m_arrCoolDown;
 	array<bool, 3>		m_arrKeyDown;
 	bool				m_isMoveKeyDown;
-	// ¼öÁ¤Áß
+	// ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 	const ST_PLAYER_INPUTKEY* m_pInputKey;
 	//LPD3DXMESH			m_pMesh;
 	//D3DMATERIAL9		m_stMtl;
@@ -52,6 +54,7 @@ protected:
 	CCrowdControl*		m_pCC;
 	CUICharge*			m_pCharge;
 
+	CDashShadow*		m_pDashShadow;
 public:
 	CCharacter(int nPlayerNum);
 	virtual ~CCharacter();

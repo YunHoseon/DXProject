@@ -2,11 +2,10 @@
 #include "CUIText.h"
 
 
-CUIText::CUIText(string ptext, D3DXVECTOR2 vPos, eTextType type)
+CUIText::CUIText(string ptext, D3DXVECTOR2 vPos, int nWidth, int nHeight, eTextType type) :
+	m_eType(type), m_sText(ptext)
 {
-	m_sText = ptext;
-	m_eType = type;
-	SetRect(&m_rcText, vPos.x, vPos.y,500 , 200);
+	SetRect(&m_rcText, vPos.x, vPos.y, nWidth, nHeight);
 }
 
 
@@ -21,36 +20,29 @@ void CUIText::Update()
 
 void CUIText::Render()
 {
+	LPD3DXFONT pFont;
 
-	if (m_eType == eTextType::ClearText)
+	switch (m_eType)
 	{
-		LPD3DXFONT pFont = g_pFontManager->GetFont(g_pFontManager->CLEARTIME);
-		pFont->DrawTextA(NULL,
-			m_sText.c_str(),
-			m_sText.length(),
-			&m_rcText,
-			DT_LEFT | DT_TOP | DT_NOCLIP,
-			D3DCOLOR_XRGB(0, 0, 0));
+	case eTextType::ClearText:
+		pFont = g_pFontManager->GetFont(g_pFontManager->CLEARTIME);
+		break;
+	case eTextType::SelectText:
+		pFont = g_pFontManager->GetFont(g_pFontManager->SELECT);
+		break;
+	case eTextType::UpdateText:
+		pFont = g_pFontManager->GetFont(g_pFontManager->UPDATE);
+		break;
+	default:
+		pFont = g_pFontManager->GetFont(g_pFontManager->UPDATE);
+		break;
 	}
-	else if (m_eType == eTextType::SelectText)
-	{
-		LPD3DXFONT pFont = g_pFontManager->GetFont(g_pFontManager->SELECT);
-		pFont->DrawTextA(NULL,
-			m_sText.c_str(),
-			m_sText.length(),
-			&m_rcText,
-			DT_LEFT | DT_TOP | DT_NOCLIP,
-			D3DCOLOR_XRGB(0, 0, 0));
-	}
-	else if (m_eType == eTextType::UpdateText)
-	{
-		LPD3DXFONT pFont = g_pFontManager->GetFont(g_pFontManager->UPDATE);
-		pFont->DrawTextA(NULL,
-			m_sText.c_str(),
-			m_sText.length(),
-			&m_rcText,
-			DT_LEFT | DT_TOP | DT_NOCLIP,
-			D3DCOLOR_XRGB(0, 0, 0));
-	}
+	
+	pFont->DrawTextA(NULL,
+		m_sText.c_str(),
+		m_sText.length(),
+		&m_rcText,
+		DT_LEFT | DT_TOP | DT_NOCLIP,
+		D3DCOLOR_XRGB(0, 0, 0));
 	
 }

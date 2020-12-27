@@ -17,7 +17,7 @@ private:
 	RECT		m_rcText;
 	eTextType	m_eType;
 public:
-	CUIText(string ptext , D3DXVECTOR2 vPos, eTextType type);
+	CUIText(string ptext , D3DXVECTOR2 vPos, int nWidth = 500, int nHeight = 200, eTextType type = eTextType::UpdateText);
 	~CUIText();
 
 	void Update() override;

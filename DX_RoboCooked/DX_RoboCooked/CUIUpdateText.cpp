@@ -16,5 +16,5 @@ CUIUpdateText::~CUIUpdateText()
 
 void CUIUpdateText::Setup()
 {
-	m_pText = new CUIText("Update...", m_vTextPosition, eTextType::UpdateText);
+	m_pText = new CUIText("Update...", m_vTextPosition, 500, 200, eTextType::UpdateText);
 }

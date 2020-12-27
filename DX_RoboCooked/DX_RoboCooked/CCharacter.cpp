@@ -4,6 +4,7 @@
 #include "ICollisionArea.h"
 #include "CCrowdControl.h"
 #include "CCCNone.h"
+#include "CDashShadow.h"
 #include "CSkinnedMesh.h"
 #include "CUICharge.h"
 
@@ -34,6 +35,7 @@ CCharacter::CCharacter(int nPlayerNum) :
 
 	m_pCC = new CCCNone;
 	m_pCharge = new CUICharge(&m_vPosition);
+	m_pDashShadow = new CDashShadow;
 }
 
 CCharacter::~CCharacter()
@@ -44,6 +46,7 @@ CCharacter::~CCharacter()
 	SafeDelete(m_pSkinnedMesh);
 	SafeDelete(m_pInteractCollision);
 	SafeDelete(m_pCharge);
+	SafeDelete(m_pDashShadow);
 }
 
 void CCharacter::Render()
@@ -62,6 +65,9 @@ void CCharacter::Render()
 
 	if (m_pCC)
 		m_pCC->Render();
+
+	if (m_pDashShadow)
+		m_pDashShadow->Render();
 }
 
 void CCharacter::Update()
@@ -81,6 +87,8 @@ void CCharacter::Update()
 		m_pInteractCollision->Update();
 	if (m_pCollision)
 		m_pCollision->Update();
+	if (m_pDashShadow)
+		m_pDashShadow->Update();
 }
 
 bool CCharacter::OnEvent(eEvent eEvent, void *_value)
@@ -241,7 +249,7 @@ void CCharacter::PressKey(void *_value)
 			m_arrKeyDown[2] = true;
 			if (CurrentTime - m_arrElapsedTime[2] > m_arrCoolDown[2])
 			{
-				//��� -> ����� �����ؾ���
+				//dash
 				D3DXVECTOR3 jump = m_vDirection;
 				jump.y += .2f;
 				D3DXVec3Normalize(&jump, &jump);
@@ -249,6 +257,9 @@ void CCharacter::PressKey(void *_value)
 				SetAcceleration(jump * 0.4f * TimeRevision);
 				g_SoundManager->PlaySFX("dash");
 				m_arrElapsedTime[2] = CurrentTime;
+				D3DXMATRIXA16 localmat = *m_pSkinnedMesh->GetTransform();
+				D3DXMatrixMultiply(&localmat, &localmat, &m_matWorld);
+				m_pDashShadow->SetAnimation(&localmat);
 			}
 			//_DEBUG_COMMENT cout << "current time : " << g_pTimeManager->GetElapsedTime() << endl;
 			_DEBUG_COMMENT cout << "cool down : " << CurrentTime - m_arrElapsedTime[2] << endl;
@@ -351,7 +362,7 @@ void CCharacter::Move()
 	data.fDistance = D3DXVec3Length(&m_vVelocity);
 	g_EventManager->CallEvent(eEvent::TravelDistance, (void *)&data);
 
-	if (m_vPosition.y < -100)
+	if (m_vPosition.y < -50)
 		Reset();
 
 	D3DXMatrixTranslation(&m_matT, m_vPosition.x, m_vPosition.y, m_vPosition.z);

@@ -58,8 +58,8 @@ void CStaticMeshManager::Load()
 	vecData.push_back(data);
 	data.fileName = "flowsand.X"; data.objectName = "FlowSand"; data.filePath = "data/model/tile";
 	vecData.push_back(data);		
-	data.fileName = "flowsand_upper.X"; data.objectName = "FlowSand_Upper"; data.filePath = "data/model/tile";
-	vecData.push_back(data);
+	//data.fileName = "flowsand_upper.X"; data.objectName = "FlowSand_Upper"; data.filePath = "data/model/tile";
+	//vecData.push_back(data);
 	data.fileName = "water.X"; data.objectName = "Water"; data.filePath = "data/model/tile";
 	vecData.push_back(data);
 	data.fileName = "soil.X"; data.objectName = "Soil"; data.filePath = "data/model/tile";
@@ -73,7 +73,12 @@ void CStaticMeshManager::Load()
 	vecData.push_back(data);
 	data.fileName = "harpy_skill_2_2.X"; data.objectName = "Harpy_Wing_R"; data.filePath = "data/model/monster";
 	vecData.push_back(data);
-	data.fileName = "medusa_skill_ult.X"; data.objectName = "Medusa_MagicCircle"; data.filePath = "data/model/monster";
+
+	data.fileName = "chara_1p.X"; data.objectName = "Character"; data.filePath = "data/model/character";
+	vecData.push_back(data);
+	//data.fileName = "Sphere.X"; data.objectName = "Sphere"; data.filePath = "data/model/object";
+	//vecData.push_back(data);
+	data.fileName = "medusa_skill_3.X"; data.objectName = "Medusa_MagicCircle"; data.filePath = "data/model/monster";
 	vecData.push_back(data);
 	
 	for (ST_StaticMesh_Data datas : vecData)
