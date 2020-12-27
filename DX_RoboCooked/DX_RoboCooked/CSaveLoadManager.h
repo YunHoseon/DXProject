@@ -17,6 +17,8 @@ public:
 	json& GetStageData(int nIndex);
 	json& GetStageData(string sKey);
 	json& GetSaveData();
+	string GetStageIDByIndex(int nIndex);
+
 
 	int GetMaxIndex();
 	int GetDataSize();

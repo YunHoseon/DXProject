@@ -14,7 +14,6 @@ private:
 	CUIChargeBoard*		m_pGaugeThree;
 	CUIChargeBoard*		m_pGaugeTwo;
 	CUIChargeBoard*		m_pGaugeOne;
-	CUIChargeBoard*		m_pGaugeZero;
 
 	D3DXVECTOR3			m_vCombinatorUIPosition;
 

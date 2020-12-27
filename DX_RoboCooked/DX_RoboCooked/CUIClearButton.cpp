@@ -50,7 +50,7 @@ void CUIClearButton::Setup()
 	CUI* clearTextUI = new CUIClearTime(D3DXVECTOR2(m_vPosition.x + 335, m_vPosition.y + 300) , D3DXVECTOR2(m_vPosition.x + 350, m_vPosition.y + 400) , sTime, eTextType::ClearText);
 	board->AddChild(clearTextUI);
 
-	CUI* startBtn = new CUIStartButton(D3DXVECTOR2(m_vPosition.x + 250, m_vPosition.y + 525), eBtnEvent::None);
+	CUI* startBtn = new CUIStartButton(D3DXVECTOR2(m_vPosition.x + 250, m_vPosition.y + 525), eBtnEvent::ClearNextStage);
 	board->AddChild(startBtn);
 
 	CUI* mainBtn = new CUIMainButton(D3DXVECTOR2(m_vPosition.x + 550, m_vPosition.y + 525), eBtnEvent::ClearMain);
@@ -77,6 +77,7 @@ bool CUIClearButton::OnEvent(eEvent eEvent, void * _value)
 		GoToMain();
 		break;
 	case eEvent::ClearNextStage:
+		NextStage();
 		break;
 	case eEvent::ClearSetTime:
 		SetTimeEvent(_value);

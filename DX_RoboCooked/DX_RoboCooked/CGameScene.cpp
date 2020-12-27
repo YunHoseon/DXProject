@@ -1004,9 +1004,9 @@ void CGameScene::DeleteCC()
 
 int CGameScene::IsGameClear()
 {
-	if (m_fGameTime <= 0)
+	if (m_fGameTime <= 280)
 	{
-		return 2; //실패
+		return 1; //실패
 	}
 
 	for (CBlueprint *it : m_vecBlueprints)

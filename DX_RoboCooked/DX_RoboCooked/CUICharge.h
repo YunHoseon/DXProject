@@ -1,7 +1,6 @@
 #pragma once
 #include "CUIButton.h"
 
-class CUIChargeZero;
 class CUIChargeOne;
 class CUIChargeTwo;
 class CUIChargeThree;
@@ -18,7 +17,6 @@ private:
 	CUIChargeBoard*		m_pChargeThree;
 	CUIChargeBoard*		m_pChargeTwo;
 	CUIChargeBoard*		m_pChargeOne;
-	CUIChargeBoard*		m_pChargeZero;
 
 	D3DXVECTOR3			m_vChargeUIPosition;
 

@@ -83,6 +83,29 @@ void CUIButton::GoToMain()
 	}
 }
 
+void CUIButton::NextStage()
+{
+	if (m_pInteractCenter == nullptr)
+		return;
+
+	int iTemp = g_SaveLoadManager->GetIndexByKey(m_pInteractCenter->GetSceneID()) + 1;
+	if (iTemp > g_SaveLoadManager->GetMaxIndex())
+	{
+		iTemp = 0;
+	}
+
+	CGameScene* scene = new CGameScene;
+
+	g_pThreadManager->AddThread(thread(&CGameScene::Load, scene, "data/js", g_SaveLoadManager->GetStageIDByIndex(iTemp), &CGameScene::Init));
+
+	CScene* pBeforeScene = g_SceneManager->SetCurrentScene(scene);
+	if (pBeforeScene)
+	{
+		g_pThreadManager->AddThread(thread([pBeforeScene]() { delete pBeforeScene; }));
+	}
+
+}
+
 void CUIButton::AddChild(CUI * component)
 {
 	this->m_listUIchildren.push_back(component);

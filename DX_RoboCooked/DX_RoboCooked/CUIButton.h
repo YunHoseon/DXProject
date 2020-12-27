@@ -26,6 +26,7 @@ public:
 	virtual void SetPosition(float x, float y) override;
 	virtual void ResetGame();
 	virtual void GoToMain();
+	virtual void NextStage();
 
 public:
 	virtual void AddChild(CUI *component) override;

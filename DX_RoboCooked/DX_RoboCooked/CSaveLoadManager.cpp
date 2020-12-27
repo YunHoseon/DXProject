@@ -56,6 +56,13 @@ json& CSaveLoadManager::GetSaveData()
 	return m_jSaveData;
 }
 
+string CSaveLoadManager::GetStageIDByIndex(int nIndex)
+{
+	json jData = GetStageData(nIndex);
+	string sStageID = jData["StageID"];
+	return sStageID;
+}
+
 int CSaveLoadManager::GetMaxIndex()
 {
 	return m_jSaveData["StageIndex"].size() - 1;
