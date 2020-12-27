@@ -148,7 +148,7 @@ void CGameScene::Init()
 
 	//CMonsterHarpy* harpy = new CMonsterHarpy(this);
 	//harpy->AddObjectPosition(g_vZero);
-	CMonsterMedusa* medusa = new CMonsterMedusa(this);
+	//CMonsterMedusa* medusa = new CMonsterMedusa(this);
 	
 	m_cMutex.lock();
 	m_fGameTime = 300.0f;
@@ -166,7 +166,7 @@ void CGameScene::Init()
 	//m_vecParts.push_back(parts2);
 	//m_vecParts.push_back(parts3);
 	//m_vecParts.push_back(parts4);
-	m_vecMonster.push_back(medusa);
+	//m_vecMonster.push_back(medusa);
 	m_cMutex.unlock();
 }
 
