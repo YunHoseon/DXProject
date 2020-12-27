@@ -24,6 +24,7 @@
 #include "CTile.h"
 #include "CCrowdControl.h"
 
+#include "CTipBoard.h"
 #include "CTornado.h"
 #include "CSandpile.h"
 
@@ -129,8 +130,13 @@ void CGameScene::Init()
 	CUIButton *pEsc = new CUIEsc;
 	CUIWarning *pWarrning = new CUIWarning;
 
-	//CField* pField = new CField(eTileType::Sand);
 
+	//TipBoard
+	CTipBoard* pDebugTipBoard = new CTipBoard(D3DXVECTOR3(0, 0, 0),string("TEST"));
+	m_vecObject.push_back(pDebugTipBoard);
+	
+
+	//CField* pField = new CField(eTileType::Sand);
 	//CParts* parts1 = g_pPartsManager->CreateParts("C01");
 	//parts1->SetPosition(0, 2, 0);
 	//CParts* parts2 = g_pPartsManager->CreateParts("C05");
