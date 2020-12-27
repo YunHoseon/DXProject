@@ -17,7 +17,7 @@ private:
 	CUIChargeBoard*		m_pChargeThree;
 	CUIChargeBoard*		m_pChargeTwo;
 	CUIChargeBoard*		m_pChargeOne;
-
+	CUIChargeBoard*		m_pChargeZero;
 	D3DXVECTOR3			m_vChargeUIPosition;
 
 
