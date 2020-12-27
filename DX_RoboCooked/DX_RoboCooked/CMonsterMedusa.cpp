@@ -7,8 +7,8 @@
 CMonsterMedusa::CMonsterMedusa(IInteractCenter *pInteractCenter) : CMonster(pInteractCenter), m_nDestroyPartsPosition(0, 0, 0), m_pSkillAnim_1(nullptr)
 {
 	m_fFirstSkillConditionTime = 40.0f;
-	//m_fUltimateSkillConditionTime = 280.0f;
-	m_fUltimateSkillConditionTime = 295.0f;
+	m_fUltimateSkillConditionTime = 280.0f;
+	//m_fUltimateSkillConditionTime = 295.0f;
 	m_sSpecificPartsID = "B04";
 	m_debugName = "medusa";
 	ChooseSkillCondition();
