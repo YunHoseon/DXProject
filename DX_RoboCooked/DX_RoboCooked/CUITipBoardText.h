@@ -1,0 +1,17 @@
+#pragma once
+#include "CUIButton.h"
+class CUITipBoardText :
+	public CUIButton
+{
+private:
+	string		m_sTipText;
+	int			m_nWidth;
+	int			m_nHeight;
+public:
+	CUITipBoardText(D3DXVECTOR2 vPos,string sText,int nWidth, int nHeight);
+	~CUITipBoardText();
+
+public:
+	void Setup()override;
+};
+

@@ -24,6 +24,7 @@
 #include "CTile.h"
 #include "CCrowdControl.h"
 
+#include "CTipBoard.h"
 #include "CTornado.h"
 #include "CSandpile.h"
 
@@ -129,8 +130,13 @@ void CGameScene::Init()
 	CUIButton *pEsc = new CUIEsc;
 	CUIWarning *pWarrning = new CUIWarning;
 
-	//CField* pField = new CField(eTileType::Sand);
 
+	//TipBoard
+	CTipBoard* pDebugTipBoard = new CTipBoard(D3DXVECTOR3(0, 0, 0),string("TEST"));
+	m_vecObject.push_back(pDebugTipBoard);
+	
+
+	//CField* pField = new CField(eTileType::Sand);
 	//CParts* parts1 = g_pPartsManager->CreateParts("C01");
 	//parts1->SetPosition(0, 2, 0);
 	//CParts* parts2 = g_pPartsManager->CreateParts("C05");
@@ -1030,12 +1036,17 @@ int CGameScene::IsGameClear()
 
 void CGameScene::GetInteractObject(CCharacter *pCharacter)
 {
+	D3DXVECTOR3 vDirection;
+	map<float, CInteractiveActor *> veclength;
+
 	for (CParts *it : m_vecParts)
 	{
 		if (pCharacter->GetInteractCollsion()->Collide(it->GetCollision()))
 		{
-			it->Interact(pCharacter);
-			return;
+			vDirection = pCharacter->GetPosition() - it->GetPosition();
+			veclength[D3DXVec3Length(&vDirection)] = it;
+			/*it->Interact(pCharacter);
+			return;*/
 		}
 	}
 
@@ -1043,8 +1054,10 @@ void CGameScene::GetInteractObject(CCharacter *pCharacter)
 	{
 		if (pCharacter->GetInteractCollsion()->Collide(it->GetCollision()))
 		{
-			it->Interact(pCharacter);
-			return;
+			vDirection = pCharacter->GetPosition() - it->GetPosition();
+			veclength[D3DXVec3Length(&vDirection)] = it;
+			/*it->Interact(pCharacter);
+			return;*/
 		}
 	}
 
@@ -1052,10 +1065,23 @@ void CGameScene::GetInteractObject(CCharacter *pCharacter)
 	{
 		if (pCharacter->GetInteractCollsion()->Collide(it->GetCollision()))
 		{
-			it->Interact(pCharacter);
+			vDirection = pCharacter->GetPosition() - it->GetPosition();
+			veclength[D3DXVec3Length(&vDirection)] = it;
+			/*it->Interact(pCharacter);
+			return;*/
+		}
+	}
+
+	for (auto it : veclength)
+	{
+		if (pCharacter->GetInteractCollsion()->Collide(it.second->GetCollision()))
+		{
+			it.second->Interact(pCharacter);
 			return;
 		}
 	}
+
+
 }
 
 void CGameScene::AddParts(CParts *parts)

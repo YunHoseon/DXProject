@@ -633,8 +633,20 @@
     <ClInclude Include="CUIWhiteboard.h">
       <Filter>UI\Button\SubUI</Filter>
     </ClInclude>
+    <ClInclude Include="CTipBoard.h">
+      <Filter>GameScene\Object</Filter>
+    </ClInclude>
     <ClInclude Include="CUI2LevelCombination.h">
-      <Filter>Header Files</Filter>
+      <Filter>UI\Button\SubUI</Filter>
+    </ClInclude>
+    <ClInclude Include="CUITipBoardText.h">
+      <Filter>UI\Button\SubUI</Filter>
+    </ClInclude>
+    <ClInclude Include="CUITipBoard.h">
+      <Filter>UI\Button\SubUI</Filter>
+    </ClInclude>
+    <ClInclude Include="CUIPopUpBoard.h">
+      <Filter>UI\Button\SubUI</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -1163,8 +1175,20 @@
     <ClCompile Include="CUIWhiteboard.cpp">
       <Filter>UI\Button\SubUI</Filter>
     </ClCompile>
+    <ClCompile Include="CTipBoard.cpp">
+      <Filter>GameScene\Object</Filter>
+    </ClCompile>
     <ClCompile Include="CUI2LevelCombination.cpp">
-      <Filter>Source Files</Filter>
+      <Filter>UI\Button\SubUI</Filter>
+    </ClCompile>
+    <ClCompile Include="CUITipBoardText.cpp">
+      <Filter>UI\Button\SubUI</Filter>
+    </ClCompile>
+    <ClCompile Include="CUITipBoard.cpp">
+      <Filter>UI\Button\SubUI</Filter>
+    </ClCompile>
+    <ClCompile Include="CUIPopUpBoard.cpp">
+      <Filter>UI\Button\SubUI</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

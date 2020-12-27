@@ -184,6 +184,7 @@
     <ClInclude Include="CStaticMesh.h" />
     <ClInclude Include="CTestStair.h" />
     <ClInclude Include="CThreadManager.h" />
+    <ClInclude Include="CTipBoard.h" />
     <ClInclude Include="CTornado.h" />
     <ClInclude Include="CTV.h" />
     <ClInclude Include="CUI1LevelCombination.h" />
@@ -230,6 +231,7 @@
     <ClInclude Include="CUIMainStartButton.h" />
     <ClInclude Include="CUIMaker.h" />
     <ClInclude Include="CUIMakerBoard.h" />
+    <ClInclude Include="CUIPopUpBoard.h" />
     <ClInclude Include="CUIReady.h" />
     <ClInclude Include="CUIReadyBoard.h" />
     <ClInclude Include="CUIResetButton.h" />
@@ -269,6 +271,8 @@
     <ClInclude Include="CUIText.h" />
     <ClInclude Include="CUITexture.h" />
     <ClInclude Include="CUITextureManager.h" />
+    <ClInclude Include="CUITipBoard.h" />
+    <ClInclude Include="CUITipBoardText.h" />
     <ClInclude Include="CUITrafficLightFiveBoard.h" />
     <ClInclude Include="CUITrafficLightFourBoard.h" />
     <ClInclude Include="CUITrafficLightOneBoard.h" />
@@ -363,6 +367,7 @@
     <ClCompile Include="CStaticMesh.cpp" />
     <ClCompile Include="CTestStair.cpp" />
     <ClCompile Include="CThreadManager.cpp" />
+    <ClCompile Include="CTipBoard.cpp" />
     <ClCompile Include="CTornado.cpp" />
     <ClCompile Include="CTV.cpp" />
     <ClCompile Include="CUI1LevelCombination.cpp" />
@@ -409,6 +414,7 @@
     <ClCompile Include="CUIMainStartButton.cpp" />
     <ClCompile Include="CUIMaker.cpp" />
     <ClCompile Include="CUIMakerBoard.cpp" />
+    <ClCompile Include="CUIPopUpBoard.cpp" />
     <ClCompile Include="CUIReady.cpp" />
     <ClCompile Include="CUIReadyBoard.cpp" />
     <ClCompile Include="CUIResetButton.cpp" />
@@ -448,6 +454,8 @@
     <ClCompile Include="CUIText.cpp" />
     <ClCompile Include="CUITexture.cpp" />
     <ClCompile Include="CUITextureManager.cpp" />
+    <ClCompile Include="CUITipBoard.cpp" />
+    <ClCompile Include="CUITipBoardText.cpp" />
     <ClCompile Include="CUITrafficLightFiveBoard.cpp" />
     <ClCompile Include="CUITrafficLightFourBoard.cpp" />
     <ClCompile Include="CUITrafficLightOneBoard.cpp" />
