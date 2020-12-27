@@ -11,7 +11,7 @@ CPartsDestroyer::CPartsDestroyer():
 	m_pSMesh(nullptr)
 {
 	//D3DXCreateSphere(g_pD3DDevice, 1, 30, 30, &m_pMesh, nullptr);
-	////m_pTexture = g_pTextureManager->GetTexture("data/texture/medusa_poison.png");
+	//m_pTexture = g_pTextureManager->GetTexture("data/texture/medusa_poison.png");
 	//m_stMtl.Ambient = D3DXCOLOR(0.43f, 0.67f, 0.27f, 1.0f);
 	//m_stMtl.Diffuse = D3DXCOLOR(0.43f, 0.67f, 0.27f, 1.0f);
 	//m_stMtl.Specular = D3DXCOLOR(0.3f, 0.3f, 0.3f, 1.0f);
@@ -70,16 +70,13 @@ void CPartsDestroyer::Render()
 	}
 }
 
-void CPartsDestroyer::SetActive(D3DXVECTOR3& vPos, float fDuration, float fRadius)
+void CPartsDestroyer::SetActive(D3DXVECTOR3& vPos, float fDuration)
 {
 	D3DXMATRIXA16 matS, matR, matT;
-	D3DXMatrixIdentity(&matS);
-	D3DXMatrixIdentity(&matR);
-	D3DXMatrixIdentity(&matT);
 
 	D3DXMatrixRotationX(&matR, 0);
-	D3DXMatrixTranslation(&matT, vPos.x, vPos.y + 1.0f, vPos.z);
-	D3DXMatrixScaling(&matS, fRadius, fRadius, fRadius);
+	D3DXMatrixTranslation(&matT, vPos.x, vPos.y, vPos.z);
+	D3DXMatrixScaling(&matS, 0.05f, 0.05f, 0.05f);
 	m_matWorld = matS * matR * matT;
 
 	g_EventManager->Attach(eEvent::Tick, this);

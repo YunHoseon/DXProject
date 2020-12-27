@@ -22,12 +22,12 @@ public:
 	virtual void ToggleStop() = 0;
 	virtual bool GetStop() = 0;
 	virtual float GetTime() = 0;
-	virtual void MonsterSkill(eSkill skill, float fDuration = 0) = 0;
+	virtual void ApplyMonsterSkill(eSkill skill, float fDuration = 0) = 0;
 	virtual void FinishSkill(eSkill skill) = 0;
 	virtual bool CheckSpecificPartsID(string partsID) = 0;
 	virtual D3DXVECTOR3 SelectRandomObject() = 0;
 	virtual bool CheckDistanceToSelectedObject(D3DXVECTOR3 pos) = 0;
-	virtual void CheckSandDummyArea(ICollisionArea *collison) = 0;
+	virtual void CheckCollideCharacterToSandpile(ICollisionArea *collison) = 0;
 	virtual D3DXVECTOR3 GetRandomPartsPosition() = 0;
 	virtual void DestroyPartsOnPosition(D3DXVECTOR3 pos) = 0;
 	virtual string GetSceneID() = 0;

@@ -139,8 +139,12 @@ void CGameScene::Init()
 	//parts3->SetPosition(0, 2, 0);
 	//CParts* parts4 = g_pPartsManager->CreateParts("C08");
 	//parts4->SetPosition(0, 2, 0);
-	m_cMutex.lock();
 
+	//CMonsterHarpy* harpy = new CMonsterHarpy(this);
+	//harpy->AddObjectPosition(g_vZero);
+	CMonsterMedusa* medusa = new CMonsterMedusa(this);
+	
+	m_cMutex.lock();
 	m_fGameTime = 300.0f;
 	m_vecStaticActor.push_back(wall);
 	//m_vecStaticActor.push_back(pField);
@@ -156,6 +160,7 @@ void CGameScene::Init()
 	//m_vecParts.push_back(parts2);
 	//m_vecParts.push_back(parts3);
 	//m_vecParts.push_back(parts4);
+	m_vecMonster.push_back(medusa);
 	m_cMutex.unlock();
 }
 
@@ -834,7 +839,7 @@ void CGameScene::ToggleStop()
 	m_isTimeStop = !m_isTimeStop;
 }
 
-void CGameScene::MonsterSkill(eSkill skill, float fDuration)
+void CGameScene::ApplyMonsterSkill(eSkill skill, float fDuration)
 {
 	switch (skill)
 	{
@@ -894,20 +899,23 @@ bool CGameScene::CheckDistanceToSelectedObject(D3DXVECTOR3 pos)
 	return false;
 }
 
-void CGameScene::CheckSandDummyArea(ICollisionArea *collison)
+void CGameScene::CheckCollideCharacterToSandpile(ICollisionArea *collision)
 {
 	for (auto it : m_vecCharacters)
 	{
-		if (it->GetIsSandpile() == false && collison->Collide(it->GetCollision())) //더미 밖에서 안으로 들어올때 들어오는곳
+		if (collision->Collide(it->GetCollision())) // 모래더미와 겹쳐있음
 		{
-			it->SetIsSandpile(true);
+			if (it->GetCC()->GetID() != "SLOWANDSTOP")
+				it->SetCC(new CCCSlowAndStop);
 
-			it->SetCC(new CCCSlowAndStop);
+			it->SetOverlappedSandpile(collision);
 		}
-		else if (it->GetIsSandpile() && collison->Collide(it->GetCollision()) == false) // 더미밖에서 들어오는곳
+		else if (collision == it->GetOverlappedSandpile()) // 모래더미와 겹쳐있지 않은데 이전에 겹친 적이 있음
 		{
-			it->SetIsSandpile(false);
-			it->DeleteCC();
+			if (it->GetCC()->GetID() == "SLOWANDSTOP")
+				it->DeleteCC();
+				
+			it->SetOverlappedSandpile(nullptr);
 		}
 	}
 }

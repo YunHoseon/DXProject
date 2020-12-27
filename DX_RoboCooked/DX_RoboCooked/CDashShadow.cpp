@@ -37,22 +37,25 @@ void CDashShadow::Update()
 		return;
 
 	m_fElapsedTime += g_pTimeManager->GetElapsedTime();
-	//m_NebXf._13 -= 10.f;
 	m_fAnimScale += g_pTimeManager->GetElapsedTime() * 2;
 }
 
 void CDashShadow::SetAnimation(D3DXMATRIXA16* pmatWorld)
 {
 	m_matWorld = *pmatWorld;
-	//D3DXMatrixScaling(&m_matWorld, 10, 10, 10);
+
+	g_pD3DDevice->GetTransform(D3DTS_VIEW, &m_matView);
+	g_pD3DDevice->GetTransform(D3DTS_PROJECTION, &m_matProj);
+	D3DXMatrixInverse(&m_matViewI, 0, &m_matView);
+	D3DXMatrixTranspose(&m_matViewIT, &m_matViewI);
+	D3DXMatrixMultiply(&m_matWV, &m_matWorld, &m_matView);
+	D3DXMatrixMultiply(&m_matWVP, &m_matWV, &m_matProj);
 	D3DXMatrixInverse(&m_matWorldIT, 0,  &m_matWorld);
 	D3DXMatrixTranspose(&m_matWorldIT, &m_matWorldIT);
 	D3DXMatrixMultiply(&m_matWV, &m_matWorld, &m_matView);
 	D3DXMatrixMultiply(&m_matWVP, &m_matWV, &m_matProj);
 
-	//m_NebXf = m_matWorld;
 	m_fAnimScale = 0.001f;
-	//m_NebXf._13 = 20.f;
 	m_fElapsedTime = 0.f;
 }
 
@@ -67,7 +70,6 @@ void CDashShadow::Render()
 	m_pShader->SetMatrix("ViewITXf", &m_matViewIT);
 	m_pShader->SetMatrix("ViewIXf", &m_matViewI);
 	m_pShader->SetMatrix("WorldViewXf", &m_matWV);
-	//m_pShader->SetMatrix("NebXf", &m_NebXf);
 	m_pShader->SetFloat("Scale", m_fAnimScale);
 	
 	UINT	numPasses = 0;
@@ -80,7 +82,6 @@ void CDashShadow::Render()
 			m_pShader->BeginPass(0);
 			//for (int j = 0; j < nSubsetSize; ++j)
 			{
-				g_pD3DDevice->SetTransform(D3DTS_WORLD, &m_matWorld);
 				m_pSMesh->Render();
 			}
 			m_pShader->EndPass();

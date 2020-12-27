@@ -7,7 +7,8 @@
 CMonsterMedusa::CMonsterMedusa(IInteractCenter *pInteractCenter) : CMonster(pInteractCenter), m_nDestroyPartsPosition(0, 0, 0), m_pSkillAnim_1(nullptr)
 {
 	m_fFirstSkillConditionTime = 40.0f;
-	m_fUltimateSkillConditionTime = 280.0f;
+	//m_fUltimateSkillConditionTime = 280.0f;
+	m_fUltimateSkillConditionTime = 295.0f;
 	m_sSpecificPartsID = "B04";
 	m_debugName = "medusa";
 	ChooseSkillCondition();
@@ -102,21 +103,21 @@ void CMonsterMedusa::Render()
 void CMonsterMedusa::Update()
 {
 
-	if (FirstSkillTriggered() && m_pInteractCenter->CheckWarning())
+	if (FirstSkillTriggered())
 	{
 		m_stSkillUsing.FirstSkillProperty = FirstSkill();
 		m_stSkillUsing.isFirstSkill = true;
-		m_pInteractCenter->MonsterSkill(FirstSkill(), FirstSkillTime());
+		m_pInteractCenter->ApplyMonsterSkill(FirstSkill(), FirstSkillTime());
 
 		m_pSkillAnim_1->SetAnimationIndexBlend(0);
 	}
 
-	if (SecondSkillTriggered() && m_pInteractCenter->CheckWarning())
+	if (SecondSkillTriggered())
 	{
 		m_stSkillUsing.SecondSkillProperty = SecondSkill();
 		m_stSkillUsing.isSecondSkill = true;
 		ChooseSkillCondition();
-		m_pInteractCenter->MonsterSkill(SecondSkill(), SecondSkillTime());
+		m_pInteractCenter->ApplyMonsterSkill(SecondSkill(), SecondSkillTime());
 
 		for (int i = 0; i < 4; ++i)
 		{
@@ -132,13 +133,13 @@ void CMonsterMedusa::Update()
 		}
 	}
 
-	if (UltimateSkillTriggered() && m_pInteractCenter->CheckWarning())
+	if (UltimateSkillTriggered())
 	{
 		m_stSkillUsing.UltimateSkillProperty = UltimateSkill();
 		m_stSkillUsing.isUltimateSkill = true;
-		m_pInteractCenter->MonsterSkill(UltimateSkill(), UltimateSkillTime());
+		m_pInteractCenter->ApplyMonsterSkill(UltimateSkill(), UltimateSkillTime());
 
-		m_cPartsDestroyer.SetActive(m_nDestroyPartsPosition, 5.0f, 0.05f);
+		m_cPartsDestroyer.SetActive(m_nDestroyPartsPosition, 5.0f);
 	}
 
 	if (CheckDurationTimeFirstSkill())

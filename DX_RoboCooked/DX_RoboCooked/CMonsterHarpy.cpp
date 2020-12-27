@@ -84,21 +84,21 @@ void CMonsterHarpy::DeleteTornado()
 void CMonsterHarpy::Update()
 {
 
-	if (FirstSkillTriggered() && m_pInteractCenter->CheckWarning() )
+	if (FirstSkillTriggered())
 	{
 		m_stSkillUsing.FirstSkillProperty = FirstSkill();
 		m_stSkillUsing.isFirstSkill = true;
-		m_pInteractCenter->MonsterSkill(FirstSkill(), FirstSkillTime());
+		m_pInteractCenter->ApplyMonsterSkill(FirstSkill(), FirstSkillTime());
 
 		m_cSkillAnim_1.SetAnimation();
 	}
 
-	if (SecondSkillTriggered() && m_pInteractCenter->CheckWarning())
+	if (SecondSkillTriggered())
 	{
 		m_stSkillUsing.SecondSkillProperty = SecondSkill();
 		m_stSkillUsing.isSecondSkill = true;
 		ChooseSkillCondition();
-		m_pInteractCenter->MonsterSkill(SecondSkill(), SecondSkillTime());
+		m_pInteractCenter->ApplyMonsterSkill(SecondSkill(), SecondSkillTime());
 
 		m_vecSkillAnim_2[0]->SetAnimation();
 		m_vecSkillAnim_2[1]->SetAnimation();
@@ -112,13 +112,13 @@ void CMonsterHarpy::Update()
 		}
 	}
 
-	if (UltimateSkillTriggered() && m_pInteractCenter->CheckWarning())
+	if (UltimateSkillTriggered())
 	{
 		CRandomNumberGenerator r;
 		m_nWindDir = r.GenInt(0, 1) ? -1 : 1;
 		m_stSkillUsing.UltimateSkillProperty = UltimateSkill();
 		m_stSkillUsing.isUltimateSkill = true;
-		m_pInteractCenter->MonsterSkill(UltimateSkill(), m_nWindDir);
+		m_pInteractCenter->ApplyMonsterSkill(UltimateSkill(), m_nWindDir);
 
 		m_cSkillAnim_Ultimate.SetAnimation(m_nWindDir);
 	}

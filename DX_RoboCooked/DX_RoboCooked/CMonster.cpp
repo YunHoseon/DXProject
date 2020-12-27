@@ -15,19 +15,19 @@ CMonster::~CMonster()
 
 void CMonster::Update()
 {
-	if (FirstSkillTriggered() && m_pInteractCenter->CheckWarning())
+	if (FirstSkillTriggered())
 	{
 		m_stSkillUsing.FirstSkillProperty = FirstSkill();
 		m_stSkillUsing.isFirstSkill = true;
-		m_pInteractCenter->MonsterSkill(FirstSkill(), FirstSkillTime());
+		m_pInteractCenter->ApplyMonsterSkill(FirstSkill(), FirstSkillTime());
 	}
 
-	if (SecondSkillTriggered() && m_pInteractCenter->CheckWarning())
+	if (SecondSkillTriggered())
 	{
 		m_stSkillUsing.SecondSkillProperty = SecondSkill();
 		m_stSkillUsing.isSecondSkill = true;
 		ChooseSkillCondition();
-		m_pInteractCenter->MonsterSkill(SecondSkill(), SecondSkillTime());
+		m_pInteractCenter->ApplyMonsterSkill(SecondSkill(), SecondSkillTime());
 	}
 
 	if (m_eSecondSkillEvent == eEvent::SpecificArea)
@@ -38,11 +38,11 @@ void CMonster::Update()
 		}
 	}
 
-	if (UltimateSkillTriggered() && m_pInteractCenter->CheckWarning())
+	if (UltimateSkillTriggered())
 	{
 		m_stSkillUsing.UltimateSkillProperty = UltimateSkill();
 		m_stSkillUsing.isUltimateSkill = true;
-		m_pInteractCenter->MonsterSkill(UltimateSkill(), UltimateSkillTime());
+		m_pInteractCenter->ApplyMonsterSkill(UltimateSkill(), UltimateSkillTime());
 	}
 
 	if (CheckDurationTimeFirstSkill())
@@ -113,6 +113,8 @@ bool CMonster::FirstSkillTriggered()
 
 	if (m_fFirstSkillConditionElapsedTime >= m_fFirstSkillConditionTime)
 	{
+		if (!m_pInteractCenter->CheckWarning())
+			return false;
 		m_fFirstSkillConditionElapsedTime = 0;
 		return true;
 	}
@@ -124,29 +126,32 @@ bool CMonster::SecondSkillTriggered()
 {
 	if (m_stSkillUsing.isUltimateSkill)
 		return false;
-
+	bool b = false;
 	if (m_fTravelDistance >= 32.0f)
-		return true;
+		b = true;
 
 	if (m_isArrive)
-		return true;
+		b = true;
 
 	if (m_nCombinUseCount >= 6)
-		return true;
+		b = true;
 
 	if (m_nVendingUseCount >= 4)
-		return true;
+		b = true;
 
 	if (m_nCrowdControlCount >= 3)
-		return true;
+		b = true;
 
 	if (m_nThrowPartsCount >= 6)
-		return true;
+		b = true;
 
 	if (m_nSpinPartsCount >= 6)
-		return true;
+		b = true;
 
-	return false;
+	if (b && !m_pInteractCenter->CheckWarning())
+		return false;
+	
+	return b;
 }
 
 bool CMonster::UltimateSkillTriggered()
@@ -156,12 +161,16 @@ bool CMonster::UltimateSkillTriggered()
 
 	if (m_stSkillUsing.isUltimatePartsCheck && m_pInteractCenter->CheckSpecificPartsID(m_sSpecificPartsID))
 	{
+		if (!m_pInteractCenter->CheckWarning())
+			return false;
 		m_stSkillUsing.isUltimatePartsCheck = false;
 		return true;
 	}
 
 	if (m_stSkillUsing.isUltimateBluePrintCheck && m_nBluePrintChangeCount >= 10)
 	{
+		if (!m_pInteractCenter->CheckWarning())
+			return false;
 		m_stSkillUsing.isUltimateBluePrintCheck = false;
 		g_EventManager->Detach(eEvent::CompleteBluePrint, this);
 		return true;
@@ -169,6 +178,8 @@ bool CMonster::UltimateSkillTriggered()
 
 	if (m_stSkillUsing.isUltimateTimeCheck && m_pInteractCenter->GetTime() < m_fUltimateSkillConditionTime)
 	{
+		if (!m_pInteractCenter->CheckWarning())
+			return false;
 		m_stSkillUsing.isUltimateTimeCheck = false;
 		return true;
 	}
