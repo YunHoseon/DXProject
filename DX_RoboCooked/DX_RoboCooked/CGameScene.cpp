@@ -1028,12 +1028,17 @@ int CGameScene::IsGameClear()
 
 void CGameScene::GetInteractObject(CCharacter *pCharacter)
 {
+	D3DXVECTOR3 vDirection;
+	map<float, CInteractiveActor *> veclength;
+
 	for (CParts *it : m_vecParts)
 	{
 		if (pCharacter->GetInteractCollsion()->Collide(it->GetCollision()))
 		{
-			it->Interact(pCharacter);
-			return;
+			vDirection = pCharacter->GetPosition() - it->GetPosition();
+			veclength[D3DXVec3Length(&vDirection)] = it;
+			/*it->Interact(pCharacter);
+			return;*/
 		}
 	}
 
@@ -1041,8 +1046,10 @@ void CGameScene::GetInteractObject(CCharacter *pCharacter)
 	{
 		if (pCharacter->GetInteractCollsion()->Collide(it->GetCollision()))
 		{
-			it->Interact(pCharacter);
-			return;
+			vDirection = pCharacter->GetPosition() - it->GetPosition();
+			veclength[D3DXVec3Length(&vDirection)] = it;
+			/*it->Interact(pCharacter);
+			return;*/
 		}
 	}
 
@@ -1050,10 +1057,23 @@ void CGameScene::GetInteractObject(CCharacter *pCharacter)
 	{
 		if (pCharacter->GetInteractCollsion()->Collide(it->GetCollision()))
 		{
-			it->Interact(pCharacter);
+			vDirection = pCharacter->GetPosition() - it->GetPosition();
+			veclength[D3DXVec3Length(&vDirection)] = it;
+			/*it->Interact(pCharacter);
+			return;*/
+		}
+	}
+
+	for (auto it : veclength)
+	{
+		if (pCharacter->GetInteractCollsion()->Collide(it.second->GetCollision()))
+		{
+			it.second->Interact(pCharacter);
 			return;
 		}
 	}
+
+
 }
 
 void CGameScene::AddParts(CParts *parts)
