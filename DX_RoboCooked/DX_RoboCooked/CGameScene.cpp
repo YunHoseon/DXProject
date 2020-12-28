@@ -646,6 +646,20 @@ void CGameScene::Load(string sFolder, string sStageKey, void (CGameScene::*pCall
 			}
 		}
 		{
+			json jTipboard = j["Tipboard"];
+			for (auto&& p : jTipboard)
+			{
+				D3DXVECTOR3 pos(p["Position"][0], p["Position"][1], p["Position"][2]);
+				float rotate = p["Rotate"];
+				D3DXVECTOR3 scale(p["Scale"][0], p["Scale"][1], p["Scale"][2]);
+				string txt = p["Text"];
+				CTipBoard* Tipboard = new CTipBoard(pos, txt);
+				Tipboard->SetRotationY(rotate);
+				Tipboard->SetScale(scale);
+				vecInter.push_back(Tipboard);
+			}
+		}
+		{
 			while (!g_pPartsManager->IsLoaded()) {}
 			if (g_pThreadManager->GetStopMessage()) return;
 			// parts

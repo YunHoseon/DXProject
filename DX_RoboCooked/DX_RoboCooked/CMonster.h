@@ -75,12 +75,21 @@ protected:
 	//조건리스트 
 	FLOAT						m_fTravelDistance;//1
 	BOOL						m_isArrive; //2
-	FLOAT						m_fArriveSize;
 	INT							m_nCombinUseCount;//3
 	INT							m_nVendingUseCount;//4
 	INT							m_nCrowdControlCount;//5
 	INT							m_nThrowPartsCount;//6
 	INT							m_nSpinPartsCount;//7
+
+
+	FLOAT						m_fConditionTravelDistance;//1
+	FLOAT						m_fConditionArriveSize;//2
+	INT							m_nConditionCombinUseCount;//3
+	INT							m_nConditionVendingUseCount;//4
+	INT							m_nConditionCrowdControlCount;//5
+	INT							m_nConditionThrowPartsCount;//6
+	INT							m_nConditionSpinPartsCount;//7
+
 
 	INT							m_nBluePrintChangeCount;
 	string						m_sSpecificPartsID;

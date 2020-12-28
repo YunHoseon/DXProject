@@ -201,7 +201,7 @@ void CCharacter::PressKey(void *_value)
 			{
 				m_fThrowPower += m_fThrowPowerUpSpeed * TimeRevision;
 			}
-			if (m_fThrowPower > m_fMaxThrowPower)
+			if (m_fThrowPower > m_fMaxThrowPower - EPSILON)
 			{
 				m_fThrowPower = m_fMaxThrowPower;
 				g_SoundManager->StopSFX("charge_up");
@@ -323,19 +323,28 @@ void CCharacter::ReleaseKey(void *_value)
 	}
 
 	_DEBUG_COMMENT else if (data->wKey == 'K')
-		_DEBUG_COMMENT
-	{
-		_DEBUG_COMMENT m_fBaseSpeed += 0.01f;
-		_DEBUG_COMMENT cout << "chara speed : " << m_fBaseSpeed << endl;
-		_DEBUG_COMMENT
-	}
-	_DEBUG_COMMENT else if (data->wKey == 'L')
-		_DEBUG_COMMENT
-	{
-		_DEBUG_COMMENT m_fBaseSpeed -= 0.01f;
-		_DEBUG_COMMENT cout << "chara speed : " << m_fBaseSpeed << endl;
-		_DEBUG_COMMENT
-	}
+	_DEBUG_COMMENT {
+	_DEBUG_COMMENT 	m_fBaseSpeed += 0.01f;
+	_DEBUG_COMMENT 	cout << "chara speed : " << m_fBaseSpeed << endl;
+	_DEBUG_COMMENT 	
+	_DEBUG_COMMENT }
+	_DEBUG_COMMENT  else if (data->wKey == 'L')
+	_DEBUG_COMMENT {
+	_DEBUG_COMMENT 	m_fBaseSpeed -= 0.01f;
+	_DEBUG_COMMENT 	cout << "chara speed : " << m_fBaseSpeed << endl;
+	_DEBUG_COMMENT 	
+	_DEBUG_COMMENT }
+	_DEBUG_COMMENT else if (data->wKey == 'U')
+	_DEBUG_COMMENT {
+	_DEBUG_COMMENT 	m_fMaxThrowPower -= 0.01f;
+	_DEBUG_COMMENT 	cout << "max throw power : " << m_fMaxThrowPower << endl;
+	_DEBUG_COMMENT }
+	_DEBUG_COMMENT else if (data->wKey == 'I')
+	_DEBUG_COMMENT {
+	_DEBUG_COMMENT 	m_fMaxThrowPower += 0.01f;
+	_DEBUG_COMMENT 	cout << "max throw power : " << m_fMaxThrowPower << endl;
+	_DEBUG_COMMENT 	
+	_DEBUG_COMMENT }
 }
 
 void CCharacter::SetKeyChange(void *_value)
