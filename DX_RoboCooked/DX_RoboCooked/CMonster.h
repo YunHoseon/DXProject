@@ -75,6 +75,7 @@ protected:
 	//조건리스트 
 	FLOAT						m_fTravelDistance;//1
 	BOOL						m_isArrive; //2
+	FLOAT						m_fArriveSize;
 	INT							m_nCombinUseCount;//3
 	INT							m_nVendingUseCount;//4
 	INT							m_nCrowdControlCount;//5
