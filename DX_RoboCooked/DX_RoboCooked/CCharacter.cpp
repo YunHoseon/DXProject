@@ -27,7 +27,7 @@ CCharacter::CCharacter(int nPlayerNum) :
 	m_fThrowPowerUpSpeed(0.003f),
 	m_fMaxSpeed(0.2f),
 	m_pCC(nullptr),
-	m_isSandpile(false),
+	m_pOverlappedSandpile(nullptr),
 	m_vDefaultPosition(0, 0, 0),
 	m_pCharge(nullptr),
 	m_isDash(false)
@@ -391,10 +391,10 @@ void CCharacter::Rotate(float fTargetRot)
 	
 	D3DXVec3TransformNormal(&m_vDirection, &D3DXVECTOR3(0, 0, 1), &m_matR);
 	m_matWorld = m_matS * m_matR * m_matT;
-	m_isMoveKeyDown = true;
 
 	SetForce(m_vDirection * m_fBaseSpeed * m_pCC->MultiplySpeed() * TimeRevision);
 
+	m_isMoveKeyDown = true;
 	if (m_pCollision)
 		m_pCollision->Update();
 

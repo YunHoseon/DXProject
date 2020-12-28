@@ -70,12 +70,12 @@ public:
 	void ToggleStop() override;
 
 	void GetInteractObject(CCharacter *pCharacter) override;
-	void MonsterSkill(eSkill skill, float fDuration = 0) override;
+	void ApplyMonsterSkill(eSkill skill, float fDuration = 0) override;
 	void FinishSkill(eSkill skill) override;
 	bool CheckSpecificPartsID(string parts) override;
 	D3DXVECTOR3 SelectRandomObject() override;
 	bool CheckDistanceToSelectedObject(D3DXVECTOR3 pos) override;
-	void CheckSandDummyArea(ICollisionArea *collison) override;
+	void CheckCollideCharacterToSandpile(ICollisionArea *collision) override;
 	void DestroyPartsOnPosition(D3DXVECTOR3 pos) override;
 	bool CheckWarning() override;
 

@@ -47,7 +47,7 @@ void CSandpile::Render()
 
 void CSandpile::Update()
 {
-	m_pInteractCenter->CheckSandDummyArea(m_pCollisionArea);
+	m_pInteractCenter->CheckCollideCharacterToSandpile(m_pCollisionArea);
 }
 
 void CSandpile::SetPosition(D3DXVECTOR3 vPosition)

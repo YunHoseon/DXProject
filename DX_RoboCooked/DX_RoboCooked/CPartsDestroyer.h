@@ -23,5 +23,5 @@ public:
 	bool OnEvent(eEvent eEvent, void* _value) override;
 	void Render();
 	
-	void SetActive(D3DXVECTOR3& vPos, float fDuration, float fRadius);
+	void SetActive(D3DXVECTOR3& vPos, float fDuration);
 };

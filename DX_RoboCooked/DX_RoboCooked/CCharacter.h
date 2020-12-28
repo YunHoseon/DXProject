@@ -50,7 +50,7 @@ protected:
 	float				m_fThrowPowerUpSpeed;
 	float				m_fMaxSpeed;
 	
-	bool				m_isSandpile;
+	ICollisionArea*		m_pOverlappedSandpile;
 
 	CCrowdControl*		m_pCC;
 	CUICharge*			m_pCharge;
@@ -86,8 +86,8 @@ public:
 	CParts* GetParts() { return m_pParts; }
 	void SetParts(CParts* pParts) { m_pParts = pParts; }
 
-	BOOL GetIsSandpile() { return m_isSandpile; }
-	void SetIsSandpile(bool b) { m_isSandpile = b; }
+	ICollisionArea* GetOverlappedSandpile() { return m_pOverlappedSandpile; }
+	void SetOverlappedSandpile(ICollisionArea* p) { m_pOverlappedSandpile = p; }
 
 	CCrowdControl* GetCC() { return m_pCC; }
 	void SetCC(CCrowdControl* cc);
