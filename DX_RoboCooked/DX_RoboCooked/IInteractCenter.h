@@ -26,7 +26,7 @@ public:
 	virtual void FinishSkill(eSkill skill) = 0;
 	virtual bool CheckSpecificPartsID(string partsID) = 0;
 	virtual D3DXVECTOR3 SelectRandomObject() = 0;
-	virtual bool CheckDistanceToSelectedObject(D3DXVECTOR3 pos) = 0;
+	virtual bool CheckDistanceToSelectedObject(D3DXVECTOR3 pos, float fSize) = 0;
 	virtual void CheckCollideCharacterToSandpile(ICollisionArea *collison) = 0;
 	virtual D3DXVECTOR3 GetRandomPartsPosition() = 0;
 	virtual void DestroyPartsOnPosition(D3DXVECTOR3 pos) = 0;

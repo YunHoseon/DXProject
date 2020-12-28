@@ -892,9 +892,9 @@ D3DXVECTOR3 CGameScene::SelectRandomObject()
 	return m_vecObject[index]->GetPosition();
 }
 
-bool CGameScene::CheckDistanceToSelectedObject(D3DXVECTOR3 pos)
+bool CGameScene::CheckDistanceToSelectedObject(D3DXVECTOR3 pos, float fSize)
 {
-	D3DXVECTOR3 size(1.5f, 100.0f, 1.5f);
+	D3DXVECTOR3 size(fSize, 100.0f, fSize);
 	CBoxCollision cCollsion(pos, size);
 
 	for (auto it : m_vecCharacters)

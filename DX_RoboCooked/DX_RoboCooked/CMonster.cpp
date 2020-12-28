@@ -32,7 +32,7 @@ void CMonster::Update()
 
 	if (m_eSecondSkillEvent == eEvent::SpecificArea)
 	{
-		if (m_pInteractCenter->CheckDistanceToSelectedObject(m_vSpecificAreaPosition))
+		if (m_pInteractCenter->CheckDistanceToSelectedObject(m_vSpecificAreaPosition,2.0f))
 		{
 			m_isArrive = true;
 		}
@@ -127,25 +127,25 @@ bool CMonster::SecondSkillTriggered()
 	if (m_stSkillUsing.isUltimateSkill)
 		return false;
 	bool b = false;
-	if (m_fTravelDistance >= 32.0f)
+	if (m_fTravelDistance >= 45.0f)
 		b = true;
 
 	if (m_isArrive)
 		b = true;
 
-	if (m_nCombinUseCount >= 6)
+	if (m_nCombinUseCount >= 8)
 		b = true;
 
-	if (m_nVendingUseCount >= 4)
+	if (m_nVendingUseCount >= 7)
 		b = true;
 
-	if (m_nCrowdControlCount >= 3)
+	if (m_nCrowdControlCount >= 4)
 		b = true;
 
-	if (m_nThrowPartsCount >= 6)
+	if (m_nThrowPartsCount >= 8)
 		b = true;
 
-	if (m_nSpinPartsCount >= 6)
+	if (m_nSpinPartsCount >= 7)
 		b = true;
 
 	if (b && !m_pInteractCenter->CheckWarning())
