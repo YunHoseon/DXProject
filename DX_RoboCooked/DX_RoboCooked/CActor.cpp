@@ -15,7 +15,8 @@ CActor::CActor() :
 	m_vVelocity(0, 0, 0),
 	m_vAcceleration(0, 0, 0),
 	m_vScale(1, 1, 1),
-	m_fFlexibility(1)
+	m_fFlexibility(1),
+	m_isCollide(false)
 {
 	D3DXMatrixIdentity(&m_matS);
 	D3DXMatrixRotationY(&m_matR, m_fRotY);

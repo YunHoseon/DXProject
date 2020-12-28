@@ -281,7 +281,18 @@ void CGameScene::Update()
 	{ // collide
 		if (m_vecCharacters.size() == 2)
 		{
-			CPhysicsApplyer::ApplyBound(m_vecCharacters[0], m_vecCharacters[1]);
+			if (CPhysicsApplyer::ApplyBound(m_vecCharacters[0], m_vecCharacters[1]))
+			{
+				if (ColideCheck(m_vecCharacters[0], m_vecCharacters[1]))
+				{
+					g_SoundManager->PlaySFX("character_impact");
+				}
+			}
+			else
+			{
+				m_vecCharacters[0]->SetIsCollide(false);
+				m_vecCharacters[1]->SetIsCollide(false);
+			}
 		}
 
 		for (CParts *part : m_vecParts)
@@ -293,7 +304,21 @@ void CGameScene::Update()
 			for (CParts *part2 : m_vecParts)
 			{
 				if (part != part2)
-					CPhysicsApplyer::ApplyBound(part2, part);
+				{
+					if (CPhysicsApplyer::ApplyBound(part2, part))
+					{
+						if (ColideCheck(part2, part))
+						{
+							g_SoundManager->PlaySFX("part_impact");
+						}
+					}
+					else
+					{
+						part->SetIsCollide(false);
+						part2->SetIsCollide(false);
+					}
+
+				}
 			}
 		}
 
@@ -1059,6 +1084,18 @@ int CGameScene::IsGameClear()
 		return 1; // 클리어
 
 	return 0;
+}
+
+bool CGameScene::ColideCheck(CActor* pActor1, CActor* pActor2)
+{
+
+	if (pActor1->GetIsCollide() == false || pActor2->GetIsCollide() == false)
+	{
+		pActor1->SetIsCollide(true);
+		pActor2->SetIsCollide(true);
+		return true;
+	}
+	return false;
 }
 
 void CGameScene::GetInteractObject(CCharacter *pCharacter)

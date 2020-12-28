@@ -87,6 +87,7 @@ public:
 	void DeleteCC();
 	int IsGameClear();
 	//bool IsGameLose();
+	bool ColideCheck(CActor* pActor1 , CActor* pActor2);
 
 	D3DXVECTOR3 GetRandomPartsPosition() override;
 	string GetSceneID() override { return m_sStageKey; }
