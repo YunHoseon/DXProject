@@ -70,17 +70,15 @@ void CDashShadow::Render()
 	m_pShader->SetMatrix("ViewITXf", &m_matViewIT);
 	m_pShader->SetMatrix("ViewIXf", &m_matViewI);
 	m_pShader->SetMatrix("WorldViewXf", &m_matWV);
+	//m_pShader->SetMatrix("NebXf", &m_NebXf);
 	m_pShader->SetFloat("Scale", m_fAnimScale);
 	
 	UINT	numPasses = 0;
-	int nSubsetSize = 0;
-	nSubsetSize = m_pSMesh->GetVecMaterial().size();
 	m_pShader->Begin(&numPasses, NULL);
 	{
 		for (UINT i = 0; i < numPasses; ++i)
 		{
 			m_pShader->BeginPass(0);
-			//for (int j = 0; j < nSubsetSize; ++j)
 			{
 				m_pSMesh->Render();
 			}

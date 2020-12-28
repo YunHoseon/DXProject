@@ -132,8 +132,8 @@ void CGameScene::Init()
 
 
 	//TipBoard
-	CTipBoard* pDebugTipBoard = new CTipBoard(D3DXVECTOR3(0, 0, 0),string("TEST"));
-	m_vecObject.push_back(pDebugTipBoard);
+	//CTipBoard* pDebugTipBoard = new CTipBoard(g_vZero,string("TEST"));
+	//m_vecObject.push_back(pDebugTipBoard);
 	
 
 	//CField* pField = new CField(eTileType::Sand);
@@ -1036,17 +1036,20 @@ int CGameScene::IsGameClear()
 
 void CGameScene::GetInteractObject(CCharacter *pCharacter)
 {
-	D3DXVECTOR3 vDirection;
+	float fMaxDistance = 9999.f;
+	CInteractiveActor* target = nullptr;
 	map<float, CInteractiveActor *> veclength;
 
 	for (CParts *it : m_vecParts)
 	{
 		if (pCharacter->GetInteractCollsion()->Collide(it->GetCollision()))
 		{
-			vDirection = pCharacter->GetPosition() - it->GetPosition();
-			veclength[D3DXVec3Length(&vDirection)] = it;
-			/*it->Interact(pCharacter);
-			return;*/
+			float dist = D3DXVec3Length(&(pCharacter->GetPosition() - it->GetPosition()));
+			if(dist < fMaxDistance)
+			{
+				fMaxDistance = dist;
+				target = it;
+			}
 		}
 	}
 
@@ -1054,10 +1057,12 @@ void CGameScene::GetInteractObject(CCharacter *pCharacter)
 	{
 		if (pCharacter->GetInteractCollsion()->Collide(it->GetCollision()))
 		{
-			vDirection = pCharacter->GetPosition() - it->GetPosition();
-			veclength[D3DXVec3Length(&vDirection)] = it;
-			/*it->Interact(pCharacter);
-			return;*/
+			float dist = D3DXVec3Length(&(pCharacter->GetPosition() - it->GetPosition()));
+			if (dist < fMaxDistance)
+			{
+				fMaxDistance = dist;
+				target = it;
+			}
 		}
 	}
 
@@ -1065,22 +1070,17 @@ void CGameScene::GetInteractObject(CCharacter *pCharacter)
 	{
 		if (pCharacter->GetInteractCollsion()->Collide(it->GetCollision()))
 		{
-			vDirection = pCharacter->GetPosition() - it->GetPosition();
-			veclength[D3DXVec3Length(&vDirection)] = it;
-			/*it->Interact(pCharacter);
-			return;*/
+			float dist = D3DXVec3Length(&(pCharacter->GetPosition() - it->GetPosition()));
+			if (dist < fMaxDistance)
+			{
+				fMaxDistance = dist;
+				target = it;
+			}
 		}
 	}
 
-	for (auto it : veclength)
-	{
-		if (pCharacter->GetInteractCollsion()->Collide(it.second->GetCollision()))
-		{
-			it.second->Interact(pCharacter);
-			return;
-		}
-	}
-
+	if (target)
+		target->Interact(pCharacter);
 
 }
 
