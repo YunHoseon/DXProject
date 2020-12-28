@@ -757,6 +757,19 @@ void CGameScene::Load(string sFolder, string sStageKey, void (CGameScene::*pCall
 					vecTile.push_back(Tile);
 				}
 			}
+			{
+				json jBrick = j["Brick"];
+				for (auto&& p : jBrick)
+				{
+					D3DXVECTOR3 pos(p["Position"][0], p["Position"][1], p["Position"][2]);
+					float rotate = p["Rotate"];
+					D3DXVECTOR3 scale(p["Scale"][0], p["Scale"][1], p["Scale"][2]);
+					CBrick* Tile = new CBrick(pos);
+					Tile->SetRotationY(rotate);
+					Tile->SetScale(scale);
+					vecTile.push_back(Tile);
+				}
+			}
 		}
 		{
 			// player1

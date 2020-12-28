@@ -49,6 +49,8 @@ void CStaticMeshManager::Load()
 	vecData.push_back(data);
 	data.fileName = "Whiteboard.X"; data.objectName = "Whiteboard"; data.filePath = "data/model/object";
 	vecData.push_back(data);
+	data.fileName = "Tipboard.X"; data.objectName = "Tipboard"; data.filePath = "data/model/object";
+	vecData.push_back(data);
 	data.fileName = "tornado.X"; data.objectName = "Tornado"; data.filePath = "data/model/object";
 	vecData.push_back(data);
 

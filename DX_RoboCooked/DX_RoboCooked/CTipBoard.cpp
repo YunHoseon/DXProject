@@ -10,7 +10,7 @@ CTipBoard::CTipBoard(D3DXVECTOR3 vPos, string sText)
 	, m_pCharacter(nullptr)
 	, m_pTipBoard(nullptr)
 {
-	m_pSMesh = g_pStaticMeshManager->GetStaticMesh("Whiteboard");
+	m_pSMesh = g_pStaticMeshManager->GetStaticMesh("Tipboard");
 	m_pCollision = new CBoxCollision(m_pSMesh->GetMesh(), &m_matWorld);
 
 	m_pTipBoard = new CUITipBoard(D3DXVECTOR2(530, 160));

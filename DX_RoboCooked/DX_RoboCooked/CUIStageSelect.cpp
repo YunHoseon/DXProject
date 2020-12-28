@@ -172,7 +172,7 @@ bool CUIStageSelect::OnEvent(eEvent eEvent, void * _value)
 
 void CUIStageSelect::SelectEvent(int i)
 {
-	json jData = g_SaveLoadManager->GetStageData(i + m_nPage);
+	json jData = g_SaveLoadManager->GetStageData(i + m_nPage * 6);
 
 	if (jData["FileName"] == "X")
 		return;

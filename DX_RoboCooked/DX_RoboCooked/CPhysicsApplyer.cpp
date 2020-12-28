@@ -8,7 +8,7 @@ void CPhysicsApplyer::ApplyGravity(CActor* pA)
 	pA->AddAcceleration(vGravity * TimeRevision);
 }
 
-void CPhysicsApplyer::ApplyBound(CActor* pA, CActor* pB)
+bool CPhysicsApplyer::ApplyBound(CActor* pA, CActor* pB)
 {
 	D3DXVECTOR3 vNormal(0, 0, 0);
 	if (pA->Collide(pB, &vNormal))
@@ -55,5 +55,8 @@ void CPhysicsApplyer::ApplyBound(CActor* pA, CActor* pB)
 
 		vTempVelocity = (pB->GetVelocity() + pB->GetAcceleration()) * -1 * pA->GetFriction(); // -1 * 마찰계수
 		pB->AddAcceleration(vTempVelocity); // 마찰력
+
+		return true;
 	}
+	return false;
 }

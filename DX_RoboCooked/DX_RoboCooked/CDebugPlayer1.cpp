@@ -21,7 +21,7 @@ CDebugPlayer1::CDebugPlayer1(IInteractCenter* pInteractCenter)
 	D3DXVECTOR3 min = m_pSkinnedMesh->GetMin();
 
 	D3DXMATRIXA16 matS, matR, matT;
-	D3DXMatrixScaling(&matS, 0.015f, 0.015f, 0.015f);
+	D3DXMatrixScaling(&matS, 0.015f * 1.3f, 0.015f * 1.3f, 0.015f * 1.3f);
 	D3DXMatrixRotationY(&matR, D3DXToRadian(180));
 	D3DXMatrixTranslation(&matT, 0, -((max.y - min.y) / 2 * 0.015f), 0);
 	*pmat = matS * matR * matT;
