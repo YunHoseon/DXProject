@@ -39,6 +39,7 @@ protected:
 	array<float, 3>		m_arrCoolDown;
 	array<bool, 3>		m_arrKeyDown;
 	bool				m_isMoveKeyDown;
+	bool				m_isDash;
 	// ������
 	const ST_PLAYER_INPUTKEY* m_pInputKey;
 	//LPD3DXMESH			m_pMesh;

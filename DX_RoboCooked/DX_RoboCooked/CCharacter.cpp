@@ -29,7 +29,8 @@ CCharacter::CCharacter(int nPlayerNum) :
 	m_pCC(nullptr),
 	m_pOverlappedSandpile(nullptr),
 	m_vDefaultPosition(0, 0, 0),
-	m_pCharge(nullptr)
+	m_pCharge(nullptr),
+	m_isDash(false)
 {
 	m_fBaseSpeed = 0.02f;
 
@@ -80,6 +81,7 @@ void CCharacter::Update()
 
 	m_pSkinnedMesh->Update();
 	m_isMoveKeyDown = false;
+	m_isDash = false;
 	if (m_pCC->IsEnd())
 		DeleteCC();
 
@@ -260,6 +262,7 @@ void CCharacter::PressKey(void *_value)
 				D3DXMATRIXA16 localmat = *m_pSkinnedMesh->GetTransform();
 				D3DXMatrixMultiply(&localmat, &localmat, &m_matWorld);
 				m_pDashShadow->SetAnimation(&localmat);
+				m_isDash = true;
 			}
 			//_DEBUG_COMMENT cout << "current time : " << g_pTimeManager->GetElapsedTime() << endl;
 			_DEBUG_COMMENT cout << "cool down : " << CurrentTime - m_arrElapsedTime[2] << endl;
@@ -374,6 +377,9 @@ void CCharacter::Move()
 
 void CCharacter::Rotate(float fTargetRot)
 {
+	if (m_isDash)
+		return;
+
 	fTargetRot += m_pCC->ReverseRotate();
 	fTargetRot = fTargetRot < D3DX_PI * 2 ? fTargetRot : fTargetRot - D3DX_PI * 2;
 	D3DXQUATERNION stLerpRot, stCurrentRot, stTargetRot;
