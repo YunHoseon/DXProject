@@ -11,7 +11,8 @@ public:
 		CLEARTIME,
 		TVTIME,
 		SELECT,
-		UPDATE
+		UPDATE,
+		TIP
 	};
 private:
 	map<eFontType, LPD3DXFONT> m_mapFont;

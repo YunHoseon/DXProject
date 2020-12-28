@@ -47,7 +47,7 @@ LPD3DXFONT CFontManager::GetFont(eFontType e)
 		fd.CharSet = DEFAULT_CHARSET;
 		fd.OutputPrecision = OUT_DEFAULT_PRECIS;
 		fd.PitchAndFamily = FF_DONTCARE;
-
+		
 		AddFontResource(L"data/font/umberto.ttf");
 		wcscpy_s(fd.FaceName, L"Umberto");
 	}
@@ -60,7 +60,7 @@ LPD3DXFONT CFontManager::GetFont(eFontType e)
 		fd.CharSet = DEFAULT_CHARSET;
 		fd.OutputPrecision = OUT_DEFAULT_PRECIS;
 		fd.PitchAndFamily = FF_DONTCARE;
-
+		
 		AddFontResource(L"data/Fonts/a컴퓨터C.ttf");
 		wcscpy_s(fd.FaceName, L"a컴퓨터C");
 	}
@@ -74,6 +74,19 @@ LPD3DXFONT CFontManager::GetFont(eFontType e)
 		fd.OutputPrecision = OUT_DEFAULT_PRECIS;
 		fd.PitchAndFamily = FF_DONTCARE;
 
+		AddFontResource(L"data/Fonts/a컴퓨터C.ttf");
+		wcscpy_s(fd.FaceName, L"a컴퓨터C");
+	}
+	else if (e == TIP)
+	{
+		fd.Height = 27;
+		fd.Width = 27;
+		fd.Weight = FW_MEDIUM;
+		fd.Italic = false;
+		fd.CharSet = DEFAULT_CHARSET;
+		fd.OutputPrecision = OUT_DEFAULT_PRECIS;
+		fd.PitchAndFamily = FF_DONTCARE;
+		
 		AddFontResource(L"data/Fonts/a컴퓨터C.ttf");
 		wcscpy_s(fd.FaceName, L"a컴퓨터C");
 	}

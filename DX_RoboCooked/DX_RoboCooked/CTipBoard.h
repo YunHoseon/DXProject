@@ -11,6 +11,7 @@ private:
 	CUITipBoard*	m_pTipBoard;
 public:
 	CTipBoard(D3DXVECTOR3 vPos, string sText);
+	CTipBoard(D3DXVECTOR3 vPos, std::wstring wsText);
 	~CTipBoard();
 
 	void Update() override;

@@ -13,8 +13,30 @@ CTipBoard::CTipBoard(D3DXVECTOR3 vPos, string sText)
 	m_pSMesh = g_pStaticMeshManager->GetStaticMesh("Tipboard");
 	m_pCollision = new CBoxCollision(m_pSMesh->GetMesh(), &m_matWorld);
 
-	m_pTipBoard = new CUITipBoard(D3DXVECTOR2(530, 160));
-	m_pTipBoard->SetText(sText, 700, 450);
+	m_pTipBoard = new CUITipBoard(D3DXVECTOR2(341, 509));
+	m_pTipBoard->SetText(sText, 965, 225);
+
+	SetScale(0.025f, 0.025f, 0.025f);
+	SetRotationY(D3DXToRadian(0));
+	SetPosition(vPos);
+
+	float y = vPos.y - 0.5f + m_pCollision->GetHeight() * 0.5f + (vPos.y - m_pCollision->GetCenter().y);
+	SetPosition(vPos.x, y, vPos.z);
+
+	if (m_pCollision)
+		m_pCollision->Update();
+}
+
+CTipBoard::CTipBoard(D3DXVECTOR3 vPos, std::wstring wsText)
+	: m_pSMesh(nullptr)
+	, m_pCharacter(nullptr)
+	, m_pTipBoard(nullptr)
+{
+	m_pSMesh = g_pStaticMeshManager->GetStaticMesh("Tipboard");
+	m_pCollision = new CBoxCollision(m_pSMesh->GetMesh(), &m_matWorld);
+
+	m_pTipBoard = new CUITipBoard(D3DXVECTOR2(341, 509));
+	m_pTipBoard->SetText(wsText, 965, 225);
 
 	SetScale(0.025f, 0.025f, 0.025f);
 	SetRotationY(D3DXToRadian(0));

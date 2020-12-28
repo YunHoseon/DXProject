@@ -40,6 +40,8 @@
 /* ������ */
 #include <filesystem>
 #include <fstream>
+#include <locale>
+#include <codecvt>
 
 #include "CBoundaryWall.h"
 
@@ -678,7 +680,9 @@ void CGameScene::Load(string sFolder, string sStageKey, void (CGameScene::*pCall
 				float rotate = p["Rotate"];
 				D3DXVECTOR3 scale(p["Scale"][0], p["Scale"][1], p["Scale"][2]);
 				string txt = p["Text"];
-				CTipBoard* Tipboard = new CTipBoard(pos, txt);
+				std::wstring_convert < std::codecvt_utf8<wchar_t>, wchar_t> convertString;
+				std::wstring wideString = convertString.from_bytes(txt);
+				CTipBoard* Tipboard = new CTipBoard(pos, wideString);
 				Tipboard->SetRotationY(rotate);
 				Tipboard->SetScale(scale);
 				vecInter.push_back(Tipboard);
@@ -792,7 +796,7 @@ void CGameScene::Load(string sFolder, string sStageKey, void (CGameScene::*pCall
 					CBrick* Tile = new CBrick(pos);
 					Tile->SetRotationY(rotate);
 					Tile->SetScale(scale);
-					vecTile.push_back(Tile);
+					vecStatic.push_back(Tile);
 				}
 			}
 		}
