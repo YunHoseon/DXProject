@@ -74,7 +74,7 @@ public:
 	void FinishSkill(eSkill skill) override;
 	bool CheckSpecificPartsID(string parts) override;
 	D3DXVECTOR3 SelectRandomObject() override;
-	bool CheckDistanceToSelectedObject(D3DXVECTOR3 pos) override;
+	bool CheckDistanceToSelectedObject(D3DXVECTOR3 pos, float fSize) override;
 	void CheckCollideCharacterToSandpile(ICollisionArea *collision) override;
 	void DestroyPartsOnPosition(D3DXVECTOR3 pos) override;
 	bool CheckWarning() override;

@@ -2,7 +2,7 @@
 #include "CMonster.h"
 
 CMonster::CMonster(IInteractCenter *pInteractCenter)
-	: m_pInteractCenter(pInteractCenter), m_eSkillCondition(), m_eSecondSkillEvent(eEvent::None), m_fFirstSkillConditionTime(0.0f), m_fFirstSkillConditionElapsedTime(0.0f), m_isArrive(false), m_fTravelDistance(0.0f), m_nCombinUseCount(0), m_nVendingUseCount(0), m_nCrowdControlCount(0), m_nThrowPartsCount(0), m_nSpinPartsCount(0), m_sSpecificPartsID(""), m_fFirstSkillElapsedTime(0.0f), m_fSecondSkillElapsedTime(0.0f), m_fUltimateSkillElapsedTime(0.0f), m_fUltimateSkillConditionTime(999.0f), m_nBluePrintChangeCount(0), m_vSpecificAreaPosition(0, 0, 0)
+	: m_pInteractCenter(pInteractCenter), m_eSkillCondition(), m_eSecondSkillEvent(eEvent::None), m_fFirstSkillConditionTime(0.0f), m_fFirstSkillConditionElapsedTime(0.0f), m_isArrive(false), m_fTravelDistance(0.0f), m_nCombinUseCount(0), m_nVendingUseCount(0), m_nCrowdControlCount(0), m_nThrowPartsCount(0), m_nSpinPartsCount(0), m_sSpecificPartsID(""), m_fFirstSkillElapsedTime(0.0f), m_fSecondSkillElapsedTime(0.0f), m_fUltimateSkillElapsedTime(0.0f), m_fUltimateSkillConditionTime(999.0f), m_nBluePrintChangeCount(0), m_vSpecificAreaPosition(0, 0, 0), m_fArriveSize(0.0f)
 
 {
 	g_EventManager->Attach(eEvent::CompleteBluePrint, this);
@@ -32,7 +32,7 @@ void CMonster::Update()
 
 	if (m_eSecondSkillEvent == eEvent::SpecificArea)
 	{
-		if (m_pInteractCenter->CheckDistanceToSelectedObject(m_vSpecificAreaPosition))
+		if (m_pInteractCenter->CheckDistanceToSelectedObject(m_vSpecificAreaPosition, m_fArriveSize))
 		{
 			m_isArrive = true;
 		}
@@ -127,26 +127,73 @@ bool CMonster::SecondSkillTriggered()
 	if (m_stSkillUsing.isUltimateSkill)
 		return false;
 	bool b = false;
-	if (m_fTravelDistance >= 32.0f)
-		b = true;
 
-	if (m_isArrive)
-		b = true;
+	//테스트수치 
+	{
+		if (m_fTravelDistance >= 45.0f)
+			b = true;
 
-	if (m_nCombinUseCount >= 6)
-		b = true;
+		if (m_isArrive)
+		{
+			b = true;
+			m_fArriveSize = 2.0f;
+		}
 
-	if (m_nVendingUseCount >= 4)
-		b = true;
+		if (m_nCombinUseCount >= 8)
+			b = true;
 
-	if (m_nCrowdControlCount >= 3)
-		b = true;
+		if (m_nVendingUseCount >= 7)
+			b = true;
 
-	if (m_nThrowPartsCount >= 6)
-		b = true;
+		if (m_nCrowdControlCount >= 4)
+			b = true;
 
-	if (m_nSpinPartsCount >= 6)
-		b = true;
+		if (m_nThrowPartsCount >= 8)
+			b = true;
+
+		if (m_nSpinPartsCount >= 7)
+			b = true;
+
+	}
+
+
+	//랜덤수치
+	//{
+	//	if (m_fTravelDistance >= 45.0f)
+	//		b = true;
+
+	//	if (m_isArrive)
+	//	{
+	//		b = true;
+	//		m_fArriveSize = 2.0f;
+	//	}
+
+	//	if (m_nCombinUseCount >= 8)
+	//		b = true;
+
+	//	if (m_nVendingUseCount >= 7)
+	//		b = true;
+
+	//	if (m_nCrowdControlCount >= 4)
+	//		b = true;
+
+	//	if (m_nThrowPartsCount >= 8)
+	//		b = true;
+
+	//	if (m_nSpinPartsCount >= 7)
+	//		b = true;
+	//}
+	//
+
+
+
+
+
+
+
+
+
+
 
 	if (b && !m_pInteractCenter->CheckWarning())
 		return false;

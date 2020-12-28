@@ -43,7 +43,7 @@ void CUISelectSolved::Setup()
 	D3DXVECTOR2 clearUIPos = D3DXVECTOR2(m_vPosition.x , m_vPosition.y + 150);
 	D3DXVECTOR2 TimeTextPos = D3DXVECTOR2(m_vPosition.x + 285, m_vPosition.y + 190);
 
-	CUI* clearTimeUI = new CUIClearTime(clearUIPos, TimeTextPos, sTime, eTextType::SelectText);
+	CUI* clearTimeUI = new CUIClearTime(clearUIPos, TimeTextPos, sTime,80,50, eTextType::SelectText);
 	board->AddChild(clearTimeUI);
 
 	D3DXVECTOR2 startBtnPos = D3DXVECTOR2(m_vPosition.x + 160, m_vPosition.y + 250);
