@@ -2,8 +2,32 @@
 #include "CMonster.h"
 
 CMonster::CMonster(IInteractCenter *pInteractCenter)
-	: m_pInteractCenter(pInteractCenter), m_eSkillCondition(), m_eSecondSkillEvent(eEvent::None), m_fFirstSkillConditionTime(0.0f), m_fFirstSkillConditionElapsedTime(0.0f), m_isArrive(false), m_fTravelDistance(0.0f), m_nCombinUseCount(0), m_nVendingUseCount(0), m_nCrowdControlCount(0), m_nThrowPartsCount(0), m_nSpinPartsCount(0), m_sSpecificPartsID(""), m_fFirstSkillElapsedTime(0.0f), m_fSecondSkillElapsedTime(0.0f), m_fUltimateSkillElapsedTime(0.0f), m_fUltimateSkillConditionTime(999.0f), m_nBluePrintChangeCount(0), m_vSpecificAreaPosition(0, 0, 0), m_fArriveSize(0.0f)
-
+	: m_pInteractCenter(pInteractCenter),
+	m_eSkillCondition(),
+	m_eSecondSkillEvent(eEvent::None),
+	m_fFirstSkillConditionTime(0.0f),
+	m_fFirstSkillConditionElapsedTime(0.0f),
+	m_isArrive(false),
+	m_fTravelDistance(0.0f),
+	m_nCombinUseCount(0),
+	m_nVendingUseCount(0),
+	m_nCrowdControlCount(0),
+	m_nThrowPartsCount(0),
+	m_nSpinPartsCount(0),
+	m_sSpecificPartsID(""),
+	m_fFirstSkillElapsedTime(0.0f),
+	m_fSecondSkillElapsedTime(0.0f),
+	m_fUltimateSkillElapsedTime(0.0f),
+	m_fUltimateSkillConditionTime(999.0f),
+	m_nBluePrintChangeCount(0),
+	m_vSpecificAreaPosition(0, 0, 0),
+	m_fConditionTravelDistance(0.0f),
+	m_fConditionArriveSize(0.0f),
+	m_nConditionCombinUseCount(0),
+	m_nConditionVendingUseCount(0),
+	m_nConditionCrowdControlCount(0),
+	m_nConditionThrowPartsCount(0),
+	m_nConditionSpinPartsCount(0)
 {
 	g_EventManager->Attach(eEvent::CompleteBluePrint, this);
 }
@@ -32,7 +56,7 @@ void CMonster::Update()
 
 	if (m_eSecondSkillEvent == eEvent::SpecificArea)
 	{
-		if (m_pInteractCenter->CheckDistanceToSelectedObject(m_vSpecificAreaPosition, m_fArriveSize))
+		if (m_pInteractCenter->CheckDistanceToSelectedObject(m_vSpecificAreaPosition, 2.0f))
 		{
 			m_isArrive = true;
 		}
@@ -136,7 +160,6 @@ bool CMonster::SecondSkillTriggered()
 		if (m_isArrive)
 		{
 			b = true;
-			m_fArriveSize = 2.0f;
 		}
 
 		if (m_nCombinUseCount >= 8)
@@ -153,44 +176,35 @@ bool CMonster::SecondSkillTriggered()
 
 		if (m_nSpinPartsCount >= 7)
 			b = true;
-
 	}
 
-
 	//랜덤수치
-	//{
-	//	if (m_fTravelDistance >= 45.0f)
-	//		b = true;
+	/*
+	{
+		if (m_fTravelDistance >= m_fConditionTravelDistance)
+			b = true;
 
-	//	if (m_isArrive)
-	//	{
-	//		b = true;
-	//		m_fArriveSize = 2.0f;
-	//	}
+		if (m_isArrive)
+		{
+			b = true;
+		}
 
-	//	if (m_nCombinUseCount >= 8)
-	//		b = true;
+		if (m_nCombinUseCount >= m_nConditionCombinUseCount)
+			b = true;
 
-	//	if (m_nVendingUseCount >= 7)
-	//		b = true;
+		if (m_nVendingUseCount >= m_nConditionVendingUseCount)
+			b = true;
 
-	//	if (m_nCrowdControlCount >= 4)
-	//		b = true;
+		if (m_nCrowdControlCount >= m_nConditionCrowdControlCount)
+			b = true;
 
-	//	if (m_nThrowPartsCount >= 8)
-	//		b = true;
+		if (m_nThrowPartsCount >= m_nConditionThrowPartsCount)
+			b = true;
 
-	//	if (m_nSpinPartsCount >= 7)
-	//		b = true;
-	//}
-	//
-
-
-
-
-
-
-
+		if (m_nSpinPartsCount >= m_nConditionSpinPartsCount)
+			b = true;
+	}
+	*/
 
 
 
@@ -246,6 +260,8 @@ void CMonster::ChooseSkillCondition()
 			m_eSkillCondition = eSkillCondition::TravelDistance;
 			g_EventManager->Attach(eEvent::TravelDistance, this);
 			m_eSecondSkillEvent = eEvent::TravelDistance;
+
+			m_fConditionTravelDistance = r.GenFloat(40, 50);
 		}
 		else if (random < 30)
 		{
@@ -253,36 +269,48 @@ void CMonster::ChooseSkillCondition()
 			g_EventManager->Attach(eEvent::SpecificArea, this);
 			m_eSecondSkillEvent = eEvent::SpecificArea;
 			m_vSpecificAreaPosition = m_pInteractCenter->SelectRandomObject();
+
+			m_fConditionArriveSize = r.GenFloat(1.0f, 4.0f);
 		}
 		else if (random < 48)
 		{
 			m_eSkillCondition = eSkillCondition::CombinUse;
 			g_EventManager->Attach(eEvent::CombinUse, this);
 			m_eSecondSkillEvent = eEvent::CombinUse;
+
+			m_nConditionCombinUseCount = r.GenInt(6, 8);
 		}
 		else if (random < 62)
 		{
 			m_eSkillCondition = eSkillCondition::VendingUse;
 			g_EventManager->Attach(eEvent::VendingUse, this);
 			m_eSecondSkillEvent = eEvent::VendingUse;
+
+			m_nConditionVendingUseCount = r.GenInt(6, 8);
 		}
 		else if (random < 74)
 		{
 			m_eSkillCondition = eSkillCondition::CrowdControl;
 			g_EventManager->Attach(eEvent::CrowdControl, this);
 			m_eSecondSkillEvent = eEvent::CrowdControl;
+
+			m_nConditionCrowdControlCount = r.GenInt(2, 4);
 		}
 		else if (random < 86)
 		{
 			m_eSkillCondition = eSkillCondition::ThrowParts;
 			g_EventManager->Attach(eEvent::ThrowParts, this);
 			m_eSecondSkillEvent = eEvent::ThrowParts;
+
+			m_nConditionThrowPartsCount = r.GenInt(6, 8);
 		}
 		else
 		{
 			m_eSkillCondition = eSkillCondition::SpinParts;
 			g_EventManager->Attach(eEvent::SpinParts, this);
 			m_eSecondSkillEvent = eEvent::SpinParts;
+
+			m_nConditionSpinPartsCount = r.GenInt(5, 7);
 		}
 	}
 

@@ -11,10 +11,6 @@ CMainGame::CMainGame()
 	//, m_pScene(NULL)
 {
 	//Sound Add
-	//g_SoundManager->AddBGM("data/sound/bgm.mp3");
-	g_SoundManager->AddSFX("data/sound/effBBam.mp3", "BBam");
-	g_SoundManager->AddSFX("data/sound/effMelem.mp3", "Melem");
-
 	g_SoundManager->AddSFX("data/sound/sfx/click.mp3", "click");
 	g_SoundManager->AddSFX("data/sound/sfx/win.mp3", "win");
 	g_SoundManager->AddSFX("data/sound/sfx/game_over.mp3", "game_over");
