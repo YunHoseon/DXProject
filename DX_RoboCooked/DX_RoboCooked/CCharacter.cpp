@@ -37,6 +37,7 @@ CCharacter::CCharacter(int nPlayerNum) :
 	m_pCC = new CCCNone;
 	m_pCharge = new CUICharge(&m_vPosition);
 	m_pDashShadow = new CDashShadow;
+	m_vDirection = D3DXVECTOR3(0, 0, -1);
 }
 
 CCharacter::~CCharacter()
