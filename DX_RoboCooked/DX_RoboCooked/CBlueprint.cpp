@@ -189,6 +189,8 @@ void CBlueprint::SetupTexture(string partsID)
 		m_blueprintTexture = g_pTextureManager->GetTexture("data/Texture/blueprint/blueprint_head_hero.png");
 	else if (partsID == "C09")
 		m_blueprintTexture = g_pTextureManager->GetTexture("data/Texture/blueprint/blueprint_head_final.png");
+	else if (partsID == "B01")
+		m_blueprintTexture = g_pTextureManager->GetTexture("data/Texture/blueprint/B01_RC.png");
 	else
 		m_blueprintTexture = g_pTextureManager->GetTexture("data/Texture/Blueprint.jpg");
 }
