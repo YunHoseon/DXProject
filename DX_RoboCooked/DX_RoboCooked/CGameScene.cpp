@@ -169,6 +169,7 @@ void CGameScene::Init()
 	//m_vecParts.push_back(parts3);
 	//m_vecParts.push_back(parts4);
 	//m_vecMonster.push_back(medusa);
+	//m_vecMonster.push_back(harpy);
 	m_cMutex.unlock();
 }
 

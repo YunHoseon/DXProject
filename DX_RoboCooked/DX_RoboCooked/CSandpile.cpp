@@ -19,7 +19,7 @@ CSandpile::CSandpile(IInteractCenter* InteractCenter, D3DXVECTOR3 vPosition) : m
 	SetRotationY(0);
 	SetPosition(vPosition);
 
-	m_pCollisionArea = new CBoxCollision(D3DXVECTOR3(0, 0, 0), D3DXVECTOR3(0.8, 0.3, 0.8), &m_matWorld);
+	m_pCollisionArea = new CBoxCollision(D3DXVECTOR3(0, 0, 0), D3DXVECTOR3(0.1, 0.3, 0.1), &m_matWorld);
 	m_pCollisionArea->Update();
 }
 

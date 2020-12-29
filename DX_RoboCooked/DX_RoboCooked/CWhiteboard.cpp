@@ -14,7 +14,8 @@ CWhiteboard::CWhiteboard(D3DXVECTOR3 vPos)
 	m_pSMesh = g_pStaticMeshManager->GetStaticMesh("Whiteboard");
 	m_pCollision = new CBoxCollision(m_pSMesh->GetMesh(), &m_matWorld);
 
-	m_pUIWhiteboard = new CUIWhiteboard(D3DXVECTOR2(530,160));
+	//m_pUIWhiteboard = new CUIWhiteboard(D3DXVECTOR2(530,160));
+	m_pUIWhiteboard = new CUIWhiteboard(D3DXVECTOR2(1059, 0));
 
 	SetScale(0.025f, 0.025f, 0.025f);
 	SetRotationY(D3DXToRadian(0));
