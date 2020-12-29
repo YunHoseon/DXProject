@@ -112,23 +112,21 @@ void CBlueprint::StoreOnBlueprintParts()
 	if (m_onBlueprintParts)
 		return;
 	
-	if (m_onBlueprintParts == nullptr)
+	for (CParts* it : *m_pVecParts)
 	{
-		for (CParts* it : *m_pVecParts)
+		if (it->GetCollision()->Collide(m_pInteractCollision))
 		{
-			if (it->GetCollision()->Collide(m_pInteractCollision))
-			{
-				m_onBlueprintParts = it;
-				m_onBlueprintParts->SetGrabPosition(&m_pInteractCollision->GetCenter());
-				m_onBlueprintParts->GetCollision()->SetActive(false);
-				m_pCollision->SetActive(true);
-				m_pInteractCollision->SetActive(false);
+			m_onBlueprintParts = it;
+			m_onBlueprintParts->SetGrabPosition(&m_pInteractCollision->GetCenter());
+			m_onBlueprintParts->GetCollision()->SetActive(false);
+			m_pCollision->SetActive(true);
+			m_pInteractCollision->SetActive(false);
 
-				CheckBluePrintComplete();
-				break;
-			}
+			CheckBluePrintComplete();
+			break;
 		}
 	}
+	
 }
 
 void CBlueprint::CheckBluePrintComplete()

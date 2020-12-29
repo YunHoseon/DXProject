@@ -991,8 +991,7 @@ D3DXVECTOR3 CGameScene::GetRandomPartsPosition()
 	CRandomNumberGenerator rand;
 	int index = rand.GenInt(0, m_vecParts.size() - 1);
 
-	D3DXVECTOR3 vec = m_vecParts[index]->GetPosition();
-	return vec;
+	return m_vecParts[index]->GetPosition();
 }
 
 CCrowdControl *CGameScene::ChooseCC(eSkill skill)
