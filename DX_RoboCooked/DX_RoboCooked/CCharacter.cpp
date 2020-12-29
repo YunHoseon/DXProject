@@ -22,7 +22,7 @@ CCharacter::CCharacter(int nPlayerNum) :
 	//m_pMesh(nullptr),
 	//m_stMtl({}),
 	m_fMinThrowPower(0.01f),
-	m_fMaxThrowPower(0.1f),
+	m_fMaxThrowPower(0.3f),
 	m_fThrowPower(m_fMinThrowPower),
 	m_fThrowPowerUpSpeed(0.003f),
 	m_fMaxSpeed(0.2f),
@@ -455,6 +455,16 @@ void CCharacter::Reset()
 	SetRotationY(D3DX_PI);
 	m_vVelocity = g_vZero;
 	m_vAcceleration = g_vZero;
+
+	if (m_pParts)
+	{
+		SetPlayerState(ePlayerState::None);
+		m_pParts->ThrowParts(m_vDirection * m_fThrowPower * TimeRevision);
+		m_pParts = nullptr;
+		m_fThrowPower = m_fMinThrowPower;
+		if (m_pCharge)
+			m_pCharge->SetChildActive(false);
+	}
 }
 
 void CCharacter::SetAnimState()
