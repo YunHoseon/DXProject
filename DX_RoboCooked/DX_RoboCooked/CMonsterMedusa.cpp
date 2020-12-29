@@ -11,7 +11,7 @@ CMonsterMedusa::CMonsterMedusa(IInteractCenter *pInteractCenter) : CMonster(pInt
 	//m_fUltimateSkillConditionTime = 295.0f;
 	m_sSpecificPartsID = "B04";
 	m_debugName = "medusa";
-	ChooseSkillCondition();
+	ChooseSecondSkillCondition();
 
 	vector<D3DXVECTOR3> vecProjVertex, vecTrans;
 	vecProjVertex.push_back(D3DXVECTOR3(-0.7, -0.7, 0.5));
@@ -116,7 +116,7 @@ void CMonsterMedusa::Update()
 	{
 		m_stSkillUsing.SecondSkillProperty = SecondSkill();
 		m_stSkillUsing.isSecondSkill = true;
-		ChooseSkillCondition();
+		ChooseSecondSkillCondition();
 		m_pInteractCenter->ApplyMonsterSkill(SecondSkill(), SecondSkillTime());
 
 		for (int i = 0; i < 4; ++i)

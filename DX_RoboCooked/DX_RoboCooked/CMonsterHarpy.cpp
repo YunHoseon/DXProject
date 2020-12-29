@@ -12,7 +12,7 @@ CMonsterHarpy::CMonsterHarpy(IInteractCenter *pInteractCenter) : CMonster(pInter
 	//m_fUltimateSkillConditionTime = 290.0f;
 	m_sSpecificPartsID = "B03";
 	m_debugName = "harpy";
-	ChooseSkillCondition();
+	ChooseSecondSkillCondition();
 	m_vecSkillAnim_2.resize(2);
 	g_EventManager->Attach(eEvent::DeleteTornado, this);
 	m_vecSkillAnim_2[0] = new CHarpyWing_L;
@@ -97,7 +97,7 @@ void CMonsterHarpy::Update()
 	{
 		m_stSkillUsing.SecondSkillProperty = SecondSkill();
 		m_stSkillUsing.isSecondSkill = true;
-		ChooseSkillCondition();
+		ChooseSecondSkillCondition();
 		m_pInteractCenter->ApplyMonsterSkill(SecondSkill(), SecondSkillTime());
 
 		m_vecSkillAnim_2[0]->SetAnimation();

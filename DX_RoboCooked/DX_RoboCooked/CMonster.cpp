@@ -50,7 +50,7 @@ void CMonster::Update()
 	{
 		m_stSkillUsing.SecondSkillProperty = SecondSkill();
 		m_stSkillUsing.isSecondSkill = true;
-		ChooseSkillCondition();
+		ChooseSecondSkillCondition();
 		m_pInteractCenter->ApplyMonsterSkill(SecondSkill(), SecondSkillTime());
 	}
 
@@ -248,9 +248,9 @@ bool CMonster::UltimateSkillTriggered()
 	return false;
 }
 
-void CMonster::ChooseSkillCondition()
+void CMonster::ChooseSecondSkillCondition()
 {
-	SkillConditionInit();
+	SecondSkillConditionInit();
 
 	CRandomNumberGenerator r;
 	int random = r.GenInt(0, 99);
@@ -416,7 +416,7 @@ void CMonster::TravelDistanceSkill(void *_value)
 	m_fTravelDistance += data->fDistance;
 }
 
-void CMonster::SkillConditionInit()
+void CMonster::SecondSkillConditionInit()
 {
 	if (m_eSecondSkillEvent == eEvent::None)
 		return;

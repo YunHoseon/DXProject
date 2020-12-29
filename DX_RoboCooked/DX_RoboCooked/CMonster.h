@@ -128,7 +128,7 @@ public:
 	void AddObjectPosition(D3DXVECTOR3 pos);
 	void AddBluePrintCount();
 	virtual void DeleteTornado() {};
-	void ChooseSkillCondition();
+	void ChooseSecondSkillCondition();
 public:
 	void TravelDistanceSkill(void* _value);
 	void ArriveSkill() { m_isArrive = true; }
@@ -139,7 +139,7 @@ public:
 	void SpinPartsSkill(){ m_nSpinPartsCount++; }
 
 protected:
-	void SkillConditionInit();
+	void SecondSkillConditionInit();
 	bool UltimateSkillTriggered();
 	bool SecondSkillTriggered();
 	bool FirstSkillTriggered();
