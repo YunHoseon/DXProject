@@ -76,6 +76,8 @@ public:
 
 	void AddAcceleration(const D3DXVECTOR3& vAccel) override {}
 	void AddForce(const D3DXVECTOR3& vForce) override {}
+
+	void CreateShadowMap() override;
 private:
 	CParts* Make() override = 0;
 	virtual void Setup(float fAngle, D3DXVECTOR3 vPosition){};

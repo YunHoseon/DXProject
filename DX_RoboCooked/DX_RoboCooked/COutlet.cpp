@@ -126,3 +126,21 @@ void COutlet::SetPartsId(string sPartsID)
 	m_pSkinnedMesh->SetTransform(mat);
 	m_pSkinnedMesh->Update();
 }
+
+void COutlet::CreateShadowMap()
+{
+	g_pRenderShadowManager->GetCreateShadowShader()->SetMatrix("gWorldMatrix", &m_matWorld);
+	UINT numPasses = 0;
+	g_pRenderShadowManager->GetCreateShadowShader()->Begin(&numPasses, NULL);
+
+	for (UINT i = 0; i < numPasses; ++i)
+	{
+		g_pRenderShadowManager->GetCreateShadowShader()->BeginPass(i);
+		{
+			m_pSkinnedMesh->Render(nullptr);
+		}
+		g_pRenderShadowManager->GetCreateShadowShader()->EndPass();
+	}
+
+	g_pRenderShadowManager->GetCreateShadowShader()->End();
+}

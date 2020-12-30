@@ -131,6 +131,36 @@ void CSkinnedMesh::Render(LPD3DXFRAME pFrame)
 		Render(pFrame->pFrameSibling);
 }
 
+void CSkinnedMesh::RenderWithShadow(LPD3DXFRAME pFrame)
+{
+	if (pFrame == nullptr)
+		pFrame = m_pRoot;
+
+	ST_BONE* pBone = (ST_BONE*)pFrame;
+
+	if (pBone->pMeshContainer)
+	{
+		ST_BONE_MESH* pBoneMesh = (ST_BONE_MESH*)pBone->pMeshContainer;
+		if (pBoneMesh->MeshData.pMesh)
+		{
+			//g_pD3DDevice->SetTransform(D3DTS_WORLD, &pBone->CombinedTransformationMatrix);
+			for (size_t i = 0; i < pBoneMesh->vecMtl.size(); ++i)
+			{
+				g_pRenderShadowManager->GetApplyShadowShader()->SetTexture("DiffuseMap_Tex", pBoneMesh->vecTexture[i]);
+				g_pD3DDevice->SetMaterial(&pBoneMesh->vecMtl[i]);
+				g_pRenderShadowManager->GetApplyShadowShader()->CommitChanges();
+				pBoneMesh->MeshData.pMesh->DrawSubset(i);
+			}
+		}
+	}
+
+	if (pFrame->pFrameFirstChild)
+		RenderWithShadow(pFrame->pFrameFirstChild);
+
+	if (pFrame->pFrameSibling)
+		RenderWithShadow(pFrame->pFrameSibling);
+}
+
 void CSkinnedMesh::SetupBoneMatrixPtrs(LPD3DXFRAME pFrame)
 {
 	if(pFrame && pFrame->pMeshContainer)

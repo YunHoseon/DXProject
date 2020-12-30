@@ -173,6 +173,7 @@
     <ClInclude Include="CMonsterMedusa.h" />
     <ClInclude Include="CPartsDestroyer.h" />
     <ClInclude Include="CPartsManager.h" />
+    <ClInclude Include="CRenderShadowManager.h" />
     <ClInclude Include="CSand.h" />
     <ClInclude Include="CSandpile.h" />
     <ClInclude Include="CSaveLoadManager.h" />
@@ -356,6 +357,7 @@
     <ClCompile Include="CMonsterMedusa.cpp" />
     <ClCompile Include="CPartsDestroyer.cpp" />
     <ClCompile Include="CPartsManager.cpp" />
+    <ClCompile Include="CRenderShadowManager.cpp" />
     <ClCompile Include="CSand.cpp" />
     <ClCompile Include="CSandpile.cpp" />
     <ClCompile Include="CSaveLoadManager.cpp" />

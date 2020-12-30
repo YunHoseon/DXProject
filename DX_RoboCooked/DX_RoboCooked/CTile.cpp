@@ -32,15 +32,44 @@ bool CTile::OnEvent(eEvent eEvent, void* _value)
 	return true;
 }
 
+void CTile::CreateShadowMap()
+{
+	g_pRenderShadowManager->GetCreateShadowShader()->SetMatrix("gWorldMatrix", &m_matWorld);
+	UINT numPasses = 0;
+	g_pRenderShadowManager->GetCreateShadowShader()->Begin(&numPasses, NULL);
+
+	for (UINT i = 0; i < numPasses; ++i)
+	{
+		g_pRenderShadowManager->GetCreateShadowShader()->BeginPass(i);
+		{
+			m_pSMesh->CreateShadowMap();
+		}
+		g_pRenderShadowManager->GetCreateShadowShader()->EndPass();
+	}
+
+	g_pRenderShadowManager->GetCreateShadowShader()->End();
+}
+
 void CTile::Render()
 {
-
-	if(m_pSMesh)
+	g_pRenderShadowManager->GetApplyShadowShader()->SetMatrix("gWorldMatrix", &m_matWorld);
+	g_pRenderShadowManager->GetApplyShadowShader()->SetBool("gIsSkinned", false);
+	UINT numPasses = 0;
+	g_pRenderShadowManager->GetApplyShadowShader()->Begin(&numPasses, NULL);
+	
+	for (UINT i = 0; i < numPasses; ++i)
 	{
-		g_pD3DDevice->SetTransform(D3DTS_WORLD, &m_matWorld);
-		g_pD3DDevice->SetRenderState(D3DRS_LIGHTING, true);
-		m_pSMesh->Render();
+		g_pRenderShadowManager->GetApplyShadowShader()->BeginPass(i);
+		{
+			if (m_pSMesh)
+			{
+				m_pSMesh->RenderWidthShadow();
+			}
+		}
+		g_pRenderShadowManager->GetApplyShadowShader()->EndPass();
 	}
+	
+	g_pRenderShadowManager->GetApplyShadowShader()->End();
 }
 
 void CTile::Update()

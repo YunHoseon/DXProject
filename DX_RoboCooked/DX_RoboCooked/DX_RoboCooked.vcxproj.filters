@@ -648,6 +648,9 @@
     <ClInclude Include="CUIPopUpBoard.h">
       <Filter>UI\Button\SubUI</Filter>
     </ClInclude>
+    <ClInclude Include="CRenderShadowManager.h">
+      <Filter>Manager</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="stdafx.cpp">
@@ -1189,6 +1192,9 @@
     </ClCompile>
     <ClCompile Include="CUIPopUpBoard.cpp">
       <Filter>UI\Button\SubUI</Filter>
+    </ClCompile>
+    <ClCompile Include="CRenderShadowManager.cpp">
+      <Filter>Manager</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

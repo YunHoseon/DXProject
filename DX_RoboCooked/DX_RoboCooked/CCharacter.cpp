@@ -53,9 +53,28 @@ CCharacter::~CCharacter()
 
 void CCharacter::Render()
 {
+	g_pRenderShadowManager->GetApplyShadowShader()->SetMatrix("gWorldMatrix", &m_matWorld);
+	g_pRenderShadowManager->GetApplyShadowShader()->SetBool("gIsSkinned", true);
+	UINT numPasses = 0;
+	
+	g_pRenderShadowManager->GetApplyShadowShader()->Begin(&numPasses, NULL);
+
+	for (UINT i = 0; i < numPasses; ++i)
+	{
+		g_pRenderShadowManager->GetApplyShadowShader()->BeginPass(i);
+		{
+			if (m_pSkinnedMesh)
+			{
+				m_pSkinnedMesh->RenderWithShadow(nullptr);
+			}
+		}
+		g_pRenderShadowManager->GetApplyShadowShader()->EndPass();
+	}
+
+	g_pRenderShadowManager->GetApplyShadowShader()->End();
 	g_pD3DDevice->SetTransform(D3DTS_WORLD, &m_matWorld);
 	g_pD3DDevice->SetRenderState(D3DRS_LIGHTING, true);
-	m_pSkinnedMesh->Render(nullptr);
+	
 
 	_DEBUG_COMMENT if (m_pInteractCollision)
 		_DEBUG_COMMENT m_pInteractCollision->Render();
@@ -441,6 +460,25 @@ void CCharacter::SetCC(CCrowdControl *cc)
 	SafeDelete(m_pCC);
 	m_pCC = cc;
 	m_pCC->SetTarget(&m_vGrabPartsPosition);
+}
+
+void CCharacter::CreateShadowMap()
+{
+	g_pD3DDevice->SetRenderState(D3DRS_LIGHTING, true);
+	g_pRenderShadowManager->GetCreateShadowShader()->SetMatrix("gWorldMatrix", &m_matWorld);
+	UINT numPasses = 0;
+	g_pRenderShadowManager->GetCreateShadowShader()->Begin(&numPasses, NULL);
+
+	for (UINT i = 0; i < numPasses; ++i)
+	{
+		g_pRenderShadowManager->GetCreateShadowShader()->BeginPass(i);
+		{
+			m_pSkinnedMesh->Render(nullptr);
+		}
+		g_pRenderShadowManager->GetCreateShadowShader()->EndPass();
+	}
+	
+	g_pRenderShadowManager->GetCreateShadowShader()->End();
 }
 
 void CCharacter::DeleteCC()

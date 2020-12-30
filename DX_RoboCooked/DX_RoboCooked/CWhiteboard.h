@@ -24,4 +24,5 @@ public:
 	bool ClosePopup(void* _value);
 	void SetFormula(vector<CBlueprint *>& vBp);
 
+	void CreateShadowMap() override;
 };

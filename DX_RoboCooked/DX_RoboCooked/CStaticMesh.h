@@ -24,4 +24,6 @@ public:
 	vector<LPDIRECT3DTEXTURE9>& GetVecTexture() { return m_vecTexture; }
 
 	virtual void Render(LPDIRECT3DTEXTURE9 pBlendTexture = nullptr);
+	virtual void RenderWidthShadow();
+	virtual void CreateShadowMap();
 };

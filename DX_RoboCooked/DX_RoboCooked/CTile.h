@@ -35,6 +35,7 @@ public:
 
 	Synthesize(eTileType, m_eTileType, TileType);
 
+	void CreateShadowMap() override;
 };
 
 #include "CSand.h"

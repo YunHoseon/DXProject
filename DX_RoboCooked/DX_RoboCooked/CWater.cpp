@@ -74,9 +74,7 @@ void CWater::Render()
 	// << :
 	else if (m_pSMesh)
 	{
-		g_pD3DDevice->SetTransform(D3DTS_WORLD, &m_matWorld);
-		g_pD3DDevice->SetRenderState(D3DRS_LIGHTING, true);
-		m_pSMesh->Render();
+		CTile::Render();
 	}
 }
 

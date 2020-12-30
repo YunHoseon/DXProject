@@ -43,5 +43,7 @@ public:
 	void AddForce(const D3DXVECTOR3& vForce) override {}
 
 	void SetPartsId(string sPartsID);
+
+	void CreateShadowMap() override;
 };
 

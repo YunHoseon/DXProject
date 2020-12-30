@@ -88,6 +88,25 @@ void CPartStorage::Setup(float fAngle, D3DXVECTOR3 vPosition, string sPartsID)
 }
 
 
+void CPartStorage::CreateShadowMap()
+{
+	g_pRenderShadowManager->GetCreateShadowShader()->SetMatrix("gWorldMatrix", &m_matWorld);
+	UINT numPasses = 0;
+	g_pRenderShadowManager->GetCreateShadowShader()->Begin(&numPasses, NULL);
+
+	for (UINT i = 0; i < numPasses; ++i)
+	{
+		g_pRenderShadowManager->GetCreateShadowShader()->BeginPass(i);
+		{
+			if (m_pSkinnedMesh)
+				m_pSkinnedMesh->Render(nullptr);
+		}
+		g_pRenderShadowManager->GetCreateShadowShader()->EndPass();
+	}
+
+	g_pRenderShadowManager->GetCreateShadowShader()->End();
+}
+
 CParts *CPartStorage::Make()
 {
 	CParts *parts = g_pPartsManager->CreateParts(m_sID);

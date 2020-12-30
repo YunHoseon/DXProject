@@ -63,5 +63,7 @@ public:
 
 	void AddForce(const D3DXVECTOR3& vForce) override;
 	void AddAcceleration(const D3DXVECTOR3& vAccel) override;
+
+	void CreateShadowMap() override;
 };
 
