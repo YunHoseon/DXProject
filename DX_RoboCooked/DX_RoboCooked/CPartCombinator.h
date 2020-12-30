@@ -42,7 +42,7 @@ protected:
 	//D3DXVECTOR3					m_vOnCombinatorPosition;
 	vector<D3DXVECTOR3>				m_vecOnCombinatorPosition;
 	CParts*							m_pParts;
-	bool							m_isCombine;
+	bool							m_isDischarging;
 	float							m_fElapsedTime;
 	float							m_fCombineTime;
 	INT								m_nPartsCount;

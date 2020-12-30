@@ -11,7 +11,7 @@ CPartCombinator::CPartCombinator(IInteractCenter* pInteractCenter, eCombinatorPa
 	m_pPartsInteractCollision(NULL),
 	//m_vOnCombinatorPosition(vPosition.x, vPosition.y + 2.5f, vPosition.z),
 	m_pParts(NULL),
-	m_isCombine(false),
+	m_isDischarging(false),
 	m_fElapsedTime(0),
 	m_fCombineTime(5.f),
 	m_nPartsCount(0),

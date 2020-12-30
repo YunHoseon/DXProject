@@ -65,7 +65,7 @@ void CPartManualCombinator::Update()
 	if (m_isTimeCheck && m_eCombinatorActionState == eCombinatorActionState::Usable)
 		CombineParts();
 	
-	if (m_isCombine && m_pParts == nullptr)
+	if (m_isDischarging && m_pParts == nullptr)
 		DischargeParts();
 
 	if (m_eCombinatorLoadState == eCombinatorLoadState::LoadPossible)
@@ -80,6 +80,7 @@ void CPartManualCombinator::Update()
 			m_pInteractCenter->DeleteParts(m_pParts);
 			m_pParts = nullptr;
 			m_eCombinatorActionState = eCombinatorActionState::Usable;
+			m_eCombinatorLoadState = eCombinatorLoadState::LoadPossible;
 			m_DestroyTrashCountTime = 0;
 		}
 	}
@@ -130,6 +131,7 @@ void CPartManualCombinator::Interact(CCharacter* pCharacter)
 	m_pParts->SetGrabPosition(&pCharacter->GetGrabPartsPosition());
 	m_pParts->GetCollision()->SetActive(true);
 	m_pParts = nullptr;
+	
 	m_eCombinatorActionState = eCombinatorActionState::Usable;
 }
 
@@ -163,7 +165,7 @@ void CPartManualCombinator::CombineParts()
 
 	if(m_fElapsedTime >= m_fCombineTime)
 	{
-		m_eCombinatorLoadState = eCombinatorLoadState::LoadPossible;
+		//m_eCombinatorLoadState = eCombinatorLoadState::LoadPossible;
 		m_isTimeCheck = false;
 		m_fElapsedTime = 0;
 		
@@ -174,7 +176,7 @@ void CPartManualCombinator::CombineParts()
 		m_vecDischargeParts.push_back(parts);
 		m_pInteractCenter->AddParts(parts);
 
-		m_isCombine = true;
+		m_isDischarging = true;
 	}
 }
 
@@ -184,15 +186,16 @@ void CPartManualCombinator::DischargeParts()
 	{
 		m_nPartsCount = 0;
 		m_eCombinatorLoadState = eCombinatorLoadState::LoadPossible;
-		m_isCombine = false;
+		m_isDischarging = false;
 		return;
 	}
-	m_pParts = *m_vecDischargeParts.begin();
+	m_pParts = m_vecDischargeParts.back();
 	//m_pParts->SetPosition(m_vOnCombinatorPosition);
 	//m_pParts->SetGrabPosition(&m_vOnCombinatorPosition);
 	m_pParts->SetGrabPosition(&m_vecOnCombinatorPosition[1]);
 	m_pParts->Unsmallize();
-	m_vecDischargeParts.erase(m_vecDischargeParts.begin());
+	//m_vecDischargeParts.erase(m_vecDischargeParts.begin());
+	m_vecDischargeParts.pop_back();
 }
 
 void CPartManualCombinator::InsertParts(CParts* p)
@@ -203,20 +206,25 @@ void CPartManualCombinator::InsertParts(CParts* p)
 void CPartManualCombinator::ReadytoCarryParts()
 {
 	CheckCombineisFull();
-	if (m_isTimeCheck)
+	if (m_isTimeCheck) //만약 꽉차있다면 부품을 숨기고 조합에 들어감
 		return;
 
-	m_isCombine = true; 
+	// 꽉 차있지 않을 경우 들고있던 부품을 내보내기 배열에 추가함.
+	m_isDischarging = true; 
 	for (auto it : m_multimapParts)
 	{
 		m_vecDischargeParts.push_back(it.second);
 	}
 	m_multimapParts.clear();
+	//if (!m_vecDischargeParts.empty())
+	m_eCombinatorLoadState = eCombinatorLoadState::LoadImpossible;
 }
 
 void CPartManualCombinator::CheckCombineisFull()
 {
-	if (m_eCombinatorLoadState == eCombinatorLoadState::LoadImpossible)
+	// loadImpossible => 꽉 차있거나 내보낼 부품이 있을 때.
+	// 따라서 LoadImpossible이고 내보낼 부품이 없다면 꽉 차있다.
+	if (m_eCombinatorLoadState == eCombinatorLoadState::LoadImpossible && m_pParts == nullptr) 
 	{
 		for (auto it : m_multimapParts)
 		{

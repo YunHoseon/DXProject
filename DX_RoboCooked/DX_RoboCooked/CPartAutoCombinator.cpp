@@ -37,7 +37,7 @@ void CPartAutoCombinator::Update()
 		m_eCombinatorActionState == eCombinatorActionState::Usable)
 		CombineParts();
 	
-	if(m_isCombine && m_pParts == nullptr)
+	if(m_isDischarging && m_pParts == nullptr)
 		DischargeParts();
 
 	if (m_eCombinatorLoadState == eCombinatorLoadState::LoadPossible && m_pParts == nullptr)
@@ -129,14 +129,14 @@ void CPartAutoCombinator::DischargeParts()
 	//	m_nPartsCount = 0;
 	//	m_eCombinatorActionState = eCombinatorActionState::Unusable;
 	//	m_eCombinatorLoadState = eCombinatorLoadState::LoadPossible;
-	//	m_isCombine = false;
+	//	m_isDischarging = false;
 	//	return;
 	//}
 
 	m_nPartsCount = 0;
 	m_eCombinatorActionState = eCombinatorActionState::Unusable;
 	m_eCombinatorLoadState = eCombinatorLoadState::LoadPossible;
-	m_isCombine = false;
+	m_isDischarging = false;
 
 	m_pParts = *m_vecDischargeParts.begin();
 	//m_pParts->SetPosition(m_vOnCombinatorPosition);
@@ -160,7 +160,7 @@ void CPartAutoCombinator::InsertParts(CParts* p)
 void CPartAutoCombinator::ReadytoCarryParts()
 {
 	g_SoundManager->PlaySFX("machine_complete");
-	m_isCombine = true;
+	m_isDischarging = true;
 	CParts* parts = Make();
 	parts->GetCollision()->SetActive(false);
 	m_vecDischargeParts.push_back(parts);
