@@ -34,7 +34,7 @@ void CUICC::Render()
 		m_Sprite->Draw(m_DisabledTexture,
 			&rc,
 			&g_vZero,
-			&D3DXVECTOR3(m_vPosition.x - m_DisabledInfo.Width * 0.5f, m_vPosition.y - m_DisabledInfo.Height, 0),
+			&D3DXVECTOR3(m_vPosition.x - m_DisabledInfo.Width * 0.5f, m_vPosition.y - m_DisabledInfo.Height + 10, 0),
 			D3DCOLOR_ARGB(255, 255, 255, 255));
 	}
 	m_Sprite->End();
