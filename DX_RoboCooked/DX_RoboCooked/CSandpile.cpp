@@ -34,6 +34,9 @@ void CSandpile::Render()
 {
 	g_pRenderShadowManager->GetApplyShadowShader()->SetMatrix("gWorldMatrix", &m_matWorld);
 	g_pRenderShadowManager->GetApplyShadowShader()->SetBool("gIsSkinned", false);
+	float f[3] = { 0.1,0.05,0.05 };
+	float f2[3] = { 0.8,0.8,0.8 };
+	g_pRenderShadowManager->GetApplyShadowShader()->SetFloatArray("gLightColor", f, 3);
 	UINT numPasses = 0;
 	g_pRenderShadowManager->GetApplyShadowShader()->Begin(&numPasses, NULL);
 
@@ -51,7 +54,7 @@ void CSandpile::Render()
 
 	g_pRenderShadowManager->GetApplyShadowShader()->End();
 
-	
+	g_pRenderShadowManager->GetApplyShadowShader()->SetFloatArray("gLightColor", f2, 3);
 	//if (m_pSMesh)
 	//{
 	//	g_pD3DDevice->SetTransform(D3DTS_WORLD, &m_matWorld);

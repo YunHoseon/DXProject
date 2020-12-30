@@ -179,7 +179,7 @@ void CGameScene::Render()
 
 	g_pD3DDevice->GetTransform(D3DTS_VIEW, &matView);
 	g_pD3DDevice->GetTransform(D3DTS_PROJECTION, &matProjection);
-	g_pRenderShadowManager->SetWorldLightPosition(D3DXVECTOR4(16.f, 20.0f, 16.0f, 1.0f));
+	g_pRenderShadowManager->SetWorldLightPosition(D3DXVECTOR4(16.f, 40.0f, 16.0f, 1.0f));
 	D3DXMATRIXA16 matViewProjection;
 	D3DXMatrixMultiply(&matViewProjection, &matView, &matProjection);
 

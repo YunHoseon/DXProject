@@ -76,11 +76,13 @@ void CStaticMesh::Render(LPDIRECT3DTEXTURE9 pBlendTexture)
 
 void CStaticMesh::RenderWidthShadow()
 {
+	
 	if (m_pMesh)
 	{
 		for (int i = 0; i < m_vecMaterial.size(); ++i)
 		{
 			g_pRenderShadowManager->GetApplyShadowShader()->SetTexture("DiffuseMap_Tex", m_vecTexture[i]);
+			g_pRenderShadowManager->GetApplyShadowShader()->SetTexture("SpecularMap_Tex", m_vecTexture[i]);
 			g_pRenderShadowManager->GetApplyShadowShader()->CommitChanges();
 			m_pMesh->DrawSubset(i);
 		}
