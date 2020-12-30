@@ -91,7 +91,8 @@ void CUIButton::NextStage()
 	int iTemp = g_SaveLoadManager->GetIndexByKey(m_pInteractCenter->GetSceneID()) + 1;
 	if (iTemp > g_SaveLoadManager->GetMaxIndex())
 	{
-		iTemp = 0;
+		GoToMain();
+		return;
 	}
 
 	CGameScene* scene = new CGameScene;

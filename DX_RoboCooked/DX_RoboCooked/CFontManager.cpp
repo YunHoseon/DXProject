@@ -41,15 +41,15 @@ LPD3DXFONT CFontManager::GetFont(eFontType e)
 	else if(e == CLEARTIME)
 	{
 		fd.Height = 100;
-		fd.Width = 50;
+		fd.Width = 100;
 		fd.Weight = FW_MEDIUM;
 		fd.Italic = false;
 		fd.CharSet = DEFAULT_CHARSET;
 		fd.OutputPrecision = OUT_DEFAULT_PRECIS;
 		fd.PitchAndFamily = FF_DONTCARE;
 		
-		AddFontResource(L"data/font/umberto.ttf");
-		wcscpy_s(fd.FaceName, L"Umberto");
+		AddFontResource(L"data/Fonts/a컴퓨터C.ttf");
+		wcscpy_s(fd.FaceName, L"a컴퓨터C");
 	}
 	else if (e == SELECT)
 	{

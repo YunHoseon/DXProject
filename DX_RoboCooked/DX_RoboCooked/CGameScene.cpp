@@ -179,7 +179,7 @@ void CGameScene::Render()
 
 	g_pD3DDevice->GetTransform(D3DTS_VIEW, &matView);
 	g_pD3DDevice->GetTransform(D3DTS_PROJECTION, &matProjection);
-	g_pRenderShadowManager->SetWorldLightPosition(D3DXVECTOR4(16.f, 40.0f, 16.0f, 1.0f));
+	g_pRenderShadowManager->SetWorldLightPosition(D3DXVECTOR4(20.f, 40.0f, 20.0f, 1.0f));
 	D3DXMATRIXA16 matViewProjection;
 	D3DXMatrixMultiply(&matViewProjection, &matView, &matProjection);
 
@@ -246,63 +246,11 @@ void CGameScene::Render()
 
 			g_pRenderShadowManager->GetApplyShadowShader()->SetTexture(
 				"ShadowMap_Tex", g_pRenderShadowManager->GetShadowRenderTarget());
-
-		//	UINT numPasses = 0;
-		//	//pApplyShadowShader->Begin(&numPasses, NULL);
-		//	g_pRenderShadowManager->GetApplyShadowShader()->Begin(&numPasses, NULL);
-		//	{
-		//		for (UINT i = 0; i < numPasses; ++i)
-		//		{
-		//			//pApplyShadowShader->BeginPass(i);
-		//			g_pRenderShadowManager->GetApplyShadowShader()->BeginPass(i);
-		//			{
-		//				for (CTile* it : m_vecTile)
-		//				{
-		//					if (it->GetTileType() != eTileType::Water)
-		//					{
-		//						g_pRenderShadowManager->GetApplyShadowShader()->SetTexture("DiffuseMap_Tex",
-		//							g_pTextureManager->GetTexture(it->GetTexPath()));
-	
-		//						g_pRenderShadowManager->GetApplyShadowShader()->SetMatrix("gWorldMatrix", &it->GetMatW());
-		//						g_pRenderShadowManager->GetApplyShadowShader()->SetBool("gIsSkinned", false);
-		//						g_pRenderShadowManager->GetApplyShadowShader()->CommitChanges();
-		//						it->SetApplyShadowShader(true);
-		//						it->Render();
-		//					}
-		//				}
-
-		//				for (CCharacter* it : m_vecCharacters)
-		//				{
-		//					if (it->GetActorType() == eActorType::DebugPlayer1)
-		//						g_pRenderShadowManager->GetApplyShadowShader()->SetTexture("DiffuseMap_Tex",
-		//							g_pTextureManager->GetTexture(it->GetTexPath()/*"data/model/character/RobotBoy.png"*/));
-		//					else if (it->GetActorType() == eActorType::DebugPlayer2)
-		//						g_pRenderShadowManager->GetApplyShadowShader()->SetTexture("DiffuseMap_Tex",
-		//							g_pTextureManager->GetTexture(it->GetTexPath()/*"data/model/character/RobotBoy2.png"*/));
-
-		//					/*pApplyShadowShader->SetMatrix("gWorldMatrix", &it->GetMatW());
-		//					pApplyShadowShader->SetBool("gIsSkinned", true);
-		//					pApplyShadowShader->CommitChanges();*/
-		//					g_pRenderShadowManager->GetApplyShadowShader()->SetMatrix("gWorldMatrix", &it->GetMatW());
-		//					g_pRenderShadowManager->GetApplyShadowShader()->SetBool("gIsSkinned", true);
-		//					g_pRenderShadowManager->GetApplyShadowShader()->CommitChanges();
-		//					it->Render();
-		//					//it->RenderTranslucent();
-		//				}
-		//			}
-		//			//pApplyShadowShader->EndPass();
-		//			g_pRenderShadowManager->GetApplyShadowShader()->EndPass();
-		//		}
-		//		//pApplyShadowShader->End();
-		//		g_pRenderShadowManager->GetApplyShadowShader()->End();
-		//	}
-			for (CTile *it : m_vecTile)
-			{
-				it->Render();
-			}
-			
-			
-			
+		}
+		
+		for (CTile *it : m_vecTile)
+		{
+			it->Render();
 		}
 		
 		for (CCharacter* it : m_vecCharacters)
