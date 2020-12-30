@@ -28,7 +28,6 @@ private:
 	SoundManager();
 	~SoundManager();
 public:
-
 	void AddSFX(string path, string musicName);
 	void AddBGM(string path);
 	void PlaySFX(string soundName);

@@ -127,7 +127,7 @@ void CMonsterMedusa::Update()
 
 	if (m_eSecondSkillEvent == eEvent::SpecificArea)
 	{
-		if (m_pInteractCenter->CheckDistanceToSelectedObject(m_vSpecificAreaPosition,2.0f))
+		if (m_pInteractCenter->CheckDistanceToSelectedObject(m_vSpecificAreaPosition, m_fConditionArriveSize))
 		{
 			m_isArrive = true;
 		}
