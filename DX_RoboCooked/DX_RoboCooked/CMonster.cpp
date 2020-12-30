@@ -56,7 +56,7 @@ void CMonster::Update()
 
 	if (m_eSecondSkillEvent == eEvent::SpecificArea)
 	{
-		if (m_pInteractCenter->CheckDistanceToSelectedObject(m_vSpecificAreaPosition, 2.0f))
+		if (m_pInteractCenter->CheckDistanceToSelectedObject(m_vSpecificAreaPosition, m_fConditionArriveSize))
 		{
 			m_isArrive = true;
 		}
@@ -152,34 +152,34 @@ bool CMonster::SecondSkillTriggered()
 		return false;
 	bool b = false;
 
-	//테스트수치 
-	{
-		if (m_fTravelDistance >= 45.0f)
-			b = true;
+	////테스트수치 
+	//{
+	//	if (m_fTravelDistance >= 45.0f)
+	//		b = true;
 
-		if (m_isArrive)
-		{
-			b = true;
-		}
+	//	if (m_isArrive)
+	//	{
+	//		b = true;
+	//	}
 
-		if (m_nCombinUseCount >= 8)
-			b = true;
+	//	if (m_nCombinUseCount >= 8)
+	//		b = true;
 
-		if (m_nVendingUseCount >= 7)
-			b = true;
+	//	if (m_nVendingUseCount >= 7)
+	//		b = true;
 
-		if (m_nCrowdControlCount >= 4)
-			b = true;
+	//	if (m_nCrowdControlCount >= 4)
+	//		b = true;
 
-		if (m_nThrowPartsCount >= 8)
-			b = true;
+	//	if (m_nThrowPartsCount >= 8)
+	//		b = true;
 
-		if (m_nSpinPartsCount >= 7)
-			b = true;
-	}
+	//	if (m_nSpinPartsCount >= 7)
+	//		b = true;
+	//}
 
 	//랜덤수치
-	/*
+	
 	{
 		if (m_fTravelDistance >= m_fConditionTravelDistance)
 			b = true;
@@ -204,7 +204,7 @@ bool CMonster::SecondSkillTriggered()
 		if (m_nSpinPartsCount >= m_nConditionSpinPartsCount)
 			b = true;
 	}
-	*/
+	
 
 
 
