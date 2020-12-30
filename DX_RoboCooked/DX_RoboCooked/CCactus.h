@@ -16,4 +16,5 @@ public:
 
 	void SetScale(float x, float y, float z) override;
 	void SetScale(const D3DXVECTOR3& vScale) override;
+	void CreateShadowMap() override;
 };

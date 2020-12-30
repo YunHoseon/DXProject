@@ -22,5 +22,7 @@ public:
 	void AddForce(const D3DXVECTOR3& vForce) override {}
 	bool OnEvent(eEvent eEvent, void* _value);
 	bool ClosePopup(void* _value);
+
+	void CreateShadowMap() override;
 };
 

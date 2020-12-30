@@ -74,5 +74,6 @@ public:
 	virtual float GetFlexibiltiy() { return m_fFlexibility; }
 	virtual bool GetIsCollide() { return m_isCollide; }
 	virtual void SetIsCollide(bool b) { m_isCollide = b; }
+	virtual void CreateShadowMap() {}
 };
 

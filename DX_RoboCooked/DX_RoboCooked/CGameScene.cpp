@@ -175,41 +175,167 @@ void CGameScene::Init()
 
 void CGameScene::Render()
 {
+	D3DXMATRIXA16 matView, matProjection;
+
+	g_pD3DDevice->GetTransform(D3DTS_VIEW, &matView);
+	g_pD3DDevice->GetTransform(D3DTS_PROJECTION, &matProjection);
+	g_pRenderShadowManager->SetWorldLightPosition(D3DXVECTOR4(16.f, 20.0f, 16.0f, 1.0f));
+	D3DXMATRIXA16 matViewProjection;
+	D3DXMatrixMultiply(&matViewProjection, &matView, &matProjection);
+
 	m_cMutex.lock();
-
-	for (CParts *it : m_vecParts)
+	// CreateShadow
 	{
-		it->Render();
+
+		LPDIRECT3DSURFACE9 pHWBackBuffer = NULL;
+		LPDIRECT3DSURFACE9 pHWDepthStencilBuffer = NULL;
+		g_pD3DDevice->GetRenderTarget(0, &pHWBackBuffer);
+		g_pD3DDevice->GetDepthStencilSurface(&pHWDepthStencilBuffer);
+
+		LPDIRECT3DSURFACE9 pShadowSurface;
+		pShadowSurface = NULL;
+
+		if (SUCCEEDED(g_pRenderShadowManager->GetShadowRenderTarget()->GetSurfaceLevel(0, &pShadowSurface)))
+		{
+			g_pD3DDevice->SetRenderTarget(0, pShadowSurface);
+			pShadowSurface->Release();
+			pShadowSurface = NULL;
+		}
+		g_pD3DDevice->SetDepthStencilSurface(g_pRenderShadowManager->GetShadowDepthStencil());
+
+		g_pD3DDevice->Clear(0, NULL, (D3DCLEAR_TARGET | D3DCLEAR_ZBUFFER), 0xFFFFFFFF, 1.0f, 0);
+		g_pRenderShadowManager->CalAndSetLightView();
+		g_pRenderShadowManager->CalAndSetLightProjection();
+		g_pRenderShadowManager->GetCreateShadowShader()->SetVector("gWorldLightPosition", &g_pRenderShadowManager->GetWorldLightPosition());
+		for (CCharacter* it : m_vecCharacters)
+		{
+			it->CreateShadowMap();
+		}
+		for (CActor* it : m_vecStaticActor)
+		{
+			it->CreateShadowMap();
+		}
+		for (CTile* it : m_vecTile)
+		{
+			it->CreateShadowMap();
+		}
+		for (CInteractiveActor* it : m_vecObject)
+		{
+			it->CreateShadowMap();
+		}
+		for (CParts* it : m_vecParts)
+		{
+			it->CreateShadowMap();
+		}
+
+		g_pD3DDevice->SetRenderTarget(0, pHWBackBuffer);
+		g_pD3DDevice->SetDepthStencilSurface(pHWDepthStencilBuffer);
+		pHWBackBuffer->Release();
+		pHWBackBuffer = NULL;
+		pHWDepthStencilBuffer->Release();
+		pHWDepthStencilBuffer = NULL;
 	}
 
-	for (CInteractiveActor *it : m_vecObject)
+	// ApplyShadow
 	{
-		it->Render();
-	}
+		if (g_pRenderShadowManager->GetApplyShadowShader())
+		{
 
-	for (CCharacter *it : m_vecCharacters)
-	{
-		it->Render();
-	}
+			g_pRenderShadowManager->GetApplyShadowShader()->SetMatrix("gViewProjectionMatrix", &matViewProjection);
+			g_pRenderShadowManager->GetApplyShadowShader()->SetVector("gWorldLightPosition", &g_pRenderShadowManager->GetWorldLightPosition());
 
-	for (CBlueprint *it : m_vecBlueprints)
-	{
-		it->Render();
-	}
+			g_pRenderShadowManager->GetApplyShadowShader()->SetTexture(
+				"ShadowMap_Tex", g_pRenderShadowManager->GetShadowRenderTarget());
 
-	for (CTile *it : m_vecTile)
-	{
-		it->Render();
-	}
-
-	for (CActor* it : m_vecStaticActor)
-	{
-		it->Render();
-	}
+		//	UINT numPasses = 0;
+		//	//pApplyShadowShader->Begin(&numPasses, NULL);
+		//	g_pRenderShadowManager->GetApplyShadowShader()->Begin(&numPasses, NULL);
+		//	{
+		//		for (UINT i = 0; i < numPasses; ++i)
+		//		{
+		//			//pApplyShadowShader->BeginPass(i);
+		//			g_pRenderShadowManager->GetApplyShadowShader()->BeginPass(i);
+		//			{
+		//				for (CTile* it : m_vecTile)
+		//				{
+		//					if (it->GetTileType() != eTileType::Water)
+		//					{
+		//						g_pRenderShadowManager->GetApplyShadowShader()->SetTexture("DiffuseMap_Tex",
+		//							g_pTextureManager->GetTexture(it->GetTexPath()));
 	
-	for (CMonster *it : m_vecMonster)
-	{
-		it->Render();
+		//						g_pRenderShadowManager->GetApplyShadowShader()->SetMatrix("gWorldMatrix", &it->GetMatW());
+		//						g_pRenderShadowManager->GetApplyShadowShader()->SetBool("gIsSkinned", false);
+		//						g_pRenderShadowManager->GetApplyShadowShader()->CommitChanges();
+		//						it->SetApplyShadowShader(true);
+		//						it->Render();
+		//					}
+		//				}
+
+		//				for (CCharacter* it : m_vecCharacters)
+		//				{
+		//					if (it->GetActorType() == eActorType::DebugPlayer1)
+		//						g_pRenderShadowManager->GetApplyShadowShader()->SetTexture("DiffuseMap_Tex",
+		//							g_pTextureManager->GetTexture(it->GetTexPath()/*"data/model/character/RobotBoy.png"*/));
+		//					else if (it->GetActorType() == eActorType::DebugPlayer2)
+		//						g_pRenderShadowManager->GetApplyShadowShader()->SetTexture("DiffuseMap_Tex",
+		//							g_pTextureManager->GetTexture(it->GetTexPath()/*"data/model/character/RobotBoy2.png"*/));
+
+		//					/*pApplyShadowShader->SetMatrix("gWorldMatrix", &it->GetMatW());
+		//					pApplyShadowShader->SetBool("gIsSkinned", true);
+		//					pApplyShadowShader->CommitChanges();*/
+		//					g_pRenderShadowManager->GetApplyShadowShader()->SetMatrix("gWorldMatrix", &it->GetMatW());
+		//					g_pRenderShadowManager->GetApplyShadowShader()->SetBool("gIsSkinned", true);
+		//					g_pRenderShadowManager->GetApplyShadowShader()->CommitChanges();
+		//					it->Render();
+		//					//it->RenderTranslucent();
+		//				}
+		//			}
+		//			//pApplyShadowShader->EndPass();
+		//			g_pRenderShadowManager->GetApplyShadowShader()->EndPass();
+		//		}
+		//		//pApplyShadowShader->End();
+		//		g_pRenderShadowManager->GetApplyShadowShader()->End();
+		//	}
+			for (CTile *it : m_vecTile)
+			{
+				it->Render();
+			}
+			
+			
+			
+		}
+		
+		for (CCharacter* it : m_vecCharacters)
+		{
+			it->Render();
+		}
+
+		for (CParts *it : m_vecParts)
+		{
+			it->Render();
+		}
+		
+		for (CInteractiveActor *it : m_vecObject)
+		{
+			it->Render();
+		}
+
+
+		for (CBlueprint *it : m_vecBlueprints)
+		{
+			it->Render();
+		}
+
+
+		for (CActor* it : m_vecStaticActor)
+		{
+			it->Render();
+		}
+	
+		for (CMonster *it : m_vecMonster)
+		{
+			it->Render();
+		}
 	}
 	
 	if (m_pDebugTrafficLight)

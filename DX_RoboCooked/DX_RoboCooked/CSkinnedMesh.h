@@ -26,6 +26,7 @@ public:
 	void Update();
 	void Update(LPD3DXFRAME pFrame, LPD3DXFRAME pParent);
 	void Render(LPD3DXFRAME pFrame);
+	void RenderWithShadow(LPD3DXFRAME pFrame);
 	void SetupBoneMatrixPtrs(LPD3DXFRAME pFrame);
 	void UpdateSkinnedMesh(LPD3DXFRAME pFrame);
 

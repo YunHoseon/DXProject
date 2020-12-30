@@ -34,7 +34,8 @@ protected:
 	CParts*				m_pParts;
 
 	D3DXVECTOR3			m_vDefaultPosition;
-	// Ű�ٿ� ����.
+	
+	
 	array<float, 3>		m_arrElapsedTime;
 	array<float, 3>		m_arrCoolDown;
 	array<bool, 3>		m_arrKeyDown;
@@ -93,5 +94,7 @@ public:
 	void SetCC(CCrowdControl* cc);
 
 	virtual void SetDefaultPosition(D3DXVECTOR3 vPos) { m_vDefaultPosition = vPos; }
+
+	virtual void CreateShadowMap() override;
 };
 
