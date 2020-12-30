@@ -14,8 +14,8 @@ CBoundaryWall::CBoundaryWall()
 	m_vecWall[1]->SetRotationY(D3DX_PI * 0.5f);
 	m_matWorld = g_matIdentity;
 
-	D3DXVECTOR3 vMin(12 * -0.5f * BLOCK_SIZE, 0, -0.5f);
-	D3DXVECTOR3 vMax(12 * 0.5f * BLOCK_SIZE, 5 * BLOCK_SIZE, 0.5f);
+	D3DXVECTOR3 vMin(16 * -0.5f * BLOCK_SIZE, 0, -0.5f);
+	D3DXVECTOR3 vMax(16 * 0.5f * BLOCK_SIZE, 5 * BLOCK_SIZE, 0.5f);
 	D3DXVECTOR3 vOrigin((vMax + vMin) * 0.5f);
 	vOrigin.z = -6.5f;
 	m_pCollision = new CBoxCollision(vOrigin, (vMax - vMin) * 1.1f, &m_matWorld);

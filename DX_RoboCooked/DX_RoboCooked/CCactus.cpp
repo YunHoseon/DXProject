@@ -28,28 +28,28 @@ void CCactus::Update()
 
 void CCactus::Render()
 {
-	g_pRenderShadowManager->GetApplyShadowShader()->SetMatrix("gWorldMatrix", &m_matWorld);
-	g_pRenderShadowManager->GetApplyShadowShader()->SetBool("gIsSkinned", false);
-	UINT numPasses = 0;
-	g_pRenderShadowManager->GetApplyShadowShader()->Begin(&numPasses, NULL);
+	//g_pRenderShadowManager->GetApplyShadowShader()->SetMatrix("gWorldMatrix", &m_matWorld);
+	//g_pRenderShadowManager->GetApplyShadowShader()->SetBool("gIsSkinned", false);
+	//UINT numPasses = 0;
+	//g_pRenderShadowManager->GetApplyShadowShader()->Begin(&numPasses, NULL);
 
-	for (UINT i = 0; i < numPasses; ++i)
-	{
-		g_pRenderShadowManager->GetApplyShadowShader()->BeginPass(i);
-		{
-			if (m_pSMesh)
-			{
-				m_pSMesh->RenderWidthShadow();
-			}
-		}
-		g_pRenderShadowManager->GetApplyShadowShader()->EndPass();
-	}
+	//for (UINT i = 0; i < numPasses; ++i)
+	//{
+	//	g_pRenderShadowManager->GetApplyShadowShader()->BeginPass(i);
+	//	{
+	//		if (m_pSMesh)
+	//		{
+	//			m_pSMesh->RenderWidthShadow();
+	//		}
+	//	}
+	//	g_pRenderShadowManager->GetApplyShadowShader()->EndPass();
+	//}
 
-	g_pRenderShadowManager->GetApplyShadowShader()->End();
+	//g_pRenderShadowManager->GetApplyShadowShader()->End();
 	
-	//g_pD3DDevice->SetRenderState(D3DRS_LIGHTING, true);
-	//g_pD3DDevice->SetTransform(D3DTS_WORLD, &m_matWorld);
-	//m_pSMesh->Render();
+	g_pD3DDevice->SetRenderState(D3DRS_LIGHTING, false);
+	g_pD3DDevice->SetTransform(D3DTS_WORLD, &m_matWorld);
+	m_pSMesh->Render();
 
 	_DEBUG_COMMENT if (m_pCollision)
 		_DEBUG_COMMENT	m_pCollision->Render();
