@@ -21,13 +21,13 @@ CMonster::CMonster(IInteractCenter *pInteractCenter)
 	m_fUltimateSkillConditionTime(999.0f),
 	m_nBluePrintChangeCount(0),
 	m_vSpecificAreaPosition(0, 0, 0),
-	m_fConditionTravelDistance(0.0f),
-	m_fConditionArriveSize(0.0f),
-	m_nConditionCombinUseCount(0),
-	m_nConditionVendingUseCount(0),
-	m_nConditionCrowdControlCount(0),
-	m_nConditionThrowPartsCount(0),
-	m_nConditionSpinPartsCount(0)
+	m_fConditionTravelDistance(999.0f),
+	m_fConditionArriveSize(999.0f),
+	m_nConditionCombinUseCount(999),
+	m_nConditionVendingUseCount(999),
+	m_nConditionCrowdControlCount(999),
+	m_nConditionThrowPartsCount(999),
+	m_nConditionSpinPartsCount(999)
 {
 	g_EventManager->Attach(eEvent::CompleteBluePrint, this);
 }
