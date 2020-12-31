@@ -1,1176 +1,1239 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <ClassDiagram MajorVersion="1" MinorVersion="1">
   <Class Name="CCamera" Collapsed="true">
-    <Position X="257.75" Y="0.5" Width="1.5" />
+    <Position X="272" Y="0.5" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAQABAGACioAAAAAAAAAAgAgAAAAAAAAABAAQACAABA=</HashCode>
       <FileName>CCamera.h</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="CScene" Collapsed="true">
-    <Position X="132.25" Y="0.5" Width="1.5" />
+    <Position X="140.75" Y="0.5" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAQAAAAQAAAAAAAAAAAAAAAAAAAAAAAAABACAAAAAAg=</HashCode>
       <FileName>CScene.h</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="CMainGame" Collapsed="true">
-    <Position X="256" Y="1.5" Width="1.5" />
+    <Position X="272" Y="1.5" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAQAICAACAAAAABAAAAIAAAAAAAAAAAAIBAAQAAAAAA=</HashCode>
       <FileName>CMainGame.h</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="IInteractCenter" Collapsed="true">
-    <Position X="138.5" Y="0.5" Width="1.5" />
+    <Position X="147" Y="0.5" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>IQAACAAAACIAAAEASgAAAAAAAgAACAQAAIgIAgQAARA=</HashCode>
+      <HashCode>AQAACAAAACIAAAEASgAAAAAAAgAACAQAAJgIAgQAAQE=</HashCode>
       <FileName>IInteractCenter.h</FileName>
     </TypeIdentifier>
   </Class>
-  <Class Name="CSaveLoadManager" Collapsed="true">
-    <Position X="6.5" Y="1.75" Width="1.5" />
+  <Class Name="CRenderShadowManager" Collapsed="true">
+    <Position X="6.5" Y="10.75" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>AAAAAIEQAUAAAAAAAAAAgAAAAQAAAAAAAAAgCAAEAAA=</HashCode>
+      <HashCode>AAIAACgAACEAAAAAAAAAAAAAEAAAAAAAAAAAEIAAAAA=</HashCode>
+      <FileName>CRenderShadowManager.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="CSaveLoadManager" Collapsed="true">
+    <Position X="11" Y="10.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AACAAIEQAUAAAAAAAAAAgAAAAQAAAAAAAAAgCAAEAAA=</HashCode>
       <FileName>CSaveLoadManager.h</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="CShaderManager" Collapsed="true">
-    <Position X="8.75" Y="1.75" Width="1.5" />
+    <Position X="13.25" Y="10.75" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAAAAAIAAABAAAAAAAAAAEAAAABAAAAAAABAAAAAAAA=</HashCode>
       <FileName>CShaderManager.h</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="CThreadManager" Collapsed="true">
-    <Position X="13.25" Y="1.75" Width="1.5" />
+    <Position X="17.75" Y="10.75" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AQAAAAAAACgAAAAAAAACAAAEAABAAAAAAAAIIAAIAAA=</HashCode>
       <FileName>CThreadManager.h</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="SoundManager" Collapsed="true">
-    <Position X="15.5" Y="1.75" Width="1.5" />
+    <Position X="20" Y="10.75" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAEABAAAAAEgAIAQQA0AAAAAQABAAAIAAAAAAAAAAkg=</HashCode>
       <FileName>CSoundManager.h</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="CUITextureManager" Collapsed="true">
-    <Position X="17.75" Y="1.75" Width="1.5" />
+    <Position X="22.25" Y="10.75" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAAAAAACAAAAAAAAhAAACAAAAABAgAAAIAAABAAAAAA=</HashCode>
       <FileName>CUITextureManager.h</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="CDeviceManager" Collapsed="true">
-    <Position X="20" Y="1.75" Width="1.5" />
+    <Position X="24.5" Y="10.75" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAAQAgAQAAAAAAAAAAAAAAAAAABAAAgAAAACAAAAAAA=</HashCode>
       <FileName>CDeviceManager.h</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="CFontManager" Collapsed="true">
-    <Position X="24.5" Y="1.75" Width="1.5" />
+    <Position X="29" Y="10.75" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAAABAAAAAgAAAAAQAABAAAAAAhAAAEAAAAAAAAAAAA=</HashCode>
       <FileName>CFontManager.h</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="CSceneManager" Collapsed="true">
-    <Position X="26.75" Y="1.75" Width="1.5" />
+    <Position X="31.25" Y="10.75" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAQAAIAAAAAAAgggIAAAAAAAAABAAAAAABAAAAAAAAA=</HashCode>
       <FileName>CSceneManager.h</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="CSkinnedMeshManager" Collapsed="true">
-    <Position X="29" Y="1.75" Width="1.5" />
+    <Position X="33.5" Y="10.75" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAAAAAAAAAAAAABAAAAAAAAAAABAAAAJAAAAAAAAAAE=</HashCode>
       <FileName>CSkinnedMeshManager.h</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="CTextureManager" Collapsed="true">
-    <Position X="31.25" Y="1.75" Width="1.5" />
+    <Position X="35.75" Y="10.75" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAAAAIACAAAAAAAAgAAAAAAAAABAAACAAAAAAAAAAAA=</HashCode>
       <FileName>CTextureManager.h</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="CTimeManager" Collapsed="true">
-    <Position X="33.5" Y="1.75" Width="1.5" />
+    <Position X="2" Y="10.75" Width="1.5" />
     <TypeIdentifier>
       <HashCode>IAQAAAAAAAAAAAAAECAAAAAAAAAAAAADCAAAAAAEAAA=</HashCode>
       <FileName>CTimeManager.h</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="CSingleton&lt;T&gt;" Collapsed="true">
-    <Position X="17.75" Y="0.5" Width="1.5" />
+    <Position X="19" Y="9.5" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAAAAAAAAAAAAAAAAQAAAAAABBAAAAAAAAAgAAAAAAA=</HashCode>
       <FileName>CSingleton.h</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="CStaticMeshManager" Collapsed="true">
-    <Position X="2" Y="1.75" Width="1.5" />
+    <Position X="4.25" Y="10.75" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAAAgAAAAAEAAAAIAAAEAAAAAAEAAAABAAAAAAAACAA=</HashCode>
       <FileName>CStaticMeshManager.h</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="CEventManager" Collapsed="true">
-    <Position X="4.25" Y="1.75" Width="1.5" />
+    <Position X="8.75" Y="10.75" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAAAAAAAAAAAAAIAQgAAACgAAIgAAAAAAAAAAAAQAAA=</HashCode>
       <FileName>CEventManager.h</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="CEventListener" Collapsed="true">
-    <Position X="135.25" Y="0.5" Width="1.5" />
+    <Position X="144" Y="0.5" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAAAAAAAAAAAAAAAAEAAAAAAAAQAAAAAAAAAAAAAAAA=</HashCode>
       <FileName>CEventListener.h</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="CInputManager" Collapsed="true">
-    <Position X="11" Y="1.75" Width="1.5" />
+    <Position X="15.5" Y="10.75" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AARAAAAAAAAAAAAAAAAAAAAAAAAAQgAACAAARAAAAAA=</HashCode>
       <FileName>InputManager.h</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="CKeyboard" Collapsed="true">
-    <Position X="263" Y="0.5" Width="1.5" />
+    <Position X="270.25" Y="1.5" Width="1.5" />
     <TypeIdentifier>
       <HashCode>BAVAAgAQAAAABBAEAEAgAAEBAAAAAAAAAAAAACAAAAA=</HashCode>
       <FileName>Keyboard.h</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="CMouse" Collapsed="true">
-    <Position X="259.5" Y="1.5" Width="1.5" />
+    <Position X="275.5" Y="1.5" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAEBAhAQAAAAAAAAAQAAIABAAAAAAEAAAAAAIAAAAAQ=</HashCode>
       <FileName>Mouse.h</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="CMeshLoader" Collapsed="true">
-    <Position X="257.75" Y="1.5" Width="1.5" />
+    <Position X="273.75" Y="1.5" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAgAAAAAAAAAAAAA=</HashCode>
       <FileName>CMeshLoader.h</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="CPartsManager" Collapsed="true">
-    <Position X="22.25" Y="1.75" Width="1.5" />
+    <Position X="26.75" Y="10.75" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAAIgAAAAAEAMQAIAAAAAAACAAAAAAAAAAAAAQAAAAA=</HashCode>
       <FileName>CPartsManager.h</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="CStaticMesh" Collapsed="true">
-    <Position X="1.75" Y="6.5" Width="1.5" />
+    <Position X="1.75" Y="3.5" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>AgBAAAAAAAVBAAAAAAAAAAAAAAAAAAAAABAgABAAAAA=</HashCode>
+      <HashCode>AgRAAAAAAAVBAAAAAAAAAAAAAAAAAAAAABAgABAAAgA=</HashCode>
       <FileName>CStaticMesh.h</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="CFrameCounter" Collapsed="true">
-    <Position X="259.5" Y="0.5" Width="1.5" />
+    <Position X="275.5" Y="0.5" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAQAAAAAAAACAAAAACQAAAAAAAABAAAAABAAAAAAAAA=</HashCode>
       <FileName>CFrameCounter.h</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="CRandomNumberGenerator" Collapsed="true">
-    <Position X="256" Y="2.5" Width="1.5" />
+    <Position X="272" Y="2.5" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAAAAAAQACAAAAAAAQAAQAAAAAAAAAAAAAAAAACAABA=</HashCode>
       <FileName>CRandomNumberGenerator.h</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="CGameScene" Collapsed="true">
-    <Position X="135.25" Y="1.75" Width="1.5" />
+    <Position X="144" Y="1.75" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>IQRAiQAAkCIAIQEQanwCAIAAAgAACQQAAJQKBwRADxA=</HashCode>
+      <HashCode>AQRAiQAAkCIAIQEQanwCAIAAAgAACQQAAJQKBwRADwE=</HashCode>
       <FileName>CGameScene.h</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="CBoxCollision" Collapsed="true">
-    <Position X="7.75" Y="7.75" Width="1.5" />
+    <Position X="5.5" Y="4.75" Width="1.5" />
     <TypeIdentifier>
       <HashCode>CAUAAACAAEAAAQAAAAAAACBQACAAAEQAABEAAgAAAAA=</HashCode>
       <FileName>CBoxCollision.h</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="ICollisionArea" Collapsed="true">
-    <Position X="6.75" Y="6.5" Width="1.5" />
+    <Position X="6.75" Y="3.5" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAQAIQEAAEAAAAAAEAAAAiZAMAAMAEAAABAIA4AhAAA=</HashCode>
       <FileName>ICollisionArea.h</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="CSphereCollision" Collapsed="true">
-    <Position X="5.5" Y="7.75" Width="1.5" />
+    <Position X="7.75" Y="4.75" Width="1.5" />
     <TypeIdentifier>
       <HashCode>gAQAAAAAAEEAAAAAAAAAADBAAAAAAEAgAFAAAggAAAA=</HashCode>
       <FileName>CSphereCollision.h</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="CCombinatorButton" Collapsed="true">
-    <Position X="206.25" Y="4.75" Width="1.5" />
+    <Position X="31.5" Y="4.75" Width="1.5" />
     <TypeIdentifier>
       <HashCode>IAQAAAAAGAAAgAAAAEAAAAAAICAAIIAAAJAAAAAAAAE=</HashCode>
       <FileName>CCombinatorButton.h</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="CPartAutoCombinator" Collapsed="true">
-    <Position X="212.5" Y="8.25" Width="1.5" />
+    <Position X="30.75" Y="8.25" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAYAAAAACAAAAAAAAACAAAAEOAAAAAAAABAAEAIEAAA=</HashCode>
       <FileName>CPartAutoCombinator.h</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="CPartCombinator" Collapsed="true">
-    <Position X="213.75" Y="6.75" Width="1.5" />
+    <Position X="31.75" Y="6.75" Width="1.5" />
     <TypeIdentifier>
       <HashCode>IQYAASEAGCDAAAABAIAAAICEODAABAAFAFAQGE4AAwE=</HashCode>
       <FileName>CPartCombinator.h</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="CPartManualCombinator" Collapsed="true">
-    <Position X="214.75" Y="8.25" Width="1.5" />
+    <Position X="33" Y="8.25" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAYAAAAACAAgAAAAAEAAAACEOAAAAAAAABAAEAIAAAA=</HashCode>
       <FileName>CPartManualCombinator.h</FileName>
     </TypeIdentifier>
   </Class>
-  <Class Name="CCharacter">
-    <Position X="246.5" Y="3.25" Width="1.5" />
+  <Class Name="CDashShadow" Collapsed="true">
+    <Position X="273.75" Y="0.5" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>hVZIAAAUAJgEBQAQQMAIAAUAEACAAEE4AFkQSGAABQE=</HashCode>
+      <HashCode>AQQEAAAAAIAAAAAQIAgIEAAAICIAACABABCAAAkgAAA=</HashCode>
+      <FileName>CDashShadow.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="CCharacter" Collapsed="true">
+    <Position X="71.75" Y="3.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>hVZIAAAUAJgEBQAQQMAIAAVAECAABEEwAFEQSGAADYE=</HashCode>
       <FileName>CCharacter.h</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="CDebugPlayer2" Collapsed="true">
-    <Position X="244.75" Y="4.75" Width="1.5" />
+    <Position X="73" Y="4.75" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAQAAAAAAAAAAACAAAAA=</HashCode>
       <FileName>CDebugPlayer2.h</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="CDebugPlayer1" Collapsed="true">
-    <Position X="248.25" Y="4.75" Width="1.5" />
+    <Position X="70.75" Y="4.75" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAAAAAAAAAAAAAAAAAAAAAAgAAAAAEAAAAAAAAAAAAA=</HashCode>
       <FileName>CDebugPlayer1.h</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="CActor" Collapsed="true">
-    <Position X="229.75" Y="1.75" Width="1.5" />
+    <Position X="49.5" Y="1.75" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>IAQkAAACEuAIAAggAKAAABQYAAAAAkgAKFCBQiQAOBk=</HashCode>
+      <HashCode>IAQkIAECEuAIAAggAKAAABQYEAAAAkgAKFCBQiQAGBk=</HashCode>
       <FileName>CActor.h</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="CInteractiveActor" Collapsed="true">
-    <Position X="210.75" Y="3.25" Width="1.5" />
+    <Position X="34.75" Y="3.25" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAAAAAAAAAAAAAAAQAAAAAAAIAAAAAAAAAAAAAAIAAA=</HashCode>
       <FileName>CInteractiveActor.h</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="CPhysicsApplyer" Collapsed="true">
-    <Position X="261.25" Y="1.5" Width="1.5" />
+    <Position X="277.25" Y="1.5" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAABAACAAAAAAAAAAQAAAAAAAAAAAAAAAAAAAgAAAAA=</HashCode>
       <FileName>CPhysicsApplyer.h</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="COutlet" Collapsed="true">
-    <Position X="210.75" Y="4.75" Width="1.5" />
+    <Position X="33.75" Y="4.75" Width="1.5" />
     <TypeIdentifier>
       <HashCode>ICQABGgQGDAAAIEAAAAACAAEIAAAAAgAABAAAAAAABE=</HashCode>
       <FileName>COutlet.h</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="CPartStorage" Collapsed="true">
-    <Position X="213.75" Y="4.75" Width="1.5" />
+    <Position X="34.75" Y="6.75" Width="1.5" />
     <TypeIdentifier>
       <HashCode>ICQAAAAACBAAAAAAAAAAAAAEIAAAAAAgABAAAAIABAE=</HashCode>
       <FileName>CPartStorage.h</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="CPartVending" Collapsed="true">
-    <Position X="207.75" Y="6.75" Width="1.5" />
+    <Position X="37.75" Y="6.75" Width="1.5" />
     <TypeIdentifier>
       <HashCode>IAQAACAAGCAAAAAAgAAAAAAAICAAAAAAABAAAAIBAAE=</HashCode>
       <FileName>CPartVending.h</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="IPartGenerator" Collapsed="true">
-    <Position X="203.75" Y="5.5" Width="1.5" />
+    <Position X="26.75" Y="5.5" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAJAAAIAAAA=</HashCode>
       <FileName>IPartGenerator.h</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="CParts" Collapsed="true">
-    <Position X="224.25" Y="4.75" Width="1.5" />
+    <Position X="49.5" Y="4.75" Width="1.5" />
     <TypeIdentifier>
       <HashCode>PMQQAAkADAEAAAAghgEBBAQgYAEAAAAIABAKAQAAARE=</HashCode>
       <FileName>CParts.h</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="CMonster" Collapsed="true">
-    <Position X="202.75" Y="1.75" Width="1.5" />
+    <Position X="21.25" Y="1.75" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>YoUArUAAEABIgBEVAUggAQAAQgBAACykAFkKgRKACIM=</HashCode>
+      <HashCode>YoUArUAAEABIgBEVCEggBQBAQxBAACykAFgKgbKACIM=</HashCode>
       <FileName>CMonster.h</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="CMonsterHarpy" Collapsed="true">
-    <Position X="204" Y="3.25" Width="1.5" />
+    <Position X="20.25" Y="3.25" Width="1.5" />
     <TypeIdentifier>
       <HashCode>QAQAAAAAELAIAACQAAAAABAAAIAAAACAAFAIAAAACAE=</HashCode>
       <FileName>CMonsterHarpy.h</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="CMonsterMedusa" Collapsed="true">
-    <Position X="201.75" Y="3.25" Width="1.5" />
+    <Position X="22.5" Y="3.25" Width="1.5" />
     <TypeIdentifier>
       <HashCode>QAQAAAAAEKAIAAgQAAAAAAAAAAEAAACQANAIgAACAAA=</HashCode>
       <FileName>CMonsterMedusa.h</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="CCCNone" Collapsed="true">
-    <Position X="0.75" Y="4.75" Width="1.5" />
+    <Position X="0.75" Y="1.75" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAAAAAAAAAAAAgAAAAAAkAAAAAAAAAAAABAABAAAABA=</HashCode>
       <FileName>CCCNone.h</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="CCCReverseKey" Collapsed="true">
-    <Position X="3" Y="4.75" Width="1.5" />
+    <Position X="3" Y="1.75" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAAAAAEAAAAAAAAAAAACgIAAAAAAAAAAABAgAAAAABI=</HashCode>
       <FileName>CCCReverseKey.h</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="CCCSlowAndStop" Collapsed="true">
-    <Position X="5.25" Y="4.75" Width="1.5" />
+    <Position X="5.25" Y="1.75" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAAAIAEAAAAAAAAAAAAAgAAAAAAAAAAAQBAAAACQABI=</HashCode>
       <FileName>CCCSlowAndStop.h</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="CCCSpeedDown" Collapsed="true">
-    <Position X="7.5" Y="4.75" Width="1.5" />
+    <Position X="7.5" Y="1.75" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAAAIAEAAAAAAAAAAAAAgAAAAAAAAAAAAFAAAQAAABI=</HashCode>
       <FileName>CCCSpeedDown.h</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="CCCStopMove" Collapsed="true">
-    <Position X="9.75" Y="4.75" Width="1.5" />
+    <Position X="9.75" Y="1.75" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAAAAAEAACAAAAAAAAAggAACAAAAAAAAABAAAAAAABI=</HashCode>
       <FileName>CCCStopMove.h</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="CCrowdControl" Collapsed="true">
-    <Position X="5.25" Y="3.5" Width="1.5" />
+    <Position X="5.25" Y="0.5" Width="1.5" />
     <TypeIdentifier>
       <HashCode>QAAQIAAAACAAAAAABAAAkABAIAIAAAABABAgAAAQABI=</HashCode>
       <FileName>CCrowdControl.h</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="CHarpyWing" Collapsed="true">
-    <Position X="1.75" Y="7.75" Width="1.5" />
+    <Position X="1.75" Y="4.75" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAwEAAAAAIAAAQAAAAAAAAAAAAAAAAAAABAAAAAgEAA=</HashCode>
       <FileName>CHarpyWing.h</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="CHarpyWing_L" Collapsed="true">
-    <Position X="0.5" Y="9.25" Width="1.5" />
+    <Position X="0.5" Y="6.25" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAQgAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAg=</HashCode>
       <FileName>CHarpyWing_L.h</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="CHarpyWing_R" Collapsed="true">
-    <Position X="2.75" Y="9.25" Width="1.5" />
+    <Position X="2.75" Y="6.25" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAQAAAAACAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAg=</HashCode>
       <FileName>CHarpyWing_R.h</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="CPartsDestroyer" Collapsed="true">
-    <Position X="197.25" Y="1.75" Width="1.5" />
+    <Position X="267.75" Y="1.75" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAAEAAAAAIAQAQAAAEAAAAAAICgAAAgAABAAAIAAAAE=</HashCode>
       <FileName>CPartsDestroyer.h</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="CBrick" Collapsed="true">
-    <Position X="235.75" Y="4.75" Width="1.5" />
+    <Position X="65.5" Y="4.75" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAQAAAAAAAAAAAAAAAAAIAAAAAAAIAAAAAAAAAAAAAA=</HashCode>
       <FileName>CBrick.h</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="CSand" Collapsed="true">
-    <Position X="238" Y="4.75" Width="1.5" />
+    <Position X="67.75" Y="4.75" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAQAAAAAAAAAAAAAAAAAAAAAAAAEAABAAAAAAAAAAAA=</HashCode>
       <FileName>CSand.h</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="CThickSand" Collapsed="true">
-    <Position X="240.25" Y="4.75" Width="1.5" />
+    <Position X="54.25" Y="4.75" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAQAAAAAAAAAAAAAAAAAAAAAAAAAAgAAAAAEAAAAAAA=</HashCode>
       <FileName>CThickSand.h</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="CFlowSand" Collapsed="true">
-    <Position X="242.5" Y="4.75" Width="1.5" />
+    <Position X="56.5" Y="4.75" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAAQAAABAAAAAACAAAAAAAAEAAAAAgAAABAAAAAAAAA=</HashCode>
       <FileName>CFlowSand.h</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="CSoil" Collapsed="true">
-    <Position X="229" Y="4.75" Width="1.5" />
+    <Position X="58.75" Y="4.75" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAQAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAACAAAAAIA=</HashCode>
       <FileName>CSoil.h</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="CStair" Collapsed="true">
-    <Position X="231.25" Y="4.75" Width="1.5" />
+    <Position X="61" Y="4.75" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAAAAAAAAEAAAAAAAAAAAAQAAAAAAAAAABAAAAEAAAA=</HashCode>
       <FileName>CStair.h</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="CTestStair" Collapsed="true">
-    <Position X="217.5" Y="3.25" Width="1.5" />
+    <Position X="42.75" Y="3.25" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAQAAAAAAAIAAAAAAAAAAAAAAAAAAAAgABAAAAAAAAA=</HashCode>
       <FileName>CTestStair.h</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="CWater" Collapsed="true">
-    <Position X="233.5" Y="4.75" Width="1.5" />
+    <Position X="63.25" Y="4.75" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>AAQAACAAAEAAAAAAAAAAAAQAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <HashCode>AAQAACAAAEAAAAAAAAAAAAQAAAAAAAAAABAAAAAAAAA=</HashCode>
       <FileName>CWater.h</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="CField" Collapsed="true">
-    <Position X="219.75" Y="3.25" Width="1.5" />
+    <Position X="45" Y="3.25" Width="1.5" />
     <TypeIdentifier>
       <HashCode>IAQAAAAACFAAQAAAUCAAAAQQAEAAAAAABBAYACAAAAE=</HashCode>
       <FileName>CField.h</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="CTile" Collapsed="true">
-    <Position X="235.75" Y="3.25" Width="1.5" />
+    <Position X="61" Y="3.25" Width="1.5" />
     <TypeIdentifier>
       <HashCode>IAQAACAAAAAAAABAAEAEAAAAACAAAAAAABAAAAAAABE=</HashCode>
       <FileName>CTile.h</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="CBlueprint" Collapsed="true">
-    <Position X="222" Y="4.75" Width="1.5" />
+    <Position X="47.25" Y="4.75" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>IAQQAAIUmACAAAAAAEAAAAAAMIAAAgAoABAgQQABAAE=</HashCode>
+      <HashCode>IAQQAAIUmACAAAAAAEAAAAABMIAAAgAoABAgQQABAAE=</HashCode>
       <FileName>CBlueprint.h</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="CBoundaryWall" Collapsed="true">
-    <Position X="238.75" Y="3.25" Width="1.5" />
+    <Position X="64" Y="3.25" Width="1.5" />
     <TypeIdentifier>
       <HashCode>IAQAAAAIAAAAAAAAAAAgAAQAAAAAAAAAABAAAABAAAE=</HashCode>
       <FileName>CBoundaryWall.h</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="CCactus" Collapsed="true">
-    <Position X="241" Y="3.25" Width="1.5" />
+    <Position X="66.25" Y="3.25" Width="1.5" />
     <TypeIdentifier>
       <HashCode>IAQBAAAAAAAAAAAAAAAAAAAAACAAAAAAABAAAgAAAAE=</HashCode>
       <FileName>CCactus.h</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="CSandpile" Collapsed="true">
-    <Position X="243.25" Y="3.25" Width="1.5" />
+    <Position X="68.5" Y="3.25" Width="1.5" />
     <TypeIdentifier>
       <HashCode>IAQAAAAAAAAAAAAAACAAAAAAACAAAgAAABAQAAAAAAE=</HashCode>
       <FileName>CSandpile.h</FileName>
     </TypeIdentifier>
   </Class>
+  <Class Name="CTipBoard" Collapsed="true">
+    <Position X="51.75" Y="4.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>IAQAEAAAAAAAAAAAAFAAABAAICAAAAAAABAAACAEAAE=</HashCode>
+      <FileName>CTipBoard.h</FileName>
+    </TypeIdentifier>
+  </Class>
   <Class Name="CTornado" Collapsed="true">
-    <Position X="249" Y="3.25" Width="1.5" />
+    <Position X="74.25" Y="3.25" Width="1.5" />
     <TypeIdentifier>
       <HashCode>IAQAAAEAAAAAAAAAAAAAAAAAACAgAQAAABAAAAAAAAE=</HashCode>
       <FileName>CTornado.h</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="CTV" Collapsed="true">
-    <Position X="251.25" Y="3.25" Width="1.5" />
+    <Position X="24.75" Y="3.25" Width="1.5" />
     <TypeIdentifier>
       <HashCode>IAQAABAAAAEABAAAAAACAAAAACAAAAAAABAgEAAAAAE=</HashCode>
       <FileName>CTV.h</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="CWall" Collapsed="true">
-    <Position X="253.5" Y="3.25" Width="1.5" />
+    <Position X="27" Y="3.25" Width="1.5" />
     <TypeIdentifier>
       <HashCode>IAQAAAEACAEAAAAAAEAAAAUAACAAAAAEABAAAAAgEAE=</HashCode>
       <FileName>CWall.h</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="CWhiteboard" Collapsed="true">
-    <Position X="226.5" Y="4.75" Width="1.5" />
+    <Position X="29.25" Y="4.75" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>IAQAAAAABAAAAAAAAEAAAAAAICABAAAgABAAACAEAAE=</HashCode>
+      <HashCode>JAQAAAAABAAAAAAAAEAAAAAAICABAAAgABAAACAEAAE=</HashCode>
       <FileName>CWhiteboard.h</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="CGrid" Collapsed="true">
-    <Position X="261.25" Y="0.5" Width="1.5" />
+    <Position X="277.25" Y="0.5" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAAAAAAAGAAAAAAgACAAAAAAAAAAAAAAABAAAAAAEAA=</HashCode>
       <FileName>CGrid.h</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="CPyramid" Collapsed="true">
-    <Position X="263" Y="1.5" Width="1.5" />
+    <Position X="270.25" Y="2.5" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AQAAAAAAGAAAAAAAAIAIAAAAAAAAAAAAABAAAAAAAAA=</HashCode>
       <FileName>CPyramid.h</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="CPharaohCoffin" Collapsed="true">
-    <Position X="210.75" Y="6.75" Width="1.5" />
+    <Position X="36.75" Y="4.75" Width="1.5" />
     <TypeIdentifier>
       <HashCode>KCQAAAQAAAAAQAACAAAAAAAEIiAAAEBAABAAAgIAAAE=</HashCode>
       <FileName>CPharaohCoffin.h</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="CUI" Collapsed="true">
-    <Position X="107.25" Y="1.75" Width="1.5" />
+    <Position X="171" Y="1.75" Width="1.5" />
     <TypeIdentifier>
       <HashCode>QBwU6AAmDCEYGQCgGQAARAggQQhIBlBGANIJCJQAQAA=</HashCode>
       <FileName>CUI.h</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="CUIButton" Collapsed="true">
-    <Position X="103.75" Y="3.25" Width="1.5" />
+    <Position X="167.5" Y="3.25" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>AAAAoAAACIAIEAEAAAAAFAAAAAAAwgBAAFEAAAAACAQ=</HashCode>
+      <HashCode>AAAA4AAACIAIEAEAAAAAFAAAAAAAwgBAAFEAAAAACAQ=</HashCode>
       <FileName>CUIButton.h</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="CUIText" Collapsed="true">
-    <Position X="190.5" Y="3.25" Width="1.5" />
+    <Position X="261" Y="3.25" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>AAQAIAAAAAAAAAAAAAAAAAAAAAEAAAAAABAAAAABIgA=</HashCode>
+      <HashCode>AAQAIAAAAAAAAAAAAAAAAAAAAAEAAAAAABAAACABIgA=</HashCode>
       <FileName>CUIText.h</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="CUITexture" Collapsed="true">
-    <Position X="193.75" Y="3.25" Width="1.5" />
+    <Position X="264.25" Y="3.25" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAQAAAAACAAAMAUAAAAQAIAgAAAKAAAAABAACAAAAAA=</HashCode>
       <FileName>CUITexture.h</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="CUICharge" Collapsed="true">
-    <Position X="116.25" Y="4.75" Width="1.5" />
+    <Position X="240.75" Y="4.75" Width="1.5" />
     <TypeIdentifier>
       <HashCode>CACAAGACiAAAAAAAAAAAAAAABAAAAAIAAQAAEAAAAAA=</HashCode>
       <FileName>CUICharge.h</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="CUIClearButton" Collapsed="true">
-    <Position X="123" Y="4.75" Width="1.5" />
+    <Position X="252" Y="4.75" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAIQAAAACAEAAAAAAEAAAAgAAAAEAAAAAAAAAAAAAAA=</HashCode>
       <FileName>CUIClearButton.h</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="CUICombinatorGauge" Collapsed="true">
-    <Position X="156.75" Y="4.75" Width="1.5" />
+    <Position X="76.5" Y="4.75" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>AACAQAAACIAECBAAAAAAAAACGAAAAAAAAAAAgAAAAAA=</HashCode>
+      <HashCode>AACAQAAACIAECBAAAAAAAAAAGAAAAAAAAAAAgAAAAAA=</HashCode>
       <FileName>CUICombinatorGauge.h</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="CUIControll" Collapsed="true">
-    <Position X="163.5" Y="4.75" Width="1.5" />
+    <Position X="85.5" Y="4.75" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAAAAAAACAAAAABAAEAAABAAAAAAAAAAAAAAAAAAAAA=</HashCode>
       <FileName>CUIControll.h</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="CUIEsc" Collapsed="true">
-    <Position X="183.75" Y="4.75" Width="1.5" />
+    <Position X="94.5" Y="4.75" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAAAAAAACAAAAAAAAAAAAAAABAABAAAAAAAAAAAAAAA=</HashCode>
       <FileName>CUIEsc.h</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="CUILoseButton" Collapsed="true">
-    <Position X="19.5" Y="4.75" Width="1.5" />
+    <Position X="105.75" Y="4.75" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAAAAAAACAAAAAAAAEAAQBAAAAAAAAAAAAAAAAAAAAA=</HashCode>
       <FileName>CUILoseButton.h</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="CUIMainScreen" Collapsed="true">
-    <Position X="44.25" Y="4.75" Width="1.5" />
+    <Position X="112.5" Y="4.75" Width="1.5" />
     <TypeIdentifier>
       <HashCode>EAAAAAAACAAAAAAAAEQIAEAAAAAAAAAAAAAIAgAQAAA=</HashCode>
       <FileName>CUIMainScreen.h</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="CUIMaker" Collapsed="true">
-    <Position X="53.25" Y="4.75" Width="1.5" />
+    <Position X="119.25" Y="4.75" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AgAAIAAACAAAAAAAAEAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
       <FileName>CUIMaker.h</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="CUIReady" Collapsed="true">
-    <Position X="60" Y="4.75" Width="1.5" />
+    <Position X="153" Y="4.75" Width="1.5" />
     <TypeIdentifier>
       <HashCode>ABAAAAgACAAAIAAAAEAAAAAAAAAAAAABAAAAAAAAAAA=</HashCode>
       <FileName>CUIReady.h</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="CUIStageSelect" Collapsed="true">
-    <Position X="73.5" Y="4.75" Width="1.5" />
+    <Position X="159.75" Y="4.75" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAgAAAACCAAAAAAAAMAEAAAAACAAAAAAAAAAABAAAAA=</HashCode>
       <FileName>CUIStageSelect.h</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="CUIWarning" Collapsed="true">
-    <Position X="82.5" Y="4.75" Width="1.5" />
+    <Position X="180" Y="4.75" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAAAAgAACAQAoAAAAEABAABIAAQAAAABAAAQAAEAAAA=</HashCode>
       <FileName>CUIWarning.h</FileName>
     </TypeIdentifier>
   </Class>
-  <Class Name="CUIWhiteboard" Collapsed="true">
-    <Position X="89.25" Y="4.75" Width="1.5" />
-    <TypeIdentifier>
-      <HashCode>AAAAAAAACAQAAAIAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
-      <FileName>CUIWhiteboard.h</FileName>
-    </TypeIdentifier>
-  </Class>
   <Class Name="CUIPauseButton" Collapsed="true">
-    <Position X="96" Y="4.75" Width="1.5" />
+    <Position X="186.75" Y="4.75" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAAIAAAACAAgAAAAAEAAEAAAACAAAAAAAAAAAAAAEAA=</HashCode>
       <FileName>CUIPauseButton.h</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="CUITrafficLight" Collapsed="true">
-    <Position X="102.75" Y="4.75" Width="1.5" />
+    <Position X="211.5" Y="4.75" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAAAAAAACAAAAAAIAMAAAAAAAAAAAQAAAACAABAAAQA=</HashCode>
       <FileName>CUITrafficLight.h</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="CUILoading" Collapsed="true">
-    <Position X="111.75" Y="4.75" Width="1.5" />
+    <Position X="220.5" Y="4.75" Width="1.5" />
     <TypeIdentifier>
       <HashCode>ABCAAAAACAAAAAAAAEAAMAAAAAAAAAAAACRAAAAgAAA=</HashCode>
       <FileName>CUILoading.h</FileName>
     </TypeIdentifier>
   </Class>
+  <Class Name="CUI1LevelCombination" Collapsed="true">
+    <Position X="227.25" Y="4.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAACACAAgAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>CUI1LevelCombination.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="CUI1LevelCombinatorImage" Collapsed="true">
+    <Position X="243" Y="4.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAgAAAAACAAAAAAAAAAAAAAAAAAAAAACAAAAAAAAAAA=</HashCode>
+      <FileName>CUI1LevelCombinatorImage.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="CUI2LevelCombination" Collapsed="true">
+    <Position X="254.25" Y="4.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAEAACAAAQAAAAAAAAAAAAAAAAAAAAAAAAAAAAQA=</HashCode>
+      <FileName>CUI2LevelCombination.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="CUI2LevelCombinatorImage" Collapsed="true">
+    <Position X="78.75" Y="4.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAQCAAAAAAAAAAAAAAEAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>CUI2LevelCombinatorImage.h</FileName>
+    </TypeIdentifier>
+  </Class>
   <Class Name="CUIClearBoard" Collapsed="true">
-    <Position X="118.5" Y="4.75" Width="1.5" />
+    <Position X="87.75" Y="4.75" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAAAAABACAQAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
       <FileName>CUIClearBoard.h</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="CUIClearTime" Collapsed="true">
-    <Position X="125.25" Y="4.75" Width="1.5" />
+    <Position X="96.75" Y="4.75" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAAAAAAACAAAAAAAAAAAEAAAAAAAAAACAAAAAAABAAA=</HashCode>
       <FileName>CUIClearTime.h</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="CUICloseButton" Collapsed="true">
-    <Position X="159" Y="4.75" Width="1.5" />
+    <Position X="108" Y="4.75" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAAAAAAACAAAAAAAgAAAAAAAAAAAAAAAAAAACAAAAAA=</HashCode>
       <FileName>CUICloseButton.h</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="CUIControllBoard" Collapsed="true">
-    <Position X="165.75" Y="4.75" Width="1.5" />
+    <Position X="114.75" Y="4.75" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAAAAAAACAAAAAAAAAAAAAAAAAAABAAAAAAAAAAAAgA=</HashCode>
       <FileName>CUIControllBoard.h</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="CUIEndButton" Collapsed="true">
-    <Position X="186" Y="4.75" Width="1.5" />
+    <Position X="121.5" Y="4.75" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAAAAAAICAAAAAAAAAAAAAAAAAAAAIAAAAAAAAAAAAA=</HashCode>
       <FileName>CUIEndButton.h</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="CUIloadingMessageComplete" Collapsed="true">
-    <Position X="21.75" Y="4.75" Width="1.5" />
+    <Position X="155.25" Y="4.75" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAAAAAAACAAAEAAAAAAAAAAAAAAgAAAAAAAAAAAAAAA=</HashCode>
       <FileName>CUIloadingMessageComplete.h</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="CUILoadingMessageLoad" Collapsed="true">
-    <Position X="46.5" Y="4.75" Width="1.5" />
+    <Position X="162" Y="4.75" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAAAAAAACAAAAAQAAAAAAAAAAAAAAAAAAAAgAAAAAAA=</HashCode>
       <FileName>CUILoadingMessageLoad.h</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="CUILoseBoard" Collapsed="true">
-    <Position X="55.5" Y="4.75" Width="1.5" />
+    <Position X="182.25" Y="4.75" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAAAAAAACAAAAAACAAAAAAAAAAAAAAAAAAAAAAAAAQA=</HashCode>
       <FileName>CUILoseBoard.h</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="CUIMainButton" Collapsed="true">
-    <Position X="62.25" Y="4.75" Width="1.5" />
+    <Position X="189" Y="4.75" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAAAAAAACAAAAAAAAAAAAAAAAAAAAAAQAAAAQAAAAAA=</HashCode>
       <FileName>CUIMainButton.h</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="CUIMainControllButton" Collapsed="true">
-    <Position X="75.75" Y="4.75" Width="1.5" />
+    <Position X="213.75" Y="4.75" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAAAAAQACAAAAAAAAAAAAAAAAAAABAAAAAAAAAAAAAA=</HashCode>
       <FileName>CUIMainControllButton.h</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="CUIMainEndButton" Collapsed="true">
-    <Position X="84.75" Y="4.75" Width="1.5" />
+    <Position X="222.75" Y="4.75" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAAAAAAASAAAAAAAAAAAACAAAAAAAAAAAAAAAAAAAAA=</HashCode>
       <FileName>CUIMainEndButton.h</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="CUIMainMakerButton" Collapsed="true">
-    <Position X="91.5" Y="4.75" Width="1.5" />
+    <Position X="229.5" Y="4.75" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAAAAIAACAAAAEAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
       <FileName>CUIMainMakerButton.h</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="CUIMainScreenBoard" Collapsed="true">
-    <Position X="98.25" Y="4.75" Width="1.5" />
+    <Position X="245.25" Y="4.75" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAAAAAAACAAAAAAAAAgAAAAAAAAAAAAAAAAAAABAAAA=</HashCode>
       <FileName>CUIMainScreenBoard.h</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="CUIMainStartButton" Collapsed="true">
-    <Position X="105" Y="4.75" Width="1.5" />
+    <Position X="256.5" Y="4.75" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAAAAAAACAAAAAAAEAAAAAAAAAAAAAAAAAAAACAAAAA=</HashCode>
       <FileName>CUIMainStartButton.h</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="CUIMakerBoard" Collapsed="true">
-    <Position X="114" Y="4.75" Width="1.5" />
+    <Position X="81" Y="4.75" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAAAAAAACgAAAAAAAAAAAAAAAAAAAAAAAAAAQAAAAAA=</HashCode>
       <FileName>CUIMakerBoard.h</FileName>
     </TypeIdentifier>
   </Class>
+  <Class Name="CUIPopUpBoard" Collapsed="true">
+    <Position X="90" Y="4.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAADAAAAAAAAAAAAAAAAAAAAAAAAAAAAEAAAAA=</HashCode>
+      <FileName>CUIPopUpBoard.h</FileName>
+    </TypeIdentifier>
+  </Class>
   <Class Name="CUIReadyBoard" Collapsed="true">
-    <Position X="120.75" Y="4.75" Width="1.5" />
+    <Position X="99" Y="4.75" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAAAAAAECAAAAAAAAAAAEAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
       <FileName>CUIReadyBoard.h</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="CUIResetButton" Collapsed="true">
-    <Position X="127.5" Y="4.75" Width="1.5" />
+    <Position X="110.25" Y="4.75" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAAAAAAACAAAAAAAAAAAAAAAAAAAAAAAAAAAAABAAAA=</HashCode>
       <FileName>CUIResetButton.h</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="CUISelectLeft" Collapsed="true">
-    <Position X="161.25" Y="4.75" Width="1.5" />
+    <Position X="117" Y="4.75" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAAAAAAACAAAAAACAAAAAAAAAAAAABAAAAAAAAAAAAA=</HashCode>
       <FileName>CUISelectLeft.h</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="CUISelectMainButton" Collapsed="true">
-    <Position X="168" Y="4.75" Width="1.5" />
+    <Position X="123.75" Y="4.75" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAAAAAAADAAAAAAEAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
       <FileName>CUISelectMainButton.h</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="CUISelectRight" Collapsed="true">
-    <Position X="188.25" Y="4.75" Width="1.5" />
+    <Position X="157.5" Y="4.75" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAAAAAAACAACAAAAAAAAgAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
       <FileName>CUISelectRight.h</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="CUIStageSelectPopUpBoard" Collapsed="true">
-    <Position X="24" Y="4.75" Width="1.5" />
+    <Position X="164.25" Y="4.75" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AACAAABACQAAAAAAAAAAAAIAAAAAAAQAgAAACAABACA=</HashCode>
       <FileName>CUIStageSelectPopUpBoard.h</FileName>
     </TypeIdentifier>
   </Class>
-  <Class Name="CUISubWhiteboard" Collapsed="true">
-    <Position X="48.75" Y="4.75" Width="1.5" />
+  <Class Name="CUITipBoard" Collapsed="true">
+    <Position X="184.5" Y="4.75" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>AAAAAEAACAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAQAA=</HashCode>
-      <FileName>CUISubWhiteboard.h</FileName>
+      <HashCode>AAAAAAAACAAAAAAAAIAAEAAAAAAAAAAAAAAIAAAAAAA=</HashCode>
+      <FileName>CUITipBoard.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="CUITipBoardText" Collapsed="true">
+    <Position X="191.25" Y="4.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAACAAAAEAAAAAEAAAAAASAAAAAQAAAAAAAAAI=</HashCode>
+      <FileName>CUITipBoardText.h</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="CUITryAgain" Collapsed="true">
-    <Position X="57.75" Y="4.75" Width="1.5" />
+    <Position X="216" Y="4.75" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAAAAAAACAAAABAAAAAAAAAAAAAAAAIAAAAAAAAAAAA=</HashCode>
       <FileName>CUITryAgain.h</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="CUIUpdateText" Collapsed="true">
-    <Position X="64.5" Y="4.75" Width="1.5" />
+    <Position X="225" Y="4.75" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAAAAAAACAAAAAAAAAAAAAAAAAAAAAACIAAAAAAAAAA=</HashCode>
       <FileName>CUIUpdateText.h</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="CUIWarningBoard" Collapsed="true">
-    <Position X="78" Y="4.75" Width="1.5" />
+    <Position X="231.75" Y="4.75" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAAAAAAACAAAAAAABAAAAAAAAAACAAAAAAAAAAAAAAA=</HashCode>
       <FileName>CUIWarningBoard.h</FileName>
     </TypeIdentifier>
   </Class>
+  <Class Name="CUIWhiteboard" Collapsed="true">
+    <Position X="247.5" Y="4.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>BAAAAAAACAQAAAIAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>CUIWhiteboard.h</FileName>
+    </TypeIdentifier>
+  </Class>
   <Class Name="CUIPauseBoard" Collapsed="true">
-    <Position X="87" Y="4.75" Width="1.5" />
+    <Position X="258.75" Y="4.75" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAAAAAAACAAAAAAAAAAAAAAAAAAAAAAAAAAAAAgCAAA=</HashCode>
       <FileName>CUIPauseBoard.h</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="CUIStartButton" Collapsed="true">
-    <Position X="93.75" Y="4.75" Width="1.5" />
+    <Position X="83.25" Y="4.75" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAACAAAACAAAAAAAAAAAAAAAAAAAAAAAAABAAAAAAAA=</HashCode>
       <FileName>CUIStartButton.h</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="CUILoadingScreen" Collapsed="true">
-    <Position X="100.5" Y="4.75" Width="1.5" />
+    <Position X="92.25" Y="4.75" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAAAABAACAAAAAAAAAAgAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
       <FileName>CUILoadingScreen.h</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="CUILight" Collapsed="true">
-    <Position X="107.25" Y="4.75" Width="1.5" />
+    <Position X="101.25" Y="4.75" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAAAAAoACAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
       <FileName>CUILight.h</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="CUITrafficLightFiveBoard" Collapsed="true">
-    <Position X="170.25" Y="6.25" Width="1.5" />
+    <Position X="166.5" Y="6.25" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAAAAAAACAAAAAAAAAAAAAAAAAAAAAAAAAACAAAAEAA=</HashCode>
       <FileName>CUITrafficLightFiveBoard.h</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="CUITrafficLightFourBoard" Collapsed="true">
-    <Position X="172.5" Y="6.25" Width="1.5" />
+    <Position X="168.75" Y="6.25" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAAAAAAACAAAAAAAAAAAAABAAAAAAAAAAAAAAAEAAAA=</HashCode>
       <FileName>CUITrafficLightFourBoard.h</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="CUITrafficLightOneBoard" Collapsed="true">
-    <Position X="174.75" Y="6.25" Width="1.5" />
+    <Position X="171" Y="6.25" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAEAAAAACAAAAAAAAAAAAAAAAAAAQAAAAAAAAAAAAAA=</HashCode>
       <FileName>CUITrafficLightOneBoard.h</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="CUITrafficLightThreeBoard" Collapsed="true">
-    <Position X="177" Y="6.25" Width="1.5" />
+    <Position X="173.25" Y="6.25" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAAAAAAACAAAAIAAAAAAAAAAAAAAAAAAAAAABAAAAAA=</HashCode>
       <FileName>CUITrafficLightThreeBoard.h</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="CUITrafficLightBoard" Collapsed="true">
-    <Position X="174.75" Y="4.75" Width="1.5" />
+    <Position X="171" Y="4.75" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAAABAAASAAAAAAAAACEAAAAAAAAAgAAIAAAAAAAAAA=</HashCode>
       <FileName>CUITrafficLightBoard.h</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="CUITrafficLightTwoBoard" Collapsed="true">
-    <Position X="179.25" Y="6.25" Width="1.5" />
+    <Position X="175.5" Y="6.25" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAAAAAAgCAAAAAAAAAAAAAAAAAABAAAAAAAAAAAAAAA=</HashCode>
       <FileName>CUITrafficLightTwoBoard.h</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="CUIStar" Collapsed="true">
-    <Position X="34" Y="4.75" Width="1.5" />
+    <Position X="201.25" Y="4.75" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAQAg=</HashCode>
       <FileName>CUIStar.h</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="CUIStarOne" Collapsed="true">
-    <Position X="26.25" Y="6.25" Width="1.5" />
+    <Position X="202.5" Y="6.25" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAAAAAAACACAAAAAAAAAAAAAAAAAAAAAgAAAAAAAAAA=</HashCode>
       <FileName>CUIStarOne.h</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="CUIStarThree" Collapsed="true">
-    <Position X="28.5" Y="6.25" Width="1.5" />
+    <Position X="204.75" Y="6.25" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAAAAAAACAAAAAAABAAAAAAAAAAAAAACAAAAAAAAAAA=</HashCode>
       <FileName>CUIStarThree.h</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="CUIStarTwo" Collapsed="true">
-    <Position X="30.75" Y="6.25" Width="1.5" />
+    <Position X="207" Y="6.25" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAAAAAAACAEAAAAAAAAAAAAQAAAAAAAAAAAAAAAAAAA=</HashCode>
       <FileName>CUIStarTwo.h</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="CUIStarZero" Collapsed="true">
-    <Position X="33" Y="6.25" Width="1.5" />
+    <Position X="209.25" Y="6.25" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAAAAAAACAAABAAAAAAAAAAAAAAAAACAAAAAAAAAAAA=</HashCode>
       <FileName>CUIStarZero.h</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="CUICombinatorGaugeFive" Collapsed="true">
-    <Position X="136.5" Y="6.25" Width="1.5" />
+    <Position X="150.75" Y="6.25" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAAAAAAECAAAAAAAgAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
       <FileName>CUICombinatorGaugeFive.h</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="CUICombinatorGaugeFour" Collapsed="true">
-    <Position X="138.75" Y="6.25" Width="1.5" />
+    <Position X="126" Y="6.25" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAAAAAAACAAAAAABAAAAAAAEAAAAAAAAAAAAAAAAAAA=</HashCode>
       <FileName>CUICombinatorGaugeFour.h</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="CUICombinatorGaugeOne" Collapsed="true">
-    <Position X="141" Y="6.25" Width="1.5" />
+    <Position X="128.25" Y="6.25" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAQAAAAACAAAAAAIAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
       <FileName>CUICombinatorGaugeOne.h</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="CUICombinatorGaugeThree" Collapsed="true">
-    <Position X="143.25" Y="6.25" Width="1.5" />
+    <Position X="130.5" Y="6.25" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAAACAAACAAAAAAAAAAAAAAAAAEAAAAAAAAAAAAAAAA=</HashCode>
       <FileName>CUICombinatorGaugeThree.h</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="CUICombinatorGaugeTwo" Collapsed="true">
-    <Position X="145.5" Y="6.25" Width="1.5" />
+    <Position X="132.75" Y="6.25" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAAAAAAACAAAAAAAAAAAAAAAAEAEAAAAAAAAAAAAAAA=</HashCode>
       <FileName>CUICombinatorGaugeTwo.h</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="CUICombinatorGaugeZero" Collapsed="true">
-    <Position X="147.75" Y="6.25" Width="1.5" />
+    <Position X="135" Y="6.25" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAAAAAAACAAAAAAAABAAAAAAgAAAAAAAAAAAAAAAAAA=</HashCode>
       <FileName>CUICombinatorGaugeZero.h</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="CUIChargeBoard" Collapsed="true">
-    <Position X="142" Y="4.75" Width="1.5" />
+    <Position X="138.25" Y="4.75" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAAAAAACCAAAAAAAAAAABAAAAAAAAAAAAAAAAAAIAAA=</HashCode>
       <FileName>CUIChargeBoard.h</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="CUIChargeFive" Collapsed="true">
-    <Position X="150" Y="6.25" Width="1.5" />
+    <Position X="137.25" Y="6.25" Width="1.5" />
     <TypeIdentifier>
       <HashCode>EAAAAAAACAAAAABAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
       <FileName>CUIChargeFive.h</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="CUIChargeFour" Collapsed="true">
-    <Position X="152.25" Y="6.25" Width="1.5" />
+    <Position X="139.5" Y="6.25" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAAAAAAACAAAAAQAAAAAAAAAAAAAAAAAACAAAAAAAAA=</HashCode>
       <FileName>CUIChargeFour.h</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="CUIChargeOne" Collapsed="true">
-    <Position X="154.5" Y="6.25" Width="1.5" />
+    <Position X="141.75" Y="6.25" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAAAAAAACAAAAAAAACAAAAAAIAAAAAAAAAAAAAAAAAA=</HashCode>
       <FileName>CUIChargeOne.h</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="CUIChargeThree" Collapsed="true">
-    <Position X="129.75" Y="6.25" Width="1.5" />
+    <Position X="144" Y="6.25" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AQAAAAAACAAEAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
       <FileName>CUIChargeThree.h</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="CUIChargeTwo" Collapsed="true">
-    <Position X="132" Y="6.25" Width="1.5" />
+    <Position X="146.25" Y="6.25" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAAAAAABCAAAAAAAAAAAAAAAAAAAAAAAAAgAAAAAAAA=</HashCode>
       <FileName>CUIChargeTwo.h</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="CUIChargeZero" Collapsed="true">
-    <Position X="134.25" Y="6.25" Width="1.5" />
+    <Position X="148.5" Y="6.25" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAAAAAAACAAAAAAAAEAAAAAAAAAQAAAAAAAAAAAAAAA=</HashCode>
       <FileName>CUIChargeZero.h</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="CUISelect" Collapsed="true">
-    <Position X="69" Y="4.75" Width="1.5" />
+    <Position X="236.25" Y="4.75" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAAAAAQACAIAAAAAAAACAAAAAAQAAAAAAAAAAAAAAAA=</HashCode>
       <FileName>CUISelect.h</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="CUISelectBoard" Collapsed="true">
-    <Position X="80.25" Y="4.75" Width="1.5" />
+    <Position X="249.75" Y="4.75" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAAAAAAAKAAAAAIAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
       <FileName>CUISelectBoard.h</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="CUISelectNone" Collapsed="true">
-    <Position X="66.75" Y="6.25" Width="1.5" />
+    <Position X="238.5" Y="6.25" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAAgAAAACAAAAAAAAAAAAAAAAAAAAAAAAAAAAQAAAAA=</HashCode>
       <FileName>CUISelectNone.h</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="CUISelectSolved" Collapsed="true">
-    <Position X="69" Y="6.25" Width="1.5" />
+    <Position X="234" Y="6.25" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAAAgAAACAAAAAAAAEAAAAAIAAAAAAAAAAAAAAAAAAA=</HashCode>
       <FileName>CUISelectSolved.h</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="CUISelectStarOne" Collapsed="true">
-    <Position X="35.25" Y="6.25" Width="1.5" />
+    <Position X="193.5" Y="6.25" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAIAAAAACAAAAAAAAAAAAAAIAAAAAAAAAAAAAAAAAAA=</HashCode>
       <FileName>CUISelectStarOne.h</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="CUISelectStartButton" Collapsed="true">
-    <Position X="109.5" Y="4.75" Width="1.5" />
+    <Position X="103.5" Y="4.75" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAAAAAAACAAAAAAAAAAAAAAAAAAAAAAAAAAQAAAAAAI=</HashCode>
       <FileName>CUISelectStartButton.h</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="CUISelectStarThree" Collapsed="true">
-    <Position X="37.5" Y="6.25" Width="1.5" />
+    <Position X="195.75" Y="6.25" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAAAAAQACAAAAAAAAAAAAAAAAAAAAAAAAAAgAAAAAAA=</HashCode>
       <FileName>CUISelectStarThree.h</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="CUISelectStarTwo" Collapsed="true">
-    <Position X="39.75" Y="6.25" Width="1.5" />
+    <Position X="198" Y="6.25" Width="1.5" />
     <TypeIdentifier>
       <HashCode>ABAAAAAACAAAAAAAAAAAAAAAAAAAAAAAAAAAAABAAAA=</HashCode>
       <FileName>CUISelectStarTwo.h</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="CUISelectStarZero" Collapsed="true">
-    <Position X="42" Y="6.25" Width="1.5" />
+    <Position X="200.25" Y="6.25" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAAAAAAACAAAAAAAAABAAAAAAAAIAAAAAAAAAAAAAAA=</HashCode>
       <FileName>CUISelectStarZero.h</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="CUISelectUnsolved" Collapsed="true">
-    <Position X="71.25" Y="6.25" Width="1.5" />
+    <Position X="236.25" Y="6.25" Width="1.5" />
     <TypeIdentifier>
       <HashCode>QAAAAAAACAAAAAAAAEAAAAAAAAAAAACAAAAAAAAAAAA=</HashCode>
       <FileName>CUISelectUnsolved.h</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="CUIAcidRain" Collapsed="true">
-    <Position X="181.5" Y="4.75" Width="1.5" />
+    <Position X="177.75" Y="4.75" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAQAAAAQCAAAAAAAAEAgAAAAIAAAAAABABAAAAAAAAA=</HashCode>
       <FileName>CUIAcidRain.h</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="CUICC" Collapsed="true">
-    <Position X="195" Y="4.75" Width="1.5" />
+    <Position X="263.25" Y="4.75" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAAAAAAAAAAAAAAAAAAAEAAAAAAAAAAAABAAAAAAAAA=</HashCode>
       <FileName>CUICC.h</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="CUIHeart" Collapsed="true">
-    <Position X="192.75" Y="4.75" Width="1.5" />
+    <Position X="265.5" Y="4.75" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAwEAAAAAAAAAAAAAAAAAAIAIIAAAAABABAAIAAgCAA=</HashCode>
       <FileName>CUIHeart.h</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="CUIWind" Collapsed="true">
-    <Position X="51" Y="4.75" Width="1.5" />
+    <Position X="218.25" Y="4.75" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAQAEAAACAAAAAAAAAAAEgAAAAAAAAAAABAEAAAgAAg=</HashCode>
       <FileName>CUIWind.h</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="CMainScene" Collapsed="true">
-    <Position X="132.25" Y="1.75" Width="1.5" />
+    <Position X="140.75" Y="1.75" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAUAAAAAAABAEUAAAAAAAAAAAAAAAAAAABACAAAAAAA=</HashCode>
       <FileName>CMainScene.h</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="CAllocateHierachy" Collapsed="true" BaseTypeListCollapsed="true">
-    <Position X="256" Y="0.5" Width="1.5" />
+    <Position X="270.25" Y="0.5" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAAAACBAAAAAAAAAAAAAAAQAAAAABAEAAgAAAAAAEAA=</HashCode>
       <FileName>CAllocateHierachy.h</FileName>
@@ -1178,240 +1241,240 @@
     <Lollipop Position="0.2" Collapsed="true" />
   </Class>
   <Class Name="CSkinnedMesh" Collapsed="true">
-    <Position X="257.75" Y="2.5" Width="1.5" />
+    <Position X="273.75" Y="2.5" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>EAQAgCGECAAAgAEAQABIBIQAGABIEAAFCBIgAAQACAA=</HashCode>
+      <HashCode>EAQAgCGECAAAgAEAQABIBIQAGIBIEAAFCBIgAAQACAA=</HashCode>
       <FileName>CSkinnedMesh.h</FileName>
     </TypeIdentifier>
   </Class>
   <Struct Name="ST_PC_VERTEX" Collapsed="true">
-    <Position X="256" Y="4.75" Width="1.5" />
+    <Position X="270.25" Y="4.75" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAAAQAAAAAAAAAAAAAAAAAAAAAAAAACAAEAAAAAAAAA=</HashCode>
       <FileName>stdafx.h</FileName>
     </TypeIdentifier>
   </Struct>
   <Struct Name="ST_PN_VERTEX" Collapsed="true">
-    <Position X="259.5" Y="4.75" Width="1.5" />
+    <Position X="273.75" Y="4.75" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAEkAAAAAAAAA=</HashCode>
       <FileName>stdafx.h</FileName>
     </TypeIdentifier>
   </Struct>
   <Struct Name="ST_PNT_VERTEX" Collapsed="true">
-    <Position X="263" Y="4.75" Width="1.5" />
+    <Position X="277.25" Y="4.75" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAAAABAAAAAAAAAAAAAAAAAAAAAAAAAAEEQAAAAAAAA=</HashCode>
       <FileName>stdafx.h</FileName>
     </TypeIdentifier>
   </Struct>
   <Struct Name="ST_PNC_VERTEX" Collapsed="true">
-    <Position X="261.25" Y="4.75" Width="1.5" />
+    <Position X="275.5" Y="4.75" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAAAABAAAAAAAAAAAAAAAAAAAAAAAACAEEAAAAAAAAA=</HashCode>
       <FileName>stdafx.h</FileName>
     </TypeIdentifier>
   </Struct>
   <Struct Name="ST_PT_VERTEX" Collapsed="true">
-    <Position X="257.75" Y="5.75" Width="1.5" />
+    <Position X="272" Y="5.75" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAEQAAAAAACA=</HashCode>
       <FileName>stdafx.h</FileName>
     </TypeIdentifier>
   </Struct>
   <Struct Name="ST_POS_SAMPLE" Collapsed="true">
-    <Position X="256" Y="5.75" Width="1.5" />
+    <Position X="270.25" Y="5.75" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAAAAAQAAAAAAAAAAAAAAAAAAAAAAAAAEBAAAAAAAAA=</HashCode>
       <FileName>stdafx.h</FileName>
     </TypeIdentifier>
   </Struct>
   <Struct Name="ST_ROT_SAMPLE" Collapsed="true">
-    <Position X="259.5" Y="5.75" Width="1.5" />
+    <Position X="273.75" Y="5.75" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAAAAAAAAAAAAAAAEAAAAAAAAAAAAAAAECAAAAAAAAA=</HashCode>
       <FileName>stdafx.h</FileName>
     </TypeIdentifier>
   </Struct>
   <Struct Name="ST_SPHERE" Collapsed="true">
-    <Position X="256" Y="6.75" Width="1.5" />
+    <Position X="270.25" Y="6.75" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAAAAAIAAAAAAAAAAAEAAAAAgAAAACAAAAAAAAAAAAA=</HashCode>
       <FileName>stdafx.h</FileName>
     </TypeIdentifier>
   </Struct>
   <Struct Name="ST_CUBE" Collapsed="true">
-    <Position X="259.5" Y="3.75" Width="1.5" />
+    <Position X="273.75" Y="3.75" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAgAAQAAAAAAAAAAAIAAA=</HashCode>
       <FileName>stdafx.h</FileName>
     </TypeIdentifier>
   </Struct>
   <Struct Name="ST_KeyInputEvent" Collapsed="true">
-    <Position X="261.25" Y="3.75" Width="1.5" />
+    <Position X="275.5" Y="3.75" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAAAAAAAAAAAAAIAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
       <FileName>stdafx.h</FileName>
     </TypeIdentifier>
   </Struct>
   <Struct Name="ST_MouseEvent" Collapsed="true">
-    <Position X="263" Y="3.75" Width="1.5" />
+    <Position X="277.25" Y="3.75" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAEAAAAAAAAAAAAA=</HashCode>
       <FileName>stdafx.h</FileName>
     </TypeIdentifier>
   </Struct>
   <Struct Name="ST_TravelDistanceEvent" Collapsed="true">
-    <Position X="259.5" Y="6.75" Width="1.5" />
+    <Position X="273.75" Y="6.75" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAAAAAAAEAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
       <FileName>stdafx.h</FileName>
     </TypeIdentifier>
   </Struct>
   <Struct Name="ST_SetTimeEvent" Collapsed="true">
-    <Position X="261.25" Y="5.75" Width="1.5" />
+    <Position X="275.5" Y="5.75" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAQAA=</HashCode>
       <FileName>stdafx.h</FileName>
     </TypeIdentifier>
   </Struct>
   <Struct Name="ST_TickEvent" Collapsed="true">
-    <Position X="257.75" Y="6.75" Width="1.5" />
+    <Position X="272" Y="6.75" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAAAAAAAAAAAAAAAAAAgAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
       <FileName>stdafx.h</FileName>
     </TypeIdentifier>
   </Struct>
   <Struct Name="ST_PLAYER_INPUTKEY" Collapsed="true">
-    <Position X="257.75" Y="4.75" Width="1.5" />
+    <Position X="272" Y="4.75" Width="1.5" />
     <TypeIdentifier>
       <HashCode>IAAAAAAgAAAAAEAcAAAAAAAAAAAAAAAAAAAgAAAAAAg=</HashCode>
       <FileName>stdafx.h</FileName>
     </TypeIdentifier>
   </Struct>
   <Struct Name="ST_Skill" Collapsed="true">
-    <Position X="263" Y="5.75" Width="1.5" />
+    <Position X="277.25" Y="5.75" Width="1.5" />
     <TypeIdentifier>
       <HashCode>ABAAAAABAIAAAAAAAAAAAggACAAAAgAgAAAEgAAAAAA=</HashCode>
       <FileName>CMonster.h</FileName>
     </TypeIdentifier>
   </Struct>
   <Struct Name="ST_BONE" Collapsed="true">
-    <Position X="256" Y="3.75" Width="1.5" />
+    <Position X="270.25" Y="3.75" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAIAA=</HashCode>
       <FileName>CAllocateHierachy.h</FileName>
     </TypeIdentifier>
   </Struct>
   <Struct Name="ST_BONE_MESH" Collapsed="true">
-    <Position X="257.75" Y="3.75" Width="1.5" />
+    <Position X="272" Y="3.75" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAAADAAAAAAAAAAAAAAAQAACAAAAAAIAAAAAAAAAAAA=</HashCode>
       <FileName>CAllocateHierachy.h</FileName>
     </TypeIdentifier>
   </Struct>
   <Enum Name="eEvent" Collapsed="true">
-    <Position X="256" Y="8.75" Width="1.5" />
+    <Position X="270.25" Y="8.75" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAASBACwLQABgFCAAwICggoAIYBBQAUAQACFgAmBaEA=</HashCode>
       <FileName>CEventManager.h</FileName>
     </TypeIdentifier>
   </Enum>
   <Enum Name="eCombinatorPartsLevel" Collapsed="true">
-    <Position X="263" Y="8" Width="1.5" />
+    <Position X="277.25" Y="8" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAAAAAAAABAAAAAACAAAAAAAIAACAAAAAAAAAAAAAAA=</HashCode>
       <FileName>CPartCombinator.h</FileName>
     </TypeIdentifier>
   </Enum>
   <Enum Name="eCombinatorLoadState" Collapsed="true">
-    <Position X="261.25" Y="8" Width="1.5" />
+    <Position X="275.5" Y="8" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAAAAAAAAAAAAAAABAAAAAAAAAAAAAAAAAgAAAAAAAA=</HashCode>
       <FileName>CPartCombinator.h</FileName>
     </TypeIdentifier>
   </Enum>
   <Enum Name="eCombinatorActionState" Collapsed="true">
-    <Position X="259.5" Y="8" Width="1.5" />
+    <Position X="273.75" Y="8" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAAAAAAAEAAAAAAAAAAAAAAAAAAAAAAAAAAABAAAAAA=</HashCode>
       <FileName>CPartCombinator.h</FileName>
     </TypeIdentifier>
   </Enum>
   <Enum Name="ePlayerState" Collapsed="true">
-    <Position X="261.25" Y="8.75" Width="1.5" />
+    <Position X="275.5" Y="8.75" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAAIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAEAAAA=</HashCode>
       <FileName>CCharacter.h</FileName>
     </TypeIdentifier>
   </Enum>
   <Enum Name="eAnimState" Collapsed="true">
-    <Position X="256" Y="8" Width="1.5" />
+    <Position X="270.25" Y="8" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAAAAABAAAAAAAAAAAAAAAAAAAAAAAgAAAAAAAIAAAI=</HashCode>
       <FileName>CCharacter.h</FileName>
     </TypeIdentifier>
   </Enum>
   <Enum Name="eOutletState" Collapsed="true">
-    <Position X="257.75" Y="8.75" Width="1.5" />
+    <Position X="272" Y="8.75" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAAAAAAAAAEAAAAAAAAAAAAAAAAAAAAAAAAAAAEAAAA=</HashCode>
       <FileName>COutlet.h</FileName>
     </TypeIdentifier>
   </Enum>
   <Enum Name="ePartVendingState" Collapsed="true">
-    <Position X="259.5" Y="8.75" Width="1.5" />
+    <Position X="273.75" Y="8.75" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAAAAAAAEAAAAAAAAAAAAAAAAAAAAAAAAAAABAAAAAA=</HashCode>
       <FileName>CPartVending.h</FileName>
     </TypeIdentifier>
   </Enum>
   <Enum Name="eSkillCondition" Collapsed="true">
-    <Position X="256" Y="9.5" Width="1.5" />
+    <Position X="270.25" Y="9.5" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAAQAAAAAAAAgACAAAAAgAIAAAAAAAEAQAAAAAAAAAA=</HashCode>
       <FileName>CMonster.h</FileName>
     </TypeIdentifier>
   </Enum>
   <Enum Name="eSkill" Collapsed="true">
-    <Position X="263" Y="8.75" Width="1.5" />
+    <Position X="277.25" Y="8.75" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AIAAAAAAEAAAABAAAAACAAAAAAIAAAAAEAAAAAEAAAA=</HashCode>
       <FileName>CMonster.h</FileName>
     </TypeIdentifier>
   </Enum>
   <Enum Name="eSkillLevel" Collapsed="true">
-    <Position X="257.75" Y="9.5" Width="1.5" />
+    <Position X="272" Y="9.5" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAAEAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAgAAAEAAIA=</HashCode>
       <FileName>CMonster.h</FileName>
     </TypeIdentifier>
   </Enum>
   <Enum Name="eTileType" Collapsed="true">
-    <Position X="261.25" Y="9.5" Width="1.5" />
+    <Position X="275.5" Y="9.5" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAAACEAAAQAAAAAAAAAFAAAQAAAgAAAAAAAAAAAAAAA=</HashCode>
       <FileName>CTile.h</FileName>
     </TypeIdentifier>
   </Enum>
   <Enum Name="eUIState" Collapsed="true">
-    <Position X="263" Y="9.5" Width="1.5" />
+    <Position X="277.25" Y="9.5" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAAAAAIAAAAAAAAAAAAAACAAAAAAAAAAAQAgAAAAAAI=</HashCode>
       <FileName>CUI.h</FileName>
     </TypeIdentifier>
   </Enum>
   <Enum Name="eBtnEvent" Collapsed="true">
-    <Position X="257.75" Y="8" Width="1.5" />
+    <Position X="272" Y="8" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAAAAACwDQAAAAAAAwICggAAIIABQAEAAACBgAGAAEA=</HashCode>
       <FileName>CUI.h</FileName>
     </TypeIdentifier>
   </Enum>
   <Enum Name="eTextType" Collapsed="true">
-    <Position X="259.5" Y="9.5" Width="1.5" />
+    <Position X="273.75" Y="9.5" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>AAAAAAAAAAgAAAAAAAACAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <HashCode>AAAAAAAAAAgEAAAAAAACAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
       <FileName>CUIText.h</FileName>
     </TypeIdentifier>
   </Enum>
