@@ -104,20 +104,20 @@ bool CWall::OnEvent(eEvent eEvent, void * _value)
 void CWall::ReleaseKey(void* _value)
 {
 	ST_KeyInputEvent* data = static_cast<ST_KeyInputEvent*>(_value);
-	if (data->wKey == 'O')
-	{
-		m_nRotAngleX -= 2;
-		if (m_nRotAngleX <= 0)
-			m_nRotAngleX = 0;
-		D3DXMatrixRotationX(&m_matR, D3DXToRadian(m_nRotAngleX));
-	}
-	else if (data->wKey == 'P')
-	{
-		m_nRotAngleX += 2;
-		if (m_nRotAngleX >= 90)
-			m_nRotAngleX = 90;
-		D3DXMatrixRotationX(&m_matR, D3DXToRadian(m_nRotAngleX));
-	}
+	_DEBUG_COMMENT if (data->wKey == 'O')
+	_DEBUG_COMMENT {
+	_DEBUG_COMMENT 	m_nRotAngleX -= 2;
+	_DEBUG_COMMENT 	if (m_nRotAngleX <= 0)
+	_DEBUG_COMMENT 		m_nRotAngleX = 0;
+	_DEBUG_COMMENT 	D3DXMatrixRotationX(&m_matR, D3DXToRadian(m_nRotAngleX));
+	_DEBUG_COMMENT }
+	_DEBUG_COMMENT else if (data->wKey == 'P')
+	_DEBUG_COMMENT {
+	_DEBUG_COMMENT 	m_nRotAngleX += 2;
+	_DEBUG_COMMENT 	if (m_nRotAngleX >= 90)
+	_DEBUG_COMMENT 		m_nRotAngleX = 90;
+	_DEBUG_COMMENT 	D3DXMatrixRotationX(&m_matR, D3DXToRadian(m_nRotAngleX));
+	_DEBUG_COMMENT }
 
 	
 	m_matWorld = m_matR * m_matT;
