@@ -133,30 +133,10 @@ void CGameScene::Init()
 	CUIWarning *pWarrning = new CUIWarning;
 
 
-	//TipBoard
-	//CTipBoard* pDebugTipBoard = new CTipBoard(g_vZero,string("TEST"));
-	//m_vecObject.push_back(pDebugTipBoard);
-	
-
-	//CField* pField = new CField(eTileType::Sand);
-	//CParts* parts1 = g_pPartsManager->CreateParts("C01");
-	//parts1->SetPosition(0, 2, 0);
-	//CParts* parts2 = g_pPartsManager->CreateParts("C05");
-	//parts2->SetPosition(0, 2, 0);
-	//CParts* parts3 = g_pPartsManager->CreateParts("C07");
-	//parts3->SetPosition(0, 2, 0);
-	//CParts* parts4 = g_pPartsManager->CreateParts("C08");
-	//parts4->SetPosition(0, 2, 0);
-
-	//CMonsterHarpy* harpy = new CMonsterHarpy(this);
-	//harpy->AddObjectPosition(g_vZero);
-	//CMonsterMedusa* medusa = new CMonsterMedusa(this);
-	
 	m_cMutex.lock();
 	m_fGameTime = 300.0f;
 	m_vecStaticActor.push_back(wall);
-	//m_vecStaticActor.push_back(pField);
-	//m_vecStaticActor.push_back(pBwall);
+	
 	m_pEscUI = pEsc;
 	m_pWarnning = pWarrning;
 	m_pReady = pReady;
@@ -164,12 +144,7 @@ void CGameScene::Init()
 	m_pDebugLoseUI = pLoseButton;
 	m_pDebugClearUI = pClearButton;
 	m_pDebugTrafficLight = pTrafficLight;
-	//m_vecParts.push_back(parts1);
-	//m_vecParts.push_back(parts2);
-	//m_vecParts.push_back(parts3);
-	//m_vecParts.push_back(parts4);
-	//m_vecMonster.push_back(medusa);
-	//m_vecMonster.push_back(harpy);
+	
 	m_cMutex.unlock();
 }
 
