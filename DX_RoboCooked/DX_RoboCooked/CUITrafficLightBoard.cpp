@@ -11,8 +11,7 @@ CUITrafficLightBoard::~CUITrafficLightBoard()
 
 void CUITrafficLightBoard::SetPosition()
 {
-	RECT rc;
-	GetClientRect(g_hWnd, &rc);
-	m_vPosition = D3DXVECTOR2((rc.right - m_vSize.x) / 2, rc.bottom - m_vSize.y);
-
+	D3DVIEWPORT9 vp;
+	g_pD3DDevice->GetViewport(&vp);
+	m_vPosition = D3DXVECTOR2((vp.Width - m_vSize.x) / 2, vp.Height - m_vSize.y);
 }

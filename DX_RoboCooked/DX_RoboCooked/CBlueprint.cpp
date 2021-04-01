@@ -10,19 +10,20 @@ CBlueprint::CBlueprint(string partsID, vector<CParts*>& vecParts, D3DXVECTOR3 po
 	: m_isCompleted(false)
 	, m_onBlueprintParts(NULL)
 	, m_pInteractCollision(nullptr)
+	, m_blueprintTexture(nullptr)
+	, m_completeBlueprintTexture(nullptr)
 {
 	m_sRightPartsID = partsID;
 	m_pVecParts = &vecParts;
-	m_blueprintTexture = g_pTextureManager->GetTexture("data/Texture/Blueprint.jpg");
-	m_completeBlueprintTexture = g_pTextureManager->GetTexture("data/Texture/CompleteBlueprint.jpg");
-	//파츠 아이디에 따라 m_matS,텍스쳐 다르게
 	m_fFriction = 0.2f;
-	SetPosition(position);
+	SetPosition(position.x, position.y - 0.5f, position.z);
 	SetScale(scale);
 	SetRotationY(angle);
 	m_fRightPartsAngleY = partsAngle;
 	m_fMass = 9999.f;
-	//D3DXMatrixIdentity(&m_matInteractCollision);
+
+	SetupTexture(partsID);
+	m_completeBlueprintTexture = g_pTextureManager->GetTexture("data/Texture/blueprint/blueprint_base.png");
 }
 
 
@@ -38,66 +39,6 @@ void CBlueprint::Setup()
 	v.n = D3DXVECTOR3(0, 1, 0);
 	
 	{
-		//front
-		v.p = D3DXVECTOR3(-BLOCK_SIZE / (2.0f), -BLOCK_SIZE / (2.0f), -BLOCK_SIZE / (2.0f));	v.t = D3DXVECTOR2(0, 1);
-		vecVertex.push_back(v);
-		v.p = D3DXVECTOR3(-BLOCK_SIZE / (2.0f), BLOCK_SIZE / (2.0f), -BLOCK_SIZE / (2.0f));		v.t = D3DXVECTOR2(0, 0);
-		vecVertex.push_back(v);
-		v.p = D3DXVECTOR3(BLOCK_SIZE / (2.0f), BLOCK_SIZE / (2.0f), -BLOCK_SIZE / (2.0f));		v.t = D3DXVECTOR2(1, 0);
-		vecVertex.push_back(v);
-
-		v.p = D3DXVECTOR3(-BLOCK_SIZE / (2.0f), -BLOCK_SIZE / (2.0f), -BLOCK_SIZE / (2.0f));	v.t = D3DXVECTOR2(0, 1);
-		vecVertex.push_back(v);
-		v.p = D3DXVECTOR3(BLOCK_SIZE / (2.0f), BLOCK_SIZE / (2.0f), -BLOCK_SIZE / (2.0f));		v.t = D3DXVECTOR2(1, 0);
-		vecVertex.push_back(v);
-		v.p = D3DXVECTOR3(BLOCK_SIZE / (2.0f), -BLOCK_SIZE / (2.0f), -BLOCK_SIZE / (2.0f));		v.t = D3DXVECTOR2(1, 1);
-		vecVertex.push_back(v);
-
-		//back
-		v.p = D3DXVECTOR3(-BLOCK_SIZE / (2.0f), -BLOCK_SIZE / (2.0f), BLOCK_SIZE / (2.0f));		v.t = D3DXVECTOR2(0, 1);
-		vecVertex.push_back(v);
-		v.p = D3DXVECTOR3(BLOCK_SIZE / (2.0f), BLOCK_SIZE / (2.0f), BLOCK_SIZE / (2.0f));		v.t = D3DXVECTOR2(1, 0);
-		vecVertex.push_back(v);
-		v.p = D3DXVECTOR3(-BLOCK_SIZE / (2.0f), BLOCK_SIZE / (2.0f), BLOCK_SIZE / (2.0f));		v.t = D3DXVECTOR2(0, 0);
-		vecVertex.push_back(v);
-
-		v.p = D3DXVECTOR3(-BLOCK_SIZE / (2.0f), -BLOCK_SIZE / (2.0f), BLOCK_SIZE / (2.0f));		v.t = D3DXVECTOR2(0, 1);
-		vecVertex.push_back(v);
-		v.p = D3DXVECTOR3(BLOCK_SIZE / (2.0f), -BLOCK_SIZE / (2.0f), BLOCK_SIZE / (2.0f));		v.t = D3DXVECTOR2(1, 1);
-		vecVertex.push_back(v);
-		v.p = D3DXVECTOR3(BLOCK_SIZE / (2.0f), BLOCK_SIZE / (2.0f), BLOCK_SIZE / (2.0f));		v.t = D3DXVECTOR2(1, 0);
-		vecVertex.push_back(v);
-
-		//left
-		v.p = D3DXVECTOR3(-BLOCK_SIZE / (2.0f), -BLOCK_SIZE / (2.0f), BLOCK_SIZE / (2.0f));		v.t = D3DXVECTOR2(0, 1);
-		vecVertex.push_back(v);
-		v.p = D3DXVECTOR3(-BLOCK_SIZE / (2.0f), BLOCK_SIZE / (2.0f), BLOCK_SIZE / (2.0f));	    v.t = D3DXVECTOR2(0, 0);
-		vecVertex.push_back(v);
-		v.p = D3DXVECTOR3(-BLOCK_SIZE / (2.0f), BLOCK_SIZE / (2.0f), -BLOCK_SIZE / (2.0f));	    v.t = D3DXVECTOR2(1, 0);
-		vecVertex.push_back(v);
-
-		v.p = D3DXVECTOR3(-BLOCK_SIZE / (2.0f), -BLOCK_SIZE / (2.0f), BLOCK_SIZE / (2.0f));	    v.t = D3DXVECTOR2(0, 1);
-		vecVertex.push_back(v);
-		v.p = D3DXVECTOR3(-BLOCK_SIZE / (2.0f), BLOCK_SIZE / (2.0f), -BLOCK_SIZE / (2.0f));	    v.t = D3DXVECTOR2(1, 0);
-		vecVertex.push_back(v);
-		v.p = D3DXVECTOR3(-BLOCK_SIZE / (2.0f), -BLOCK_SIZE / (2.0f), -BLOCK_SIZE / (2.0f));	v.t = D3DXVECTOR2(1, 1);
-		vecVertex.push_back(v);
-
-		//right
-		v.p = D3DXVECTOR3(BLOCK_SIZE / (2.0f), -BLOCK_SIZE / (2.0f), -BLOCK_SIZE / (2.0f));		v.t = D3DXVECTOR2(0, 1);
-		vecVertex.push_back(v);
-		v.p = D3DXVECTOR3(BLOCK_SIZE / (2.0f), BLOCK_SIZE / (2.0f), -BLOCK_SIZE / (2.0f));	    v.t = D3DXVECTOR2(0, 0);
-		vecVertex.push_back(v);
-		v.p = D3DXVECTOR3(BLOCK_SIZE / (2.0f), BLOCK_SIZE / (2.0f), BLOCK_SIZE / (2.0f));		v.t = D3DXVECTOR2(1, 0);
-		vecVertex.push_back(v);
-
-		v.p = D3DXVECTOR3(BLOCK_SIZE / (2.0f), -BLOCK_SIZE / (2.0f), -BLOCK_SIZE / (2.0f));	    v.t = D3DXVECTOR2(0, 1);
-		vecVertex.push_back(v);
-		v.p = D3DXVECTOR3(BLOCK_SIZE / (2.0f), BLOCK_SIZE / (2.0f), BLOCK_SIZE / (2.0f));		v.t = D3DXVECTOR2(1, 0);
-		vecVertex.push_back(v);
-		v.p = D3DXVECTOR3(BLOCK_SIZE / (2.0f), -BLOCK_SIZE / (2.0f), BLOCK_SIZE / (2.0f));	    v.t = D3DXVECTOR2(1, 1);
-		vecVertex.push_back(v);
-
 		//top
 		v.p = D3DXVECTOR3(-BLOCK_SIZE / (2.0f), BLOCK_SIZE / (2.0f), -BLOCK_SIZE / (2.0f));		v.t = D3DXVECTOR2(0, 1);
 		vecVertex.push_back(v);
@@ -113,29 +54,17 @@ void CBlueprint::Setup()
 		v.p = D3DXVECTOR3(BLOCK_SIZE / (2.0f), BLOCK_SIZE / (2.0f), -BLOCK_SIZE / (2.0f));	    v.t = D3DXVECTOR2(1, 1);
 		vecVertex.push_back(v);
 
-		//bottom
-		v.p = D3DXVECTOR3(-BLOCK_SIZE / (2.0f), -BLOCK_SIZE / (2.0f), BLOCK_SIZE / (2.0f));		v.t = D3DXVECTOR2(0, 1);
-		vecVertex.push_back(v);
-		v.p = D3DXVECTOR3(-BLOCK_SIZE / (2.0f), -BLOCK_SIZE / (2.0f), -BLOCK_SIZE / (2.0f));	v.t = D3DXVECTOR2(0, 0);
-		vecVertex.push_back(v);
-		v.p = D3DXVECTOR3(BLOCK_SIZE / (2.0f), -BLOCK_SIZE / (2.0f), -BLOCK_SIZE / (2.0f));	    v.t = D3DXVECTOR2(1, 0);
-		vecVertex.push_back(v);
-
-		v.p = D3DXVECTOR3(-BLOCK_SIZE / (2.0f), -BLOCK_SIZE / (2.0f), BLOCK_SIZE / (2.0f));	    v.t = D3DXVECTOR2(0, 1);
-		vecVertex.push_back(v);
-		v.p = D3DXVECTOR3(BLOCK_SIZE / (2.0f), -BLOCK_SIZE / (2.0f), -BLOCK_SIZE / (2.0f));	    v.t = D3DXVECTOR2(1, 0);
-		vecVertex.push_back(v);
-		v.p = D3DXVECTOR3(BLOCK_SIZE / (2.0f), -BLOCK_SIZE / (2.0f), BLOCK_SIZE / (2.0f));	    v.t = D3DXVECTOR2(1, 1);
-		vecVertex.push_back(v);
+		//uv 회전
+		D3DXMATRIXA16 mat2dRot;
+		D3DXMatrixTransformation2D(&mat2dRot, 0, 0, 0, &D3DXVECTOR2(0.5, 0.5), -m_fRightPartsAngleY, 0);
+		for (auto && vertex : vecVertex)
+		{
+			D3DXVec2TransformCoord(&vertex.t, &vertex.t, &mat2dRot);
+		}
 	}
 
 	m_vecVertex_Multi = vecVertex;
 	
-	//D3DXMatrixRotationY(&m_matR, D3DXToRadian(m_nRotAngleY));
-	//D3DXMatrixTranslation(&m_matT, m_vPosition.x, m_vPosition.y, m_vPosition.z);
-	//m_matWorld = m_matS * m_matR * m_matT;
-
-	//m_matInteractCollision = m_matT;
 	m_pCollision = new CSphereCollision(D3DXVECTOR3(0, 0.5f, 0), 1.0f, &m_matWorld);
 	m_pCollision->SetActive(false);
 	m_pInteractCollision = new CSphereCollision(D3DXVECTOR3(0, 0.5f, 0), 1.0f, &m_matWorld);
@@ -183,23 +112,21 @@ void CBlueprint::StoreOnBlueprintParts()
 	if (m_onBlueprintParts)
 		return;
 	
-	if (m_onBlueprintParts == nullptr)
+	for (CParts* it : *m_pVecParts)
 	{
-		for (CParts* it : *m_pVecParts)
+		if (it->GetCollision()->Collide(m_pInteractCollision))
 		{
-			if (it->GetCollision()->Collide(m_pInteractCollision))
-			{
-				m_onBlueprintParts = it;
-				m_onBlueprintParts->SetGrabPosition(&m_pInteractCollision->GetCenter());
-				m_onBlueprintParts->GetCollision()->SetActive(false);
-				m_pCollision->SetActive(true);
-				m_pInteractCollision->SetActive(false);
+			m_onBlueprintParts = it;
+			m_onBlueprintParts->SetGrabPosition(&m_pInteractCollision->GetCenter());
+			m_onBlueprintParts->GetCollision()->SetActive(false);
+			m_pCollision->SetActive(true);
+			m_pInteractCollision->SetActive(false);
 
-				CheckBluePrintComplete();
-				break;
-			}
+			CheckBluePrintComplete();
+			break;
 		}
 	}
+	
 }
 
 void CBlueprint::CheckBluePrintComplete()
@@ -227,12 +154,43 @@ void CBlueprint::Interact(CCharacter* pCharacter)
 			m_onBlueprintParts->SetGrabPosition(&pCharacter->GetGrabPartsPosition());
 			pCharacter->SetParts(m_onBlueprintParts);
 			m_onBlueprintParts = nullptr;
-			m_isCompleted = false;
 			m_pCollision->SetActive(false);
 			m_pInteractCollision->SetActive(true);
-			g_EventManager->CallEvent(eEvent::UnCompleteBluePrint, this);
+			if(m_isCompleted)
+			{
+				m_isCompleted = false;
+				g_EventManager->CallEvent(eEvent::UnCompleteBluePrint, this);
+			}
 		}
 	}
+}
+
+void CBlueprint::SetupTexture(string partsID)
+{
+	if (partsID == "C00")
+		m_blueprintTexture = g_pTextureManager->GetTexture("data/Texture/blueprint/blueprint_body_hyper.png");
+	else if (partsID == "C01")
+		m_blueprintTexture = g_pTextureManager->GetTexture("data/Texture/blueprint/blueprint_body_boost.png");
+	else if (partsID == "C02")
+		m_blueprintTexture = g_pTextureManager->GetTexture("data/Texture/blueprint/blueprint_arm.png");
+	else if (partsID == "C03")
+		m_blueprintTexture = g_pTextureManager->GetTexture("data/Texture/blueprint/blueprint_hand_gravity.png");
+	else if (partsID == "C04")
+		m_blueprintTexture = g_pTextureManager->GetTexture("data/Texture/blueprint/blueprint_hand_rolling.png");
+	else if (partsID == "C05")
+		m_blueprintTexture = g_pTextureManager->GetTexture("data/Texture/blueprint/blueprint_leg.png");
+	else if (partsID == "C06")
+		m_blueprintTexture = g_pTextureManager->GetTexture("data/Texture/blueprint/blueprint_foot_trust.png");
+	else if (partsID == "C07")
+		m_blueprintTexture = g_pTextureManager->GetTexture("data/Texture/blueprint/blueprint_foot_infinity.png");
+	else if (partsID == "C08")
+		m_blueprintTexture = g_pTextureManager->GetTexture("data/Texture/blueprint/blueprint_head_hero.png");
+	else if (partsID == "C09")
+		m_blueprintTexture = g_pTextureManager->GetTexture("data/Texture/blueprint/blueprint_head_final.png");
+	else if (partsID == "B01")
+		m_blueprintTexture = g_pTextureManager->GetTexture("data/Texture/blueprint/B01_RC.png");
+	else
+		m_blueprintTexture = g_pTextureManager->GetTexture("data/Texture/Blueprint.jpg");
 }
 
 void CBlueprint::MultiTexture_Render()

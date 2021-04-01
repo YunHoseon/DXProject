@@ -19,7 +19,7 @@ CSandpile::CSandpile(IInteractCenter* InteractCenter, D3DXVECTOR3 vPosition) : m
 	SetRotationY(0);
 	SetPosition(vPosition);
 
-	m_pCollisionArea = new CBoxCollision(D3DXVECTOR3(0, 0, 0), D3DXVECTOR3(0.8, 0.3, 0.8), &m_matWorld);
+	m_pCollisionArea = new CBoxCollision(D3DXVECTOR3(0, 0, 0), D3DXVECTOR3(0.1, 0.3, 0.1), &m_matWorld);
 	m_pCollisionArea->Update();
 }
 
@@ -32,10 +32,33 @@ CSandpile::~CSandpile()
 
 void CSandpile::Render()
 {
+	//g_pRenderShadowManager->GetApplyShadowShader()->SetMatrix("gWorldMatrix", &m_matWorld);
+	//g_pRenderShadowManager->GetApplyShadowShader()->SetBool("gIsSkinned", false);
+	//float f[3] = { 0.1,0.05,0.05 };
+	//float f2[3] = { 0.8,0.8,0.8 };
+	//g_pRenderShadowManager->GetApplyShadowShader()->SetFloatArray("gLightColor", f, 3);
+	//UINT numPasses = 0;
+	//g_pRenderShadowManager->GetApplyShadowShader()->Begin(&numPasses, NULL);
+
+	//for (UINT i = 0; i < numPasses; ++i)
+	//{
+	//	g_pRenderShadowManager->GetApplyShadowShader()->BeginPass(i);
+	//	{
+	//		if (m_pSMesh)
+	//		{
+	//			m_pSMesh->RenderWidthShadow();
+	//		}
+	//	}
+	//	g_pRenderShadowManager->GetApplyShadowShader()->EndPass();
+	//}
+
+	//g_pRenderShadowManager->GetApplyShadowShader()->End();
+
+	//g_pRenderShadowManager->GetApplyShadowShader()->SetFloatArray("gLightColor", f2, 3);
 	if (m_pSMesh)
 	{
 		g_pD3DDevice->SetTransform(D3DTS_WORLD, &m_matWorld);
-		g_pD3DDevice->SetRenderState(D3DRS_LIGHTING, true);
+		g_pD3DDevice->SetRenderState(D3DRS_LIGHTING, false);
 		m_pSMesh->Render();
 	}
 
@@ -47,7 +70,7 @@ void CSandpile::Render()
 
 void CSandpile::Update()
 {
-	m_pInteractCenter->CheckSandDummyArea(m_pCollisionArea);
+	m_pInteractCenter->CheckCollideCharacterToSandpile(m_pCollisionArea);
 }
 
 void CSandpile::SetPosition(D3DXVECTOR3 vPosition)
@@ -62,4 +85,22 @@ void CSandpile::SetPosition(float x, float y, float z)
 	CActor::SetPosition(x, y, z);
 	if (m_pCollisionArea)
 		m_pCollisionArea->Update();
+}
+
+void CSandpile::CreateShadowMap()
+{
+	g_pRenderShadowManager->GetCreateShadowShader()->SetMatrix("gWorldMatrix", &m_matWorld);
+	UINT numPasses = 0;
+	g_pRenderShadowManager->GetCreateShadowShader()->Begin(&numPasses, NULL);
+
+	for (UINT i = 0; i < numPasses; ++i)
+	{
+		g_pRenderShadowManager->GetCreateShadowShader()->BeginPass(i);
+		{
+			m_pSMesh->CreateShadowMap();
+		}
+		g_pRenderShadowManager->GetCreateShadowShader()->EndPass();
+	}
+
+	g_pRenderShadowManager->GetCreateShadowShader()->End();
 }

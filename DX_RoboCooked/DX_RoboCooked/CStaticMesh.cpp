@@ -66,8 +66,36 @@ void CStaticMesh::Render(LPDIRECT3DTEXTURE9 pBlendTexture)
 	{
 		for (int i = 0; i < m_vecMaterial.size(); ++i)
 		{
-			g_pD3DDevice->SetMaterial(&m_vecMaterial[i]);
 			g_pD3DDevice->SetTexture(0, m_vecTexture[i]);
+			g_pD3DDevice->SetMaterial(&m_vecMaterial[i]);
+			m_pMesh->DrawSubset(i);
+		}
+		g_pD3DDevice->SetTexture(0, 0);
+	}
+}
+
+void CStaticMesh::RenderWidthShadow()
+{
+	
+	if (m_pMesh)
+	{
+		for (int i = 0; i < m_vecMaterial.size(); ++i)
+		{
+			g_pRenderShadowManager->GetApplyShadowShader()->SetTexture("DiffuseMap_Tex", m_vecTexture[i]);
+			g_pRenderShadowManager->GetApplyShadowShader()->SetTexture("SpecularMap_Tex", m_vecTexture[i]);
+			g_pRenderShadowManager->GetApplyShadowShader()->CommitChanges();
+			m_pMesh->DrawSubset(i);
+		}
+		g_pD3DDevice->SetTexture(0, 0);
+	}
+}
+
+void CStaticMesh::CreateShadowMap()
+{
+	if (m_pMesh)
+	{
+		for (int i = 0; i < m_vecMaterial.size(); ++i)
+		{
 			m_pMesh->DrawSubset(i);
 		}
 		g_pD3DDevice->SetTexture(0, 0);

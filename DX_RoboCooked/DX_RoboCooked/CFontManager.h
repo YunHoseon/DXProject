@@ -9,12 +9,15 @@ public:
 	{
 		DEFAULT,
 		CLEARTIME,
-		TVTIME
+		TVTIME,
+		SELECT,
+		UPDATE,
+		TIP
 	};
 private:
 	map<eFontType, LPD3DXFONT> m_mapFont;
 	map<eFontType, HFONT> m_map3dFont;
-
+	int m_nFontCount;
 	friend CSingleton<CFontManager>;
 	CFontManager();
 	~CFontManager();

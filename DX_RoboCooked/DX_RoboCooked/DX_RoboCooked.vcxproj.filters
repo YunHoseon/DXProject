@@ -1,10 +1,6 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup>
-    <Filter Include="Source Files">
-      <UniqueIdentifier>{4FC737F1-C7A5-4376-A066-2A32D752A2FF}</UniqueIdentifier>
-      <Extensions>cpp;c;cc;cxx;def;odl;idl;hpj;bat;asm;asmx</Extensions>
-    </Filter>
     <Filter Include="Header Files">
       <UniqueIdentifier>{93995380-89BD-4b04-88EB-625FBE52EBFB}</UniqueIdentifier>
       <Extensions>h;hh;hpp;hxx;hm;inl;inc;xsd</Extensions>
@@ -78,6 +74,28 @@
     </Filter>
     <Filter Include="UI\Button\SubUI\CUIStar">
       <UniqueIdentifier>{166b9dcb-917c-448f-bb56-bf0e98860386}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="UI\Effect">
+      <UniqueIdentifier>{ed4dce4e-62a7-4b87-a952-99b115684b66}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="MainScene">
+      <UniqueIdentifier>{edfe3b96-e223-49b7-a612-0afdbe1d5853}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="GameScene\Monster\Effect">
+      <UniqueIdentifier>{96c70846-d7a5-4bbf-910a-6a77d98d434b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files">
+      <UniqueIdentifier>{4FC737F1-C7A5-4376-A066-2A32D752A2FF}</UniqueIdentifier>
+      <Extensions>cpp;c;cc;cxx;def;odl;idl;hpj;bat;asm;asmx</Extensions>
+    </Filter>
+    <Filter Include="UI\Button\SubUI\CUICombinatorGauge">
+      <UniqueIdentifier>{10a25cf6-904d-4921-93a9-495e2bbb16c2}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="UI\Button\SubUI\CUICharge">
+      <UniqueIdentifier>{7e1eea6b-46fc-4649-9fd5-a332f3696c38}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="UI\Button\SubUI\CUISelect">
+      <UniqueIdentifier>{6ca06a80-943d-474d-99a5-7cc32e5e2ec4}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -405,8 +423,233 @@
     <ClInclude Include="CWall.h">
       <Filter>GameScene\Object</Filter>
     </ClInclude>
+    <ClInclude Include="CUIAcidRain.h">
+      <Filter>UI\Effect</Filter>
+    </ClInclude>
+    <ClInclude Include="CUILoseButton.h">
+      <Filter>UI\Button\MainUI</Filter>
+    </ClInclude>
+    <ClInclude Include="CUILoseBoard.h">
+      <Filter>UI\Button\SubUI</Filter>
+    </ClInclude>
+    <ClInclude Include="CMainScene.h">
+      <Filter>MainScene</Filter>
+    </ClInclude>
+    <ClInclude Include="CUIMainControllButton.h">
+      <Filter>UI\Button\SubUI</Filter>
+    </ClInclude>
+    <ClInclude Include="CUIMainEndButton.h">
+      <Filter>UI\Button\SubUI</Filter>
+    </ClInclude>
+    <ClInclude Include="CUIMainMakerButton.h">
+      <Filter>UI\Button\SubUI</Filter>
+    </ClInclude>
+    <ClInclude Include="CUIMainStartButton.h">
+      <Filter>UI\Button\SubUI</Filter>
+    </ClInclude>
+    <ClInclude Include="CUIMainScreen.h">
+      <Filter>UI\Button\MainUI</Filter>
+    </ClInclude>
+    <ClInclude Include="CUIMainScreenBoard.h">
+      <Filter>UI\Button\SubUI</Filter>
+    </ClInclude>
+    <ClInclude Include="CUIloadingMessageComplete.h">
+      <Filter>UI\Button\SubUI</Filter>
+    </ClInclude>
+    <ClInclude Include="CUILoadingMessageLoad.h">
+      <Filter>UI\Button\SubUI</Filter>
+    </ClInclude>
+    <ClInclude Include="CUILoadingScreen.h">
+      <Filter>UI\Button\SubUI</Filter>
+    </ClInclude>
+    <ClInclude Include="CUIControllBoard.h">
+      <Filter>UI\Button\SubUI</Filter>
+    </ClInclude>
+    <ClInclude Include="CUIMakerBoard.h">
+      <Filter>UI\Button\SubUI</Filter>
+    </ClInclude>
+    <ClInclude Include="CUIMaker.h">
+      <Filter>UI\Button\MainUI</Filter>
+    </ClInclude>
+    <ClInclude Include="CUIControll.h">
+      <Filter>UI\Button\MainUI</Filter>
+    </ClInclude>
+    <ClInclude Include="CWhiteboard.h">
+      <Filter>GameScene\Object</Filter>
+    </ClInclude>
+    <ClInclude Include="CHarpyWing_R.h">
+      <Filter>GameScene\Monster\Effect</Filter>
+    </ClInclude>
+    <ClInclude Include="CHarpyWing.h">
+      <Filter>GameScene\Monster\Effect</Filter>
+    </ClInclude>
+    <ClInclude Include="CHarpyWing_L.h">
+      <Filter>GameScene\Monster\Effect</Filter>
+    </ClInclude>
     <ClInclude Include="CPartsDestroyer.h">
-      <Filter>GameScene\Monster</Filter>
+      <Filter>GameScene\Monster\Effect</Filter>
+    </ClInclude>
+    <ClInclude Include="CUIHeart.h">
+      <Filter>UI\Effect</Filter>
+    </ClInclude>
+    <ClInclude Include="CUIWind.h">
+      <Filter>UI\Effect</Filter>
+    </ClInclude>
+    <ClInclude Include="CUICharge.h">
+      <Filter>UI\Button\MainUI</Filter>
+    </ClInclude>
+    <ClInclude Include="CUIReady.h">
+      <Filter>UI\Button\MainUI</Filter>
+    </ClInclude>
+    <ClInclude Include="CUIReadyBoard.h">
+      <Filter>UI\Button\SubUI</Filter>
+    </ClInclude>
+    <ClInclude Include="CUIWarning.h">
+      <Filter>UI\Button\MainUI</Filter>
+    </ClInclude>
+    <ClInclude Include="CUIWarningBoard.h">
+      <Filter>UI\Button\SubUI</Filter>
+    </ClInclude>
+    <ClInclude Include="CUICC.h">
+      <Filter>UI\Effect</Filter>
+    </ClInclude>
+    <ClInclude Include="CUICombinatorGauge.h">
+      <Filter>UI\Button\MainUI</Filter>
+    </ClInclude>
+    <ClInclude Include="CUIChargeFive.h">
+      <Filter>UI\Button\SubUI\CUICharge</Filter>
+    </ClInclude>
+    <ClInclude Include="CUIChargeFour.h">
+      <Filter>UI\Button\SubUI\CUICharge</Filter>
+    </ClInclude>
+    <ClInclude Include="CUIChargeOne.h">
+      <Filter>UI\Button\SubUI\CUICharge</Filter>
+    </ClInclude>
+    <ClInclude Include="CUIChargeThree.h">
+      <Filter>UI\Button\SubUI\CUICharge</Filter>
+    </ClInclude>
+    <ClInclude Include="CUIChargeTwo.h">
+      <Filter>UI\Button\SubUI\CUICharge</Filter>
+    </ClInclude>
+    <ClInclude Include="CUIChargeZero.h">
+      <Filter>UI\Button\SubUI\CUICharge</Filter>
+    </ClInclude>
+    <ClInclude Include="CUIChargeBoard.h">
+      <Filter>UI\Button\SubUI\CUICharge</Filter>
+    </ClInclude>
+    <ClInclude Include="CUICombinatorGaugeFive.h">
+      <Filter>UI\Button\SubUI\CUICombinatorGauge</Filter>
+    </ClInclude>
+    <ClInclude Include="CUICombinatorGaugeFour.h">
+      <Filter>UI\Button\SubUI\CUICombinatorGauge</Filter>
+    </ClInclude>
+    <ClInclude Include="CUICombinatorGaugeOne.h">
+      <Filter>UI\Button\SubUI\CUICombinatorGauge</Filter>
+    </ClInclude>
+    <ClInclude Include="CUICombinatorGaugeThree.h">
+      <Filter>UI\Button\SubUI\CUICombinatorGauge</Filter>
+    </ClInclude>
+    <ClInclude Include="CUICombinatorGaugeTwo.h">
+      <Filter>UI\Button\SubUI\CUICombinatorGauge</Filter>
+    </ClInclude>
+    <ClInclude Include="CUICombinatorGaugeZero.h">
+      <Filter>UI\Button\SubUI\CUICombinatorGauge</Filter>
+    </ClInclude>
+    <ClInclude Include="CUIStageSelect.h">
+      <Filter>UI\Button\MainUI</Filter>
+    </ClInclude>
+    <ClInclude Include="CUIStageSelectPopUpBoard.h">
+      <Filter>UI\Button\SubUI</Filter>
+    </ClInclude>
+    <ClInclude Include="CUISelectNone.h">
+      <Filter>UI\Button\SubUI\CUISelect</Filter>
+    </ClInclude>
+    <ClInclude Include="CUISelectSolved.h">
+      <Filter>UI\Button\SubUI\CUISelect</Filter>
+    </ClInclude>
+    <ClInclude Include="CUISelectUnsolved.h">
+      <Filter>UI\Button\SubUI\CUISelect</Filter>
+    </ClInclude>
+    <ClInclude Include="CUISelect.h">
+      <Filter>UI\Button\SubUI\CUISelect</Filter>
+    </ClInclude>
+    <ClInclude Include="CUISelectBoard.h">
+      <Filter>UI\Button\SubUI\CUISelect</Filter>
+    </ClInclude>
+    <ClInclude Include="CUISelectStarOne.h">
+      <Filter>UI\Button\SubUI\CUISelect</Filter>
+    </ClInclude>
+    <ClInclude Include="CUISelectStarThree.h">
+      <Filter>UI\Button\SubUI\CUISelect</Filter>
+    </ClInclude>
+    <ClInclude Include="CUISelectStarZero.h">
+      <Filter>UI\Button\SubUI\CUISelect</Filter>
+    </ClInclude>
+    <ClInclude Include="CUISelectStarTwo.h">
+      <Filter>UI\Button\SubUI\CUISelect</Filter>
+    </ClInclude>
+    <ClInclude Include="CUISelectStartButton.h">
+      <Filter>UI\Button\SubUI\CUISelect</Filter>
+    </ClInclude>
+    <ClInclude Include="CBoundaryWall.h">
+      <Filter>GameScene\Object</Filter>
+    </ClInclude>
+    <ClInclude Include="CThreadManager.h">
+      <Filter>Manager</Filter>
+    </ClInclude>
+    <ClInclude Include="CSaveLoadManager.h">
+      <Filter>Manager</Filter>
+    </ClInclude>
+    <ClInclude Include="CUISelectLeft.h">
+      <Filter>UI\Button\SubUI</Filter>
+    </ClInclude>
+    <ClInclude Include="CUISelectMainButton.h">
+      <Filter>UI\Button\SubUI</Filter>
+    </ClInclude>
+    <ClInclude Include="CUIUpdateText.h">
+      <Filter>UI\Button\SubUI</Filter>
+    </ClInclude>
+    <ClInclude Include="CUISelectRight.h">
+      <Filter>UI\Button\SubUI</Filter>
+    </ClInclude>
+    <ClInclude Include="CShaderManager.h">
+      <Filter>Manager</Filter>
+    </ClInclude>
+    <ClInclude Include="CDashShadow.h">
+      <Filter>GameScene\Character</Filter>
+    </ClInclude>
+    <ClInclude Include="CUIEsc.h">
+      <Filter>UI\Button\MainUI</Filter>
+    </ClInclude>
+    <ClInclude Include="CUI2LevelCombinatorImage.h">
+      <Filter>UI\Button\SubUI</Filter>
+    </ClInclude>
+    <ClInclude Include="CUI1LevelCombinatorImage.h">
+      <Filter>UI\Button\SubUI</Filter>
+    </ClInclude>
+    <ClInclude Include="CUI1LevelCombination.h">
+      <Filter>UI\Button\SubUI</Filter>
+    </ClInclude>
+    <ClInclude Include="CUIWhiteboard.h">
+      <Filter>UI\Button\SubUI</Filter>
+    </ClInclude>
+    <ClInclude Include="CTipBoard.h">
+      <Filter>GameScene\Object</Filter>
+    </ClInclude>
+    <ClInclude Include="CUI2LevelCombination.h">
+      <Filter>UI\Button\SubUI</Filter>
+    </ClInclude>
+    <ClInclude Include="CUITipBoardText.h">
+      <Filter>UI\Button\SubUI</Filter>
+    </ClInclude>
+    <ClInclude Include="CUITipBoard.h">
+      <Filter>UI\Button\SubUI</Filter>
+    </ClInclude>
+    <ClInclude Include="CUIPopUpBoard.h">
+      <Filter>UI\Button\SubUI</Filter>
+    </ClInclude>
+    <ClInclude Include="CRenderShadowManager.h">
+      <Filter>Manager</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -725,8 +968,233 @@
     <ClCompile Include="CGrid.cpp">
       <Filter>GameScene\Object</Filter>
     </ClCompile>
+    <ClCompile Include="CUIAcidRain.cpp">
+      <Filter>UI\Effect</Filter>
+    </ClCompile>
+    <ClCompile Include="CUILoseButton.cpp">
+      <Filter>UI\Button\MainUI</Filter>
+    </ClCompile>
+    <ClCompile Include="CUILoseBoard.cpp">
+      <Filter>UI\Button\SubUI</Filter>
+    </ClCompile>
+    <ClCompile Include="CMainScene.cpp">
+      <Filter>MainScene</Filter>
+    </ClCompile>
+    <ClCompile Include="CUIMainControllButton.cpp">
+      <Filter>UI\Button\SubUI</Filter>
+    </ClCompile>
+    <ClCompile Include="CUIMainEndButton.cpp">
+      <Filter>UI\Button\SubUI</Filter>
+    </ClCompile>
+    <ClCompile Include="CUIMainMakerButton.cpp">
+      <Filter>UI\Button\SubUI</Filter>
+    </ClCompile>
+    <ClCompile Include="CUIMainStartButton.cpp">
+      <Filter>UI\Button\SubUI</Filter>
+    </ClCompile>
+    <ClCompile Include="CUIMainScreen.cpp">
+      <Filter>UI\Button\MainUI</Filter>
+    </ClCompile>
+    <ClCompile Include="CUIMainScreenBoard.cpp">
+      <Filter>UI\Button\SubUI</Filter>
+    </ClCompile>
+    <ClCompile Include="CUILoadingMessageLoad.cpp">
+      <Filter>UI\Button\SubUI</Filter>
+    </ClCompile>
+    <ClCompile Include="CUIloadingMessageComplete.cpp">
+      <Filter>UI\Button\SubUI</Filter>
+    </ClCompile>
+    <ClCompile Include="CUILoadingScreen.cpp">
+      <Filter>UI\Button\SubUI</Filter>
+    </ClCompile>
+    <ClCompile Include="CUIMakerBoard.cpp">
+      <Filter>UI\Button\SubUI</Filter>
+    </ClCompile>
+    <ClCompile Include="CUIControllBoard.cpp">
+      <Filter>UI\Button\SubUI</Filter>
+    </ClCompile>
+    <ClCompile Include="CUIControll.cpp">
+      <Filter>UI\Button\MainUI</Filter>
+    </ClCompile>
+    <ClCompile Include="CUIMaker.cpp">
+      <Filter>UI\Button\MainUI</Filter>
+    </ClCompile>
+    <ClCompile Include="CWhiteboard.cpp">
+      <Filter>GameScene\Object</Filter>
+    </ClCompile>
+    <ClCompile Include="CHarpyWing.cpp">
+      <Filter>GameScene\Monster\Effect</Filter>
+    </ClCompile>
+    <ClCompile Include="CHarpyWing_L.cpp">
+      <Filter>GameScene\Monster\Effect</Filter>
+    </ClCompile>
+    <ClCompile Include="CHarpyWing_R.cpp">
+      <Filter>GameScene\Monster\Effect</Filter>
+    </ClCompile>
     <ClCompile Include="CPartsDestroyer.cpp">
-      <Filter>GameScene\Monster</Filter>
+      <Filter>GameScene\Monster\Effect</Filter>
+    </ClCompile>
+    <ClCompile Include="CUIHeart.cpp">
+      <Filter>UI\Effect</Filter>
+    </ClCompile>
+    <ClCompile Include="CUIWind.cpp">
+      <Filter>UI\Effect</Filter>
+    </ClCompile>
+    <ClCompile Include="CUICharge.cpp">
+      <Filter>UI\Button\MainUI</Filter>
+    </ClCompile>
+    <ClCompile Include="CUIReady.cpp">
+      <Filter>UI\Button\MainUI</Filter>
+    </ClCompile>
+    <ClCompile Include="CUIReadyBoard.cpp">
+      <Filter>UI\Button\SubUI</Filter>
+    </ClCompile>
+    <ClCompile Include="CUIWarning.cpp">
+      <Filter>UI\Button\MainUI</Filter>
+    </ClCompile>
+    <ClCompile Include="CUIWarningBoard.cpp">
+      <Filter>UI\Button\SubUI</Filter>
+    </ClCompile>
+    <ClCompile Include="CUICC.cpp">
+      <Filter>UI\Effect</Filter>
+    </ClCompile>
+    <ClCompile Include="CUICombinatorGauge.cpp">
+      <Filter>UI\Button\MainUI</Filter>
+    </ClCompile>
+    <ClCompile Include="CUIChargeFive.cpp">
+      <Filter>UI\Button\SubUI\CUICharge</Filter>
+    </ClCompile>
+    <ClCompile Include="CUIChargeFour.cpp">
+      <Filter>UI\Button\SubUI\CUICharge</Filter>
+    </ClCompile>
+    <ClCompile Include="CUIChargeOne.cpp">
+      <Filter>UI\Button\SubUI\CUICharge</Filter>
+    </ClCompile>
+    <ClCompile Include="CUIChargeThree.cpp">
+      <Filter>UI\Button\SubUI\CUICharge</Filter>
+    </ClCompile>
+    <ClCompile Include="CUIChargeTwo.cpp">
+      <Filter>UI\Button\SubUI\CUICharge</Filter>
+    </ClCompile>
+    <ClCompile Include="CUIChargeZero.cpp">
+      <Filter>UI\Button\SubUI\CUICharge</Filter>
+    </ClCompile>
+    <ClCompile Include="CUIChargeBoard.cpp">
+      <Filter>UI\Button\SubUI\CUICharge</Filter>
+    </ClCompile>
+    <ClCompile Include="CUICombinatorGaugeFive.cpp">
+      <Filter>UI\Button\SubUI\CUICombinatorGauge</Filter>
+    </ClCompile>
+    <ClCompile Include="CUICombinatorGaugeFour.cpp">
+      <Filter>UI\Button\SubUI\CUICombinatorGauge</Filter>
+    </ClCompile>
+    <ClCompile Include="CUICombinatorGaugeOne.cpp">
+      <Filter>UI\Button\SubUI\CUICombinatorGauge</Filter>
+    </ClCompile>
+    <ClCompile Include="CUICombinatorGaugeThree.cpp">
+      <Filter>UI\Button\SubUI\CUICombinatorGauge</Filter>
+    </ClCompile>
+    <ClCompile Include="CUICombinatorGaugeZero.cpp">
+      <Filter>UI\Button\SubUI\CUICombinatorGauge</Filter>
+    </ClCompile>
+    <ClCompile Include="CUICombinatorGaugeTwo.cpp">
+      <Filter>UI\Button\SubUI\CUICombinatorGauge</Filter>
+    </ClCompile>
+    <ClCompile Include="CUIStageSelect.cpp">
+      <Filter>UI\Button\MainUI</Filter>
+    </ClCompile>
+    <ClCompile Include="CUIStageSelectPopUpBoard.cpp">
+      <Filter>UI\Button\SubUI</Filter>
+    </ClCompile>
+    <ClCompile Include="CUISelectNone.cpp">
+      <Filter>UI\Button\SubUI\CUISelect</Filter>
+    </ClCompile>
+    <ClCompile Include="CUISelectSolved.cpp">
+      <Filter>UI\Button\SubUI\CUISelect</Filter>
+    </ClCompile>
+    <ClCompile Include="CUISelectUnsolved.cpp">
+      <Filter>UI\Button\SubUI\CUISelect</Filter>
+    </ClCompile>
+    <ClCompile Include="CUISelect.cpp">
+      <Filter>UI\Button\SubUI\CUISelect</Filter>
+    </ClCompile>
+    <ClCompile Include="CUISelectBoard.cpp">
+      <Filter>UI\Button\SubUI\CUISelect</Filter>
+    </ClCompile>
+    <ClCompile Include="CUISelectStarOne.cpp">
+      <Filter>UI\Button\SubUI\CUISelect</Filter>
+    </ClCompile>
+    <ClCompile Include="CUISelectStarThree.cpp">
+      <Filter>UI\Button\SubUI\CUISelect</Filter>
+    </ClCompile>
+    <ClCompile Include="CUISelectStarZero.cpp">
+      <Filter>UI\Button\SubUI\CUISelect</Filter>
+    </ClCompile>
+    <ClCompile Include="CUISelectStarTwo.cpp">
+      <Filter>UI\Button\SubUI\CUISelect</Filter>
+    </ClCompile>
+    <ClCompile Include="CUISelectStartButton.cpp">
+      <Filter>UI\Button\SubUI\CUISelect</Filter>
+    </ClCompile>
+    <ClCompile Include="CBoundaryWall.cpp">
+      <Filter>GameScene\Object</Filter>
+    </ClCompile>
+    <ClCompile Include="CThreadManager.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="CSaveLoadManager.cpp">
+      <Filter>Manager</Filter>
+    </ClCompile>
+    <ClCompile Include="CUISelectLeft.cpp">
+      <Filter>UI\Button\SubUI</Filter>
+    </ClCompile>
+    <ClCompile Include="CUISelectRight.cpp">
+      <Filter>UI\Button\SubUI</Filter>
+    </ClCompile>
+    <ClCompile Include="CUISelectMainButton.cpp">
+      <Filter>UI\Button\SubUI</Filter>
+    </ClCompile>
+    <ClCompile Include="CUIUpdateText.cpp">
+      <Filter>UI\Button\SubUI</Filter>
+    </ClCompile>
+    <ClCompile Include="CShaderManager.cpp">
+      <Filter>Manager</Filter>
+    </ClCompile>
+    <ClCompile Include="CDashShadow.cpp">
+      <Filter>GameScene\Character</Filter>
+    </ClCompile>
+    <ClCompile Include="CUIEsc.cpp">
+      <Filter>UI\Button\MainUI</Filter>
+    </ClCompile>
+    <ClCompile Include="CUI1LevelCombination.cpp">
+      <Filter>UI\Button\SubUI</Filter>
+    </ClCompile>
+    <ClCompile Include="CUI1LevelCombinatorImage.cpp">
+      <Filter>UI\Button\SubUI</Filter>
+    </ClCompile>
+    <ClCompile Include="CUI2LevelCombinatorImage.cpp">
+      <Filter>UI\Button\SubUI</Filter>
+    </ClCompile>
+    <ClCompile Include="CUIWhiteboard.cpp">
+      <Filter>UI\Button\SubUI</Filter>
+    </ClCompile>
+    <ClCompile Include="CTipBoard.cpp">
+      <Filter>GameScene\Object</Filter>
+    </ClCompile>
+    <ClCompile Include="CUI2LevelCombination.cpp">
+      <Filter>UI\Button\SubUI</Filter>
+    </ClCompile>
+    <ClCompile Include="CUITipBoardText.cpp">
+      <Filter>UI\Button\SubUI</Filter>
+    </ClCompile>
+    <ClCompile Include="CUITipBoard.cpp">
+      <Filter>UI\Button\SubUI</Filter>
+    </ClCompile>
+    <ClCompile Include="CUIPopUpBoard.cpp">
+      <Filter>UI\Button\SubUI</Filter>
+    </ClCompile>
+    <ClCompile Include="CRenderShadowManager.cpp">
+      <Filter>Manager</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -744,6 +1212,5 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="ClassDiagram.cd" />
-    <None Include="ClassDiagram1.cd" />
   </ItemGroup>
 </Project>

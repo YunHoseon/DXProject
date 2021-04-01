@@ -19,19 +19,31 @@
 #include "CBlueprint.h"
 #include "CMonster.h"
 #include "CPharaohCoffin.h"
+#include "CTV.h"
+#include "CWhiteboard.h"
 #include "CTile.h"
 #include "CCrowdControl.h"
 
+#include "CTipBoard.h"
 #include "CTornado.h"
 #include "CSandpile.h"
 
+#include "CUILoseButton.h"
 #include "CUIClearButton.h"
 #include "CUIPauseButton.h"
 #include "CUITrafficLight.h"
+#include "CUILoading.h"
+#include "CUIReady.h"
+#include "CUIWarning.h"
+#include "CUIEsc.h"
 
 /* ������ */
 #include <filesystem>
 #include <fstream>
+#include <locale>
+#include <codecvt>
+
+#include "CBoundaryWall.h"
 
 std::mutex CGameScene::m_cMutex;
 
@@ -39,21 +51,26 @@ std::mutex CGameScene::m_cMutex;
 #include "CDebugPlayer1.h"
 #include "CDebugPlayer2.h"
 
-CGameScene::CGameScene() : m_pField(NULL),
+CGameScene::CGameScene() : 
+						   m_pDebugLoseUI(nullptr),
 						   m_pDebugClearUI(nullptr),
 						   m_pDebugPauseUI(nullptr),
 						   m_pDebugTrafficLight(nullptr),
+						   m_pLoadingPopup(nullptr),
 						   m_isTimeStop(false),
 						   m_vWind(0, 0, 0),
 						   m_fGameTime(300.0f),
-						   m_nLotIndex(0)
+						   m_pReady(nullptr),
+						   m_pWarnning(nullptr),
+						   m_pEscUI(nullptr)
 {
+	g_SoundManager->AddBGM("data/Sound/bgm/Tribal_Tensions.mp3");
+	g_SoundManager->PlayBGM();
+
 	g_EventManager->Attach(eEvent::Tick, this);
-	//Sound Add
-	g_SoundManager->AddBGM("data/sound/bgm.mp3");
-	g_SoundManager->AddSFX("data/sound/effBBam.mp3", "BBam");
-	g_SoundManager->AddSFX("data/sound/effMelem.mp3", "Melem");
 	// 로딩 UI
+	CUILoading *pLoadingPopup = new CUILoading(this);
+	m_pLoadingPopup = pLoadingPopup;
 }
 
 CGameScene::~CGameScene()
@@ -78,105 +95,196 @@ CGameScene::~CGameScene()
 	{
 		SafeDelete(it);
 	}
-	for (CMonster* it : m_vecMonster)
+	for (CMonster *it : m_vecMonster)
 	{
 		SafeDelete(it);
 	}
 
-	for (CTile* it : m_vecTile)
+	for (CTile *it : m_vecTile)
 	{
 		SafeDelete(it);
 	}
 
-	for (CBlueprint* it : m_vecBlueprints)
+	for (CBlueprint *it : m_vecBlueprints)
 	{
 		SafeDelete(it);
 	}
 	SafeDelete(m_pDebugPauseUI);
 	SafeDelete(m_pDebugTrafficLight);
+	SafeDelete(m_pDebugClearUI);
+	SafeDelete(m_pLoadingPopup);
+	SafeDelete(m_pDebugLoseUI);
+	SafeDelete(m_pReady);
+	SafeDelete(m_pWarnning);
+	SafeDelete(m_pEscUI);
 	m_cMutex.unlock();
 }
 
 void CGameScene::Init()
 {
-	CWall *wall = new CWall(this);
-	CMonster *Medusa = new CMonsterMedusa(this);
-	CMonster *Harpy = new CMonsterHarpy(this);
-	Harpy->AddObjectPosition(D3DXVECTOR3(0, 0, 0));
-	Harpy->AddObjectPosition(D3DXVECTOR3(3, 0, 0));
-	Harpy->AddObjectPosition(D3DXVECTOR3(0, 0, 3));
-	Harpy->AddObjectPosition(D3DXVECTOR3(-3, 0, 0));
-	Harpy->AddObjectPosition(D3DXVECTOR3(0, 0, -3));
+	CWall *wall = new CWall(this, true);
+	//CBoundaryWall* pBwall = new CBoundaryWall;
+	CUIButton *pClearButton = new CUIClearButton(D3DXVECTOR2(465, 10), this);
+	CUIButton *pPauseButton = new CUIPauseButton(D3DXVECTOR2(465, 10), 27, this);
+	CUIButton *pLoseButton = new CUILoseButton(D3DXVECTOR2(465, 10), this);
+	CUITrafficLight *pTrafficLight = new CUITrafficLight(this, m_vecBlueprints.size());
+	CUIButton *pReady = new CUIReady(D3DXVECTOR2(675, 450), this);
+	CUIButton *pEsc = new CUIEsc;
+	CUIWarning *pWarrning = new CUIWarning;
 
-	CUIButton* pClearButton = new CUIClearButton(D3DXVECTOR2(465, 10), this);
-	CUIButton* pPauseButton = new CUIPauseButton(D3DXVECTOR2(465, 10), 27, this);
-	CUITrafficLight* pTrafficLight = new CUITrafficLight(this,m_vecBlueprints.size());
-	
-	//CPharaohCoffin* coffin = new CPharaohCoffin(this, D3DXVECTOR3(0,1,0));
 
 	m_cMutex.lock();
-
-	//m_fGameTime = 50.0f;
+	m_fGameTime = 300.0f;
 	m_vecStaticActor.push_back(wall);
-	m_vecMonster.push_back(Medusa);
-	m_vecMonster.push_back(Harpy);
-
+	
+	m_pEscUI = pEsc;
+	m_pWarnning = pWarrning;
+	m_pReady = pReady;
+	m_pDebugPauseUI = pPauseButton;
+	m_pDebugLoseUI = pLoseButton;
 	m_pDebugClearUI = pClearButton;
 	m_pDebugTrafficLight = pTrafficLight;
-	m_pDebugPauseUI = pPauseButton;
-	//m_vecObject.push_back(coffin);
-
+	
 	m_cMutex.unlock();
 }
 
 void CGameScene::Render()
 {
+	D3DXMATRIXA16 matView, matProjection;
+
+	g_pD3DDevice->GetTransform(D3DTS_VIEW, &matView);
+	g_pD3DDevice->GetTransform(D3DTS_PROJECTION, &matProjection);
+	g_pRenderShadowManager->SetWorldLightPosition(D3DXVECTOR4(20.f, 40.0f, 20.0f, 1.0f));
+	D3DXMATRIXA16 matViewProjection;
+	D3DXMatrixMultiply(&matViewProjection, &matView, &matProjection);
+
 	m_cMutex.lock();
-
-	for (CActor *it : m_vecStaticActor)
+	// CreateShadow
 	{
-		it->Render();
+
+		LPDIRECT3DSURFACE9 pHWBackBuffer = NULL;
+		LPDIRECT3DSURFACE9 pHWDepthStencilBuffer = NULL;
+		g_pD3DDevice->GetRenderTarget(0, &pHWBackBuffer);
+		g_pD3DDevice->GetDepthStencilSurface(&pHWDepthStencilBuffer);
+
+		LPDIRECT3DSURFACE9 pShadowSurface;
+		pShadowSurface = NULL;
+
+		if (SUCCEEDED(g_pRenderShadowManager->GetShadowRenderTarget()->GetSurfaceLevel(0, &pShadowSurface)))
+		{
+			g_pD3DDevice->SetRenderTarget(0, pShadowSurface);
+			pShadowSurface->Release();
+			pShadowSurface = NULL;
+		}
+		g_pD3DDevice->SetDepthStencilSurface(g_pRenderShadowManager->GetShadowDepthStencil());
+
+		g_pD3DDevice->Clear(0, NULL, (D3DCLEAR_TARGET | D3DCLEAR_ZBUFFER), 0xFFFFFFFF, 1.0f, 0);
+		g_pRenderShadowManager->CalAndSetLightView();
+		g_pRenderShadowManager->CalAndSetLightProjection();
+		g_pRenderShadowManager->GetCreateShadowShader()->SetVector("gWorldLightPosition", &g_pRenderShadowManager->GetWorldLightPosition());
+		for (CCharacter* it : m_vecCharacters)
+		{
+			it->CreateShadowMap();
+		}
+		for (CActor* it : m_vecStaticActor)
+		{
+			it->CreateShadowMap();
+		}
+		for (CTile* it : m_vecTile)
+		{
+			it->CreateShadowMap();
+		}
+		for (CInteractiveActor* it : m_vecObject)
+		{
+			it->CreateShadowMap();
+		}
+		for (CParts* it : m_vecParts)
+		{
+			it->CreateShadowMap();
+		}
+
+		g_pD3DDevice->SetRenderTarget(0, pHWBackBuffer);
+		g_pD3DDevice->SetDepthStencilSurface(pHWDepthStencilBuffer);
+		pHWBackBuffer->Release();
+		pHWBackBuffer = NULL;
+		pHWDepthStencilBuffer->Release();
+		pHWDepthStencilBuffer = NULL;
 	}
 
-	for (CParts *it : m_vecParts)
+	// ApplyShadow
 	{
-		it->Render();
-	}
+		if (g_pRenderShadowManager->GetApplyShadowShader())
+		{
 
-	for (CInteractiveActor *it : m_vecObject)
-	{
-		it->Render();
-	}
+			g_pRenderShadowManager->GetApplyShadowShader()->SetMatrix("gViewProjectionMatrix", &matViewProjection);
+			g_pRenderShadowManager->GetApplyShadowShader()->SetVector("gWorldLightPosition", &g_pRenderShadowManager->GetWorldLightPosition());
 
-	for (CCharacter *it : m_vecCharacters)
-	{
-		it->Render();
-	}
+			g_pRenderShadowManager->GetApplyShadowShader()->SetTexture(
+				"ShadowMap_Tex", g_pRenderShadowManager->GetShadowRenderTarget());
+		}
+		
+		for (CTile *it : m_vecTile)
+		{
+			it->Render();
+		}
+		
+		for (CCharacter* it : m_vecCharacters)
+		{
+			it->Render();
+		}
 
-	for (CBlueprint *it : m_vecBlueprints)
-	{
-		it->Render();
-	}
+		for (CParts *it : m_vecParts)
+		{
+			it->Render();
+		}
+		
+		for (CInteractiveActor *it : m_vecObject)
+		{
+			it->Render();
+		}
 
-	for (CMonster *it : m_vecMonster)
-	{
-		it->Render();
-	}
 
-	for (CTile *it : m_vecTile)
-	{
-		it->Render();
-	}
+		for (CBlueprint *it : m_vecBlueprints)
+		{
+			it->Render();
+		}
 
+
+		for (CActor* it : m_vecStaticActor)
+		{
+			it->Render();
+		}
+	
+		for (CMonster *it : m_vecMonster)
+		{
+			it->Render();
+		}
+	}
+	
 	if (m_pDebugTrafficLight)
 		m_pDebugTrafficLight->Render();
+
+	if (m_pDebugLoseUI)
+		m_pDebugLoseUI->Render();
 
 	if (m_pDebugPauseUI)
 		m_pDebugPauseUI->Render();
 
-	
 	if (m_pDebugClearUI)
 		m_pDebugClearUI->Render();
+
+	if (m_pEscUI)
+		m_pEscUI->Render();
+
+	if (m_pLoadingPopup)
+		m_pLoadingPopup->Render();
+
+	if (m_pReady)
+		m_pReady->Render();
+
+	if (m_pWarnning)
+		m_pWarnning->Render();
+
 	
 
 	m_cMutex.unlock();
@@ -184,17 +292,6 @@ void CGameScene::Render()
 
 void CGameScene::Update()
 {
-	//if (IsGameClear())
-	//{
-	//	//승리상태
-	//	_DEBUG_COMMENT cout << "game clear!" << endl;
-	//}
-	//if (IsGameLose())
-	//{
-	//	//패배상태
-	//	_DEBUG_COMMENT cout << "game lose!" << endl;
-	//}
-
 	if (m_isTimeStop)
 		return;
 
@@ -236,11 +333,20 @@ void CGameScene::Update()
 	{ // collide
 		if (m_vecCharacters.size() == 2)
 		{
-			CPhysicsApplyer::ApplyBound(m_vecCharacters[0], m_vecCharacters[1]);
+			if (CPhysicsApplyer::ApplyBound(m_vecCharacters[0], m_vecCharacters[1]))
+			{
+				if (ColideCheck(m_vecCharacters[0], m_vecCharacters[1]))
+				{
+					g_SoundManager->PlaySFX("character_impact");
+				}
+			}
+			else
+			{
+				m_vecCharacters[0]->SetIsCollide(false);
+				m_vecCharacters[1]->SetIsCollide(false);
+			}
 		}
 
-		
-		
 		for (CParts *part : m_vecParts)
 		{
 			for (CCharacter *character : m_vecCharacters)
@@ -250,21 +356,33 @@ void CGameScene::Update()
 			for (CParts *part2 : m_vecParts)
 			{
 				if (part != part2)
-					CPhysicsApplyer::ApplyBound(part2, part);
+				{
+					if (CPhysicsApplyer::ApplyBound(part2, part))
+					{
+						if (ColideCheck(part2, part))
+						{
+							g_SoundManager->PlaySFX("part_impact");
+						}
+					}
+					else
+					{
+						part->SetIsCollide(false);
+						part2->SetIsCollide(false);
+					}
+
+				}
 			}
 		}
 
-		
-		
 		for (CInteractiveActor *obj : m_vecObject)
 		{
 			for (CCharacter *character : m_vecCharacters)
 			{
-				CPhysicsApplyer::ApplyBound(character, obj);
+				CPhysicsApplyer::ApplyBound(obj, character);
 			}
 			for (CParts *part : m_vecParts)
 			{
-				CPhysicsApplyer::ApplyBound(part, obj);
+				CPhysicsApplyer::ApplyBound(obj, part);
 			}
 		}
 
@@ -272,14 +390,14 @@ void CGameScene::Update()
 		{
 			for (CCharacter *character : m_vecCharacters)
 			{
-				CPhysicsApplyer::ApplyBound(character, pStaticActor);
+				CPhysicsApplyer::ApplyBound(pStaticActor, character);
 			}
 			for (CParts *part : m_vecParts)
 			{
-				CPhysicsApplyer::ApplyBound(part, pStaticActor);
+				CPhysicsApplyer::ApplyBound(pStaticActor, part);
 			}
 		}
-
+		
 		for (CTile *tile : m_vecTile)
 		{
 			D3DXVECTOR3 min, max;
@@ -297,10 +415,11 @@ void CGameScene::Update()
 						D3DXBoxBoundProbe(&min, &max, &character->GetPosition(), &D3DXVECTOR3(0, 0, 1)) ||
 						D3DXBoxBoundProbe(&min, &max, &character->GetPosition(), &D3DXVECTOR3(0, 0, -1)))
 					{
-						CPhysicsApplyer::ApplyBound(character, tile);
+						CPhysicsApplyer::ApplyBound(tile, character);
 					}
 				}
 			}
+
 			for (CParts *part : m_vecParts)
 			{
 				if (D3DXVec3LengthSq(&(tile->GetPosition() - tile->GetPosition())) < 5.f)
@@ -313,12 +432,12 @@ void CGameScene::Update()
 						D3DXBoxBoundProbe(&min, &max, &part->GetPosition(), &D3DXVECTOR3(0, 0, 1)) ||
 						D3DXBoxBoundProbe(&min, &max, &part->GetPosition(), &D3DXVECTOR3(0, 0, -1)))
 					{
-						CPhysicsApplyer::ApplyBound(part, tile);
+						CPhysicsApplyer::ApplyBound(tile, part);
 					}
 				}
 			}
 		}
-		
+
 		for (CBlueprint *blueprint : m_vecBlueprints)
 		{
 			for (CCharacter *character : m_vecCharacters)
@@ -326,8 +445,6 @@ void CGameScene::Update()
 				CPhysicsApplyer::ApplyBound(character, blueprint);
 			}
 		}
-
-		
 	}
 	{ // update
 		for (CActor *it : m_vecStaticActor)
@@ -335,9 +452,15 @@ void CGameScene::Update()
 			it->Update();
 		}
 
-		for (CParts *it : m_vecParts)
+		for (int i = 0; i < m_vecParts.size(); ++i)
 		{
-			it->Update();
+			m_vecParts[i]->Update();
+
+			if (m_vecParts[i]->GetPosition().y < -150)
+			{
+				DeleteParts(m_vecParts[i]);
+				--i;
+			}
 		}
 
 		for (CInteractiveActor *it : m_vecObject)
@@ -362,60 +485,89 @@ void CGameScene::Update()
 	}
 }
 
-bool CGameScene::OnEvent(eEvent eEvent, void * _value)
+bool CGameScene::OnEvent(eEvent eEvent, void *_value)
 {
 	switch (eEvent)
 	{
 	case eEvent::Tick:
+		if (m_isTimeStop)
+			break;
 		return TickUpdate(_value);
 	}
-
 	return true;
 }
 
-bool CGameScene::TickUpdate(void * _value)
+bool CGameScene::TickUpdate(void *_value)
 {
-	ST_TickEvent* data = static_cast<ST_TickEvent*>(_value);
+	ST_TickEvent *data = static_cast<ST_TickEvent *>(_value);
 	m_fGameTime -= data->fElapsedTime;
 
 	int check = IsGameClear();
 	if (check == 1)
 	{
-		if(m_pDebugClearUI)
-			m_pDebugClearUI->InvertActive();
-		ST_SetTimeEvent data;
-		data.fTime = m_fGameTime;
+		g_SoundManager->PlaySFX("win");
+		ST_SetTimeEvent timeData;
+		timeData.nTime = m_fGameTime;
 
-		g_EventManager->CallEvent(eEvent::ClearSetTime, (void*)&data);
+		m_isTimeStop = true;
+		SafeDelete(m_pDebugPauseUI);
+		g_EventManager->CallEvent(eEvent::ClearSetTime, (void *)&timeData);
+		//g_SaveLoadManager->Save(m_sStageKey, true, m_fGameTime);
+
+		json& jData = g_SaveLoadManager->GetStageData(m_sStageKey);
+		jData["isClear"] = true;
+		jData["ClearTime"] = m_fGameTime;
+		g_SaveLoadManager->Save();
+		
+
+
+		//세이브 체크중
+		if (m_pDebugClearUI)
+			m_pDebugClearUI->ActiveUI();
+
 		return false;
 	}
 	else if (check == 2)
 	{
-		//패배 ->InvertActive();
+		g_SoundManager->PlaySFX("game_over");
+
+		m_isTimeStop = true;
+		SafeDelete(m_pDebugPauseUI);
+
+		if (m_pDebugLoseUI)
+			m_pDebugLoseUI->ActiveUI();
 		return false;
 	}
-
+	
 	return true;
 }
 
-void CGameScene::Load(string sFolder, string sFilename, void (CGameScene::* pCallback)(void))
+void CGameScene::Load(string sFolder, string sStageKey, void (CGameScene::*pCallback)(void))
 {
 	m_cMutex.lock();
 	m_isTimeStop = true;
 	m_cMutex.unlock();
 
-	string sFullname = sFolder + "/" + sFilename;
+	m_sStageKey = sStageKey;
+	json jData = g_SaveLoadManager->GetStageData(sStageKey);
+	string FileName = jData["FileName"];
+	string sFullname = sFolder + "/" + FileName;
+	
 	std::ifstream is(sFullname);
 	assert(is.is_open());
 	json j;
 	is >> j;
 	is.close();
-	vector<CBlueprint*> vecBP;
-	vector<CActor*> vecStatic;
-	vector<CInteractiveActor*> vecInter;
-	vector<CParts*> vecParts;
-	vector<CCharacter*> vecChara;
-	vector<CTile*> vecTile;
+	vector<CBlueprint *> vecBP;
+	vector<CActor *> vecStatic;
+	vector<CInteractiveActor *> vecInter;
+	vector<CParts *> vecParts;
+	vector<CCharacter *> vecChara;
+	vector<CTile *> vecTile;
+	vector<CMonster *> vecMonster;
+
+	while(!g_pStaticMeshManager->IsLoaded()){} // 메시 로딩이 끝날때까지 busylock
+	if (g_pThreadManager->GetStopMessage()) return;
 	{
 		{
 			// blueprint
@@ -452,7 +604,7 @@ void CGameScene::Load(string sFolder, string sFilename, void (CGameScene::* pCal
 				D3DXVECTOR3 pos(p["Position"][0], p["Position"][1], p["Position"][2]);
 				float rotate = p["Rotate"];
 				D3DXVECTOR3 scale(p["Scale"][0], p["Scale"][1], p["Scale"][2]);
-				CSandpile* sandpile = new CSandpile(this,pos);
+				CSandpile* sandpile = new CSandpile(this, pos);
 				sandpile->SetRotationY(rotate);
 				sandpile->SetScale(scale);
 				vecStatic.push_back(sandpile);
@@ -468,7 +620,7 @@ void CGameScene::Load(string sFolder, string sFilename, void (CGameScene::* pCal
 				CPharaohCoffin* Coffin = new CPharaohCoffin(this, pos);
 				Coffin->SetRotationY(rotate);
 				Coffin->SetScale(scale);
-				vecStatic.push_back(Coffin);
+				vecInter.push_back(Coffin);
 			}
 		}
 		{
@@ -554,6 +706,41 @@ void CGameScene::Load(string sFolder, string sFilename, void (CGameScene::* pCal
 			}
 		}
 		{
+			json jField = j["Field"];
+			for (int i = 0; i < jField.size(); ++i)
+			{
+				eTileType eFieldTileType = static_cast<eTileType>(jField[i]["TileType"]);
+				CField* field = new CField(eFieldTileType);
+				vecStatic.push_back(field);
+			}
+		}
+		{
+			json jBoundaryWall = j["BoundaryWall"];
+			for (int i = 0; i < jBoundaryWall.size(); ++i)
+			{
+				CBoundaryWall* bwall = new CBoundaryWall;
+				vecStatic.push_back(bwall);
+			}
+		}
+		{
+			json jTipboard = j["Tipboard"];
+			for (auto&& p : jTipboard)
+			{
+				D3DXVECTOR3 pos(p["Position"][0], p["Position"][1], p["Position"][2]);
+				float rotate = p["Rotate"];
+				D3DXVECTOR3 scale(p["Scale"][0], p["Scale"][1], p["Scale"][2]);
+				string txt = p["Text"];
+				std::wstring_convert < std::codecvt_utf8<wchar_t>, wchar_t> convertString;
+				std::wstring wideString = convertString.from_bytes(txt);
+				CTipBoard* Tipboard = new CTipBoard(pos, wideString);
+				Tipboard->SetRotationY(rotate);
+				Tipboard->SetScale(scale);
+				vecInter.push_back(Tipboard);
+			}
+		}
+		{
+			while (!g_pPartsManager->IsLoaded()) {}
+			if (g_pThreadManager->GetStopMessage()) return;
 			// parts
 			json jParts = j["Parts"];
 			for (auto&& p : jParts)
@@ -571,6 +758,19 @@ void CGameScene::Load(string sFolder, string sFilename, void (CGameScene::* pCal
 		}
 		{
 			// tile
+			{
+				json jWater = j["Water"];
+				for (auto&& p : jWater)
+				{
+					D3DXVECTOR3 pos(p["Position"][0], p["Position"][1], p["Position"][2]);
+					float rotate = p["Rotate"];
+					D3DXVECTOR3 scale(p["Scale"][0], p["Scale"][1], p["Scale"][2]);
+					CWater* Tile = new CWater(pos);
+					Tile->SetRotationY(rotate);
+					Tile->SetScale(scale);
+					vecTile.push_back(Tile);
+				}
+			}
 			{
 				json jSand = j["Sand"];
 				for (auto&& p : jSand)
@@ -624,19 +824,6 @@ void CGameScene::Load(string sFolder, string sFilename, void (CGameScene::* pCal
 				}
 			}
 			{
-				json jWater = j["Water"];
-				for (auto&& p : jWater)
-				{
-					D3DXVECTOR3 pos(p["Position"][0], p["Position"][1], p["Position"][2]);
-					float rotate = p["Rotate"];
-					D3DXVECTOR3 scale(p["Scale"][0], p["Scale"][1], p["Scale"][2]);
-					CWater* Tile = new CWater(pos);
-					Tile->SetRotationY(rotate);
-					Tile->SetScale(scale);
-					vecTile.push_back(Tile);
-				}
-			}
-			{
 				json jFlowSand = j["FlowSand"];
 				for (auto&& p : jFlowSand)
 				{
@@ -647,6 +834,19 @@ void CGameScene::Load(string sFolder, string sFilename, void (CGameScene::* pCal
 					Tile->SetRotationY(rotate);
 					Tile->SetScale(scale);
 					vecTile.push_back(Tile);
+				}
+			}
+			{
+				json jBrick = j["Brick"];
+				for (auto&& p : jBrick)
+				{
+					D3DXVECTOR3 pos(p["Position"][0], p["Position"][1], p["Position"][2]);
+					float rotate = p["Rotate"];
+					D3DXVECTOR3 scale(p["Scale"][0], p["Scale"][1], p["Scale"][2]);
+					CBrick* Tile = new CBrick(pos);
+					Tile->SetRotationY(rotate);
+					Tile->SetScale(scale);
+					vecStatic.push_back(Tile);
 				}
 			}
 		}
@@ -691,17 +891,59 @@ void CGameScene::Load(string sFolder, string sFilename, void (CGameScene::* pCal
 	this->m_vecParts.insert(m_vecParts.end(), vecParts.begin(), vecParts.end());
 	this->m_vecCharacters.insert(m_vecCharacters.end(), vecChara.begin(), vecChara.end());
 	this->m_vecTile.insert(m_vecTile.end(), vecTile.begin(), vecTile.end());
-	this->m_sID = sFilename;
+	this->m_sStageKey = m_sStageKey;
 	this->m_cMutex.unlock();
 
+	{
+		json jMonster = j["Monster"];
+		for (UINT i = 0; i < jMonster.size(); i++)
+		{
+			if (jMonster[i]["Type"] == "Medusa")
+			{
+				CMonsterMedusa* pTempMedusa = new CMonsterMedusa(this);
+				vecMonster.push_back(pTempMedusa);
+			}
+			else if (jMonster[i]["Type"] == "Harpy")
+			{
+				CMonsterHarpy* pTempHarpy = new CMonsterHarpy(this);
+				vecMonster.push_back(pTempHarpy);
+
+				json jTempSkObj = jMonster[i]["SkillObject"];
+				for (UINT j = 0; j < jTempSkObj.size(); j++)
+				{
+					D3DXVECTOR3 vTempPos = D3DXVECTOR3(jTempSkObj[j][0], jTempSkObj[j][1], jTempSkObj[j][2]);
+					pTempHarpy->AddObjectPosition(vTempPos);
+				}
+			}
+		}
+	}
+	vector<CInteractiveActor*> vecWhiteboard;
+	{
+		json jWhiteboard = j["Whiteboard"];
+		for (auto&& p : jWhiteboard)
+		{
+			D3DXVECTOR3 pos(p["Position"][0], p["Position"][1], p["Position"][2]);
+			float rotate = p["Rotate"];
+			D3DXVECTOR3 scale(p["Scale"][0], p["Scale"][1], p["Scale"][2]);
+			CWhiteboard* Whiteboard = new CWhiteboard(pos);
+			Whiteboard->SetRotationY(rotate);
+			Whiteboard->SetScale(scale);
+			Whiteboard->SetFormula(m_vecBlueprints);
+			vecWhiteboard.push_back(Whiteboard);
+		}
+	}
+	
+
+	this->m_cMutex.lock();
+	this->m_vecMonster.insert(m_vecMonster.end(), vecMonster.begin(), vecMonster.end());
+	this->m_vecObject.insert(m_vecObject.end(), vecWhiteboard.begin(), vecWhiteboard.end());
+	this->m_cMutex.unlock();
+	
 	if (pCallback)
 		(this->*pCallback)();
 
 	// 로딩ui 종료하고 게임 시작
-	
-	m_cMutex.lock();
-	m_isTimeStop = false;
-	m_cMutex.unlock();
+	g_EventManager->CallEvent(eEvent::LoadingEnd, NULL);
 }
 
 void CGameScene::ToggleStop()
@@ -709,31 +951,26 @@ void CGameScene::ToggleStop()
 	m_isTimeStop = !m_isTimeStop;
 }
 
-void CGameScene::MonsterSkill(eSkill skill)
+void CGameScene::ApplyMonsterSkill(eSkill skill, float fDuration)
 {
 	switch (skill)
 	{
 	case eSkill::SandWind:
-		SetWindDirection();
+		SetWindDirection(fDuration);
+		break;
+	case eSkill::None:
+	case eSkill::KeyLock:
+	case eSkill::SlowMove:
+	case eSkill::KeyReverse:
+		SetCCToRandomCharacter(skill, fDuration);
 		break;
 	}
-
-	CC(ChooseCC(skill));
 }
 
 void CGameScene::FinishSkill(eSkill skill)
 {
 	switch (skill)
 	{
-	case eSkill::KeyLock:
-		DeleteCC();
-		break;
-	case eSkill::SlowMove:
-		DeleteCC();
-		break;
-	case eSkill::KeyRevers:
-		DeleteCC();
-		break;
 	case eSkill::SandWind:
 		DeleteWind();
 		break;
@@ -750,47 +987,47 @@ bool CGameScene::CheckSpecificPartsID(string partsID)
 		if (it->GetPartsID() == partsID)
 			return true;
 	}
-
 	return false;
 }
 
-void CGameScene::ElectIndexLot()
+D3DXVECTOR3 CGameScene::SelectRandomObject()
 {
 	CRandomNumberGenerator rand;
-	m_nLotIndex = rand.GenInt(0, m_vecObject.size() - 1);
+	int index = rand.GenInt(0, m_vecObject.size() - 1);
+
+	return m_vecObject[index]->GetPosition();
 }
 
-bool CGameScene::CheckSpecificArea()
+bool CGameScene::CheckDistanceToSelectedObject(D3DXVECTOR3 pos, float fSize)
 {
-	D3DXVECTOR3 pos = m_vecObject[m_nLotIndex]->GetPosition();
-	D3DXVECTOR3 size(1.5f, 100.0f, 1.5f);
+	D3DXVECTOR3 size(fSize, 100.0f, fSize);
 	CBoxCollision cCollsion(pos, size);
-
-	cCollsion.Render();
 
 	for (auto it : m_vecCharacters)
 	{
 		if (cCollsion.Collide(it->GetCollision()))
 			return true;
 	}
-
 	return false;
 }
 
-void CGameScene::CheckSandDummyArea(ICollisionArea *collison)
+void CGameScene::CheckCollideCharacterToSandpile(ICollisionArea *collision)
 {
 	for (auto it : m_vecCharacters)
 	{
-		if (it->GetDummy() == false && collison->Collide(it->GetCollision())) //더미 밖에서 안으로 들어올때 들어오는곳
+		if (collision->Collide(it->GetCollision())) // 모래더미와 겹쳐있음
 		{
-			it->SetDummy(true);
+			if (it->GetCC()->GetID() != "SLOWANDSTOP")
+				it->SetCC(new CCCSlowAndStop);
 
-			it->SetCC(new CCCSlowAndStop);
+			it->SetOverlappedSandpile(collision);
 		}
-		else if (it->GetDummy() && collison->Collide(it->GetCollision()) == false) // 더미밖에서 들어오는곳
+		else if (collision == it->GetOverlappedSandpile()) // 모래더미와 겹쳐있지 않은데 이전에 겹친 적이 있음
 		{
-			it->SetDummy(false);
-			it->DeleteCC();
+			if (it->GetCC()->GetID() == "SLOWANDSTOP")
+				it->DeleteCC();
+				
+			it->SetOverlappedSandpile(nullptr);
 		}
 	}
 }
@@ -803,9 +1040,7 @@ D3DXVECTOR3 CGameScene::GetRandomPartsPosition()
 	CRandomNumberGenerator rand;
 	int index = rand.GenInt(0, m_vecParts.size() - 1);
 
-	D3DXVECTOR3 vec = m_vecParts[index]->GetPosition();
-
-	return vec;
+	return m_vecParts[index]->GetPosition();
 }
 
 CCrowdControl *CGameScene::ChooseCC(eSkill skill)
@@ -816,26 +1051,23 @@ CCrowdControl *CGameScene::ChooseCC(eSkill skill)
 		return new CCCStopMove;
 	case eSkill::SlowMove:
 		return new CCCSpeedDown;
-	case eSkill::KeyRevers:
+	case eSkill::KeyReverse:
 		return new CCCReverseKey;
 	}
-
 	return new CCCNone;
 }
 
-void CGameScene::CC(CCrowdControl *pCC)
+void CGameScene::SetCCToRandomCharacter(eSkill skill, float fDuration)
 {
+	CCrowdControl *pCC = ChooseCC(skill);
+	pCC->SetDuration(fDuration);
+
+	CRandomNumberGenerator r;
+	m_vecCharacters[r.GenInt(0, 1)]->SetCC(pCC);
 	g_EventManager->CallEvent(eEvent::CrowdControl, NULL);
-
-	for (CCharacter *it : m_vecCharacters)
-	{
-		it->SetCC(pCC->Clone());
-	}
-
-	SafeDelete(pCC);
 }
 
-void CGameScene::MedusaUlt(D3DXVECTOR3 pos)
+void CGameScene::DestroyPartsOnPosition(D3DXVECTOR3 pos)
 {
 	CSphereCollision cCollsion(pos, 2.0f);
 
@@ -850,23 +1082,30 @@ void CGameScene::MedusaUlt(D3DXVECTOR3 pos)
 	}
 }
 
-void CGameScene::SetWindDirection()
+bool CGameScene::CheckWarning()
 {
-	int windDirection = rand() % 2;
+	if (m_pWarnning == nullptr)
+		return true;
 
-	if (windDirection == 1)
+	if (m_pWarnning->GetCheckFirst())
 	{
-		m_vWind = D3DXVECTOR3(0.01f, 0, 0);
+		return m_pWarnning->GetCheckEnd();
 	}
 	else
 	{
-		m_vWind = D3DXVECTOR3(-0.01f, 0, 0);
+		g_EventManager->CallEvent(eEvent::CallWarning, NULL);
 	}
+	return false;
+}
+
+void CGameScene::SetWindDirection(float nDir)
+{
+	m_vWind = D3DXVECTOR3(0.01f * nDir, 0, 0);
 }
 
 void CGameScene::DeleteWind()
 {
-	m_vWind = D3DXVECTOR3(0, 0, 0);
+	m_vWind = g_vZero;
 }
 
 void CGameScene::DeleteTornado()
@@ -888,38 +1127,46 @@ int CGameScene::IsGameClear()
 	{
 		return 2; //실패
 	}
-	
+
 	for (CBlueprint *it : m_vecBlueprints)
 	{
 		if (it->GetIsCompleted() == false)
 			return 0; // 완료되지 않음
 	}
-	if(!m_vecBlueprints.empty())
+	if (!m_vecBlueprints.empty())
 		return 1; // 클리어
 
 	return 0;
 }
 
-//bool CGameScene::IsGameLose()
-//{
-//	m_fGameTime -= g_pTimeManager->GetElapsedTime();
-//
-//	if (m_fGameTime <= 0)
-//	{
-//		return true;
-//	}
-//
-//	return false;
-//}
+bool CGameScene::ColideCheck(CActor* pActor1, CActor* pActor2)
+{
+
+	if (pActor1->GetIsCollide() == false || pActor2->GetIsCollide() == false)
+	{
+		pActor1->SetIsCollide(true);
+		pActor2->SetIsCollide(true);
+		return true;
+	}
+	return false;
+}
 
 void CGameScene::GetInteractObject(CCharacter *pCharacter)
 {
+	float fMaxDistance = 9999.f;
+	CInteractiveActor* target = nullptr;
+	map<float, CInteractiveActor *> veclength;
+
 	for (CParts *it : m_vecParts)
 	{
 		if (pCharacter->GetInteractCollsion()->Collide(it->GetCollision()))
 		{
-			it->Interact(pCharacter);
-			return;
+			float dist = D3DXVec3Length(&(pCharacter->GetPosition() - it->GetPosition()));
+			if(dist < fMaxDistance)
+			{
+				fMaxDistance = dist;
+				target = it;
+			}
 		}
 	}
 
@@ -927,8 +1174,12 @@ void CGameScene::GetInteractObject(CCharacter *pCharacter)
 	{
 		if (pCharacter->GetInteractCollsion()->Collide(it->GetCollision()))
 		{
-			it->Interact(pCharacter);
-			return;
+			float dist = D3DXVec3Length(&(pCharacter->GetPosition() - it->GetPosition()));
+			if (dist < fMaxDistance)
+			{
+				fMaxDistance = dist;
+				target = it;
+			}
 		}
 	}
 
@@ -936,10 +1187,18 @@ void CGameScene::GetInteractObject(CCharacter *pCharacter)
 	{
 		if (pCharacter->GetInteractCollsion()->Collide(it->GetCollision()))
 		{
-			it->Interact(pCharacter);
-			return;
+			float dist = D3DXVec3Length(&(pCharacter->GetPosition() - it->GetPosition()));
+			if (dist < fMaxDistance)
+			{
+				fMaxDistance = dist;
+				target = it;
+			}
 		}
 	}
+
+	if (target)
+		target->Interact(pCharacter);
+
 }
 
 void CGameScene::AddParts(CParts *parts)
@@ -989,31 +1248,5 @@ void CGameScene::CheckAroundCombinator(CPartCombinator *combinator)
 	{
 		combinator->PartsInteract(it.second);
 		it.second->SetCPartCombinator(combinator);
-	}
-}
-
-string CGameScene::CalMin(int sec)
-{
-	int a = sec / 60;
-	if (a >= 10)
-	{
-		return std::to_string(a);
-	}
-	else
-	{
-		return "0" + std::to_string(a);
-	}
-}
-
-string CGameScene::CalSec(int sec)
-{
-	int a = sec % 60;
-	if (a >= 10)
-	{
-		return std::to_string(a);
-	}
-	else
-	{
-		return "0" + std::to_string(a);
 	}
 }

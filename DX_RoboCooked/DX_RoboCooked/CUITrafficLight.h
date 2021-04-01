@@ -9,7 +9,6 @@ class CUITrafficLight :
 {
 
 private:
-	IInteractCenter*			m_pInteractCenter;
 	CUITrafficLightBoard*		m_pLightBoard;
 	INT							m_nCompleteBluePrintCount;
 

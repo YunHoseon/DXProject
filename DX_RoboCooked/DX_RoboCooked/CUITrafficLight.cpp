@@ -10,7 +10,7 @@
 
 
 CUITrafficLight::CUITrafficLight(IInteractCenter* pInteractCenter, int nSize)
-			: m_pInteractCenter(pInteractCenter)
+			: CUIButton(pInteractCenter)
 			, m_nCompleteBluePrintCount(0)
 			, m_pLightBoard(nullptr)
 {
@@ -39,7 +39,7 @@ CUITrafficLight::CUITrafficLight(IInteractCenter* pInteractCenter, int nSize)
 		m_pLightBoard = new CUITrafficLightFiveBoard;
 		break;
 	}
-	Add(m_pLightBoard);
+	AddChild(m_pLightBoard);
 
 	Setup();
 	InvertActive();
@@ -57,12 +57,14 @@ void CUITrafficLight::Setup()
 	for (int i = 0; i < m_pLightBoard->GetLightCount(); i++)
 	{
 		light = new CUILight(m_pLightBoard->GetLightPosition(i));
-		m_pLightBoard->Add(light);
+		m_pLightBoard->AddChild(light);
 	}
 }
 
 bool CUITrafficLight::OnEvent(eEvent eEvent, void* _value)
 {
+	if (!m_isActive)
+		return true;
 	switch (eEvent)
 	{
 	case eEvent::CompleteBluePrint:

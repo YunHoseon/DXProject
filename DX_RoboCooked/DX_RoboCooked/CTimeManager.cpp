@@ -46,12 +46,3 @@ void CTimeManager::Update()
 
 }
 
-float CTimeManager::GetElapsedTime()
-{
-	return m_fElapsedTime;
-}
-
-float CTimeManager::GetLastUpdateTime()
-{
-	return m_dwLastUpdateTime.QuadPart * 0.0000001f;
-}

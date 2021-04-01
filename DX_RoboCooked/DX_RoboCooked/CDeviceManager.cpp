@@ -27,6 +27,9 @@ CDeviceManager::CDeviceManager() : CSingleton<CDeviceManager>(), m_pD3D(NULL), m
 	d3dpp.EnableAutoDepthStencil = true;
 	d3dpp.AutoDepthStencilFormat = D3DFMT_D24S8;
 	d3dpp.PresentationInterval = D3DPRESENT_INTERVAL_IMMEDIATE;
+	d3dpp.BackBufferWidth = 1920;// GetSystemMetrics(SM_CXSCREEN);
+	d3dpp.BackBufferHeight = 1080;// GetSystemMetrics(SM_CYSCREEN);
+	d3dpp.FullScreen_RefreshRateInHz = D3DPRESENT_RATE_DEFAULT;
 	
 
 

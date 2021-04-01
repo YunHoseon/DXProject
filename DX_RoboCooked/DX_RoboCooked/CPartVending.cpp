@@ -15,6 +15,7 @@ CPartVending::CPartVending(COutlet *outlet, IInteractCenter *pInteractCenter, st
 	m_sID = sPartsID;
 	m_fMass = 9999.f;
 	m_fFriction = 0.2f;
+	m_pOutlet->SetPartsId(m_sID);
 }
 
 CPartVending::~CPartVending()
@@ -64,6 +65,7 @@ void CPartVending::Interact(CCharacter *pCharacter)
 {
 	if (m_ePartVendingState == ePartVendingState::Usable && m_pOutlet->GetState() == eOutletState::None && pCharacter->GetPlayerState() == ePlayerState::None)
 	{
+		g_SoundManager->PlaySFX("box");
 		CParts *parts = Make();
 		parts->SetPosition(m_pOutlet->GetPosition() + D3DXVECTOR3(0, 1.0f, 0));
 		m_pInteractCenter->AddParts(parts);
@@ -73,4 +75,22 @@ void CPartVending::Interact(CCharacter *pCharacter)
 		//m_pInteractCenter->SendPartsToOutlet(parts, m_pOutlet);
 		g_EventManager->CallEvent(eEvent::VendingUse, NULL);
 	}
+}
+
+void CPartVending::CreateShadowMap()
+{
+	g_pRenderShadowManager->GetCreateShadowShader()->SetMatrix("gWorldMatrix", &m_matWorld);
+	UINT numPasses = 0;
+	g_pRenderShadowManager->GetCreateShadowShader()->Begin(&numPasses, NULL);
+
+	for (UINT i = 0; i < numPasses; ++i)
+	{
+		g_pRenderShadowManager->GetCreateShadowShader()->BeginPass(i);
+		{
+			m_pSMesh->CreateShadowMap();
+		}
+		g_pRenderShadowManager->GetCreateShadowShader()->EndPass();
+	}
+
+	g_pRenderShadowManager->GetCreateShadowShader()->End();
 }

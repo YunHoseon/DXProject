@@ -10,6 +10,5 @@ private:
 public:
 	CDebugPlayer1(IInteractCenter* pInteractCenter = nullptr);
 	virtual ~CDebugPlayer1();
-
 };
 

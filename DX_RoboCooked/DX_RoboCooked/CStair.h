@@ -8,5 +8,6 @@ public:
 	~CStair();
 
 	void Render() override;
+	bool Collide(CActor* target, D3DXVECTOR3* pNormal) override;
 };
 

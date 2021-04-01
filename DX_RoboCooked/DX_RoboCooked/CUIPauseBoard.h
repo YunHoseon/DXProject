@@ -13,6 +13,5 @@ public:
 
 public:
 	virtual void Setup() override;
-
 };
 

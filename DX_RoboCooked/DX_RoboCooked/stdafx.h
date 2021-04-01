@@ -49,6 +49,7 @@ using std::thread;
 using nlohmann::json;
 
 extern HWND g_hWnd;
+
 #define SafeRelease(p) { if(p) p->Release(); p = nullptr; }
 
 #define SafeDelete(p) { if(p) delete p; p = nullptr; }
@@ -61,6 +62,8 @@ extern HWND g_hWnd;
 
 #define WIDTH 16
 #define HEIGHT 12
+
+
 
 const D3DXVECTOR3 g_vZero(0.f,0.f,0.f);
 const D3DXMATRIXA16 g_matIdentity(
@@ -174,7 +177,7 @@ struct ST_TravelDistanceEvent
 };
 struct ST_SetTimeEvent
 {
-	float fTime;
+	int nTime;
 };
 
 struct ST_TickEvent
@@ -205,6 +208,9 @@ struct ST_PLAYER_INPUTKEY
 		return *this;
 	}
 };
+
+extern string CalMin(int sec);
+extern string CalSec(int sec);
 
 
 #define Synthesize(varType, varName, funName)\
@@ -246,7 +252,10 @@ struct ST_PLAYER_INPUTKEY
 #include "CPartsManager.h"
 #include "CUITextureManager.h"
 #include "CStaticMeshManager.h"
-
+#include "CThreadManager.h"
+#include "CSaveLoadManager.h"
+#include "CShaderManager.h"
+#include "CRenderShadowManager.h"
 #include "CRandomNumberGenerator.h"
 
 #define __SLASH(x) /##x
@@ -265,17 +274,17 @@ struct ST_PLAYER_INPUTKEY
 	using std::cout;
 	using std::endl;
 #else
-	//#define _DEBUG_COMMENT __DOUBLE_SLASH
-	//#define _RELEASE_COMMENT
+	#define _DEBUG_COMMENT __DOUBLE_SLASH
+	#define _RELEASE_COMMENT
 
-#ifdef UNICODE
-#pragma comment(linker, "/entry:wWinMainCRTStartup /subsystem:console")
-#else
-#pragma comment(linker, "/entry:WinMainCRTStartup /subsystem:console")
-#endif
-#define _DEBUG_COMMENT
-#define _RELEASE_COMMENT __DOUBLE_SLASH
-#include <iostream>
-using std::cout;
-using std::endl;
+//#ifdef UNICODE
+//#pragma comment(linker, "/entry:wWinMainCRTStartup /subsystem:console")
+//#else
+//#pragma comment(linker, "/entry:WinMainCRTStartup /subsystem:console")
+//#endif
+//#define _DEBUG_COMMENT
+//#define _RELEASE_COMMENT
+//#include <iostream>
+//using std::cout;
+//using std::endl;
 #endif

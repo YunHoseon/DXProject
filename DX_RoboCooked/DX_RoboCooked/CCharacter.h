@@ -2,10 +2,12 @@
 #include "CParts.h"
 
 
+class CDashShadow;
 class ICollisionArea;
 class CGameScene;
 class CCrowdControl;
 class CSkinnedMesh;
+class CUICharge;
 
 enum class ePlayerState
 {
@@ -32,22 +34,29 @@ protected:
 	CParts*				m_pParts;
 
 	D3DXVECTOR3			m_vDefaultPosition;
-	// Å°´Ù¿î °ü·Ã.
+	
+	
 	array<float, 3>		m_arrElapsedTime;
 	array<float, 3>		m_arrCoolDown;
 	array<bool, 3>		m_arrKeyDown;
 	bool				m_isMoveKeyDown;
-	// ¼öÁ¤Áß
+	bool				m_isDash;
+	// ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 	const ST_PLAYER_INPUTKEY* m_pInputKey;
 	//LPD3DXMESH			m_pMesh;
-	//D3DMATERIAL9		m_stMtlSphere;
+	//D3DMATERIAL9		m_stMtl;
 	float				m_fMinThrowPower;
 	float				m_fMaxThrowPower;
 	float				m_fThrowPower;
 	float				m_fThrowPowerUpSpeed;
-	// »óÅÂÀÌ»ó °ü·Ã ¸â¹ö Ãß°¡ ÇÊ¿ä
+	float				m_fMaxSpeed;
+	
+	ICollisionArea*		m_pOverlappedSandpile;
+
 	CCrowdControl*		m_pCC;
-	BOOL				m_isDummy;
+	CUICharge*			m_pCharge;
+
+	CDashShadow*		m_pDashShadow;
 public:
 	CCharacter(int nPlayerNum);
 	virtual ~CCharacter();
@@ -62,23 +71,30 @@ public:
 	virtual void AddForce(const D3DXVECTOR3& vForce) override;
 	virtual void SetForce(const D3DXVECTOR3& vForce = g_vZero) override;
 	virtual float GetMass() override;
+	virtual void Reset();
 	
+	void DeleteCC();
+	void SetAnimState();
+	
+	/*getter setter*/
+	ST_PLAYER_INPUTKEY GetInputKey() { return *m_pInputKey; }
 	D3DXVECTOR3& GetGrabPartsPosition() { return m_vGrabPartsPosition; }
 	ICollisionArea* GetInteractCollsion() { return m_pInteractCollision; }
+	
 	ePlayerState GetPlayerState() { return m_ePlayerState; }
 	void SetPlayerState(ePlayerState state) { m_ePlayerState = state; }
-	void SetParts(CParts* pParts) { m_pParts = pParts; }
+	
 	CParts* GetParts() { return m_pParts; }
-	void SetDummy(bool b) { m_isDummy = b; }
-	BOOL GetDummy() { return m_isDummy; }
-	CCrowdControl* GetCC() { return m_pCC; }
+	void SetParts(CParts* pParts) { m_pParts = pParts; }
 
+	ICollisionArea* GetOverlappedSandpile() { return m_pOverlappedSandpile; }
+	void SetOverlappedSandpile(ICollisionArea* p) { m_pOverlappedSandpile = p; }
+
+	CCrowdControl* GetCC() { return m_pCC; }
 	void SetCC(CCrowdControl* cc);
-	void DeleteCC();
 
 	virtual void SetDefaultPosition(D3DXVECTOR3 vPos) { m_vDefaultPosition = vPos; }
-	virtual void Reset();
 
-	void SetAnimState();
+	virtual void CreateShadowMap() override;
 };
 

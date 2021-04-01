@@ -4,6 +4,8 @@
 #include "stdafx.h"
 #include "DX_RoboCooked.h"
 
+#include "CUI.h"
+
 #define MAX_LOADSTRING 100
 
 
@@ -121,8 +123,16 @@ BOOL InitInstance(HINSTANCE hInstance, int nCmdShow)
 {
    hInst = hInstance; // Store instance handle in our global variable
 
-   g_hWnd = CreateWindowW(szWindowClass, szTitle, WS_OVERLAPPEDWINDOW,
-      CW_USEDEFAULT, 0, 1920, 1080, nullptr, nullptr, hInstance, nullptr);
+   g_hWnd = CreateWindowW(szWindowClass, szTitle, WS_EX_TOPMOST | WS_POPUP,
+      0, 0, GetSystemMetrics(SM_CXSCREEN), GetSystemMetrics(SM_CYSCREEN), nullptr, nullptr, hInstance, nullptr);
+
+   //g_hWnd = CreateWindowW(szWindowClass, NULL, WS_EX_TOPMOST | WS_POPUP,
+	  // 0, 0, 1920, 1080,
+	  // NULL, NULL, hInstance, NULL);
+
+	//g_hWnd = CreateWindowExW(WS_EX_APPWINDOW, szWindowClass, szTitle, WS_POPUP,
+ //       0, 0, GetSystemMetrics(SM_CXSCREEN), GetSystemMetrics(SM_CYSCREEN), nullptr, nullptr, hInstance, nullptr);
+
 
    if (!g_hWnd)
    {
@@ -132,6 +142,11 @@ BOOL InitInstance(HINSTANCE hInstance, int nCmdShow)
    ShowWindow(g_hWnd, nCmdShow);
    UpdateWindow(g_hWnd);
 
+   RECT rc;
+   GetClientRect(g_hWnd, &rc);
+   CUI::SetWidthRevision((float)(rc.right - rc.left) / 1920);
+   CUI::SetHeightRevision((float)(rc.bottom - rc.top) / 1080);
+	
    return TRUE;
 }
 
@@ -176,6 +191,14 @@ LRESULT CALLBACK WndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam)
             // TODO: Add any drawing code that uses hdc here...
             EndPaint(hWnd, &ps);
         }
+        break;
+    case WM_SIZE:
+    {
+        RECT rc;
+        GetClientRect(g_hWnd, &rc);
+        CUI::SetWidthRevision((rc.right - rc.left) / 1920);
+        CUI::SetHeightRevision((rc.bottom - rc.top) / 1080);
+    }
         break;
     case WM_DESTROY:
         PostQuitMessage(0);

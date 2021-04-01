@@ -23,7 +23,7 @@ enum class eSkill
 	KeyLock,
 	SlowMove,
 	DestroyParts,
-	KeyRevers,
+	KeyReverse,
 	SandWind,
 	Tornado
 };
@@ -81,9 +81,20 @@ protected:
 	INT							m_nThrowPartsCount;//6
 	INT							m_nSpinPartsCount;//7
 
+
+	FLOAT						m_fConditionTravelDistance;//1
+	FLOAT						m_fConditionArriveSize;//2
+	INT							m_nConditionCombinUseCount;//3
+	INT							m_nConditionVendingUseCount;//4
+	INT							m_nConditionCrowdControlCount;//5
+	INT							m_nConditionThrowPartsCount;//6
+	INT							m_nConditionSpinPartsCount;//7
+
+
 	INT							m_nBluePrintChangeCount;
 	string						m_sSpecificPartsID;
 	vector<D3DXVECTOR3>			m_vecObjectPosition;
+	D3DXVECTOR3					m_vSpecificAreaPosition;
 
 	//디버그용
 	string						m_debugName;
@@ -117,7 +128,7 @@ public:
 	void AddObjectPosition(D3DXVECTOR3 pos);
 	void AddBluePrintCount();
 	virtual void DeleteTornado() {};
-	void ChooseSkillCondition();
+	void ChooseSecondSkillCondition();
 public:
 	void TravelDistanceSkill(void* _value);
 	void ArriveSkill() { m_isArrive = true; }
@@ -127,8 +138,8 @@ public:
 	void ThrowPartsSkill() { m_nThrowPartsCount++; }
 	void SpinPartsSkill(){ m_nSpinPartsCount++; }
 
-private:
-	void SkillConditionInit();
+protected:
+	void SecondSkillConditionInit();
 	bool UltimateSkillTriggered();
 	bool SecondSkillTriggered();
 	bool FirstSkillTriggered();

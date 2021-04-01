@@ -76,6 +76,7 @@ void CSkinnedMesh::Update()
 		//m_isInputOn = true;
 		//SetAnimationIndexBlend(IDLE);
 	}
+	 
 }
 
 void CSkinnedMesh::Update(LPD3DXFRAME pFrame, LPD3DXFRAME pParent)
@@ -128,6 +129,36 @@ void CSkinnedMesh::Render(LPD3DXFRAME pFrame)
 
 	if (pFrame->pFrameSibling)
 		Render(pFrame->pFrameSibling);
+}
+
+void CSkinnedMesh::RenderWithShadow(LPD3DXFRAME pFrame)
+{
+	if (pFrame == nullptr)
+		pFrame = m_pRoot;
+
+	ST_BONE* pBone = (ST_BONE*)pFrame;
+
+	if (pBone->pMeshContainer)
+	{
+		ST_BONE_MESH* pBoneMesh = (ST_BONE_MESH*)pBone->pMeshContainer;
+		if (pBoneMesh->MeshData.pMesh)
+		{
+			//g_pD3DDevice->SetTransform(D3DTS_WORLD, &pBone->CombinedTransformationMatrix);
+			for (size_t i = 0; i < pBoneMesh->vecMtl.size(); ++i)
+			{
+				g_pRenderShadowManager->GetApplyShadowShader()->SetTexture("DiffuseMap_Tex", pBoneMesh->vecTexture[i]);
+				g_pD3DDevice->SetMaterial(&pBoneMesh->vecMtl[i]);
+				g_pRenderShadowManager->GetApplyShadowShader()->CommitChanges();
+				pBoneMesh->MeshData.pMesh->DrawSubset(i);
+			}
+		}
+	}
+
+	if (pFrame->pFrameFirstChild)
+		RenderWithShadow(pFrame->pFrameFirstChild);
+
+	if (pFrame->pFrameSibling)
+		RenderWithShadow(pFrame->pFrameSibling);
 }
 
 void CSkinnedMesh::SetupBoneMatrixPtrs(LPD3DXFRAME pFrame)
@@ -195,7 +226,7 @@ void CSkinnedMesh::UpdateSkinnedMesh(LPD3DXFRAME pFrame)
 void CSkinnedMesh::SetAnimationIndex(int nIndex)
 {
 	int num = m_pAnimController->GetNumAnimationSets();
-	if (nIndex > num) nIndex = nIndex % num;
+	if (nIndex >= num) nIndex = nIndex % num;
 	
 	LPD3DXANIMATIONSET pAnimSet = NULL;
 	m_pAnimController->GetAnimationSet(nIndex, &pAnimSet);
@@ -203,6 +234,7 @@ void CSkinnedMesh::SetAnimationIndex(int nIndex)
 	//m_pAnimController->ResetTime();
 	m_pAnimController->GetPriorityBlend();
 	m_nCurrentAnimIndex = nIndex;
+	m_dAnimPeriod = pAnimSet->GetPeriod();
 }
 
 void CSkinnedMesh::SetAnimationIndexBlend(int nIndex)
@@ -325,7 +357,8 @@ void CSkinnedMesh::Update(ST_BONE* pCurrent, D3DXMATRIXA16* pmatParent)
 
 void CSkinnedMesh::SetRandomTrackPosition()
 {
-	m_pAnimController->SetTrackPosition(0, (rand() % 100) / 10.0f);
+	CRandomNumberGenerator r;
+	m_pAnimController->SetTrackPosition(0, r.GenInt(0,99) / 10.0f);
 }
 
 void CSkinnedMesh::SetTransform(D3DXMATRIXA16* pmat)

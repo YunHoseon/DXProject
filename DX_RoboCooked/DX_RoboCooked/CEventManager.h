@@ -35,7 +35,28 @@ enum class eEvent
 	PauseEnd,
 	ClearMain,
 	ClearNextStage,
-	ClearSetTime
+	ClearSetTime,
+	LoseMain,
+	LoseReset,
+	MainStart,
+	MainControll,
+	MainMaker,
+	MainEvent,
+	MainEnd,
+	LoadingEnd,
+	StageClose,
+	MakerClose,
+	ControllClose,
+	ReadyBoard,
+	CallWarning,
+	SelectButton1,
+	SelectButton2,
+	SelectButton3,
+	SelectButton4,
+	SelectButton5,
+	SelectButton6,
+	SelectLeft,
+	SelectRight
 };
 
 

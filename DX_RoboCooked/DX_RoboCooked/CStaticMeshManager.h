@@ -12,12 +12,14 @@ private:
 		string filePath;
 	};
 	map<string, CStaticMesh*> m_mapStaticMesh;
-
+	bool m_isLoaded;
 public:
 	CStaticMeshManager();
 	~CStaticMeshManager();
 
 	CStaticMesh* GetStaticMesh(string name);
 	void Load();
+
+	bool IsLoaded() { return m_isLoaded; }
 };
 

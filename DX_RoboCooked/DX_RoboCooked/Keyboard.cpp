@@ -70,7 +70,7 @@ void CKeyboard::PressKey(WPARAM keyID, LPARAM lParam)
 		new_vk = keyID;
 		break;
 	}
-
+	
 	m_setKey.insert(new_vk);
 	m_dwPrevKey = new_vk;
 	m_eKeyState = E_BTNDOWN;

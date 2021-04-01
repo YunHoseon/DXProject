@@ -24,6 +24,7 @@ bool CMeshLoader::LoadMesh(string sFilename, string sFolder, LPD3DXMESH* pMesh, 
 		&numMtls,
 		pMesh
 	);
+	
 	if (mtlBuffer != 0 && numMtls != 0)
 	{
 		D3DXMATERIAL* pMtls = (D3DXMATERIAL*)mtlBuffer->GetBufferPointer();

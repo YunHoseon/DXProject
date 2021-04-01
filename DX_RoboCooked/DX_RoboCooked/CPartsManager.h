@@ -18,8 +18,11 @@ private:
 	~CPartsManager();
 	map<string, CParts*>	m_mapParts;
 	map<string, string>		m_mapFormula;
+	bool					m_isLoaded;
 public:
 	void Load();
 	CParts* CreateParts(string sID);
 	string GetIDFromFormula(string sFormula);
+
+	bool IsLoaded() { return m_isLoaded; }
 };

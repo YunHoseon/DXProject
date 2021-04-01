@@ -1,15 +1,27 @@
 #pragma once
 #include "CUIButton.h"
+
+class IInteractCenter;
+
 class CUILoading :
 	public CUIButton
 {
 private:
-	bool	m_isLoading;
+	//IInteractCenter*	m_pInteractCenter;
+	bool				m_isLoading;
+
+	CUI*				m_pBoard;
+	CUI*				m_pLoadingMessage;
+	CUI*				m_pCompleteMessage;
+
 public:
-	CUILoading(D3DXVECTOR2 vPos);
+	CUILoading(IInteractCenter*	pInteractCenter);
 	~CUILoading();
 
 	void Setup() override;
-	void Render() override;
+	bool OnEvent(eEvent eEvent, void* _value);
+
+	bool KeyReleaseEvent(void* _value);
+	bool LoadingEndEvent();
 };
 

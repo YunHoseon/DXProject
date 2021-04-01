@@ -11,7 +11,7 @@ public:
 
 	CStaticMesh& operator=(CStaticMesh&& other) noexcept;
 
-private:
+protected:
 	LPD3DXMESH m_pMesh;
 	vector<D3DMATERIAL9> m_vecMaterial;
 	vector<LPDIRECT3DTEXTURE9> m_vecTexture;
@@ -23,5 +23,7 @@ public:
 	vector<D3DMATERIAL9>& GetVecMaterial() { return m_vecMaterial; }
 	vector<LPDIRECT3DTEXTURE9>& GetVecTexture() { return m_vecTexture; }
 
-	void Render(LPDIRECT3DTEXTURE9 pBlendTexture = nullptr);
+	virtual void Render(LPDIRECT3DTEXTURE9 pBlendTexture = nullptr);
+	virtual void RenderWidthShadow();
+	virtual void CreateShadowMap();
 };

@@ -15,7 +15,7 @@ private:
 public:
 
 	void Update();
-	float GetElapsedTime();
-	float GetLastUpdateTime();
+	float GetElapsedTime() { return m_fElapsedTime; }
+	float GetLastUpdateTime() { return m_dwLastUpdateTime.QuadPart * 0.0000001f; }
 	
 };

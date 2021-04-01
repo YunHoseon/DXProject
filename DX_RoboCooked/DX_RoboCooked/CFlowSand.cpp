@@ -8,10 +8,10 @@ CFlowSand::CFlowSand(D3DXVECTOR3 vPosition):
 	m_eTileType = eTileType::FlowSand;
 	
 	m_pSMesh = g_pStaticMeshManager->GetStaticMesh("FlowSand");
-	m_pUpperMesh = g_pStaticMeshManager->GetStaticMesh("FlowSand_Upper");
-	m_pCollision = new CBoxCollision(g_vZero, D3DXVECTOR3(100, 100, 100), &m_matWorld);
-	
-	SetScale(0.01f, 0.01f, 0.01f);
+	//m_pUpperMesh = g_pStaticMeshManager->GetStaticMesh("FlowSand_Upper");
+	m_pCollision = new CBoxCollision(g_vZero, D3DXVECTOR3(0.1, 0.1, 0.1), &m_matWorld);
+	SetRotationY(D3DX_PI * 0.5f);
+	SetScale(10.f, 10.f, 10.f);
 	SetPosition(vPosition);
 
 	float y = vPosition.y - 0.5f + m_pCollision->GetHeight() * 0.5f + (vPosition.y - m_pCollision->GetCenter().y);

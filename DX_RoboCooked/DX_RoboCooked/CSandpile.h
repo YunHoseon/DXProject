@@ -17,5 +17,7 @@ public:
 
 	void SetPosition(D3DXVECTOR3 vPosition) override;
 	void SetPosition(float x, float y, float z) override;
+
+	void CreateShadowMap() override;
 };
 

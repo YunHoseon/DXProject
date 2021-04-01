@@ -18,7 +18,6 @@ protected:
 	D3DXMATRIXA16		m_matT;
 	D3DXMATRIXA16		m_matWorld;
 	float				m_fRotY;
-
 	
 	// for physics
 	ICollisionArea*		m_pCollision;
@@ -30,6 +29,8 @@ protected:
 	float				m_fMass;
 	float				m_fFriction;
 	float				m_fRepulsivePower;
+	float				m_fFlexibility;
+	bool				m_isCollide;
 	
 public:
 
@@ -40,11 +41,12 @@ public:
 	virtual const D3DXVECTOR3& GetScale() { return m_vScale; }
 	virtual void SetScale(const D3DXVECTOR3& vScale);
 	virtual void SetScale(float x, float y, float z);
+	virtual void Smallize();
+	virtual void Unsmallize();
 
 	virtual const D3DXVECTOR3& GetPosition() { return m_vPosition; }
 	virtual void SetPosition(D3DXVECTOR3 vPosition);
 	virtual void SetPosition(float x, float y, float z);
-
 	virtual void SetRotationY(float rot);
 
 	// for physics
@@ -69,5 +71,9 @@ public:
 	
 	virtual float GetFriction(D3DXVECTOR3 vPosition = g_vZero) { return m_fFriction; }
 	virtual float GetRepulsivePower() { return m_fRepulsivePower; }
+	virtual float GetFlexibiltiy() { return m_fFlexibility; }
+	virtual bool GetIsCollide() { return m_isCollide; }
+	virtual void SetIsCollide(bool b) { m_isCollide = b; }
+	virtual void CreateShadowMap() {}
 };
 

@@ -97,6 +97,7 @@
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
       <AdditionalLibraryDirectories>%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <LargeAddressAware>true</LargeAddressAware>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
@@ -125,6 +126,7 @@
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
       <OptimizeReferences>true</OptimizeReferences>
       <GenerateDebugInformation>true</GenerateDebugInformation>
+      <LargeAddressAware>true</LargeAddressAware>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
@@ -150,6 +152,7 @@
     <ClInclude Include="CActor.h" />
     <ClInclude Include="CAllocateHierachy.h" />
     <ClInclude Include="CBlueprint.h" />
+    <ClInclude Include="CBoundaryWall.h" />
     <ClInclude Include="CBoxCollision.h" />
     <ClInclude Include="CBrick.h" />
     <ClInclude Include="CCactus.h" />
@@ -159,29 +162,79 @@
     <ClInclude Include="CCCSpeedDown.h" />
     <ClInclude Include="CCCStopMove.h" />
     <ClInclude Include="CCrowdControl.h" />
+    <ClInclude Include="CDashShadow.h" />
+    <ClInclude Include="CHarpyWing.h" />
+    <ClInclude Include="CHarpyWing_L.h" />
+    <ClInclude Include="CHarpyWing_R.h" />
+    <ClInclude Include="CMainScene.h" />
     <ClInclude Include="CMeshLoader.h" />
     <ClInclude Include="CMonster.h" />
     <ClInclude Include="CMonsterHarpy.h" />
     <ClInclude Include="CMonsterMedusa.h" />
     <ClInclude Include="CPartsDestroyer.h" />
     <ClInclude Include="CPartsManager.h" />
+    <ClInclude Include="CRenderShadowManager.h" />
     <ClInclude Include="CSand.h" />
     <ClInclude Include="CSandpile.h" />
+    <ClInclude Include="CSaveLoadManager.h" />
+    <ClInclude Include="CShaderManager.h" />
     <ClInclude Include="CThickSand.h" />
     <ClInclude Include="CFlowSand.h" />
     <ClInclude Include="CSoil.h" />
     <ClInclude Include="CStair.h" />
     <ClInclude Include="CStaticMesh.h" />
     <ClInclude Include="CTestStair.h" />
+    <ClInclude Include="CThreadManager.h" />
+    <ClInclude Include="CTipBoard.h" />
     <ClInclude Include="CTornado.h" />
     <ClInclude Include="CTV.h" />
+    <ClInclude Include="CUI1LevelCombination.h" />
+    <ClInclude Include="CUI1LevelCombinatorImage.h" />
+    <ClInclude Include="CUI2LevelCombination.h" />
+    <ClInclude Include="CUI2LevelCombinatorImage.h" />
+    <ClInclude Include="CUIAcidRain.h" />
+    <ClInclude Include="CUICC.h" />
+    <ClInclude Include="CUICharge.h" />
+    <ClInclude Include="CUIChargeBoard.h" />
+    <ClInclude Include="CUIChargeFive.h" />
+    <ClInclude Include="CUIChargeFour.h" />
+    <ClInclude Include="CUIChargeOne.h" />
+    <ClInclude Include="CUIChargeThree.h" />
+    <ClInclude Include="CUIChargeTwo.h" />
+    <ClInclude Include="CUIChargeZero.h" />
     <ClInclude Include="CUIClearBoard.h" />
     <ClInclude Include="CUIClearButton.h" />
     <ClInclude Include="CUIClearTime.h" />
     <ClInclude Include="CUICloseButton.h" />
+    <ClInclude Include="CUICombinatorGauge.h" />
+    <ClInclude Include="CUICombinatorGaugeFive.h" />
+    <ClInclude Include="CUICombinatorGaugeFour.h" />
+    <ClInclude Include="CUICombinatorGaugeOne.h" />
+    <ClInclude Include="CUICombinatorGaugeThree.h" />
+    <ClInclude Include="CUICombinatorGaugeTwo.h" />
+    <ClInclude Include="CUICombinatorGaugeZero.h" />
+    <ClInclude Include="CUIControll.h" />
+    <ClInclude Include="CUIControllBoard.h" />
     <ClInclude Include="CUIEndButton.h" />
+    <ClInclude Include="CUIEsc.h" />
+    <ClInclude Include="CUIHeart.h" />
     <ClInclude Include="CUILight.h" />
+    <ClInclude Include="CUIloadingMessageComplete.h" />
+    <ClInclude Include="CUILoadingMessageLoad.h" />
+    <ClInclude Include="CUILoseBoard.h" />
+    <ClInclude Include="CUILoseButton.h" />
     <ClInclude Include="CUIMainButton.h" />
+    <ClInclude Include="CUIMainControllButton.h" />
+    <ClInclude Include="CUIMainEndButton.h" />
+    <ClInclude Include="CUIMainMakerButton.h" />
+    <ClInclude Include="CUIMainScreen.h" />
+    <ClInclude Include="CUIMainScreenBoard.h" />
+    <ClInclude Include="CUIMainStartButton.h" />
+    <ClInclude Include="CUIMaker.h" />
+    <ClInclude Include="CUIMakerBoard.h" />
+    <ClInclude Include="CUIPopUpBoard.h" />
+    <ClInclude Include="CUIReady.h" />
+    <ClInclude Include="CUIReadyBoard.h" />
     <ClInclude Include="CUIResetButton.h" />
     <ClInclude Include="CUI.h" />
     <ClInclude Include="CCamera.h" />
@@ -196,6 +249,21 @@
     <ClInclude Include="CSoundManager.h" />
     <ClInclude Include="CPhysicsApplyer.h" />
     <ClInclude Include="CUIButton.h" />
+    <ClInclude Include="CUISelect.h" />
+    <ClInclude Include="CUISelectBoard.h" />
+    <ClInclude Include="CUISelectLeft.h" />
+    <ClInclude Include="CUISelectMainButton.h" />
+    <ClInclude Include="CUISelectNone.h" />
+    <ClInclude Include="CUISelectRight.h" />
+    <ClInclude Include="CUISelectSolved.h" />
+    <ClInclude Include="CUISelectStarOne.h" />
+    <ClInclude Include="CUISelectStartButton.h" />
+    <ClInclude Include="CUISelectStarThree.h" />
+    <ClInclude Include="CUISelectStarTwo.h" />
+    <ClInclude Include="CUISelectStarZero.h" />
+    <ClInclude Include="CUISelectUnsolved.h" />
+    <ClInclude Include="CUIStageSelect.h" />
+    <ClInclude Include="CUIStageSelectPopUpBoard.h" />
     <ClInclude Include="CUIStar.h" />
     <ClInclude Include="CUIStarOne.h" />
     <ClInclude Include="CUIStarThree.h" />
@@ -204,13 +272,21 @@
     <ClInclude Include="CUIText.h" />
     <ClInclude Include="CUITexture.h" />
     <ClInclude Include="CUITextureManager.h" />
+    <ClInclude Include="CUITipBoard.h" />
+    <ClInclude Include="CUITipBoardText.h" />
     <ClInclude Include="CUITrafficLightFiveBoard.h" />
     <ClInclude Include="CUITrafficLightFourBoard.h" />
     <ClInclude Include="CUITrafficLightOneBoard.h" />
     <ClInclude Include="CUITrafficLightThreeBoard.h" />
     <ClInclude Include="CUITryAgain.h" />
+    <ClInclude Include="CUIUpdateText.h" />
+    <ClInclude Include="CUIWind.h" />
+    <ClInclude Include="CUIWarning.h" />
+    <ClInclude Include="CUIWarningBoard.h" />
+    <ClInclude Include="CUIWhiteboard.h" />
     <ClInclude Include="CWall.h" />
     <ClInclude Include="CWater.h" />
+    <ClInclude Include="CWhiteboard.h" />
     <ClInclude Include="ICollisionArea.h" />
     <ClInclude Include="CDeviceManager.h" />
     <ClInclude Include="CEventManager.h" />
@@ -254,11 +330,13 @@
     <ClInclude Include="CUITrafficLightTwoBoard.h" />
     <ClInclude Include="CUITrafficLight.h" />
     <ClInclude Include="CUILoading.h" />
+    <ClInclude Include="CUILoadingScreen.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="CActor.cpp" />
     <ClCompile Include="CAllocateHierachy.cpp" />
     <ClCompile Include="CBlueprint.cpp" />
+    <ClCompile Include="CBoundaryWall.cpp" />
     <ClCompile Include="CBoxCollision.cpp" />
     <ClCompile Include="CBrick.cpp" />
     <ClCompile Include="CCactus.cpp" />
@@ -268,29 +346,79 @@
     <ClCompile Include="CCCSpeedDown.cpp" />
     <ClCompile Include="CCCStopMove.cpp" />
     <ClCompile Include="CCrowdControl.cpp" />
+    <ClCompile Include="CDashShadow.cpp" />
+    <ClCompile Include="CHarpyWing.cpp" />
+    <ClCompile Include="CHarpyWing_L.cpp" />
+    <ClCompile Include="CHarpyWing_R.cpp" />
+    <ClCompile Include="CMainScene.cpp" />
     <ClCompile Include="CMeshLoader.cpp" />
     <ClCompile Include="CMonster.cpp" />
     <ClCompile Include="CMonsterHarpy.cpp" />
     <ClCompile Include="CMonsterMedusa.cpp" />
     <ClCompile Include="CPartsDestroyer.cpp" />
     <ClCompile Include="CPartsManager.cpp" />
+    <ClCompile Include="CRenderShadowManager.cpp" />
     <ClCompile Include="CSand.cpp" />
     <ClCompile Include="CSandpile.cpp" />
+    <ClCompile Include="CSaveLoadManager.cpp" />
+    <ClCompile Include="CShaderManager.cpp" />
     <ClCompile Include="CThickSand.cpp" />
     <ClCompile Include="CFlowSand.cpp" />
     <ClCompile Include="CSoil.cpp" />
     <ClCompile Include="CStair.cpp" />
     <ClCompile Include="CStaticMesh.cpp" />
     <ClCompile Include="CTestStair.cpp" />
+    <ClCompile Include="CThreadManager.cpp" />
+    <ClCompile Include="CTipBoard.cpp" />
     <ClCompile Include="CTornado.cpp" />
     <ClCompile Include="CTV.cpp" />
+    <ClCompile Include="CUI1LevelCombination.cpp" />
+    <ClCompile Include="CUI1LevelCombinatorImage.cpp" />
+    <ClCompile Include="CUI2LevelCombination.cpp" />
+    <ClCompile Include="CUI2LevelCombinatorImage.cpp" />
+    <ClCompile Include="CUIAcidRain.cpp" />
+    <ClCompile Include="CUICC.cpp" />
+    <ClCompile Include="CUICharge.cpp" />
+    <ClCompile Include="CUIChargeBoard.cpp" />
+    <ClCompile Include="CUIChargeFive.cpp" />
+    <ClCompile Include="CUIChargeFour.cpp" />
+    <ClCompile Include="CUIChargeOne.cpp" />
+    <ClCompile Include="CUIChargeThree.cpp" />
+    <ClCompile Include="CUIChargeTwo.cpp" />
+    <ClCompile Include="CUIChargeZero.cpp" />
     <ClCompile Include="CUIClearBoard.cpp" />
     <ClCompile Include="CUIClearButton.cpp" />
     <ClCompile Include="CUIClearTime.cpp" />
     <ClCompile Include="CUICloseButton.cpp" />
+    <ClCompile Include="CUICombinatorGauge.cpp" />
+    <ClCompile Include="CUICombinatorGaugeFive.cpp" />
+    <ClCompile Include="CUICombinatorGaugeFour.cpp" />
+    <ClCompile Include="CUICombinatorGaugeOne.cpp" />
+    <ClCompile Include="CUICombinatorGaugeThree.cpp" />
+    <ClCompile Include="CUICombinatorGaugeTwo.cpp" />
+    <ClCompile Include="CUICombinatorGaugeZero.cpp" />
+    <ClCompile Include="CUIControll.cpp" />
+    <ClCompile Include="CUIControllBoard.cpp" />
     <ClCompile Include="CUIEndButton.cpp" />
+    <ClCompile Include="CUIEsc.cpp" />
+    <ClCompile Include="CUIHeart.cpp" />
     <ClCompile Include="CUILight.cpp" />
+    <ClCompile Include="CUIloadingMessageComplete.cpp" />
+    <ClCompile Include="CUILoadingMessageLoad.cpp" />
+    <ClCompile Include="CUILoseBoard.cpp" />
+    <ClCompile Include="CUILoseButton.cpp" />
     <ClCompile Include="CUIMainButton.cpp" />
+    <ClCompile Include="CUIMainControllButton.cpp" />
+    <ClCompile Include="CUIMainEndButton.cpp" />
+    <ClCompile Include="CUIMainMakerButton.cpp" />
+    <ClCompile Include="CUIMainScreen.cpp" />
+    <ClCompile Include="CUIMainScreenBoard.cpp" />
+    <ClCompile Include="CUIMainStartButton.cpp" />
+    <ClCompile Include="CUIMaker.cpp" />
+    <ClCompile Include="CUIMakerBoard.cpp" />
+    <ClCompile Include="CUIPopUpBoard.cpp" />
+    <ClCompile Include="CUIReady.cpp" />
+    <ClCompile Include="CUIReadyBoard.cpp" />
     <ClCompile Include="CUIResetButton.cpp" />
     <ClCompile Include="CUI.cpp" />
     <ClCompile Include="CCamera.cpp" />
@@ -305,6 +433,21 @@
     <ClCompile Include="CSoundManager.cpp" />
     <ClCompile Include="CPhysicsApplyer.cpp" />
     <ClCompile Include="CUIButton.cpp" />
+    <ClCompile Include="CUISelect.cpp" />
+    <ClCompile Include="CUISelectBoard.cpp" />
+    <ClCompile Include="CUISelectLeft.cpp" />
+    <ClCompile Include="CUISelectMainButton.cpp" />
+    <ClCompile Include="CUISelectNone.cpp" />
+    <ClCompile Include="CUISelectRight.cpp" />
+    <ClCompile Include="CUISelectSolved.cpp" />
+    <ClCompile Include="CUISelectStarOne.cpp" />
+    <ClCompile Include="CUISelectStartButton.cpp" />
+    <ClCompile Include="CUISelectStarThree.cpp" />
+    <ClCompile Include="CUISelectStarTwo.cpp" />
+    <ClCompile Include="CUISelectStarZero.cpp" />
+    <ClCompile Include="CUISelectUnsolved.cpp" />
+    <ClCompile Include="CUIStageSelect.cpp" />
+    <ClCompile Include="CUIStageSelectPopUpBoard.cpp" />
     <ClCompile Include="CUIStar.cpp" />
     <ClCompile Include="CUIStarOne.cpp" />
     <ClCompile Include="CUIStarThree.cpp" />
@@ -313,13 +456,21 @@
     <ClCompile Include="CUIText.cpp" />
     <ClCompile Include="CUITexture.cpp" />
     <ClCompile Include="CUITextureManager.cpp" />
+    <ClCompile Include="CUITipBoard.cpp" />
+    <ClCompile Include="CUITipBoardText.cpp" />
     <ClCompile Include="CUITrafficLightFiveBoard.cpp" />
     <ClCompile Include="CUITrafficLightFourBoard.cpp" />
     <ClCompile Include="CUITrafficLightOneBoard.cpp" />
     <ClCompile Include="CUITrafficLightThreeBoard.cpp" />
     <ClCompile Include="CUITryAgain.cpp" />
+    <ClCompile Include="CUIUpdateText.cpp" />
+    <ClCompile Include="CUIWind.cpp" />
+    <ClCompile Include="CUIWarning.cpp" />
+    <ClCompile Include="CUIWarningBoard.cpp" />
+    <ClCompile Include="CUIWhiteboard.cpp" />
     <ClCompile Include="CWall.cpp" />
     <ClCompile Include="CWater.cpp" />
+    <ClCompile Include="CWhiteboard.cpp" />
     <ClCompile Include="ICollisionArea.cpp" />
     <ClCompile Include="CDeviceManager.cpp" />
     <ClCompile Include="CEventManager.cpp" />
@@ -366,6 +517,7 @@
     <ClCompile Include="CUITrafficLightTwoBoard.cpp" />
     <ClCompile Include="CUITrafficLight.cpp" />
     <ClCompile Include="CUILoading.cpp" />
+    <ClCompile Include="CUILoadingScreen.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="DX_RoboCooked.rc" />
@@ -376,7 +528,6 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="ClassDiagram.cd" />
-    <None Include="ClassDiagram1.cd" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

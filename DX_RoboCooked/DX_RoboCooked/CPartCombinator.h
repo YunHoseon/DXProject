@@ -3,6 +3,7 @@
 #include "IPartGenerator.h"
 
 class IPartGenerator;
+class CUICombinatorGauge;
 
 
 enum class eCombinatorPartsLevel
@@ -38,15 +39,17 @@ protected:
 	std::multimap<string, CParts*>	m_multimapParts;
 	std::vector<CParts*>			m_vecDischargeParts;
 	ICollisionArea*					m_pPartsInteractCollision;
-	D3DXVECTOR3						m_vOnCombinatorPosition;
+	//D3DXVECTOR3					m_vOnCombinatorPosition;
+	vector<D3DXVECTOR3>				m_vecOnCombinatorPosition;
 	CParts*							m_pParts;
-	bool							m_isCombine;
+	bool							m_isDischarging;
 	float							m_fElapsedTime;
 	float							m_fCombineTime;
 	INT								m_nPartsCount;
 	INT								m_nMaxPartsCount;
 	CStaticMesh*					m_pSMesh;
-
+	CUICombinatorGauge*				m_pUICombinatorGauge;
+	float							m_DestroyTrashCountTime;
 
 public:
 	CPartCombinator(IInteractCenter* pInteractCenter, eCombinatorPartsLevel eType, float fAngle, D3DXVECTOR3 vPosition) ;
@@ -73,6 +76,8 @@ public:
 
 	void AddAcceleration(const D3DXVECTOR3& vAccel) override {}
 	void AddForce(const D3DXVECTOR3& vForce) override {}
+
+	void CreateShadowMap() override;
 private:
 	CParts* Make() override = 0;
 	virtual void Setup(float fAngle, D3DXVECTOR3 vPosition){};

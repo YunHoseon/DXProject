@@ -1,21 +1,28 @@
 ﻿#include "stdafx.h"
 #include "CFontManager.h"
 
-CFontManager::CFontManager(): CSingleton<CFontManager>()
+CFontManager::CFontManager(): CSingleton<CFontManager>(), m_nFontCount(0)
 {
 	AddFontResourceA("./data/Fonts/a컴퓨터C.ttf");
+	++m_nFontCount;
 }
 
 CFontManager::~CFontManager()
 {
 	for (auto && p : m_mapFont)
 	{
-		SafeRelease(p.second);
+		while(p.second)
+			SafeRelease(p.second);
 	}
 	for (auto && p : m_map3dFont)
 	{
 		DeleteObject(p.second);
 	}
+	for (int i = 0; i < m_nFontCount; ++i)
+	{
+		RemoveFontResourceA("./data/Fonts/a컴퓨터C.ttf");
+	}
+	m_nFontCount = 0;
 }
 
 LPD3DXFONT CFontManager::GetFont(eFontType e)
@@ -41,15 +48,58 @@ LPD3DXFONT CFontManager::GetFont(eFontType e)
 	else if(e == CLEARTIME)
 	{
 		fd.Height = 100;
-		fd.Width = 50;
+		fd.Width = 100;
+		fd.Weight = FW_MEDIUM;
+		fd.Italic = false;
+		fd.CharSet = DEFAULT_CHARSET;
+		fd.OutputPrecision = OUT_DEFAULT_PRECIS;
+		fd.PitchAndFamily = FF_DONTCARE;
+		
+		AddFontResource(L"data/Fonts/a컴퓨터C.ttf");
+		++m_nFontCount;
+		wcscpy_s(fd.FaceName, L"a컴퓨터C");
+	}
+	else if (e == SELECT)
+	{
+		fd.Height = 46;
+		fd.Width = 23;
+		fd.Weight = FW_MEDIUM;
+		fd.Italic = false;
+		fd.CharSet = DEFAULT_CHARSET;
+		fd.OutputPrecision = OUT_DEFAULT_PRECIS;
+		fd.PitchAndFamily = FF_DONTCARE;
+		
+		AddFontResource(L"data/Fonts/a컴퓨터C.ttf");
+		++m_nFontCount;
+		wcscpy_s(fd.FaceName, L"a컴퓨터C");
+	}
+	else if (e == UPDATE)
+	{
+		fd.Height = 80;
+		fd.Width = 40;
 		fd.Weight = FW_MEDIUM;
 		fd.Italic = false;
 		fd.CharSet = DEFAULT_CHARSET;
 		fd.OutputPrecision = OUT_DEFAULT_PRECIS;
 		fd.PitchAndFamily = FF_DONTCARE;
 
-		AddFontResource(L"data/font/umberto.ttf");
-		wcscpy_s(fd.FaceName, L"Umberto");
+		AddFontResource(L"data/Fonts/a컴퓨터C.ttf");
+		++m_nFontCount;
+		wcscpy_s(fd.FaceName, L"a컴퓨터C");
+	}
+	else if (e == TIP)
+	{
+		fd.Height = 35;
+		fd.Width = 35;
+		fd.Weight = FW_MEDIUM;
+		fd.Italic = false;
+		fd.CharSet = DEFAULT_CHARSET;
+		fd.OutputPrecision = OUT_DEFAULT_PRECIS;
+		fd.PitchAndFamily = FF_DONTCARE;
+		
+		AddFontResource(L"data/Fonts/a컴퓨터C.ttf");
+		++m_nFontCount;
+		wcscpy_s(fd.FaceName, L"a컴퓨터C");
 	}
 	
 	D3DXCreateFontIndirect(g_pD3DDevice, &fd, &m_mapFont[e]);
@@ -76,6 +126,7 @@ HFONT CFontManager::Get3dFont(eFontType e)
 		lf.lfCharSet = DEFAULT_CHARSET;
 		wcscpy_s(lf.lfFaceName, L"a컴퓨터C");
 		AddFontResourceA("./data/Fonts/a컴퓨터C.ttf");
+		++m_nFontCount;
 	}
 
 	
@@ -86,8 +137,18 @@ HFONT CFontManager::Get3dFont(eFontType e)
 
 void CFontManager::Destroy()
 {
-	for (auto && it : m_mapFont)
+	for (auto && p : m_mapFont)
 	{
-		SafeRelease(it.second);
+		while (p.second)
+			SafeRelease(p.second);
 	}
+	for (auto && p : m_map3dFont)
+	{
+		DeleteObject(p.second);
+	}
+	for (int i = 0; i < m_nFontCount; ++i)
+	{
+		RemoveFontResourceA("./data/Fonts/a컴퓨터C.ttf");
+	}
+	m_nFontCount = 0;
 }

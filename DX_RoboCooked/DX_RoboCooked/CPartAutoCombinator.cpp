@@ -5,6 +5,7 @@
 #include "CParts.h"
 #include "IInteractCenter.h"
 #include "CCharacter.h"
+#include "CUICombinatorGauge.h"
 
 CPartAutoCombinator::CPartAutoCombinator(IInteractCenter* pInteractCenter, eCombinatorPartsLevel eType, float fAngle, D3DXVECTOR3 vPosition):
 	CPartCombinator(pInteractCenter, eType, fAngle, vPosition)
@@ -36,17 +37,32 @@ void CPartAutoCombinator::Update()
 		m_eCombinatorActionState == eCombinatorActionState::Usable)
 		CombineParts();
 	
-	if(m_isCombine && m_pParts == nullptr)
+	if(m_isDischarging && m_pParts == nullptr)
 		DischargeParts();
 
 	if (m_eCombinatorLoadState == eCombinatorLoadState::LoadPossible && m_pParts == nullptr)
 		m_pInteractCenter->CheckAroundCombinator(this);
+
+	if (m_pParts != nullptr && m_pParts->GetPartsID() == "D00")
+	{
+		m_DestroyTrashCountTime += g_pTimeManager->GetElapsedTime();
+		if (m_pParts->GetDestroyTrashTime() <= m_DestroyTrashCountTime)
+		{
+			m_pInteractCenter->DeleteParts(m_pParts);
+			m_pParts = nullptr;
+			m_DestroyTrashCountTime = 0;
+			m_eCombinatorActionState = eCombinatorActionState::Usable;
+		}
+	}
 }
 
 void CPartAutoCombinator::Render()
 {
 	g_pD3DDevice->SetTransform(D3DTS_WORLD, &m_matWorld);
 	m_pSMesh->Render();
+
+	if (m_pUICombinatorGauge)
+		m_pUICombinatorGauge->Render();
 
 	_DEBUG_COMMENT if (m_pCollision)
 		_DEBUG_COMMENT m_pCollision->Render();
@@ -60,6 +76,9 @@ void CPartAutoCombinator::Interact(CCharacter* pCharacter)
 {
 	if (m_pParts == nullptr || pCharacter->GetPlayerState() != ePlayerState::None)
 		return;
+	if (m_pParts->GetPartsID() == "D00")
+		return;
+	
 	pCharacter->SetParts(m_pParts);
 	m_pParts->SetGrabPosition(&pCharacter->GetGrabPartsPosition());
 	m_pParts->GetCollision()->SetActive(true);
@@ -72,17 +91,15 @@ void CPartAutoCombinator::PartsInteract(CParts* pParts)
 	m_nPartsCount++;
 	
 	if (m_nPartsCount > m_nMaxPartsCount)
-	{
 		return;
-	}
 
-	if(m_nPartsCount == m_nMaxPartsCount)
+	if (m_nPartsCount == m_nMaxPartsCount)
 		m_eCombinatorLoadState = eCombinatorLoadState::LoadImpossible;
-
-
+	
 	pParts->GetCollision()->SetActive(false);
 	pParts->SetCombinatorPosition(m_vPosition);
-	pParts->SetMoveParts(true);
+	//pParts->SetMoveParts(true);
+	pParts->SetMoveParts(true, m_vecOnCombinatorPosition[m_nPartsCount-1]);
 
 	g_EventManager->CallEvent(eEvent::CombinUse, NULL);
 }
@@ -91,9 +108,15 @@ void CPartAutoCombinator::PartsInteract(CParts* pParts)
 void CPartAutoCombinator::CombineParts()
 {
 	m_fElapsedTime += g_pTimeManager->GetElapsedTime();
+	if (!g_SoundManager->IsPlayingSFX("machine_run"))
+		g_SoundManager->PlaySFX("machine_run");
+	if (m_pUICombinatorGauge)
+		m_pUICombinatorGauge->UpdateCombinator(m_fElapsedTime, m_fCombineTime);
 
 	if (m_fElapsedTime >= m_fCombineTime)
 	{
+		if (m_pUICombinatorGauge)
+			m_pUICombinatorGauge->SetChildActive(false);
 		m_fElapsedTime = 0;
 		ReadytoCarryParts();
 	}
@@ -106,31 +129,40 @@ void CPartAutoCombinator::DischargeParts()
 	//	m_nPartsCount = 0;
 	//	m_eCombinatorActionState = eCombinatorActionState::Unusable;
 	//	m_eCombinatorLoadState = eCombinatorLoadState::LoadPossible;
-	//	m_isCombine = false;
+	//	m_isDischarging = false;
 	//	return;
 	//}
 
 	m_nPartsCount = 0;
 	m_eCombinatorActionState = eCombinatorActionState::Unusable;
 	m_eCombinatorLoadState = eCombinatorLoadState::LoadPossible;
-	m_isCombine = false;
+	m_isDischarging = false;
 
 	m_pParts = *m_vecDischargeParts.begin();
 	//m_pParts->SetPosition(m_vOnCombinatorPosition);
-	m_pParts->SetGrabPosition(&m_vOnCombinatorPosition);
+	//m_pParts->SetGrabPosition(&m_vOnCombinatorPosition);
+	m_pParts->SetGrabPosition(&m_vecOnCombinatorPosition[1]);
 	m_vecDischargeParts.clear();
 }
 
 void CPartAutoCombinator::InsertParts(CParts* p)
 {
 	m_multimapParts.insert(std::make_pair(p->GetPartsID(), p));
+	if (m_eCombinatorLoadState == eCombinatorLoadState::LoadImpossible)
+	{
+		for (auto it : m_multimapParts)
+		{
+			it.second->UsingCombinator();
+		}
+	}
 }
 
 void CPartAutoCombinator::ReadytoCarryParts()
 {
-	m_isCombine = true;
+	g_SoundManager->PlaySFX("machine_complete");
+	m_isDischarging = true;
 	CParts* parts = Make();
-
+	parts->GetCollision()->SetActive(false);
 	m_vecDischargeParts.push_back(parts);
 	m_pInteractCenter->AddParts(parts);
 }
@@ -146,7 +178,6 @@ CParts* CPartAutoCombinator::Make()
 	m_multimapParts.clear();
 
 	CParts* Parts = g_pPartsManager->CreateParts(g_pPartsManager->GetIDFromFormula(strResult));
-	
 	return Parts;
 }
 
@@ -159,7 +190,9 @@ void CPartAutoCombinator::Setup(float fAngle, D3DXVECTOR3 vPosition)
 	SetScale(0.01f, 0.01f, 0.01f);
 	SetPosition(vPosition);
 
-	// ¸Þ½Ã Å©±â¿¡ µû¶ó y°ª º¸Á¤
+	m_pUICombinatorGauge = new CUICombinatorGauge(&m_vPosition);
+
+	// ï¿½Þ½ï¿½ Å©ï¿½â¿¡ ï¿½ï¿½ï¿½ï¿½ yï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
 	float y = vPosition.y - 0.5f + m_pCollision->GetHeight() * 0.5f + (vPosition.y - m_pCollision->GetCenter().y);
 	SetPosition(vPosition.x, y, vPosition.z);
 	if (!m_pPartsInteractCollision)

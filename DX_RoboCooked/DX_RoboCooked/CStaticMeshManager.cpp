@@ -2,9 +2,11 @@
 #include "CStaticMeshManager.h"
 #include "CMeshLoader.h"
 
-CStaticMeshManager::CStaticMeshManager()
+static std::mutex cMutex;
+CStaticMeshManager::CStaticMeshManager() : m_isLoaded(false)
 {
 	Load();
+	m_isLoaded = true;
 }
 
 
@@ -43,6 +45,14 @@ void CStaticMeshManager::Load()
 	vecData.push_back(data);
 	data.fileName = "Coffin.X"; data.objectName = "Coffin"; data.filePath = "data/model/object";
 	vecData.push_back(data);
+	data.fileName = "TV.X"; data.objectName = "TV"; data.filePath = "data/model/object";
+	vecData.push_back(data);
+	data.fileName = "Whiteboard.X"; data.objectName = "Whiteboard"; data.filePath = "data/model/object";
+	vecData.push_back(data);
+	data.fileName = "Tipboard.X"; data.objectName = "Tipboard"; data.filePath = "data/model/object";
+	vecData.push_back(data);
+	data.fileName = "tornado.X"; data.objectName = "Tornado"; data.filePath = "data/model/object";
+	vecData.push_back(data);
 
 	data.fileName = "sand.X"; data.objectName = "Sand"; data.filePath = "data/model/tile";
 	vecData.push_back(data);
@@ -50,8 +60,8 @@ void CStaticMeshManager::Load()
 	vecData.push_back(data);
 	data.fileName = "flowsand.X"; data.objectName = "FlowSand"; data.filePath = "data/model/tile";
 	vecData.push_back(data);		
-	data.fileName = "flowsand_upper.X"; data.objectName = "FlowSand_Upper"; data.filePath = "data/model/tile";
-	vecData.push_back(data);
+	//data.fileName = "flowsand_upper.X"; data.objectName = "FlowSand_Upper"; data.filePath = "data/model/tile";
+	//vecData.push_back(data);
 	data.fileName = "water.X"; data.objectName = "Water"; data.filePath = "data/model/tile";
 	vecData.push_back(data);
 	data.fileName = "soil.X"; data.objectName = "Soil"; data.filePath = "data/model/tile";
@@ -60,13 +70,26 @@ void CStaticMeshManager::Load()
 	vecData.push_back(data);
 	data.fileName = "stair.X"; data.objectName = "Stair"; data.filePath = "data/model/tile";
 	vecData.push_back(data);
-	
-	
+
+	data.fileName = "harpy_skill_2_1.X"; data.objectName = "Harpy_Wing_L"; data.filePath = "data/model/monster";
+	vecData.push_back(data);
+	data.fileName = "harpy_skill_2_2.X"; data.objectName = "Harpy_Wing_R"; data.filePath = "data/model/monster";
+	vecData.push_back(data);
+
+	data.fileName = "chara_1p.X"; data.objectName = "Character"; data.filePath = "data/model/character";
+	vecData.push_back(data);
+	//data.fileName = "Sphere.X"; data.objectName = "Sphere"; data.filePath = "data/model/object";
+	//vecData.push_back(data);
+	data.fileName = "medusa_skill_3.X"; data.objectName = "Medusa_MagicCircle"; data.filePath = "data/model/monster";
+	vecData.push_back(data);
 	
 	for (ST_StaticMesh_Data datas : vecData)
 	{
+		if (g_pThreadManager->GetStopMessage()) return;
 		CStaticMesh* staticMesh = new CStaticMesh;
 		CMeshLoader::LoadMesh(datas.fileName, datas.filePath, staticMesh);
+		cMutex.lock();
 		m_mapStaticMesh.emplace(datas.objectName, staticMesh);
+		cMutex.unlock();
 	}
 }

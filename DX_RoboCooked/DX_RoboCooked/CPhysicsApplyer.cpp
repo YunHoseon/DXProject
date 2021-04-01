@@ -2,13 +2,13 @@
 #include "CPhysicsApplyer.h"
 #include "CActor.h"
 
+D3DXVECTOR3 CPhysicsApplyer::vGravity(0, -0.01f, 0);
 void CPhysicsApplyer::ApplyGravity(CActor* pA)
 {
-	static D3DXVECTOR3 gravity(0, -0.01f, 0);
-	pA->AddAcceleration(gravity * TimeRevision);
+	pA->AddAcceleration(vGravity * TimeRevision);
 }
 
-void CPhysicsApplyer::ApplyBound(CActor* pA, CActor* pB)
+bool CPhysicsApplyer::ApplyBound(CActor* pA, CActor* pB)
 {
 	D3DXVECTOR3 vNormal(0, 0, 0);
 	if (pA->Collide(pB, &vNormal))
@@ -29,14 +29,14 @@ void CPhysicsApplyer::ApplyBound(CActor* pA, CActor* pB)
 
 		if (power[0] > 0)
 		{
-			vNormalForce[0] = vNormal * power[0] * 1 + vNormal * pB->GetRepulsivePower();  // 1.0 = 탄성계수. 1.0이면 튕기지 않음, RepulsivePower = 반발력. 속도와 무관하게 밀어내는 값
-			vNormalForce[1] = -vNormal * power[0] * 1 + -vNormal * pA->GetRepulsivePower();
+			vNormalForce[0] = vNormal * power[0] * pB->GetFlexibiltiy() + vNormal * pB->GetRepulsivePower();  // 1.0 = 탄성계수. 1.0이면 튕기지 않음, RepulsivePower = 반발력. 속도와 무관하게 밀어내는 값
+			vNormalForce[1] = -vNormal * power[0] * pA->GetFlexibiltiy() + -vNormal * pA->GetRepulsivePower();
 		}
 
 		else if (power[1] > 0)
 		{
-			vNormalForce[0] = vNormal * power[1] * 1 + vNormal * pB->GetRepulsivePower();
-			vNormalForce[1] = -vNormal * power[1] * 1 + -vNormal * pA->GetRepulsivePower();
+			vNormalForce[0] = vNormal * power[1] * pB->GetFlexibiltiy() + vNormal * pB->GetRepulsivePower();
+			vNormalForce[1] = -vNormal * power[1] * pA->GetFlexibiltiy() + -vNormal * pA->GetRepulsivePower();
 		}
 
 		if (pA->GetMass() < pB->GetMass())
@@ -55,5 +55,8 @@ void CPhysicsApplyer::ApplyBound(CActor* pA, CActor* pB)
 
 		vTempVelocity = (pB->GetVelocity() + pB->GetAcceleration()) * -1 * pA->GetFriction(); // -1 * 마찰계수
 		pB->AddAcceleration(vTempVelocity); // 마찰력
+
+		return true;
 	}
+	return false;
 }

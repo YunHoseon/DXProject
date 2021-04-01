@@ -20,11 +20,10 @@ CPharaohCoffin::CPharaohCoffin(IInteractCenter* pInteractCenter, D3DXVECTOR3 vPo
 	m_pSMesh = g_pStaticMeshManager->GetStaticMesh("Coffin");
 	m_pCollision = new CBoxCollision(m_pSMesh->GetMesh(), &m_matWorld);
 	m_pCCCollision = new CSphereCollision(g_vZero, 1.5f, &m_matWorld);
-	SetScale(0.01f, 0.01f, 0.01f);
+	CActor::SetScale(0.01f, 0.01f, 0.01f);
 	SetRotationY(D3DXToRadian(0));
-	SetPosition(vPos);
-
-	float y = vPos.y - 0.5f + m_pCollision->GetHeight() * 0.5f + (vPos.y - m_pCollision->GetCenter().y);
+	m_fBasePositionY = vPos.y;
+	float y = m_fBasePositionY - 0.5f + m_pCollision->GetHeight() * 0.5f;
 	SetPosition(vPos.x, y, vPos.z);
 
 	if (m_pCollision)
@@ -51,25 +50,25 @@ void CPharaohCoffin::Update()
 		}
 	}
 
-	if (m_isMoveBlocked)
-	{
-		m_fPassedTime += g_pTimeManager->GetElapsedTime();
-		if (3.0f <= m_fPassedTime)
-		{
-			m_isMoveBlocked = false;
-			m_fPassedTime = 0.0f;
-		}
-	}
-	else
-	{
-		for (CCharacter* it : m_pInteractCenter->GetCharacters())
-		{
-			if (m_pCCCollision->Collide(it->GetCollision()))
-			{
-				it->DeleteCC();
-			}
-		}
-	}
+	//if (m_isMoveBlocked)
+	//{
+	//	m_fPassedTime += g_pTimeManager->GetElapsedTime();
+	//	if (3.0f <= m_fPassedTime)
+	//	{
+	//		m_isMoveBlocked = false;
+	//		m_fPassedTime = 0.0f;
+	//	}
+	//}
+	//else
+	//{
+	//	for (CCharacter* it : m_pInteractCenter->GetCharacters())
+	//	{
+	//		if (m_pCCCollision->Collide(it->GetCollision()))
+	//		{
+	//			it->DeleteCC();
+	//		}
+	//	}
+	//}
 }
 
 void CPharaohCoffin::Render()
@@ -108,15 +107,49 @@ void CPharaohCoffin::Interact(CCharacter * pCharacter)
 			{
 				if (m_pCCCollision->Collide(it->GetCollision()))
 				{
-					it->SetCC(new CCCStopMove);
+					CCCStopMove* stop = new CCCStopMove;
+					stop->SetDuration(3.0f);
+					it->SetCC(stop);
 				}
 			}
 		}
 	}
 }
 
+void CPharaohCoffin::SetScale(const D3DXVECTOR3& vScale)
+{
+	CActor::SetScale(vScale);
+	float y = m_fBasePositionY - 0.5f + m_pCollision->GetHeight() * 0.5f;
+	SetPosition(m_vPosition.x, y, m_vPosition.z);
+}
+
+void CPharaohCoffin::SetScale(float x, float y, float z)
+{
+	CActor::SetScale(x, y, z);
+	float _y = m_fBasePositionY - 0.5f + m_pCollision->GetHeight() * 0.5f;
+	SetPosition(m_vPosition.x, _y, m_vPosition.z);
+}
+
 CParts* CPharaohCoffin::Make()
 {
 	CParts *parts = g_pPartsManager->CreateParts(m_arrPartsID[m_randNumGenerator.GenInt(0, 4)]);
 	return parts;
+}
+
+void CPharaohCoffin::CreateShadowMap()
+{
+	g_pRenderShadowManager->GetCreateShadowShader()->SetMatrix("gWorldMatrix", &m_matWorld);
+	UINT numPasses = 0;
+	g_pRenderShadowManager->GetCreateShadowShader()->Begin(&numPasses, NULL);
+
+	for (UINT i = 0; i < numPasses; ++i)
+	{
+		g_pRenderShadowManager->GetCreateShadowShader()->BeginPass(i);
+		{
+			m_pSMesh->CreateShadowMap();
+		}
+		g_pRenderShadowManager->GetCreateShadowShader()->EndPass();
+	}
+
+	g_pRenderShadowManager->GetCreateShadowShader()->End();
 }

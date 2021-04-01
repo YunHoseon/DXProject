@@ -13,9 +13,6 @@ private:
 	~CSceneManager();
 
 public:
-	//void SceneChange(std::string sceneName);
-	//void AddScene(std::string SceneName, CScene* scene);
-	//void EraseScene(std::string SceneName);
 	CScene* SetCurrentScene(CScene* Scene);
 	CScene* GetCurrentScene();
 	void Update();
@@ -23,9 +20,9 @@ public:
 	
 	void Destroy();
 private:
-	//std::map<std::string,CScene*> m_SceneList;
 	CScene* m_pCurrentScene;
 
 
 };
+
 

@@ -5,9 +5,12 @@
 #include "CMeshLoader.h"
 #include "CParts.h"
 
-CPartsManager::CPartsManager()
+static std::mutex cMutex;
+
+CPartsManager::CPartsManager() : m_isLoaded(false)
 {
 	Load();
+	m_isLoaded = true;
 }
 
 CPartsManager::~CPartsManager()
@@ -23,6 +26,7 @@ void CPartsManager::Load()
 	std::ifstream is("data/js/PartsData.json");
 	json j;
 	is >> j;
+	is.close();
 
 	// 1. 조합식으로만 검색
 	// 2. ID로만 검색
@@ -30,6 +34,7 @@ void CPartsManager::Load()
 	{
 		for (int i = 0; i < j.size(); ++i)
 		{
+			if (g_pThreadManager->GetStopMessage()) return;
 			string id = j[i]["ID"];
 			string filename = j[i]["Filename"];
 			float fMass = j[i]["Mass"];
@@ -38,12 +43,12 @@ void CPartsManager::Load()
 			CMeshLoader::LoadMesh(filename, "data/model/parts", part->GetStaticMesh());
 			part->Setup(D3DXVECTOR3(j[i]["Size"][0], j[i]["Size"][1], j[i]["Size"][2]));
 			//part->Setup(D3DXVECTOR3(0.5, 0.5, 0.5));
-
+			cMutex.lock();
 			m_mapParts.emplace(id, part);
 			m_mapFormula.emplace(j[i]["Formula"], j[i]["ID"]);
+			cMutex.unlock();
 		}
 	}
-	is.close();
 }
 
 CParts* CPartsManager::CreateParts(string sID)
